@@ -1,1 +1,3 @@
 # Mon portfolio en ligne
+
+Bienvenue dans mon portfolio en ligne ! Ce site présente mes projets, compétences et expériences professionnelles.
