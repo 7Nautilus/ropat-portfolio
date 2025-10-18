@@ -169,7 +169,7 @@ p {
 
 /* Projects Section */
 .projects {
-  padding: 3rem 1rem;
+  padding: 3rem 2rem;
 }
 
 .projects-title {
@@ -221,12 +221,15 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   border-bottom: 1px solid #16a34a;
+  aspect-ratio: 1 / 1; /* Définit un carré */
+  width: 100%;
+  overflow: hidden;
 }
 
 .project-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Assure que l'image remplit le carré sans déformation */
 }
 
 .project-content {
