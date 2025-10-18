@@ -241,3 +241,133 @@ footer {
   color: white;
   text-align: center;
 }
+
+/* Burger Menu */
+
+/* Burger Menu - Visible uniquement sur mobile */
+.burger-menu {
+  display: block;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 60;
+  transition: transform 0.3s;
+}
+
+.burger-menu:hover {
+  transform: scale(1.1);
+}
+
+.burger-menu:focus {
+  border-radius: 5px;
+  outline: 2px solid #22c55e;
+  outline-offset: 4px;
+}
+
+.burger-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  display: block;
+}
+
+/* Animation des lignes du burger en X */
+.burger-menu.active .burger-line-top {
+  transform: translateY(4.25px) translateX(-4.25px) rotate(45deg);
+  transform-origin: center;
+}
+
+.burger-menu.active .burger-line-middle {
+  opacity: 0;
+}
+
+.burger-menu.active .burger-line-bottom {
+  transform: translateY(-4.25px) translateX(-4.25px) rotate(-45deg);
+  transform-origin: center;
+}
+
+.burger-line-top,
+.burger-line-middle,
+.burger-line-bottom {
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Navigation Links - Menu mobile fullscreen */
+.nav-links {
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.98);
+  backdrop-filter: blur(10px);
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: color 0.3s, transform 0.3s;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #22c55e;
+  transform: translateX(10px);
+  outline: none;
+}
+
+/* Masquer le burger sur desktop */
+@media (min-width: 640px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    gap: 1rem;
+    background: transparent;
+    backdrop-filter: none;
+    width: auto;
+    height: auto;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 1;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+
+  .nav-link:hover {
+    transform: none;
+  }
+}
