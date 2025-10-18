@@ -285,7 +285,7 @@ footer {
 
 .burger-menu:focus {
   border-radius: 5px;
-  outline: 2px solid #22c55e;
+  outline: 2px solid #FF5C00;
   outline-offset: 4px;
 }
 
