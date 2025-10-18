@@ -36,19 +36,6 @@ nav {
   letter-spacing: -0.5px;
 }
 
-/* Burger Menu */
-.burger-menu {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-.burger-icon {
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
 /* Navigation Links */
 .nav-links {
   display: none;
