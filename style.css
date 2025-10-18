@@ -135,8 +135,14 @@ p {
 }
 
 .hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   font-size: 1.125rem;
   max-width: 70%;
+  line-height: 1.6;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid #22c55e;
 }
 
 .cta {
