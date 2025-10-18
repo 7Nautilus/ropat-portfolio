@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Optimisation du titre et description pour le SEO : Ciblage Secteur Musical -->
   <title>Ropat — Graphiste & Designer</title>
+  <meta name="description" content="Ropat est un graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise.">
+  <!-- STYLES -->
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <!-- FIN DES STYLES -->
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -12,7 +17,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KN22K5FS');</script>
   <!-- End Google Tag Manager -->
-  <!-- Google tag (gtag.js) -->
+  <!-- Global site tag (gtag.js) - Google Analytics  -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDE6T1D92Q"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -20,31 +25,113 @@
     gtag('js', new Date());
     gtag('config', 'G-JDE6T1D92Q');
   </script>
+  <!-- End Global site tag (gtag.js) -->
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN22K5FS"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+  <!-- BLACK HEADER + GREEN BORDER -->
   <header>
-    <h1>Ropat</h1>
     <nav>
-      <a href="index.html">Accueil</a>
-      <a href="works.html">Mes créations</a>
-      <a href="about.html">À propos</a>
-      <a href="contact.html">Contact</a>
+      <!-- LOGO / NOM DE MARQUE -->
+      <a href="index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
+      <!-- Liens de navigation (Menu) -->
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Accueil</a>
+        <a href="works.html" class="nav-link">Mes créations</a>
+        <a href="about.html" class="nav-link">À propos</a>
+        <a href="contact.html" class="contact-link">Contact</a>
+      </div>
     </nav>
   </header>
 
+  <!-- CONTENU PRINCIPAL -->
   <main>
-    <section>
-      <h2>Derniers projets</h2>
-      <!-- ici tes visuels, avec titres et descriptions -->
+    <!-- SECTION HÉRO -->
+    <section class="hero">
+      <h1 class="hero-title">Direction Artistique & Design Graphique <br>pour Artistes Musicaux</h1>
+
+      <!-- texte d'accroche -->
+      <p class="hero-text">
+        Bonjour ! Je suis Ropat, graphiste basé à Angers. 
+        <br>J'accompagne les artistes et les labels dans la création d'une <strong>identité visuelle</strong> percutante. Je conçois des <strong>pochettes d'album</strong>, des <strong>visualizers</strong> et des <strong>affiches de concert</strong>, tout en assurant le branding classique (logos, chartes) pour les entreprises.
+      </p>
+      <!-- BOUTON CTA -->
+      <a href="contact.html" class="cta">
+        Donner un visuel à votre musique
+      </a>
+    </section>
+
+    <!-- SECTION PROJETS -->
+    <section class="projects">
+      <!-- H2 -->
+      <h2 class="projects-title">Projets Récents : Musique et Branding</h2>
+
+      <div class="projects-grid">
+        <!-- Les cartes de projets ont un fond gris très foncé (bg-gray-950) pour se détacher légèrement du fond bg-black -->
+        <!-- Exemple de Carte Projet 1 : Pochette d'album -->
+        <div class="project-card">
+          <!-- Placeholder monochrome -->
+          <div class="project-image">
+            [Pochette d'Album / EP]
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Pochette d'album "BTR" (Maltezz)</h3>
+            <!-- Description -->
+            <p class="project-description">Direction artistique complète et création de la cover pour la sortie de l'EP.</p>
+          </div>
+        </div>
+                
+        <!-- Exemple de Carte Projet 2 : Visualizer / Motion -->
+        <div class="project-card">
+          <!-- Placeholder monochrome -->
+          <div class="project-image">
+            [Visualizer Vidéo]
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Visualizer pour Single "JPeJA"</h3>
+            <!-- Description -->
+            <p class="project-description">Animation graphique et typographie pour la promotion du nouveau single.</p>
+          </div>
+        </div>
+
+        <!-- Exemple de Carte Projet 3 : Branding Entreprise -->
+        <div class="project-card">
+          <!-- Placeholder monochrome -->
+          <div class="project-image">
+            [Branding / Logo]
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Procédure visuelle de création de logo</h3>
+            <!-- Description -->
+            <p class="project-description">Création de logo typographique utilisant une palette de formes géométriques donnée.</p>
+          </div>
+        </div>
+
+        <!-- Exemple de Carte Projet 3 : Poster -->
+        <div class="project-card">
+          <!-- Placeholder monochrome -->
+          <div class="project-image">
+            [Branding / Logo]
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Affiche "SSD DEFRAG"</h3>
+            <!-- Description -->
+            <p class="project-description">Création d'une affiche sur le thème de la défragmentation de disque dur.</p>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Ropat — Graphiste basé à Angers</p>
+    <div class="footer-content">
+      <!-- Texte footer -->
+      <p class="footer-text">© 2025 Ropat — Graphiste et Directeur Artistique à Angers. Tous droits réservés.</p>
+      <!-- Liens supplémentaires si nécessaire -->
+    </div>
   </footer>
 </body>
 </html>
