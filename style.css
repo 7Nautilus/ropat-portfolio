@@ -115,6 +115,10 @@ h1 {
 	margin: 0;
 }
 
+h3 {
+	margin: 0;
+}
+
 p {
 	margin: 0;
 }
@@ -197,6 +201,7 @@ p {
 .project-card {
   background-color: #1a202c;
   border-radius: 1.5rem;
+  border: 2px solid #16a34a;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -208,7 +213,6 @@ p {
 }
 
 .project-image {
-  height: 12rem;
   background-color: #2d3748;
   display: flex;
   align-items: center;
@@ -216,7 +220,13 @@ p {
   color: white;
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 1px solid #4a5568;
+  border-bottom: 1px solid #16a34a;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-content {
@@ -385,3 +395,7 @@ footer {
     transform: none;
   }
 }
+
+
+
+
