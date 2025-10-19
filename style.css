@@ -453,6 +453,16 @@ footer {
   }
 }
 
+/* Style pour les liens dans les cartes de projet */
+.project-card a {
+  text-decoration: none; /* Supprime le soulignement */
+  color: inherit; /* Conserve la couleur du texte d'origine */
+}
+
+.project-card a:hover {
+  color: inherit; /* Conserve la couleur d'origine au survol */
+}
+
 
 
 
