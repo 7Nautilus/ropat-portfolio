@@ -1,12 +1,33 @@
+/* Variables CSS */
+:root {
+  --primary-color: #FF5C00;
+  --secondary-color: rgba(0, 0, 0, 0.5);
+  --white-color: #ffffff;
+  --font-family: 'Inter', sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family);
+  background-image: url(assets/background-img.png);
+  background-size: cover;
+  background-position: center;
+  color: var(--white-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
 /* Header */
 header {
-  background-color: rgba(0, 0, 0, 0.4); /* Réduction de l'opacité à 50% */
+  background-color: rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
   z-index: 10;
   padding: 0 2rem;
-  border-bottom: 3px solid rgb(255, 92, 0, 0.5);
+  border-bottom: 3px solid var(--primary-color);
 }
 
 /* Navigation */
@@ -17,22 +38,39 @@ nav {
   padding: 1rem 0;
 }
 
+/* Reset margins for headings and paragraphs */
+h1 {
+	margin: 0;
+}
+
+h2 {
+	margin: 0;
+}
+
+h3 {
+	margin: 0;
+}
+
+p {
+	margin: 0;
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: 800;
-  color: white;
+  color: var(--white-color);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .logo:hover {
-  color: #FF5C00;
+  color: var(--primary-color);
 }
 
 .logo-text {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #ffffff; 
+  color: var(--white-color);
   letter-spacing: -0.5px;
 }
 
@@ -51,41 +89,40 @@ nav {
   z-index: 50;
 }
 
-
 .nav-links.active {
   display: flex;
 }
 
 .nav-link {
-  color: white;
+  color: var(--white-color);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #FF5C00;
+  color: var(--primary-color);
 }
 
 .contact-link {
   display: inline-block;
-  background-color: rgb(255, 92, 0, 0.2); /* bg-green-500 */
-  border: 3px solid #FF5C00; /* border-green-500 */
-  color: white; /* text-white */
-  padding: 0.5rem 1rem; /* px-4 py-2 */
-  border-radius: 9999px; /* rounded-full */
-  font-weight: 600; /* font-semibold */
+  background-color: rgba(255, 92, 0, 0.2);
+  border: 3px solid var(--primary-color);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
   text-decoration: none;
   transition: background-color 0.3s, transform 0.3s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-.contact-link:hover {
-  background-color: #FF5C00; /* hover:bg-green-600 */
-  transform: scale(1.05); /* hover:scale-105 */
 }
 
-@media (min-width: 640px) {
+.contact-link:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.05);
+}
 
+/* Media Queries */
+@media (min-width: 640px) {
   .nav-links {
     display: flex;
     position: static;
@@ -99,32 +136,7 @@ nav {
   }
 }
 
-/* Body */
-body {
-  font-family: 'Inter', sans-serif;
-  background-image: url(assets/background-img.png); 
-  background-size: cover;
-  background-position: center;
-  color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  margin: 0; /* Supprime la marge par défaut */
-}
-
 /* Hero Section */
-
-h1 {
-	margin: 0;
-}
-
-h3 {
-	margin: 0;
-}
-
-p {
-	margin: 0;
-}
 
 .hero {
   display: flex;
@@ -135,10 +147,16 @@ p {
 }
 
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 800;
   line-height: 1.2;
   max-width: 80%;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--white-color);
 }
 
 .hero-text {
@@ -149,14 +167,41 @@ p {
   max-width: 70%;
   line-height: 1.6;
   padding: 0 0 0 1rem;
-  border-left: 3px solid rgb(255, 92, 0, 0.5);
+  border-left: 3px solid var(--primary-color);
 }
+
+.hero-image {
+  max-width: 40%;
+  height: auto;
+  border-radius: 3rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.hero-project{
+	display: flex;
+	flex-direction: row;
+	gap: inherit;
+}
+
+.hero-project-description {
+	display: flex;
+	flex-direction: column;
+	gap: inherit;
+}
+
+#project-description {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 0 2rem 2rem 0;
+    padding: 1rem;
+}
+
+/* Hero Section End */
 
 .cta {
   display: flex;
-  background-color: rgb(255, 92, 0, 0.2);
-  border: 3px solid #FF5C00;
-  color: white;
+  background-color: rgba(255, 92, 0, 0.2);
+  border: 3px solid var(--primary-color);
+  color: var(--white-color);
   padding: 0.75rem 2rem;
   border-radius: 9999px;
   font-size: 1.375rem;
@@ -167,7 +212,7 @@ p {
 }
 
 .cta:hover {
-  background-color: #FF5C00;
+  background-color: var(--primary-color);
   transform: scale(1.05);
 }
 
@@ -180,7 +225,7 @@ p {
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  border-bottom: 3px solid rgb(255, 92, 0, 0.5);
+  border-bottom: 3px solid var(--primary-color);
   padding-bottom: 0.5rem;
 }
 
@@ -205,7 +250,7 @@ p {
 .project-card {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1.5rem;
-  border: 2px solid #FF5C00;
+  border: 2px solid var(--primary-color);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -221,10 +266,10 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--white-color);
   font-weight: 700;
   text-transform: uppercase;
-  border-bottom: 1px solid #FF5C00;
+  border-bottom: 1px solid var(--primary-color);
   aspect-ratio: 1 / 1; /* Définit un carré */
   width: 100%;
   overflow: hidden;
@@ -252,17 +297,16 @@ p {
 }
 
 /* Footer */
-
 footer {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--secondary-color);
   padding: 1.5rem;
-  border-top: 2px solid rgb(255, 92, 0, 0.5);
-  margin-top: auto; /* Permet au footer de rester en bas */
+  border-top: 2px solid var(--primary-color);
+  margin-top: auto;
 }
 
 .footer-text {
   font-size: 0.875rem;
-  color: white;
+  color: var(--white-color);
   text-align: center;
 }
 
@@ -273,7 +317,7 @@ footer {
   display: block;
   background: none;
   border: none;
-  color: white;
+  color: var(--white-color);
   cursor: pointer;
   padding: 0.5rem;
   z-index: 60;
@@ -286,7 +330,7 @@ footer {
 
 .burger-menu:focus {
   border-radius: 5px;
-  outline: 2px solid #FF5C00;
+  outline: 2px solid var(--primary-color);
   outline-offset: 4px;
 }
 
@@ -352,7 +396,7 @@ footer {
 }
 
 .nav-link {
-  color: white;
+  color: var(--white-color);
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 600;
@@ -362,7 +406,7 @@ footer {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: #FF5C00;
+  color: var(--primary-color);
   transform: translateX(10px);
   outline: none;
 }
@@ -462,7 +506,3 @@ footer {
 .project-card a:hover {
   color: inherit; /* Conserve la couleur d'origine au survol */
 }
-
-
-
-
