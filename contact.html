@@ -4,14 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact</title>
+  <meta name="description" content="Contactez-moi pour toute question ou collaboration. Retrouvez-moi sur mes réseaux sociaux ou envoyez-moi un email directement.">
+  <meta name="keywords" content="contact, graphiste, designer graphique, collaboration, email, réseaux sociaux, Angers, France">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <link rel="icon" href="assets/icon.png" type="image/png">
 </head>
 <body>
   <header>
     <nav>
       <!-- LOGO / NOM DE MARQUE -->
       <a href="index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
+
+      <!-- Bouton Burger (visible uniquement sur mobile) -->
+      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
+        <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
+          <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
+          <path class="burger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
+        </svg>
+      </button>
+
       <!-- Liens de navigation (Menu) -->
       <div class="nav-links">
         <a href="index.html" class="nav-link">Accueil</a>
@@ -25,7 +40,8 @@
   <main class="hero">
     <h1 class="hero-title">Contactez-moi</h1>
     <p class="hero-text">Vous avez une question ou souhaitez collaborer ? Retrouvez-moi sur mes réseaux ou envoyez-moi un email directement !</p>
-  </main>
+    <a href="mailto:vultur.psd@gmail.com" class="cta">Envoyer un email</a>
+</main>
 
   <footer>
     <div class="footer-content">
