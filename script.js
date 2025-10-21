@@ -1,3 +1,37 @@
+// ================================
+// OPTIMISATIONS & PERFORMANCES
+// ================================
+
+// Utilisation de la délégation d'événements
+// Débounce pour les événements répétitifs
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+// ================================
+// PAGE LOADER
+// ================================
+window.addEventListener('load', () => {
+  const loader = document.getElementById('pageLoader');
+  if (loader) {
+    setTimeout(() => {
+      loader.classList.add('loaded');
+      // Retirer du DOM après la transition
+      setTimeout(() => {
+        loader.remove();
+      }, 500);
+    }, 800);
+  }
+});
+
 // Menu burger toggle
 document.addEventListener('DOMContentLoaded', function() {
   const burgerMenu = document.querySelector('.burger-menu');

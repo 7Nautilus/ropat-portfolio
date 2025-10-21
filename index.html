@@ -3,25 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!-- Optimisation du titre et description pour le SEO : Ciblage Secteur Musical -->
   <title>Ropat — Graphiste & Designer</title>
   <meta name="description" content="Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise.">
   <meta name="keywords" content="graphiste, designer graphique, direction artistique, pochette d'album, visualizer, affiche de concert, branding, identité visuelle, Angers, musique, artiste musical, label, logo, charte graphique">
+  
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <!-- STYLES -->
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Preconnect pour optimiser le chargement des fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <!-- FIN DES STYLES -->
-  <!-- JavaScript -->
-  <script src="script.js" defer></script>
-  <!-- Fin JavaScript -->
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Schema.org pour le SEO Local-->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Ropat",
+    "image": "",
+    "url": "https://ropat.art",
+    "telephone": "",
+    
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "",
+      "addressLocality": "Angers",
+      "addressRegion": "Pays de la Loire",
+      "postalCode": "",
+      "addressCountry": "FR"
+    },
+    
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "47.478419",
+      "longitude": "-0.563166"
+    },
+
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+
+    "sameAs": [
+      "https://www.instagram.com/9.ropat/"
+    ]
+
+    "description": "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise."
+  }
+  </script> 
+
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-KN22K5FS');</script>
-  <!-- End Google Tag Manager -->
+
   <!-- Global site tag (gtag.js) - Google Analytics  -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDE6T1D92Q"></script>
   <script>
@@ -30,7 +81,13 @@
     gtag('js', new Date());
     gtag('config', 'G-JDE6T1D92Q');
   </script>
-  <!-- End Global site tag (gtag.js) -->
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="assets/background-img.png" as="image">
+
+  <!-- JavaScript différé -->
+  <script src="script.js" defer></script>
+
   <!-- Icône du site -->
   <link rel="icon" href="assets/icon.png" type="image/png">
 </head>
@@ -38,15 +95,23 @@
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN22K5FS"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <!-- BLACK HEADER + GREEN BORDER -->
-  <header>
-    <nav>
-      <!-- LOGO / NOM DE MARQUE -->
-      <a href="index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
+  
+  <!-- Loader de page -->
+  <div class="page-loader" id="pageLoader">
+    <div class="loader-content">
+      <div class="loader-logo">Ropat</div>
+      <div class="loader-bar"></div>
+    </div>
+  </div>
 
-      <!-- Bouton Burger (visible uniquement sur mobile) -->
-      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
+  <!-- Header -->
+  <header role="banner">
+    <nav role="navigation" aria-label="Navigation principale">
+      <!-- LOGO / NOM DE MARQUE -->
+      <a href="index.html" class="logo" title="Ropat - Retour à l'accueil" aria-label="Retour à l'accueil">Ropat</a>
+
+      <!-- Bouton Burger -->
+      <button class="burger-menu" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation">
         <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
           <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
@@ -54,9 +119,9 @@
         </svg>
       </button>
 
-      <!-- Liens de navigation (Menu) -->
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Accueil</a>
+      <!-- Navigation Links -->
+      <div class="nav-links" id="main-navigation">
+        <a href="index.html" class="nav-link" aria-current="page">Accueil</a>
         <a href="works.html" class="nav-link">Mes créations</a>
         <a href="about.html" class="nav-link">À propos</a>
         <a href="contact.html" class="contact-link">Contact</a>
@@ -64,16 +129,16 @@
     </nav>
   </header>
 
-  <!-- CONTENU PRINCIPAL -->
-  <main>
-    <!-- SECTION HÉRO -->
-    <section class="hero">
-      <h1 class="hero-title">Direction Artistique & Design Graphique</h1>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="hero-title" id="hero-title">Direction Artistique & Design Graphique</h1>
 
-      <!-- texte d'accroche -->
+      <!-- Texte d'accroche -->
       <div class="hero-text" id="project-description">
         <div>
-          <span>Bonjour ! Je suis Ropat, graphiste basé à Angers. </span><br>
+          <span>Bonjour ! Je suis <strong>Ropat</strong>, graphiste basé à Angers. </span><br>
           <span>J'accompagne les artistes et les labels dans la création de leur <strong>identité visuelle</strong>.</span><br>
         </div>
         <div>
@@ -81,35 +146,86 @@
           <span>Tout en assurant le branding classique (logos, chartes) pour les entreprises.</span>
         </div>
       </div>
-      <!-- BOUTON CTA -->
-      <a href="contact.html" class="cta">
-        Donner un visuel à votre musique
+
+      <!-- CTA -->
+      <a href="contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
+        <span>Donner un visuel à votre musique</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
       </a>
     </section>
+    
+    <!-- Section Services (Nouvelle)
+    <section class="services" aria-labelledby="services-title">
+      <h2 id="services-title" class="services-title">Services & Expertise</h2>
+      <div class="services-grid">
+        <article class="service-card" data-aos="fade-up" data-aos-delay="0">
+          <div class="service-icon">🎵</div>
+          <h3>Industrie Musicale</h3>
+          <p>Pochettes d'album, visualizers, affiches de concert, merchandising</p>
+        </article>
+        
+        <article class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-icon">🎨</div>
+          <h3>Branding & Identité</h3>
+          <p>Logos, chartes graphiques, identité visuelle complète</p>
+        </article>
+        
+        <article class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-icon">🎬</div>
+          <h3>Motion Design</h3>
+          <p>Animations, stop-motion, contenus animés pour réseaux sociaux</p>
+        </article>
+        
+        <article class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <div class="service-icon">📐</div>
+          <h3>Direction Artistique</h3>
+          <p>Conception globale, supervision créative, conseil stratégique</p>
+        </article>
+      </div>
+    </section>-->
 
     <!-- SECTION PROJETS -->
-    <section class="projects">
-      <!-- H2 -->
-      <h2 class="projects-title">Projets Récents : Musique et Branding</h2>
+    <section class="projects" aria-labelledby="projects-title">
+      <h2 class="projects-title" id="projects-title">Projets Récents : Musique et Branding</h2>
+
+      <!-- Filtres de catégories 
+      <div class="project-filters" role="group" aria-label="Filtrer les projets">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="music">Musique</button>
+        <button class="filter-btn" data-filter="branding">Branding</button>
+        <button class="filter-btn" data-filter="animation">Animation</button>
+      </div>
+      -->
 
       <div class="projects-grid">
-        <!-- Exemple de Carte Projet 1 : Pochette d'album -->
-        <div class="project-card">
-          <a href="projet-btr.html" class="project-link">
-            <!-- Placeholder monochrome -->
+        <!-- Projet 1 : Pochette d'album -->
+        <article class="project-card" data-category="music" data-aos="fade-up">
+          <a href="projet-btr.html" class="project-link" aria-label="Voir le projet de la pochette de l'EP 'BTR' de Maltezz">
             <div class="project-image">
-              <img alt="Pochette d'album BTR de Maltezz" src="assets/BTR-cover-art.png"> 
+              <img
+                src="assets/BTR-cover-art.png" 
+                alt="Pochette d'album 'BTR' de Maltezz"
+                loading="lazy"
+                width="400"
+                height="400"
+              >
+            </div>
+            <div class="project-overlay">
+              <!--<span class="project-tag">Musique</span>
+              <span class="project-year">2025</span>-->
             </div>
             <div class="project-content">
-              <h3 class="project-title">Pochette d'album "BTR" (Maltezz)</h3>
-              <!-- Description -->
+              <h3 class="project-title">Pochette d'album "BTR"</h3>
+              <p class="project-client">Maltezz</p>
               <p class="project-description">Direction artistique complète et création de la cover pour la sortie de l'EP.</p>
             </div>
           </a>
-        </div>
+        </article>
 
         <!-- Exemple de Carte Projet 2 : Logo Design Process -->
-        <div class="project-card">
+        <article class="project-card">
           <a href="projet-logo-process.html" class="project-link">
             <!-- Placeholder monochrome -->
             <div class="project-image">
@@ -121,10 +237,10 @@
               <p class="project-description">Exemple de processus de design de logo incluant sketch, développement et finalisation.</p>
             </div>
           </a>
-        </div>
+        </article>
 
         <!-- Exemple de Carte Projet 3 : Branding Entreprise -->
-        <div class="project-card">
+        <article class="project-card">
           <a href="projet-cheetah.html" class="project-link">
             <!-- Placeholder monochrome -->
             <div class="project-image">
@@ -136,10 +252,10 @@
               <p class="project-description">Réalisation d'une animation en stop-motion</p>
             </div>
           </a>
-        </div>
+        </article>
 
         <!-- Exemple de Carte Projet 3 : Poster -->
-        <div class="project-card">
+        <article class="project-card">
           <a href="projet-hdd.html" class="project-link">
             <!-- Placeholder monochrome -->
             <div class="project-image">
@@ -151,7 +267,7 @@
               <p class="project-description">Création d'une affiche sur le thème de la défragmentation de disque dur.</p>
             </div>
           </a>
-        </div>
+        </article>
       </div>
     </section>
   </main>
