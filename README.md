@@ -8,3 +8,9 @@ Bienvenue dans mon portfolio en ligne ! Ce site présente mes projets, compéten
 - CSS3
 - JavaScript
 - GitHub Actions pour l'automatisation
+
+## Fonctionnalités
+
+- Présentation de projets avec filtres par catégorie
+- Section "À propos" détaillant mon parcours
+- Formulaire de contact
