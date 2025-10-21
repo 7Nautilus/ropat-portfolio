@@ -1,9 +1,8 @@
 name: Generate Sitemap
 
 on:
-  push:
-    branches:
-      - main  # Changez en "gh-pages" si c'est votre branche
+  workflow_dispatch
+    
 
 permissions:
   contents: write
