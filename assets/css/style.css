@@ -61,7 +61,7 @@ html {
 
 body {
   font-family: var(--font-family);
-  background-image: url(assets/background-img.webp);
+  background-image: url(assets/main-bg.webp);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
