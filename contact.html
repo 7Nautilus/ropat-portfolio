@@ -3,23 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
   <title>Contact</title>
   <meta name="description" content="Contactez-moi pour toute question ou collaboration. Retrouvez-moi sur mes réseaux sociaux ou envoyez-moi un email directement.">
   <meta name="keywords" content="contact, graphiste, designer graphique, collaboration, email, réseaux sociaux, Angers, France">
+
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script src="script.js" defer></script>
-  <link rel="icon" href="assets/icon.png" type="image/png">
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- JS -->
+  <script src="assets/js/script.js" defer></script>
+
+  <!-- Icon -->
+  <link rel="icon" href="/assets/icon.png" type="image/png">
 </head>
 <body>
+  <!-- Header -->
   <header>
     <nav>
       <!-- LOGO / NOM DE MARQUE -->
       <a href="index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
 
-      <!-- Bouton Burger (visible uniquement sur mobile) -->
-      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
+      <!-- Bouton Burger -->
+      <button class="burger-menu" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation">
         <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
           <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
@@ -27,22 +43,27 @@
         </svg>
       </button>
 
-      <!-- Liens de navigation (Menu) -->
-      <div class="nav-links">
+      <!-- Navigation Links -->
+      <div class="nav-links" id="main-navigation">
         <a href="index.html" class="nav-link">Accueil</a>
-        <a href="works.html" class="nav-link">Mes créations</a>
+        <a href="portfolio.html" class="nav-link">Mes créations</a>
         <a href="about.html" class="nav-link">À propos</a>
-        <a href="contact.html" class="contact-link">Contact</a>
+        <a href="contact.html" class="contact-link" aria-current="page">Contact</a>
       </div>
     </nav>
   </header>
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 class="hero-title" id="hero-title">Contactez-moi</h1>
 
-  <main class="hero">
-    <h1 class="hero-title">Contactez-moi</h1>
-    <p class="hero-text">Vous avez une question ou souhaitez collaborer ? Retrouvez-moi sur mes réseaux ou envoyez-moi un email directement !</p>
-    <a href="mailto:vultur.psd@gmail.com" class="cta">Envoyer un email</a>
-    <a href="https://www.instagram.com/9.ropat/">Instagram</a>
-</main>
+      <!-- Contact Information -->
+      <p class="hero-text">Vous avez une question ou souhaitez collaborer ? Retrouvez-moi sur mes réseaux ou envoyez-moi un email directement !</p>
+      <a href="mailto:vultur.psd@gmail.com" class="cta">Envoyer un email</a>
+      <a href="https://www.instagram.com/9.ropat/">Instagram</a>
+    </section>
+  </main>
 
   <footer>
     <div class="footer-content">
