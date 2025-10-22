@@ -558,7 +558,7 @@ nav {
 .social-links {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   justify-content: center;
   margin-top: var(--spacing-md);
 }
@@ -567,10 +567,6 @@ nav {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.social-links li {
-  margin-bottom: var(--spacing-xs);
 }
 
 .social-links a {
