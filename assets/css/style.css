@@ -560,8 +560,8 @@ nav {
 .social-links {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: var(--spacing-sm);
-  justify-content: center;
   font-size: var(--font-size-base);
 }
 
