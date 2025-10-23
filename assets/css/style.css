@@ -557,6 +557,14 @@ nav {
   gap: var(--spacing-sm);
 }
 
+#contact-social-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
 .social-links {
   display: flex;
   flex-direction: column;
