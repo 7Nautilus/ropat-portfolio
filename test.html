@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prévisualisation Footer - Ropat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <style>
+    /* Variables CSS */
+    :root {
+      --primary-color: #FF5C00;
+      --primary-color-alpha: rgba(255, 92, 0, 0.2);
+      --secondary-color: rgba(0, 0, 0, 0.5);
+      --white-color: #ffffff;
+      --gray-dark: #2d3748;
+      --gray-light: #e2e8f0;
+      --background-dark: #0a0a0a;
+      --font-family: 'Inter', sans-serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-base: 1rem;
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+      --border-radius-full: 9999px;
+      --transition-base: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: var(--white-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem;
+    }
+
+    .demo-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .demo-content h1 {
+      font-size: 2rem;
+      color: var(--gray-light);
+      margin-bottom: 1rem;
+    }
+
+    .demo-content p {
+      color: var(--primary-color);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--secondary-color);
+      padding: var(--spacing-xl) var(--spacing-lg);
+      border-top: 2px solid var(--primary-color);
+      margin-top: auto;
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-top {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: var(--spacing-xl);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .footer-link {
+      color: var(--white-color);
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      text-decoration: none;
+      transition: color var(--transition-base);
+      position: relative;
+    }
+
+    .footer-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width var(--transition-base);
+    }
+
+    .footer-link:hover,
+    .footer-link:focus {
+      color: var(--primary-color);
+    }
+
+    .footer-link:hover::after,
+    .footer-link:focus::after {
+      width: 100%;
+    }
+
+    .footer-social {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .footer-social-link {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      color: var(--white-color);
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      text-decoration: none;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border: 2px solid transparent;
+      border-radius: var(--border-radius-full);
+      transition: all var(--transition-base);
+    }
+
+    .footer-social-link:hover,
+    .footer-social-link:focus {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .footer-social-link svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+      padding-top: var(--spacing-md);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-text {
+      font-size: var(--font-size-sm);
+      color: var(--gray-light);
+      text-align: center;
+      margin: 0;
+    }
+
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .footer-link-small {
+      color: var(--gray-light);
+      font-size: var(--font-size-xs);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    .footer-link-small:hover,
+    .footer-link-small:focus {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .footer-separator {
+      color: var(--gray-light);
+      font-size: var(--font-size-xs);
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        gap: var(--spacing-xl);
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .footer-text {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 639px) {
+      .footer-top {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+      }
+
+      footer {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+
+      .footer-link {
+        font-size: var(--font-size-sm);
+      }
+
+      .footer-social-link {
+        font-size: var(--font-size-sm);
+        padding: var(--spacing-xs);
+      }
+
+      .footer-text {
+        font-size: 0.7rem;
+      }
+
+      .footer-link-small {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-content">
+    <div>
+      <h1>Prévisualisation du Footer</h1>
+      <p>↓ Scrollez vers le bas pour voir le footer ↓</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <!-- Section haute avec navigation et réseaux sociaux côte à côte -->
+      <div class="footer-top">
+        <!-- Navigation rapide -->
+        <nav class="footer-nav" aria-label="Navigation footer">
+          <a href="#" class="footer-link">Accueil</a>
+          <a href="#" class="footer-link">Portfolio</a>
+          <a href="#" class="footer-link">À propos</a>
+          <a href="#" class="footer-link">Contact</a>
+        </nav>
+
+        <!-- Réseaux sociaux -->
+        <div class="footer-social">
+          <a href="https://www.instagram.com/9.ropat/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            Instagram
+          </a>
+          <a href="https://www.pinterest.fr/ropat9/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="Pinterest">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+            </svg>
+            Pinterest
+          </a>
+        </div>
+      </div>
+
+      <!-- Copyright et mentions -->
+      <div class="footer-bottom">
+        <p class="footer-text">© 2025 Ropat — Graphiste et Directeur Artistique à Angers</p>
+        <div class="footer-legal">
+          <a href="#" class="footer-link-small">Mentions légales</a>
+          <span class="footer-separator">•</span>
+          <a href="#" class="footer-link-small">Confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
