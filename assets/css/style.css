@@ -562,6 +562,7 @@ nav {
   flex-direction: column;
   gap: var(--spacing-sm);
   justify-content: center;
+  font-size: var(--font-size-base);
 }
 
 .social-links li {
@@ -585,11 +586,11 @@ nav {
   align-items: center;
   gap: var(--spacing-xs);
   color: var(--white-color);
-  font-size: var(--font-size-lg);
   font-weight: 600;
   text-decoration: none;
   transition: transform var(--transition-base), color var(--transition-base);
 }
+/* rm : font-size: var(--font-size-lg); */
 
 .social-link img {
   width: 24px;
@@ -599,9 +600,10 @@ nav {
 
 .social-icon {
   color: var(--primary-color);
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
+
 
 /* ============================================
    FOOTER
@@ -626,6 +628,7 @@ footer {
   justify-content: center;
   width: 100%;
   gap: var(--spacing-xl);
+  font-size: var(--font-size-base);
 }
 
 .footer-nav {
