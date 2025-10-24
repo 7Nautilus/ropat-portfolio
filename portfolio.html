@@ -1,0 +1,49 @@
+---
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="/assets/js/script.js" defer></script>
+  <link rel="icon" href="/assets/images/branding/icon.png" type="image/png">
+</head>
+<body>
+  <header>
+    <nav>
+      <!-- LOGO / NOM DE MARQUE -->
+      <a href="/index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
+
+      <!-- Bouton Burger (visible uniquement sur mobile) -->
+      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
+        <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
+          <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
+          <path class="burger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
+        </svg>
+      </button>
+
+      <!-- Liens de navigation (Menu) -->
+      <div class="nav-links">
+        <a href="/index.html" class="nav-link">Accueil</a>
+        <a href="/portfolio.html" class="nav-link">Mes créations</a>
+        <a href="/about.html" class="nav-link">À propos</a>
+        <a href="/contact.html" class="contact-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="hero">
+  </main>
+
+  <footer>
+    {% include footer.html %}
+  </footer>
+</body>
+</html>
