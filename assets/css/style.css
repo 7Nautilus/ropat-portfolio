@@ -493,7 +493,7 @@ main {
    PROJECTS SECTION
    ============================================ */
 .projects {
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: 0;
 }
 
 .projects-title {
