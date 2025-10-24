@@ -392,6 +392,19 @@ nav {
 }
 
 /* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
+}
+
+
+/* ============================================
    HERO SECTION
    ============================================ */
 
@@ -400,7 +413,6 @@ nav {
   flex-direction: column;
   align-items: flex-start;
   gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
 }
 
 .hero-title {
@@ -553,7 +565,6 @@ nav {
 .contact-methods {
   display: flex;
   flex-direction: column;
-  margin: 0 var(--spacing-lg) 0 var(--spacing-lg);
   gap: var(--spacing-sm);
 }
 
