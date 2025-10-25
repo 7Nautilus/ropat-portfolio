@@ -825,6 +825,7 @@ footer {
 
   .footer-bottom {
     font-size: var(--spacing-xs);
+    gap: var(--spacing-xs);
   }
 }
 
