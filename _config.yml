@@ -1,0 +1,18 @@
+title: "Ropat Portfolio"
+description: "Portfolio de Ropat"
+baseurl: ""
+url: "https://ropat.art"
+
+# Exclusions pour Jekyll (ne pas exclure _includes car Jekyll en a besoin pour les inclusions)
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+plugins:
+  - jekyll-sitemap
+
+# Configuration du plugin sitemap - exclure les includes du sitemap mais pas du build
+sitemap:
+  exclude:
+    - "/_includes/"
