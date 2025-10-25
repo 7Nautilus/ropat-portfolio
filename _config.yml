@@ -1,6 +1,0 @@
-title: "Ropat Portfolio"
-description: "Portfolio de Ropat"
-baseurl: ""
-url: "https://ropat.art"
-exclude:
-  - _includes/footer.html
