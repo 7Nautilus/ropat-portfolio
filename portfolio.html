@@ -22,13 +22,7 @@
       <a href="index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
 
       <!-- Bouton Burger (visible uniquement sur mobile) -->
-      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
-        <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
-          <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
-          <path class="burger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
-        </svg>
-      </button>
+      {% include burger-menu.html %}
 
       <!-- Liens de navigation (Menu) -->
       <div class="nav-links">
@@ -47,63 +41,16 @@
 
       <div class="projects-grid">
         <!-- Projet 1 : Pochette d'album -->
-        <article class="project-card" data-category="music" data-aos="fade-up">
-          <a href="projects/btr.html" class="project-link" aria-label="Voir le projet de la pochette de l'EP 'BTR' de Maltezz">
-            <div class="project-image">
-              <img
-                src="assets/images/projects/btr-cover.png" 
-                alt="Pochette d'album 'BTR' de Maltezz"
-                loading="lazy"
-                width="400"
-                height="400"
-              >
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Pochette d'album "BTR"</h3>
-              <p class="project-client">Maltezz</p>
-              <p class="project-description">Direction artistique complète et création de la cover pour la sortie de l'EP.</p>
-            </div>
-          </a>
-        </article>
+        {% include card-btr.html %}
 
         <!-- Projet 2 : Logo Design Process -->
-        <article class="project-card">
-          <a href="projects/logo-process.html" class="project-link">
-            <div class="project-image">
-              <img alt="Logo design process" src="assets/images/projects/logo-design-process.png" loading="lazy" width="400" height="400">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Logo design process</h3>
-              <p class="project-description">Exemple de processus de design de logo incluant sketch, développement et finalisation.</p>
-            </div>
-          </a>
-        </article>
+        {% include card-logo-design-process.html %}
 
         <!-- Projet 3 : Stop-Motion -->
-        <article class="project-card">
-          <a href="projects/cheetah.html" class="project-link">
-            <div class="project-image">
-              <img alt="Stop-Motion Animation" src="assets/images/projects/cheetah-stopmotion.png" loading="lazy" width="400" height="400">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Animation Stop-Motion</h3>
-              <p class="project-description">Réalisation d'une animation en stop-motion</p>
-            </div>
-          </a>
-        </article>
+        {% include card-cheetah.html %}
 
         <!-- Projet 4 : Poster -->
-        <article class="project-card">
-          <a href="projects/hdd-defrag.html" class="project-link">
-            <div class="project-image">
-              <img alt="Affiche HDD DEFRAG" src="assets/images/projects/hdd-defrag-poster.png" loading="lazy" width="400" height="400">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Affiche "HDD DEFRAG"</h3>
-              <p class="project-description">Création d'une affiche sur le thème de la défragmentation de disque dur.</p>
-            </div>
-          </a>
-        </article>
+        {% include card-hdd-defrag.html %}
       </div>
     </section>
   </main>

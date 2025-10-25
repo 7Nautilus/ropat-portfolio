@@ -36,13 +36,7 @@
       <a href="/index.html" class="logo" title="Ropat - Retour à l'accueil">Ropat</a>
 
       <!-- Bouton Burger (visible uniquement sur mobile) -->
-      <button class="burger-menu" aria-label="Menu" aria-expanded="false">
-        <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
-          <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
-          <path class="burger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
-        </svg>
-      </button>
+      {% include burger-menu.html %}
 
       <!-- Liens de navigation (Menu) -->
       <div class="nav-links">

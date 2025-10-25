@@ -64,7 +64,8 @@
     },
 
     "sameAs": [
-      "https://www.instagram.com/9.ropat/"
+      "https://www.instagram.com/9.ropat/",
+      "https://fr.pinterest.com/9.ropat/"
     ],
 
     "description": "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise."
@@ -116,13 +117,7 @@
       <a href="index.html" class="logo" title="Ropat - Retour à l'accueil" aria-label="Retour à l'accueil">Ropat</a>
 
       <!-- Bouton Burger -->
-      <button class="burger-menu" aria-label="Menu" aria-expanded="false" aria-controls="main-navigation">
-        <svg class="burger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path class="burger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
-          <path class="burger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
-          <path class="burger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
-        </svg>
-      </button>
+      {% include burger-menu.html %}
 
       <!-- Navigation Links -->
       <div class="nav-links" id="main-navigation">
@@ -209,49 +204,13 @@
         {% include card-btr.html %}
 
         <!-- Exemple de Carte Projet 2 : Logo Design Process -->
-        <article class="project-card">
-          <a href="projects/logo-process.html" class="project-link">
-            <!-- Placeholder monochrome -->
-            <div class="project-image">
-              <img alt="Logo design process" src="assets/images/projects/logo-design-process.png">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Logo design process</h3>
-              <!-- Description -->
-              <p class="project-description">Exemple de processus de design de logo incluant sketch, développement et finalisation.</p>
-            </div>
-          </a>
-        </article>
+        {% include card-logo-design-process.html %}
 
         <!-- Exemple de Carte Projet 3 : Branding Entreprise -->
-        <article class="project-card">
-          <a href="projects/cheetah.html" class="project-link">
-            <!-- Placeholder monochrome -->
-            <div class="project-image">
-              <img alt="Stop-Motion Animation" src="assets/images/projects/cheetah-stopmotion.png">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Animation Stop-Motion</h3>
-              <!-- Description -->
-              <p class="project-description">Réalisation d'une animation en stop-motion</p>
-            </div>
-          </a>
-        </article>
+        {% include card-cheetah.html %}
 
         <!-- Exemple de Carte Projet 3 : Poster -->
-        <article class="project-card">
-          <a href="projects/hdd-defrag.html" class="project-link">
-            <!-- Placeholder monochrome -->
-            <div class="project-image">
-              <img alt="Affiche HDD DEFRAG" src="assets/images/projects/hdd-defrag-poster.png">
-            </div>
-            <div class="project-content">
-              <h3 class="project-title">Affiche "HDD DEFRAG"</h3>
-              <!-- Description -->
-              <p class="project-description">Création d'une affiche sur le thème de la défragmentation de disque dur.</p>
-            </div>
-          </a>
-        </article>
+        {% include card-hdd-defrag.html %}
       </div>
     </section>
   </main>
