@@ -19,6 +19,7 @@ jobs:
         uses: cicirello/generate-sitemap@v1
         with:
           base-url-path: https://ropat.art/
+          exclude-paths: _includes/
           
       - name: Commit sitemap
         run: |
