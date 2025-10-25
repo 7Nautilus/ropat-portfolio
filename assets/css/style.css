@@ -823,7 +823,7 @@ footer {
     justify-content: space-between;
   }
 
-  .footer-text {
+  .footer-bottom {
     font-size: var(--spacing-xs);
   }
 }
