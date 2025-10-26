@@ -1,0 +1,13 @@
+<div class="nav-links" id="main-navigation">
+  {% for item in site.data.navigation %}
+    {% assign is_current = false %}
+    {% if page.url == item.url %}
+      {% assign is_current = true %}
+    {% endif %}
+    <a href="{{ item.url | relative_url }}"
+       class="{{ item.class }}"
+       {% if is_current %}aria-current="page"{% endif %}>
+       {{ item.name }}
+    </a>
+  {% endfor %}
+</div>

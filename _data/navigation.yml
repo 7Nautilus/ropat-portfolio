@@ -1,0 +1,15 @@
+- name: Accueil
+  url: /
+  class: nav-link
+
+- name: À Propos
+  url: /about/
+  class: nav-link
+
+- name: Portfolio
+  url: /portfolio/
+  class: nav-link
+
+- name: Contact
+  url: /contact/
+  class: contact-link
