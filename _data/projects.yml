@@ -6,6 +6,7 @@
   title: 'Pochette d''album "BTR"' # Note : les ' sont doublés pour être valides
   client: Maltezz
   description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
+  featured: true
 
 - category: branding
   url: /projects/logo-process.html
@@ -15,6 +16,7 @@
   title: "Logo design process"
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
+  featured: true
 
 - category: animation
   url: /projects/cheetah.html
@@ -24,6 +26,7 @@
   title: "Animation Stop-Motion"
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Réalisation d'une animation en stop-motion"
+  featured: true
 
 - category: design
   url: /projects/hdd-defrag.html
@@ -33,3 +36,14 @@
   title: 'Affiche "HDD DEFRAG"'
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
+  featured: true
+
+- category: design
+  url: /projects/exit.html
+  aria_label: "Voir le projet d'affiche EXIT"
+  image_src: /assets/images/projects/exit.png
+  image_alt: "Affiche EXIT"
+  title: 'Affiche "EXIT"'
+  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
+  description: "Création d'une affiche sur le thème du design des sorties de secours."
+  featured: false
