@@ -7,7 +7,8 @@ Bienvenue dans mon portfolio en ligne ! Ce site présente mes projets, compéten
 - HTML5
 - CSS3
 - JavaScript
-- GitHub Actions pour l'automatisation
+- GitHub Actions pour l'automatisation du déploiement et de la génération du sitemap
+- Jekyll pour la génération statique du site
 
 ## Fonctionnalités
 
