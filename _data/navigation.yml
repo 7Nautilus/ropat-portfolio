@@ -2,14 +2,15 @@
   url: /
   class: nav-link
 
-- name: À Propos
-  url: about.html
+- name: Mes créations
+  url: /portfolio.html
   class: nav-link
 
-- name: Portfolio
-  url: portfolio.html
+- name: À propos
+  url: /about.html
   class: nav-link
+
 
 - name: Contact
-  url: contact.html
+  url: /contact.html
   class: contact-link
