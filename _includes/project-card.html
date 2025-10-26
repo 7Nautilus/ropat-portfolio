@@ -1,0 +1,23 @@
+<article class="project-card" data-category="{{ include.project.category }}" data-aos="fade-up">
+  <a href="{{ include.project.url | relative_url }}" class="project-link" aria-label="{{ include.project.aria_label }}">
+    <!-- Project Image -->
+    <div class="project-image">
+      <img
+        src="{{ include.project.image_src | relative_url }}" 
+        alt="{{ include.project.image_alt }}"
+        loading="lazy"
+        width="400"
+        height="400">
+    </div>
+    <!-- Project Content -->
+    <div class="project-content">
+      <h3 class="project-title">{{ include.project.title }}</h3>
+
+      {% if include.project.client %}
+        <p class="project-client">{{ include.project.client }}</p>
+      {% endif %}
+      
+      <p class="project-description">{{ include.project.description }}</p>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,12 @@
+
+        <!-- Projet 1 : Pochette d'album -->
+        {% include card-btr.html %}
+
+        <!-- Projet 2 : Logo Design Process -->
+        {% include card-logo-design-process.html %}
+
+        <!-- Projet 3 : Stop-Motion -->
+        {% include card-cheetah.html %}
+
+        <!-- Projet 4 : Poster -->
+        {% include card-hdd-defrag.html %}

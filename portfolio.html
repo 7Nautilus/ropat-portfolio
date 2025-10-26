@@ -26,17 +26,9 @@
       <h1 class="hero-title" id="hero-title">Mes Créations</h1>
 
       <div class="projects-grid">
-        <!-- Projet 1 : Pochette d'album -->
-        {% include card-btr.html %}
-
-        <!-- Projet 2 : Logo Design Process -->
-        {% include card-logo-design-process.html %}
-
-        <!-- Projet 3 : Stop-Motion -->
-        {% include card-cheetah.html %}
-
-        <!-- Projet 4 : Poster -->
-        {% include card-hdd-defrag.html %}
+        {% for item in site.data.projects %}
+          {% include project_card.html project=item %}
+        {% endfor %}
       </div>
     </section>
   </main>

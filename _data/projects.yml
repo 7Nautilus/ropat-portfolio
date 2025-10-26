@@ -1,0 +1,26 @@
+- category: music
+  url: /projects/btr.html
+  aria_label: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
+  image_src: /assets/images/projects/btr-cover.png
+  image_alt: "Pochette d'album 'BTR' de Maltezz"
+  title: 'Pochette d''album "BTR"' # Note : les ' sont doublés pour être valides
+  client: Maltezz
+  description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
+
+- category: design
+  url: /projects/hdd-defrag.html
+  aria_label: "Voir le projet d'affiche HDD DEFRAG"
+  image_src: /assets/images/projects/hdd-defrag-poster.png
+  image_alt: "Affiche HDD DEFRAG"
+  title: 'Affiche "HDD DEFRAG"'
+  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
+  description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
+
+- category: branding
+  url: /projects/logo-process.html
+  aria_label: "Voir le processus de création de logo"
+  image_src: "/assets/images/projects/logo-design-process.png"
+  image_alt: "Logo design process"
+  title: "Logo design process"
+  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
+  description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
