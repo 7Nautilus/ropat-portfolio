@@ -5,14 +5,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO -->
   <title>EXIT</title>
   <meta name="description" content="Projet de création d'affiche pour le projet EXIT.">
   <meta name="keywords" content="affiche, design graphique, EXIT, projet, Ropat, graphiste, Angers">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EXIT">
+  <meta property="og:description" content="Projet de création d'affiche pour le projet EXIT.">
+  <meta property="og:image" content="https://ropat.art/assets/images/projects/exit.png">
+  <meta property="og:url" content="https://ropat.art/projects/exit">
+  <meta property="og:type" content="website">
+
+  <!-- Canonical -->
   <link rel="canonical" href="https://ropat.art/projects/exit">
+
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
+  
+  <!-- Preconnect pour optimiser le chargement des fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- JS -->
   <script src="../assets/js/script.js" defer></script>
+
+  <!-- Icon -->
   <link rel="icon" href="../assets/images/branding/icon.png" type="image/png">
 </head>
 <body>
@@ -33,8 +56,6 @@
   </main>
 
   <!-- Footer -->
-  <footer>
-    {% include footer.html %}
-  </footer>
+  {% include footer.html %}
 </body>
 </html>

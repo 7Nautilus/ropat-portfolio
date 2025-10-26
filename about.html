@@ -5,14 +5,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
   <title>À propos</title>
   <meta name="description" content="À propos de moi - Ropat, graphiste et directeur artistique basé à Angers. Découvrez mon parcours, mes compétences et ma passion pour le design visuel au service des artistes et des entreprises.">
   <meta name="keywords" content="à propos, graphiste, designer graphique, directeur artistique, parcours, compétences, Angers, identité visuelle, branding, musique, artistes, entreprises">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="À propos de Ropat">
+  <meta property="og:description" content="Découvrez le parcours et les compétences de Ropat, graphiste et directeur artistique basé à Angers.">
+  <meta property="og:image" content="https://ropat.art/assets/images/branding/icon.png">
+  <meta property="og:url" content="https://ropat.art/about">
+  <meta property="og:type" content="website">
+  
+  <!-- Canonical -->
   <link rel="canonical" href="https://ropat.art/about">
+
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Preconnect pour optimiser le chargement des fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- JS -->
   <script src="assets/js/script.js" defer></script>
+  
+  <!-- Icon -->
   <link rel="icon" href="assets/images/branding/icon.png" type="image/png">
 </head>
 <body>
@@ -27,8 +50,7 @@
     </div>
   </main>
 
-  <footer>
-    {% include footer.html %}
-  </footer>
+  <!-- Footer -->
+  {% include footer.html %}
 </body>
 </html>
