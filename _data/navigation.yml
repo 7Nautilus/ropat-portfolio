@@ -3,13 +3,13 @@
   class: nav-link
 
 - name: À Propos
-  url: /about/
+  url: /about.html/
   class: nav-link
 
 - name: Portfolio
-  url: /portfolio/
+  url: /portfolio.html/
   class: nav-link
 
 - name: Contact
-  url: /contact/
+  url: /contact.html/
   class: contact-link
