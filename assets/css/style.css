@@ -401,6 +401,7 @@ main {
   flex-grow: 1;
   padding: var(--spacing-lg);
   gap: var(--spacing-xl);
+  min-height: 100vh;
 }
 
 
