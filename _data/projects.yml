@@ -7,15 +7,6 @@
   client: Maltezz
   description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
 
-- category: design
-  url: /projects/hdd-defrag.html
-  aria_label: "Voir le projet d'affiche HDD DEFRAG"
-  image_src: /assets/images/projects/hdd-defrag-poster.png
-  image_alt: "Affiche HDD DEFRAG"
-  title: 'Affiche "HDD DEFRAG"'
-  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
-  description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
-
 - category: branding
   url: /projects/logo-process.html
   aria_label: "Voir le processus de création de logo"
@@ -24,3 +15,21 @@
   title: "Logo design process"
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
+
+- category: animation
+  url: /projects/cheetah.html
+  aria_label: "Voir le projet d'animation en stop-motion"
+  image_src: assets/images/projects/cheetah-stopmotion.png
+  image_alt: "Stop-Motion Animation"
+  title: "Animation Stop-Motion"
+  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
+  description: "Réalisation d'une animation en stop-motion"
+
+- category: design
+  url: /projects/hdd-defrag.html
+  aria_label: "Voir le projet d'affiche HDD DEFRAG"
+  image_src: /assets/images/projects/hdd-defrag-poster.png
+  image_alt: "Affiche HDD DEFRAG"
+  title: 'Affiche "HDD DEFRAG"'
+  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
+  description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
