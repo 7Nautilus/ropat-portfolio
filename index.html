@@ -150,10 +150,9 @@
     <!-- Section Services (Nouvelle) -->
     <section class="services" aria-labelledby="services-title">
       <h2 class="section-title" id="services-title">Services & Expertise</h2>
-      <div class="services-grid">
+      <div class="section-grid" id="services-grid">
         <!-- Carte de Conception Graphique -->
         <article class="service-card" data-aos="fade-up" data-aos-delay="0">
-          <!-- <div class="service-icon">🎵</div> -->
           <!-- Icône SVG (Palette d'artiste) -->
           <div class="service-icon-placeholder" aria-label="Icône de conception graphique">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>
@@ -209,7 +208,7 @@
       </div>
       -->
 
-      <div class="projects-grid">
+      <div class="section-grid" id="projects-grid">
         {% assign featured_projects = site.data.projects | where: "featured", true %}
 
         {% for item in featured_projects limit: 4 %}
