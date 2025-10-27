@@ -5,14 +5,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio - Mes Créations | Ropat</title>
+
+  <!-- SEO -->
+  <title>Portfolio</title>
   <meta name="description" content="Découvrez mes créations graphiques : pochettes d'album, logos, affiches, animations stop-motion et projets de branding pour artistes et entreprises.">
   <meta name="keywords" content="portfolio, créations graphiques, pochette album, design logo, affiche concert, stop-motion, branding, identité visuelle, Ropat, graphiste Angers">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Portfolio - Mes Créations | Ropat">
+  <meta property="og:description" content="Découvrez mes créations graphiques : pochettes d'album, logos, affiches, animations stop-motion et projets de branding pour artistes et entreprises.">
+  <meta property="og:image" content="https://ropat.art/assets/images/branding/icon.png">
+  <meta property="og:url" content="https://ropat.art/portfolio">
+  <meta property="og:type" content="website">
+  
+  <!-- Canonical -->
   <link rel="canonical" href="https://ropat.art/portfolio">
+
+  <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- JS -->
   <script src="assets/js/script.js" defer></script>
+
+  <!-- Icon -->
   <link rel="icon" href="assets/images/branding/icon.png" type="image/png">
 </head>
 <body>
@@ -33,8 +56,7 @@
     </section>
   </main>
 
-  <footer>
-    {% include footer.html %}
-  </footer>
+  <!-- Footer -->
+  {% include footer.html %}
 </body>
 </html>
