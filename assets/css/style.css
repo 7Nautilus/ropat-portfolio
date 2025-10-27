@@ -508,7 +508,8 @@ main {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 var(--spacing-lg);
   gap: var(--spacing-lg);
 }
 
@@ -571,7 +572,7 @@ main {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-lg);
 }
 
