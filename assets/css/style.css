@@ -559,13 +559,13 @@ main {
 
 .service-tools {
   display: flex;
-  
+
   font-size: var(--font-size-sm);
   color: var(--primary-color);
 }
 
 .service-tool {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.6rem;
   border-radius: var(--border-radius-sm);
   background-color: var(--primary-color-alpha);
 }
