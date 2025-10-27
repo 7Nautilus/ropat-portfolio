@@ -568,7 +568,7 @@ main {
   border-bottom: var(--border-primary);
   padding-bottom: var(--spacing-xs);
 }
-*/ 
+*/
 
 .projects-grid {
   display: grid;
