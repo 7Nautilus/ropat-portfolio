@@ -878,6 +878,7 @@ footer {
 
   .services-grid {
     grid-template-columns: 1fr;
+    margin: 0;
     padding: 0;
   } 
 
@@ -888,7 +889,8 @@ footer {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
-    marging: 0;
+    margin: 0;
+    padding: 0;
   }
 
   .project-title {
