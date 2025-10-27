@@ -10,3 +10,24 @@
 
         <!-- Projet 4 : Poster -->
         {% include card-hdd-defrag.html %}
+
+
+
+
+<article class="service-card" data-aos="fade-up" data-aos-delay="100">
+          <!-- <div class="service-icon">🎨</div> -->
+          <h3>Branding & Identité</h3>
+          <p>Logos, chartes graphiques, identité visuelle complète</p>
+        </article>
+        
+        <article class="service-card" data-aos="fade-up" data-aos-delay="200">
+          <!-- <div class="service-icon">🎬</div> -->
+          <h3>Motion Design</h3>
+          <p>Animations, stop-motion, contenus animés pour réseaux sociaux</p>
+        </article>
+        
+        <article class="service-card" data-aos="fade-up" data-aos-delay="300">
+          <!-- <div class="service-icon">📐</div> -->
+          <h3>Direction Artistique</h3>
+          <p>Conception globale, supervision créative, conseil stratégique</p>
+        </article>

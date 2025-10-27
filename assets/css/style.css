@@ -502,6 +502,54 @@ main {
   padding-bottom: var(--spacing-xs);
 }
 
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius-md);
+  border: 2px solid var(--primary-color);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);;
+  gap: var(--spacing-md);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+
+.service-icon-placeholder {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-color);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.service-card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-md);
+}
+
+.service-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
 
 
 /* ============================================
