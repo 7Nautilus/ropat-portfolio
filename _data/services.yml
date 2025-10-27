@@ -11,9 +11,9 @@
   title: 'Design pour la musique'
   description: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
   tools: 
-    - '#Photoshop'
-    - '#Illustrator'
-    - '#Blender'
+    - nom: '#Photoshop'
+    - nom: '#Illustrator'
+    - nom: '#Blender'
 
 - data_aos_delay: 200
   icon_aria: 'Icône de branding et stratégie visuelle'
