@@ -513,13 +513,6 @@ main {
    SERVICES SECTION
    ============================================ */
 
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 0 var(--spacing-lg);
-  gap: var(--spacing-lg);
-}
-
 .service-card {
   display: flex;
   flex-direction: column;
@@ -889,7 +882,6 @@ footer {
 
   .section-grid {
     grid-template-columns: 1fr;
-    gap: var(--spacing-md);
     margin: 0;
     padding: 0;
   }
@@ -921,10 +913,6 @@ footer {
   .cta {
   	font-size: var(--font-size-base);
 	  padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
-  .section-grid {
-	  gap: var(--spacing-sm);
   }
 
   .footer-text {
