@@ -546,13 +546,15 @@ main {
 }
 
 .project-content {
+  display: flex;
+  flex-direction: column;
   padding: 1.25rem;
+  gap: var(--spacing-xs);
 }
 
 .project-title {
   font-size: var(--font-size-xl);
   font-weight: 600;
-  margin-bottom: var(--spacing-xs);
 }
 
 .project-description {
