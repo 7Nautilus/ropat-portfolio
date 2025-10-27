@@ -194,7 +194,7 @@
         {% assign featured_projects = site.data.projects | where: "featured", true %}
 
         {% for item in featured_projects limit: 4 %}
-          {% include project_card.html project=item %}
+          {% include project-card.html project=item %}
         {% endfor %}
       </div>
     </section>
