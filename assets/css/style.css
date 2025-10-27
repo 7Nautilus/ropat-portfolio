@@ -801,7 +801,7 @@ footer {
     padding: 1.5rem 1rem;
   }
 
-  .projects-grid {
+  .section-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -832,7 +832,7 @@ footer {
 
 /* Desktop - 1024px + */
 @media (min-width: 1024px) {
-  .projects-grid {
+  .section-grid {
     grid-template-columns: repeat(3, 1fr);
   } 
 }
@@ -893,7 +893,7 @@ footer {
     font-size: var(--font-size-2xl);
   }
 
-  .projects-grid {
+  .section-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
     margin: 0;
@@ -929,7 +929,7 @@ footer {
 	  padding: var(--spacing-xs) var(--spacing-sm);
   }
 
-  .projects-grid {
+  .section-grid {
 	  gap: var(--spacing-sm);
   }
 
