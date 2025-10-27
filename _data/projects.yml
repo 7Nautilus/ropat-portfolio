@@ -36,7 +36,7 @@
   title: 'Affiche "HDD DEFRAG"'
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
-  featured: true
+  featured: false
 
 - category: design
   url: /projects/exit.html
