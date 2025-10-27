@@ -191,17 +191,11 @@
       -->
 
       <div class="projects-grid">
-        <!-- Projet 1 : Pochette d'album -->
-        {% include card-btr.html %}
+        {% assign featured_projects = site.data.projects | where: "featured", true %}
 
-        <!-- Exemple de Carte Projet 2 : Logo Design Process -->
-        {% include card-logo-design-process.html %}
-
-        <!-- Exemple de Carte Projet 3 : Branding Entreprise -->
-        {% include card-cheetah.html %}
-
-        <!-- Exemple de Carte Projet 3 : Poster -->
-        {% include card-hdd-defrag.html %}
+        {% for item in featured_projects limit: 4 %}
+          {% include project_card.html project=item %}
+        {% endfor %}
       </div>
     </section>
   </main>
