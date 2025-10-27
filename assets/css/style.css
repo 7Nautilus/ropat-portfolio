@@ -400,7 +400,7 @@ main {
   flex-direction: column;
   flex-grow: 1;
   padding: var(--spacing-lg);
-  gap: var(--spacing-xl);
+  gap: 10rem;
   min-height: 100vh;
 }
 
@@ -491,12 +491,27 @@ main {
 }
 
 /* ============================================
+   SECTIONS
+   ============================================ */
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-lg);
+  border-bottom: var(--border-primary);
+  padding-bottom: var(--spacing-xs);
+}
+
+
+
+/* ============================================
    PROJECTS SECTION
    ============================================ */
 .projects {
   padding: 0;
 }
 
+/*
 .projects-title {
   font-size: var(--font-size-3xl);
   font-weight: 700;
@@ -504,6 +519,7 @@ main {
   border-bottom: var(--border-primary);
   padding-bottom: var(--spacing-xs);
 }
+*/
 
 .projects-grid {
   display: grid;
