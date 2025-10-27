@@ -559,7 +559,9 @@ main {
 
 .service-tools {
   display: flex;
-
+  flex-direction: row;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
   font-size: var(--font-size-sm);
   color: var(--primary-color);
 }
@@ -568,6 +570,7 @@ main {
   padding: 0.25rem 0.6rem;
   border-radius: var(--border-radius-sm);
   background-color: var(--primary-color-alpha);
+  width: fit-content;
 }
  
 
