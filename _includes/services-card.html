@@ -9,5 +9,9 @@
     <p>{{ include.services.description }}</p>
   </div>
   <!-- Tools used -->
-  <span class="service-tools">{{ include.services.tools }}</span>
+  {% if include.services.tools %}
+    {% for tool in include.services.tools %}
+      <span class="services-tool">{{ tool.nom }}</span>
+    {% endfor %}
+  {% endif %}
 </article>
