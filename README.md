@@ -27,4 +27,3 @@ Le site est automatiquement déployé sur GitHub Pages à chaque push sur la bra
 - Le principe DRY est appliqué dans la structure du code pour éviter la duplication et faciliter la maintenance.
 - Les styles CSS sont centralisés et réutilisés à travers des classes communes.
 - Les composants HTML sont modularisés pour une réutilisation efficace.
-
