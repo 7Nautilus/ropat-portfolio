@@ -24,6 +24,6 @@
   title: 'Branding & Stratégie Visuelle'
   description: "Développement de l'identité de marque, positionnement visuel et cohérence graphique pour renforcer votre présence."
   tools: 
-    - nom: Figma
-    - nom: Illustrator 
-    - nom: Photoshop
+    - nom: '#Figma'
+    - nom: '#Illustrator' 
+    - nom: '#Photoshop'
