@@ -561,6 +561,11 @@ main {
   font-size: var(--font-size-sm);
   color: var(--primary-color);
 }
+
+.service-tool {
+  padding: 0.25rem 0.5rem;
+  background-color: var(--primary-color-alpha);
+}
  
 
 /* ============================================
