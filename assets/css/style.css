@@ -883,12 +883,6 @@ footer {
     padding: 0.75rem var(--spacing-md);
   }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-    margin: 0;
-    padding: 0;
-  } 
-
   .projects-title {
     font-size: var(--font-size-2xl);
   }
