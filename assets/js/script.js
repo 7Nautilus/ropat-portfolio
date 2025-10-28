@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card'); // Assurez-vous que chaque carte de projet a cette classe
+    const projectCards = document.querySelectorAll('.project-card');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -87,22 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
-            // 2. Récupérer la catégorie
+            // 2. Récupérer la catégorie cliquée
             const filterValue = button.getAttribute('data-filter');
 
             // 3. Filtrer les cartes
             projectCards.forEach(card => {
-                const categories = card.getAttribute('category'); // Récupère la/les catégorie(s) de la carte
+                // S'assurer que la carte a bien l'attribut data-category
+                const category = card.getAttribute('data-category'); 
 
-                if (filterValue === 'all' || categories.includes(filterValue)) {
-                    // Afficher la carte (ajuster selon votre CSS, souvent en changeant l'opacité ou le 'display')
-                    card.style.display = 'block'; 
-                    // Si vous utilisez des transitions CSS, vous préférerez peut-être :
-                    // card.classList.remove('hidden');
+                // Utiliser l'égalité stricte pour les projets à catégorie unique
+                // ET ajouter une vérification pour éviter le null (même si l'égalité le gère)
+                if (filterValue === 'all' || (category && category === filterValue)) {
+                    // Si le filtre est 'all' OU si la catégorie de la carte correspond au filtre
+                    card.style.display = 'block';
                 } else {
-                    // Masquer la carte
                     card.style.display = 'none';
-                    // Ou : card.classList.add('hidden');
                 }
             });
         });
