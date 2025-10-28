@@ -92,13 +92,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 3. Filtrer les cartes
             projectCards.forEach(card => {
-                // S'assurer que la carte a bien l'attribut data-category
-                const category = card.getAttribute('data-category'); 
+                // Récupère la chaîne de catégories (ex: "music branding")
+                const categoriesString = card.getAttribute('data-category'); 
 
-                // Utiliser l'égalité stricte pour les projets à catégorie unique
-                // ET ajouter une vérification pour éviter le null (même si l'égalité le gère)
-                if (filterValue === 'all' || (category && category === filterValue)) {
-                    // Si le filtre est 'all' OU si la catégorie de la carte correspond au filtre
+                // Si 'all' est sélectionné, on affiche tout.
+                if (filterValue === 'all') {
+                    card.style.display = 'block';
+                    return; // Passe à la carte suivante
+                }
+
+                // Pour les filtres spécifiques:
+                // Vérifie si la chaîne de catégories existe (pour éviter le null)
+                // et si, une fois séparée par l'espace, elle contient le filtre actif.
+                if (categoriesString && categoriesString.split(' ').includes(filterValue)) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
