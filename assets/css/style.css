@@ -241,13 +241,13 @@ nav {
   transition: width var(--transition-speed);
 }
 
-.logo:hover::after {
-  width: 100%;
-}
-
 .logo:hover {
   color: var(--primary-color);
   transform: translateY(-2px);
+}
+
+.logo:hover::after {
+  width: 100%;
 }
 
 .logo-text {
@@ -352,16 +352,16 @@ nav {
   padding: var(--spacing-xs);
   z-index: 110;
   transition: transform var(--transition-base);
-}
 
-.burger-menu:hover {
-  transform: scale(1.1);
-}
+  &:hover {
+    transform: scale(1.1);
+  }
 
-.burger-menu:focus {
-  border-radius: 5px;
-  outline: 2px solid var(--primary-color);
-  outline-offset: 4px;
+  &:focus {
+    border-radius: 5px;
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+  }
 }
 
 .burger-icon {
@@ -392,14 +392,14 @@ nav {
 }
 
 /* ============================================
-   CATEGORY FILTERS
+   Dropdown Menu
    ============================================ */
 
 .dropdown {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  min-width: 15rem;
+  min-width: 10rem;
   position: relative;
   margin-left: var(--spacing-lg);
   animation: fadeIn 0.6s ease-out;
@@ -505,7 +505,6 @@ main {
   gap: 10rem;
   min-height: 100vh;
 }
-
 
 /* ============================================
    HERO SECTION
