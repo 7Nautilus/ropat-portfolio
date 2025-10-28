@@ -402,17 +402,6 @@ nav {
   animation: fadeIn 0.6s ease-out;
 }
 
-.filter-label {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--white-color);
-  font-weight: 600;
-  font-size: var(--font-size-base);
-  white-space: nowrap;
-  cursor: pointer;
-}
-
 /* Style de l'élément SELECT */
 .filter-select {
   padding: var(--spacing-xs) var(--spacing-sm);
@@ -951,7 +940,6 @@ footer {
 
 /* Mobile - Max 639px */
 @media (max-width: 639px) {
-
   .hero-project {
 	  flex-direction: column;
   }
@@ -985,10 +973,6 @@ footer {
   .category-filters {
     margin: 0;
     margin-bottom: var(--spacing-lg);
-  }
-
-  .filter-label {
-    font-size: var(--font-size-sm);
   }
 
   .filter-select {
