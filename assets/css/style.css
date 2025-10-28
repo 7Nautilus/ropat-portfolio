@@ -354,6 +354,7 @@ nav {
   padding: var(--spacing-xs);
   z-index: 110;
   transition: transform var(--transition-base);
+  position: relative;
 }
 
 .burger-menu:hover {
