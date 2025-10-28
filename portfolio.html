@@ -50,12 +50,14 @@
       <h1 class="hero-title" id="hero-title">Mes Créations</h1>
 
       <!-- Filtres de catégories -->
-      <div class="project-filters" role="group" aria-label="Filtrer les projets">
-        <button class="filter-btn active" data-filter="all">Tous</button>
-        <button class="filter-btn" data-filter="music">Musique</button>
-        <button class="filter-btn" data-filter="branding">Branding</button>
-        <button class="filter-btn" data-filter="animation">Animation</button>
-        <button class="filter-btn" data-filter="design">Affiche</button>
+      <div class="category-filters" aria-label="Filtrer les projets">
+        <select class="filter-select" id="category-filter"></select>
+          <option value="all">Tous</option>
+          <option value="music">Musique</option>
+          <option value="branding">Branding</option>
+          <option value="animation">Animation</option>
+          <option value="design">Affiche</option>
+        </select>
       </div>
 
       <!-- Grille des projets -->

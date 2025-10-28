@@ -78,19 +78,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // Filtrage des projets
 
 document.addEventListener('DOMContentLoaded', () => {
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    // Cibler l'élément SELECT par son ID
+    const filterSelect = document.getElementById('category-filter');
     const projectCards = document.querySelectorAll('.project-card');
 
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // 1. Gérer la classe 'active' sur les boutons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    if (filterSelect) {
+        // Écouter le changement de sélection (l'événement 'change')
+        filterSelect.addEventListener('change', (event) => {
+            // La valeur du filtre est la valeur de l'option sélectionnée
+            const filterValue = event.target.value; 
 
-            // 2. Récupérer la catégorie cliquée
-            const filterValue = button.getAttribute('data-filter');
-
-            // 3. Filtrer les cartes
+            // Parcourir et filtrer les cartes de projet
             projectCards.forEach(card => {
                 // Récupère la chaîne de catégories (ex: "music branding")
                 const categoriesString = card.getAttribute('data-category'); 
@@ -102,8 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Pour les filtres spécifiques:
-                // Vérifie si la chaîne de catégories existe (pour éviter le null)
-                // et si, une fois séparée par l'espace, elle contient le filtre actif.
+                // Vérifie si la chaîne de catégories existe et contient le filtre actif.
                 if (categoriesString && categoriesString.split(' ').includes(filterValue)) {
                     card.style.display = 'block';
                 } else {
@@ -111,5 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         });
-    });
+    }
+    // Si l'élément filterSelect n'existe pas, rien ne se passe, ce qui est robuste.
 });
