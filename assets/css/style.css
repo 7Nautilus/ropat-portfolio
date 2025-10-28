@@ -392,6 +392,14 @@ nav {
 }
 
 /* ============================================
+   Filter
+   ============================================ */
+
+.category-filters {
+  margin: 0 var(--spacing-lg);
+}
+
+/* ============================================
    MAIN CONTENT
    ============================================ */
 
@@ -895,6 +903,10 @@ footer {
   .contact-link {
     font-size: var(--font-size-2xl);
     padding: 0.75rem var(--spacing-md);
+  }
+
+  .category-filters {
+    margin: 0;
   }
 
   .projects-title {
