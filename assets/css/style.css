@@ -426,7 +426,7 @@ nav {
 /* Style de l'élément SELECT */
 .filter-select {
   /* Retrait du margin-right qui n'est plus utile */
-  padding: var(--spacing-xs) var(--spacing-md); /* Ajuster le padding pour une meilleure ergonomie */
+  padding: var(--spacing-xs) var(--spacing-md) var(--spacing-xs) var(--spacing-sm); /* Ajuster le padding pour une meilleure ergonomie */
   
   /* Couleurs et bordures basées sur vos variables */
   background-color: var(--primary-color-alpha);
