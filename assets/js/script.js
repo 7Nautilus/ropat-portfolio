@@ -76,50 +76,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // ================================
-// FILTRAGE DES PROJETS AVEC CHOICES.JS
+// FILTRAGE DES PROJETS
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterSelect = document.getElementById('category-filter');
     const projectCards = document.querySelectorAll('.project-card');
 
-    // Initialiser Choices.js
-    let choicesInstance = null;
-    if (filterSelect && typeof Choices !== 'undefined') {
-        choicesInstance = new Choices(filterSelect, {
-            searchEnabled: false,
-            itemSelectText: '',
-            shouldSort: false,
-            classNames: {
-                containerOuter: 'choices',
-                containerInner: 'choices__inner',
-                input: 'choices__input',
-                inputCloned: 'choices__input--cloned',
-                list: 'choices__list',
-                listItems: 'choices__list--multiple',
-                listSingle: 'choices__list--single',
-                listDropdown: 'choices__list--dropdown',
-                item: 'choices__item',
-                itemSelectable: 'choices__item--selectable',
-                itemDisabled: 'choices__item--disabled',
-                itemChoice: 'choices__item--choice',
-                placeholder: 'choices__placeholder',
-                group: 'choices__group',
-                groupHeading: 'choices__heading',
-                button: 'choices__button',
-                activeState: 'is-active',
-                focusState: 'is-focused',
-                openState: 'is-open',
-                disabledState: 'is-disabled',
-                highlightedState: 'is-highlighted',
-                selectedState: 'is-selected',
-                flippedState: 'is-flipped',
-                loadingState: 'is-loading',
-                noResults: 'has-no-results',
-                noChoices: 'has-no-choices'
-            }
-        });
-    }
 
     // Fonction pour filtrer les projets avec animation
     const filterProjects = (filterValue) => {
@@ -170,4 +133,36 @@ document.addEventListener('DOMContentLoaded', () => {
             filterProjects(filterValue);
         });
     }
+});
+
+
+// Get all dropdown elements
+const dropdowns = document.querySelectorAll('.dropdown');
+
+dropdowns.forEach(dropdown => {
+  const select = dropdown.querySelector('.select');
+  const caret = dropdown.querySelector('.caret');
+  const menu = dropdown.querySelector('.menu');
+  const options = dropdown.querySelectorAll('.menu li');
+  const selected = dropdown.querySelector('.selected');
+
+  select.addEventListener('click', () => {
+    select.classList.toggle('select-clicked');
+    caret.classList.toggle('caret-rotate');
+    menu.classList.toggle('menu-open');
+  });
+
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      selected.innerText = option.innerText;
+      select.classList.remove('select-clicked');
+      caret.classList.remove('caret-rotate');
+      menu.classList.remove('menu-open');
+      options.forEach(opt => {
+        opt.classList.remove('active');
+      });
+
+      option.classList.add('active');
+    });
+  });
 });

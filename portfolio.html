@@ -32,8 +32,8 @@
   <!-- CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
 
-  <!-- Choices.js -->
-  <script src="https://cdn.jsdelivr.net/npm/choices.js@10.2.0/public/assets/scripts/choices.min.js"></script>
+  <!-- Choices.js Script -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   
   <!-- JS -->
   <script src="assets/js/script.js" defer></script>
@@ -53,15 +53,17 @@
       <h1 class="hero-title" id="hero-title">Mes Créations</h1>
 
       <!-- Filtres de catégories -->
-      <div class="category-filters" aria-label="Filtrer les projets">
-        <select class="filter-select" id="category-filter">
-          <option value="all">Tous</option>
-          
-          <option value="music">Musique</option>
-          <option value="branding">Branding</option>
-          <option value="animation">Animation</option>
-          <option value="design">Affiche</option>
-        </select>
+      <div class="dropdown" aria-label="Filtrer les projets">
+        <div class="select">
+          <span class="selected">Tous</span>
+          <div class="caret"></div>
+        </div>
+        <ul class="menu">
+          <li data-filter="all" class="active">Tous</li>
+          <li data-filter="music">Musique</li>
+          <li data-filter="branding">Branding</li>
+          <li data-filter="animation">Animation</li>
+        </ul>
       </div>
 
       <!-- Grille des projets -->
