@@ -392,52 +392,41 @@ nav {
 }
 
 /* ============================================
-   Filter
+   CATEGORY FILTERS
    ============================================ */
 
 .category-filters {
   display: flex;
+  justify-content: flex-start;
   margin-left: var(--spacing-lg);
+  animation: fadeIn 0.6s ease-out;
 }
 
-.filter-select {
-  margin-right: var(--spacing-md);
-  padding: var(--spacing-xs);
-  background-color: var(--primary-color-alpha);
-  border: var(--border-primary);
-  border-radius: var(--border-radius-sm);
-  color: var(--white-color);
-}
-
-/* ============================================
-   Filter
-   ============================================ */
-
-/* Conteneur pour le filtre */
-.project-filters { 
-  /* J'ai renommé la classe de .category-filters à .project-filters pour plus de clarté 
-     et pour correspondre à la nouvelle structure HTML. */
+.filter-label {
   display: flex;
-  justify-content: flex-start; /* Aligner à gauche si l'écran est large */
-  margin-bottom: var(--spacing-lg); /* Ajouter un espacement avec la grille de projets */
-  margin-left: var(--spacing-lg); /* Conserver l'alignement de la grille */
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--white-color);
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 /* Style de l'élément SELECT */
 .filter-select {
-  /* Retrait du margin-right qui n'est plus utile */
-  padding: var(--spacing-xs) var(--spacing-md) var(--spacing-xs) var(--spacing-sm); /* Ajuster le padding pour une meilleure ergonomie */
-  
-  /* Couleurs et bordures basées sur vos variables */
+  padding: var(--spacing-xs) var(--spacing-sm);
+
+  /* Couleurs et bordures */
   background-color: var(--primary-color-alpha);
-  border: var(--border-primary);
+  border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-sm);
   color: var(--white-color);
   
   /* Typographie */
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  font-weight: 600; /* Ajouter un poids pour le rendre plus visible */
+  font-weight: 600;
   cursor: pointer;
   
   /* Enlever les styles par défaut du navigateur */
@@ -445,27 +434,44 @@ nav {
   -moz-appearance: none;
   appearance: none;
   
-  /* Ajouter une flèche custom pour l'aspect déroulant */
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M7 10l5 5 5-5z"/></svg>');
+  /* Ajouter une flèche custom */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>');
   background-repeat: no-repeat;
-  background-position: right var(--spacing-xs) center; /* Position de la flèche */
+  background-position: right var(--spacing-xs) center;
   background-size: 1.5rem;
   
-  /* Transition pour l'interactivité */
+  /* Transition */
   transition: all var(--transition-base);
 }
 
 .filter-select:hover {
   background-color: var(--primary-color);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 0 0 3px var(--primary-color-alpha);
+}
+
+.filter-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--primary-color-alpha);
+  border-color: var(--white-color);
 }
 
 /* Style des options du menu déroulant */
 .filter-select option {
-  /* Assurez-vous que les options restent lisibles sur le fond du menu */
   background-color: var(--background-dark); 
   color: var(--white-color);
-  padding: var(--spacing-xs);
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-base);
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 
@@ -978,6 +984,16 @@ footer {
 
   .category-filters {
     margin: 0;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .filter-label {
+    font-size: var(--font-size-sm);
+  }
+
+  .filter-select {
+    width: 100%;
+    min-width: auto;
   }
 
   .projects-title {

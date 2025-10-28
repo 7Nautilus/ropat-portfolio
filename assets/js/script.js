@@ -75,39 +75,83 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Filtrage des projets
+// Filtrage des projets avec animations et compteur
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Cibler l'élément SELECT par son ID
     const filterSelect = document.getElementById('category-filter');
     const projectCards = document.querySelectorAll('.project-card');
+    const projectsCount = document.getElementById('projects-count');
 
-    if (filterSelect) {
-        // Écouter le changement de sélection (l'événement 'change')
-        filterSelect.addEventListener('change', (event) => {
-            // La valeur du filtre est la valeur de l'option sélectionnée
-            const filterValue = event.target.value; 
+    // Fonction pour mettre à jour le compteur
+    const updateCount = (count, total, category) => {
+        if (projectsCount) {
+            if (category === 'all') {
+                projectsCount.textContent = `${total} projet${total > 1 ? 's' : ''}`;
+            } else {
+                projectsCount.textContent = `${count} projet${count > 1 ? 's' : ''}`;
+            }
+        }
+    };
 
-            // Parcourir et filtrer les cartes de projet
-            projectCards.forEach(card => {
-                // Récupère la chaîne de catégories (ex: "music branding")
-                const categoriesString = card.getAttribute('data-category'); 
+    // Fonction pour filtrer les projets avec animation
+    const filterProjects = (filterValue) => {
+        let visibleCount = 0;
+        const total = projectCards.length;
 
-                // Si 'all' est sélectionné, on affiche tout.
-                if (filterValue === 'all') {
-                    card.style.display = 'block';
-                    return; // Passe à la carte suivante
-                }
+        projectCards.forEach((card, index) => {
+            const categoriesString = card.getAttribute('data-category');
+            let shouldShow = false;
 
-                // Pour les filtres spécifiques:
-                // Vérifie si la chaîne de catégories existe et contient le filtre actif.
-                if (categoriesString && categoriesString.split(' ').includes(filterValue)) {
-                    card.style.display = 'block';
-                } else {
+            if (filterValue === 'all') {
+                shouldShow = true;
+                visibleCount++;
+            } else if (categoriesString && categoriesString.split(' ').includes(filterValue)) {
+                shouldShow = true;
+                visibleCount++;
+            }
+
+            // Animation de sortie
+            if (!shouldShow && card.style.display !== 'none') {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.9)';
+                setTimeout(() => {
                     card.style.display = 'none';
-                }
-            });
+                }, 300);
+            }
+            
+            // Animation d'entrée
+            if (shouldShow && card.style.display === 'none') {
+                card.style.display = 'block';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }, index * 50); // Décalage progressif
+            }
+
+            if (shouldShow && !card.style.display) {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+                visibleCount++;
+            }
+        });
+
+        // Mise à jour du compteur
+        updateCount(visibleCount, total, filterValue);
+    };
+
+    if (filterSelect && projectCards.length > 0) {
+        // Initialiser les styles de transition
+        projectCards.forEach(card => {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        });
+
+        // Compteur initial
+        updateCount(projectCards.length, projectCards.length, 'all');
+
+        // Écouter le changement de sélection
+        filterSelect.addEventListener('change', (event) => {
+            const filterValue = event.target.value;
+            filterProjects(filterValue);
         });
     }
-    // Si l'élément filterSelect n'existe pas, rien ne se passe, ce qui est robuste.
 });
