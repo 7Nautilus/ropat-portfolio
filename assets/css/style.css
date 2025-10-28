@@ -460,12 +460,6 @@ nav {
   box-shadow: var(--shadow-sm);
 }
 
-.filter-select:focus {
-  /* Utilise le focus-visible global, mais vous pouvez le personnaliser ici si besoin */
-  outline: 3px solid var(--primary-color);
-  outline-offset: 4px;
-}
-
 /* Style des options du menu déroulant */
 .filter-select option {
   /* Assurez-vous que les options restent lisibles sur le fond du menu */
