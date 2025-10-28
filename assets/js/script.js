@@ -75,39 +75,62 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Filtrage des projets avec animations et compteur
+// ================================
+// FILTRAGE DES PROJETS AVEC CHOICES.JS
+// ================================
 
 document.addEventListener('DOMContentLoaded', () => {
     const filterSelect = document.getElementById('category-filter');
     const projectCards = document.querySelectorAll('.project-card');
-    const projectsCount = document.getElementById('projects-count');
 
-    // Fonction pour mettre à jour le compteur
-    const updateCount = (count, total, category) => {
-        if (projectsCount) {
-            if (category === 'all') {
-                projectsCount.textContent = `${total} projet${total > 1 ? 's' : ''}`;
-            } else {
-                projectsCount.textContent = `${count} projet${count > 1 ? 's' : ''}`;
+    // Initialiser Choices.js
+    let choicesInstance = null;
+    if (filterSelect && typeof Choices !== 'undefined') {
+        choicesInstance = new Choices(filterSelect, {
+            searchEnabled: false,
+            itemSelectText: '',
+            shouldSort: false,
+            classNames: {
+                containerOuter: 'choices',
+                containerInner: 'choices__inner',
+                input: 'choices__input',
+                inputCloned: 'choices__input--cloned',
+                list: 'choices__list',
+                listItems: 'choices__list--multiple',
+                listSingle: 'choices__list--single',
+                listDropdown: 'choices__list--dropdown',
+                item: 'choices__item',
+                itemSelectable: 'choices__item--selectable',
+                itemDisabled: 'choices__item--disabled',
+                itemChoice: 'choices__item--choice',
+                placeholder: 'choices__placeholder',
+                group: 'choices__group',
+                groupHeading: 'choices__heading',
+                button: 'choices__button',
+                activeState: 'is-active',
+                focusState: 'is-focused',
+                openState: 'is-open',
+                disabledState: 'is-disabled',
+                highlightedState: 'is-highlighted',
+                selectedState: 'is-selected',
+                flippedState: 'is-flipped',
+                loadingState: 'is-loading',
+                noResults: 'has-no-results',
+                noChoices: 'has-no-choices'
             }
-        }
-    };
+        });
+    }
 
     // Fonction pour filtrer les projets avec animation
     const filterProjects = (filterValue) => {
-        let visibleCount = 0;
-        const total = projectCards.length;
-
         projectCards.forEach((card, index) => {
             const categoriesString = card.getAttribute('data-category');
             let shouldShow = false;
 
             if (filterValue === 'all') {
                 shouldShow = true;
-                visibleCount++;
             } else if (categoriesString && categoriesString.split(' ').includes(filterValue)) {
                 shouldShow = true;
-                visibleCount++;
             }
 
             // Animation de sortie
@@ -131,12 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (shouldShow && !card.style.display) {
                 card.style.opacity = '1';
                 card.style.transform = 'scale(1)';
-                visibleCount++;
             }
         });
-
-        // Mise à jour du compteur
-        updateCount(visibleCount, total, filterValue);
     };
 
     if (filterSelect && projectCards.length > 0) {
@@ -144,9 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         projectCards.forEach(card => {
             card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
         });
-
-        // Compteur initial
-        updateCount(projectCards.length, projectCards.length, 'all');
 
         // Écouter le changement de sélection
         filterSelect.addEventListener('change', (event) => {
