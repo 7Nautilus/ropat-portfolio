@@ -396,7 +396,17 @@ nav {
    ============================================ */
 
 .category-filters {
+  display: flex;
   margin: 0 var(--spacing-lg);
+  
+}
+
+.category-filter {
+  margin-right: var(--spacing-md);
+}
+
+.category-filter:last-child {
+  margin-right: 0;
 }
 
 /* ============================================
