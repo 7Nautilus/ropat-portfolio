@@ -6,10 +6,13 @@
   url: /portfolio.html
   class: nav-link
 
+- name: Mes services
+  url: /services.html
+  class: nav-link
+
 - name: À propos
   url: /about.html
   class: nav-link
-
 
 - name: Contact
   url: /contact.html
