@@ -401,11 +401,11 @@ nav {
   padding: var(--spacing-sm) 0;
 }
 
-.category-filter {
+.filter-select {
   margin-right: var(--spacing-md);
 }
 
-.category-filter:last-child {
+.filter-select:last-child {
   margin-right: 0;
 }
 
