@@ -398,7 +398,6 @@ nav {
 .category-filters {
   display: flex;
   margin: 0 var(--spacing-lg);
-  padding: var(--spacing-sm) 0;
 }
 
 .filter-select {
