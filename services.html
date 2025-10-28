@@ -45,12 +45,12 @@
   <!-- Main Content -->
   <main class="main-content">
     <!-- SECTION PROJETS -->
-    <section class="hero" aria-labelledby="projects-title">
-      <h1 class="hero-title" id="hero-title">Mes Créations</h1>
+    <section class="hero" aria-labelledby="servicess-title">
+      <h1 class="hero-title" id="hero-title">Mes Services</h1>
 
-      <div class="section-grid" id="projects-grid">
-        {% for item in site.data.projects %}
-          {% include project-card.html project=item %}
+      <div class="section-grid" id="services-grid">
+        {% for item in site.data.services %}
+          {% include services-card.html service=item %}
         {% endfor %}
       </div>
     </section>
