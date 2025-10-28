@@ -584,11 +584,12 @@ main {
   font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
-}
 
-.cta:hover {
-  background-color: var(--primary-color);
-  transform: scale(1.05);
+  &:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
 }
 
 /* ============================================
