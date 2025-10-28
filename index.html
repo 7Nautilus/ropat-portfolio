@@ -147,7 +147,7 @@
       </a>
     </section>
 
-    <!-- Section Services -->
+    <!-- SERVICES SECTION -->
     <section class="services" aria-labelledby="services-title">
       <h2 class="section-title" id="services-title">Services & Expertise</h2>
       <div class="section-grid" id="services-grid">
@@ -157,19 +157,12 @@
       </div>
     </section>
 
-    <!-- SECTION PROJETS -->
+    <!-- PROJECTS SECTION -->
     <section class="projects" aria-labelledby="projects-title">
+      <!-- Projects Section Title -->
       <h2 class="section-title" id="projects-title">Projets Récents : Musique et Branding</h2>
 
-      <!-- Filtres de catégories 
-      <div class="project-filters" role="group" aria-label="Filtrer les projets">
-        <button class="filter-btn active" data-filter="all">Tous</button>
-        <button class="filter-btn" data-filter="music">Musique</button>
-        <button class="filter-btn" data-filter="branding">Branding</button>
-        <button class="filter-btn" data-filter="animation">Animation</button>
-      </div>
-      -->
-
+      <!-- Projects Grid -->
       <div class="section-grid" id="projects-grid">
         {% assign featured_projects = site.data.projects | where: "featured", true %}
 
