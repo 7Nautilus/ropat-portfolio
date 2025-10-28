@@ -80,9 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // ================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    const filterSelect = document.getElementById('category-filter');
     const projectCards = document.querySelectorAll('.project-card');
-
+    const filterOptions = document.querySelectorAll('.dropdown .menu li');
 
     // Fonction pour filtrer les projets avec animation
     const filterProjects = (filterValue) => {
@@ -121,16 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    if (filterSelect && projectCards.length > 0) {
+    if (filterOptions.length > 0 && projectCards.length > 0) {
         // Initialiser les styles de transition
         projectCards.forEach(card => {
             card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
         });
 
-        // Écouter le changement de sélection
-        filterSelect.addEventListener('change', (event) => {
-            const filterValue = event.target.value;
-            filterProjects(filterValue);
+        // Ajouter l'écouteur d'événement sur chaque option du dropdown
+        filterOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const filterValue = option.getAttribute('data-filter');
+                filterProjects(filterValue);
+            });
         });
     }
 });
