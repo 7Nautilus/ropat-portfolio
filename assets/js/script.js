@@ -73,3 +73,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+
+// Filtrage des projets
+
+document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card'); // Assurez-vous que chaque carte de projet a cette classe
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 1. Gérer la classe 'active' sur les boutons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            // 2. Récupérer la catégorie
+            const filterValue = button.getAttribute('data-filter');
+
+            // 3. Filtrer les cartes
+            projectCards.forEach(card => {
+                const categories = card.getAttribute('data-category'); // Récupère la/les catégorie(s) de la carte
+
+                if (filterValue === 'all' || categories.includes(filterValue)) {
+                    // Afficher la carte (ajuster selon votre CSS, souvent en changeant l'opacité ou le 'display')
+                    card.style.display = 'block'; 
+                    // Si vous utilisez des transitions CSS, vous préférerez peut-être :
+                    // card.classList.remove('hidden');
+                } else {
+                    // Masquer la carte
+                    card.style.display = 'none';
+                    // Ou : card.classList.add('hidden');
+                }
+            });
+        });
+    });
+});

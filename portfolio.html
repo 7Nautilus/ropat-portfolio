@@ -46,17 +46,18 @@
   <main class="main-content">
     <!-- SECTION PROJETS -->
     <section class="hero" aria-labelledby="projects-title">
+      <!-- Services section title-->
       <h1 class="hero-title" id="hero-title">Mes Créations</h1>
 
-      <!-- Filtres de catégories 
+      <!-- Filtres de catégories -->
       <div class="project-filters" role="group" aria-label="Filtrer les projets">
         <button class="filter-btn active" data-filter="all">Tous</button>
         <button class="filter-btn" data-filter="music">Musique</button>
         <button class="filter-btn" data-filter="branding">Branding</button>
         <button class="filter-btn" data-filter="animation">Animation</button>
       </div>
-      -->
 
+      <!-- Grille des projets -->
       <div class="section-grid" id="projects-grid">
         {% for item in site.data.projects %}
           {% include project-card.html project=item %}
