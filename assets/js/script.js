@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // 3. Filtrer les cartes
             projectCards.forEach(card => {
-                const categories = card.getAttribute('data-category'); // Récupère la/les catégorie(s) de la carte
+                const categories = card.getAttribute('category'); // Récupère la/les catégorie(s) de la carte
 
                 if (filterValue === 'all' || categories.includes(filterValue)) {
                     // Afficher la carte (ajuster selon votre CSS, souvent en changeant l'opacité ou le 'display')
