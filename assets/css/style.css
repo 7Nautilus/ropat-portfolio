@@ -410,6 +410,73 @@ nav {
 }
 
 /* ============================================
+   Filter
+   ============================================ */
+
+/* Conteneur pour le filtre */
+.project-filters { 
+  /* J'ai renommé la classe de .category-filters à .project-filters pour plus de clarté 
+     et pour correspondre à la nouvelle structure HTML. */
+  display: flex;
+  justify-content: flex-start; /* Aligner à gauche si l'écran est large */
+  margin-bottom: var(--spacing-lg); /* Ajouter un espacement avec la grille de projets */
+  margin-left: var(--spacing-lg); /* Conserver l'alignement de la grille */
+}
+
+/* Style de l'élément SELECT */
+.filter-select {
+  /* Retrait du margin-right qui n'est plus utile */
+  padding: var(--spacing-xs) var(--spacing-md); /* Ajuster le padding pour une meilleure ergonomie */
+  
+  /* Couleurs et bordures basées sur vos variables */
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  color: var(--white-color);
+  
+  /* Typographie */
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600; /* Ajouter un poids pour le rendre plus visible */
+  cursor: pointer;
+  
+  /* Enlever les styles par défaut du navigateur */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  /* Ajouter une flèche custom pour l'aspect déroulant */
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-xs) center; /* Position de la flèche */
+  background-size: 1.5rem;
+  
+  /* Transition pour l'interactivité */
+  transition: all var(--transition-base);
+}
+
+.filter-select:hover {
+  background-color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-select:focus {
+  /* Utilise le focus-visible global, mais vous pouvez le personnaliser ici si besoin */
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+/* Style des options du menu déroulant */
+.filter-select option {
+  /* Assurez-vous que les options restent lisibles sur le fond du menu */
+  background-color: var(--background-dark); 
+  color: var(--white-color);
+  padding: var(--spacing-xs);
+}
+
+
+
+/* ============================================
    MAIN CONTENT
    ============================================ */
 
