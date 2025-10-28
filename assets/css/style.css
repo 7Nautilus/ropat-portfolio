@@ -441,7 +441,6 @@ nav {
 .filter-select:focus {
   outline: none;
   box-shadow: 0 0 0 4px var(--primary-color-alpha);
-  border-color: var(--white-color);
 }
 
 /* Style des options du menu déroulant */
