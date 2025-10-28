@@ -30,4 +30,4 @@
           <!-- <div class="service-icon">📐</div> -->
           <h3>Direction Artistique</h3>
           <p>Conception globale, supervision créative, conseil stratégique</p>
-        </article>
+        </article> 
