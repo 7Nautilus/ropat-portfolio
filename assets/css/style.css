@@ -402,10 +402,11 @@ nav {
 
 .filter-select {
   margin-right: var(--spacing-md);
-}
-
-.filter-select:last-child {
-  margin-right: 0;
+  padding: var(--spacing-xs);
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  color: var(--white-color);
 }
 
 /* ============================================
