@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ajouter le gestionnaire au clic (ou touche Entrée/Espace)
         thumbnail.addEventListener('click', (event) => {
             // Récupérer le chemin de l'image stocké dans l'attribut data
-            const fullSrc = event.currentTarget.getAttribute('data-full-src');
+            const fullSrc = event.currentTarget.getAttribute('src');
 
             // Changer l'image
             changeImage(fullSrc);
