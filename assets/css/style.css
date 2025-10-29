@@ -647,7 +647,6 @@ main {
     gap: var(--spacing-xs);
     max-height: 500px; /* Limiter la hauteur pour le défilement */
     overflow-y: auto; /* Permet le défilement si plus de 5 miniatures */
-    padding-right: var(--spacing-xs);
 }
 
 .thumbnail-image {
