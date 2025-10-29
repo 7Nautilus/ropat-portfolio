@@ -558,6 +558,13 @@ main {
   line-height: 1.6;
 }
 
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-base);
+}
+
 .hero-image {
   max-width: 40%;
   width: 100%;
