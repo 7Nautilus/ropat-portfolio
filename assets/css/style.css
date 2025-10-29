@@ -570,6 +570,11 @@ main {
   font-size: var(--font-size-base);
 }
 
+.hero-image-container {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+
 .hero-image {
   max-width: 40%;
   width: 100%;
@@ -629,18 +634,20 @@ main {
 /* Conteneur principal (pour aligner les deux blocs) */
 .project-gallery {
     display: flex; /* Utiliser Flexbox */
-    gap: 20px;
-    max-width: 1000px; /* À ajuster */
-    margin: 40px auto;
+    flex-direction: column; /* Aligner les éléments en colonne */
+    gap: var(--spacing-sm);
+    width: 100%;
 }
 
 /* Zone des miniatures (côté gauche comme Amazon) */
 .thumbnails-container {
     display: flex;
-    flex-direction: column; /* Miniatures verticales */
-    gap: 10px;
+    flex-direction: row; /* Miniatures verticales */
+    justify-content: space-between;
+    gap: var(--spacing-xs);
     max-height: 500px; /* Limiter la hauteur pour le défilement */
     overflow-y: auto; /* Permet le défilement si plus de 5 miniatures */
+    padding-right: var(--spacing-xs);
 }
 
 .thumbnail-image {
@@ -648,8 +655,11 @@ main {
     height: 80px;
     object-fit: cover;
     cursor: pointer;
-    border: 2px solid transparent;
-    transition: border-color 0.2s;
+    border: 3px solid transparent;
+    transition: all 0.2s ease-in-out;
+    border-radius: var(--border-radius-sm);
+    opacity: 0.7;
+    outline: none
 }
 
 /* Miniature active et au survol */
@@ -665,13 +675,19 @@ main {
 /* Zone de la grande image */
 .main-display {
     flex-grow: 1; /* Prend l'espace restant */
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: var(--border-primary);
 }
 
 #main-image {
     width: 100%;
     height: auto;
+    max-height: 40rem;
     display: block;
     object-fit: contain;
+    transition: opacity 0.3s ease-in-out;
 }
 
 
