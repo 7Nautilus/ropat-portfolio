@@ -1038,6 +1038,10 @@ footer {
     padding: 0.875rem 2rem;
     gap: 0.875rem;
   }
+
+  .hero-image-container {
+    max-width: 100%;
+  }
 }
 
 /* Small Laptops - 640px - 1023px */
