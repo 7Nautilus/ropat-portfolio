@@ -572,7 +572,7 @@ main {
 
 .hero-image-container {
   flex-basis: 50%;
-  max-width: 50%;
+  max-width: 40%;
 }
 
 .hero-image {
