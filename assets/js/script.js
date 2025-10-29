@@ -167,3 +167,42 @@ dropdowns.forEach(dropdown => {
     });
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Récupérer les éléments du DOM
+    const mainImage = document.getElementById('main-image');
+    const thumbnails = document.querySelectorAll('.thumbnail-item');
+
+    // 2. Définir la fonction de changement d'image
+    const changeImage = (newSrc) => {
+        // Mettre à jour la source de l'image principale
+        mainImage.src = newSrc;
+    };
+
+    // 3. Boucler sur toutes les miniatures pour ajouter l'écouteur d'événement
+    thumbnails.forEach(thumbnail => {
+        
+        // Ajouter le gestionnaire au clic (ou touche Entrée/Espace)
+        thumbnail.addEventListener('click', (event) => {
+            // Récupérer le chemin de l'image stocké dans l'attribut data
+            const fullSrc = event.currentTarget.getAttribute('data-full-src');
+
+            // Changer l'image
+            changeImage(fullSrc);
+
+            // Gérer l'état 'actif' pour le CSS
+            thumbnails.forEach(t => t.removeAttribute('data-active'));
+            event.currentTarget.setAttribute('data-active', 'true');
+        });
+        
+        // Ajouter le support clavier (si l'utilisateur navigue avec Tab)
+        thumbnail.addEventListener('keydown', (event) => {
+             if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault(); // Empêche le défilement de la page avec Espace
+                event.currentTarget.click(); // Simule un clic
+            }
+        });
+
+    });
+});

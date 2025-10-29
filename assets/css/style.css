@@ -623,6 +623,59 @@ main {
 }
 
 /* ============================================
+   GALLERY
+   ============================================ */
+
+/* Conteneur principal (pour aligner les deux blocs) */
+.project-gallery {
+    display: flex; /* Utiliser Flexbox */
+    gap: 20px;
+    max-width: 1000px; /* À ajuster */
+    margin: 40px auto;
+}
+
+/* Zone des miniatures (côté gauche comme Amazon) */
+.thumbnails-container {
+    display: flex;
+    flex-direction: column; /* Miniatures verticales */
+    gap: 10px;
+    max-height: 500px; /* Limiter la hauteur pour le défilement */
+    overflow-y: auto; /* Permet le défilement si plus de 5 miniatures */
+}
+
+.thumbnail-image {
+    width: 80px; /* Taille des miniatures à ajuster */
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+/* Miniature active et au survol */
+.thumbnail-image:hover, 
+.thumbnail-image[data-active="true"] {
+    border-color: #007bff; /* Mettre votre couleur principale */
+}
+.thumbnail-image[data-active="true"] {
+    /* Un peu plus d'ombre pour l'image sélectionnée */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); 
+}
+
+/* Zone de la grande image */
+.main-display {
+    flex-grow: 1; /* Prend l'espace restant */
+}
+
+#main-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+/* ============================================
    SECTIONS
    ============================================ */
 
