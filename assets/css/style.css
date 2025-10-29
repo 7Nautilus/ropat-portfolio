@@ -680,7 +680,7 @@ main {
     flex-grow: 1; /* Prend l'espace restant */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--spacing-xl);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     border: var(--border-primary);
