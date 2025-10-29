@@ -174,6 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainImage = document.getElementById('main-image');
     const thumbnails = document.querySelectorAll('.thumbnail-image');
 
+    // Vérifier que les éléments existent
+    if (!mainImage || thumbnails.length === 0) return;
+
+    // Stocker l'image principale d'origine
+    const originalImageSrc = mainImage.src;
+
     // 2. Définir la fonction de changement d'image
     const changeImage = (newSrc) => {
         // Mettre à jour la source de l'image principale
@@ -185,15 +191,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Ajouter le gestionnaire au clic (ou touche Entrée/Espace)
         thumbnail.addEventListener('click', (event) => {
-            // Récupérer le chemin de l'image stocké dans l'attribut data
-            const fullSrc = event.currentTarget.getAttribute('src');
+            const clickedThumbnail = event.currentTarget;
+            const fullSrc = clickedThumbnail.getAttribute('src');
+            const isActive = clickedThumbnail.getAttribute('data-active') === 'true';
 
-            // Changer l'image
-            changeImage(fullSrc);
-
-            // Gérer l'état 'actif' pour le CSS
-            thumbnails.forEach(t => t.removeAttribute('data-active'));
-            event.currentTarget.setAttribute('data-active', 'true');
+            // Si on clique sur le thumbnail actif, revenir à l'image principale
+            if (isActive) {
+                changeImage(originalImageSrc);
+                thumbnails.forEach(t => t.removeAttribute('data-active'));
+            } else {
+                // Sinon, changer pour la nouvelle image
+                changeImage(fullSrc);
+                
+                // Gérer l'état 'actif' pour le CSS
+                thumbnails.forEach(t => t.removeAttribute('data-active'));
+                clickedThumbnail.setAttribute('data-active', 'true');
+            }
         });
         
         // Ajouter le support clavier (si l'utilisateur navigue avec Tab)
