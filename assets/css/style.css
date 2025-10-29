@@ -1049,6 +1049,10 @@ footer {
   .hero-project {
 	  flex-direction: column;
   }
+
+  .hero-image-container {
+    max-width: 40%;
+  }
 }
 
 /* Desktop - 1024px + */
@@ -1056,6 +1060,10 @@ footer {
   .section-grid {
     grid-template-columns: repeat(3, 1fr);
   } 
+
+  .hero-image-container {
+    max-width: 40%;
+  }
 }
 
 /* Large Desktops - 1440px + */
