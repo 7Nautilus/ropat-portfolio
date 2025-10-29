@@ -969,6 +969,10 @@ footer {
     font-size: var(--font-size-4xl);
     max-width: 70%;
   }
+  
+  .hero-subtitle {
+    font-size: var(--font-size-2xl);
+  }
 
   .hero-text {
     font-size: var(--font-size-xl);
