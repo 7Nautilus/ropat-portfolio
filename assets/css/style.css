@@ -650,8 +650,9 @@ main {
 }
 
 .thumbnail-image {
-    width: 80px; /* Taille des miniatures à ajuster */
-    height: 80px;
+    flex: 1; /* Partager l'espace équitablement */
+    min-width: 0; /* Permet la réduction en dessous de la largeur du contenu */
+    aspect-ratio: 1 / 1; /* Garde les miniatures carrées */
     object-fit: cover;
     cursor: pointer;
     border: 3px solid transparent;
