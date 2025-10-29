@@ -558,7 +558,7 @@ main {
   line-height: 1.6;
 }
 
-.pitch {
+.pitch { 
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
