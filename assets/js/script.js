@@ -172,7 +172,7 @@ dropdowns.forEach(dropdown => {
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Récupérer les éléments du DOM
     const mainImage = document.getElementById('main-image');
-    const thumbnails = document.querySelectorAll('.thumbnail-item');
+    const thumbnails = document.querySelectorAll('.thumbnail-image');
 
     // 2. Définir la fonction de changement d'image
     const changeImage = (newSrc) => {
