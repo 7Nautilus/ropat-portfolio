@@ -1138,6 +1138,10 @@ footer {
     font-size: 1.15rem;
   }
   
+  .hero-image-container {
+    max-width: 100%;
+  }
+
   /* Footer */
   .footer-top {
     justify-content: space-between;
