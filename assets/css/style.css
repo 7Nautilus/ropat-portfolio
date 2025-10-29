@@ -983,7 +983,7 @@ footer {
 
   .hero-text {
     font-size: var(--font-size-xl);
-    max-width: 70%;
+    max-width: 100%;
   }
 }
 
