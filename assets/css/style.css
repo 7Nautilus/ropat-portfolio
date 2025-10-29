@@ -666,6 +666,8 @@ main {
 .thumbnail-image:hover, 
 .thumbnail-image[data-active="true"] {
     border-color: var(--primary-color); /* Mettre votre couleur principale */
+    opacity: 1;
+    transform: scale(1.05) ease-in-out;
 }
 .thumbnail-image[data-active="true"] {
     /* Un peu plus d'ombre pour l'image sélectionnée */
