@@ -537,13 +537,24 @@ main {
 }
 
 .hero-text {
+  /* Display */
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  font-size: var(--font-size-lg);
   max-width: 70%;
-  padding-left: var(--spacing-sm);
+  
+  /* Spacing */
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+
+  /* Background */
+  background-color: var(--secondary-color);
+
+  /* Border */
+  border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
   border-left: var(--border-primary);
+  
+  /* Typography */
+  font-size: var(--font-size-lg);
   line-height: 1.6;
 }
 
@@ -568,12 +579,6 @@ main {
 	display: flex;
 	flex-direction: column;
 	gap: inherit;
-}
-
-#project-description {
-	background-color: var(--secondary-color);
-	border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;
-  padding: var(--spacing-sm);
 }
 
 /* Call to Action Button */
