@@ -47,3 +47,13 @@
   # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
   description: "Création d'une affiche sur le thème du design des sorties de secours."
   featured: false
+
+- category: music
+  url: /projects/a-lone.html
+  aria_label: "Voir la pochette de l'album 'A-LONE' de B-Lone"
+  image_src: /assets/images/projects/a-lone-cover.webp
+  image_alt: "Pochette d'album 'A-LONE' de B-Lone"
+  title: 'Pochette d''album "A-LONE"'
+  client: "B-Lone"
+  description: "Direction artistique complète et création de la cover pour la sortie de l'album."
+  featured: false
