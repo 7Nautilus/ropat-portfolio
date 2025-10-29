@@ -524,6 +524,10 @@ main {
   gap: var(--spacing-lg);
 }
 
+#hero-project-section {
+  gap: var(--spacing-xl);
+}
+
 .hero-title {
   font-size: var(--font-size-4xl);
   font-weight: 800;
