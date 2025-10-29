@@ -665,7 +665,7 @@ main {
 /* Miniature active et au survol */
 .thumbnail-image:hover, 
 .thumbnail-image[data-active="true"] {
-    border-color: #007bff; /* Mettre votre couleur principale */
+    border-color: var(--primary-color); /* Mettre votre couleur principale */
 }
 .thumbnail-image[data-active="true"] {
     /* Un peu plus d'ombre pour l'image sélectionnée */
