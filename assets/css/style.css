@@ -588,6 +588,12 @@ main {
 	gap: inherit;
 }
 
+.hero-project-details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 /* Call to Action Button */
 
 .cta {
@@ -1008,7 +1014,7 @@ footer {
 	  max-width: 100%;
 	  border-radius: var(--border-radius-sm);
   }
-  
+
   /* CTA */
   .cta {
     font-size: var(--font-size-lg);
