@@ -65,7 +65,8 @@ html {
 body {
   font-family: var(--font-family);
   background-image: url(/assets/images/backgrounds/main-bg.webp);
-  background-size: cover;
+  background-size: contain;
+  background-repeat: repeat;
   background-position: center center;
   background-attachment: scroll;
   background-color: var(--background-dark); /* Fallback */
