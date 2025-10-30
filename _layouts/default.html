@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>{{ page.title }}</title>
+    {% if page.meta_description %}
+        <meta name="description" content="{{ page.meta_description }}">
+    {% else %}
+        <meta name="description" content="Ropat - Portfolio de créations graphiques et design. Découvrez mes projets de pochettes d'album, logos, affiches, animations en motion design et branding.">
+    {% endif %}
+    {% if page.meta_keywords %}
+        <meta name="keywords" content="{{ page.meta_keywords }}">
+    {% else %}
+        <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
+    {% endif %}
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page.og_title | default: page.title }}">
+    <meta property="og:description" content="{{ page.og_description | default: page.meta_description }}">
+    <meta property="og:image" content="{{ page.og_image | default: 'https://ropat.art/assets/images/branding/icon.png' }}">
+    <meta property="og:url" content="{{ page.og_url | default: site.url | append: page.url }}">
+    <meta property="og:type" content="website">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="../sitemap.xml">
+
+    <!-- Preconnect pour optimiser le chargement des fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+    
+</head>
+<body>
+    {% include header.html %}
+
+    {{ content }} 
+
+    {% include footer.html %}
+</body>
+</html>

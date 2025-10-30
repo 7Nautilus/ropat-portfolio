@@ -1,0 +1,84 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      // ------------------------------------------------------------
+      // 1. DÉCLARATION DE L'ENTITÉ PRINCIPALE (ProfessionnalService)
+      // ------------------------------------------------------------
+      {
+        "@type": "ProfessionalService",
+        "@id": "{{ site.url }}#professionalService",
+        "name": "Ropat",
+        "url": "{{ site.url }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ site.url }}/assets/images/branding/icon.png"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ site.url }}/assets/images/branding/icon.png"
+        },
+        "description": "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Angers",
+          "addressRegion": "Pays de la Loire",
+          "postalCode": "49000",
+          "addressCountry": "FR"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "47.478419",
+          "longitude": "-0.563166"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        "sameAs": [
+          "https://www.instagram.com/9.ropat/",
+          "https://fr.pinterest.com/9ropat/"
+        ]
+      },
+
+      // ------------------------------------------------------------
+      // 2. DÉCLARATION DE LA PAGE ACTUELLE (WebPage)
+      // ------------------------------------------------------------
+      {
+        "@type": "{% if page.schema_type == 'Article' %}Article{% else %}WebPage{% endif %}",
+        "@id": "{{ page.url | absolute_url }}#webpage",
+        "name": "{{ page.title }}",
+        "url": "{{ page.url | absolute_url }}",
+        "inLanguage": "fr-FR",
+        "isPartOf": {
+          "@id": "{{ site.url }}#professionalService"
+        },
+        "datePublished": "{{ page.date | date_to_xmlschema | default: '2025-01-01T00:00:00+00:00' }}",
+        "dateModified": "{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% else %}{{ 'now' | date_to_xmlschema }}{% endif %}",
+        "description": "{{ page.meta_description | default: "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise." }}"
+
+        // Ajout spécifique pour les articles/projets
+        {% if page.schema_type == 'Article' %}
+        ,
+        "headline": "{{ page.title }}",
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ page.image | absolute_url }}"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Ropat"
+        }
+        {% endif %}
+      }
+    ]
+  }
+</script>
