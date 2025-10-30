@@ -67,7 +67,6 @@ body {
   background-image: url(/assets/images/backgrounds/main-bg.webp);
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   background-color: var(--background-dark); /* Fallback */
   color: var(--white-color);
   min-height: 100vh;
