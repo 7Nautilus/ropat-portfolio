@@ -3,6 +3,8 @@
 <meta property="og:image" content="{{ page.og_image | default: 'https://ropat.art/assets/images/branding/icon.png' }}">
 <meta property="og:url" content="{{ page.og_url | default: site.url | append: page.url }}">
 <meta property="og:type" content="website">
+<meta property="og:locale" content="{% if page.lang == 'fr' %}fr_FR{% else %}en_US{% endif %}">
+<meta property="og:site_name" content="Ropat">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ page.og_title | default: page.title }}">
@@ -11,6 +13,3 @@
 <meta name="twitter:url" content="{{ page.og_url | default: site.url | append: page.url }}">
 <meta name="twitter:creator" content="@9ropat">
 <meta name="twitter:site" content="@9ropat">
-
-<meta property="og:locale" content="{% if page.lang == 'fr' %}fr_FR{% else %}en_US{% endif %}">
-<meta property="og:site_name" content="Ropat">
