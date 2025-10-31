@@ -915,6 +915,12 @@ main {
 
 .social-icon {
   color: var(--primary-color);
+  width: 24px;
+  height: 24px;
+}
+
+/* Icônes plus grandes dans la page de contact */
+#contact-social-links .social-icon {
   width: 48px;
   height: 48px;
 }
