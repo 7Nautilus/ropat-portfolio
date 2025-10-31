@@ -568,7 +568,7 @@ main {
   /* Display */
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  max-width: 100%;
   width: fit-content;
   
   /* Spacing */
@@ -1036,10 +1036,6 @@ footer {
 /* Medium Tablets - 768px + */
 @media (min-width: 768px) {
   .hero-title {
-    max-width: 100%;
-  }
-
-  .hero-text {
     max-width: 100%;
   }
 
