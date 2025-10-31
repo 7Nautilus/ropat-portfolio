@@ -1,6 +1,5 @@
 ---
 layout: null
-permalink: /sitemap.xml
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -19,48 +18,34 @@ permalink: /sitemap.xml
     <priority>1.0</priority>
   </url>
 
-  <!-- French Main Pages -->
-  {% assign fr_pages = site.pages | where_exp: "page", "page.path contains 'fr/'" | where_exp: "page", "page.path contains '.html'" | where_exp: "page", "page.path contains 'projects' == false" %}
-  {% for page in fr_pages %}
+  <!-- Pages -->
+  {% for page in site.pages %}
+    {% if page.path contains '.html' %}
+      {% unless page.path contains '_layouts' or page.path contains '_includes' or page.path contains 'projects/' %}
+        {% if page.path contains 'fr/' or page.path contains 'en/' %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <changefreq>{% if page.url contains 'portfolio' %}weekly{% else %}monthly{% endif %}</changefreq>
     <priority>{% if page.url contains 'portfolio' %}0.9{% else %}0.8{% endif %}</priority>
   </url>
+        {% endif %}
+      {% endunless %}
+    {% endif %}
   {% endfor %}
 
-  <!-- English Main Pages -->
-  {% assign en_pages = site.pages | where_exp: "page", "page.path contains 'en/'" | where_exp: "page", "page.path contains '.html'" | where_exp: "page", "page.path contains 'projects' == false" | where_exp: "page", "page.path contains 'index.html' == false" %}
-  {% for page in en_pages %}
+  <!-- Projects -->
+  {% for page in site.pages %}
+    {% if page.path contains 'projects/' and page.path contains '.html' %}
+      {% if page.path contains 'fr/projects/' or page.path contains 'en/projects/' %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
     <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>{% if page.url contains 'portfolio' %}weekly{% else %}monthly{% endif %}</changefreq>
-    <priority>{% if page.url contains 'portfolio' %}0.9{% else %}0.8{% endif %}</priority>
-  </url>
-  {% endfor %}
-
-  <!-- French Projects -->
-  {% assign fr_projects = site.pages | where_exp: "page", "page.path contains 'fr/projects/'" %}
-  {% for project in fr_projects %}
-  <url>
-    <loc>{{ site.url }}{{ project.url }}</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  {% endfor %}
-
-  <!-- English Projects -->
-  {% assign en_projects = site.pages | where_exp: "page", "page.path contains 'en/projects/'" %}
-  {% for project in en_projects %}
-  <url>
-    <loc>{{ site.url }}{{ project.url }}</loc>
-    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+      {% endif %}
+    {% endif %}
   {% endfor %}
 
 </urlset>
