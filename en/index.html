@@ -1,0 +1,71 @@
+---
+layout: default
+lang: "en"
+title: "Ropat - Graphic Designer & Art Director"
+meta_description: "Graphic designer and art director based in Angers, specialized in visual support for music artists (album covers, visualizers, posters) and corporate branding."
+meta_keywords: "graphic designer, art direction, album cover, visualizer, concert poster, branding, visual identity, Angers, music, music artist, label, logo, brand guidelines"
+canonical_url: "https://ropat.art/en/index.html"
+og_title: "Ropat - Graphic Designer & Art Director"
+og_description: "Graphic designer and art director based in Angers, specialized in visual support for music artists (album covers, visualizers, posters) and corporate branding."
+og_url: "https://ropat.art/en/index.html"
+---
+<!-- Page loader -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-logo">Ropat</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 class="hero-title" id="hero-title">Art Direction & Graphic Design</h1>
+
+    <!-- Hero text -->
+    <div class="hero-text">
+      <div>
+        <span>Hello! I'm <strong>Ropat</strong>, a graphic designer based in Angers. </span><br>
+        <span>I support artists and labels in creating their <strong>visual identity</strong>.</span><br>
+      </div>
+      <div>
+        <span>I design <strong>album covers</strong>, <strong>visualizers</strong>, <strong>concert posters</strong>...</span><br>
+        <span>While also providing classic branding (logos, guidelines) for businesses.</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <a href="/en/contact.html" class="cta" aria-label="Contact me to create your visual identity">
+      <span>Give your music a visual</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">Services & Expertise</h2>
+    <div class="section-grid" id="services-grid">
+      {% for item in site.data.services %}
+        {% include service-card.html services=item %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="projects" aria-labelledby="projects-title">
+    <!-- Projects Section Title -->
+    <h2 class="section-title" id="projects-title">Recent Projects: Music and Branding</h2>
+
+    <!-- Projects Grid -->
+    <div class="section-grid" id="projects-grid">
+      {% assign featured_projects = site.data.projects | where: "featured", true %}
+
+      {% for item in featured_projects limit: 4 %}
+        {% include project-card.html project=item %}
+      {% endfor %}
+    </div>
+  </section>
+</main>

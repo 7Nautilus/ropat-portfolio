@@ -1,24 +1,36 @@
 {% comment %}
-  1. Détermine la langue actuelle de la page en examinant l'URL.
+  1. Détermine la langue actuelle de la page à partir du front matter.
   Le défaut est 'en', car c'est la langue par défaut du site.
 {% endcomment %}
-{% assign current_lang = 'en' %}
-{% if page.url contains '/fr/' %}
-  {% assign current_lang = 'fr' %}
-{% endif %}
+{% assign current_lang = page.lang | default: 'en' %}
 
 {% comment %}
   2. Retire le préfixe de langue de l'URL pour obtenir le chemin de la page (ex: /about.html)
+  Gestion spéciale pour la page d'accueil
 {% endcomment %}
 {% assign path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
 
+{% if path_no_lang == "/index.html" or path_no_lang == "/" %}
+  {% if current_lang == 'fr' %}
+    {% assign switch_url = '/en/index.html' %}
+  {% else %}
+    {% assign switch_url = '/index.html' %}
+  {% endif %}
+{% else %}
+  {% if current_lang == 'fr' %}
+    {% assign switch_url = '/en' | append: path_no_lang %}
+  {% else %}
+    {% assign switch_url = '/fr' | append: path_no_lang %}
+  {% endif %}
+{% endif %}
+
 <div class="lang-selector-container">
     {% if current_lang == 'fr' %}
-        <a href="{{ '/en' | append: path_no_lang }}" class="lang-switch-link">
+        <a href="{{ switch_url }}" class="lang-switch-link">
             English
         </a>
     {% else %}
-        <a href="{{ '/fr' | append: path_no_lang }}" class="lang-switch-link">
+        <a href="{{ switch_url }}" class="lang-switch-link">
             Français
         </a>
     {% endif %}
