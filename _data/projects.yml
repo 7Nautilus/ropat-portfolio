@@ -31,11 +31,6 @@
     fr: "<p>L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.</p><p>J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.</p><p>Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.</p>"
     en: "<p>The goal was to create a strong visual identity that aligns with the artist's musical universe.</p><p>I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.</p><p>This project allowed me to develop my graphic design skills while exploring new creative techniques.</p>"
   main_image: /assets/images/projects/btr-cover.png
-  thumbnails:
-    - src: /assets/images/projects/btr-cover.png
-      alt:
-        fr: "Couverture de l'album BTR"
-        en: "BTR album cover"
 
 - category: branding
   url: /fr/projects/logo-process.html

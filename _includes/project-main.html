@@ -10,11 +10,13 @@
         <div class="main-display">
           <img src="{{ project.main_image }}" id="main-image" alt="{{ project.thumbnails[0].alt[lang] }}" width="1200" height="1200" loading="lazy">
         </div>
+        {% if project.thumbnails and project.thumbnails.size > 0 %}
         <div class="thumbnails-container" id="thumbnails">
           {% for thumbnail in project.thumbnails %}
           <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail.alt[lang] }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
           {% endfor %}
         </div>
+        {% endif %}
       </div>
     </div>
     <!-- Description -->
