@@ -26,12 +26,21 @@
 
 <div class="lang-selector-container">
     {% if current_lang == 'fr' %}
-        <a href="{{ switch_url }}" class="lang-switch-link">
+        <a href="{{ switch_url }}" class="lang-switch-link" onclick="setLangCookie('en')">
             English
         </a>
     {% else %}
-        <a href="{{ switch_url }}" class="lang-switch-link">
+        <a href="{{ switch_url }}" class="lang-switch-link" onclick="setLangCookie('fr')">
             Français
         </a>
     {% endif %}
 </div>
+
+<script>
+  // Fonction pour mettre à jour le cookie de langue lors d'un changement manuel
+  function setLangCookie(lang) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 jours
+    document.cookie = `lang_choice=${lang};expires=${expires.toUTCString()};path=/`;
+  }
+</script>
