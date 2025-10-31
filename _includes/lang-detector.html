@@ -37,7 +37,7 @@
   const isFrenchPage = currentPath.startsWith('/fr/') || isRootPage;
   const isEnglishPage = currentPath.startsWith('/en/');
   
-  // Si l'utilisateur préfère l'anglais et qu'il est sur une page française
+  // Règle simple : Si la langue n'est PAS français → rediriger vers anglais
   if (langCode !== 'fr' && isFrenchPage && !isEnglishPage) {
     // Construire l'URL anglaise équivalente
     let englishPath;
@@ -59,17 +59,6 @@
     }
     setCookie('lang_choice', 'fr', 30);
     window.location.href = frenchPath;
-  }
-  // Pour toute autre langue que FR/EN, rediriger vers l'anglais par défaut
-  else if (langCode !== 'fr' && langCode !== 'en' && isFrenchPage && !isEnglishPage) {
-    let englishPath;
-    if (isRootPage) {
-      englishPath = '/en/index.html';
-    } else {
-      englishPath = currentPath.replace('/fr/', '/en/');
-    }
-    setCookie('lang_choice', 'en', 30);
-    window.location.href = englishPath;
   }
   // Sinon, enregistrer le choix implicite basé sur la page actuelle
   else {
