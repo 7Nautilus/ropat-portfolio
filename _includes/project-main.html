@@ -8,7 +8,7 @@
     <div class="hero-image-container">
       <div class="project-gallery">
         <div class="main-display">
-          <img src="{{ project.main_image }}" id="main-image" alt="{{ project.thumbnails[0].alt[lang] }}" width="1200" height="1200" loading="lazy">
+          <img src="{{ project.main_image }}" id="main-image" alt="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" width="1200" height="1200" loading="lazy">
         </div>
         {% if project.thumbnails and project.thumbnails.size > 0 %}
         <div class="thumbnails-container" id="thumbnails">
