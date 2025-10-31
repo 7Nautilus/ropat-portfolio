@@ -8,7 +8,12 @@
         {% assign link_name = item.fr_name %}
     {% endif %}
 
-    {% assign final_url = "/" | append: current_lang | append: item.base_url %}
+    {% comment %} Pour la page d'accueil en français, on pointe vers /index.html directement {% endcomment %}
+    {% if current_lang == 'fr' and item.base_url == '/index.html' %}
+      {% assign final_url = item.base_url %}
+    {% else %}
+      {% assign final_url = "/" | append: current_lang | append: item.base_url %}
+    {% endif %}
 
     {% assign is_current = false %}
     {% if page.url == final_url %}
