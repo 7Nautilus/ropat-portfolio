@@ -1,48 +1,65 @@
-<artifact identifier="schema-org-final" type="application/vnd.ant.code" language="liquid" title="Schema.org">
 {% comment %}
 ========================================
-CONFIGURATION CENTRALISÉE
+SCHEMA.ORG - DONNÉES STRUCTURÉES
+Génère automatiquement les balises Schema.org selon le type de page
 ========================================
 {% endcomment %}
+
 {% comment %} Données business {% endcomment %}
 {% assign business_name = site.business.name | default: "Ropat" %}
 {% assign business_url = site.url %}
 {% assign business_logo = site.url | append: "/assets/images/branding/icon.png" %}
 {% assign business_description = site.business.description | default: "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise." %}
+
 {% comment %} Adresse {% endcomment %}
 {% assign address_city = site.business.address.city | default: "Angers" %}
 {% assign address_region = site.business.address.region | default: "Pays de la Loire" %}
 {% assign address_postal = site.business.address.postal | default: "49000" %}
 {% assign address_country = site.business.address.country | default: "FR" %}
+
 {% comment %} Coordonnées GPS {% endcomment %}
 {% assign geo_lat = site.business.geo.latitude | default: "47.478419" %}
 {% assign geo_lon = site.business.geo.longitude | default: "-0.563166" %}
+
 {% comment %} Réseaux sociaux {% endcomment %}
 {% assign social_instagram = site.social.instagram | default: "https://www.instagram.com/9.ropat/" %}
 {% assign social_pinterest = site.social.pinterest | default: "https://fr.pinterest.com/9ropat/" %}
 {% assign social_behance = site.social.behance | default: "https://www.behance.net/ropat" %}
+
 {% comment %} Price range {% endcomment %}
 {% assign price_range = site.business.price_range | default: "€€" %}
+
 {% comment %} Email {% endcomment %}
 {% assign business_email = site.business.email %}
+
 {% comment %} Description de la page {% endcomment %}
 {% assign final_page_title = include.page_title | default: page.title %}
 {% assign final_page_description = include.page_meta_description | default: page.meta_description | default: business_description %}
+
 {% comment %} Dates {% endcomment %}
 {% assign date_published = page.date | date_to_xmlschema | default: "2025-01-01T00:00:00+00:00" %}
 {% if page.last_modified_at %}
-{% assign date_modified = page.last_modified_at | date_to_xmlschema %}
+  {% assign date_modified = page.last_modified_at | date_to_xmlschema %}
 {% else %}
-{% assign date_modified = "now" | date_to_xmlschema %}
+  {% assign date_modified = "now" | date_to_xmlschema %}
 {% endif %}
+
+{% comment %} Langue {% endcomment %}
+{% assign page_language = "en-US" %}
+{% if page.lang == "fr" %}
+  {% assign page_language = "fr-FR" %}
+{% endif %}
+
 {% comment %} Type de page {% endcomment %}
 {% assign is_article = false %}
 {% if page.schema_type == "Article" %}
-{% assign is_article = true %}
+  {% assign is_article = true %}
 {% endif %}
 
 {% comment %}
-GÉNÉRATION DU SCHEMA.ORG
+========================================
+GÉNÉRATION DU SCHEMA.ORG JSON-LD
+========================================
 {% endcomment %}
 
 <script type="application/ld+json">
@@ -95,14 +112,66 @@ GÉNÉRATION DU SCHEMA.ORG
         "{{ social_behance }}"
       ]
     },
-    {% if is_article %}
+    {% comment %} === PAGE DE PROJET (CreativeWork) === {% endcomment %}
+    {% if page.project_id %}
+      {% assign project = site.data.projects | where: "project_title", page.project_id | first %}
+      {% if project %}
+    {
+      "@type": "CreativeWork",
+      "@id": "{{ page.url | absolute_url }}#creativework",
+      "name": "{{ project.title[page.lang] }}",
+      "url": "{{ page.url | absolute_url }}",
+      "inLanguage": "{{ page_language }}",
+      "creator": {
+        "@type": "Person",
+        "name": "{{ business_name }}",
+        "url": "{{ business_url }}"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "{{ business_name }}",
+        "url": "{{ business_url }}"
+      },
+      "datePublished": "{{ project.year }}-01-01",
+      "description": "{{ project.description[page.lang] }}",
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ business_url }}{{ project.main_image }}"
+      },
+      {% if project.tools %}
+      "keywords": "{{ project.tools }}",
+      {% endif %}
+      "genre": "{% if project.category == 'music' %}Album Cover Design{% elsif project.category == 'branding' %}Branding{% elsif project.category == 'animation' %}Motion Design{% else %}Graphic Design{% endif %}",
+      "isPartOf": {
+        "@id": "{{ business_url }}#professionalService"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}#webpage",
+      "name": "{{ final_page_title }}",
+      "url": "{{ page.url | absolute_url }}",
+      "inLanguage": "{{ page_language }}",
+      "isPartOf": {
+        "@id": "{{ business_url }}#professionalService"
+      },
+      "datePublished": "{{ date_published }}",
+      "dateModified": "{{ date_modified }}",
+      "description": {{ final_page_description | jsonify }},
+      "mainEntity": {
+        "@id": "{{ page.url | absolute_url }}#creativework"
+      }
+    }
+      {% endif %}
+    {% comment %} === PAGE ARTICLE === {% endcomment %}
+    {% elsif is_article %}
     {
       "@type": "Article",
-      "@id": "{{ page.url | absolute_url }}#webpage",
+      "@id": "{{ page.url | absolute_url }}#article",
       "name": "{{ final_page_title }}",
       "headline": "{{ final_page_title }}",
       "url": "{{ page.url | absolute_url }}",
-      "inLanguage": "fr-FR",
+      "inLanguage": "{{ page_language }}",
       "isPartOf": {
         "@id": "{{ business_url }}#professionalService"
       },
@@ -116,15 +185,24 @@ GÉNÉRATION DU SCHEMA.ORG
       "author": {
         "@type": "Person",
         "name": "{{ business_name }}"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ business_name }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ business_logo }}"
+        }
       }
     }
+    {% comment %} === PAGE NORMALE (WebPage) === {% endcomment %}
     {% else %}
     {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}#webpage",
       "name": "{{ final_page_title }}",
       "url": "{{ page.url | absolute_url }}",
-      "inLanguage": "fr-FR",
+      "inLanguage": "{{ page_language }}",
       "isPartOf": {
         "@id": "{{ business_url }}#professionalService"
       },
@@ -136,4 +214,3 @@ GÉNÉRATION DU SCHEMA.ORG
   ]
 }
 </script>
-</artifact>
