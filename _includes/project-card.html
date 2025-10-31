@@ -1,6 +1,10 @@
 {% assign current_lang = page.lang | default: 'en' %}
+{% assign project_url = include.project.url %}
+{% if current_lang == 'en' %}
+  {% assign project_url = include.project.url | replace: '/fr/projects/', '/en/projects/' %}
+{% endif %}
 <article class="project-card" data-category="{{ include.project.category }}" data-aos="fade-up">
-  <a href="{{ include.project.url | relative_url }}" class="project-link" aria-label="{{ include.project.aria_label[current_lang] }}">
+  <a href="{{ project_url | relative_url }}" class="project-link" aria-label="{{ include.project.aria_label[current_lang] }}">
     <!-- Project Image -->
     <div class="project-image">
       <img

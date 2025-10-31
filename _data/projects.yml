@@ -1,5 +1,5 @@
 - category: music
-  url: /projects/btr.html
+  url: /fr/projects/btr.html
   aria_label: 
     fr: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
     en: "View the 'BTR' EP cover project by Maltezz"
@@ -17,7 +17,7 @@
   featured: true
 
 - category: branding
-  url: /projects/logo-process.html
+  url: /fr/projects/logo-process.html
   aria_label: 
     fr: "Voir le processus de création de logo"
     en: "View the logo creation process"
@@ -34,7 +34,7 @@
   featured: true
 
 - category: animation
-  url: /projects/cheetah.html
+  url: /fr/projects/cheetah.html
   aria_label: 
     fr: "Voir le projet d'animation en stop-motion"
     en: "View the stop-motion animation project"
@@ -51,7 +51,7 @@
   featured: true
 
 - category: design
-  url: /projects/hdd-defrag.html
+  url: /fr/projects/hdd-defrag.html
   aria_label: 
     fr: "Voir le projet d'affiche HDD DEFRAG"
     en: "View the HDD DEFRAG poster project"
@@ -68,7 +68,7 @@
   featured: false
 
 - category: design
-  url: /projects/exit.html
+  url: /fr/projects/exit.html
   aria_label: 
     fr: "Voir le projet d'affiche EXIT"
     en: "View the EXIT poster project"
@@ -85,7 +85,7 @@
   featured: false
 
 - category: music
-  url: /projects/a-lone.html
+  url: /fr/projects/a-lone.html
   aria_label: 
     fr: "Voir la pochette de l'album 'A-LONE' de B-Lone"
     en: "View the 'A-LONE' album cover by B-Lone"
