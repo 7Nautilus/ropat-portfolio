@@ -31,6 +31,29 @@
     fr: "<p>L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.</p><p>J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.</p><p>Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.</p>"
     en: "<p>The goal was to create a strong visual identity that aligns with the artist's musical universe.</p><p>I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.</p><p>This project allowed me to develop my graphic design skills while exploring new creative techniques.</p>"
   main_image: /assets/images/projects/btr-cover.png
+  seo:
+    title:
+      fr: "Pochette BTR - Maltezz | Ropat"
+      en: "BTR Cover - Maltezz | Ropat"
+    meta_description:
+      fr: "Projet de création de pochette d'album pour l'EP BTR de l'artiste français Maltezz. Direction artistique complète et identité visuelle."
+      en: "Album cover design project for French artist Maltezz's BTR EP. Complete art direction and visual identity."
+    meta_keywords:
+      fr: "pochette album, BTR, Maltezz, direction artistique, design graphique, cover art, EP, musique, Ropat"
+      en: "album cover, BTR, Maltezz, art direction, graphic design, cover art, EP, music, Ropat"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/btr.html"
+      en: "https://ropat.art/en/projects/btr.html"
+    og_title:
+      fr: "Pochette BTR - Maltezz"
+      en: "BTR Cover - Maltezz"
+    og_description:
+      fr: "Projet de création de pochette d'album pour l'EP BTR de l'artiste français Maltezz. Direction artistique complète et identité visuelle."
+      en: "Album cover design project for French artist Maltezz's BTR EP. Complete art direction and visual identity."
+    og_url:
+      fr: "https://ropat.art/fr/projects/btr.html"
+      en: "https://ropat.art/en/projects/btr.html"
+    og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
 
 - category: branding
   url: /fr/projects/logo-process.html
@@ -48,6 +71,57 @@
     fr: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
     en: "Example of logo design process including sketch, development and finalization."
   featured: true
+  project_title: "Logo Design Process"
+  subtitle:
+    fr: "Processus de <strong>création de logo</strong>"
+    en: "<strong>Logo creation</strong> process"
+  context_title:
+    fr: "À propos du projet"
+    en: "About the project"
+  context_content:
+    fr: "<p>Ce projet met en avant le processus de création d'un logo, de l'esquisse initiale à la version finale.</p>"
+    en: "<p>This project showcases the logo creation process, from the initial sketch to the final version.</p>"
+  main_image: /assets/images/projects/logo-design-process.png
+  thumbnails:
+    - src: /assets/images/projects/logo-design-process.png
+      alt:
+        fr: "Sketch géométrique du logo"
+        en: "Geometric logo sketch"
+    - src: /assets/images/projects/logo-design-process-vecto.png
+      alt:
+        fr: "Version vectorielle du logo"
+        en: "Vector version of the logo"
+    - src: /assets/images/projects/logo-design-process-3d.png
+      alt:
+        fr: "Variations du logo en 3D"
+        en: "3D logo variations"
+    - src: /assets/images/projects/logo-design-process-3d-fx.png
+      alt:
+        fr: "Processus de création des effets 3D du logo"
+        en: "Logo 3D effects creation process"
+  seo:
+    title:
+      fr: "Logo Design Process | Ropat"
+      en: "Logo Design Process | Ropat"
+    meta_description:
+      fr: "Découvrez le processus de création d'un logo, de l'esquisse initiale à la version finale 3D avec effets."
+      en: "Discover the logo creation process, from initial sketch to final 3D version with effects."
+    meta_keywords:
+      fr: "logo, design, processus, création de logo, branding, identité visuelle, graphisme, 3D, Ropat"
+      en: "logo, design, process, logo creation, branding, visual identity, graphic design, 3D, Ropat"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/logo-process.html"
+      en: "https://ropat.art/en/projects/logo-process.html"
+    og_title:
+      fr: "Logo Design Process"
+      en: "Logo Design Process"
+    og_description:
+      fr: "Découvrez le processus de création d'un logo, de l'esquisse initiale à la version finale."
+      en: "Discover the logo creation process, from initial sketch to final version."
+    og_url:
+      fr: "https://ropat.art/fr/projects/logo-process.html"
+      en: "https://ropat.art/en/projects/logo-process.html"
+    og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
 
 - category: animation
   url: /fr/projects/cheetah.html
@@ -65,6 +139,41 @@
     fr: "Réalisation d'une animation en stop-motion"
     en: "Creation of a stop-motion animation"
   featured: true
+  project_title: "Cheetah Animation"
+  subtitle:
+    fr: "Animation en <strong>stop-motion</strong>"
+    en: "<strong>Stop-motion</strong> animation"
+  context_title:
+    fr: "À propos du projet"
+    en: "About the project"
+  context_content:
+    fr: "<p>Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.</p>"
+    en: "<p>This project showcases a stop-motion animation created using both traditional and digital techniques.</p>"
+  main_image: /assets/videos/CHEETAH.mp4
+  media_type: video
+  seo:
+    title:
+      fr: "Cheetah Animation - Ropat"
+      en: "Cheetah Animation - Ropat"
+    meta_description:
+      fr: "Cheetah est un projet d'animation en stop motion qui explore la vitesse et l'agilité de cet animal emblématique à travers l'analyse de son cycle de course."
+      en: "Cheetah is a stop-motion animation project exploring the speed and agility of this iconic animal through the analysis of its running cycle."
+    meta_keywords:
+      fr: "Cheetah, guépard, animation, stop motion, projet, Ropat, graphiste, designer graphique, Angers, France"
+      en: "Cheetah, animation, stop motion, project, Ropat, graphic designer, Angers, France"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/cheetah.html"
+      en: "https://ropat.art/en/projects/cheetah.html"
+    og_title:
+      fr: "Cheetah Animation - Ropat"
+      en: "Cheetah Animation - Ropat"
+    og_description:
+      fr: "Animation en stop motion explorant la vitesse et l'agilité du guépard."
+      en: "Stop-motion animation exploring the cheetah's speed and agility."
+    og_url:
+      fr: "https://ropat.art/fr/projects/cheetah.html"
+      en: "https://ropat.art/en/projects/cheetah.html"
+    og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
 
 - category: design
   url: /fr/projects/hdd-defrag.html
@@ -82,6 +191,40 @@
     fr: "Création d'une affiche sur le thème de la défragmentation de disque dur."
     en: "Creation of a poster on the theme of hard drive defragmentation."
   featured: false
+  project_title: "HDD DEFRAG"
+  subtitle:
+    fr: "Projet de <strong>design graphique</strong> d'affiche"
+    en: "<strong>Graphic design</strong> poster project"
+  context_title:
+    fr: "À propos du projet"
+    en: "About the project"
+  context_content:
+    fr: "<p>HDD DEFRAG est un projet de design graphique axé sur la création d'une affiche mettant en avant la défragmentation de disques durs.</p>"
+    en: "<p>HDD DEFRAG is a graphic design project focused on creating a poster highlighting hard drive defragmentation.</p>"
+  main_image: /assets/images/projects/hdd-defrag-poster.png
+  seo:
+    title:
+      fr: "HDD DEFRAG - Affiche | Ropat"
+      en: "HDD DEFRAG - Poster | Ropat"
+    meta_description:
+      fr: "Projet de création d'une affiche pour promouvoir la défragmentation des disques durs."
+      en: "Poster design project promoting hard drive defragmentation."
+    meta_keywords:
+      fr: "HDD, défragmentation, disque dur, optimisation, performance, design graphique, affiche, Ropat"
+      en: "HDD, defragmentation, hard drive, optimization, performance, graphic design, poster, Ropat"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/hdd-defrag.html"
+      en: "https://ropat.art/en/projects/hdd-defrag.html"
+    og_title:
+      fr: "HDD DEFRAG - Affiche"
+      en: "HDD DEFRAG - Poster"
+    og_description:
+      fr: "Affiche design sur le thème de la défragmentation de disque dur."
+      en: "Design poster on the theme of hard drive defragmentation."
+    og_url:
+      fr: "https://ropat.art/fr/projects/hdd-defrag.html"
+      en: "https://ropat.art/en/projects/hdd-defrag.html"
+    og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
 
 - category: design
   url: /fr/projects/exit.html
@@ -99,6 +242,40 @@
     fr: "Création d'une affiche sur le thème du design des sorties de secours."
     en: "Creation of a poster on the theme of emergency exit design."
   featured: false
+  project_title: "EXIT"
+  subtitle:
+    fr: "Projet de <strong>création d'affiche</strong> détournant le design des panneaux de signalisation de sorties de secours"
+    en: "<strong>Poster design</strong> project reinterpreting emergency exit signage design"
+  context_title:
+    fr: "À propos du projet"
+    en: "About the project"
+  context_content:
+    fr: "<p>Pour ce projet je me suis basé d'un ancien fichier Illustrator de mon ami @alxndr.rawz dans lequel il avait exploré des concepts similaires, en designant à sa manière les éléments du fameux panneau \"exit\"</p><p>J'avais ce fichier sur mon disque dur depuis un moment et je voulais l'explorer davantage. Je l'ai donc importé dans Photoshop, j'y ai ajouté mes propres éléments graphiques et j'ai retravaillé la composition pour lui donner une nouvelle vie.</p><p>Pour le rendu final j'ai voulu donner à cette affiche un aspect de cuivre oxydé, avec sa couleur verte et ses reflets brillants.</p>"
+    en: "<p>For this project, I based my work on an old Illustrator file from my friend @alxndr.rawz, in which he explored similar concepts by designing elements of the famous \"exit\" sign in his own style.</p><p>I had this file on my hard drive for a while and wanted to explore it further. So I imported it into Photoshop, added my own graphic elements, and reworked the composition to give it new life.</p><p>For the final rendering, I wanted to give this poster an oxidized copper look, with its green color and shiny reflections.</p>"
+  main_image: /assets/images/projects/exit.png
+  seo:
+    title:
+      fr: "EXIT - Affiche Design | Ropat"
+      en: "EXIT - Poster Design | Ropat"
+    meta_description:
+      fr: "Projet de création d'affiche détournant le design des panneaux de signalisation de sorties de secours avec un aspect cuivre oxydé."
+      en: "Poster design project reinterpreting emergency exit signage design with an oxidized copper aesthetic."
+    meta_keywords:
+      fr: "affiche, design graphique, EXIT, sortie de secours, signalisation, projet, Ropat, graphiste, Angers"
+      en: "poster, graphic design, EXIT, emergency exit, signage, project, Ropat, graphic designer, Angers"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/exit.html"
+      en: "https://ropat.art/en/projects/exit.html"
+    og_title:
+      fr: "EXIT - Affiche Design"
+      en: "EXIT - Poster Design"
+    og_description:
+      fr: "Création d'affiche détournant le design des panneaux de sorties de secours."
+      en: "Poster design reinterpreting emergency exit signage."
+    og_url:
+      fr: "https://ropat.art/fr/projects/exit.html"
+      en: "https://ropat.art/en/projects/exit.html"
+    og_image: "https://ropat.art/assets/images/projects/exit.png"
 
 - category: music
   url: /fr/projects/a-lone.html
@@ -146,3 +323,26 @@
       alt:
         fr: "Mockup 3D de l'album A-LONE"
         en: "A-LONE album 3D mockup"
+  seo:
+    title:
+      fr: "Pochette A-LONE - B-Lone | Ropat"
+      en: "A-LONE Cover - B-Lone | Ropat"
+    meta_description:
+      fr: "Projet de création de pochette d'album pour l'album A-LONE de l'artiste français B-Lone. Direction artistique complète et identité visuelle."
+      en: "Album cover design project for French artist B-Lone's A-LONE album. Complete art direction and visual identity."
+    meta_keywords:
+      fr: "pochette album, A-LONE, B-Lone, direction artistique, design graphique, cover art, album, musique, Ropat"
+      en: "album cover, A-LONE, B-Lone, art direction, graphic design, cover art, album, music, Ropat"
+    canonical_url:
+      fr: "https://ropat.art/fr/projects/a-lone.html"
+      en: "https://ropat.art/en/projects/a-lone.html"
+    og_title:
+      fr: "Pochette A-LONE - B-Lone"
+      en: "A-LONE Cover - B-Lone"
+    og_description:
+      fr: "Projet de création de pochette d'album pour l'album A-LONE de l'artiste français B-Lone. Direction artistique complète et identité visuelle."
+      en: "Album cover design project for French artist B-Lone's A-LONE album. Complete art direction and visual identity."
+    og_url:
+      fr: "https://ropat.art/fr/projects/a-lone.html"
+      en: "https://ropat.art/en/projects/a-lone.html"
+    og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"

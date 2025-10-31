@@ -1,0 +1,20 @@
+{% comment %}
+  Include SEO pour les pages de projets
+  Récupère les données depuis _data/projects.yml et les injecte dans page.*
+  pour être utilisées par le layout default.html
+{% endcomment %}
+
+{% assign project = site.data.projects | where: "project_title", include.project_id | first %}
+{% assign lang = page.lang | default: "fr" %}
+
+{% if project.seo %}
+  {% comment %} Injection des données du projet dans les variables page {% endcomment %}
+  {% assign page.title = project.seo.title[lang] %}
+  {% assign page.meta_description = project.seo.meta_description[lang] %}
+  {% assign page.meta_keywords = project.seo.meta_keywords[lang] %}
+  {% assign page.canonical_url = project.seo.canonical_url[lang] %}
+  {% assign page.og_title = project.seo.og_title[lang] %}
+  {% assign page.og_description = project.seo.og_description[lang] %}
+  {% assign page.og_url = project.seo.og_url[lang] %}
+  {% assign page.og_image = project.seo.og_image %}
+{% endif %}

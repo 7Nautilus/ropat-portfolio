@@ -26,30 +26,33 @@
       <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en{{ page_path_no_lang }}" />
     {% endif %}
 
-    <!-- SEO -->
-    <title>{{ page.title }}</title>
+    <!-- SEO - Gestion des métadonnées -->
+    {% if page.title %}
+        <!-- Page avec métadonnées dans le front matter -->
+        <title>{{ page.title }}</title>
+        <meta name="title" content="{{ page.title }}">
+        
+        {% if page.meta_description %}
+            <meta name="description" content="{{ page.meta_description }}">
+        {% elsif page.lang == 'fr' %}
+            <meta name="description" content="Ropat - Portfolio de créations graphiques et design. Découvrez mes projets de pochettes d'album, logos, affiches, animations en motion design et branding.">
+        {% else %}
+            <meta name="description" content="Ropat - Graphic design portfolio. Explore my projects including album covers, logos, posters, motion design animations, and branding.">
+        {% endif %}
 
-    {% if page.meta_description %}
-        <meta name="description" content="{{ page.meta_description }}">
-    {% elsif page.lang == 'fr' %}
-        <meta name="description" content="Ropat - Portfolio de créations graphiques et design. Découvrez mes projets de pochettes d'album, logos, affiches, animations en motion design et branding.">
-    {% else %}
-        <meta name="description" content="Ropat - Graphic design portfolio. Explore my projects including album covers, logos, posters, motion design animations, and branding.">
-    {% endif %}
-
-    {% if page.meta_keywords %}
-        <meta name="keywords" content="{{ page.meta_keywords }}">
-    {% elsif page.lang == 'fr' %}
-        <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
-    {% else %}
-        <meta name="keywords" content="graphic designer, graphic design, portfolio, design creations, Ropat, Angers, France">
+        {% if page.meta_keywords %}
+            <meta name="keywords" content="{{ page.meta_keywords }}">
+        {% elsif page.lang == 'fr' %}
+            <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
+        {% else %}
+            <meta name="keywords" content="graphic designer, graphic design, portfolio, design creations, Ropat, Angers, France">
+        {% endif %}
     {% endif %}
     
     <meta name="author" content="Ropat">
     <meta name="publisher" content="Ropat">
     <meta name="copyright" content="Ropat">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="{{ page.lang | default: 'en' }}">
 
     <!-- Canonical -->
     <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
