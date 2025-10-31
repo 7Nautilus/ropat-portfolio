@@ -1,19 +1,24 @@
-- name: Accueil
-  url: /
+- fr_name: Accueil
+  en_name: Home
+  url: /index.html
   class: nav-link
 
-- name: Mes créations
+- fr_name: Mes créations
+  en_name: My creations
   url: /portfolio.html
   class: nav-link
 
-- name: Services
+- fr_name: Services
+  en_name: Services
   url: /services.html
   class: nav-link
 
-- name: À propos
+- fr_name: À propos
+  en_name: About
   url: /about.html
   class: nav-link
 
-- name: Contact
+- fr_name: Contact
+  en_name: Contact
   url: /contact.html
   class: contact-link

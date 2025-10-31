@@ -4,10 +4,17 @@
     <div class="footer-top">
       <!-- Navigation -->
       <nav class="footer-nav" aria-label="Footer Navigation">
-        <a href="/index.html" class="footer-link">Accueil</a>
-        <a href="/portfolio.html" class="footer-link">Portfolio</a>
-        <a href="/about.html" class="footer-link">À propos</a>
-        <a href="/contact.html" class="footer-link">Contact</a>
+        {% assign current_lang = page.lang | default: 'en' %}
+        {% for item in site.data.navigation %}
+          {% assign link_name = item.en_name %}
+          {% if current_lang == 'fr' %}
+              {% assign link_name = item.fr_name %}
+          {% endif %}
+
+          {% assign final_url = "/" | append: current_lang | append: item.base_url %}
+
+          <a href="{{ final_url | relative_url }}" class="footer-link">{{ link_name }}</a>
+        {% endfor %}
       </nav>
       <!-- Social Links -->
       <div class="social-links">
@@ -31,11 +38,23 @@
     </div>
   <!-- Footer Bottom -->
   <div class="footer-bottom">
-    <p class="footer-text">© 2025 Ropat — Graphiste et Directeur Artistique à Angers. Tous droits réservés.</p>
+    {% if current_lang == 'fr' %}
+      {% assign copyright_text = "© 2025 Ropat — Graphiste et Directeur Artistique à Angers. Tous droits réservés." %}
+    {% else %}
+      {% assign copyright_text = "© 2025 Ropat — Graphic Designer and Art Director in Angers. All rights reserved." %}
+    {% endif %}
+    <p class="footer-text">{{ copyright_text }}</p>
+    {% include lang-selector.html %} 
     <div class="footer-legal">
-      <a href="#" class="footer-link-small">Mentions légales</a>
-      <span class="footer-separator">•</span>
-      <a href="#" class="footer-link-small">Confidentialité</a>
+      {% if current_lang == 'fr' %}
+        <a href="/fr/mentions-legales.html" class="footer-link-small">Mentions légales</a>
+        <span class="footer-separator">•</span>
+        <a href="/fr/confidentialite.html" class="footer-link-small">Confidentialité</a>
+      {% else %}
+        <a href="/en/legal-notice.html" class="footer-link-small">Legal Notice</a>
+        <span class="footer-separator">•</span>
+        <a href="/en/privacy.html" class="footer-link-small">Privacy</a>
+      {% endif %}
     </div>
   </div>
 </footer>
