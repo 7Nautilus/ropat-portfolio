@@ -13,6 +13,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="language" content="{{ page.lang | default: 'en' }}"> 
 
+    {% comment %} Si c'est une page de projet, charger les métadonnées depuis projects.yml {% endcomment %}
+    {% if page.project_id %}
+      {% assign project = site.data.projects | where: "project_title", page.project_id | first %}
+      {% assign lang = page.lang | default: "fr" %}
+      {% if project.seo %}
+        {% assign page.title = project.seo.title[lang] %}
+        {% assign page.meta_description = project.seo.meta_description[lang] %}
+        {% assign page.meta_keywords = project.seo.meta_keywords[lang] %}
+        {% assign page.canonical_url = project.seo.canonical_url[lang] %}
+        {% assign page.og_title = project.seo.og_title[lang] %}
+        {% assign page.og_description = project.seo.og_description[lang] %}
+        {% assign page.og_url = project.seo.og_url[lang] %}
+        {% assign page.og_image = project.seo.og_image %}
+      {% endif %}
+    {% endif %}
+
     {% assign page_path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
     
     {% comment %} Gestion spéciale pour la page d'accueil {% endcomment %}

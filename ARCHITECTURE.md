@@ -17,7 +17,9 @@ Ce projet suit le principe **DRY (Don't Repeat Yourself)** en utilisant Jekyll e
 ### Layouts
 
 - **`_layouts/default.html`** : Template de base pour toutes les pages
-  - Gère automatiquement les métadonnées SEO (title, description, keywords)
+  - Détecte automatiquement si c'est une page de projet via `page.project_id`
+  - Charge automatiquement les métadonnées SEO depuis `projects.yml` pour les projets
+  - Gère les métadonnées SEO (title, description, keywords) pour toutes les pages
   - Inclut `open-graph.html` pour Open Graph
   - Gère les liens alternatifs hreflang (FR/EN)
 
@@ -30,9 +32,10 @@ Ce projet suit le principe **DRY (Don't Repeat Yourself)** en utilisant Jekyll e
 - **`burger-menu.html`** : Menu mobile
 
 #### SEO
-- **`project-seo.html`** : Injecte les métadonnées SEO des projets dans les variables `page.*` (récupère depuis `projects.yml`)
 - **`open-graph.html`** : Balises Open Graph et Twitter (utilisé par le layout default)
 - **`schema-org.html`** : Données structurées Schema.org
+
+> 💡 **Note** : Les métadonnées SEO des projets sont automatiquement chargées depuis `projects.yml` par le layout `default.html` lorsqu'un `project_id` est défini dans le front matter.
 
 #### Projets
 - **`project-main.html`** : Template principal pour afficher un projet
@@ -60,11 +63,13 @@ Toutes les pages de projets utilisent maintenant le même format minimal :
 ---
 layout: default
 lang: "fr"  # ou "en"
+project_id: "NOM_DU_PROJET"
 ---
 
-{% include project-seo.html project_id="NOM_DU_PROJET" %}
-{% include project-main.html project_id="NOM_DU_PROJET" %}
+{% include project-main.html project_id=page.project_id %}
 ```
+
+Le layout `default.html` détecte automatiquement la présence de `project_id` et charge les métadonnées SEO depuis `projects.yml`.
 
 ### Projets migrés
 
@@ -151,10 +156,10 @@ lang: "fr"  # ou "en"
 ---
 layout: default
 lang: "fr"
+project_id: "TITRE_UNIQUE"
 ---
 
-{% include project-seo.html project_id="TITRE_UNIQUE" %}
-{% include project-main.html project_id="TITRE_UNIQUE" %}
+{% include project-main.html project_id=page.project_id %}
 ```
 
 **`en/projects/nom-projet.html`** :
@@ -162,10 +167,10 @@ lang: "fr"
 ---
 layout: default
 lang: "en"
+project_id: "TITRE_UNIQUE"
 ---
 
-{% include project-seo.html project_id="TITRE_UNIQUE" %}
-{% include project-main.html project_id="TITRE_UNIQUE" %}
+{% include project-main.html project_id=page.project_id %}
 ```
 
 ⚠️ **Important** : Le `project_id` doit correspondre exactement au `project_title` dans `projects.yml`
@@ -190,17 +195,18 @@ Le système supporte automatiquement FR et EN :
 ## 🔄 Flux des métadonnées SEO
 
 ### Pour les pages de projets :
-1. **`project-seo.html`** récupère les données depuis `projects.yml`
-2. Injecte les données dans les variables `page.*` (title, meta_description, og_title, etc.)
-3. **`default.html`** utilise ces variables `page.*` pour les balises meta
-4. **`open-graph.html`** est appelé par `default.html` et utilise aussi `page.*`
+1. Page définit `project_id` dans le front matter
+2. **`default.html`** détecte automatiquement `page.project_id`
+3. Récupère les données depuis `projects.yml` et les injecte dans `page.*`
+4. Utilise ces variables `page.*` pour les balises meta
+5. **`open-graph.html`** est appelé et utilise aussi `page.*`
 
 ### Pour les pages normales (about, contact, etc.) :
 1. Métadonnées définies directement dans le front matter
 2. **`default.html`** utilise directement `page.*`
 3. **`open-graph.html`** utilise aussi `page.*`
 
-✨ **Résultat** : Un seul système cohérent pour toutes les pages !
+✨ **Résultat** : Un seul système automatique et cohérent pour toutes les pages !
 
 ## 📊 Score DRY : 9.5/10
 
