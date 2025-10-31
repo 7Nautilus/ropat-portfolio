@@ -1,0 +1,48 @@
+{% assign project = site.data.projects | where: "project_title", include.project_id | first %}
+{% assign lang = page.lang | default: "fr" %}
+
+<!-- Main Content -->
+<main class="hero" id="hero-project-section">
+  <section class="hero-project">
+    <!-- Gallery -->
+    <div class="hero-image-container">
+      <div class="project-gallery">
+        <div class="main-display">
+          <img src="{{ project.main_image }}" id="main-image" alt="{{ project.thumbnails[0].alt[lang] }}" width="1200" height="1200" loading="lazy">
+        </div>
+        <div class="thumbnails-container" id="thumbnails">
+          {% for thumbnail in project.thumbnails %}
+          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail.alt[lang] }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Description -->
+    <div class="hero-project-description">
+      <h1 class="hero-title">{{ project.project_title }}</h1>
+      <div class="hero-text">
+        <h2 class="hero-subtitle">{{ project.subtitle[lang] }}</h2>
+        <div class="pitch">
+          {% if project.client %}
+          <span><strong>• {% if lang == "fr" %}Client{% else %}Client{% endif %}</strong>: {{ project.client }}</span>
+          {% endif %}
+          {% if project.services %}
+          <span><strong>• {% if lang == "fr" %}Prestation(s){% else %}Services{% endif %}</strong>: {{ project.services[lang] }}</span>
+          {% endif %}
+          {% if project.year %}
+          <span><strong>• {% if lang == "fr" %}Année{% else %}Year{% endif %}</strong>: {{ project.year }}</span>
+          {% endif %}
+          {% if project.tools %}
+          <span><strong>• {% if lang == "fr" %}Outils{% else %}Tools{% endif %}</strong>: {{ project.tools }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="hero-project-details">
+    <h3 class="section-title">{{ project.context_title[lang] }}</h3>
+    <div class="hero-text">
+      {{ project.context_content[lang] }}
+    </div>
+  </section>
+</main>

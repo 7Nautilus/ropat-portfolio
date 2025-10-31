@@ -15,6 +15,27 @@
     fr: "Direction artistique complète et création de la cover pour la sortie de l'EP."
     en: "Complete art direction and cover creation for the EP release."
   featured: true
+  project_title: BTR
+  subtitle:
+    fr: "Projet de <strong>création de pochette</strong> pour l'ep <strong>BTR</strong> de l'artiste français <strong>Maltezz</strong>."
+    en: "<strong>Album cover design</strong> project for the <strong>BTR</strong> EP by French artist <strong>Maltezz</strong>."
+  services:
+    fr: "Direction Artistique, Design de pochette d'album"
+    en: "Art Direction, Album Cover Design"
+  year: "2023"
+  tools: "Photoshop, Illustrator"
+  context_title:
+    fr: "Contexte du projet"
+    en: "Project Context"
+  context_content:
+    fr: "<p>L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.</p><p>J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.</p><p>Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.</p>"
+    en: "<p>The goal was to create a strong visual identity that aligns with the artist's musical universe.</p><p>I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.</p><p>This project allowed me to develop my graphic design skills while exploring new creative techniques.</p>"
+  main_image: /assets/images/projects/btr-cover.png
+  thumbnails:
+    - src: /assets/images/projects/btr-cover.png
+      alt:
+        fr: "Couverture de l'album BTR"
+        en: "BTR album cover"
 
 - category: branding
   url: /fr/projects/logo-process.html
@@ -101,3 +122,32 @@
     fr: "Direction artistique complète et création de la cover pour la sortie de l'album."
     en: "Complete art direction and cover creation for the album release."
   featured: false
+  project_title: A-LONE
+  subtitle:
+    fr: "<strong>Direction Artistique</strong> et <strong>Cover Art</strong> pour l'album <strong>A-LONE</strong>"
+    en: "<strong>Art Direction</strong> and <strong>Cover Art</strong> for the <strong>A-LONE</strong> album"
+  services:
+    fr: "Direction Artistique, Typographie custom & Design de pochette d'album"
+    en: "Art Direction, Custom Typography & Album Cover Design"
+  year: "2024"
+  tools: "Photoshop, Illustrator"
+  context_title:
+    fr: "Contexte du projet"
+    en: "Project Context"
+  context_content:
+    fr: "<p>La pochette de l'album A-LONE à été mon premier projet concret pour un artiste musical.</p><p>J'ai conçu une identité visuelle forte et cohérente avec l'univers musical de B-Lone.</p>"
+    en: "<p>The A-LONE album cover was my first concrete project for a music artist.</p><p>I designed a strong visual identity that aligns with B-Lone's musical universe.</p>"
+  main_image: /assets/images/projects/a-lone-cover.webp
+  thumbnails:
+    - src: /assets/images/projects/a-lone-cover.webp
+      alt:
+        fr: "Couverture de l'album A-LONE"
+        en: "A-LONE album cover"
+    - src: /assets/images/projects/a-lone-back.webp
+      alt:
+        fr: "Visuel arrière de l'album A-LONE"
+        en: "A-LONE album back cover"
+    - src: /assets/images/projects/a-lone-mockup.webp
+      alt:
+        fr: "Mockup 3D de l'album A-LONE"
+        en: "A-LONE album 3D mockup"
