@@ -20,6 +20,7 @@ CONFIGURATION CENTRALISÉE
 {% comment %} Réseaux sociaux {% endcomment %}
 {% assign social_instagram = site.social.instagram | default: "https://www.instagram.com/9.ropat/" %}
 {% assign social_pinterest = site.social.pinterest | default: "https://fr.pinterest.com/9ropat/" %}
+{% assign social_behance = site.social.behance | default: "https://www.behance.net/ropat" %}
 {% comment %} Price range {% endcomment %}
 {% assign price_range = site.business.price_range | default: "€€" %}
 {% comment %} Email {% endcomment %}
@@ -90,7 +91,8 @@ GÉNÉRATION DU SCHEMA.ORG
       ],
       "sameAs": [
         "{{ social_instagram }}",
-        "{{ social_pinterest }}"
+        "{{ social_pinterest }}",
+        "{{ social_behance }}"
       ]
     },
     {% if is_article %}
