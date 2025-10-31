@@ -22,6 +22,12 @@ Bienvenue sur mon portfolio en ligne ! Ce site présente mes projets, compétenc
 
 Ce projet suit le principe **DRY** avec une architecture centralisée :
 
+### Pages légales
+
+Le site inclut des pages de mentions légales et de confidentialité conformes au RGPD :
+- 🇫🇷 `/fr/mentions-legales.html` + `/fr/confidentialite.html`
+- 🇬🇧 `/en/legal-notice.html` + `/en/privacy.html`
+
 ### Structure des données
 
 ```

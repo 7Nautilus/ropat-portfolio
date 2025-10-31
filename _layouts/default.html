@@ -127,8 +127,20 @@
         page_title=final_title 
         page_meta_description=final_meta_description 
     %}
+    
+    <!-- Project Schema.org -->
+    {% include project-schema.html %}
 </head>
 <body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">
+      {% if page.lang == 'fr' %}
+        Aller au contenu principal
+      {% else %}
+        Skip to main content
+      {% endif %}
+    </a>
+    
     <!-- Language Detection Script -->
     {% include lang-detector.html %}
     
