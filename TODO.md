@@ -2,7 +2,6 @@
 
 ## Projets à ajouter
 
-- A-LONE
 - JPeJA
 - Crow animation
 - Poster "Outlast"
