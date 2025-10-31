@@ -16,7 +16,7 @@
     {% else %}
         <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
     {% endif %}
-
+    
     <!-- Open Graph -->
     <meta property="og:title" content="{{ page.og_title | default: page.title }}">
     <meta property="og:description" content="{{ page.og_description | default: page.meta_description }}">
@@ -28,17 +28,26 @@
     <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
 
     <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="../sitemap.xml">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <!-- Preconnect pour optimiser le chargement des fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css">
 
-    
+    <!-- JS -->
+    <script src="/assets/js/script.js" defer></script>
+
+    <!-- Icon -->
+    <link rel="icon" href="/assets/images/branding/icon.png" type="image/png">
+
+    <!-- Open Graph -->
+    {% include open-graph.html %}
+    <!-- Schema.org -->
+    {% include schema-org.html %}
 </head>
 <body>
     {% include header.html %}

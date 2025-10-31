@@ -1,0 +1,140 @@
+<artifact identifier="schema-org-final" type="application/vnd.ant.code" language="liquid" title="Schema.org - Version finale adaptée">
+{% comment %}
+========================================
+CONFIGURATION CENTRALISÉE
+========================================
+{% endcomment %}
+{% comment %} Données business {% endcomment %}
+{% assign business_name = site.business.name | default: "Ropat" %}
+{% assign business_url = site.url %}
+{% assign business_logo = site.url | append: "/assets/images/branding/icon.png" %}
+{% assign business_description = site.business.description | default: "Graphiste et directeur artistique basé à Angers, spécialisé dans l'accompagnement visuel des artistes musicaux (pochettes, visualizers, affiches) et le branding d'entreprise." %}
+{% comment %} Adresse {% endcomment %}
+{% assign address_city = site.business.address.city | default: "Angers" %}
+{% assign address_region = site.business.address.region | default: "Pays de la Loire" %}
+{% assign address_postal = site.business.address.postal | default: "49000" %}
+{% assign address_country = site.business.address.country | default: "FR" %}
+{% comment %} Coordonnées GPS {% endcomment %}
+{% assign geo_lat = site.business.geo.latitude | default: "47.478419" %}
+{% assign geo_lon = site.business.geo.longitude | default: "-0.563166" %}
+{% comment %} Réseaux sociaux {% endcomment %}
+{% assign social_instagram = site.social.instagram | default: "https://www.instagram.com/9.ropat/" %}
+{% assign social_pinterest = site.social.pinterest | default: "https://fr.pinterest.com/9ropat/" %}
+{% comment %} Price range {% endcomment %}
+{% assign price_range = site.business.price_range | default: "€€" %}
+{% comment %} Email {% endcomment %}
+{% assign business_email = site.business.email %}
+{% comment %} Description de la page {% endcomment %}
+{% if page.meta_description %}
+{% assign page_description = page.meta_description %}
+{% else %}
+{% assign page_description = business_description %}
+{% endif %}
+{% comment %} Dates {% endcomment %}
+{% assign date_published = page.date | date_to_xmlschema | default: "2025-01-01T00:00:00+00:00" %}
+{% if page.last_modified_at %}
+{% assign date_modified = page.last_modified_at | date_to_xmlschema %}
+{% else %}
+{% assign date_modified = "now" | date_to_xmlschema %}
+{% endif %}
+{% comment %} Type de page {% endcomment %}
+{% assign is_article = false %}
+{% if page.schema_type == "Article" %}
+{% assign is_article = true %}
+{% endif %}
+
+{% comment %}
+GÉNÉRATION DU SCHEMA.ORG
+{% endcomment %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "{{ business_url }}#professionalService",
+      "name": "{{ business_name }}",
+      "url": "{{ business_url }}",
+      "priceRange": "{{ price_range }}",
+      {% if business_email %}
+      "email": "{{ business_email }}",
+      {% endif %}
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ business_logo }}"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ business_logo }}"
+      },
+      "description": "{{ business_description }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ address_city }}",
+        "addressRegion": "{{ address_region }}",
+        "postalCode": "{{ address_postal }}",
+        "addressCountry": "{{ address_country }}"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "{{ geo_lat }}",
+        "longitude": "{{ geo_lon }}"
+      },
+      "openingHoursSpecification": [
+        {% for hours in site.business.opening_hours %}
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "{{ hours.day }}",
+          "opens": "{{ hours.opens }}",
+          "closes": "{{ hours.closes }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "sameAs": [
+        "{{ social_instagram }}",
+        "{{ social_pinterest }}"
+      ]
+    },
+    {% if is_article %}
+    {
+      "@type": "Article",
+      "@id": "{{ page.url | absolute_url }}#webpage",
+      "name": "{{ page.title }}",
+      "headline": "{{ page.title }}",
+      "url": "{{ page.url | absolute_url }}",
+      "inLanguage": "fr-FR",
+      "isPartOf": {
+        "@id": "{{ business_url }}#professionalService"
+      },
+      "datePublished": "{{ date_published }}",
+      "dateModified": "{{ date_modified }}",
+      "description": {{ page_description | jsonify }},
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ page.image | absolute_url }}"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "{{ business_name }}"
+      }
+    }
+    {% else %}
+    {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}#webpage",
+      "name": "{{ page.title }}",
+      "url": "{{ page.url | absolute_url }}",
+      "inLanguage": "fr-FR",
+      "isPartOf": {
+        "@id": "{{ business_url }}#professionalService"
+      },
+      "datePublished": "{{ date_published }}",
+      "dateModified": "{{ date_modified }}",
+      "description": {{ page_description | jsonify }}
+    }
+    {% endif %}
+  ]
+}
+</script>
+</artifact>
