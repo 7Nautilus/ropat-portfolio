@@ -18,16 +18,26 @@
       {% assign project = site.data.projects | where: "project_title", page.project_id | first %}
       {% assign lang = page.lang | default: "fr" %}
       {% if project.seo %}
-        {% assign page.title = project.seo.title[lang] %}
-        {% assign page.meta_description = project.seo.meta_description[lang] %}
-        {% assign page.meta_keywords = project.seo.meta_keywords[lang] %}
-        {% assign page.canonical_url = project.seo.canonical_url[lang] %}
-        {% assign page.og_title = project.seo.og_title[lang] %}
-        {% assign page.og_description = project.seo.og_description[lang] %}
-        {% assign page.og_url = project.seo.og_url[lang] %}
-        {% assign page.og_image = project.seo.og_image %}
+        {% assign page_title = project.seo.title[lang] %}
+        {% assign page_meta_description = project.seo.meta_description[lang] %}
+        {% assign page_meta_keywords = project.seo.meta_keywords[lang] %}
+        {% assign page_canonical_url = project.seo.canonical_url[lang] %}
+        {% assign page_og_title = project.seo.og_title[lang] %}
+        {% assign page_og_description = project.seo.og_description[lang] %}
+        {% assign page_og_url = project.seo.og_url[lang] %}
+        {% assign page_og_image = project.seo.og_image %}
       {% endif %}
     {% endif %}
+    
+    {% comment %} Utiliser les valeurs du frontmatter ou celles de projects.yml {% endcomment %}
+    {% assign final_title = page.title | default: page_title %}
+    {% assign final_meta_description = page.meta_description | default: page_meta_description %}
+    {% assign final_meta_keywords = page.meta_keywords | default: page_meta_keywords %}
+    {% assign final_canonical_url = page.canonical_url | default: page_canonical_url %}
+    {% assign final_og_title = page.og_title | default: page_og_title %}
+    {% assign final_og_description = page.og_description | default: page_og_description %}
+    {% assign final_og_url = page.og_url | default: page_og_url %}
+    {% assign final_og_image = page.og_image | default: page_og_image %}
 
     {% assign page_path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
     
@@ -43,21 +53,21 @@
     {% endif %}
 
     <!-- SEO - Gestion des métadonnées -->
-    {% if page.title %}
-        <!-- Page avec métadonnées dans le front matter -->
-        <title>{{ page.title }}</title>
-        <meta name="title" content="{{ page.title }}">
+    {% if final_title %}
+        <!-- Page avec métadonnées dans le front matter ou projects.yml -->
+        <title>{{ final_title }}</title>
+        <meta name="title" content="{{ final_title }}">
         
-        {% if page.meta_description %}
-            <meta name="description" content="{{ page.meta_description }}">
+        {% if final_meta_description %}
+            <meta name="description" content="{{ final_meta_description }}">
         {% elsif page.lang == 'fr' %}
             <meta name="description" content="Ropat - Portfolio de créations graphiques et design. Découvrez mes projets de pochettes d'album, logos, affiches, animations en motion design et branding.">
         {% else %}
             <meta name="description" content="Ropat - Graphic design portfolio. Explore my projects including album covers, logos, posters, motion design animations, and branding.">
         {% endif %}
 
-        {% if page.meta_keywords %}
-            <meta name="keywords" content="{{ page.meta_keywords }}">
+        {% if final_meta_keywords %}
+            <meta name="keywords" content="{{ final_meta_keywords }}">
         {% elsif page.lang == 'fr' %}
             <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
         {% else %}
@@ -71,7 +81,7 @@
     <meta name="robots" content="index, follow">
 
     <!-- Canonical -->
-    <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
+    <link rel="canonical" href="{{ final_canonical_url | default: site.url | append: page.url }}">
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
@@ -104,9 +114,19 @@
     <link rel="icon" href="/assets/images/branding/icon.png" type="image/png">
 
     <!-- Open Graph -->
-    {% include open-graph.html %}
+    {% include open-graph.html 
+        og_title=final_og_title 
+        og_description=final_og_description 
+        og_image=final_og_image 
+        og_url=final_og_url 
+        page_title=final_title 
+        page_meta_description=final_meta_description 
+    %}
     <!-- Schema.org -->
-    {% include schema-org.html %}
+    {% include schema-org.html 
+        page_title=final_title 
+        page_meta_description=final_meta_description 
+    %}
 </head>
 <body>
     <!-- Language Detection Script -->

@@ -25,11 +25,8 @@ CONFIGURATION CENTRALISÉE
 {% comment %} Email {% endcomment %}
 {% assign business_email = site.business.email %}
 {% comment %} Description de la page {% endcomment %}
-{% if page.meta_description %}
-{% assign page_description = page.meta_description %}
-{% else %}
-{% assign page_description = business_description %}
-{% endif %}
+{% assign final_page_title = include.page_title | default: page.title %}
+{% assign final_page_description = include.page_meta_description | default: page.meta_description | default: business_description %}
 {% comment %} Dates {% endcomment %}
 {% assign date_published = page.date | date_to_xmlschema | default: "2025-01-01T00:00:00+00:00" %}
 {% if page.last_modified_at %}
@@ -100,8 +97,8 @@ GÉNÉRATION DU SCHEMA.ORG
     {
       "@type": "Article",
       "@id": "{{ page.url | absolute_url }}#webpage",
-      "name": "{{ page.title }}",
-      "headline": "{{ page.title }}",
+      "name": "{{ final_page_title }}",
+      "headline": "{{ final_page_title }}",
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "fr-FR",
       "isPartOf": {
@@ -109,7 +106,7 @@ GÉNÉRATION DU SCHEMA.ORG
       },
       "datePublished": "{{ date_published }}",
       "dateModified": "{{ date_modified }}",
-      "description": {{ page_description | jsonify }},
+      "description": {{ final_page_description | jsonify }},
       "image": {
         "@type": "ImageObject",
         "url": "{{ page.image | default: business_logo | absolute_url }}"
@@ -123,7 +120,7 @@ GÉNÉRATION DU SCHEMA.ORG
     {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}#webpage",
-      "name": "{{ page.title }}",
+      "name": "{{ final_page_title }}",
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "fr-FR",
       "isPartOf": {
@@ -131,7 +128,7 @@ GÉNÉRATION DU SCHEMA.ORG
       },
       "datePublished": "{{ date_published }}",
       "dateModified": "{{ date_modified }}",
-      "description": {{ page_description | jsonify }}
+      "description": {{ final_page_description | jsonify }}
     }
     {% endif %}
   ]
