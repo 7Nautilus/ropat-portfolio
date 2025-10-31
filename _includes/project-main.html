@@ -9,7 +9,7 @@
       <div class="project-gallery">
         <div class="main-display">
           {% if project.media_type == "video" %}
-          <video src="{{ project.main_image }}" id="main-image" class="hero-image" aria-label="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" autoplay loop muted playsinline width="1200" height="1200"></video>
+          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" autoplay loop muted playsinline width="1200" height="1200"></video>
           {% else %}
           <img src="{{ project.main_image }}" id="main-image" alt="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" width="1200" height="1200" loading="lazy">
           {% endif %}
