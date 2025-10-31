@@ -16,58 +16,56 @@ og_url: "https://ropat.art"
     <div class="loader-bar"></div>
   </div>
 </div>
-  <!-- Header -->
-  {% include header.html %}
 
-  <!-- Main Content -->
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="hero-title">
-      <h1 class="hero-title" id="hero-title">Direction Artistique & Design Graphique</h1>
+<!-- Main Content -->
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 class="hero-title" id="hero-title">Direction Artistique & Design Graphique</h1>
 
-      <!-- Texte d'accroche -->
-      <div class="hero-text">
-        <div>
-          <span>Bonjour ! Je suis <strong>Ropat</strong>, graphiste basé à Angers. </span><br>
-          <span>J'accompagne les artistes et les labels dans la création de leur <strong>identité visuelle</strong>.</span><br>
-        </div>
-        <div>
-          <span>Je conçois des <strong>pochettes d'album</strong>, des <strong>visualizers</strong>, des <strong>affiches de concert</strong>...</span><br>
-          <span>Tout en assurant le branding classique (logos, chartes) pour les entreprises.</span>
-        </div>
+    <!-- Texte d'accroche -->
+    <div class="hero-text">
+      <div>
+        <span>Bonjour ! Je suis <strong>Ropat</strong>, graphiste basé à Angers. </span><br>
+        <span>J'accompagne les artistes et les labels dans la création de leur <strong>identité visuelle</strong>.</span><br>
       </div>
-
-      <!-- CTA -->
-      <a href="/fr/contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
-        <span>Donner un visuel à votre musique</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-        </svg>
-      </a>
-    </section>
-
-    <!-- SERVICES SECTION -->
-    <section class="services" aria-labelledby="services-title">
-      <h2 class="section-title" id="services-title">Services & Expertise</h2>
-      <div class="section-grid" id="services-grid">
-        {% for item in site.data.services %}
-          {% include service-card.html services=item %}
-        {% endfor %}
+      <div>
+        <span>Je conçois des <strong>pochettes d'album</strong>, des <strong>visualizers</strong>, des <strong>affiches de concert</strong>...</span><br>
+        <span>Tout en assurant le branding classique (logos, chartes) pour les entreprises.</span>
       </div>
-    </section>
+    </div>
 
-    <!-- PROJECTS SECTION -->
-    <section class="projects" aria-labelledby="projects-title">
-      <!-- Projects Section Title -->
-      <h2 class="section-title" id="projects-title">Projets Récents : Musique et Branding</h2>
+    <!-- CTA -->
+    <a href="/fr/contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
+      <span>Donner un visuel à votre musique</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </section>
 
-      <!-- Projects Grid -->
-      <div class="section-grid" id="projects-grid">
-        {% assign featured_projects = site.data.projects | where: "featured", true %}
+  <!-- SERVICES SECTION -->
+  <section class="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">Services & Expertise</h2>
+    <div class="section-grid" id="services-grid">
+      {% for item in site.data.services %}
+        {% include service-card.html services=item %}
+      {% endfor %}
+    </div>
+  </section>
 
-        {% for item in featured_projects limit: 4 %}
-          {% include project-card.html project=item %}
-        {% endfor %}
-      </div>
-    </section>
-  </main>
+  <!-- PROJECTS SECTION -->
+  <section class="projects" aria-labelledby="projects-title">
+    <!-- Projects Section Title -->
+    <h2 class="section-title" id="projects-title">Projets Récents : Musique et Branding</h2>
+
+    <!-- Projects Grid -->
+    <div class="section-grid" id="projects-grid">
+      {% assign featured_projects = site.data.projects | where: "featured", true %}
+
+      {% for item in featured_projects limit: 4 %}
+        {% include project-card.html project=item %}
+      {% endfor %}
+    </div>
+  </section>
+</main>
