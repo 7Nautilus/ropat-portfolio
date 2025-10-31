@@ -1,0 +1,44 @@
+---
+layout: default
+lang: "en"
+title: "Portfolio - Ropat"
+meta_description: "Discover my graphic creations: album covers, logos, posters, motion design animations and branding projects for artists and businesses."
+meta_keywords: "portfolio, graphic creations, album cover, logo design, concert poster, motion design, branding, visual identity, Ropat, graphic designer Angers"
+canonical_url: "https://ropat.art/en/portfolio.html"
+og_title: "Portfolio - Ropat"
+og_description: "Discover my graphic creations: album covers, logos, posters, motion design animations and branding projects for artists and businesses."
+og_url: "https://ropat.art/en/portfolio.html"
+---
+<!-- Choices.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- PROJECTS SECTION -->
+  <section class="hero" aria-labelledby="projects-title">
+    <!-- Section title-->
+    <h1 class="hero-title" id="hero-title">My Creations</h1>
+
+    <!-- Category filters -->
+    <div class="dropdown" aria-label="Filter projects">
+      <div class="select">
+        <span class="selected">All</span>
+        <div class="caret"></div>
+      </div>
+      <ul class="menu">
+        <li data-filter="all" class="active">All</li>
+        <li data-filter="music">Music</li>
+        <li data-filter="branding">Branding</li>
+        <li data-filter="animation">Animation</li>
+        <li data-filter="design">Print</li>
+      </ul>
+    </div>
+
+    <!-- Projects grid -->
+    <div class="section-grid" id="projects-grid">
+      {% for item in site.data.projects %}
+        {% include project-card.html project=item %}
+      {% endfor %}
+    </div>
+  </section>
+</main>

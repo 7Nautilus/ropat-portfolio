@@ -1,0 +1,24 @@
+---
+layout: default
+lang: "en"
+title: "Services - Ropat"
+meta_description: "Discover my services: album cover design, logo creation, posters, motion design animations and branding projects for artists and businesses."
+meta_keywords: "services, graphic creations, album cover, logo design, concert poster, motion design, branding, visual identity, Ropat, graphic designer Angers"
+canonical_url: "https://ropat.art/en/services.html"
+og_title: "Services - Ropat"
+og_description: "Discover my services: album cover design, logo creation, posters, motion design animations and branding projects for artists and businesses."
+og_url: "https://ropat.art/en/services.html"
+---
+<!-- Main Content -->
+<main class="main-content">
+  <!-- SERVICES SECTION -->
+  <section class="hero" aria-labelledby="services-title">
+    <h1 class="hero-title" id="hero-title">My Services</h1>
+
+    <div class="section-grid" id="services-grid">
+      {% for item in site.data.services %}
+        {% include service-card.html services=item %}
+      {% endfor %}
+    </div>
+  </section>
+</main>
