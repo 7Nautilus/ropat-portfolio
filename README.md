@@ -130,9 +130,6 @@ ropat-portfolio/
     meta_description:
       fr: "Meta description FR"
       en: "Meta description EN"
-    meta_keywords:
-      fr: "mots, clés, fr"
-      en: "keywords, en"
     canonical_url:
       fr: "https://ropat.art/fr/projects/nom-projet.html"
       en: "https://ropat.art/en/projects/nom-projet.html"

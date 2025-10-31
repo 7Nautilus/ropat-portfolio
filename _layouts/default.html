@@ -20,7 +20,6 @@
       {% if project.seo %}
         {% assign page_title = project.seo.title[lang] %}
         {% assign page_meta_description = project.seo.meta_description[lang] %}
-        {% assign page_meta_keywords = project.seo.meta_keywords[lang] %}
         {% assign page_canonical_url = project.seo.canonical_url[lang] %}
         {% assign page_og_title = project.seo.og_title[lang] %}
         {% assign page_og_description = project.seo.og_description[lang] %}
@@ -32,7 +31,6 @@
     {% comment %} Utiliser les valeurs du frontmatter ou celles de projects.yml {% endcomment %}
     {% assign final_title = page.title | default: page_title %}
     {% assign final_meta_description = page.meta_description | default: page_meta_description %}
-    {% assign final_meta_keywords = page.meta_keywords | default: page_meta_keywords %}
     {% assign final_canonical_url = page.canonical_url | default: page_canonical_url %}
     {% assign final_og_title = page.og_title | default: page_og_title %}
     {% assign final_og_description = page.og_description | default: page_og_description %}
@@ -64,14 +62,6 @@
             <meta name="description" content="Ropat - Portfolio de créations graphiques et design. Découvrez mes projets de pochettes d'album, logos, affiches, animations en motion design et branding.">
         {% else %}
             <meta name="description" content="Ropat - Graphic design portfolio. Explore my projects including album covers, logos, posters, motion design animations, and branding.">
-        {% endif %}
-
-        {% if final_meta_keywords %}
-            <meta name="keywords" content="{{ final_meta_keywords }}">
-        {% elsif page.lang == 'fr' %}
-            <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
-        {% else %}
-            <meta name="keywords" content="graphic designer, graphic design, portfolio, design creations, Ropat, Angers, France">
         {% endif %}
     {% endif %}
     
