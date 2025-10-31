@@ -16,6 +16,11 @@
     {% else %}
         <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
     {% endif %}
+    <meta name="author" content="Ropat">
+    <meta name="publisher" content="Ropat">
+    <meta name="copyright" content="Ropat">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr">
 
     <!-- Canonical -->
     <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
@@ -28,6 +33,7 @@
 
     <!-- Preconnect pour optimiser le chargement des fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 

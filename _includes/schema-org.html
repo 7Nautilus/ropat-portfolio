@@ -112,7 +112,7 @@ GÉNÉRATION DU SCHEMA.ORG
       "description": {{ page_description | jsonify }},
       "image": {
         "@type": "ImageObject",
-        "url": "{{ page.image | absolute_url }}"
+        "url": "{{ page.image | default: business_logo | absolute_url }}"
       },
       "author": {
         "@type": "Person",
