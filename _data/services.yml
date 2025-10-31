@@ -1,28 +1,46 @@
 - data_aos_delay: 0
-  icon_aria: 'Icône de conception graphique'
+  icon_aria: 
+    fr: 'Icône de conception graphique'
+    en: 'Graphic design icon'
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>'
-  title: 'Conception graphique'
-  description: 'Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web.'
+  title: 
+    fr: 'Conception graphique'
+    en: 'Graphic Design'
+  description: 
+    fr: 'Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web.'
+    en: 'Creation of logos, complete visual identities, posters, flyers and all your print and web communication materials.'
   tools: 
     - nom: '#Illustrator'
     - nom: '#Photoshop'
     - nom: '#Figma'
 
 - data_aos_delay: 100
-  icon_aria: 'Icône de design pour la musique'
+  icon_aria: 
+    fr: 'Icône de design pour la musique'
+    en: 'Music design icon'
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-icon lucide-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
-  title: 'Design pour la musique'
-  description: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
+  title: 
+    fr: 'Design pour la musique'
+    en: 'Music Design'
+  description: 
+    fr: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
+    en: "Creation of album covers, visualizers, concert posters and all visual materials for artists and music labels."
   tools: 
     - nom: '#Photoshop'
     - nom: '#Illustrator'
     - nom: '#Blender'
 
 - data_aos_delay: 200
-  icon_aria: 'Icône de branding et stratégie visuelle'
+  icon_aria: 
+    fr: 'Icône de branding et stratégie visuelle'
+    en: 'Branding and visual strategy icon'
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-distribute-center-icon lucide-align-horizontal-distribute-center"><rect width="6" height="14" x="4" y="5" rx="2"/><rect width="6" height="10" x="14" y="7" rx="2"/><path d="M17 22v-5"/><path d="M17 7V2"/><path d="M7 22v-3"/><path d="M7 5V2"/></svg>'
-  title: 'Branding & Stratégie Visuelle'
-  description: "Développement de l'identité de marque, positionnement visuel et cohérence graphique pour renforcer votre présence."
+  title: 
+    fr: 'Branding & Stratégie Visuelle'
+    en: 'Branding & Visual Strategy'
+  description: 
+    fr: "Développement de l'identité de marque, positionnement visuel et cohérence graphique pour renforcer votre présence."
+    en: "Development of brand identity, visual positioning and graphic consistency to strengthen your presence."
   tools: 
     - nom: '#Figma'
     - nom: '#Illustrator' 

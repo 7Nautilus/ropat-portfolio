@@ -19,20 +19,7 @@ og_url: "https://ropat.art/fr/portfolio.html"
     <!-- Services section title-->
     <h1 class="hero-title" id="hero-title">Mes créations</h1>
 
-    <!-- Filtres de catégories -->
-    <div class="dropdown" aria-label="Filtrer les projets">
-      <div class="select">
-        <span class="selected">Tous</span>
-        <div class="caret"></div>
-      </div>
-      <ul class="menu">
-        <li data-filter="all" class="active">Tous</li>
-        <li data-filter="music">Musique</li>
-        <li data-filter="branding">Branding</li>
-        <li data-filter="animation">Animation</li>
-        <li data-filter="design">Print</li>
-      </ul>
-    </div>
+    {% include portfolio-filters.html %}
 
     <!-- Grille des projets -->
     <div class="section-grid" id="projects-grid">

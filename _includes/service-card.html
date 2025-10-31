@@ -1,12 +1,13 @@
+{% assign current_lang = page.lang | default: 'en' %}
 <article class="service-card" data-aos="fade-up" data-aos-delay="{{ include.services.data_aos_delay }}">
   <!-- SVG icon -->
-  <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria }}">
+  <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
     {{ include.services.icon | raw }}
   </div>
   <!-- Text content-->
   <div class="service-text-content">
-    <h3 class="service-title">{{ include.services.title }}</h3>
-    <p>{{ include.services.description }}</p>
+    <h3 class="service-title">{{ include.services.title[current_lang] }}</h3>
+    <p>{{ include.services.description[current_lang] }}</p>
   </div>
   <!-- Tools used -->
   <div class="service-tools">

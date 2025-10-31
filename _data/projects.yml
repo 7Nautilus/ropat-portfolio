@@ -1,59 +1,103 @@
 - category: music
   url: /projects/btr.html
-  aria_label: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
+  aria_label: 
+    fr: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
+    en: "View the 'BTR' EP cover project by Maltezz"
   image_src: /assets/images/projects/btr-cover.png
-  image_alt: "Pochette d'album 'BTR' de Maltezz"
-  title: 'Pochette d''album "BTR"' # Note : les ' sont doublés pour être valides
+  image_alt: 
+    fr: "Pochette d'album 'BTR' de Maltezz"
+    en: "'BTR' album cover by Maltezz"
+  title: 
+    fr: 'Pochette d''album "BTR"'
+    en: 'Album Cover "BTR"'
   client: Maltezz
-  description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
+  description: 
+    fr: "Direction artistique complète et création de la cover pour la sortie de l'EP."
+    en: "Complete art direction and cover creation for the EP release."
   featured: true
 
 - category: branding
   url: /projects/logo-process.html
-  aria_label: "Voir le processus de création de logo"
+  aria_label: 
+    fr: "Voir le processus de création de logo"
+    en: "View the logo creation process"
   image_src: "/assets/images/projects/logo-design-process.png"
-  image_alt: "Logo design process"
-  title: "Logo design process"
-  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
-  description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
+  image_alt: 
+    fr: "Processus de design de logo"
+    en: "Logo design process"
+  title: 
+    fr: "Processus de design de logo"
+    en: "Logo design process"
+  description: 
+    fr: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
+    en: "Example of logo design process including sketch, development and finalization."
   featured: true
 
 - category: animation
   url: /projects/cheetah.html
-  aria_label: "Voir le projet d'animation en stop-motion"
+  aria_label: 
+    fr: "Voir le projet d'animation en stop-motion"
+    en: "View the stop-motion animation project"
   image_src: assets/images/projects/cheetah-stopmotion.png
-  image_alt: "Stop-Motion Animation"
-  title: "Animation Stop-Motion"
-  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
-  description: "Réalisation d'une animation en stop-motion"
+  image_alt: 
+    fr: "Animation Stop-Motion"
+    en: "Stop-Motion Animation"
+  title: 
+    fr: "Animation Stop-Motion"
+    en: "Stop-Motion Animation"
+  description: 
+    fr: "Réalisation d'une animation en stop-motion"
+    en: "Creation of a stop-motion animation"
   featured: true
 
 - category: design
   url: /projects/hdd-defrag.html
-  aria_label: "Voir le projet d'affiche HDD DEFRAG"
+  aria_label: 
+    fr: "Voir le projet d'affiche HDD DEFRAG"
+    en: "View the HDD DEFRAG poster project"
   image_src: /assets/images/projects/hdd-defrag-poster.png
-  image_alt: "Affiche HDD DEFRAG"
-  title: 'Affiche "HDD DEFRAG"'
-  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
-  description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
+  image_alt: 
+    fr: "Affiche HDD DEFRAG"
+    en: "HDD DEFRAG Poster"
+  title: 
+    fr: 'Affiche "HDD DEFRAG"'
+    en: 'Poster "HDD DEFRAG"'
+  description: 
+    fr: "Création d'une affiche sur le thème de la défragmentation de disque dur."
+    en: "Creation of a poster on the theme of hard drive defragmentation."
   featured: false
 
 - category: design
   url: /projects/exit.html
-  aria_label: "Voir le projet d'affiche EXIT"
+  aria_label: 
+    fr: "Voir le projet d'affiche EXIT"
+    en: "View the EXIT poster project"
   image_src: /assets/images/projects/exit.png
-  image_alt: "Affiche EXIT"
-  title: 'Affiche "EXIT"'
-  # On ne met pas de ligne "client" ici, puisqu'il n'y en a pas
-  description: "Création d'une affiche sur le thème du design des sorties de secours."
+  image_alt: 
+    fr: "Affiche EXIT"
+    en: "EXIT Poster"
+  title: 
+    fr: 'Affiche "EXIT"'
+    en: 'Poster "EXIT"'
+  description: 
+    fr: "Création d'une affiche sur le thème du design des sorties de secours."
+    en: "Creation of a poster on the theme of emergency exit design."
   featured: false
 
 - category: music
   url: /projects/a-lone.html
-  aria_label: "Voir la pochette de l'album 'A-LONE' de B-Lone"
+  aria_label: 
+    fr: "Voir la pochette de l'album 'A-LONE' de B-Lone"
+    en: "View the 'A-LONE' album cover by B-Lone"
   image_src: /assets/images/projects/a-lone-cover.webp
-  image_alt: "Pochette d'album 'A-LONE' de B-Lone"
-  title: 'Pochette d''album "A-LONE"'
+  image_alt: 
+    fr: "Pochette d'album 'A-LONE' de B-Lone"
+    en: "'A-LONE' album cover by B-Lone"
+  title: 
+    fr: 'Pochette d''album "A-LONE"'
+    en: 'Album Cover "A-LONE"'
   client: "B-Lone"
-  description: "Direction artistique complète et création de la cover pour la sortie de l'album."
+  description: 
+    fr: "Direction artistique complète et création de la cover pour la sortie de l'album."
+    en: "Complete art direction and cover creation for the album release."
   featured: false

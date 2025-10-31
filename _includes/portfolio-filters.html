@@ -1,0 +1,16 @@
+{% assign current_lang = page.lang | default: 'en' %}
+
+<!-- Filtres de catégories -->
+<div class="dropdown" aria-label="{% if current_lang == 'fr' %}Filtrer les projets{% else %}Filter projects{% endif %}">
+  <div class="select">
+    <span class="selected">{% if current_lang == 'fr' %}Tous{% else %}All{% endif %}</span>
+    <div class="caret"></div>
+  </div>
+  <ul class="menu">
+    <li data-filter="all" class="active">{% if current_lang == 'fr' %}Tous{% else %}All{% endif %}</li>
+    <li data-filter="music">{% if current_lang == 'fr' %}Musique{% else %}Music{% endif %}</li>
+    <li data-filter="branding">Branding</li>
+    <li data-filter="animation">Animation</li>
+    <li data-filter="design">Print</li>
+  </ul>
+</div>
