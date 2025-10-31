@@ -16,13 +16,6 @@
     {% else %}
         <meta name="keywords" content="graphiste, designer graphique, portfolio, créations graphiques, Ropat, Angers, France">
     {% endif %}
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ page.og_title | default: page.title }}">
-    <meta property="og:description" content="{{ page.og_description | default: page.meta_description }}">
-    <meta property="og:image" content="{{ page.og_image | default: 'https://ropat.art/assets/images/branding/icon.png' }}">
-    <meta property="og:url" content="{{ page.og_url | default: site.url | append: page.url }}">
-    <meta property="og:type" content="website">
 
     <!-- Canonical -->
     <link rel="canonical" href="{{ page.canonical_url | default: site.url | append: page.url }}">
