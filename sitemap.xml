@@ -1,122 +1,66 @@
+---
+layout: null
+permalink: /sitemap.xml
+---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<!-- Home Pages -->
-<url>
-  <loc>https://ropat.art/</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>1.0</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>1.0</priority>
-</url>
+  
+  <!-- Home Pages -->
+  <url>
+    <loc>{{ site.url }}/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/en/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-<!-- French Pages -->
-<url>
-  <loc>https://ropat.art/fr/about.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/contact.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/portfolio.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.9</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/services.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
+  <!-- French Main Pages -->
+  {% assign fr_pages = site.pages | where_exp: "page", "page.path contains 'fr/'" | where_exp: "page", "page.path contains '.html'" | where_exp: "page", "page.path contains 'projects' == false" %}
+  {% for page in fr_pages %}
+  <url>
+    <loc>{{ site.url }}{{ page.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if page.url contains 'portfolio' %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if page.url contains 'portfolio' %}0.9{% else %}0.8{% endif %}</priority>
+  </url>
+  {% endfor %}
 
-<!-- English Pages -->
-<url>
-  <loc>https://ropat.art/en/about.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/contact.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/portfolio.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.9</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/services.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.8</priority>
-</url>
+  <!-- English Main Pages -->
+  {% assign en_pages = site.pages | where_exp: "page", "page.path contains 'en/'" | where_exp: "page", "page.path contains '.html'" | where_exp: "page", "page.path contains 'projects' == false" | where_exp: "page", "page.path contains 'index.html' == false" %}
+  {% for page in en_pages %}
+  <url>
+    <loc>{{ site.url }}{{ page.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>{% if page.url contains 'portfolio' %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if page.url contains 'portfolio' %}0.9{% else %}0.8{% endif %}</priority>
+  </url>
+  {% endfor %}
 
-<!-- French Projects -->
-<url>
-  <loc>https://ropat.art/fr/projects/a-lone.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/projects/btr.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/projects/cheetah.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/projects/exit.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/projects/hdd-defrag.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/fr/projects/logo-process.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
+  <!-- French Projects -->
+  {% assign fr_projects = site.pages | where_exp: "page", "page.path contains 'fr/projects/'" %}
+  {% for project in fr_projects %}
+  <url>
+    <loc>{{ site.url }}{{ project.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
 
-<!-- English Projects -->
-<url>
-  <loc>https://ropat.art/en/projects/a-lone.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/projects/btr.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/projects/cheetah.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/projects/exit.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/projects/hdd-defrag.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
-<url>
-  <loc>https://ropat.art/en/projects/logo-process.html</loc>
-  <lastmod>2025-10-31T14:58:44+01:00</lastmod>
-  <priority>0.7</priority>
-</url>
+  <!-- English Projects -->
+  {% assign en_projects = site.pages | where_exp: "page", "page.path contains 'en/projects/'" %}
+  {% for project in en_projects %}
+  <url>
+    <loc>{{ site.url }}{{ project.url }}</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  {% endfor %}
+
 </urlset>

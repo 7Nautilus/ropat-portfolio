@@ -1,0 +1,20 @@
+# Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Le sitemap.xml contient du code Jekyll et DOIT être commité
+# Il sera transformé en XML pur par Jekyll lors du build
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*~
