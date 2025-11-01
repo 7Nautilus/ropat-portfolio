@@ -45,16 +45,16 @@ locales:
     description: "Creation of a poster on the theme of hard drive defragmentation."
     context_title: "About the project"
     context_content: |
-      #### # Context and objective
+      ### # Context and objective
       I wanted to tackle a technical subject seldom spotlighted in graphic design: hard drive defragmentation and how digital creatives experience it. The goal was to package this utilitarian topic into an attention-grabbing yet informative poster.
 
-      #### # Research and concept
+      ### # Research and concept
       I began by gathering references tied to safety and prevention posters, then built a concept that subverts those visual codes. Modeling the universal recycling symbol in Illustrator became the anchor that guided the storytelling.
 
-      #### # Design execution
+      ### # Design execution
       The composition took shape in InDesign. I brought in a halftone-treated hard drive photo from Photoshop to add texture, while Illustrator supplied the structural 3D elements. Impact drives the headline presence, Minion Pro keeps the body text legible, and Onyx elevates the “Empty The Bin” (inspired by La Fève's mixtape series) and “Clean The Dump” callouts with a subtle retro tone.
 
-      #### # Finishing touches
+      ### # Finishing touches
       Final tweaks in Photoshop layered additional wear and grain, giving the piece a tangible, lived-in finish. The end result balances information and aesthetics around the recycling symbol at the center of the narrative.
     seo:
       title: "HDD DEFRAG - Poster | Ropat"
