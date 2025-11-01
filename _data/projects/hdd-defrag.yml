@@ -18,15 +18,21 @@ locales:
     context_title: "À propos du projet"
     context_content: |
       Ce projet de design graphique explore le thème de la défragmentation des disques durs à travers l'usage que peuvent en faire les designers, monteurs vidéo et autres professionnels du numérique.
+      
       Ce thème n'est évidemment pas spécialement accrocheur, mais il me traînait dans la tête depuis que j'ai commencé à utiliser Premiere Pro et After Effects, logiciels sur lequels la problématique du cache et du stockage de manière générale est très présente en particulier sur des ordinateurs avares en espace disponible.
 
       J'ai donc décidé de l'explorer à travers ce projet. La première étape a été de rechercher des visuels et des concepts liés au thème générale, puis de les assembler dans une composition cohérente et esthétique.
+      
       L'idée d'utiliser les codes graphiques attachés au design d'affiche à but de prévention m'est venue naturellement, je voulais créer un visuel qui attire l'attention tout en restant informatif.
       
       Dans un second temps j'ai reproduit en 3D le symbole universel du recyclage sur Illustrator, j'ai ensuite appliqué un effet de demi-ton sur une image de disque dur avec Photoshop, avant de finaliser la composition dans InDesign.
+      
       Pour le titre ainsi que pour les éléments principaux, j'ai choisi la typographie Impact pour son aspect bold et compact, qui contraste bien avec les éléments graphiques plus fins de l'affiche.
+      
       Afin d'intégrer au maximum le texte de labeur je l'ai disposé autour des éléments, en s'enroulant autour du symbole recyclage, pour plus de contraste il me fallait une typographie fine avec empattement, mon choix s'est donc pourté sur la Minion Pro. Cela permet de créer un équilibre visuel tout en renforçant le message de l'affiche. 
+      
       Les deux éléments "Empty The Bin" (en référence à la série de mixtape de LaFève) et "Clean The Dump" viennent compléter le message principal, grace cette fois à la typographie Onyx, qui ramène cette touche vintage que je recherchais.
+      
       J'ai ensuite importé le tout dans Photoshop pour ajouter des effets de texture et de vieillissement, donnant à l'affiche un aspect usé et authentique.
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
