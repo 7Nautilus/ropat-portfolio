@@ -21,7 +21,7 @@ og_url: "https://ropat.art/fr/portfolio.html"
     <!-- Grille des projets -->
     <div class="section-grid" id="projects-grid">
       {% for item in site.data.projects %}
-        {% include project-card.html project=item %}
+        {% include project-card.html project=item index=forloop.index0 %}
       {% endfor %}
     </div>
   </section>

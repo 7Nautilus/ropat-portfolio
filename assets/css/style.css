@@ -110,6 +110,19 @@ img {
   -webkit-backdrop-filter: blur(10px);
 }
 
+.animate-fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition-delay: var(--animate-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.animate-fade-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ================================
    SKIP LINK (Accessibilité)
    ================================ */
@@ -1253,6 +1266,12 @@ footer {
   .service-card:hover,
   .cta:hover,
   .nav-link:hover {
+    transform: none !important;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up.is-visible {
+    opacity: 1 !important;
     transform: none !important;
   }
 }

@@ -42,7 +42,7 @@ og_url: "https://ropat.art"
     <h2 class="section-title" id="services-title">Services & Expertise</h2>
     <div class="section-grid" id="services-grid">
       {% for item in site.data.services %}
-        {% include service-card.html services=item %}
+        {% include service-card.html services=item index=forloop.index0 %}
       {% endfor %}
     </div>
   </section>
@@ -57,7 +57,7 @@ og_url: "https://ropat.art"
       {% assign featured_projects = site.data.projects | where: "featured", true %}
 
       {% for item in featured_projects limit: 4 %}
-        {% include project-card.html project=item %}
+        {% include project-card.html project=item index=forloop.index0 %}
       {% endfor %}
     </div>
   </section>

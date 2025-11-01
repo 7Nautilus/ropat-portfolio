@@ -16,7 +16,7 @@ og_url: "https://ropat.art/fr/services.html"
 
     <div class="section-grid" id="services-grid">
       {% for item in site.data.services %}
-        {% include service-card.html services=item %}
+        {% include service-card.html services=item index=forloop.index0 %}
       {% endfor %}
     </div>
   </section>

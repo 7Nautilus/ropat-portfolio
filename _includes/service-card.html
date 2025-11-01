@@ -1,5 +1,7 @@
 {% assign current_lang = page.lang | default: 'en' %}
-<article class="service-card" data-aos="fade-up" data-aos-delay="{{ include.services.data_aos_delay }}">
+{% assign animation_index = include.index | default: 0 %}
+{% assign animation_delay = animation_index | times: 120 %}
+<article class="service-card animate-fade-up" style="--animate-delay: {{ animation_delay }}ms">
   <!-- SVG icon -->
   <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
     {{ include.services.icon | raw }}
