@@ -23,7 +23,7 @@ og_url: "https://ropat.art/en/portfolio.html"
       {% assign project_slugs = site.data.projects.index.order %}
       {% for slug in project_slugs %}
         {% assign item = site.data.projects[slug] %}
-        {% include project-card.html project=item index=forloop.index0 %}
+        {% include project-card.html project=item index=forloop.index0 disable_animation=true %}
       {% endfor %}
     </div>
   </section>
