@@ -540,7 +540,7 @@ main {
   flex-direction: column;
   flex-grow: 1;
   padding: var(--spacing-lg);
-  gap: clamp(3rem, 8vw, 6rem);
+  gap: 10rem;
   min-height: 100vh;
 }
 
