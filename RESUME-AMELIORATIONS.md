@@ -1,6 +1,6 @@
 # 🎯 RÉSUMÉ DES AMÉLIORATIONS - 1er novembre 2025
 
-## ✅ 6 AMÉLIORATIONS MAJEURES APPLIQUÉES
+## ✅ 7 AMÉLIORATIONS MAJEURES APPLIQUÉES
 
 ### 1. 🔧 Correction attributs `alt` sur SVG
 **Fichiers :** footer.html, fr/contact.html, en/contact.html  
@@ -54,6 +54,13 @@
 
 ---
 
+### 7. 🌐 Amélioration détection de langue
+**Fichier modifié :** _includes/lang-detector.html  
+**Changements :** Réduction des redirections agressives pour les bots et meilleure gestion des préférences utilisateur.  
+**Impact :** Expérience utilisateur améliorée + Référencement optimisé
+
+---
+
 ## 📊 SCORES
 
 | Avant | Après | Gain |
@@ -76,13 +83,14 @@
 - ✅ _includes/project-schema.html
 - ✅ CORRECTIONS-APPLIQUEES.md
 
-### Modifiés (6)
+### Modifiés (7)
 - ✅ _includes/footer.html
 - ✅ fr/contact.html
 - ✅ en/contact.html
 - ✅ _layouts/default.html
 - ✅ assets/css/style.css
 - ✅ README.md
+- ✅ _includes/lang-detector.html
 
 ---
 
@@ -108,6 +116,7 @@
 - [x] prefers-reduced-motion
 - [x] Skip to content
 - [x] Schema.org projets
+- [x] Détection de langue améliorée
 - [x] Documentation mise à jour
 
 ---
