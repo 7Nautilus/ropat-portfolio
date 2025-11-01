@@ -1,14 +1,7 @@
 {% assign current_lang = page.lang | default: 'en' %}
 {% assign animation_index = include.index | default: 0 %}
-{% if include.project.url[current_lang] %}
-  {% assign project_url = include.project.url[current_lang] %}
-{% else %}
-  {% comment %} Fallback pour compatibilité avec ancienne structure {% endcomment %}
-  {% assign project_url = include.project.url %}
-  {% if current_lang == 'en' %}
-    {% assign project_url = include.project.url | replace: '/fr/projects/', '/en/projects/' %}
-  {% endif %}
-{% endif %}
+{% assign project_locale = include.project.locales[current_lang] | default: include.project.locales.en %}
+{% assign project_url = project_locale.url %}
 {% assign animations_disabled = include.disable_animation | default: false %}
 {% if animations_disabled %}
   {% assign article_classes = "project-card" %}
@@ -17,25 +10,25 @@
   {% assign article_classes = "project-card animate-fade-up" %}
 {% endif %}
 <article class="{{ article_classes }}" data-category="{{ include.project.category }}"{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
-  <a href="{{ project_url | relative_url }}" class="project-link" aria-label="{{ include.project.aria_label[current_lang] }}">
+  <a href="{{ project_url | relative_url }}" class="project-link" aria-label="{{ project_locale.aria_label }}">
     <!-- Project Image -->
     <div class="project-image">
       <img
         src="{{ include.project.image_src | relative_url }}" 
-        alt="{{ include.project.image_alt[current_lang] }}"
+        alt="{{ project_locale.image_alt }}"
         loading="lazy"
         width="400"
         height="400">
     </div>
     <!-- Project Content -->
     <div class="project-content">
-      <h3 class="project-title">{{ include.project.title[current_lang] }}</h3>
+      <h3 class="project-title">{{ project_locale.title }}</h3>
 
       {% if include.project.client %}
         <p class="project-client"><strong>{{ include.project.client }}</strong></p>
       {% endif %}
       
-      <p class="project-description">{{ include.project.description[current_lang] }}</p>
+      <p class="project-description">{{ project_locale.description }}</p>
     </div>
   </a>
 </article>

@@ -125,12 +125,13 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
     },
     {% comment %} === PAGE DE PROJET (CreativeWork) === {% endcomment %}
     {% if page.project_id %}
-      {% assign project = site.data.projects | where: "project_title", page.project_id | first %}
+      {% assign project = site.data.projects[page.project_id] %}
       {% if project %}
+        {% assign project_locale = project.locales[page.lang] | default: project.locales.en %}
     {
       "@type": "CreativeWork",
       "@id": "{{ page.url | absolute_url }}#creativework",
-      "name": "{{ project.title[page.lang] }}",
+      "name": "{{ project_locale.title }}",
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "{{ page_language }}",
       "creator": {
@@ -144,7 +145,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
         "url": "{{ business_url }}"
       },
       "datePublished": "{{ project.year }}-01-01",
-      "description": "{{ project.description[page.lang] }}",
+      "description": "{{ project_locale.description }}",
       "image": {
         "@type": "ImageObject",
         "url": "{{ business_url }}{{ project.main_image }}"

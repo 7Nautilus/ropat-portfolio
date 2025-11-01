@@ -1,0 +1,57 @@
+slug: btr
+project_title: BTR
+category: music
+featured: true
+client: Maltezz
+year: "2025"
+tools: "Photoshop, Illustrator, Blender"
+image_src: /assets/images/projects/btr-cover.png
+main_image: /assets/images/projects/btr-cover.png
+media_type: image
+locales:
+  fr:
+    url: /fr/projects/btr.html
+    aria_label: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
+    image_alt: "Pochette d'album 'BTR' de Maltezz"
+    title: "Pochette d'album \"BTR\""
+    subtitle: "**Direction Artistique** et **Cover Art** pour l'EP **BTR**"
+    description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
+    services: "Direction Artistique, Design de pochette d'album"
+    context_title: "Contexte du projet"
+    context_content: |
+      L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.
+
+      J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.
+
+      Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.
+    seo:
+      title: "Pochette BTR - Maltezz | Ropat"
+      description: "Direction artistique et création de la pochette pour l'EP BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
+      canonical_url: "https://ropat.art/fr/projects/btr.html"
+      og_title: "Pochette BTR - Maltezz"
+      og_description: "Direction artistique et création de la pochette pour l'EP BTR de Maltezz."
+      og_url: "https://ropat.art/fr/projects/btr.html"
+      og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
+  en:
+    url: /en/projects/btr.html
+    aria_label: "View the 'BTR' EP cover project by Maltezz"
+    image_alt: "'BTR' album cover by Maltezz"
+    title: "Album Cover \"BTR\""
+    subtitle: "**Art Direction** and **Cover Art** for the **BTR** EP"
+    description: "Complete art direction and cover creation for the EP release."
+    services: "Art Direction, Album Cover Design"
+    context_title: "Project Context"
+    context_content: |
+      The goal was to create a strong visual identity that aligns with the artist's musical universe.
+
+      I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.
+
+      This project allowed me to develop my graphic design skills while exploring new creative techniques.
+    seo:
+      title: "BTR Cover - Maltezz | Ropat"
+      description: "Art direction and cover design for Maltezz's BTR EP. Graphic composition, color choices and typography."
+      canonical_url: "https://ropat.art/en/projects/btr.html"
+      og_title: "BTR Cover - Maltezz"
+      og_description: "Art direction and cover design for Maltezz's BTR EP."
+      og_url: "https://ropat.art/en/projects/btr.html"
+      og_image: "https://ropat.art/assets/images/projects/btr-cover.png"

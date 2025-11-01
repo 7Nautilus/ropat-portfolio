@@ -48,8 +48,8 @@
 ---
 
 ### 6. 🔍 Schema.org CreativeWork pour projets
-**Fichier créé :** _includes/project-schema.html  
-**Type :** Données structurées pour chaque projet du portfolio  
+**Fichier :** _includes/schema-org.html  
+**Type :** Données structurées dynamiques pour chaque projet du portfolio  
 **Impact :** Meilleur SEO + Rich snippets Google possibles
 
 ---
@@ -58,6 +58,14 @@
 **Fichier modifié :** _includes/lang-detector.html  
 **Changements :** Réduction des redirections agressives pour les bots et meilleure gestion des préférences utilisateur.  
 **Impact :** Expérience utilisateur améliorée + Référencement optimisé
+
+---
+
+### 8. 🧩 Données projets modulaires + script d'automatisation
+**Fichiers :** `_data/projects/index.yml`, `_data/projects/*.yml`, `_includes/project-card.html`, `_includes/project-main.html`, `_includes/schema-org.html`, `_layouts/default.html`, `scripts/new-project.ps1`, pages `fr|en/projects/*.html`, `fr|en/index.html`, `fr|en/portfolio.html`, `README.md`  
+**Avant :** Un seul fichier `_data/projects.yml` difficile à maintenir, métadonnées dispersées et création de projet manuelle.  
+**Après :** 1 fichier YAML par projet avec champs bilingues, ordre contrôlé par `index.yml`, script PowerShell pour générer données + pages, templates mis à jour pour lire la nouvelle structure et SEO dynamique.  
+**Impact :** Maintenance simplifiée, ajout de projet en 2 minutes, réduction du risque d'erreur, cohérence SEO/UX.
 
 ---
 
@@ -75,15 +83,22 @@
 
 ## 📁 FICHIERS CRÉÉS/MODIFIÉS
 
-### Créés (6)
+### Créés (13)
 - ✅ fr/mentions-legales.html
 - ✅ fr/confidentialite.html
 - ✅ en/legal-notice.html
 - ✅ en/privacy.html
-- ✅ _includes/project-schema.html
+- ✅ _data/projects/index.yml
+- ✅ _data/projects/a-lone.yml
+- ✅ _data/projects/btr.yml
+- ✅ _data/projects/cheetah.yml
+- ✅ _data/projects/exit.yml
+- ✅ _data/projects/hdd-defrag.yml
+- ✅ _data/projects/logo-process.yml
+- ✅ scripts/new-project.ps1
 - ✅ CORRECTIONS-APPLIQUEES.md
 
-### Modifiés (7)
+### Modifiés (17)
 - ✅ _includes/footer.html
 - ✅ fr/contact.html
 - ✅ en/contact.html
@@ -91,6 +106,16 @@
 - ✅ assets/css/style.css
 - ✅ README.md
 - ✅ _includes/lang-detector.html
+- ✅ _includes/project-card.html
+- ✅ _includes/project-main.html
+- ✅ _includes/schema-org.html
+- ✅ en/index.html
+- ✅ en/portfolio.html
+- ✅ fr/index.html
+- ✅ fr/portfolio.html
+- ✅ fr/projects/*.html
+- ✅ en/projects/*.html
+- ✅ index.html
 
 ---
 

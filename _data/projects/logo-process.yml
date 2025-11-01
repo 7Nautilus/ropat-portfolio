@@ -1,0 +1,63 @@
+slug: logo-process
+project_title: "Logo Design Process"
+category: branding
+featured: true
+year: "2025"
+tools: "Illustrator"
+image_src: /assets/images/projects/logo-design-process.png
+main_image: /assets/images/projects/logo-design-process.png
+media_type: image
+thumbnails:
+  - src: /assets/images/projects/logo-design-process.png
+    alt:
+      fr: "Sketch géométrique du logo"
+      en: "Geometric logo sketch"
+  - src: /assets/images/projects/logo-design-process-vecto.png
+    alt:
+      fr: "Version vectorielle du logo"
+      en: "Vector version of the logo"
+  - src: /assets/images/projects/logo-design-process-3d.png
+    alt:
+      fr: "Variations du logo en 3D"
+      en: "3D logo variations"
+  - src: /assets/images/projects/logo-design-process-3d-fx.png
+    alt:
+      fr: "Processus de création des effets 3D du logo"
+      en: "Logo 3D effects creation process"
+locales:
+  fr:
+    url: /fr/projects/logo-process.html
+    aria_label: "Voir le processus de création de logo"
+    image_alt: "Processus de design de logo"
+    title: "Processus de design de logo"
+    subtitle: "Processus de **création de logo** géométrique"
+    description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
+    context_title: "À propos du projet"
+    context_content: |
+      Ce projet met en avant le processus de création d'un logo, de l'esquisse initiale à la version finale.
+    seo:
+      title: "Logo Design Process | Ropat"
+      description: "Découvrez le processus de création d'un logo géométrique, de l'esquisse initiale à la version finale 3D avec effets."
+      canonical_url: "https://ropat.art/fr/projects/logo-process.html"
+      og_title: "Logo Design Process"
+      og_description: "Processus de création d'un logo, de l'esquisse initiale à la version finale 3D."
+      og_url: "https://ropat.art/fr/projects/logo-process.html"
+      og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
+  en:
+    url: /en/projects/logo-process.html
+    aria_label: "View the logo creation process"
+    image_alt: "Logo design process"
+    title: "Logo design process"
+    subtitle: "**Logo creation** process"
+    description: "Example of logo design process including sketch, development and finalization."
+    context_title: "About the project"
+    context_content: |
+      This project showcases the logo creation process, from the initial sketch to the final version.
+    seo:
+      title: "Logo Design Process | Ropat"
+      description: "Discover the geometric logo creation process, from initial sketch to final 3D version with effects."
+      canonical_url: "https://ropat.art/en/projects/logo-process.html"
+      og_title: "Logo Design Process"
+      og_description: "Logo creation process, from initial sketch to final 3D version."
+      og_url: "https://ropat.art/en/projects/logo-process.html"
+      og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"

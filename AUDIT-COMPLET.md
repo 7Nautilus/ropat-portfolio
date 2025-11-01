@@ -30,7 +30,7 @@
 ### ✅ Points Forts
 
 #### Structure DRY Exemplaire
-- ✅ Données centralisées dans `_data/` (projects.yml, services.yml, navigation.yml)
+- ✅ Données centralisées dans `_data/` (projects/, services.yml, navigation.yml)
 - ✅ Templates réutilisables (`_includes/` et `_layouts/`)
 - ✅ System unique pour pages projets et pages normales
 - ✅ Pas de duplication de code

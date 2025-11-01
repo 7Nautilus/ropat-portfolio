@@ -13,22 +13,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="language" content="{{ page.lang | default: 'en' }}"> 
 
-    {% comment %} Si c'est une page de projet, charger les métadonnées depuis projects.yml {% endcomment %}
+  {% comment %} Si c'est une page de projet, charger les métadonnées depuis _data/projects/<slug>.yml {% endcomment %}
     {% if page.project_id %}
-      {% assign project = site.data.projects | where: "project_title", page.project_id | first %}
+      {% assign project = site.data.projects[page.project_id] %}
       {% assign lang = page.lang | default: "fr" %}
-      {% if project.seo %}
-        {% assign page_title = project.seo.title[lang] %}
-        {% assign page_meta_description = project.seo.meta_description[lang] | default: project.seo.description[lang] %}
-        {% assign page_canonical_url = project.seo.canonical_url[lang] %}
-        {% assign page_og_title = project.seo.og_title[lang] %}
-        {% assign page_og_description = project.seo.og_description[lang] %}
-        {% assign page_og_url = project.seo.og_url[lang] %}
-        {% assign page_og_image = project.seo.og_image %}
+      {% if project %}
+        {% assign project_locale = project.locales[lang] | default: project.locales.en %}
+        {% if project_locale.seo %}
+          {% assign page_title = project_locale.seo.title %}
+          {% assign page_meta_description = project_locale.seo.meta_description | default: project_locale.seo.description %}
+          {% assign page_canonical_url = project_locale.seo.canonical_url %}
+          {% assign page_og_title = project_locale.seo.og_title %}
+          {% assign page_og_description = project_locale.seo.og_description %}
+          {% assign page_og_url = project_locale.seo.og_url %}
+          {% assign page_og_image = project_locale.seo.og_image %}
+        {% endif %}
       {% endif %}
     {% endif %}
     
-    {% comment %} Utiliser les valeurs du frontmatter ou celles de projects.yml {% endcomment %}
+  {% comment %} Utiliser les valeurs du frontmatter ou celles de _data/projects/<slug>.yml {% endcomment %}
     {% assign final_title = page.title | default: page_title %}
     {% assign final_meta_description = page.meta_description | default: page_meta_description %}
     {% assign final_canonical_url = page.canonical_url | default: page_canonical_url %}
@@ -52,7 +55,7 @@
 
     <!-- SEO - Gestion des métadonnées -->
     {% if final_title %}
-        <!-- Page avec métadonnées dans le front matter ou projects.yml -->
+  <!-- Page avec métadonnées dans le front matter ou _data/projects/<slug>.yml -->
         <title>{{ final_title }}</title>
         <meta name="title" content="{{ final_title }}">
         

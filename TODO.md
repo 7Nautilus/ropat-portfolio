@@ -11,19 +11,23 @@ Tous les projets ont été migrés vers le système YAML centralisé :
 - ✅ Logo Design Process (galerie)
 
 **Nouveau système** :
-- Données centralisées dans `_data/projects.yml`
-- Include SEO réutilisable : `_includes/project-seo.html`
-- Template unique : `_includes/project-main.html`
-- Support images ET vidéos
-- Métadonnées SEO intégrées
+- Données modulaires dans `_data/projects/<slug>.yml`
+- Ordre contrôlé par `_data/projects/index.yml`
+- Script d'amorçage : `scripts/new-project.ps1`
+- Templates mis à jour : `_includes/project-card.html`, `_includes/project-main.html`, `_includes/schema-org.html`, `_layouts/default.html`
+- Support images ET vidéos (fallbacks automatiques)
+- Métadonnées SEO intégrées par langue
 
-📖 **Voir `ARCHITECTURE.md` pour ajouter de nouveaux projets**
+📖 **Voir `README.md` (section "Ajouter un nouveau projet") pour la procédure complète**
 
 ---
 
 ## Projets à ajouter
 
-Pour ajouter un projet, suivre les instructions dans `ARCHITECTURE.md` :
+Pour ajouter un projet :
+- Lancer `scripts/new-project.ps1`
+- Compléter le YAML généré (FR/EN, SEO, miniatures)
+- Voir `README.md` pour les étapes détaillées
 
 - JPeJA
 - Crow animation

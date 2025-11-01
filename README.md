@@ -32,17 +32,23 @@ Le site inclut des pages de mentions légales et de confidentialité conformes a
 
 ```
 _data/
-├── projects.yml      # Tous les projets (contenu + SEO)
-├── services.yml      # Tous les services
-└── navigation.yml    # Navigation du site
+├── navigation.yml             # Navigation du site
+├── projects/                  # 1 fichier par projet + ordre d'affichage
+│   ├── index.yml              # Liste ordonnée des slugs
+│   ├── a-lone.yml             # Contenu & SEO du projet "A-LONE"
+│   ├── btr.yml
+│   └── ...
+└── services.yml               # Tous les services
 ```
+
+Chaque projet possède désormais son propre fichier YAML. Les champs globaux (année, outils, client, média) sont partagés, tandis que les textes traduits sont regroupés sous `locales`. Ce découpage facilite les ajouts, les revues et les contributions multiples.
 
 ### Layouts et Includes
 
 **Layouts :**
 - `_layouts/default.html` : Template de base
   - Détecte automatiquement les pages de projet via `project_id`
-  - Charge les métadonnées SEO depuis `projects.yml`
+  - Charge les métadonnées SEO depuis `_data/projects/<slug>.yml`
   - Gère les liens hreflang FR/EN
 
 **Includes réutilisables :**
@@ -78,104 +84,99 @@ ropat-portfolio/
 ### Fonctionnement
 
 1. **URLs distinctes** : `/fr/projects/...` et `/en/projects/...`
-2. **Traductions centralisées** : Tous les textes dans `_data/projects.yml`
+2. **Traductions centralisées** : Tous les textes dans `_data/projects/<slug>.yml`
 3. **SEO optimisé** : Balises hreflang automatiques
 4. **Navigation intelligente** : `project-card.html` adapte les URLs selon la langue
 
 ## 🎨 Ajouter un nouveau projet
 
-### 1. Ajouter les données dans `_data/projects.yml`
+1. Lancer l'assistant :
+    ```powershell
+    powershell -ExecutionPolicy Bypass -File .\scripts\new-project.ps1
+    # ou : pwsh -File ./scripts/new-project.ps1
+    ```
+    Le script demande le slug, la catégorie, les textes principaux FR/EN et crée automatiquement :
+    - le fichier `_data/projects/<slug>.yml`
+    - l'entrée correspondante dans `_data/projects/index.yml`
+    - les pages `fr/projects/<slug>.html` et `en/projects/<slug>.html`
+
+2. Ouvrir le fichier YAML généré et compléter les champs encore « TODO » si nécessaire (SEO, contexte détaillé, miniatures additionnelles, etc.).
+
+### Structure du fichier projet
 
 ```yaml
-- category: music  # music, branding, animation, design
-  url: /fr/projects/nom-projet.html
-  aria_label: 
-    fr: "Description FR"
-    en: "Description EN"
-  image_src: /assets/images/projects/image.png
-  image_alt: 
-    fr: "Alt FR"
-    en: "Alt EN"
-  title: 
-    fr: "Titre FR"
-    en: "Title EN"
-  client: "Nom Client"
-  description: 
-    fr: "Description courte FR"
-    en: "Short description EN"
-  featured: true
-  project_title: "TITRE_UNIQUE"  # ID du projet
-  subtitle:
-    fr: "Sous-titre <strong>FR</strong>"
-    en: "Subtitle <strong>EN</strong>"
-  year: "2024"
-  tools: "Photoshop, Illustrator"
-  context_title:
-    fr: "Contexte du projet"
-    en: "Project Context"
-  context_content:
-    fr: "<p>Contenu FR</p>"
-    en: "<p>Content EN</p>"
-  main_image: /assets/images/projects/main.png
-  media_type: video  # optionnel (si vidéo au lieu d'image)
-  thumbnails:  # optionnel (pour galerie)
-    - src: /assets/images/projects/thumb1.png
-      alt:
-        fr: "Alt 1 FR"
-        en: "Alt 1 EN"
-  seo:
-    title:
-      fr: "Titre SEO FR | Ropat"
-      en: "SEO Title EN | Ropat"
-    meta_description:
-      fr: "Meta description FR"
-      en: "Meta description EN"
-    canonical_url:
-      fr: "https://ropat.art/fr/projects/nom-projet.html"
-      en: "https://ropat.art/en/projects/nom-projet.html"
-    og_title:
-      fr: "OG Title FR"
-      en: "OG Title EN"
-    og_description:
-      fr: "OG Description FR"
-      en: "OG Description EN"
-    og_url:
-      fr: "https://ropat.art/fr/projects/nom-projet.html"
-      en: "https://ropat.art/en/projects/nom-projet.html"
-    og_image: "https://ropat.art/assets/images/projects/og-image.png"
+slug: exemple
+project_title: EXEMPLE
+category: music
+featured: false
+client: "Nom du client (optionnel)"
+year: "2025"
+tools: "Photoshop, Illustrator"
+image_src: /assets/images/projects/exemple.png
+main_image: /assets/images/projects/exemple.png
+media_type: image
+locales:
+  fr:
+    url: /fr/projects/exemple.html
+    aria_label: "Voir le projet Exemple"
+    image_alt: "Visuel du projet Exemple"
+    title: "Titre FR"
+    subtitle: "Sous-titre avec **mise en avant**"
+    description: "Résumé court du projet en français."
+    services: "Compétences mises en œuvre"
+    context_title: "Contexte du projet"
+    context_content: |
+      Paragraphe(s) détaillant le déroulé du projet.
+    seo:
+      title: "Titre SEO FR | Ropat"
+      description: "Meta description FR"
+      canonical_url: "https://ropat.art/fr/projects/exemple.html"
+      og_title: "Titre Open Graph FR"
+      og_description: "Description Open Graph FR"
+      og_url: "https://ropat.art/fr/projects/exemple.html"
+      og_image: "https://ropat.art/assets/images/projects/exemple.png"
+  en:
+    url: /en/projects/exemple.html
+    aria_label: "View the Exemple project"
+    image_alt: "Exemple project visual"
+    title: "English title"
+    subtitle: "English subtitle with **emphasis**"
+    description: "Short English summary."
+    services: "Services provided"
+    context_title: "Project Context"
+    context_content: |
+      Paragraph(s) describing the project in English.
+    seo:
+      title: "SEO Title EN | Ropat"
+      description: "Meta description EN"
+      canonical_url: "https://ropat.art/en/projects/exemple.html"
+      og_title: "Open Graph Title EN"
+      og_description: "Open Graph Description EN"
+      og_url: "https://ropat.art/en/projects/exemple.html"
+      og_image: "https://ropat.art/assets/images/projects/exemple.png"
 ```
 
-### 2. Créer les pages (FR et EN)
+### Pages FR/EN générées
 
-**`fr/projects/nom-projet.html`** :
-```html
+Les deux fichiers contiennent uniquement le front matter suivant (déjà rempli par le script) :
+
+```yaml
 ---
 layout: default
-lang: "fr"
-project_id: "TITRE_UNIQUE"
+lang: "fr" # ou "en"
+project_id: "exemple"
 ---
 
 {% include project-main.html project_id=page.project_id %}
 ```
 
-**`en/projects/nom-projet.html`** :
-```html
----
-layout: default
-lang: "en"
-project_id: "TITRE_UNIQUE"
----
-
-{% include project-main.html project_id=page.project_id %}
-```
-
-⚠️ **Important** : Le `project_id` doit correspondre exactement au `project_title` dans `projects.yml`
+`project_id` doit correspondre au slug : c'est la clé utilisée pour récupérer les données dans `_data/projects/<slug>.yml`.
 
 ## 🔄 Flux des métadonnées SEO
 
 ### Pages de projets :
 1. Page définit `project_id` dans le front matter
-2. `default.html` détecte `project_id` et charge les données depuis `projects.yml`
+2. `default.html` détecte `project_id` et charge les données depuis `_data/projects/<slug>.yml`
 3. Les métadonnées sont injectées dans `page.*`
 4. `open-graph.html` utilise ces variables
 

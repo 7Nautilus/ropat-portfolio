@@ -1,7 +1,15 @@
-{% assign project = site.data.projects | where: "project_title", include.project_id | first %}
+{% assign project = site.data.projects[include.project_id] %}
 {% assign lang = page.lang | default: "fr" %}
+{% if project %}
+  {% assign project_locale = project.locales[lang] | default: project.locales.en %}
+{% endif %}
+{% if project and project.thumbnails and project.thumbnails.size > 0 %}
+  {% assign primary_thumbnail = project.thumbnails[0] %}
+  {% assign primary_thumbnail_alt = primary_thumbnail.alt[lang] | default: primary_thumbnail.alt.en %}
+{% endif %}
 
 <!-- Main Content -->
+{% if project and project_locale %}
 <main id="main-content" class="hero hero-project-section">
   <section class="hero-project">
     <!-- Gallery -->
@@ -9,15 +17,16 @@
       <div class="project-gallery">
         <div class="main-display blur-bg">
           {% if project.media_type == "video" %}
-          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" autoplay loop muted playsinline width="1200" height="1200"></video>
+          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted playsinline width="1200" height="1200"></video>
           {% else %}
-          <img src="{{ project.main_image }}" id="main-image" alt="{% if project.thumbnails and project.thumbnails.size > 0 %}{{ project.thumbnails[0].alt[lang] }}{% else %}{{ project.image_alt[lang] }}{% endif %}" width="1200" height="1200" loading="lazy">
+          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy">
           {% endif %}
         </div>
         {% if project.thumbnails and project.thumbnails.size > 0 %}
         <div class="thumbnails-container" id="thumbnails">
           {% for thumbnail in project.thumbnails %}
-          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail.alt[lang] }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en %}
+          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
           {% endfor %}
         </div>
         {% endif %}
@@ -27,14 +36,14 @@
     <div class="hero-project-description">
       <h1 class="hero-title">{{ project.project_title }}</h1>
       <div class="hero-text">
-        {% assign subtitle_html = project.subtitle[lang] | markdownify %}
+        {% assign subtitle_html = project_locale.subtitle | markdownify %}
         <h2 class="hero-subtitle">{{ subtitle_html | strip | replace: '<p>', '' | replace: '</p>', '' }}</h2>
         <div class="pitch">
           {% if project.client %}
           <span><strong>• {% if lang == "fr" %}Client{% else %}Client{% endif %}</strong>: {{ project.client }}</span>
           {% endif %}
-          {% if project.services %}
-          <span><strong>• {% if lang == "fr" %}Prestation(s){% else %}Services{% endif %}</strong>: {{ project.services[lang] }}</span>
+          {% if project_locale.services %}
+          <span><strong>• {% if lang == "fr" %}Prestation(s){% else %}Services{% endif %}</strong>: {{ project_locale.services }}</span>
           {% endif %}
           {% if project.year %}
           <span><strong>• {% if lang == "fr" %}Année{% else %}Year{% endif %}</strong>: {{ project.year }}</span>
@@ -47,9 +56,10 @@
     </div>
   </section>
   <section class="hero-project-details">
-    <h3 class="section-title">{{ project.context_title[lang] }}</h3>
+    <h3 class="section-title">{{ project_locale.context_title }}</h3>
     <div class="hero-text">
-      {{ project.context_content[lang] | markdownify }}
+      {{ project_locale.context_content | markdownify }}
     </div>
   </section>
 </main>
+{% endif %}

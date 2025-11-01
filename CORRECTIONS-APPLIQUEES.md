@@ -13,9 +13,11 @@ Suite à l'audit complet du site ropat.art, voici les corrections et améliorati
 | 1 | Correction attributs `alt` sur SVG | ✅ Terminé | Accessibilité |
 | 2 | Pages légales FR créées | ✅ Terminé | Légal / RGPD |
 | 3 | Pages légales EN créées | ✅ Terminé | Légal / RGPD |
-| 4 | Support `prefers-reduced-motion` | ✅ Terminé | Accessibilité |
-| 5 | Lien "Skip to content" ajouté | ✅ Terminé | Accessibilité |
-| 6 | Schema.org CreativeWork pour projets | ✅ Terminé | SEO |
+| 4 | CSS pages légales dédiée | ✅ Terminé | UX / Légal |
+| 5 | Support `prefers-reduced-motion` | ✅ Terminé | Accessibilité |
+| 6 | Lien "Skip to content" ajouté | ✅ Terminé | Accessibilité |
+| 7 | Données projets modulaires + script d'automatisation | ✅ Terminé | Maintenance / SEO |
+| 8 | Schema.org CreativeWork pour projets | ✅ Terminé | SEO |
 
 ---
 
@@ -185,9 +187,30 @@ Styles pour :
 
 ---
 
-### 7️⃣ Schema.org CreativeWork pour projets
+### 7️⃣ Migration des données projets + automatisation
 
-**Fichier créé :** `_includes/project-schema.html`
+**Problème :** Un seul fichier `_data/projects.yml` concentrait tout le contenu bilingue, rendant les contributions difficiles, les conflits fréquents et l'ajout d'un projet laborieux (copier/coller manuel sur plusieurs fichiers).
+
+**Solution :**
+- ✅ Création d'un répertoire `_data/projects/` avec un YAML par projet (`a-lone.yml`, `btr.yml`, etc.)
+- ✅ Suppression de l'ancien `_data/projects.yml`
+- ✅ Ajout d'un index d'ordre (`_data/projects/index.yml`) pour piloter l'affichage
+- ✅ Script PowerShell `scripts/new-project.ps1` qui génère : données YAML + pages FR/EN + mise à jour de l'index
+- ✅ Mise à jour des templates (`_includes/project-card.html`, `_includes/project-main.html`, `_includes/schema-org.html`, `_layouts/default.html`) pour lire la nouvelle structure `project.locales`
+- ✅ Mise à jour des pages `fr|en/index.html`, `fr|en/portfolio.html`, `fr|en/projects/*.html`, `index.html` pour utiliser les slugs
+- ✅ Documentation révisée dans `README.md`, `RESUME-AMELIORATIONS.md`, `TODO.md`
+
+**Impact :**
+- ⚙️ Ajout d'un projet en quelques commandes (script interactif)
+- 🌐 Cohérence automatique des métadonnées FR/EN
+- 🔄 Maintenance facilitée (1 fichier par projet, conflits minimisés)
+- 🛡️ Fallbacks alt/SEO systématiques dans les includes
+
+---
+
+### 8️⃣ Schema.org CreativeWork pour projets
+
+**Fichier modifié :** `_includes/schema-org.html`
 
 **Données structurées ajoutées :**
 ```json
@@ -209,7 +232,7 @@ Styles pour :
 **Intégration :**
 - Inclus automatiquement dans `_layouts/default.html`
 - Détecte si `page.project_id` existe
-- Charge les données depuis `_data/projects.yml`
+- Charge les données depuis `_data/projects/<slug>.yml`
 - Genre adapté selon la catégorie (music → Album Cover, branding → Branding, etc.)
 
 **Impact :**
@@ -263,6 +286,7 @@ Styles pour :
 - [x] Support prefers-reduced-motion
 - [x] Lien skip-to-content fonctionnel
 - [x] Schema.org CreativeWork intégré
+- [x] Données projets modulaires migrées + script générateur
 - [x] Tests manuels effectués
 - [x] Aucune erreur dans le code
 
@@ -302,10 +326,12 @@ Styles pour :
 
 ## 📚 DOCUMENTATION MISE À JOUR
 
-Fichiers documentation à mettre à jour :
+Fichiers documentation actualisés :
 - [x] `AUDIT-COMPLET.md` - Audit initial
 - [x] `CORRECTIONS-APPLIQUEES.md` - Ce fichier
-- [ ] `README.md` - Ajouter note sur pages légales
+- [x] `README.md` - Workflow d'ajout de projet
+- [x] `RESUME-AMELIORATIONS.md` - Nouvelle section #8
+- [x] `TODO.md` - Rappel script & projets à venir
 
 ---
 

@@ -1,0 +1,54 @@
+slug: exit
+project_title: "EXIT"
+category: design
+featured: false
+year: "2025"
+tools: "Photoshop, Illustrator"
+image_src: /assets/images/projects/exit.png
+main_image: /assets/images/projects/exit.png
+media_type: image
+locales:
+  fr:
+    url: /fr/projects/exit.html
+    aria_label: "Voir le projet d'affiche EXIT"
+    image_alt: "Affiche EXIT"
+    title: "Affiche \"EXIT\""
+    subtitle: "Projet de **création d'affiche** détournant le design des panneaux de signalisation de sorties de secours"
+    description: "Création d'une affiche sur le thème du design des sorties de secours."
+    context_title: "À propos du projet"
+    context_content: |
+      Pour ce projet je me suis basé d'un ancien fichier Illustrator de mon ami @alxndr.rawz dans lequel il avait exploré des concepts similaires, en designant à sa manière les éléments du fameux panneau "exit".
+
+      J'avais ce fichier sur mon disque dur depuis un moment et je voulais l'explorer davantage. Je l'ai donc importé dans Photoshop, j'y ai ajouté mes propres éléments graphiques et j'ai retravaillé la composition pour lui donner une nouvelle vie.
+
+      Pour le rendu final j'ai voulu donner à cette affiche un aspect de cuivre oxydé, avec sa couleur verte et ses reflets brillants.
+    seo:
+      title: "EXIT - Affiche Design | Ropat"
+      description: "Création d'affiche détournant le design des panneaux de sorties de secours avec un aspect cuivre oxydé."
+      canonical_url: "https://ropat.art/fr/projects/exit.html"
+      og_title: "EXIT - Affiche Design"
+      og_description: "Création d'affiche détournant le design des panneaux de sorties de secours."
+      og_url: "https://ropat.art/fr/projects/exit.html"
+      og_image: "https://ropat.art/assets/images/projects/exit.png"
+  en:
+    url: /en/projects/exit.html
+    aria_label: "View the EXIT poster project"
+    image_alt: "EXIT Poster"
+    title: "Poster \"EXIT\""
+    subtitle: "**Poster design** project reinterpreting emergency exit signage design"
+    description: "Creation of a poster on the theme of emergency exit design."
+    context_title: "About the project"
+    context_content: |
+      For this project, I based my work on an old Illustrator file from my friend @alxndr.rawz, in which he explored similar concepts by designing elements of the famous "exit" sign in his own style.
+
+      I had this file on my hard drive for a while and wanted to explore it further. So I imported it into Photoshop, added my own graphic elements, and reworked the composition to give it new life.
+
+      For the final rendering, I wanted to give this poster an oxidized copper look, with its green color and shiny reflections.
+    seo:
+      title: "EXIT - Poster Design | Ropat"
+      description: "Poster design reinterpreting emergency exit signage with an oxidized copper aesthetic."
+      canonical_url: "https://ropat.art/en/projects/exit.html"
+      og_title: "EXIT - Poster Design"
+      og_description: "Poster design reinterpreting emergency exit signage."
+      og_url: "https://ropat.art/en/projects/exit.html"
+      og_image: "https://ropat.art/assets/images/projects/exit.png"

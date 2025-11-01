@@ -1,0 +1,66 @@
+slug: a-lone
+project_title: A-LONE
+category: music
+featured: false
+client: "B-Lone"
+year: "2024"
+tools: "Photoshop, Illustrator"
+image_src: /assets/images/projects/a-lone-cover.webp
+main_image: /assets/images/projects/a-lone-cover.webp
+media_type: image
+thumbnails:
+  - src: /assets/images/projects/a-lone-cover.webp
+    alt:
+      fr: "Couverture de l'album A-LONE"
+      en: "A-LONE album cover"
+  - src: /assets/images/projects/a-lone-back.webp
+    alt:
+      fr: "Visuel arrière de l'album A-LONE"
+      en: "A-LONE album back cover"
+  - src: /assets/images/projects/a-lone-mockup.webp
+    alt:
+      fr: "Mockup 3D de l'album A-LONE"
+      en: "A-LONE album 3D mockup"
+locales:
+  fr:
+    url: /fr/projects/a-lone.html
+    aria_label: "Voir la pochette de l'album 'A-LONE' de B-Lone"
+    image_alt: "Pochette d'album 'A-LONE' de B-Lone"
+    title: "Pochette d'album \"A-LONE\""
+    subtitle: "**Direction Artistique** et **Cover Art** pour l'album **A-LONE**"
+    description: "Direction artistique complète et création de la cover pour la sortie de l'album."
+    services: "Direction Artistique, Typographie custom & Design de pochette d'album"
+    context_title: "Contexte du projet"
+    context_content: |
+      La pochette de l'album A-LONE a été mon premier projet concret pour un artiste musical.
+
+      J'ai conçu une identité visuelle forte et cohérente avec l'univers musical de B-Lone.
+    seo:
+      title: "Pochette A-LONE - B-Lone | Ropat"
+      description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone. Typographie custom et identité visuelle complète."
+      canonical_url: "https://ropat.art/fr/projects/a-lone.html"
+      og_title: "Pochette A-LONE - B-Lone"
+      og_description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone."
+      og_url: "https://ropat.art/fr/projects/a-lone.html"
+      og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"
+  en:
+    url: /en/projects/a-lone.html
+    aria_label: "View the 'A-LONE' album cover by B-Lone"
+    image_alt: "'A-LONE' album cover by B-Lone"
+    title: "Album Cover \"A-LONE\""
+    subtitle: "**Art Direction** and **Cover Art** for the **A-LONE** album"
+    description: "Complete art direction and cover creation for the album release."
+    services: "Art Direction, Custom Typography & Album Cover Design"
+    context_title: "Project Context"
+    context_content: |
+      The A-LONE album cover was my first concrete project for a music artist.
+
+      I designed a strong visual identity that aligns with B-Lone's musical universe.
+    seo:
+      title: "A-LONE Cover - B-Lone | Ropat"
+      description: "Art direction and cover design for B-Lone's A-LONE album. Custom typography and complete visual identity."
+      canonical_url: "https://ropat.art/en/projects/a-lone.html"
+      og_title: "A-LONE Cover - B-Lone"
+      og_description: "Art direction and cover design for B-Lone's A-LONE album."
+      og_url: "https://ropat.art/en/projects/a-lone.html"
+      og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"

@@ -54,10 +54,19 @@ og_url: "https://ropat.art/en/index.html"
 
     <!-- Projects Grid -->
     <div class="section-grid" id="projects-grid">
-      {% assign featured_projects = site.data.projects | where: "featured", true %}
-
-      {% for item in featured_projects limit: 4 %}
-        {% include project-card.html project=item index=forloop.index0 disable_animation=true %}
+      {% assign project_slugs = site.data.projects.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for slug in project_slugs %}
+        {% assign item = site.data.projects[slug] %}
+        {% if item.featured %}
+          {% include project-card.html project=item index=featured_index disable_animation=true %}
+          {% assign featured_index = featured_index | plus: 1 %}
+          {% assign featured_rendered = featured_rendered | plus: 1 %}
+          {% if featured_rendered == 4 %}
+            {% break %}
+          {% endif %}
+        {% endif %}
       {% endfor %}
     </div>
   </section>
