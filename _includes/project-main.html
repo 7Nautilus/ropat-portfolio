@@ -27,7 +27,8 @@
     <div class="hero-project-description">
       <h1 class="hero-title">{{ project.project_title }}</h1>
       <div class="hero-text">
-        <h2 class="hero-subtitle">{{ project.subtitle[lang] }}</h2>
+        {% assign subtitle_html = project.subtitle[lang] | markdownify %}
+        <h2 class="hero-subtitle">{{ subtitle_html | strip | replace: '<p>', '' | replace: '</p>', '' }}</h2>
         <div class="pitch">
           {% if project.client %}
           <span><strong>• {% if lang == "fr" %}Client{% else %}Client{% endif %}</strong>: {{ project.client }}</span>
@@ -48,7 +49,7 @@
   <section class="hero-project-details">
     <h3 class="section-title">{{ project.context_title[lang] }}</h3>
     <div class="hero-text">
-      {{ project.context_content[lang] }}
+      {{ project.context_content[lang] | markdownify }}
     </div>
   </section>
 </main>

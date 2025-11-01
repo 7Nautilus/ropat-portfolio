@@ -19,8 +19,8 @@
   featured: true
   project_title: BTR
   subtitle:
-    fr: "<strong>Direction Artistique</strong> et <strong>Cover Art</strong> pour l'ep <strong>BTR</strong>"
-    en: "<strong>Art Direction</strong> and <strong>Cover Art</strong> for the <strong>BTR</strong> EP"
+    fr: "**Direction Artistique** et **Cover Art** pour l'EP **BTR**"
+    en: "**Art Direction** and **Cover Art** for the **BTR** EP"
   services:
     fr: "Direction Artistique, Design de pochette d'album"
     en: "Art Direction, Album Cover Design"
@@ -30,8 +30,18 @@
     fr: "Contexte du projet"
     en: "Project Context"
   context_content:
-    fr: "<p>L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.</p><p>J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.</p><p>Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.</p>"
-    en: "<p>The goal was to create a strong visual identity that aligns with the artist's musical universe.</p><p>I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.</p><p>This project allowed me to develop my graphic design skills while exploring new creative techniques.</p>"
+    fr: |
+      L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.
+
+      J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.
+
+      Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.
+    en: |
+      The goal was to create a strong visual identity that aligns with the artist's musical universe.
+
+      I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.
+
+      This project allowed me to develop my graphic design skills while exploring new creative techniques.
   main_image: /assets/images/projects/btr-cover.png
   seo:
     title:
@@ -76,14 +86,16 @@
   featured: true
   project_title: "Logo Design Process"
   subtitle:
-    fr: "Processus de <strong>création de logo</strong> géométrique"
-    en: "<strong>Logo creation</strong> process"
+    fr: "Processus de **création de logo** géométrique"
+    en: "**Logo creation** process"
   context_title:
     fr: "À propos du projet"
     en: "About the project"
   context_content:
-    fr: "<p>Ce projet met en avant le processus de création d'un logo, de l'esquisse initiale à la version finale.</p>"
-    en: "<p>This project showcases the logo creation process, from the initial sketch to the final version.</p>"
+    fr: |
+      Ce projet met en avant le processus de création d'un logo, de l'esquisse initiale à la version finale.
+    en: |
+      This project showcases the logo creation process, from the initial sketch to the final version.
   main_image: /assets/images/projects/logo-design-process.png
   thumbnails:
     - src: /assets/images/projects/logo-design-process.png
@@ -145,14 +157,16 @@
   featured: true
   project_title: "Cheetah Animation"
   subtitle:
-    fr: "Animation en <strong>stop-motion</strong>"
-    en: "<strong>Stop-motion</strong> animation"
+    fr: "Animation en **stop-motion**"
+    en: "**Stop-motion** animation"
   context_title:
     fr: "À propos du projet"
     en: "About the project"
   context_content:
-    fr: "<p>Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.</p>"
-    en: "<p>This project showcases a stop-motion animation created using both traditional and digital techniques.</p>"
+    fr: |
+      Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.
+    en: |
+      This project showcases a stop-motion animation created using both traditional and digital techniques.
   main_image: /assets/videos/CHEETAH.mp4
   media_type: video
   seo:
@@ -198,14 +212,16 @@
   featured: false
   project_title: "HDD DEFRAG"
   subtitle:
-    fr: "Projet de <strong>design graphique</strong> d'affiche"
-    en: "<strong>Graphic design</strong> poster project"
+    fr: "Projet de **design graphique** d'affiche"
+    en: "**Graphic design** poster project"
   context_title:
     fr: "À propos du projet"
     en: "About the project"
   context_content:
-    fr: "<p>HDD DEFRAG est un projet de design graphique axé sur la création d'une affiche mettant en avant la défragmentation de disques durs.</p>"
-    en: "<p>HDD DEFRAG is a graphic design project focused on creating a poster highlighting hard drive defragmentation.</p>"
+    fr: |
+      HDD DEFRAG est un projet de design graphique axé sur la création d'une affiche mettant en avant la défragmentation de disques durs.
+    en: |
+      HDD DEFRAG is a graphic design project focused on creating a poster highlighting hard drive defragmentation.
   main_image: /assets/images/projects/hdd-defrag-poster.png
   seo:
     title:
@@ -250,14 +266,24 @@
   featured: false
   project_title: "EXIT"
   subtitle:
-    fr: "Projet de <strong>création d'affiche</strong> détournant le design des panneaux de signalisation de sorties de secours"
-    en: "<strong>Poster design</strong> project reinterpreting emergency exit signage design"
+    fr: "Projet de **création d'affiche** détournant le design des panneaux de signalisation de sorties de secours"
+    en: "**Poster design** project reinterpreting emergency exit signage design"
   context_title:
     fr: "À propos du projet"
     en: "About the project"
   context_content:
-    fr: "<p>Pour ce projet je me suis basé d'un ancien fichier Illustrator de mon ami @alxndr.rawz dans lequel il avait exploré des concepts similaires, en designant à sa manière les éléments du fameux panneau \"exit\"</p><p>J'avais ce fichier sur mon disque dur depuis un moment et je voulais l'explorer davantage. Je l'ai donc importé dans Photoshop, j'y ai ajouté mes propres éléments graphiques et j'ai retravaillé la composition pour lui donner une nouvelle vie.</p><p>Pour le rendu final j'ai voulu donner à cette affiche un aspect de cuivre oxydé, avec sa couleur verte et ses reflets brillants.</p>"
-    en: "<p>For this project, I based my work on an old Illustrator file from my friend @alxndr.rawz, in which he explored similar concepts by designing elements of the famous \"exit\" sign in his own style.</p><p>I had this file on my hard drive for a while and wanted to explore it further. So I imported it into Photoshop, added my own graphic elements, and reworked the composition to give it new life.</p><p>For the final rendering, I wanted to give this poster an oxidized copper look, with its green color and shiny reflections.</p>"
+    fr: |
+      Pour ce projet je me suis basé d'un ancien fichier Illustrator de mon ami @alxndr.rawz dans lequel il avait exploré des concepts similaires, en designant à sa manière les éléments du fameux panneau "exit".
+
+      J'avais ce fichier sur mon disque dur depuis un moment et je voulais l'explorer davantage. Je l'ai donc importé dans Photoshop, j'y ai ajouté mes propres éléments graphiques et j'ai retravaillé la composition pour lui donner une nouvelle vie.
+
+      Pour le rendu final j'ai voulu donner à cette affiche un aspect de cuivre oxydé, avec sa couleur verte et ses reflets brillants.
+    en: |
+      For this project, I based my work on an old Illustrator file from my friend @alxndr.rawz, in which he explored similar concepts by designing elements of the famous "exit" sign in his own style.
+
+      I had this file on my hard drive for a while and wanted to explore it further. So I imported it into Photoshop, added my own graphic elements, and reworked the composition to give it new life.
+
+      For the final rendering, I wanted to give this poster an oxidized copper look, with its green color and shiny reflections.
   main_image: /assets/images/projects/exit.png
   seo:
     title:
@@ -301,8 +327,8 @@
   featured: false
   project_title: A-LONE
   subtitle:
-    fr: "<strong>Direction Artistique</strong> et <strong>Cover Art</strong> pour l'album <strong>A-LONE</strong>"
-    en: "<strong>Art Direction</strong> and <strong>Cover Art</strong> for the <strong>A-LONE</strong> album"
+    fr: "**Direction Artistique** et **Cover Art** pour l'album **A-LONE**"
+    en: "**Art Direction** and **Cover Art** for the **A-LONE** album"
   services:
     fr: "Direction Artistique, Typographie custom & Design de pochette d'album"
     en: "Art Direction, Custom Typography & Album Cover Design"
@@ -312,8 +338,14 @@
     fr: "Contexte du projet"
     en: "Project Context"
   context_content:
-    fr: "<p>La pochette de l'album A-LONE à été mon premier projet concret pour un artiste musical.</p><p>J'ai conçu une identité visuelle forte et cohérente avec l'univers musical de B-Lone.</p>"
-    en: "<p>The A-LONE album cover was my first concrete project for a music artist.</p><p>I designed a strong visual identity that aligns with B-Lone's musical universe.</p>"
+    fr: |
+      La pochette de l'album A-LONE a été mon premier projet concret pour un artiste musical.
+
+      J'ai conçu une identité visuelle forte et cohérente avec l'univers musical de B-Lone.
+    en: |
+      The A-LONE album cover was my first concrete project for a music artist.
+
+      I designed a strong visual identity that aligns with B-Lone's musical universe.
   main_image: /assets/images/projects/a-lone-cover.webp
   thumbnails:
     - src: /assets/images/projects/a-lone-cover.webp
