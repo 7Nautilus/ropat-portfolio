@@ -3,7 +3,7 @@ project_title: "HDD DEFRAG"
 category: design
 featured: false
 year: "2025"
-tools: "InDesign, Photoshop"
+tools: "InDesign, Photoshop, Illustrator"
 image_src: /assets/images/projects/hdd-defrag-poster.png
 main_image: /assets/images/projects/hdd-defrag-poster.png
 media_type: image
@@ -13,11 +13,21 @@ locales:
     aria_label: "Voir le projet d'affiche HDD DEFRAG"
     image_alt: "Affiche HDD DEFRAG"
     title: "Affiche \"HDD DEFRAG\""
-    subtitle: "Projet de **design graphique** d'affiche"
+    subtitle: "Design d'**affiche** sur la défragmentation de disque dur"
     description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
     context_title: "À propos du projet"
     context_content: |
-      HDD DEFRAG est un projet de design graphique axé sur la création d'une affiche mettant en avant la défragmentation de disques durs.
+      Ce projet de design graphique explore le thème de la défragmentation des disques durs à travers l'usage que peuvent en faire les designers, monteurs vidéo et autres professionnels du numérique.
+      Ce thème n'est évidemment pas spécialement accrocheur, mais il me traînait dans la tête depuis que j'ai commencé à utiliser Premiere Pro et After Effects, logiciels sur lequels la problématique du cache et du stockage de manière générale est très présente en particulier sur des ordinateurs avares en espace disponible.
+
+      J'ai donc décidé de l'explorer à travers ce projet. La première étape a été de rechercher des visuels et des concepts liés au thème générale, puis de les assembler dans une composition cohérente et esthétique.
+      L'idée d'utiliser les codes graphiques attachés au design d'affiche à but de prévention m'est venue naturellement, je voulais créer un visuel qui attire l'attention tout en restant informatif.
+      
+      Dans un second temps j'ai reproduit en 3D le symbole universel du recyclage sur Illustrator, j'ai ensuite appliqué un effet de demi-ton sur une image de disque dur avec Photoshop, avant de finaliser la composition dans InDesign.
+      Pour le titre ainsi que pour les éléments principaux, j'ai choisi la typographie Impact pour son aspect bold et compact, qui contraste bien avec les éléments graphiques plus fins de l'affiche.
+      Afin d'intégrer au maximum le texte de labeur je l'ai disposé autour des éléments, en s'enroulant autour du symbole recyclage, pour plus de contraste il me fallait une typographie fine avec empattement, mon choix s'est donc pourté sur la Minion Pro. Cela permet de créer un équilibre visuel tout en renforçant le message de l'affiche. 
+      Les deux éléments "Empty The Bin" (en référence à la série de mixtape de LaFève) et "Clean The Dump" viennent compléter le message principal, grace cette fois à la typographie Onyx, qui ramène cette touche vintage que je recherchais.
+      J'ai ensuite importé le tout dans Photoshop pour ajouter des effets de texture et de vieillissement, donnant à l'affiche un aspect usé et authentique.
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
       description: "Design d'affiche sur le thème de la défragmentation  des disques durs."
@@ -35,7 +45,17 @@ locales:
     description: "Creation of a poster on the theme of hard drive defragmentation."
     context_title: "About the project"
     context_content: |
-      HDD DEFRAG is a graphic design project focused on creating a poster highlighting hard drive defragmentation.
+      This graphic design project explores the theme of hard drive defragmentation through the lens of its use by designers, video editors, and other digital professionals.
+      While not an inherently captivating topic, it has lingered in my mind since I began using Premiere Pro and After Effects, where cache and storage issues are particularly prevalent, especially on computers with limited available space.
+      
+      I decided to explore this theme through this project. The first step was to research visuals and concepts related to the general theme, then assemble them into a coherent and aesthetic composition.
+      The idea of using the graphic codes associated with warning posters came naturally; I wanted to create a visual that grabs attention while remaining informative.
+      
+      Next, I recreated the universal recycling symbol in 3D using Illustrator, applied a halftone effect to a hard drive image with Photoshop, and finalized the composition in InDesign.
+      For the title and main elements, I chose the Impact typeface for its bold and compact appearance, which contrasts well with the finer graphic elements of the poster.
+      To better integrate the body text, I arranged it around the elements, wrapping it around the recycling symbol. For contrast, I needed a fine serif typeface, so I opted for Minion Pro. This creates visual balance while reinforcing the poster's message.
+      The elements "Empty The Bin" (referencing LaFève's mixtape series) and "Clean The Dump" further complement the main message, this time using the Onyx typeface, which brings the vintage touch I was looking for.
+      I then imported everything into Photoshop to add texture and aging effects, giving the poster a worn and authentic look.
     seo:
       title: "HDD DEFRAG - Poster | Ropat"
       description: "Poster design on the theme of hard drive defragmentation."
