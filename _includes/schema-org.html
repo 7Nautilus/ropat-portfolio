@@ -112,6 +112,17 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
         "{{ social_behance }}"
       ]
     },
+    {
+      "@type": "WebSite",
+      "@id": "{{ business_url }}#website",
+      "url": "{{ business_url }}",
+      "name": "{{ business_name }}",
+      "description": "{{ business_description }}",
+      "inLanguage": "{{ page_language }}",
+      "publisher": {
+        "@id": "{{ business_url }}#professionalService"
+      }
+    },
     {% comment %} === PAGE DE PROJET (CreativeWork) === {% endcomment %}
     {% if page.project_id %}
       {% assign project = site.data.projects | where: "project_title", page.project_id | first %}

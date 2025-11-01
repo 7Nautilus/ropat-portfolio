@@ -1,4 +1,4 @@
-<div class="nav-links" id="main-navigation">
+<ul class="nav-links" id="main-navigation">
   {% comment %} Détermine la langue de la page actuelle (définie dans le Front Matter) {% endcomment %}
   {% assign current_lang = page.lang | default: 'en' %}
 
@@ -20,10 +20,12 @@
       {% assign is_current = true %}
     {% endif %}
 
-    <a href="{{ final_url | relative_url }}"
-       class="{{ item.class }}"
-       {% if is_current %}aria-current="page"{% endif %}>
-       {{ link_name }}
-    </a>
+    <li class="nav-item">
+      <a href="{{ final_url | relative_url }}"
+         class="{{ item.class }}"
+         {% if is_current %}aria-current="page"{% endif %}>
+         {{ link_name }}
+      </a>
+    </li>
   {% endfor %}
-</div>
+</ul>

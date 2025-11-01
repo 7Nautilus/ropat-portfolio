@@ -40,15 +40,15 @@
     {% assign page_path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
     
     {% comment %} Gestion spéciale pour la page d'accueil {% endcomment %}
+    {% assign x_default_href = final_canonical_url | default: site.url | append: page.url %}
     {% if page_path_no_lang == "/index.html" or page_path_no_lang == "/" %}
       <link rel="alternate" hreflang="fr" href="{{ site.url }}/index.html" />
       <link rel="alternate" hreflang="en" href="{{ site.url }}/en/index.html" />
-      <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en/index.html" />
     {% else %}
       <link rel="alternate" hreflang="fr" href="{{ site.url }}/fr{{ page_path_no_lang }}" />
       <link rel="alternate" hreflang="en" href="{{ site.url }}/en{{ page_path_no_lang }}" />
-      <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en{{ page_path_no_lang }}" />
     {% endif %}
+    <link rel="alternate" hreflang="x-default" href="{{ x_default_href }}" />
 
     <!-- SEO - Gestion des métadonnées -->
     {% if final_title %}
@@ -97,7 +97,10 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-JDE6T1D92Q');
+      gtag('config', 'G-JDE6T1D92Q', {
+        'anonymize_ip': true,
+        'transport_type': 'beacon'
+      });
     </script>
 
     <!-- Icon -->

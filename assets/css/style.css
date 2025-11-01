@@ -301,6 +301,13 @@ nav {
   z-index: 100;
   opacity: 0;
   transition: opacity var(--transition-base);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin: 0;
 }
 
 .nav-links.active {
@@ -533,7 +540,7 @@ main {
   flex-direction: column;
   flex-grow: 1;
   padding: var(--spacing-lg);
-  gap: 10rem;
+  gap: clamp(3rem, 8vw, 6rem);
   min-height: 100vh;
 }
 

@@ -11,7 +11,7 @@
   {% endif %}
   <!-- LOGO / NOM DE MARQUE -->
   <a href="{{ home_url | relative_url }}" class="logo" title="{{ home_title }}">Ropat</a>
-  <nav>
+  <nav aria-label="{% if current_lang == 'fr' %}Navigation principale{% else %}Main navigation{% endif %}">
     <!-- Bouton Burger -->
     {% include burger-menu.html %}
     
