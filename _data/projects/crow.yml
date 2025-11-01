@@ -1,0 +1,46 @@
+slug: crow
+project_title: "Crow Animation"
+category: animation
+featured: true
+year: "2025"
+tools: "After Effects, Illustrator"
+image_src: /assets/images/projects/crow-stopmotion.png
+main_image: /assets/videos/crow.mp4
+media_type: video
+locales:
+  fr:
+    url: /fr/projects/crow.html
+    aria_label: "Voir le projet d'animation en stop-motion"
+    image_alt: "Animation Stop-Motion"
+    title: "Animation Stop-Motion"
+    subtitle: "Animation en **stop-motion**"
+    description: "Réalisation d'une animation en stop-motion"
+    context_title: "À propos du projet"
+    context_content: |
+      Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.
+    seo:
+      title: "Crow Animation - Ropat"
+      description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
+      canonical_url: "https://ropat.art/fr/projects/crow.html"
+      og_title: "Crow Animation - Ropat"
+      og_description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau."
+      og_url: "https://ropat.art/fr/projects/crow.html"
+      og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
+  en:
+    url: /en/projects/crow.html
+    aria_label: "View the stop-motion animation project"
+    image_alt: "Stop-Motion Animation"
+    title: "Stop-Motion Animation"
+    subtitle: "**Stop-motion** animation"
+    description: "Creation of a stop-motion animation"
+    context_title: "About the project"
+    context_content: |
+      This project showcases a stop-motion animation created using both traditional and digital techniques.
+    seo:
+      title: "Crow Animation - Ropat"
+      description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."
+      canonical_url: "https://ropat.art/en/projects/crow.html"
+      og_title: "Crow Animation - Ropat"
+      og_description: "Stop-motion animation exploring the crow's speed and agility."
+      og_url: "https://ropat.art/en/projects/crow.html"
+      og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
