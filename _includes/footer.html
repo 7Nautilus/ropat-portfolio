@@ -11,7 +11,15 @@
               {% assign link_name = item.fr_name %}
           {% endif %}
 
-          {% assign final_url = "/" | append: current_lang | append: item.base_url %}
+          {% if item.base_url == '/index.html' %}
+            {% if current_lang == 'fr' %}
+              {% assign final_url = '/index.html' %}
+            {% else %}
+              {% assign final_url = '/en/index.html' %}
+            {% endif %}
+          {% else %}
+            {% assign final_url = '/' | append: current_lang | append: item.base_url %}
+          {% endif %}
 
           <a href="{{ final_url | relative_url }}" class="footer-link">{{ link_name }}</a>
         {% endfor %}

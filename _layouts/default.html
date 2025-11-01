@@ -19,7 +19,7 @@
       {% assign lang = page.lang | default: "fr" %}
       {% if project.seo %}
         {% assign page_title = project.seo.title[lang] %}
-        {% assign page_meta_description = project.seo.meta_description[lang] %}
+        {% assign page_meta_description = project.seo.meta_description[lang] | default: project.seo.description[lang] %}
         {% assign page_canonical_url = project.seo.canonical_url[lang] %}
         {% assign page_og_title = project.seo.og_title[lang] %}
         {% assign page_og_description = project.seo.og_description[lang] %}

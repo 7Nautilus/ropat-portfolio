@@ -548,7 +548,7 @@ main {
   gap: var(--spacing-lg);
 }
 
-#hero-project-section {
+.hero-project-section {
   gap: var(--spacing-xl);
 }
 

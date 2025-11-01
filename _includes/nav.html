@@ -16,7 +16,7 @@
     {% endif %}
 
     {% assign is_current = false %}
-    {% if page.url == final_url %}
+    {% if page.url == final_url or final_url == '/index.html' and page.url == '/' %}
       {% assign is_current = true %}
     {% endif %}
 

@@ -20,50 +20,40 @@
     document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
   }
 
-  // Si l'utilisateur a déjà fait un choix, ne rien faire
-  if (getCookie('lang_choice')) {
+  const existingChoice = getCookie('lang_choice');
+  if (existingChoice) {
     return;
   }
 
-  // Détecter la langue du navigateur
-  const userLang = navigator.language || navigator.userLanguage;
-  const langCode = userLang.toLowerCase().split('-')[0]; // 'fr-FR' devient 'fr'
+  const userAgent = (navigator.userAgent || '').toLowerCase();
+  const isBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|facebot|ia_archiver/.test(userAgent);
 
-  // Page actuelle
   const currentPath = window.location.pathname;
-  
-  // Détecter si on est sur la page racine (française par défaut)
   const isRootPage = currentPath === '/' || currentPath === '/index.html';
-  const isFrenchPage = currentPath.startsWith('/fr/') || isRootPage;
-  const isEnglishPage = currentPath.startsWith('/en/');
-  
-  // Règle simple : Si la langue n'est PAS français → rediriger vers anglais
-  if (langCode !== 'fr' && isFrenchPage && !isEnglishPage) {
-    // Construire l'URL anglaise équivalente
-    let englishPath;
-    if (isRootPage) {
-      englishPath = '/en/index.html';
-    } else {
-      englishPath = currentPath.replace('/fr/', '/en/');
-    }
-    setCookie('lang_choice', 'en', 30); // Cookie valide 30 jours
-    window.location.href = englishPath;
-  } 
-  // Si l'utilisateur préfère le français et qu'il est sur une page anglaise
-  else if (langCode === 'fr' && isEnglishPage) {
-    // Construire l'URL française équivalente
-    let frenchPath = currentPath.replace('/en/', '/fr/');
-    // Si c'est /en/index.html, rediriger vers la racine
-    if (frenchPath === '/fr/index.html') {
-      frenchPath = '/index.html';
-    }
-    setCookie('lang_choice', 'fr', 30);
-    window.location.href = frenchPath;
-  }
-  // Sinon, enregistrer le choix implicite basé sur la page actuelle
-  else {
-    const currentLang = isEnglishPage ? 'en' : 'fr';
+  const isEnglishSection = currentPath.startsWith('/en/');
+  const currentLang = isEnglishSection ? 'en' : 'fr';
+
+  if (isBot) {
     setCookie('lang_choice', currentLang, 30);
+    return;
   }
+
+  const browserLanguage = (navigator.language || navigator.userLanguage || '').toLowerCase();
+  const langCode = browserLanguage.split('-')[0];
+  let preferredLang = 'en';
+  if (langCode === 'fr') {
+    preferredLang = 'fr';
+  } else if (langCode === 'en') {
+    preferredLang = 'en';
+  }
+
+  if (isRootPage && preferredLang !== currentLang) {
+    const target = preferredLang === 'fr' ? '/' : '/en/index.html';
+    setCookie('lang_choice', preferredLang, 30);
+    window.location.href = target;
+    return;
+  }
+
+  setCookie('lang_choice', currentLang, 30);
 })();
 </script>
