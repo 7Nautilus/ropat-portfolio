@@ -1,6 +1,6 @@
 {% assign current_lang = page.lang | default: 'en' %}
 {% assign animation_index = include.index | default: 0 %}
-{% assign animation_delay = animation_index | times: 80 %}
+{% assign animation_delay = animation_index | times: 140 | plus: 60 %}
 {% if include.project.url[current_lang] %}
   {% assign project_url = include.project.url[current_lang] %}
 {% else %}
