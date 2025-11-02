@@ -11,47 +11,59 @@ media_type: image
 locales:
   fr:
     url: /fr/projects/btr.html
-    aria_label: "Voir le projet de la pochette de l'EP 'BTR' de Maltezz"
-    image_alt: "Pochette d'album 'BTR' de Maltezz"
-    title: "Pochette d'album \"BTR\""
-    subtitle: "**Direction Artistique** et **Cover Art** pour l'EP **BTR**"
-    description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
-    services: "Direction Artistique, Typographie custom & Design de pochette d'album"
+    aria_label: "Voir le projet de la pochette du single 'BTR' de Maltezz"
+    image_alt: "Pochette du single 'BTR' de Maltezz"
+    title: "Pochette du single \"BTR\""
+    subtitle: "**Direction Artistique** et **Cover Art** pour le single **BTR**"
+    description: "Direction artistique complète et création de la cover pour la sortie du single."
+    services: "Direction Artistique, Typographie custom & Design de pochette de single"
     context_title: "Contexte du projet"
     context_content: |
-      L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.
+      ### # Contexte et objectif
+      En juin 2025, **Maltezz** m'a contacté pour la création de la pochette de son nouvel **EP** intitulé **BTR**. Ce projet était particulièrement important pour lui donc il voulait lui donner une **identité visuelle** forte, en reflétant le message et l'ambiance de sa **musique**. Il m'a donc partagé son morceaux, ses inspirations, ainsi que quelques idées visuelles qu'il avait en tête.
 
-      J'ai travaillé sur la composition graphique, le choix des couleurs et la typographie pour refléter l'énergie et le style unique de BTR.
+      ### # Recherche et concept
+      J'ai commencé par analyser les références visuelles fournies par Maltezz, je les ai ensuite triées pour ne garder que celles qui étaient exploitables, puis j'ai commencé à travailler sur la manière dont j'allais les intégrer. J'ai également exploré différentes **palettes de couleurs** et **typographies** pour trouver celles qui correspondaient le mieux à l'univers de BTR. Je lui ai fourni un premier **moodboard** pour valider la **direction artistique**.
 
-      Ce projet m'a permis de développer mes compétences en design graphique tout en explorant de nouvelles techniques créatives.
+      ### # Conception graphique
+      Une fois le **concept** validé, j'ai commencé la **conception graphique** de la pochette en utilisant **Illustrator** pour créer la **typographie custom** et **Blender** pour modéliser certains éléments en **3D**, en particulier pour intégrer le texte sur une scène. J'ai travaillé sur la **composition**, l'intégration des éléments visuels, et la perspective afin de créer une atmosphère immersive.
+      
+      ### # Finitions et rendu
+      J'ai ensuite finalisé le rendu sur **Photoshop** pour obtenir une pochette unique, fidèle aux **inspirations** de l'artiste et qui reflétait à la fois son univers musical, mais aussi mon identité artistique. Ce projet m'a permis d'explorer de **nouvelles techniques** créatives tout en renforçant mes compétences en design graphique.
     seo:
       title: "Pochette BTR - Maltezz | Ropat"
-      description: "Direction artistique et création de la pochette pour l'EP BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
+      description: "Direction artistique et création de la pochette pour le single BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
       canonical_url: "https://ropat.art/fr/projects/btr.html"
       og_title: "Pochette BTR - Maltezz"
-      og_description: "Direction artistique et création de la pochette pour l'EP BTR de Maltezz."
+      og_description: "Direction artistique et création de la pochette pour le single BTR de Maltezz."
       og_url: "https://ropat.art/fr/projects/btr.html"
       og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
   en:
     url: /en/projects/btr.html
-    aria_label: "View the 'BTR' EP cover project by Maltezz"
-    image_alt: "'BTR' album cover by Maltezz"
-    title: "Album Cover \"BTR\""
-    subtitle: "**Art Direction** and **Cover Art** for the **BTR** EP"
-    description: "Complete art direction and cover creation for the EP release."
-    services: "Art Direction, Custom Typography & Album Cover Design"
+    aria_label: "View the 'BTR' single cover project by Maltezz"
+    image_alt: "'BTR' single cover by Maltezz"
+    title: "Single Cover \"BTR\""
+    subtitle: "**Art Direction** and **Cover Art** for the **BTR** single"
+    description: "Complete art direction and cover creation for the single release."
+    services: "Art Direction, Custom Typography & Single Cover Design"
     context_title: "Project Context"
     context_content: |
-      The goal was to create a strong visual identity that aligns with the artist's musical universe.
+      ### # Context and objective
+      In June 2025, **Maltezz** reached out to me for the creation of the cover for his new **EP** titled **BTR**. This project was particularly important to him, so he wanted to give it a strong **visual identity** that reflected the message and vibe of his **music**. He shared his track, inspirations, and some visual ideas he had in mind.
 
-      I worked on the graphic composition, color choices, and typography to reflect the energy and unique style of BTR.
+      ### # Research and concept
+      I began by analyzing the visual references provided by Maltezz, then sorted them to keep only the usable ones, and started working on how to integrate them. I also explored different **color palettes** and **typographies** to find those that best matched the BTR universe. I provided him with an initial **moodboard** to validate the **artistic direction**.
 
-      This project allowed me to develop my graphic design skills while exploring new creative techniques.
+      ### # Design execution
+      Once the **concept** was validated, I began the **graphic design** of the cover using **Illustrator** to create the **custom typography** and **Blender** to model certain elements in **3D**, particularly to integrate the text into a scene. I worked on the **composition**, integrating visual elements, and perspective to create an immersive atmosphere.
+      
+      ### # Finishing touches
+      I then finalized the rendering in **Photoshop** to achieve a unique cover that was faithful to the artist's **inspirations** and reflected both his musical universe and my artistic identity. This project allowed me to explore **new creative techniques** while strengthening my graphic design skills.
     seo:
       title: "BTR Cover - Maltezz | Ropat"
-      description: "Art direction and cover design for Maltezz's BTR EP. Graphic composition, color choices and typography."
+      description: "Art direction and cover design for Maltezz's BTR single. Graphic composition, color choices and typography."
       canonical_url: "https://ropat.art/en/projects/btr.html"
       og_title: "BTR Cover - Maltezz"
-      og_description: "Art direction and cover design for Maltezz's BTR EP."
+      og_description: "Art direction and cover design for Maltezz's BTR single."
       og_url: "https://ropat.art/en/projects/btr.html"
       og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
