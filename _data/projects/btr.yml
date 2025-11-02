@@ -16,7 +16,7 @@ locales:
     title: "Pochette d'album \"BTR\""
     subtitle: "**Direction Artistique** et **Cover Art** pour l'EP **BTR**"
     description: "Direction artistique complète et création de la cover pour la sortie de l'EP."
-    services: "Direction Artistique, Design de pochette d'album"
+    services: "Direction Artistique, Typographie custom & Design de pochette d'album"
     context_title: "Contexte du projet"
     context_content: |
       L'objectif était de concevoir une identité visuelle forte et cohérente avec l'univers musical de l'artiste.
@@ -39,7 +39,7 @@ locales:
     title: "Album Cover \"BTR\""
     subtitle: "**Art Direction** and **Cover Art** for the **BTR** EP"
     description: "Complete art direction and cover creation for the EP release."
-    services: "Art Direction, Album Cover Design"
+    services: "Art Direction, Custom Typography & Album Cover Design"
     context_title: "Project Context"
     context_content: |
       The goal was to create a strong visual identity that aligns with the artist's musical universe.
