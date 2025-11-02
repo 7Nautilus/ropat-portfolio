@@ -32,9 +32,17 @@ locales:
     services: "Direction Artistique, Typographie custom & Design de pochette d'album"
     context_title: "Contexte du projet"
     context_content: |
-      La pochette de l'album A-LONE a été mon premier projet concret pour un artiste musical.
+      ### # Contexte et objectif
+      Novembre 2024, B-Lone me contacte pour la création de la pochette de son nouvel album intitulé A-LONE. Le brief est clair : concevoir une identité visuelle forte et cohérente avec ce projet musical introspectif. Il m'envoie donc toutes les chansons de l'album pour m'imprégner de son univers, ainsi que les photos qu'il a prises pour l'occasion avec une photographe professionnelle.
 
-      J'ai conçu une identité visuelle forte et cohérente avec l'univers musical de B-Lone.
+      ### # Recherche et concept
+      Cette étape est celle qui a pris le plus de temps, entre choix des images, des couleurs, de la typographie, et des différentes compositions graphiques. Nous avons exploré de nombreuses pistes créatives avec l'artiste avant de trouver le concept final qui reflétait le mieux l'ambiance de l'album.
+
+      ### # Conception graphique
+      Une fois le concept validé, j'ai commencé la conception graphique de la pochette en utilisant Photoshop et Illustrator. J'ai travaillé sur la mise en page, l'intégration des éléments visuels, et la création d'une typographie custom pour le titre de l'album, afin de lui donner une identité unique.
+
+      ### # Finitions et rendu
+      Pour le rendu final, j'ai veillé à ce que tous les éléments soient harmonieux, en ajustant la palette de couleurs et les effets visuels pour obtenir un résultat professionnel et attrayant. Le projet s'est conclu par la livraison des fichiers finaux prêts pour la distribution numérique et la promotion de l'album.
     seo:
       title: "Pochette A-LONE - B-Lone | Ropat"
       description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone. Typographie custom et identité visuelle complète."
@@ -53,9 +61,17 @@ locales:
     services: "Art Direction, Custom Typography & Album Cover Design"
     context_title: "Project Context"
     context_content: |
-      The A-LONE album cover was my first concrete project for a music artist.
+      ### # Context and objective
+      In November 2024, B-Lone reached out to me for the creation of the cover for his new album titled A-LONE. The brief was clear: to design a strong visual identity that aligns with this introspective musical project. He sent me all the songs from the album to immerse myself in his universe, along with photos he had taken for the occasion with a professional photographer.
 
-      I designed a strong visual identity that aligns with B-Lone's musical universe.
+      ### # Research and concept
+      This stage took the most time, involving choices of images, colors, typography, and various graphic compositions. We explored numerous creative avenues with the artist before finding the final concept that best reflected the album's mood.
+
+      ### # Design execution
+      Once the concept was approved, I began the graphic design of the cover using Photoshop and Illustrator. I worked on layout, integration of visual elements, and created custom typography for the album title to give it a unique identity.
+
+      ### # Finishing touches
+      For the final rendering, I ensured all elements were harmonious by adjusting the color palette and visual effects to achieve a professional and appealing result. The project concluded with the delivery of final files ready for digital distribution and album promotion.
     seo:
       title: "A-LONE Cover - B-Lone | Ropat"
       description: "Art direction and cover design for B-Lone's A-LONE album. Custom typography and complete visual identity."
