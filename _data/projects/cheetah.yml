@@ -7,15 +7,6 @@ tools: "After Effects, Illustrator"
 image_src: /assets/images/projects/cheetah-stopmotion.png
 main_image: /assets/videos/CHEETAH.mp4
 media_type: video
-thumbnails:
-  - src: /assets/images/projects/cheetah-stopmotion.png
-    alt:
-      fr: "Animation Stop-Motion"
-      en: "Stop-Motion Animation"
-  - src: /assets/images/projects/cheetah-noir-fluo.mp4
-    alt:
-      fr: "Version noir fluo de l'animation Cheetah"
-      en: "Cheetah animation noir fluo version"
 locales:
   fr:
     url: /fr/projects/cheetah.html
