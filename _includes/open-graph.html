@@ -1,7 +1,7 @@
 <meta property="og:title" content="{{ include.og_title | default: include.page_title | default: page.og_title | default: page.title }}">
 <meta property="og:description" content="{{ include.og_description | default: include.page_meta_description | default: page.og_description | default: page.meta_description }}">
 <meta property="og:image" content="{{ include.og_image | default: page.og_image | default: 'https://ropat.art/assets/images/branding/icon.png' }}">
-<meta property="og:url" content="{{ include.og_url | default: page.og_url | default: site.url | append: page.url }}">
+<meta property="og:url" content="{{ include.og_url | default: page.og_url }}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{% if page.lang == 'fr' %}fr_FR{% else %}en_US{% endif %}">
 <meta property="og:site_name" content="Ropat">
@@ -10,6 +10,6 @@
 <meta name="twitter:title" content="{{ include.og_title | default: include.page_title | default: page.og_title | default: page.title }}">
 <meta name="twitter:description" content="{{ include.og_description | default: include.page_meta_description | default: page.og_description | default: page.meta_description }}">
 <meta name="twitter:image" content="{{ include.og_image | default: page.og_image | default: 'https://ropat.art/assets/images/branding/icon.png' }}">
-<meta name="twitter:url" content="{{ include.og_url | default: page.og_url | default: site.url | append: page.url }}">
+<meta name="twitter:url" content="{{ include.og_url | default: page.og_url }}">
 <meta name="twitter:creator" content="@9ropat">
 <meta name="twitter:site" content="@9ropat">
