@@ -1,46 +1,46 @@
 slug: jpeja
-project_title: "JPeJA Animation"
+project_title: "JPeJA Visualizer"
 category: animation
 featured: false
 year: "2025"
 tools: "After Effects"
-image_src: /assets/images/projects/jpeja.png
+image_src: /assets/images/projects/JPeJA-thumbnail.jpg
 main_image: /assets/videos/JPeJA.mp4
 media_type: video
 locales:
   fr:
     url: /fr/projects/jpeja.html
-    aria_label: "Voir le projet d'animation en stop-motion"
-    image_alt: "Animation Stop-Motion"
-    title: "Animation Stop-Motion"
-    subtitle: "Animation en **stop-motion**"
-    description: "Réalisation d'une animation en stop-motion"
+    aria_label: "Voir le projet de visualizer musical de JPeJA"
+    image_alt: "Visualizer musical de JPeJA"
+    title: "JPeJA"
+    subtitle: "Visualizer musical"
+    description: "Réalisation d'un visualizer musical"
     context_title: "À propos du projet"
     context_content: |
-      Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.
+      Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit
     seo:
-      title: "JPeJA Animation - Ropat"
-      description: "Animation en stop motion explorant la vitesse et l'agilité du guépard à travers l'analyse de son cycle de course."
+      title: "JPeJA Visualizer - Ropat"
+      description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
       canonical_url: "https://ropat.art/fr/projects/jpeja.html"
       og_title: "JPeJA Animation - Ropat"
-      og_description: "Animation en stop motion explorant la vitesse et l'agilité du guépard."
+      og_description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
       og_url: "https://ropat.art/fr/projects/jpeja.html"
-      og_image: "https://ropat.art/assets/images/projects/jpeja.png"
+      og_image: "https://ropat.art/assets/images/projects/JPeJA-thumbnail.jpg"
   en:
     url: /en/projects/jpeja.html
-    aria_label: "View the stop-motion animation project"
-    image_alt: "Stop-Motion Animation"
-    title: "Stop-Motion Animation"
-    subtitle: "**Stop-motion** animation"
-    description: "Creation of a stop-motion animation"
+    aria_label: "View the vusualizer project"
+    image_alt: "JPeJA Visualizer"
+    title: "JPeJA"
+    subtitle: "Musical visualizer"
+    description: "Creation of a musical visualizer"
     context_title: "About the project"
     context_content: |
-      This project showcases a stop-motion animation created using both traditional and digital techniques.
+      Fictional musical visualizer for the "JPeJA" single by Wasting Shit
     seo:
-      title: "Cheetah Animation - Ropat"
-      description: "Stop-motion animation exploring the cheetah's speed and agility through analysis of its running cycle."
-      canonical_url: "https://ropat.art/en/projects/cheetah.html"
-      og_title: "Cheetah Animation - Ropat"
-      og_description: "Stop-motion animation exploring the cheetah's speed and agility."
-      og_url: "https://ropat.art/en/projects/cheetah.html"
-      og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
+      title: "JPeJA Visualizer- Ropat"
+      description: "Fictional musical visualizer for the "JPeJA" single by Wasting Shit"
+      canonical_url: "https://ropat.art/en/projects/jpeja.html"
+      og_title: "JPeJA - Ropat"
+      og_description: "Fictional musical visualizer for the "JPeJA" single by Wasting Shit"
+      og_url: "https://ropat.art/en/projects/jpeja.html"
+      og_image: "https://ropat.art/assets/images/projects/JPeJA-thumbnail.jpg"
