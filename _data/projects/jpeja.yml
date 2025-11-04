@@ -4,7 +4,7 @@ category: animation
 featured: false
 year: "2025"
 tools: "After Effects"
-image_src: /assets/images/projects/JPeJA-thumbnail.jpg
+image_src: /assets/images/projects/jpeja-thumbnail.jpg
 main_image: /assets/videos/JPeJA.mp4
 media_type: video
 locales:
@@ -25,7 +25,7 @@ locales:
       og_title: "JPeJA Animation - Ropat"
       og_description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
       og_url: "https://ropat.art/fr/projects/jpeja.html"
-      og_image: "https://ropat.art/assets/images/projects/JPeJA-thumbnail.jpg"
+      og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
   en:
     url: /en/projects/jpeja.html
     aria_label: "View the visualizer project"
@@ -43,4 +43,4 @@ locales:
       og_title: "JPeJA - Ropat"
       og_description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
       og_url: "https://ropat.art/en/projects/jpeja.html"
-      og_image: "https://ropat.art/assets/images/projects/JPeJA-thumbnail.jpg"
+      og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
