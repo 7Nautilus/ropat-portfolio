@@ -28,7 +28,7 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/JPeJA-thumbnail.jpg"
   en:
     url: /en/projects/jpeja.html
-    aria_label: "View the vusualizer project"
+    aria_label: "View the visualizer project"
     image_alt: "JPeJA Visualizer"
     title: "JPeJA"
     subtitle: "Musical visualizer"
