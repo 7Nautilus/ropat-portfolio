@@ -3,12 +3,11 @@ description: "Portfolio de Ropat"
 baseurl: ""
 url: "https://ropat.art"
 
-# Exclusions pour Jekyll (ne pas exclure _includes car Jekyll en a besoin pour les inclusions)
+# Exclusions pour Jekyll
 exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-
 
 # Configuration Business (pour Schema.org)
 business:
@@ -25,7 +24,7 @@ business:
     longitude: "-0.563166"
   # Email
   email: "vultur.psd@gmail.com"
-  
+
   # Horaires
   opening_hours:
     - day: "Monday"
