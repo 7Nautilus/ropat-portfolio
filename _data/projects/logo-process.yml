@@ -34,7 +34,17 @@ locales:
     description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
     context_title: "À propos du projet"
     context_content: |
-      Ce projet met en avant le processus de création d'un logo, de l'esquisse initiale à la version finale.
+      ### # Contexte et objectif
+      Pour ce projet j'ai voulu documenter le processus de création d'un logo géométrique, depuis l'esquisse initiale jusqu'à la version finale en 3D avec effets visuels. L'objectif était de montrer les différentes étapes de conception et les choix artistiques effectués tout au long du projet.
+
+      ### # Recherche et concept
+      J'ai commencé par effectuer des recherches sur les tendances actuelles en matière de design de logo, en m'inspirant de formes géométriques et de palettes de couleurs modernes. J'ai ensuite esquissé plusieurs concepts, en me concentrant sur la simplicité et l'impact visuel.
+
+      ### # Conception graphique
+      J'ai utilisé Illustrator pour créer la version vectorielle du logo, en veillant à respecter des proportions parfaitement équilibrées, pour ce faire je m'en suit tenu à deux formes, un cercle de 2 pixels de diamètre et un autre de 6 pixels de diamètre. Une fois le sketch terminé j'ai modélisé le logo en 3D, toujours sur Illustrator.
+
+      ### # Finitions et rendu
+      Pour la version finale, j'ai ajouté des effets visuels sur mon modèle 3D, en jouant avec les ombres, les zonnes de lumière, les contrastes et le grain pour donner plus de profondeur et d'identité au logo. Le rendu final met en valeur la géométrie du logo tout en lui conférant un aspect moderne et dynamique.
     seo:
       title: "Logo Design Process | Ropat"
       description: "Découvrez le processus de création d'un logo géométrique, de l'esquisse initiale à la version finale 3D avec effets."
@@ -52,7 +62,17 @@ locales:
     description: "Example of logo design process including sketch, development and finalization."
     context_title: "About the project"
     context_content: |
-      This project showcases the logo creation process, from the initial sketch to the final version.
+      ### # Context and objective
+      For this project, I wanted to document the process of creating a geometric logo, from the initial sketch to the final 3D version with visual effects. The goal was to showcase the different design stages and artistic choices made throughout the project.
+      
+      ### # Research and concept
+      I started by researching current trends in logo design, drawing inspiration from geometric shapes and modern color palettes. I then sketched several concepts, focusing on simplicity and visual impact.
+
+      ### # Design execution
+      I used Illustrator to create the vector version of the logo, ensuring perfectly balanced proportions by sticking to two shapes: a 2-pixel diameter circle and a 6-pixel diameter circle. Once the sketch was complete, I modeled the logo in 3D, still using Illustrator.
+      
+      ### # Finishing touches
+      For the final version, I added visual effects to my 3D model, playing with shadows, light areas, contrasts, and grain to give more depth and identity to the logo. The final render highlights the logo's geometry while giving it a modern and dynamic look.
     seo:
       title: "Logo Design Process | Ropat"
       description: "Discover the geometric logo creation process, from initial sketch to final 3D version with effects."
