@@ -29,14 +29,15 @@ Pour ajouter un projet :
 - Compléter le YAML généré (FR/EN, SEO, miniatures)
 - Voir `README.md` pour les étapes détaillées
 
-- JPeJA
-- Crow animation
-- Poster "Outlast"
+
 - Poster "Carti"
-- Logo design process 2
+- Logo design process "K"
 
 ---
 
 - EN description de JPeJA
 - EN description de cheetah
-- 
+- EN & FR description de crow
+- EN & FR description de exit
+- EN & FR description de Logo process
+- EN & FR description de Outlast
