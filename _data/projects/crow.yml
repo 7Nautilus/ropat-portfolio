@@ -17,7 +17,17 @@ locales:
     description: "Réalisation d'une animation en stop-motion"
     context_title: "À propos du projet"
     context_content: |
-      Ce projet met en avant une animation en stop motion réalisée avec des techniques traditionnelles et numériques.
+      ### # Contexte et objectif
+      A la suite du projet Cheetah, j'ai souhaité poursuivre l'exploration de l'animation en stop-motion en me concentrant cette fois sur un animal volant : le corbeau. L'objectif de ce projet était de capturer et d'analyser visuellement le cycle de vol du corbeau, en utilisant une approche similaire mêlant techniques traditionnelles et outils numériques.
+
+      ### # Recherche et concept
+      A l'instar du projet précédent, j'ai débuté par définir le style graphique de l'animation. J'ai donc recréé le corbeau en pixel art arrondi, avant de le modéliser en 3D pour lui donner plus de profondeur et de réalisme dans ses mouvements.
+
+      ### # Conception graphique
+      Les frames de l'animation ont été réalisées en combinant des dessins vectoriels créés dans Illustrator et l'assemblage/animation dans After Effects. J'ai veillé à positionner chaque frame avec soin pour respecter la fluidité naturelle du vol tout en conservant l'esthétique stylisée du stop-motion.
+
+      ### # Finitions et rendu
+      Le travail de post-production a permis de peaufiner la colorimétrie, de jouer sur la lumière et d'ajouter des effets subtils afin de donner plus de profondeur à l'animation.
     seo:
       title: "Crow Animation - Ropat"
       description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
@@ -35,7 +45,10 @@ locales:
     description: "Creation of a stop-motion animation"
     context_title: "About the project"
     context_content: |
-      This project showcases a stop-motion animation created using both traditional and digital techniques.
+      ### # Context and objective
+      ### # Research and concept
+      ### # Design execution
+      ### # Finishing touches
     seo:
       title: "Crow Animation - Ropat"
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."

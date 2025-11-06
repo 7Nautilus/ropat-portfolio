@@ -45,7 +45,17 @@ locales:
     description: "Creation of a stop-motion animation"
     context_title: "About the project"
     context_content: |
-      This project showcases a stop-motion animation created using both traditional and digital techniques.
+      ### # Context and objective
+      This stop-motion animation project was born from a fascination with animal biomechanics, particularly the cheetah, the fastest land animal in the world. The goal was to visually capture and analyze the unique running cycle of this feline, using a hybrid approach that combines traditional techniques with digital tools.
+      
+      ### # Research and concept
+      I began by defining the graphic style I wanted to use in my animation. I chose to represent the cheetah in rounded pixel art, worked in a red and black bichrome. This minimalist aesthetic allows for a focus on the fluidity of movement while creating a strong visual contrast.
+      
+      ### # Design execution
+      The animation was created frame by frame by combining vector drawings made in Illustrator and assembly/animation in After Effects. Each frame was carefully positioned to respect the natural fluidity of movement while maintaining the stylized stop-motion aesthetic.
+      
+      ### # Finishing touches
+      The post-production work allowed for refining transitions, adding subtle velocity effects, and optimizing timing to create a smooth loop. The final animation captures the essence of the cheetah's power and agility in a clean graphic style, where pixel art meets contemporary motion design.
     seo:
       title: "Cheetah Animation - Ropat"
       description: "Stop-motion animation exploring the cheetah's speed and agility through analysis of its running cycle."
