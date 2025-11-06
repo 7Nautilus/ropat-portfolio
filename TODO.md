@@ -34,3 +34,9 @@ Pour ajouter un projet :
 - Poster "Outlast"
 - Poster "Carti"
 - Logo design process 2
+
+---
+
+- EN description de JPeJA
+- EN description de cheetah
+- 
