@@ -9,6 +9,8 @@ Tous les projets ont été migrés vers le système YAML centralisé :
 - ✅ EXIT (affiche)
 - ✅ HDD DEFRAG (affiche)
 - ✅ Logo Design Process (galerie)
+- ✅ Crow Animation (vidéo stop-motion)
+- ✅ JPeJA Animation (visualizer)
 
 **Nouveau système** :
 - Données modulaires dans `_data/projects/<slug>.yml`
