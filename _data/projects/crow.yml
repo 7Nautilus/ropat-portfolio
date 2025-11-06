@@ -46,9 +46,17 @@ locales:
     context_title: "About the project"
     context_content: |
       ### # Context and objective
+      Following the Cheetah project, I wanted to continue exploring stop-motion animation by focusing this time on a flying animal: the crow. The goal of this project was to visually capture and analyze the crow's flight cycle, using a similar approach that combines traditional techniques with digital tools.
+      
       ### # Research and concept
+      Following the previous project, I began by defining the graphic style of the animation. I recreated the crow in rounded pixel art, then modeled it in 3D to give it more depth and realism in its movements.
+      
+
       ### # Design execution
+      The frames of the animation were created by combining vector drawings made in Illustrator with assembly/animation in After Effects. I made sure to position each frame carefully to respect the natural fluidity of flight while maintaining the stylized aesthetic of stop-motion.
+
       ### # Finishing touches
+      The post-production work refined the colorimetry, played with light, and added subtle effects to give more depth to the animation.
     seo:
       title: "Crow Animation - Ropat"
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."
