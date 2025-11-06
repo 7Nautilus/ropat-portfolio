@@ -1,3 +1,22 @@
+# Composants System
+
+## Projets
+
+- Données modulaires dans `_data/projects/<slug>.yml`
+- Ordre contrôlé par `_data/projects/index.yml`
+- Script d'amorçage : `scripts/new-project.ps1`
+- Templates mis à jour :
+    - `_includes/project-card.html`,
+    - `_includes/project-main.html`
+- Support images ET vidéos (fallbacks automatiques)
+- Métadonnées SEO intégrées par langue
+
+
+## Layout
+
+- `_includes/schema-org.html`,
+- `_layouts/default.html`
+
 # PROJECTS
 
 ## ✅ Migration DRY - TERMINÉE
