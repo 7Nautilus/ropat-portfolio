@@ -35,9 +35,9 @@ Pour ajouter un projet :
 
 ---
 
-- EN description de JPeJA
-- EN description de cheetah
-- EN & FR description de crow
+- ✅ EN description de JPeJA
+- ✅ EN description de cheetah
+- ✅ EN & FR description de crow
 - EN & FR description de exit
 - EN & FR description de Logo process
 - EN & FR description de Outlast
