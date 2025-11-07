@@ -12,7 +12,7 @@ locales:
     url: /fr/projects/outlast-trials.html
     aria_label: "Voir le projet d'affiche Outlast Trials"
     image_alt: "Affiche Outlast Trials"
-    title: "Affiche \"Outlast Trials\""
+    title: "Affiche “Outlast Trials”"
     subtitle: "Projet de **design graphique** d'affiche"
     description: "Création d'une affiche sur le thème du jeu vidéo Outlast Trials."
     context_title: "À propos du projet"
@@ -30,7 +30,7 @@ locales:
     url: /en/projects/outlast-trials.html
     aria_label: "View the Outlast Trials poster project"
     image_alt: "Outlast Trials Poster"
-    title: "Poster \"Outlast Trials\""
+    title: "Poster “Outlast Trials”"
     subtitle: "**Graphic design** poster project"
     description: "Creation of a poster on the theme of the Outlast Trials video game."
     context_title: "About the project"
