@@ -24,9 +24,9 @@ thumbnails:
 locales:
   fr:
     url: /fr/projects/a-lone.html
-    aria_label: "Voir la pochette de l'album 'A-LONE' de B-Lone"
-    image_alt: "Pochette d'album 'A-LONE' de B-Lone"
-    title: Pochette d'album "A-LONE"
+    aria_label: "Voir la pochette de l'album “A-LONE” de B-Lone"
+    image_alt: "Pochette d'album “A-LONE” de B-Lone"
+    title: "Pochette d'album “A-LONE”"
     subtitle: "**Direction Artistique** et **Cover Art** pour l'album **A-LONE**"
     description: "Direction artistique complète et création de la cover pour la sortie de l'album."
     services: "Direction Artistique, Typographie custom & Design de pochette d'album"
@@ -53,9 +53,9 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"
   en:
     url: /en/projects/a-lone.html
-    aria_label: "View the 'A-LONE' album cover by B-Lone"
-    image_alt: "'A-LONE' album cover by B-Lone"
-    title: "Album Cover \"A-LONE\""
+    aria_label: "View the “A-LONE” album cover by B-Lone"
+    image_alt: "“A-LONE” album cover by B-Lone"
+    title: "Album Cover “A-LONE”"
     subtitle: "**Art Direction** and **Cover Art** for the **A-LONE** album"
     description: "Complete art direction and cover creation for the album release."
     services: "Art Direction, Custom Typography & Album Cover Design"
