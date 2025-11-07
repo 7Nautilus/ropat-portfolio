@@ -12,8 +12,8 @@ locales:
   fr:
     url: /fr/projects/btr.html
     aria_label: "Voir le projet de la pochette du single 'BTR' de Maltezz"
-    image_alt: "Pochette du single 'BTR' de Maltezz"
-    title: Pochette du single "\"BTR\""
+    image_alt: "Pochette du single “BTR” de Maltezz"
+    title: Pochette du single “BTR”"
     subtitle: "**Direction Artistique** et **Cover Art** pour le single **BTR**"
     description: "Direction artistique complète et création de la cover pour la sortie du single."
     services: "Direction Artistique, Typographie custom & Design de pochette de single"
