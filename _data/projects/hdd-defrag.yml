@@ -12,7 +12,7 @@ locales:
     url: /fr/projects/hdd-defrag.html
     aria_label: "Voir le projet d'affiche HDD DEFRAG"
     image_alt: "Affiche HDD DEFRAG"
-    title: "Affiche \"HDD DEFRAG\""
+    title: "Affiche “HDD DEFRAG”"
     subtitle: "Design d'**affiche** sur la défragmentation de disque dur"
     description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
     context_title: "À propos du projet"
@@ -40,7 +40,7 @@ locales:
     url: /en/projects/hdd-defrag.html
     aria_label: "View the HDD DEFRAG poster project"
     image_alt: "HDD DEFRAG Poster"
-    title: "Poster \"HDD DEFRAG\""
+    title: "Poster “HDD DEFRAG”"
     subtitle: "**Graphic design** poster project"
     description: "Creation of a poster on the theme of hard drive defragmentation."
     context_title: "About the project"
