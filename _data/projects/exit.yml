@@ -12,7 +12,7 @@ locales:
     url: /fr/projects/exit.html
     aria_label: "Voir le projet d'affiche EXIT"
     image_alt: "Affiche EXIT"
-    title: "Affiche \"EXIT\""
+    title: "Affiche “EXIT”"
     subtitle: "Projet de **création d'affiche** détournant le design des panneaux de signalisation de sorties de secours"
     description: "Création d'une affiche sur le thème du design des sorties de secours."
     context_title: "À propos du projet"
@@ -34,7 +34,7 @@ locales:
     url: /en/projects/exit.html
     aria_label: "View the EXIT poster project"
     image_alt: "EXIT Poster"
-    title: "Poster \"EXIT\""
+    title: "Poster “EXIT”"
     subtitle: "**Poster design** project reinterpreting emergency exit signage design"
     description: "Creation of a poster on the theme of emergency exit design."
     context_title: "About the project"
