@@ -14,51 +14,34 @@
 
 ## Layout
 
-- `_includes/schema-org.html`,
 - `_layouts/default.html`
+
+
+## SEO
+
+- `_includes/schema-org.html`,
+- `_includes/open-graph.html`,
+
+
+
 
 # PROJECTS
 
-## ✅ Migration DRY - TERMINÉE
+# TODO
 
-Tous les projets ont été migrés vers le système YAML centralisé :
-- ✅ A-LONE (pochette album)
-- ✅ BTR (pochette EP)
-- ✅ Cheetah Animation (vidéo stop-motion)
-- ✅ EXIT (affiche)
-- ✅ HDD DEFRAG (affiche)
-- ✅ Logo Design Process (galerie)
-- ✅ Crow Animation (vidéo stop-motion)
-- ✅ JPeJA Animation (visualizer)
+> Consulter `README.md` (section « Ajouter un nouveau projet ») pour la procédure complète de création.
 
-**Nouveau système** :
-- Données modulaires dans `_data/projects/<slug>.yml`
-- Ordre contrôlé par `_data/projects/index.yml`
-- Script d'amorçage : `scripts/new-project.ps1`
-- Templates mis à jour : `_includes/project-card.html`, `_includes/project-main.html`, `_includes/schema-org.html`, `_layouts/default.html`
-- Support images ET vidéos (fallbacks automatiques)
-- Métadonnées SEO intégrées par langue
+## Contenu à produire
 
-📖 **Voir `README.md` (section "Ajouter un nouveau projet") pour la procédure complète**
-
----
-
-## Projets à ajouter
-
-Pour ajouter un projet :
-- Lancer `scripts/new-project.ps1`
-- Compléter le YAML généré (FR/EN, SEO, miniatures)
-- Voir `README.md` pour les étapes détaillées
-
-
+- EN & FR description de EXIT
 - Poster "Carti"
 - Logo design process "K"
 
----
+## Historique récent
 
 - ✅ EN description de JPeJA
-- ✅ EN description de cheetah
-- ✅ EN & FR description de crow
-- EN & FR description de exit
+- ✅ EN description de Cheetah
+- ✅ EN & FR description de Crow
 - ✅ EN & FR description de Logo process
 - ✅ EN & FR description de Outlast
+- Support images ET vidéos (fallbacks automatiques)

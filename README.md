@@ -1,67 +1,47 @@
 # Portfolio Ropat
 
-Bienvenue sur mon portfolio en ligne ! Ce site présente mes projets, compétences et expériences professionnelles.
+Bienvenue sur mon portfolio en ligne. Ce site présente mes projets, compétences et expériences professionnelles via un générateur statique Jekyll déployé sur GitHub Pages.
 
-## 🚀 Technologies utilisées
+## Aperçu
+
+- 🌍 Multilingue FR/EN avec SEO adapté
+- 🎨 Portfolio filtrable et responsive
+- ♿ Accessibilité renforcée (ARIA, alt explicites)
+- ⚡ Performance optimisée (images dimensionnées, médias adaptés)
+- 🤖 Déploiement automatisé via GitHub Actions (build + sitemap)
+
+## Stack technique
 
 - **HTML5 / CSS3 / JavaScript**
-- **Jekyll** pour la génération statique du site
+- **Jekyll** pour la génération statique
 - **GitHub Pages** pour l'hébergement
-- **GitHub Actions** pour l'automatisation du déploiement et de la génération du sitemap
+- **GitHub Actions** pour l'automatisation CI/CD
 
-## ✨ Fonctionnalités
+## Architecture des contenus
 
-- 🌍 **Multilingue** : Support complet FR/EN
-- 🎨 **Portfolio dynamique** : Filtres par catégorie
-- 📱 **Design responsive** : Optimisé pour tous les appareils
-- 🔍 **SEO optimisé** : Métadonnées, sitemap, balises hreflang
-- ♿ **Accessibilité** : Labels ARIA, attributs alt
-- ⚡ **Performance** : Images optimisées avec width/height
-
-## 📁 Architecture DRY (Don't Repeat Yourself)
-
-Ce projet suit le principe **DRY** avec une architecture centralisée :
-
-### Pages légales
-
-Le site inclut des pages de mentions légales et de confidentialité conformes au RGPD :
-- 🇫🇷 `/fr/mentions-legales.html` + `/fr/confidentialite.html`
-- 🇬🇧 `/en/legal-notice.html` + `/en/privacy.html`
-
-### Structure des données
+### Données
 
 ```
 _data/
-├── navigation.yml             # Navigation du site
-├── projects/                  # 1 fichier par projet + ordre d'affichage
+├── navigation.yml             # Navigation principale
+├── projects/                  # 1 fichier YAML par projet + ordre d'affichage
 │   ├── index.yml              # Liste ordonnée des slugs
 │   ├── a-lone.yml             # Contenu & SEO du projet "A-LONE"
 │   ├── btr.yml
 │   └── ...
-└── services.yml               # Tous les services
+└── services.yml               # Liste des services proposés
 ```
 
-Chaque projet possède désormais son propre fichier YAML. Les champs globaux (année, outils, client, média) sont partagés, tandis que les textes traduits sont regroupés sous `locales`. Ce découpage facilite les ajouts, les revues et les contributions multiples.
+Chaque projet possède son propre fichier YAML. Les champs globaux (année, outils, client, média) sont partagés et les traductions sont rangées sous `locales`. Le principe DRY est ainsi respecté : une seule source de vérité pour les contenus et les métadonnées.
 
-### Layouts et Includes
+### Layouts et includes
 
-**Layouts :**
-- `_layouts/default.html` : Template de base
-  - Détecte automatiquement les pages de projet via `project_id`
-  - Charge les métadonnées SEO depuis `_data/projects/<slug>.yml`
-  - Gère les liens hreflang FR/EN
+- `_layouts/default.html` : détecte `project_id`, charge les données YAML, gère les balises hreflang
+- `_includes/project-main.html`, `_includes/project-card.html`, `_includes/service-card.html` : blocs réutilisables pour projets/services
+- `_includes/open-graph.html`, `_includes/schema-org.html` : balises SEO centralisées
+- `header.html`, `footer.html`, `nav.html`, `portfolio-filters.html` : structure globale
 
-**Includes réutilisables :**
-- `header.html`, `footer.html`, `nav.html` : Structure
-- `open-graph.html` : Balises Open Graph/Twitter
-- `project-main.html` : Template principal pour les projets
-- `project-card.html` : Carte de projet (grille portfolio)
-- `service-card.html` : Carte de service
-- `portfolio-filters.html` : Filtres du portfolio
-
-## 🌍 Système Multilingue
-
-### Structure des fichiers
+## Système multilingue
 
 ```
 ropat-portfolio/
@@ -81,28 +61,26 @@ ropat-portfolio/
         └── ...
 ```
 
-### Fonctionnement
+- URLs distinctes : `/fr/...` et `/en/...`
+- Textes et métadonnées centralisés dans `_data/projects/<slug>.yml`
+- Hreflang géré automatiquement par `_layouts/default.html`
+- Cartes projets (`project-card.html`) qui adaptent les URLs selon la langue active
 
-1. **URLs distinctes** : `/fr/projects/...` et `/en/projects/...`
-2. **Traductions centralisées** : Tous les textes dans `_data/projects/<slug>.yml`
-3. **SEO optimisé** : Balises hreflang automatiques
-4. **Navigation intelligente** : `project-card.html` adapte les URLs selon la langue
+## Ajouter un nouveau projet
 
-## 🎨 Ajouter un nouveau projet
+1. **Lancer l'assistant** :
+   ```powershell
+   powershell -ExecutionPolicy Bypass -File .\scripts\new-project.ps1
+   # ou : pwsh -File ./scripts/new-project.ps1
+   ```
+   Le script crée automatiquement :
+   - `_data/projects/<slug>.yml`
+   - l'entrée correspondante dans `_data/projects/index.yml`
+   - `fr/projects/<slug>.html` et `en/projects/<slug>.html`
 
-1. Lancer l'assistant :
-    ```powershell
-    powershell -ExecutionPolicy Bypass -File .\scripts\new-project.ps1
-    # ou : pwsh -File ./scripts/new-project.ps1
-    ```
-    Le script demande le slug, la catégorie, les textes principaux FR/EN et crée automatiquement :
-    - le fichier `_data/projects/<slug>.yml`
-    - l'entrée correspondante dans `_data/projects/index.yml`
-    - les pages `fr/projects/<slug>.html` et `en/projects/<slug>.html`
+2. **Compléter le YAML généré** : renseigner les textes FR/EN manquants, les champs SEO et les médias supplémentaires.
 
-2. Ouvrir le fichier YAML généré et compléter les champs encore « TODO » si nécessaire (SEO, contexte détaillé, miniatures additionnelles, etc.).
-
-### Structure du fichier projet
+### Modèle YAML de référence
 
 ```yaml
 slug: exemple
@@ -156,9 +134,7 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/exemple.png"
 ```
 
-### Pages FR/EN générées
-
-Les deux fichiers contiennent uniquement le front matter suivant (déjà rempli par le script) :
+### Pages générées (FR/EN)
 
 ```yaml
 ---
@@ -170,38 +146,31 @@ project_id: "exemple"
 {% include project-main.html project_id=page.project_id %}
 ```
 
-`project_id` doit correspondre au slug : c'est la clé utilisée pour récupérer les données dans `_data/projects/<slug>.yml`.
+`project_id` doit correspondre au slug. Cette clé pilote le chargement des données et des métadonnées SEO.
 
-## 🔄 Flux des métadonnées SEO
+## Flux SEO
 
-### Pages de projets :
-1. Page définit `project_id` dans le front matter
-2. `default.html` détecte `project_id` et charge les données depuis `_data/projects/<slug>.yml`
-3. Les métadonnées sont injectées dans `page.*`
-4. `open-graph.html` utilise ces variables
+- **Pages projets**
+  1. Le front matter définit `project_id`
+  2. `_layouts/default.html` charge `_data/projects/<slug>.yml`
+  3. Les variables sont exposées à la page et aux includes
+  4. `_includes/open-graph.html` et `_includes/schema-org.html` injectent les balises
+- **Pages classiques** : métadonnées définies directement dans le front matter puis relayées par le layout
 
-### Pages normales :
-1. Métadonnées définies dans le front matter
-2. `default.html` et `open-graph.html` utilisent `page.*`
+## Projets disponibles
 
-✨ Un seul système cohérent pour toutes les pages !
+- ✅ A-LONE — Pochette d'album B-Lone
+- ✅ BTR — Pochette EP Maltezz
+- ✅ Cheetah Animation — Stop-motion (vidéo)
+- ✅ Crow Animation — Stop-motion (vidéo)
+- ✅ EXIT — Affiche design
+- ✅ HDD DEFRAG — Affiche design
+- ✅ JPeJA Animation — Visualizer
+- ✅ Logo Design Process — Processus de création de logo
 
-## 📊 Projets migrés
+## Points forts
 
-✅ **A-LONE** - Pochette d'album B-Lone  
-✅ **BTR** - Pochette EP Maltezz  
-✅ **Cheetah Animation** - Stop-motion (vidéo)  
-✅ **EXIT** - Affiche design  
-✅ **HDD DEFRAG** - Affiche design  
-✅ **Logo Design Process** - Processus création logo (galerie)
-
-## 🎯 Avantages du système
-
-✅ **Une seule source de vérité** : Données centralisées  
-✅ **Pas de duplication** : Modification unique pour FR et EN  
-✅ **SEO centralisé** : Métadonnées gérées depuis YAML  
-✅ **Maintenance facile** : 1 projet = 1 modification YAML  
-✅ **Cohérence** : Template unique pour tous les projets  
-✅ **Évolutif** : Facile d'ajouter de nouveaux champs
-
-## 📈 Score DRY : 9.5/10 🎉
+- Une seule source de vérité pour FR/EN
+- Données, SEO et médias centralisés dans YAML
+- Templates réutilisables pour limiter la duplication
+- Système prêt pour de nouvelles catégories ou types de médias
