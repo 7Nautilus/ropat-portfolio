@@ -1,44 +1,198 @@
-- icon_aria: 
-    fr: 'Icône de conception graphique'
-    en: 'Graphic design icon'
+- id: graphic-design
+  slug:
+    fr: conception-graphique
+    en: graphic-design
+  detail_url:
+    fr: "/fr/services/conception-graphique.html"
+    en: "/en/services/graphic-design.html"
+  icon_aria:
+    fr: "Icône de conception graphique"
+    en: "Graphic design icon"
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>'
-  title: 
-    fr: 'Conception graphique'
-    en: 'Graphic Design'
-  description: 
-    fr: 'Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web.'
-    en: 'Creation of logos, complete visual identities, posters, flyers and all your print and web communication materials.'
-  tools: 
-    - nom: '#Illustrator'
-    - nom: '#Photoshop'
-    - nom: '#Figma'
+  title:
+    fr: "Conception graphique"
+    en: "Graphic Design"
+  description:
+    fr: "Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web."
+    en: "Creation of logos, complete visual identities, posters, flyers and all your print and web communication materials."
+  detail:
+    fr:
+      hero_title: "Conception graphique"
+      hero_intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
+      sections:
+        - heading: "Ce que je propose"
+          content: |
+            Je vous accompagne sur l'ensemble de votre identité visuelle et de vos supports de communication.
 
-- icon_aria: 
-    fr: 'Icône de design pour la musique'
-    en: 'Music design icon'
+            - Création ou refonte de logos et chartes graphiques complètes
+            - Kits réseaux sociaux, templates réutilisables et guidelines détaillées
+            - Supports print (flyers, affiches, cartes) et déclinaisons digitales cohérentes
+        - heading: "Mon approche"
+          content: |
+            Chaque projet commence par une phase d'écoute afin de comprendre votre positionnement, votre public et vos contraintes. Je traduis ensuite ces informations en moodboards et pistes créatives que nous validons ensemble avant de passer à la production finale. Les livrables sont remis avec toutes les variations nécessaires (formats, couleurs, exports optimisés) pour faciliter leur utilisation au quotidien.
+        - heading: "Livrables possibles"
+          content: |
+            - Logos principaux et secondaires, monogrammes et versions responsives
+            - Chartes graphiques complètes (typographies, couleurs, usages)
+            - Déclinaisons pour réseaux sociaux, templates et éléments prêts pour l'animation
+            - Fichiers source et exports optimisés pour le print comme pour le web
+      cta:
+        text: "Discuter de votre projet"
+        url: "/fr/contact.html"
+    en:
+      hero_title: "Graphic Design"
+      hero_intro: "I craft visual identities and multi-format assets that keep your brand cohesive across print and digital touchpoints."
+      sections:
+        - heading: "What I deliver"
+          content: |
+            I support your brand across every visual touchpoint.
+
+            - New or refreshed logos and full brand guidelines
+            - Social media kits, reusable templates and detailed usage guides
+            - Print collateral (posters, flyers, cards) adapted for digital campaigns
+        - heading: "How we collaborate"
+          content: |
+            We begin with an in-depth conversation about your positioning, audience and constraints. From there I build moodboards and creative directions that we validate together before moving into production. Final files are delivered with every variation you need (formats, color spaces, optimized exports) so your team can deploy them immediately.
+        - heading: "Typical assets"
+          content: |
+            - Primary and secondary logos, monograms and responsive variations
+            - Complete brand guidelines covering typography, color systems and usage rules
+            - Social-ready assets, templated kits and motion-friendly elements
+            - Source files and exports optimized for both print and digital channels
+      cta:
+        text: "Book a discovery call"
+        url: "/en/contact.html"
+  tools:
+    - nom: "#Illustrator"
+    - nom: "#Photoshop"
+    - nom: "#Figma"
+
+- id: music-design
+  slug:
+    fr: design-musique
+    en: music-design
+  detail_url:
+    fr: "/fr/services/design-musique.html"
+    en: "/en/services/music-design.html"
+  icon_aria:
+    fr: "Icône de design pour la musique"
+    en: "Music design icon"
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-icon lucide-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
-  title: 
-    fr: 'Design pour la musique'
-    en: 'Music Design'
-  description: 
+  title:
+    fr: "Design pour la musique"
+    en: "Music Design"
+  description:
     fr: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
     en: "Creation of album covers, visualizers, concert posters and all visual materials for artists and music labels."
-  tools: 
-    - nom: '#Photoshop'
-    - nom: '#Illustrator'
-    - nom: '#Blender'
+  detail:
+    fr:
+      hero_title: "Design pour la musique"
+      hero_intro: "Je conçois des visuels immersifs pour les artistes, labels et événements musicaux, du single à la tournée."
+      sections:
+        - heading: "Services proposés"
+          content: |
+            - Pochette de single, EP ou album, déclinaisons vinyles et miniatures streaming
+            - Visualizers, lyrics videos, animations pour stories et écrans de scène
+            - Identité visuelle pour tournées, communiqués de presse et dossiers EPK
+        - heading: "Process créatif"
+          content: |
+            Après une écoute attentive de vos morceaux et de vos intentions, je construis un moodboard partagé pour aligner les inspirations. Nous explorons ensuite plusieurs directions graphiques (photomontage, 3D, typographie custom) avant de valider la piste principale. Chaque visuel est décliné dans les formats nécessaires pour vos sorties digitales, vos supports physiques et vos besoins promotionnels.
+        - heading: "Ce que vous recevez"
+          content: |
+            - Cover master et variations adaptées aux plateformes (Spotify, Apple Music, YouTube, Bandcamp)
+            - Animations courtes prêtes à publier (reels, TikTok, teasers) et visuels pour écrans de scène
+            - Packaging physique (CD, vinyle) et éléments pour merchandising
+            - Fichiers source organisés et exports optimisés pour chaque support
+      cta:
+        text: "Lancer un nouveau projet"
+        url: "/fr/contact.html"
+    en:
+      hero_title: "Music Design"
+      hero_intro: "I craft immersive visuals for artists, labels and music events—from single releases to full tour roll-outs."
+      sections:
+        - heading: "Services I provide"
+          content: |
+            - Single, EP and album artwork, including vinyl sleeves and streaming thumbnails
+            - Visualizers, lyric videos, animated loops for stories and stage screens
+            - Visual identities for tours, press campaigns and EPKs
+        - heading: "Creative process"
+          content: |
+            I start by immersing myself in your music and gathering references to capture the right mood. Together we align on a shared moodboard before exploring multiple directions—photomontage, 3D, custom typography or mixed media. Once the main concept is approved, I roll out the full visual toolkit with every format required for your release schedule and promo strategy.
+        - heading: "Deliverables"
+          content: |
+            - Master artwork plus platform-specific crops for Spotify, Apple Music, YouTube and more
+            - Short-form animations ready for social teasers, reels and stage visuals
+            - Physical packaging assets (CD, vinyl) and merchandising elements
+            - Well-organized source files and exports optimised for each channel
+      cta:
+        text: "Start a new project"
+        url: "/en/contact.html"
+  tools:
+    - nom: "#Photoshop"
+    - nom: "#Illustrator"
+    - nom: "#Blender"
 
-- icon_aria: 
-    fr: 'Icône de branding et stratégie visuelle'
-    en: 'Branding and visual strategy icon'
+- id: branding-visual-strategy
+  slug:
+    fr: branding-strategie-visuelle
+    en: branding-visual-strategy
+  detail_url:
+    fr: "/fr/services/branding-strategie-visuelle.html"
+    en: "/en/services/branding-visual-strategy.html"
+  icon_aria:
+    fr: "Icône de branding et stratégie visuelle"
+    en: "Branding and visual strategy icon"
   icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-distribute-center-icon lucide-align-horizontal-distribute-center"><rect width="6" height="14" x="4" y="5" rx="2"/><rect width="6" height="10" x="14" y="7" rx="2"/><path d="M17 22v-5"/><path d="M17 7V2"/><path d="M7 22v-3"/><path d="M7 5V2"/></svg>'
-  title: 
-    fr: 'Branding & Stratégie Visuelle'
-    en: 'Branding & Visual Strategy'
-  description: 
+  title:
+    fr: "Branding & Stratégie Visuelle"
+    en: "Branding & Visual Strategy"
+  description:
     fr: "Développement de l'identité de marque, positionnement visuel et cohérence graphique pour renforcer votre présence."
     en: "Development of brand identity, visual positioning and graphic consistency to strengthen your presence."
-  tools: 
-    - nom: '#Figma'
-    - nom: '#Illustrator' 
-    - nom: '#Photoshop'
+  detail:
+    fr:
+      hero_title: "Branding & Stratégie Visuelle"
+      hero_intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
+      sections:
+        - heading: "Pour qui ?"
+          content: |
+            - Marques en lancement qui souhaitent poser des bases solides
+            - Entreprises en repositionnement ou en croissance rapide
+            - Collectifs et organisations qui ont besoin d'harmoniser leurs supports
+        - heading: "Comment je travaille"
+          content: |
+            Nous commençons par un atelier de cadrage pour cartographier votre identité, votre audience et vos objectifs. Je formalise ensuite un territoire visuel à travers des moodboards, des propositions typographiques et colorimétriques, ainsi que des exemples d'usages concrets. La dernière phase consiste à documenter ces choix dans un guide clair pour faciliter l'appropriation par vos équipes ou partenaires.
+        - heading: "Livrables et ateliers"
+          content: |
+            - Diagnostic de marque et recommandations stratégiques
+            - Plateforme de marque synthétique (mission, valeurs, tonalité)
+            - Système visuel complet (logos, typographies, palette, iconographie)
+            - Guide d'utilisation et templates personnalisables pour vos canaux clés
+      cta:
+        text: "Structurer ma marque"
+        url: "/fr/contact.html"
+    en:
+      hero_title: "Branding & Visual Strategy"
+      hero_intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+      sections:
+        - heading: "Who it's for"
+          content: |
+            - Emerging brands that need solid foundations from day one
+            - Teams going through a repositioning or scaling phase
+            - Collectives and organisations that want consistent, shareable assets
+        - heading: "How the engagement unfolds"
+          content: |
+            We begin with a strategy workshop to map your identity, audience and goals. I then translate that insight into a visual territory using moodboards, typography and color proposals, plus concrete use cases. The final phase documents every choice in a clear guide so your team or partners can activate the brand with confidence.
+        - heading: "Deliverables & workshops"
+          content: |
+            - Brand audit and strategic recommendations
+            - Brand foundation deck (purpose, values, tone of voice)
+            - Complete visual system (logos, typography, palette, iconography)
+            - Usage guidelines and customizable templates for your key channels
+      cta:
+        text: "Shape my brand system"
+        url: "/en/contact.html"
+  tools:
+    - nom: "#Figma"
+    - nom: "#Illustrator"
+    - nom: "#Photoshop"

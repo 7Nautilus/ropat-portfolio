@@ -7,7 +7,18 @@
   {% assign animation_delay = animation_index | times: 160 | plus: 80 %}
   {% assign article_classes = "service-card animate-fade-up" %}
 {% endif %}
-<article class="{{ article_classes }}"{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
+{% assign detail_url = include.services.detail_url[current_lang] %}
+{% if detail_url %}
+  {% assign card_tag = "a" %}
+  {% if current_lang == "fr" %}
+    {% assign card_aria_label = "Découvrir le service " | append: include.services.title[current_lang] %}
+  {% else %}
+    {% assign card_aria_label = "View service: " | append: include.services.title[current_lang] %}
+  {% endif %}
+{% else %}
+  {% assign card_tag = "article" %}
+{% endif %}
+<{{ card_tag }} class="{{ article_classes }}"{% if card_tag == "a" %} href="{{ detail_url }}" aria-label="{{ card_aria_label }}"{% endif %}{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
   <!-- SVG icon -->
   <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
     {{ include.services.icon | raw }}
@@ -25,4 +36,4 @@
       {% endfor %}
     {% endif %}
   </div>
-</article>
+</{{ card_tag }}>
