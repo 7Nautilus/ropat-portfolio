@@ -1362,3 +1362,9 @@ footer {
     animation: none !important;
   }
 }
+
+
+.service-hero-header {
+  display: flex;
+  flex-direction: row;
+}
