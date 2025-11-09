@@ -871,6 +871,7 @@ main {
   border: var(--border-primary);
   padding: var(--spacing-xl);
   box-shadow: var(--shadow-sm);
+  gap: var(--spacing-xs);
 }
 
 .service-detail-content ul,
