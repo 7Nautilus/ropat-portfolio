@@ -14,14 +14,26 @@ locales:
     image_alt: "Affiche EXIT"
     title: "Affiche “EXIT”"
     subtitle: "Projet de **création d'affiche** détournant le design des panneaux de signalisation de sorties de secours"
-    description: "Création d'une affiche sur le thème du design des sorties de secours."
+    description: "Réinterprétation graphique des panneaux de sorties de secours avec un traitement cuivre oxydé, mêlant typographie, formes géométriques et textures contemporaines."
     context_title: "À propos du projet"
     context_content: |
-      Pour ce projet je me suis basé d'un ancien fichier Illustrator de mon ami @alxndr.rawz dans lequel il avait exploré des concepts similaires, en designant à sa manière les éléments du fameux panneau "exit".
+      ### # Contexte et objectif
+      Ce projet est une exploration artistique autour de la symbolique des panneaux de sorties de secours. L'idée était de détourner ces éléments de signalétique universels pour en faire une composition graphique moderne, en jouant sur le contraste entre leur fonction utilitaire et une esthétique plus organique et patinée.
+      
+      Le point de départ fut un ancien fichier Illustrator de mon ami @alxndr.rawz, qui avait exploré des concepts similaires en redesignant les éléments du fameux panneau "exit".
 
-      J'avais ce fichier sur mon disque dur depuis un moment et je voulais l'explorer davantage. Je l'ai donc importé dans Photoshop, j'y ai ajouté mes propres éléments graphiques et j'ai retravaillé la composition pour lui donner une nouvelle vie.
+      ### # Recherche et concept
+      En reprenant ce fichier, j'ai voulu pousser le concept plus loin en y ajoutant ma propre vision. J'ai importé les bases dans Photoshop et commencé à expérimenter avec différentes couches, textures et éléments graphiques. L'objectif était de créer une tension visuelle entre la rigidité géométrique des panneaux de signalisation et une matérialité plus vivante, presque industrielle.
 
-      Pour le rendu final j'ai voulu donner à cette affiche un aspect de cuivre oxydé, avec sa couleur verte et ses reflets brillants.
+      ### # Conception graphique
+      La composition mêle plusieurs niveaux de lecture : les pictogrammes de sortie reconnaissables, des formes géométriques abstraites, et des jeux typographiques. J'ai travaillé sur la superposition des éléments pour créer de la profondeur, en jouant avec les contrastes entre zones opaques et transparences.
+      
+      Chaque élément a été retravaillé pour s'intégrer dans une harmonie visuelle tout en conservant une certaine tension graphique.
+      
+      ### # Finitions et rendu
+      Pour le rendu final, j'ai opté pour un traitement de cuivre oxydé, avec ses nuances de vert-de-gris caractéristiques et ses reflets métalliques. Ce choix n'est pas anodin : le cuivre oxydé évoque le passage du temps, la transformation des matériaux, créant ainsi un parallèle intéressant avec l'idée de "sortie" et de transition.
+      
+      Les textures ont été appliquées pour donner un aspect tangible et presque sculptural à l'ensemble, transformant une simple affiche en un objet qui semble avoir vécu.
     seo:
       title: "EXIT - Affiche Design | Ropat"
       description: "Création d'affiche détournant le design des panneaux de sorties de secours avec un aspect cuivre oxydé."
@@ -36,14 +48,26 @@ locales:
     image_alt: "EXIT Poster"
     title: "Poster “EXIT”"
     subtitle: "**Poster design** project reinterpreting emergency exit signage design"
-    description: "Creation of a poster on the theme of emergency exit design."
+    description: "Graphic reinterpretation of emergency exit signs with an oxidized copper treatment, blending typography, geometric shapes, and contemporary textures."
     context_title: "About the project"
     context_content: |
-      For this project, I based my work on an old Illustrator file from my friend @alxndr.rawz, in which he explored similar concepts by designing elements of the famous "exit" sign in his own style.
+      ### # Context and objective
+      This project is an artistic exploration of the symbolism behind emergency exit signs. The idea was to repurpose these universal signage elements into a contemporary graphic composition, playing with the contrast between their utilitarian function and a more organic, weathered aesthetic.
+      
+      The starting point was an old Illustrator file from my friend @alxndr.rawz, who had explored similar concepts by redesigning the elements of the famous "exit" sign.
 
-      I had this file on my hard drive for a while and wanted to explore it further. So I imported it into Photoshop, added my own graphic elements, and reworked the composition to give it new life.
+      ### # Research and concept
+      Building on this file, I wanted to push the concept further by adding my own vision. I imported the base elements into Photoshop and began experimenting with different layers, textures, and graphic elements. The goal was to create a visual tension between the geometric rigidity of signage panels and a more living, almost industrial materiality.
 
-      For the final rendering, I wanted to give this poster an oxidized copper look, with its green color and shiny reflections.
+      ### # Design execution
+      The composition blends several levels of reading: recognizable exit pictograms, abstract geometric shapes, and typographic play. I worked on layering elements to create depth, playing with contrasts between opaque zones and transparencies.
+      
+      Each element was reworked to integrate into a visual harmony while maintaining a certain graphic tension.
+      
+      ### # Finishing touches
+      For the final render, I chose an oxidized copper treatment, with its characteristic verdigris nuances and metallic reflections. This choice is deliberate: oxidized copper evokes the passage of time and the transformation of materials, creating an interesting parallel with the idea of "exit" and transition.
+      
+      Textures were applied to give a tangible, almost sculptural aspect to the whole, transforming a simple poster into an object that seems to have lived.
     seo:
       title: "EXIT - Poster Design | Ropat"
       description: "Poster design reinterpreting emergency exit signage with an oxidized copper aesthetic."
