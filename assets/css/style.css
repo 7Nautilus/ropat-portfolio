@@ -876,6 +876,10 @@ main {
   gap: var(--spacing-xs);
 }
 
+.service-detail-content p {
+  margin-bottom: var(--spacing-xs);
+}
+
 .service-detail-content ul,
 .service-detail-content ol {
   margin: 0;
