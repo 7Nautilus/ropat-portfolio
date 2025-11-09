@@ -61,4 +61,4 @@ Pour ajouter un projet :
 - ✅ EN & FR description de crow
 - EN & FR description de exit
 - ✅ EN & FR description de Logo process
-- EN & FR description de Outlast
+- ✅ EN & FR description de Outlast
