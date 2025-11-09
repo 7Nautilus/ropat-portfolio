@@ -866,6 +866,8 @@ main {
 }
 
 .service-detail-section {
+  display: flex;
+  flex-direction: column;
   background-color: var(--secondary-color);
   border-radius: var(--border-radius-lg);
   border: var(--border-primary);
