@@ -841,7 +841,6 @@ main {
   gap: var(--spacing-xl);
   padding: 0 var(--spacing-lg) var(--spacing-xl);
   width: 100%;
-  max-width: 70rem;
 }
 
 .service-hero {
