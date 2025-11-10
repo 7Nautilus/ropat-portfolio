@@ -35,11 +35,11 @@
           </section>
         {% endfor %}
       {% endif %}
-      {% if detail.cta %}
-        <section class="service-detail-cta">
-          <a class="cta" href="{{ detail.cta.url }}">{{ detail.cta.text }}</a>
-        </section>
-      {% endif %}
     </section>
+    {% if detail.cta %}
+      <section class="service-detail-cta">
+        <a class="cta" href="{{ detail.cta.url }}">{{ detail.cta.text }}</a>
+      </section>
+    {% endif %}
   </main>
 {% endif %}
