@@ -21,25 +21,25 @@
           {% endfor %}
         </div>
       {% endif %}
-    </section>
-    {% if detail.sections %}
-      {% for section in detail.sections %}
-        <section class="service-detail-section">
-          {% if section.heading %}
-            <h2 class="section-title">{{ section.heading }}</h2>
-          {% endif %}
-          {% if section.content %}
-            <div class="service-detail-content">
-              {{ section.content | markdownify }}
-            </div>
-          {% endif %}
+      {% if detail.sections %}
+        {% for section in detail.sections %}
+          <section class="service-detail-section">
+            {% if section.heading %}
+              <h2 class="section-title">{{ section.heading }}</h2>
+            {% endif %}
+            {% if section.content %}
+              <div class="service-detail-content">
+                {{ section.content | markdownify }}
+              </div>
+            {% endif %}
+          </section>
+        {% endfor %}
+      {% endif %}
+      {% if detail.cta %}
+        <section class="service-detail-cta">
+          <a class="cta" href="{{ detail.cta.url }}">{{ detail.cta.text }}</a>
         </section>
-      {% endfor %}
-    {% endif %}
-    {% if detail.cta %}
-      <section class="service-detail-cta">
-        <a class="cta" href="{{ detail.cta.url }}">{{ detail.cta.text }}</a>
-      </section>
-    {% endif %}
+      {% endif %}
+    </section>
   </main>
 {% endif %}
