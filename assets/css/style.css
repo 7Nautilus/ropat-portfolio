@@ -879,6 +879,7 @@ main {
 .service-detail-content {
   display: flex;
   flex-direction: column;
+  font-size: var(--font-size-lg);
   gap: var(--spacing-xs);
 }
 
