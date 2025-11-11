@@ -763,6 +763,10 @@ main {
   gap: var(--spacing-lg);
 }
 
+.section-grid-simple {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
 /* ============================================
    SERVICES SECTION
    ============================================ */
