@@ -61,43 +61,13 @@
       <a class="cta" href="{{ hero_cta_url }}">{{ hero_cta_text }}</a>
     </section>
     <!-- 1ère sections - Services Card -->
-    {% if first_section %}
-      <section class="service-section">
-        {% if first_section.heading %}
-          <h2 class="section-title">{{ first_section.heading }}</h2>
-        {% endif %}
-        {% if first_section.content %}
-          <div class="section-content">
-            {{ first_section.content | markdownify }}
+    <section class="services-cards-section">
+      <div class="section-grid">
+        {% for service_item in service.services %}
+          <div class="service-card-detail">
+            <h3 class="service-card-title">{{ service_item.nom }}</h3>
           </div>
-        {% endif %}
-      </section>
-    {% endif %}
-    <!--
-    {% if second_section %}
-      <section class="service-section">
-        {% if second_section.heading %}
-          <h2 class="section-title">{{ second_section.heading }}</h2>
-        {% endif %}
-        {% if second_section.content %}
-          <div class="section-content">
-            {{ second_section.content | markdownify }}
-          </div>
-        {% endif %}
-      </section>
-    {% endif %}
-    {% if third_section %}
-      <section class="service-section">
-        {% if third_section.heading %}
-          <h2 class="section-title">{{ third_section.heading }}</h2>
-        {% endif %}
-        {% if third_section.content %}
-          <div class="section-content">
-            {{ third_section.content | markdownify }}
-          </div>
-        {% endif %}
-      </section>
-    {% endif %}
-    -->
+        {% endfor %}
+      </div>
   </main>
 {% endif %}

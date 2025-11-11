@@ -5,16 +5,20 @@
   detail_url:
     fr: "/fr/services/conception-graphique.html"
     en: "/en/services/graphic-design.html"
+  icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>'
   icon_aria:
     fr: "Icône de conception graphique"
     en: "Graphic design icon"
-  icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>'
   title:
     fr: "Conception graphique"
     en: "Graphic Design"
   description:
     fr: "Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web."
     en: "Logo creation, complete visual identities, posters, flyers and all your print and web communication materials."
+  tools:
+    - nom: "#Illustrator"
+    - nom: "#Photoshop"
+    - nom: "#Figma"
   hero:
     fr:
       title: "Conception graphique"
@@ -28,10 +32,11 @@
       cta:
         text: "Let's discuss your project"
         url: "/en/contact.html"
-  tools:
-    - nom: "#Illustrator"
-    - nom: "#Photoshop"
-    - nom: "#Figma"
+  services : 
+    - nom: "Création de logo"
+    - nom: "Identité visuelle complète"
+    - nom: "Supports imprimés (affiches, flyers, brochures)"
+    - nom: "Supports digitaux (bannières, posts réseaux sociaux)"
 
 
 - id: music-design
