@@ -58,5 +58,43 @@
       <!-- CTA -->
       <a class="cta" href="{{ cta_url }}">{{ cta_text }}</a>
     </section>
+    {% if first_section %}
+      <section class="service-section">
+        {% if first_section.heading %}
+          <h2 class="section-title">{{ first_section.heading }}</h2>
+        {% endif %}
+        {% if first_section.content %}
+          <div class="section-content">
+            {{ first_section.content | markdownify }}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+    <!--
+    {% if second_section %}
+      <section class="service-section">
+        {% if second_section.heading %}
+          <h2 class="section-title">{{ second_section.heading }}</h2>
+        {% endif %}
+        {% if second_section.content %}
+          <div class="section-content">
+            {{ second_section.content | markdownify }}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+    {% if third_section %}
+      <section class="service-section">
+        {% if third_section.heading %}
+          <h2 class="section-title">{{ third_section.heading }}</h2>
+        {% endif %}
+        {% if third_section.content %}
+          <div class="section-content">
+            {{ third_section.content | markdownify }}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+    -->
   </main>
 {% endif %}
