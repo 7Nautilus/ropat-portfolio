@@ -1,7 +1,7 @@
 {% assign current_lang = page.lang | default: "en" %}
 {% assign service = site.data.services | where: "id", include.service_id | first %}
 {% if service %}
-  {% assign detail = service.detail[current_lang] | default: service.detail.en %}
+  {% assign hero = service.hero[current_lang] | default: service.hero.en %}
   {% assign hero_title = hero.title | default: service.title[current_lang] %}
   {% assign hero_intro = hero.hero_intro %}
   {% assign hero_cta = hero.cta %}
