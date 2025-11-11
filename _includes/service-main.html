@@ -43,25 +43,20 @@
   {% endif %}
   <main id="main-content" class="main-content service-detail">
     <section class="service-hero">
+      <!-- Icône du service -->
       {% if service.icon %}
         <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
           {{ service.icon | raw }}
         </div>
       {% endif %}
+      <!-- Label du service -->
       <h1 class="service-hero-title">{{ hero_title }}</h1>
+      <!-- Texte d'accroche-->
       {% if hero_intro %}
         <p class="service-hero-intro">{{ hero_intro }}</p>
       {% endif %}
-      <div class="service-hero-actions">
-        <a class="service-primary-cta" href="{{ cta_url }}">{{ cta_text }}</a>
-      </div>
-      {% if service.tools %}
-        <div class="service-hero-tools" aria-label="{{ tools_title }}">
-          {% for tool in service.tools %}
-            <span class="service-tool">{{ tool.nom }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
+      <!-- CTA -->
+      <a class="cta" href="{{ cta_url }}">{{ cta_text }}</a>
     </section>
 
     {% if first_section %}
