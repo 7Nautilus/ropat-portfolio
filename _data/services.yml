@@ -56,6 +56,10 @@
   description:
     fr: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
     en: "Creation of album covers, visualizers, concert posters and all visual materials for artists and music labels."
+  tools:
+    - nom: "#Photoshop"
+    - nom: "#After Effects"
+    - nom: "#Blender"
   hero:
     fr:
       hero_title: "Design pour la musique"
@@ -69,10 +73,11 @@
     cta:
         text: "Let's discuss your project"
         url: "/en/contact.html"
-  tools:
-    - nom: "#Photoshop"
-    - nom: "#After Effects"
-    - nom: "#Blender"
+  services : 
+    - nom: "Pochettes d'album"
+    - nom: "Visualizers & Contenu Animé"
+    - nom: "Identité d'Artiste & Label"
+    - nom: "Supports \"Live\" & Merch"
 
 - id: branding-visual-strategy
   slug:
