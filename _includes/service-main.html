@@ -2,9 +2,9 @@
 {% assign service = site.data.services | where: "id", include.service_id | first %}
 {% if service %}
   {% assign detail = service.detail[current_lang] | default: service.detail.en %}
-  {% assign hero_title = detail.hero_title | default: service.title[current_lang] %}
-  {% assign hero_intro = detail.hero_intro %}
-  {% assign hero_cta = detail.cta %}
+  {% assign hero_title = hero.title | default: service.title[current_lang] %}
+  {% assign hero_intro = hero.intro %}
+  {% assign hero_cta = hero.cta %}
   {% assign sections = detail.sections %}
   {% assign first_section = sections[0] %}
   {% assign second_section = sections[1] %}
@@ -58,6 +58,7 @@
       <!-- CTA -->
       <a class="cta" href="{{ cta_url }}">{{ cta_text }}</a>
     </section>
+    <!-- 1ère sections - Services Card -->
     {% if first_section %}
       <section class="service-section">
         {% if first_section.heading %}
