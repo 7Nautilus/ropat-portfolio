@@ -829,10 +829,9 @@ main {
 .service-icon-placeholder {
   width: fit-content;
   height: fit-content;
-  padding: var(--spacing-sm);
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -842,6 +841,8 @@ main {
 }
 
 .big-icon svg {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
   width: 4rem;
   height: 4rem;
 }
