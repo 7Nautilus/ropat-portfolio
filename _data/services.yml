@@ -55,9 +55,15 @@
     fr:
       hero_title: "Design pour la musique"
       hero_intro: "Design de pochettes, visualizers 3D et identités visuelles pour artistes & labels."
+      cta:
+        text: "Discutons de votre projet"
+        url: "/fr/contact.html"
     en:
       hero_title: "Music Design"
       hero_intro: "I craft immersive visuals for artists, labels and music events—from single releases to full tour roll-outs."
+    cta:
+        text: "Let's discuss your project"
+        url: "/en/contact.html"
   tools:
     - nom: "#Photoshop"
     - nom: "#After Effects"
