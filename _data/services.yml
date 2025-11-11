@@ -73,6 +73,10 @@
     cta:
         text: "Let's discuss your project"
         url: "/en/contact.html"
+  subtitles:
+    first_section:
+      fr: "Mes services pour les Musiciens"
+      en: "My Services for Musicians"
   services : 
     - nom: "Pochettes d'album"
     - nom: "Visualizers & Contenu Animé"
