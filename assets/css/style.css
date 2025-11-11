@@ -840,6 +840,11 @@ main {
   text-transform: uppercase;
 }
 
+.service-icon-placeholder svg {
+  width: 6rem;
+  height: 6rem;
+}
+
 .service-text-content {
   display: flex;
   flex-direction: column;
