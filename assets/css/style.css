@@ -876,7 +876,6 @@ main {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-md);
-  max-width: 60ch;
   z-index: 1;
 }
 
