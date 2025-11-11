@@ -58,6 +58,10 @@
     en:
       hero_title: "Music Design"
       hero_intro: "I craft immersive visuals for artists, labels and music events—from single releases to full tour roll-outs."
+  tools:
+    - nom: "#Photoshop"
+    - nom: "#After Effects"
+    - nom: "#Blender"
 
 - id: branding-visual-strategy
   slug:
@@ -83,3 +87,7 @@
     en:
       hero_title: "Branding & Visual Strategy"
       hero_intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+  tools:
+    - nom: "#Figma"
+    - nom: "#Illustrator"
+    - nom: "#Photoshop"
