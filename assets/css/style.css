@@ -841,6 +841,8 @@ main {
 }
 
 .big-icon {
+  width: fit-content;
+  height: fit-content;
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-lg);
 }
