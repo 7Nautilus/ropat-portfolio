@@ -67,7 +67,7 @@
       <div class="section-grid section-grid-simple">
         {% for service_item in service.services %}
           <div class="service-card">
-            <h3 class="service-card-title">{{ service_item.nom }}</h3>
+            <h3 class="service-card-title">{{ service_item.nom[current_lang] }}</h3>
             {% if service_item.description %}
               <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
             {% endif %}
