@@ -45,8 +45,8 @@
     <section class="service-hero">
       <div class="service-hero-content">
       {% if service.icon %}
-        <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
-          {{ include.services.icon | raw }}
+        <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
+          {{ service.icon | raw }}
         </div>
       {% endif %}
       </div>
