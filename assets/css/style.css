@@ -883,10 +883,7 @@ main {
   gap: var(--spacing-md);
   padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
-  border: var(--border-primary);
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.85), rgba(9, 14, 31, 0.95));
   overflow: hidden;
-  box-shadow: var(--shadow-md);
 }
 
 .service-hero-glow {
