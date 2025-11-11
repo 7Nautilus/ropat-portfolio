@@ -43,30 +43,27 @@
   {% endif %}
   <main id="main-content" class="main-content service-detail">
     <section class="service-hero">
-      <div class="service-hero-glow" aria-hidden="true"></div>
       <div class="service-hero-content">
-        <div class="service-hero-badge">
-          {% if service.icon %}
-            <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
-              {{ include.services.icon | raw }}
-            </div>
-          {% endif %}
+      {% if service.icon %}
+        <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
+          {{ include.services.icon | raw }}
         </div>
-        <h1 class="service-hero-title">{{ hero_title }}</h1>
-        {% if hero_intro %}
-          <p class="service-hero-intro">{{ hero_intro }}</p>
-        {% endif %}
-        <div class="service-hero-actions">
-          <a class="service-primary-cta" href="{{ cta_url }}">{{ cta_text }}</a>
-        </div>
-        {% if service.tools %}
-          <div class="service-hero-tools" aria-label="{{ tools_title }}">
-            {% for tool in service.tools %}
-              <span class="service-tool">{{ tool.nom }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
+      {% endif %}
       </div>
+      <h1 class="service-hero-title">{{ hero_title }}</h1>
+      {% if hero_intro %}
+        <p class="service-hero-intro">{{ hero_intro }}</p>
+      {% endif %}
+      <div class="service-hero-actions">
+        <a class="service-primary-cta" href="{{ cta_url }}">{{ cta_text }}</a>
+      </div>
+      {% if service.tools %}
+        <div class="service-hero-tools" aria-label="{{ tools_title }}">
+          {% for tool in service.tools %}
+            <span class="service-tool">{{ tool.nom }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
     </section>
 
     {% if first_section %}
