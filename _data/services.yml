@@ -79,9 +79,13 @@
       en: "My Services for Musicians"
   services : 
     - nom: "Pochettes d'album"
+      description: "Création de covers uniques pour le streaming (Spotify, Apple Music) et le physique (Vinyle, CD)."
     - nom: "Visualizers & Contenu Animé"
+      description: "Animations 2D/3D pour accompagner vos morceaux sur les réseaux sociaux et plateformes de streaming."
     - nom: "Identité d'Artiste & Label"
+      description: "Création d'une identité visuelle forte et cohérente pour les artistes et les labels."
     - nom: "Supports \"Live\" & Merch"
+      description: "Affiches de concert, flyers et design pour tout votre merchandising."
 
 - id: branding-visual-strategy
   slug:

@@ -8,6 +8,7 @@
   {% assign hero_cta_text = hero_cta.text | default: "" %}
   {% assign hero_cta_url = hero_cta.url | default: "" %}
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
+  {% assign first_section_description = service.services.description %}
   {% assign sections = detail.sections %}
   {% assign first_section = sections[0] %}
   {% assign second_section = sections[1] %}
@@ -68,6 +69,9 @@
         {% for service_item in service.services %}
           <div class="service-card">
             <h3 class="service-card-title">{{ service_item.nom }}</h3>
+            {% if service_item.description %}
+              <p class="service-card-description">{{ service_item.description }}</p>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
