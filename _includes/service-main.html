@@ -3,11 +3,234 @@
 {% if service %}
   {% assign detail = service.detail[current_lang] | default: service.detail.en %}
   {% assign hero_title = detail.hero_title | default: service.title[current_lang] %}
+  {% assign hero_intro = detail.hero_intro %}
+  {% assign hero_cta = detail.cta %}
+  {% assign sections = detail.sections %}
+  {% assign first_section = sections[0] %}
+  {% assign second_section = sections[1] %}
+  {% assign third_section = sections[2] %}
+  {% if current_lang == "fr" %}
+    {% assign service_label = "Service" %}
+    {% assign gallery_title = "Projets récents" %}
+    {% assign gallery_cta_label = "Voir tous les projets" %}
+    {% assign gallery_cta_url = "/fr/portfolio.html" %}
+    {% assign tools_title = "Outils et expertises" %}
+    {% assign highlight_fallback_title = "Pourquoi choisir Ropat ?" %}
+    {% assign process_fallback_title = "Collaborer ensemble" %}
+    {% assign final_cta_title = "Prêt à lancer votre projet ?" %}
+    {% assign final_cta_description = "Que vous soyez un artiste, un collectif ou une marque, je suis là pour créer un univers visuel qui vous représente." %}
+    {% assign final_cta_button_text = "Discutons de votre projet" %}
+    {% assign final_cta_button_url = "/fr/contact.html" %}
+  {% else %}
+    {% assign service_label = "Service" %}
+    {% assign gallery_title = "Recent projects" %}
+    {% assign gallery_cta_label = "Browse all projects" %}
+    {% assign gallery_cta_url = "/en/portfolio.html" %}
+    {% assign tools_title = "Tools & expertise" %}
+    {% assign highlight_fallback_title = "Why partner with Ropat?" %}
+    {% assign process_fallback_title = "How we collaborate" %}
+    {% assign final_cta_title = "Ready to launch your project?" %}
+    {% assign final_cta_description = "Whether you're an artist, a collective or a brand, let's craft a visual universe that feels like you." %}
+    {% assign final_cta_button_text = "Start a conversation" %}
+    {% assign final_cta_button_url = "/en/contact.html" %}
+  {% endif %}
+  {% if hero_cta %}
+    {% assign cta_text = hero_cta.text | default: final_cta_button_text %}
+    {% assign cta_url = hero_cta.url | default: final_cta_button_url %}
+  {% else %}
+    {% assign cta_text = final_cta_button_text %}
+    {% assign cta_url = final_cta_button_url %}
+  {% endif %}
   <main id="main-content" class="main-content service-detail">
-    <!-- TEST -->
+    <section class="service-hero">
+      <div class="service-hero-glow" aria-hidden="true"></div>
+      <div class="service-hero-content">
+        <div class="service-hero-badge">
+          {% if service.icon %}
+            <span class="service-hero-icon" aria-hidden="true">{{ service.icon }}</span>
+          {% endif %}
+          <span class="service-hero-label">{{ service_label }}</span>
+        </div>
+        <h1 class="service-hero-title">{{ hero_title }}</h1>
+        {% if hero_intro %}
+          <p class="service-hero-intro">{{ hero_intro }}</p>
+        {% endif %}
+        <div class="service-hero-actions">
+          <a class="service-primary-cta" href="{{ cta_url }}">{{ cta_text }}</a>
+        </div>
+        {% if service.tools %}
+          <div class="service-hero-tools" aria-label="{{ tools_title }}">
+            {% for tool in service.tools %}
+              <span class="service-tool">{{ tool.nom }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </section>
 
-    
+    {% if first_section %}
+      {% capture first_content %}{{ first_section.content | strip }}{% endcapture %}
+      {% assign first_lines = first_content | split: "\n" %}
+      {% capture feature_intro %}
+        {% for line in first_lines %}
+          {% assign trimmed = line | strip %}
+          {% if trimmed != "" %}
+            {% assign first_char = trimmed | slice: 0, 1 %}
+            {% unless first_char == '-' %}
+              <p>{{ trimmed | markdownify | strip | replace: '<p>', '' | replace: '</p>', '' }}</p>
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      {% endcapture %}
+      {% assign feature_counter = 0 %}
+      {% capture feature_cards %}
+        {% for line in first_lines %}
+          {% assign trimmed = line | strip %}
+          {% if trimmed != "" %}
+            {% assign first_char = trimmed | slice: 0, 1 %}
+            {% if first_char == '-' %}
+              {% assign feature_counter = feature_counter | plus: 1 %}
+              {% assign item_text = trimmed | remove_first: '- ' | strip %}
+              <article class="service-feature-card animate-fade-up">
+                <div class="service-feature-card-number">{{ feature_counter }}</div>
+                <p>{{ item_text | markdownify | strip | replace: '<p>', '' | replace: '</p>', '' }}</p>
+              </article>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endcapture %}
+      {% assign feature_intro = feature_intro | strip %}
+      {% assign feature_cards = feature_cards | strip %}
+      <section class="service-feature-section">
+        <div class="service-section-header">
+          <h2 class="service-section-title">{{ first_section.heading }}</h2>
+          {% if feature_intro != "" %}
+            <div class="service-section-lead">
+              {{ feature_intro }}
+            </div>
+          {% endif %}
+        </div>
+        {% if feature_cards != "" %}
+          <div class="service-feature-grid">
+            {{ feature_cards }}
+          </div>
+        {% else %}
+          <div class="service-section-lead">
+            {{ first_section.content | markdownify }}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
 
-    <!-- TEST-->
+    {% assign project_slugs = service.related_projects | default: site.data.projects.index.order %}
+    {% if project_slugs and project_slugs != empty %}
+      <section class="service-gallery">
+        <div class="service-section-header">
+          <h2 class="service-section-title">{{ gallery_title }}</h2>
+          <a class="service-section-cta" href="{{ gallery_cta_url }}">{{ gallery_cta_label }} &rarr;</a>
+        </div>
+        <div class="service-gallery-grid">
+          {% for slug in project_slugs limit:6 %}
+            {% assign project = site.data.projects[slug] %}
+            {% if project %}
+              {% assign project_locale = project.locales[current_lang] | default: project.locales.en %}
+              <article class="service-gallery-item">
+                {% if project_locale.url %}
+                  <a href="{{ project_locale.url }}" class="service-gallery-link">
+                    <img src="{{ project.main_image | default: project.image_src }}" alt="{{ project_locale.image_alt | default: project.project_title }}" loading="lazy">
+                    <div class="service-gallery-caption">
+                      <h3>{{ project_locale.title | default: project.project_title }}</h3>
+                      {% if project_locale.subtitle %}
+                        <p>{{ project_locale.subtitle }}</p>
+                      {% endif %}
+                    </div>
+                  </a>
+                {% else %}
+                  <div class="service-gallery-link">
+                    <img src="{{ project.main_image | default: project.image_src }}" alt="{{ project_locale.image_alt | default: project.project_title }}" loading="lazy">
+                    <div class="service-gallery-caption">
+                      <h3>{{ project_locale.title | default: project.project_title }}</h3>
+                      {% if project_locale.subtitle %}
+                        <p>{{ project_locale.subtitle }}</p>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endif %}
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+
+    {% if second_section %}
+      {% capture second_content %}{{ second_section.content | strip }}{% endcapture %}
+      <section class="service-value">
+        <div class="service-value-copy">
+          <h2 class="service-section-title">{{ second_section.heading | default: highlight_fallback_title }}</h2>
+          <div class="service-section-body">
+            {{ second_content | markdownify }}
+          </div>
+        </div>
+        <aside class="service-value-highlight">
+          <h3 class="service-value-highlight-title">{{ tools_title }}</h3>
+          {% if service.tools %}
+            <ul class="service-tools-list">
+              {% for tool in service.tools %}
+                <li class="service-tool">{{ tool.nom }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {% if service.icon %}
+            <div class="service-value-visual" aria-hidden="true">
+              {{ service.icon }}
+            </div>
+          {% endif %}
+        </aside>
+      </section>
+    {% endif %}
+
+    {% if third_section %}
+      {% capture third_content %}{{ third_section.content | strip }}{% endcapture %}
+      {% assign third_lines = third_content | split: "\n" %}
+      {% assign step_index = 0 %}
+      {% capture step_cards %}
+        {% for line in third_lines %}
+          {% assign trimmed = line | strip %}
+          {% if trimmed != "" %}
+            {% assign first_char = trimmed | slice: 0, 1 %}
+            {% if first_char == '-' %}
+              {% assign step_index = step_index | plus: 1 %}
+              {% assign item_text = trimmed | remove_first: '- ' | strip %}
+              <article class="service-step-card animate-fade-up">
+                <div class="service-step-number">{{ step_index }}</div>
+                <p>{{ item_text | markdownify | strip | replace: '<p>', '' | replace: '</p>', '' }}</p>
+              </article>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endcapture %}
+      {% assign step_cards = step_cards | strip %}
+      <section class="service-steps">
+        <h2 class="service-section-title">{{ third_section.heading | default: process_fallback_title }}</h2>
+        {% if step_cards != "" %}
+          <div class="service-steps-grid">
+            {{ step_cards }}
+          </div>
+        {% else %}
+          <div class="service-section-body">
+            {{ third_content | markdownify }}
+          </div>
+        {% endif %}
+      </section>
+    {% endif %}
+
+    <section class="service-final-cta" id="contact-block">
+      <div class="service-final-cta-content">
+        <h2 class="service-final-cta-title">{{ final_cta_title }}</h2>
+        <p class="service-final-cta-text">{{ final_cta_description }}</p>
+        <a class="service-secondary-cta" href="{{ cta_url }}">{{ cta_text }}</a>
+      </div>
+    </section>
   </main>
 {% endif %}
