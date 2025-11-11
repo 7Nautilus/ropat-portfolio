@@ -870,7 +870,11 @@ main {
 
 .service-hero-content {
   position: relative;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: var(--spacing-md);
   max-width: 60ch;
   z-index: 1;
