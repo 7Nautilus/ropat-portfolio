@@ -1540,6 +1540,10 @@ footer {
   .section-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .section-grid-simple {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 /* Large Desktops - 1440px + */
