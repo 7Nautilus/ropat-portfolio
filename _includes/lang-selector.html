@@ -10,6 +10,22 @@
 {% endcomment %}
 {% assign path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
 
+{% comment %}
+  2bis. Gestion spécifique pour les pages Services dont les slugs diffèrent selon la langue
+{% endcomment %}
+{% assign switch_url = nil %}
+{% if page.service_id %}
+  {% assign service_item = site.data.services | where: "id", page.service_id | first %}
+  {% if service_item %}
+    {% if current_lang == 'fr' %}
+      {% assign switch_url = service_item.detail_url.en %}
+    {% else %}
+      {% assign switch_url = service_item.detail_url.fr %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+
+{% if switch_url == nil %}
 {% if path_no_lang == "/index.html" or path_no_lang == "/" %}
   {% if current_lang == 'fr' %}
     {% assign switch_url = '/en/index.html' %}
@@ -22,6 +38,7 @@
   {% else %}
     {% assign switch_url = '/fr' | append: path_no_lang %}
   {% endif %}
+{% endif %}
 {% endif %}
 
 <div class="lang-selector-container">
