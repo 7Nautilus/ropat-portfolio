@@ -840,9 +840,12 @@ main {
   text-transform: uppercase;
 }
 
-.big-icon svg {
+.big-icon {
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-lg);
+}
+
+.big-icon svg {
   width: 4rem;
   height: 4rem;
 }
