@@ -18,7 +18,7 @@
   hero:
     fr:
       title: "Conception graphique"
-      intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
+      hero_intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
       cta:
         text: "Discutons de votre projet"
         url: "/fr/contact.html"
