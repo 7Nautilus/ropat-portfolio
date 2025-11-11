@@ -43,13 +43,11 @@
   {% endif %}
   <main id="main-content" class="main-content service-detail">
     <section class="service-hero">
-      <div class="service-hero-content">
       {% if service.icon %}
         <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
           {{ service.icon | raw }}
         </div>
       {% endif %}
-      </div>
       <h1 class="service-hero-title">{{ hero_title }}</h1>
       {% if hero_intro %}
         <p class="service-hero-intro">{{ hero_intro }}</p>
