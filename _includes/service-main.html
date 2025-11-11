@@ -11,42 +11,5 @@
     </div>
 
     <!-- TEST-->
-    <section class="hero service-hero" aria-labelledby="service-hero-title">
-      <div class="service-hero-header">
-        <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
-          {{ service.icon | raw }}
-        </div>
-        <h1 class="hero-title" id="service-hero-title">{{ hero_title }}</h1>
-      </div>
-      {% if detail.hero_intro %}
-        <p class="service-hero-intro">{{ detail.hero_intro }}</p>
-      {% endif %}
-      {% if service.tools %}
-        <div class="service-tools">
-          {% for tool in service.tools %}
-            <span class="service-tool">{{ tool.nom }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-    </section>
-    {% if detail.sections %}
-      {% for section in detail.sections %}
-        <section class="service-detail-section">
-          {% if section.heading %}
-            <h2 class="section-title">{{ section.heading }}</h2>
-          {% endif %}
-          {% if section.content %}
-            <div class="service-detail-content">
-              {{ section.content | markdownify }}
-            </div>
-          {% endif %}
-        </section>
-      {% endfor %}
-    {% endif %}
-    {% if detail.cta %}
-      <section class="service-detail-cta">
-        <a class="cta" href="{{ detail.cta.url }}">{{ detail.cta.text }}</a>
-      </section>
-    {% endif %}
   </main>
 {% endif %}
