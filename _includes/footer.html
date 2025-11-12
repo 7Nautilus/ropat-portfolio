@@ -57,9 +57,9 @@
           <span>LinkedIn</span>
         </a></div>
         {% for item in site.data.socials %}
-          <div><a href="{{ item.link }}" class="social-link {{ item.name }}">{{ item.aria-label }}
+          <div><a href="{{ item.link }}" class="social-link {{ item.name }}">
             {{ item.icon }}
-            <span>{{ item.aria_label }}</span>
+            {{ item.aria-label }}
           </a></div>
         {% endfor %}
       </div>
