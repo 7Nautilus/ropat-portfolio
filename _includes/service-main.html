@@ -9,9 +9,7 @@
   {% assign hero_cta_url = hero_cta.url | default: "" %}
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
   {% assign first_section_description = services.description[current_lang] %}
-  {% assign first_section = sections[0] %}
-  {% assign second_section = sections[1] %}
-  {% assign third_section = sections[2] %}
+  {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
   {% if current_lang == "fr" %}
     {% assign service_label = "Service" %}
     {% assign gallery_title = "Projets récents" %}
@@ -83,5 +81,9 @@
           </div>
         {% endfor %}
       </div>
+    </section>
+    <section>
+      <h2 class="section-title">{{ second_section_subtitle }}</h2>
+    </section>
   </main>
 {% endif %}
