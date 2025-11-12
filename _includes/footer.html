@@ -27,7 +27,7 @@
       <!-- Social Links -->
       <div class="social-links">
         {% for item in site.data.socials %}
-          <div><a href="{{ item.link }}" class="social-link {{ item.name }}">
+          <div aria-label="{{ item.aria-label }}"><a href="{{ item.link }}" class="social-link {{ item.name }}">
             {{ item.icon }}
             {{ item.aria-label }}
           </a></div>
