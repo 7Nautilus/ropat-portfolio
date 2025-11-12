@@ -93,18 +93,27 @@
       description: 
         fr: "Animations 2D/3D pour accompagner vos morceaux sur les réseaux sociaux et plateformes de streaming."
         en: "2D/3D animations to accompany your tracks on social media and streaming platforms."
+      tools:
+        - nom: "#After Effects"
+        - nom: "#Blender"
     - nom: 
         fr: "Identité d'Artiste & Label"
         en: "Artist & Label Identity"
       description: 
         fr: "Création d'une identité visuelle forte et cohérente pour les artistes et les labels."
         en: "Creation of a strong and cohesive visual identity for artists and labels."
+      tools:
+        - nom: "#Illustrator"
+        - nom: "#Figma"
     - nom: 
         fr: "Supports \"Live\" & Merch"
         en: "Live Supports & Merch"
       description: 
         fr: "Affiches de concert, flyers et design pour tout votre merchandising."
         en: "Concert posters, flyers and design for all your merchandising."
+      tools:
+        - nom: "#Photoshop"
+        - nom: "#InDesign"
 
 - id: branding-visual-strategy
   slug:
