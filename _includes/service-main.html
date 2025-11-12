@@ -71,6 +71,13 @@
             {% if service_item.description %}
               <p class="service-card-description">{{ service_item.description }}</p>
             {% endif %}
+            {% if service_item.tools %}
+              <div class="service-tools">
+                {% for tool in service_item.tools %}
+                  <span class="service-tool">{{ tool.nom }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>

@@ -84,6 +84,9 @@
       description: 
         fr: "Création de covers uniques pour le streaming (Spotify, Apple Music) et le physique (Vinyle, CD)."
         en: "Creation of unique covers for streaming (Spotify, Apple Music) and physical (Vinyl, CD)."
+      tools:
+        - nom: "#Photoshop"
+        - nom: "#Blender"
     - nom: 
         fr: "Visualizers & Contenu Animé"
         en: "Visualizers & Animated Content"
