@@ -68,16 +68,18 @@
         {% for service_item in service.services %}
           <div class="service-card">
             <h3 class="service-card-title">{{ service_item.nom[current_lang] }}</h3>
-            {% if service_item.description %}
-              <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
-            {% endif %}
-            {% if service_item.tools %}
-              <div class="service-tools">
-                {% for tool in service_item.tools %}
-                  <span class="service-tool">{{ tool.nom }}</span>
-                {% endfor %}
-              </div>
-            {% endif %}
+            <div class="service-text-content">
+              {% if service_item.description %}
+                <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
+              {% endif %}
+              {% if service_item.tools %}
+                <div class="service-tools">
+                  {% for tool in service_item.tools %}
+                    <span class="service-tool">{{ tool.nom }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
           </div>
         {% endfor %}
       </div>
