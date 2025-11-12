@@ -85,22 +85,23 @@
     <section>
       <h2 class="section-title">{{ second_section_subtitle }}</h2>
       <!-- Projects Grid -->
-    <div class="section-grid" id="projects-grid">
-      <!-- Include Projects with "Music" category -->
-      {% assign project_slugs = site.data.projects.index.order %}
-      {% assign featured_index = 0 %}
-      {% assign featured_rendered = 0 %}
-      {% for slug in project_slugs %}
-        {% assign item = site.data.projects[slug] %}
-        {% if item.category and item.category contains "music" %}
-          {% include project-card.html project=item index=featured_index disable_animation=true %}
-          {% assign featured_index = featured_index | plus: 1 %}
-          {% assign featured_rendered = featured_rendered | plus: 1 %}
-          {% if featured_rendered == 4 %}
-            {% break %}
+      <div class="section-grid" id="projects-grid">
+        <!-- Include Projects with "Music" category -->
+        {% assign project_slugs = site.data.projects.index.order %}
+        {% assign featured_index = 0 %}
+        {% assign featured_rendered = 0 %}
+        {% for slug in project_slugs %}
+          {% assign item = site.data.projects[slug] %}
+          {% if item.category and item.category contains "music" %}
+            {% include project-card.html project=item index=featured_index disable_animation=true %}
+            {% assign featured_index = featured_index | plus: 1 %}
+            {% assign featured_rendered = featured_rendered | plus: 1 %}
+            {% if featured_rendered == 4 %}
+              {% break %}
+            {% endif %}
           {% endif %}
-        {% endif %}
-      {% endfor %}
+        {% endfor %}
+      </div>
       <a href="/fr/portfolio" class="cta">Voir tous les projets</a>
     </section>
   </main>
