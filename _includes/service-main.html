@@ -66,20 +66,20 @@
       <h2 class="section-title">{{ first_section_subtitle }}</h2>
       <div class="section-grid section-grid-simple">
         {% for service_item in service.services %}
-          <div class="service-card">
-            <h3 class="service-card-title">{{ service_item.nom[current_lang] }}</h3>
+          <div class="service-card service-card-simple">
             <div class="service-text-content">
+              <h3 class="service-card-title">{{ service_item.nom[current_lang] }}</h3>
               {% if service_item.description %}
                 <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
               {% endif %}
-              {% if service_item.tools %}
-                <div class="service-tools">
-                  {% for tool in service_item.tools %}
-                    <span class="service-tool">{{ tool.nom }}</span>
-                  {% endfor %}
-                </div>
-              {% endif %}
             </div>
+            {% if service_item.tools %}
+              <div class="service-tools">
+                {% for tool in service_item.tools %}
+                  <span class="service-tool">{{ tool.nom }}</span>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>

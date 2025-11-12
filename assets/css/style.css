@@ -797,6 +797,10 @@ main {
   outline-offset: 4px;
 }
 
+.service-card-simple {
+  justify-content: space-between;
+}
+
 .service-hero-badge {
   display: inline-flex;
   align-items: center;
