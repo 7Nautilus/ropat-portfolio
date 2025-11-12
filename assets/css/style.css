@@ -897,7 +897,7 @@ main {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-md);
-  padding: var(--spacing-xl);
+  padding: 10rem var(--spacing-xl);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
 }
@@ -1589,7 +1589,7 @@ footer {
   }
 
   .service-hero {
-    padding: var(--spacing-lg);
+    padding: 10rem var(--spacing-lg);
   }
 
   .service-feature-section,
