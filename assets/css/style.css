@@ -889,10 +889,6 @@ main {
  
 .service-detail {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-  padding: var(--spacing-lg);
-  width: 100%;
 }
 
 .service-hero {
