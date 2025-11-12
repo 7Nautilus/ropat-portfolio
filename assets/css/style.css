@@ -929,12 +929,14 @@ main {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
+  text-align: center;
 }
 
 .service-hero-intro {
   font-size: var(--font-size-xl);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
+  text-align: center;
 }
 
 .service-hero-actions {
