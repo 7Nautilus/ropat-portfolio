@@ -9,8 +9,8 @@
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
   {% assign first_section_description = services.description[current_lang] %}
   {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
+  {% assign gallery_cta_url = "/[current_lang]/portfolio.html" %}
   {% if current_lang == "fr" %}
-    {% assign service_label = "Service" %}
     {% assign gallery_title = "Projets récents" %}
     {% assign gallery_cta_label = "Voir tous les projets" %}
     {% assign gallery_cta_url = "/fr/portfolio.html" %}
@@ -22,7 +22,6 @@
     {% assign final_cta_button_text = "Discutons de votre projet" %}
     {% assign final_cta_button_url = "/fr/contact.html" %}
   {% else %}
-    {% assign service_label = "Service" %}
     {% assign gallery_title = "Recent projects" %}
     {% assign gallery_cta_label = "Browse all projects" %}
     {% assign gallery_cta_url = "/en/portfolio.html" %}
@@ -50,7 +49,7 @@
         </div>
       {% endif %}
       <!-- Label du service -->
-      <h1 class="service-hero-title">{{ hero_title }}</h1>
+      <h1 class="service-hero-title">{{ hero_title | default:""}}</h1>
       <!-- Texte d'accroche-->
       {% if hero_intro %}
         <p class="service-hero-intro">{{ hero_intro }}</p>
@@ -82,7 +81,7 @@
       </div>
     </section>
     <section>
-      <h2 class="section-title">{{ second_section_subtitle }}</h2>
+      <h2 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h2>
       <!-- Projects Grid -->
       <div class="section-grid" id="projects-grid">
         <!-- Include Projects with "Music" category -->
