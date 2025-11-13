@@ -55,6 +55,7 @@
         en: "Webdesign (UI/UX)"
       description: 
         fr: "Maquettes et prototypes de sites web/applications"
+        en: "Website/application mockups and prototypes"
       tools:
         - nom: "#Figma" 
         - nom: "#Illustrator"
