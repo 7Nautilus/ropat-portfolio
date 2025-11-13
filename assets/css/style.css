@@ -78,6 +78,10 @@ body {
   overflow-x: hidden;
 }
 
+section {
+  gap: var(--spacing-lg);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -759,7 +763,6 @@ main {
 .section-title {
   font-size: var(--font-size-3xl);
   font-weight: 700;
-  margin-bottom: var(--spacing-lg);
   border-bottom: var(--border-primary);
   padding-bottom: var(--spacing-xs);
 }
