@@ -5,11 +5,11 @@
   {% assign hero_title = hero.title | default: service.title[current_lang] %}
   {% assign hero_intro = hero.intro %}
   {% assign hero_cta_text = hero.cta.text | default: "Let's discuss your project" %}
-  {% assign hero_cta_url = hero.cta.url | default: "/[current_lang]/contact.html" %}
+  {% assign hero_cta_url = hero.cta.url | default: "/" | append: current_lang | append: "/contact.html" %}
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
   {% assign first_section_description = services.description[current_lang] %}
   {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
-  {% assign gallery_cta_url = "/[current_lang]/portfolio.html" %}
+  {% assign gallery_cta_url = "/" | append: current_lang | append: "/contact.html" %}
   {% if current_lang == "fr" %}
     {% assign gallery_title = "Projets récents" %}
     {% assign gallery_cta_label = "Voir tous les projets" %}
