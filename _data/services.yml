@@ -36,6 +36,13 @@
   services : 
     - nom: 
         fr: "Création de logo"
+        en: "Logo Design"
+      description: 
+        fr: "Design de logo"
+        en: "Logo creation"
+      tools:
+        - nom: "#Illustrator"
+        - nom: "#Figma"
     - nom: 
         fr: "Identité visuelle complète"
     - nom: 
