@@ -9,7 +9,7 @@
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
   {% assign first_section_description = services.description[current_lang] %}
   {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
-  {% assign gallery_cta_url = "/" | append: current_lang | append: "/contact.html" %}
+  {% assign gallery_cta_url = "/" | append: current_lang | append: "/portfolio.html" %}
   {% if current_lang == "fr" %}
     {% assign services_title = "Ce que je propose" %}
     {% assign gallery_title = "Projets récents" %}
@@ -34,13 +34,6 @@
     {% assign final_cta_description = "Whether you're an artist, a collective or a brand, let's craft a visual universe that feels like you." %}
     {% assign final_cta_button_text = "Start a conversation" %}
     {% assign final_cta_button_url = "/en/contact.html" %}
-  {% endif %}
-  {% if hero_cta %}
-    {% assign cta_text = hero_cta.text | default: final_cta_button_text %}
-    {% assign cta_url = hero_cta.url | default: final_cta_button_url %}
-  {% else %}
-    {% assign cta_text = final_cta_button_text %}
-    {% assign cta_url = final_cta_button_url %}
   {% endif %}
   <main id="main-content" class="main-content service-detail">
     <section class="service-hero">
