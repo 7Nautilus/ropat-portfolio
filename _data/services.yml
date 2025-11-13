@@ -33,6 +33,13 @@
       cta:
         text: "Let's discuss your project"
         url: "/en/contact.html"
+  subtitles:
+    first_section:
+      fr: "Mes services en Graphisme"
+      en: "My Graphic Design services"
+    second_section : 
+      fr: "Projets de Design Récents"
+      en: "Recent Design Projects"
   services : 
     - nom: 
         fr: "Création de logo"
