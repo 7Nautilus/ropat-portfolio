@@ -42,20 +42,23 @@
       en: "Recent Design Projects"
   services : 
     - nom: 
-        fr: "Création de logo"
-        en: "Logo Design"
+        fr: "Support Print"
+        en: "Print Support"
       description: 
-        fr: "Design de logo"
-        en: "Logo creation"
+        fr: "Affiches, flyers, brochures, dépliants"
+        en: ""
       tools:
         - nom: "#Illustrator"
-        - nom: "#Figma"
+        - nom: "#InDesign"
     - nom: 
-        fr: "Identité visuelle complète"
+        fr: "Webdesign (UI/UX)"
+        en: "Webdesign (UI/UX)"
+      description: 
+        fr: "Maquettes et prototypes de sites web/applications"
     - nom: 
-        fr: "Supports imprimés (affiches, flyers, brochures)"
+        fr: ""
     - nom: 
-        fr: "Supports digitaux (bannières, posts réseaux sociaux)"
+        fr: ""
 
 
 - id: music-design
