@@ -46,7 +46,7 @@
         en: "Print Support"
       description: 
         fr: "Affiches, flyers, brochures, dépliants"
-        en: ""
+        en: "Posters, flyers, brochures, flyers"
       tools:
         - nom: "#Illustrator"
         - nom: "#InDesign"
