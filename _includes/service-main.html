@@ -91,7 +91,7 @@
         {% assign featured_rendered = 0 %}
         {% for slug in project_slugs %}
           {% assign item = site.data.projects[slug] %}
-          {% if item.category and item.category contains "music" %}
+          {% if item.category and item.category contains {{ service.tag }} %}
             {% include project-card.html project=item index=featured_index disable_animation=true %}
             {% assign featured_index = featured_index | plus: 1 %}
             {% assign featured_rendered = featured_rendered | plus: 1 %}
