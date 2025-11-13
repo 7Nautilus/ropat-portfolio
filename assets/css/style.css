@@ -662,6 +662,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
   color: var(--white-color);
