@@ -2,6 +2,7 @@
   slug:
     fr: conception-graphique
     en: graphic-design
+  tag: design
   detail_url:
     fr: "/fr/services/conception-graphique.html"
     en: "/en/services/graphic-design.html"
@@ -43,6 +44,7 @@
   slug:
     fr: design-musique
     en: music-design
+  tag: music
   detail_url:
     fr: "/fr/services/design-musique.html"
     en: "/en/services/music-design.html"
@@ -122,6 +124,7 @@
   slug:
     fr: branding-strategie
     en: branding--strategy
+  tag: branding
   detail_url:
     fr: "/fr/services/branding-strategie.html"
     en: "/en/services/branding-strategy.html"
