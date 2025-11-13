@@ -34,10 +34,14 @@
         text: "Let's discuss your project"
         url: "/en/contact.html"
   services : 
-    - nom: "Création de logo"
-    - nom: "Identité visuelle complète"
-    - nom: "Supports imprimés (affiches, flyers, brochures)"
-    - nom: "Supports digitaux (bannières, posts réseaux sociaux)"
+    - nom: 
+        fr: "Création de logo"
+    - nom: 
+        fr: "Identité visuelle complète"
+    - nom: 
+        fr: "Supports imprimés (affiches, flyers, brochures)"
+    - nom: 
+        fr: "Supports digitaux (bannières, posts réseaux sociaux)"
 
 
 - id: music-design
