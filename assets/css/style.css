@@ -658,6 +658,13 @@ main {
 
 /* Call to Action Button */
 
+.cta-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: var(--spacing-lg);
+  width: 100%;
+}
+
 .cta {
   display: flex;
   align-items: center;
