@@ -139,9 +139,15 @@
     fr:
       title: "Branding & Stratégie Visuelle"
       intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
+      cta:
+        text: "Discutons de votre projet"
+        url: "/fr/contact.html"
     en:
       title: "Branding & Visual Strategy"
       intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+      cta:
+        text: "Discutons de votre projet"
+        url: "/fr/contact.html"
   tools:
     - nom: "#Figma"
     - nom: "#Illustrator"
