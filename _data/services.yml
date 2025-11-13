@@ -76,9 +76,9 @@
     en:
       title: "Music Design"
       intro: "I craft immersive visuals for artists, labels and music events, from single releases to full tour roll-outs."
-    cta:
-      text: "Let's discuss your project"
-      url: "/en/contact.html"
+      cta:
+        text: "Let's discuss your project"
+        url: "/en/contact.html"
   subtitles:
     first_section:
       fr: "Mes services pour les Musiciens"
