@@ -22,7 +22,7 @@
   hero:
     fr:
       title: "Conception graphique"
-      hero_intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
+      intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
       cta:
         text: "Discutons de votre projet"
         url: "/fr/contact.html"
@@ -62,14 +62,14 @@
     - nom: "#Blender"
   hero:
     fr:
-      hero_title: "Design pour la musique"
-      hero_intro: "Design de pochettes, visualizers 3D et identités visuelles pour artistes & labels."
+      title: "Design pour la musique"
+      intro: "Design de pochettes, visualizers 3D et identités visuelles pour artistes & labels."
       cta:
         text: "Discutons de votre projet"
         url: "/fr/contact.html"
     en:
-      hero_title: "Music Design"
-      hero_intro: "I craft immersive visuals for artists, labels and music events—from single releases to full tour roll-outs."
+      title: "Music Design"
+      intro: "I craft immersive visuals for artists, labels and music events—from single releases to full tour roll-outs."
     cta:
         text: "Let's discuss your project"
         url: "/en/contact.html"
@@ -137,11 +137,11 @@
     en: "Development of brand identity, visual positioning and graphic consistency to strengthen your presence."
   hero:
     fr:
-      hero_title: "Branding & Stratégie Visuelle"
-      hero_intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
+      title: "Branding & Stratégie Visuelle"
+      intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
     en:
-      hero_title: "Branding & Visual Strategy"
-      hero_intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+      title: "Branding & Visual Strategy"
+      intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
   tools:
     - nom: "#Figma"
     - nom: "#Illustrator"
