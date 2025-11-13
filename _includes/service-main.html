@@ -5,8 +5,8 @@
   {% assign hero_title = hero.title | default: service.title[current_lang] %}
   {% assign hero_intro = hero.hero_intro %}
   {% assign hero_cta = hero.cta %}
-  {% assign hero_cta_text = hero_cta.text | default: "" %}
-  {% assign hero_cta_url = hero_cta.url | default: "" %}
+  {% assign hero_cta_text = hero_cta.text[current_lang] | default: "" %}
+  {% assign hero_cta_url = hero_cta.url[current_lang] | default: "" %}
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
   {% assign first_section_description = services.description[current_lang] %}
   {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
