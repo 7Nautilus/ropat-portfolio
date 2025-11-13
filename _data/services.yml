@@ -168,7 +168,7 @@
       intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
       cta:
         text: "Discutons de votre projet"
-        url: "/fr/contact.html"
+        url: "/EN/contact.html"
   tools:
     - nom: "#Figma"
     - nom: "#Illustrator"
