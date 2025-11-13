@@ -668,6 +668,7 @@ main {
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
+  padding: 0 var(--spacing-lg);
 }
 
 .cta {
