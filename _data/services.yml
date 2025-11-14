@@ -185,8 +185,8 @@
         fr: "Création de Logo"
         en: "Logo design"
       description: 
-        fr: "placeholder"
-        en: "placeholder"
+        fr: "Logo principal, déclinaisons, favicon"
+        en: "Main logo, variations, favicon"
       tools:
         - nom: "#Illustrator"
         - nom: "#Figma"
