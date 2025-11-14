@@ -192,7 +192,10 @@
         - nom: "#Figma"
     - nom:
         fr: "Charte graphique complète"
-        en: ""
+        en: "Comprehensive Brand Guidelines"
       description:
         fr: "Guide d'utilisation de votre identité visuelle"
-        en: ""
+        en: "User guide for your visual identity"
+      tools:
+        - nom: "InDesign"
+        - nom: "Brandpad"
