@@ -190,3 +190,9 @@
       tools:
         - nom: "#Illustrator"
         - nom: "#Figma"
+    - nom:
+        fr: "Charte graphique complète"
+        en: ""
+      description:
+        fr: "Guide d'utilisation de votre identité visuelle"
+        en: ""
