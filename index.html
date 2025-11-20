@@ -45,7 +45,7 @@ og_url: "https://ropat.art"
       {% assign featured_index = 0 %}
       {% assign featured_rendered = 0 %}
       {% for slug in service_slugs %}
-        {% assign item = site.data.services[slug] %}
+        {% assign item = site.data.services[slug[lang]] %}
         {% if item.featured %}
           {% include service-card.html services=item index=forloop.index0 disable_animation=true %}
           {% assign featured_index = featured_index | plus: 1 %}
@@ -57,7 +57,7 @@ og_url: "https://ropat.art"
       {% endfor %}
     </div>
   </section>
-  
+
   <!-- PROJECTS SECTION -->
   <section class="projects" aria-labelledby="projects-title">
     <!-- Projects Section Title -->
