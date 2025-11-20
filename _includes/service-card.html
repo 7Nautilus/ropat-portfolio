@@ -1,4 +1,5 @@
 {% assign current_lang = page.lang | default: 'en' %}
+{% assign service = site.data.services[include.service_id[current_lang]] %}
 {% assign animations_disabled = include.disable_animation | default: false %}
 {% assign animation_index = include.index | default: 0 %}
 {% if animations_disabled %}
@@ -11,9 +12,9 @@
 {% if detail_url %}
   {% assign card_tag = "a" %}
   {% if current_lang == "fr" %}
-    {% assign card_aria_label = "Découvrir le service " | append: include.services.title[current_lang] %}
+    {% assign card_aria_label = "Découvrir le service " | append: service.title[current_lang] %}
   {% else %}
-    {% assign card_aria_label = "View service: " | append: include.services.title[current_lang] %}
+    {% assign card_aria_label = "View service: " | append: service.title[current_lang] %}
   {% endif %}
 {% else %}
   {% assign card_tag = "article" %}
@@ -21,7 +22,7 @@
 <{{ card_tag }} class="{{ article_classes }}"{% if card_tag == "a" %} href="{{ detail_url }}" aria-label="{{ card_aria_label }}"{% endif %}{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
   <!-- SVG icon -->
   <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
-    {{ include.services.icon | raw }}
+    {{ service.icon }}
   </div>
   <!-- Text content-->
   <div class="service-text-content">
@@ -30,8 +31,8 @@
   </div>
   <!-- Tools used -->
   <div class="service-tools">
-    {% if include.services.tools %}
-      {% for tool in include.services.tools %}
+    {% if service.tools %}
+      {% for tool in services.tools %}
         <span class="service-tool">{{ tool.nom }}</span>
       {% endfor %}
     {% endif %}
