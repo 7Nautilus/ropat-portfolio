@@ -3,12 +3,14 @@
 {% assign project_locale = include.project.locales[current_lang] | default: include.project.locales.en %}
 {% assign project_url = project_locale.url %}
 {% assign animations_disabled = include.disable_animation | default: false %}
+
 {% if animations_disabled %}
   {% assign article_classes = "project-card" %}
 {% else %}
   {% assign animation_delay = animation_index | times: 140 | plus: 60 %}
   {% assign article_classes = "project-card animate-fade-up" %}
 {% endif %}
+
 <article class="{{ article_classes }}" data-category="{{ include.project.category }}"{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
   <a href="{{ project_url | relative_url }}" class="project-link" aria-label="{{ project_locale.aria_label }}">
     <!-- Project Image -->
