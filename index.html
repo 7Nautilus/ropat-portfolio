@@ -63,7 +63,7 @@ og_url: "https://ropat.art"
 
     <!-- Projects Grid -->
     <div class="section-grid" id="projects-grid">
-      {% assign project_slugs = site.data.projects.index.order[lang] %}
+      {% assign project_slugs = site.data.projects.index.order %}
       {% assign featured_index = 0 %}
       {% assign featured_rendered = 0 %}
       {% for slug in project_slugs %}
