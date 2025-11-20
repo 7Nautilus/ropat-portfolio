@@ -1,4 +1,7 @@
 order:
-  - graphic-design
-  - music-design
-  - branding-strategy
+  - fr: conception-graphique
+    en: graphic-design
+  - fr: design-musical
+    en: music-design
+  - fr: branding-strategie
+    en: branding-strategy
