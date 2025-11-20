@@ -46,7 +46,7 @@ og_url: "https://ropat.art"
       {% assign featured_rendered = 0 %}
       {% for id in service_ids %}
         {% assign item = site.data.services[id] %}
-        {% include service-card.html services=item index=forloop.index0 disable_animation=true %}
+        {% include service-card.html service=item index=forloop.index0 disable_animation=true %}
         {% assign featured_index = featured_index | plus: 1 %}
         {% assign featured_rendered = featured_rendered | plus: 1 %}
         {% if featured_rendered == 4 %}
