@@ -1,1 +1,78 @@
-aaa
+slug:
+  fr: design-musique
+  en: music-design
+tag: music
+detail_url:
+  fr: "/fr/services/design-musique.html"
+  en: "/en/services/music-design.html"
+icon_aria:
+  fr: "Icône de design pour la musique"
+  en: "Music design icon"
+icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-icon lucide-music"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>'
+title:
+  fr: "Design pour la musique"
+  en: "Music Design"
+description:
+  fr: "Création de pochettes d'album, visualizers, affiches de concert et tout support visuel pour artistes et labels musicaux."
+  en: "Creation of album covers, visualizers, concert posters and all visual materials for artists and music labels."
+tools:
+  - nom: "#Photoshop"
+  - nom: "#After Effects"
+  - nom: "#Blender"
+hero:
+  fr:
+    title: "Design pour la musique"
+    intro: "Design de pochettes, visualizers 3D et identités visuelles pour artistes & labels."
+    cta:
+      text: "Discutons de votre projet"
+      url: "/fr/contact.html"
+  en:
+    title: "Music Design"
+    intro: "I craft immersive visuals for artists, labels and music events, from single releases to full tour roll-outs."
+    cta:
+      text: "Let's discuss your project"
+      url: "/en/contact.html"
+subtitles:
+  first_section:
+    fr: "Mes services pour les Musiciens"
+    en: "My Services for Musicians"
+  second_section : 
+    fr: "Projets Musicaux Récents"
+    en: "Recent Musical Projects"
+services : 
+  - nom: 
+      fr: "Pochettes d'album"
+      en: "Album Covers"
+    description: 
+      fr: "Création de covers uniques pour le streaming (Spotify, Apple Music) et le physique (Vinyle, CD)."
+      en: "Creation of unique covers for streaming (Spotify, Apple Music) and physical (Vinyl, CD)."
+    tools:
+      - nom: "#Photoshop"
+      - nom: "#Blender"
+  - nom: 
+      fr: "Visualizers & Contenu Animé"
+      en: "Visualizers & Animated Content"
+    description: 
+      fr: "Animations 2D/3D pour accompagner vos morceaux sur les réseaux sociaux et plateformes de streaming."
+      en: "2D/3D animations to accompany your tracks on social media and streaming platforms."
+    tools:
+      - nom: "#After Effects"
+      - nom: "#Blender"
+  - nom: 
+      fr: "Identité d'Artiste & Label"
+      en: "Artist & Label Identity"
+    description: 
+      fr: "Création d'une identité visuelle forte et cohérente pour les artistes et les labels."
+      en: "Creation of a strong and cohesive visual identity for artists and labels."
+    tools:
+      - nom: "#Illustrator"
+      - nom: "#Figma"
+  - nom: 
+      fr: "Supports \"Live\" & Merch"
+      en: "Live Supports & Merch"
+    description: 
+      fr: "Affiches de concert, flyers et design pour tout votre merchandising."
+      en: "Concert posters, flyers and design for all your merchandising."
+    tools:
+      - nom: "#Photoshop"
+      - nom: "#InDesign"
