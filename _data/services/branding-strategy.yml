@@ -1,1 +1,53 @@
-aa
+slug:
+  fr: branding-strategie
+  en: branding-strategy
+tag: branding
+detail_url:
+  fr: "/fr/services/branding-strategie.html"
+  en: "/en/services/branding-strategy.html"
+icon_aria:
+  fr: "Icône de branding et stratégie visuelle"
+  en: "Branding and visual strategy icon"
+icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-align-horizontal-distribute-center-icon lucide-align-horizontal-distribute-center"><rect width="6" height="14" x="4" y="5" rx="2"/><rect width="6" height="10" x="14" y="7" rx="2"/><path d="M17 22v-5"/><path d="M17 7V2"/><path d="M7 22v-3"/><path d="M7 5V2"/></svg>'
+title:
+  fr: "Branding & Stratégie Visuelle"
+  en: "Branding & Visual Strategy"
+description:
+  fr: "Développement de l'identité de marque, positionnement visuel et cohérence graphique pour renforcer votre présence."
+  en: "Development of brand identity, visual positioning and graphic consistency to strengthen your presence."
+hero:
+  fr:
+    title: "Branding & Stratégie Visuelle"
+    intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
+    cta:
+      text: "Discutons de votre projet"
+      url: "/fr/contact.html"
+  en:
+    title: "Branding & Visual Strategy"
+    intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+    cta:
+      text: "Discutons de votre projet"
+      url: "/EN/contact.html"
+tools:
+  - nom: "#Figma"
+  - nom: "#Illustrator"
+  - nom: "#Photoshop"
+services : 
+  - nom: 
+      fr: "Création de Logo"
+      en: "Logo design"
+    description: 
+      fr: "Logo principal, déclinaisons, favicon"
+      en: "Main logo, variations, favicon"
+    tools:
+      - nom: "#Illustrator"
+      - nom: "#Figma"
+  - nom:
+      fr: "Charte graphique complète"
+      en: "Comprehensive Brand Guidelines"
+    description:
+      fr: "Guide d'utilisation de votre identité visuelle"
+      en: "User guide for your visual identity"
+    tools:
+      - nom: "#InDesign"
+      - nom: "#Brandpad"
