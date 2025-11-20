@@ -15,8 +15,17 @@ og_url: "https://ropat.art/en/services.html"
     <h1 class="hero-title" id="services-title">My Services</h1>
 
     <div class="section-grid" id="services-grid">
-      {% for item in site.data.services %}
-        {% include service-card.html services=item index=forloop.index0 %}
+      {% assign service_ids = site.data.services.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for id in service_ids %}
+        {% assign item = site.data.services[id] %}
+        {% include service-card.html service=item index=forloop.index0 disable_animation=true %}
+        {% assign featured_index = featured_index | plus: 1 %}
+        {% assign featured_rendered = featured_rendered | plus: 1 %}
+        {% if featured_rendered == 4 %}
+          {% break %}
+        {% endif %}
       {% endfor %}
     </div>
   </section>
