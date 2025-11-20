@@ -41,12 +41,23 @@ og_url: "https://ropat.art"
   <section class="services" aria-labelledby="services-title">
     <h2 class="section-title" id="services-title">Services & Expertise</h2>
     <div class="section-grid" id="services-grid">
-      {% for item in site.data.services %}
-        {% include service-card.html services=item index=forloop.index0 disable_animation=true %}
+      {% assign service_slugs = site.data.services.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for slug in service_slugs %}
+        {% assign item = site.data.services[slug] %}
+        {% if item.featured %}
+          {% include service-card.html services=item index=forloop.index0 disable_animation=true %}
+          {% assign featured_index = featured_index | plus: 1 %}
+          {% assign featured_rendered = featured_rendered | plus: 1 %}
+          {% if featured_rendered == 4 %}
+            {% break %}
+          {% endif %}
+        {% endif %}
       {% endfor %}
     </div>
   </section>
-
+  
   <!-- PROJECTS SECTION -->
   <section class="projects" aria-labelledby="projects-title">
     <!-- Projects Section Title -->
