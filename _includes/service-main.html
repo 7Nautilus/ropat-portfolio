@@ -1,13 +1,21 @@
 {% assign current_lang = page.lang | default: "en" %}
-{% assign service = site.data.services[include.service_id[current_lang]] %}
+{% assign service_key = include.service_id %}
+{% if service_key and service_key[current_lang] %}
+  {% assign service_key = service_key[current_lang] %}
+{% endif %}
+{% assign service = site.data.services[service_key] %}
 {% if service %}
   {% assign hero = service.hero[current_lang] | default: service.hero.en %}
   {% assign hero_title = hero.title | default: service.title[current_lang] %}
   {% assign hero_intro = hero.intro %}
-  {% assign hero_cta_text = hero.cta.text | default: "Let's discuss your project" %}
-  {% assign hero_cta_url = "/" | append: current_lang | append: "/contact.html" %}
+  {% assign hero_cta_data = hero.cta %}
+  {% assign hero_cta_text = hero_cta_data.text | default: "Let's discuss your project" %}
+  {% assign hero_cta_url = hero_cta_data.url %}
+  {% unless hero_cta_url %}
+    {% assign hero_cta_url = "/" | append: current_lang | append: "/contact.html" %}
+  {% endunless %}
   {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
-  {% assign first_section_description = services.description[current_lang] %}
+  {% assign first_section_description = service.description[current_lang] %}
   {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
   {% assign gallery_cta_url = "/" | append: current_lang | append: "/portfolio.html" %}
   {% if current_lang == "fr" %}
