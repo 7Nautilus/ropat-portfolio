@@ -44,15 +44,14 @@ og_url: "https://ropat.art"
       {% assign service_slugs = site.data.services.index.order %}
       {% assign featured_index = 0 %}
       {% assign featured_rendered = 0 %}
-      {% for slug in service_slugs %}
-        {% assign item = site.data.services[slug[lang]] %}
-        {% if item.featured %}
-          {% include service-card.html services=item index=forloop.index0 disable_animation=true %}
-          {% assign featured_index = featured_index | plus: 1 %}
-          {% assign featured_rendered = featured_rendered | plus: 1 %}
-          {% if featured_rendered == 4 %}
-            {% break %}
-          {% endif %}
+      {% for slug_item in service_slugs %}
+        {% assign slug = slug_item[lang] %}
+        {% assign item = site.data.services[slug] %}
+        {% include service-card.html service=item index=forloop.index0 disable_animation=true %}
+        {% assign featured_index = featured_index | plus: 1 %}
+        {% assign featured_rendered = featured_rendered | plus: 1 %}
+        {% if featured_rendered == 4 %}
+          {% break %}
         {% endif %}
       {% endfor %}
     </div>
