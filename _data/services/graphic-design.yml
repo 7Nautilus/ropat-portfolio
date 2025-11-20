@@ -1,1 +1,64 @@
-aa
+slug:
+  fr: conception-graphique
+  en: graphic-design
+tag: design
+detail_url:
+  fr: "/fr/services/conception-graphique.html"
+  en: "/en/services/graphic-design.html"
+icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush-icon lucide-brush"><path d="m11 10 3 3"/><path d="M6.5 21A3.5 3.5 0 1 0 3 17.5a2.62 2.62 0 0 1-.708 1.792A1 1 0 0 0 3 21z"/><path d="M9.969 17.031 21.378 5.624a1 1 0 0 0-3.002-3.002L6.967 14.031"/></svg>'
+icon_aria:
+  fr: "Icône de conception graphique"
+  en: "Graphic design icon"
+title:
+  fr: "Conception graphique"
+  en: "Graphic Design"
+description:
+  fr: "Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web."
+  en: "Logo creation, complete visual identities, posters, flyers and all your print and web communication materials."
+tools:
+  - nom: "#Illustrator"
+  - nom: "#Photoshop"
+  - nom: "#Figma"
+hero:
+  fr:
+    title: "Conception graphique"
+    intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
+    cta:
+      text: "Discutons de votre projet"
+      url: "/fr/contact.html"
+  en:
+    title: "Graphic Design"
+    intro: "I craft visual identities and multi-format assets that keep your brand cohesive across print and digital touchpoints."
+    cta:
+      text: "Let's discuss your project"
+      url: "/en/contact.html"
+subtitles:
+  first_section:
+    fr: "Mes services en Graphisme"
+    en: "My Graphic Design services"
+  second_section : 
+    fr: "Projets de Design Récents"
+    en: "Recent Design Projects"
+services : 
+  - nom: 
+      fr: "Support Print"
+      en: "Print Support"
+    description: 
+      fr: "Affiches, flyers, brochures, dépliants"
+      en: "Posters, flyers, brochures, flyers"
+    tools:
+      - nom: "#Illustrator"
+      - nom: "#InDesign"
+  - nom: 
+      fr: "Webdesign (UI/UX)"
+      en: "Webdesign (UI/UX)"
+    description: 
+      fr: "Maquettes et prototypes de sites web/applications"
+      en: "Website/application mockups and prototypes"
+    tools:
+      - nom: "#Figma" 
+      - nom: "#Illustrator"
+  - nom: 
+      fr: ""
+  - nom: 
+      fr: ""
