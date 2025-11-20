@@ -1,14 +1,17 @@
 {% assign current_lang = page.lang | default: 'en' %}
-{% assign service = site.data.services[include.service_id[current_lang]] %}
+{% assign service = include.service %}
 {% assign animations_disabled = include.disable_animation | default: false %}
 {% assign animation_index = include.index | default: 0 %}
+
 {% if animations_disabled %}
   {% assign article_classes = "service-card" %}
 {% else %}
   {% assign animation_delay = animation_index | times: 160 | plus: 80 %}
   {% assign article_classes = "service-card animate-fade-up" %}
 {% endif %}
-{% assign detail_url = include.services.detail_url[current_lang] %}
+
+{% assign detail_url = service.detail_url[current_lang] %}
+
 {% if detail_url %}
   {% assign card_tag = "a" %}
   {% if current_lang == "fr" %}
@@ -19,20 +22,21 @@
 {% else %}
   {% assign card_tag = "article" %}
 {% endif %}
+
 <{{ card_tag }} class="{{ article_classes }}"{% if card_tag == "a" %} href="{{ detail_url }}" aria-label="{{ card_aria_label }}"{% endif %}{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
   <!-- SVG icon -->
-  <div class="service-icon-placeholder" aria-label="{{ include.services.icon_aria[current_lang] }}">
+  <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
     {{ service.icon }}
   </div>
   <!-- Text content-->
   <div class="service-text-content">
-    <h3 class="service-title">{{ include.services.title[current_lang] }}</h3>
-    <p>{{ include.services.description[current_lang] }}</p>
+    <h3 class="service-title">{{ service.title[current_lang] }}</h3>
+    <p>{{ service.description[current_lang] }}</p>
   </div>
   <!-- Tools used -->
   <div class="service-tools">
     {% if service.tools %}
-      {% for tool in services.tools %}
+      {% for tool in service.tools %}
         <span class="service-tool">{{ tool.nom }}</span>
       {% endfor %}
     {% endif %}
