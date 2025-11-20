@@ -36,7 +36,7 @@
   <!-- Tools used -->
   <div class="service-tools">
     {% if service.tools %}
-      {% for tool in services.tools %}
+      {% for tool in service.tools %}
         <span class="service-tool">{{ tool.nom }}</span>
       {% endfor %}
     {% endif %}
