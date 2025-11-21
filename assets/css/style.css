@@ -21,6 +21,12 @@
   --font-size-3xl: 2rem;
   --font-size-4xl: 3rem;
 
+  /* Tailles de police fluides */
+  --fs-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --fs-h2: clamp(1.8rem, 4vw + 0.5rem, 3rem);
+  --fs-h3: clamp(1.25rem, 2vw + 0.5rem, 1.75rem);
+  --fs-p: clamp(1rem, 0.95rem + 0.2vw, 1.2rem);
+
   /* Espacement */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -792,14 +798,14 @@ main {
 
 .service-main-title {
   text-align: center;
-  font-size: xxx-large;
+  font-size: var(--fs-h2);
 }
 
 .service-main-text-placeholder {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  font-size: var(--font-size-lg);
+  font-size: var(--fs-p);
   max-width: 70%;
 }
 
