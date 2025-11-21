@@ -799,7 +799,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  font-size: xx-large;
+  font-size: var(--font-size-lg);
 }
 
 .service-main-intro {
