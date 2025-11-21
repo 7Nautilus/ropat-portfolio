@@ -796,6 +796,7 @@ main {
 
 .service-main-text-placeholder {
   display: flex;
+  flex-direction: column;
   font-size: x-large;
 }
 
