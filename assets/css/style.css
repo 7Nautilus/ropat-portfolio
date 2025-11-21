@@ -800,6 +800,7 @@ main {
   flex-direction: column;
   gap: var(--spacing-lg);
   font-size: var(--font-size-lg);
+  max-width: 70%;
 }
 
 .service-main-intro {
