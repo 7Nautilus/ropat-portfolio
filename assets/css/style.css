@@ -786,6 +786,7 @@ main {
 
 .service-main-description {
   display: flex;
+  align-content: center;
 }
 
 .service-main-title {
@@ -793,6 +794,7 @@ main {
 }
 
 .service-main-text-placeholder {
+  display: flex;
   font-size: x-large;
 }
 
