@@ -784,6 +784,18 @@ main {
    SERVICES SECTION
    ============================================ */
 
+.service-main-description {
+  display: flex;
+}
+
+.service-main-title {
+  font-size: xx-large;
+}
+
+.service-main-text-placeholder {
+  font-size: x-large;
+}
+
 .service-card {
   display: flex;
   flex-direction: column;
