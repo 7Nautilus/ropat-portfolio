@@ -791,13 +791,20 @@ main {
 }
 
 .service-main-title {
-  font-size: xx-large;
+  font-size: xxx-large;
 }
 
 .service-main-text-placeholder {
   display: flex;
   flex-direction: column;
-  font-size: x-large;
+  gap: var(--spacing-lg);
+  font-size: xx-large;
+}
+
+.service-main-intro {
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
 }
 
 .service-card {
