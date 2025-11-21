@@ -806,7 +806,7 @@ main {
   flex-direction: column;
   gap: var(--spacing-lg);
   font-size: var(--fs-p);
-  max-width: 70%;
+  max-width: 80%;
 }
 
 .service-main-intro {
