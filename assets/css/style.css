@@ -688,7 +688,7 @@ main {
   color: var(--white-color);
   padding: 0.75rem var(--spacing-lg);
   border-radius: var(--border-radius-full);
-  font-size: var(--font-size-xl);
+  font-size: var(--fs-p);
   font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
@@ -1626,7 +1626,6 @@ footer {
 
   /* CTA */
   .cta {
-    font-size: var(--font-size-lg);
     padding: var(--spacing-xs) var(--spacing-md);
   }
   
@@ -1637,7 +1636,7 @@ footer {
   }
 
   .service-hero {
-    padding: 5rem var(--spacing-lg);
+    padding: 5rem var(--spacing-xs);
   }
 
   .service-feature-section,
@@ -1715,7 +1714,6 @@ footer {
   }
 
   .cta {
-  	font-size: var(--font-size-base);
 	  padding: var(--spacing-xs) var(--spacing-sm);
   }
 
