@@ -934,7 +934,7 @@ main {
  
 .service-detail {
   display: flex;
-  padding: 0 var(--spacing-lg);
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
 }
 
 .service-hero {
