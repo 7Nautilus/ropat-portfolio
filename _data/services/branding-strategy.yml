@@ -27,8 +27,8 @@ hero:
     title: "Branding & Visual Strategy"
     intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
     cta:
-      text: "Discutons de votre projet"
-      url: "/EN/contact.html"
+      text: "Let's discuss your project"
+      url: "/en/contact.html"
 tools:
   - nom: "#Figma"
   - nom: "#Illustrator"
