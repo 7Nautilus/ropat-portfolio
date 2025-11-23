@@ -1,0 +1,53 @@
+Type,File,Selector,Media Query,Variable Name,Value,Clamp Min,Clamp Val,Clamp Max
+CSS File,style.css,.contact-link,(min-width: 640px),--font-size-base,1rem,,,
+CSS File,style.css,.contact-link,Default,--font-size-2xl,1.5rem,,,
+CSS File,style.css,.cta,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS File,style.css,.footer-bottom,(max-width: 639px),--font-size-tiny,0.5rem,,,
+CSS File,style.css,.footer-bottom,Default,--font-size-sm,0.875rem,,,
+CSS File,style.css,.footer-text,(max-width: 360px),--font-size-xxs,0.65rem,,,
+CSS File,style.css,.footer-top,Default,--font-size-base,1rem,,,
+CSS File,style.css,.hero-subtitle,(min-width: 1440px),--font-size-2xl,1.5rem,,,
+CSS File,style.css,.hero-subtitle,Default,--font-size-xl,1.25rem,,,
+CSS File,style.css,.hero-text,(min-width: 1440px),--font-size-xl,1.25rem,,,
+CSS File,style.css,.hero-text,Default,--font-size-lg,1.125rem,,,
+CSS File,style.css,.hero-title,Default,--fs-h2,"clamp(1.75rem, 3vw + 1rem, 3rem)",1.75rem,3vw + 1rem,3rem
+CSS File,style.css,.legal-content h2,Default,--font-size-2xl,1.5rem,,,
+CSS File,style.css,.legal-content h3,Default,--font-size-xl,1.25rem,,,
+CSS File,style.css,.legal-meta,Default,--font-size-sm,0.875rem,,,
+CSS File,style.css,.loader-logo,Default,--font-size-4xl,3rem,,,
+CSS File,style.css,.logo,Default,--font-size-2xl,1.5rem,,,
+CSS File,style.css,.nav-link,(min-width: 640px),--font-size-base,1rem,,,
+CSS File,style.css,.nav-link,Default,--font-size-2xl,1.5rem,,,
+CSS File,style.css,.pitch,Default,--font-size-base,1rem,,,
+CSS File,style.css,.project-description,Default,--font-size-base,1rem,,,
+CSS File,style.css,.project-title,(max-width: 639px),--font-size-lg,1.125rem,,,
+CSS File,style.css,.project-title,Default,--font-size-xl,1.25rem,,,
+CSS File,style.css,.projects-title,(max-width: 639px),--font-size-2xl,1.5rem,,,
+CSS File,style.css,.section-title,Default,--fs-h3,"clamp(1.5rem, 2vw + 1rem, 2.25rem)",1.5rem,2vw + 1rem,2.25rem
+CSS File,style.css,.select span,Default,--font-size-lg,1.125rem,,,
+CSS File,style.css,.service-card-description,Default,--font-size-base,1rem,,,
+CSS File,style.css,.service-card-title,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS File,style.css,.service-hero-intro,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS File,style.css,.service-hero-title,Default,--fs-h1,"clamp(2.25rem, 5vw + 1rem, 4rem)",2.25rem,5vw + 1rem,4rem
+CSS File,style.css,.service-main-text-placeholder,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS File,style.css,.service-main-title,Default,--fs-h2,"clamp(1.75rem, 3vw + 1rem, 3rem)",1.75rem,3vw + 1rem,3rem
+CSS File,style.css,.service-title,Default,--font-size-xl,1.25rem,,,
+CSS File,style.css,.service-tools,Default,--fs-small,"clamp(0.875rem, 0.5vw + 0.5rem, 1rem)",0.875rem,0.5vw + 0.5rem,1rem
+CSS File,style.css,.social-links,Default,--font-size-base,1rem,,,
+CSS File,style.css,html,Default,--font-size-base,1rem,,,
+CSS Variable,style.css,:root,Default,--font-size-xs,0.75rem,,,
+CSS Variable,style.css,:root,Default,--font-size-sm,0.875rem,,,
+CSS Variable,style.css,:root,Default,--font-size-base,1rem,,,
+CSS Variable,style.css,:root,Default,--font-size-lg,1.125rem,,,
+CSS Variable,style.css,:root,Default,--font-size-xl,1.25rem,,,
+CSS Variable,style.css,:root,Default,--font-size-2xl,1.5rem,,,
+CSS Variable,style.css,:root,Default,--font-size-3xl,2rem,,,
+CSS Variable,style.css,:root,Default,--font-size-4xl,3rem,,,
+CSS Variable,style.css,:root,Default,--font-size-xxs,0.65rem,,,
+CSS Variable,style.css,:root,Default,--font-size-tiny,0.5rem,,,
+CSS Variable,style.css,:root,Default,--fs-h1,"clamp(2.25rem, 5vw + 1rem, 4rem)",2.25rem,5vw + 1rem,4rem
+CSS Variable,style.css,:root,Default,--fs-h2,"clamp(1.75rem, 3vw + 1rem, 3rem)",1.75rem,3vw + 1rem,3rem
+CSS Variable,style.css,:root,Default,--fs-h3,"clamp(1.5rem, 2vw + 1rem, 2.25rem)",1.5rem,2vw + 1rem,2.25rem
+CSS Variable,style.css,:root,Default,--fs-h4,"clamp(1.25rem, 1.5vw + 1rem, 1.75rem)",1.25rem,1.5vw + 1rem,1.75rem
+CSS Variable,style.css,:root,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS Variable,style.css,:root,Default,--fs-small,"clamp(0.875rem, 0.5vw + 0.5rem, 1rem)",0.875rem,0.5vw + 0.5rem,1rem

@@ -20,6 +20,10 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 2rem;
   --font-size-4xl: 3rem;
+  
+  /* Nouvelles variables harmonisées */
+  --font-size-xxs: 0.65rem;
+  --font-size-tiny: 0.5rem;
 
   /* Tailles de police fluides */
   --fs-h1: clamp(2.25rem, 5vw + 1rem, 4rem); /* 2.5rem, 5vw, 3.5rem */
@@ -64,7 +68,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 body {
@@ -396,6 +400,7 @@ nav {
   color: var(--white-color);
   padding: var(--spacing-xs) var(--spacing-sm);
   border-radius: var(--border-radius-full);
+  font-size: var(--font-size-2xl);
   font-weight: 600;
   text-decoration: none;
   transition: all var(--transition-base);
@@ -587,7 +592,7 @@ main {
 }
 
 .hero-title {
-  font-size: var(--font-size-4xl);
+  font-size: var(--fs-h2);
   font-weight: 800;
   line-height: 1.2;
   max-width: 100%;
@@ -1196,6 +1201,12 @@ footer {
   font-weight: 600;
 }
 
+.legal-meta {
+  margin-top: 2rem;
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
@@ -1226,6 +1237,10 @@ footer {
   .nav-link:hover {
     transform: none;
   }
+
+  .contact-link {
+    font-size: var(--font-size-base);
+  }
 }
 
 /* Medium Tablets - 768px + */
@@ -1244,7 +1259,6 @@ footer {
   }
 
   .cta {
-    font-size: 1.125rem;
     padding: 0.875rem 2rem;
     gap: 0.875rem;
   }
@@ -1270,10 +1284,6 @@ footer {
 
 /* Large Desktops - 1440px + */
 @media (min-width: 1440px) {
-  .hero-title {
-    font-size: var(--font-size-4xl);
-  }
-  
   .hero-subtitle {
     font-size: var(--font-size-2xl);
   }
@@ -1289,10 +1299,6 @@ footer {
   .hero-project {
 	  flex-direction: column;
   }
-
-  .hero-title {
-    font-size: var(--font-size-3xl);
-  }
   
   .hero-image {
 	  border-radius: var(--border-radius-sm);
@@ -1305,7 +1311,6 @@ footer {
   
   /* Contact Button */
   .contact-link {
-    font-size: var(--font-size-2xl);
     padding: 0.75rem var(--spacing-md);
   }
 
@@ -1335,7 +1340,7 @@ footer {
   }
 
   .project-title {
-    font-size: 1.15rem;
+    font-size: var(--font-size-lg);
   }
   
   .hero-image-container {
@@ -1348,23 +1353,19 @@ footer {
   }
 
   .footer-bottom {
-    font-size: var(--spacing-xs);
+    font-size: var(--font-size-tiny);
     gap: var(--spacing-xs);
   }
 }
 
 /* Very Small Mobile - Max 360px */
 @media (max-width: 360px) {
-  .hero-title {
-	  font-size: 1.75rem;
-  }
-
   .cta {
 	  padding: var(--spacing-xs) var(--spacing-sm);
   }
 
   .footer-text {
-    font-size: 0.65rem;
+    font-size: var(--font-size-xxs);
   }
 }
 
