@@ -846,7 +846,7 @@ main {
 }
 
 .service-title {
-  font-size: var(--fs-h4);
+  font-size: var(--fs-p);
   font-weight: 600;
 }
 
