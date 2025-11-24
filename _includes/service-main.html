@@ -71,12 +71,12 @@
     <!-- FIN DE LA SECTION TEST-->
     <!-- 1ère sections - Services Card -->
     <section class="services-cards-section">
-      <h3 class="section-title">{{ first_section_subtitle | default: services_title }}</h2>
+      <h3 class="section-title">{{ first_section_subtitle | default: services_title }}</h3>
       <div class="section-grid section-grid-simple">
         {% for service_item in service.services %}
           <div class="service-card service-card-simple">
             <div class="service-text-content">
-              <h3 class="service-title">{{ service_item.nom[current_lang] }}</h3>
+              <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
               {% if service_item.description %}
                 <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
               {% endif %}
@@ -93,7 +93,7 @@
       </div>
     </section>
     <section>
-      <h3 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h2>
+      <h3 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h3>
       <!-- Projects Grid -->
       <div class="section-grid" id="projects-grid">
         <!-- Include Projects with "Music" category -->
