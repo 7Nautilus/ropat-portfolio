@@ -76,7 +76,7 @@
         {% for service_item in service.services %}
           <div class="service-card service-card-simple">
             <div class="service-text-content">
-              <h3 class="service-card-title">{{ service_item.nom[current_lang] }}</h3>
+              <h3 class="service-title">{{ service_item.nom[current_lang] }}</h3>
               {% if service_item.description %}
                 <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
               {% endif %}
