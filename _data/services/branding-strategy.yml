@@ -19,13 +19,13 @@ description:
 hero:
   fr:
     title: "Branding & Stratégie Visuelle"
-    intro: "J'aide les marques à clarifier leur message et à bâtir un système visuel cohérent, de la plateforme de marque aux guidelines."
+    intro: "L'âme de votre entreprise. Je conçois des identités fortes et cohérentes qui établissent la confiance et racontent votre histoire unique."
     cta:
       text: "Discutons de votre projet"
       url: "/fr/contact.html"
   en:
     title: "Branding & Visual Strategy"
-    intro: "I help brands clarify their narrative and build a cohesive visual system—from brand foundations to rollout guidelines."
+    intro: "Your company's soul. I design strong and consistent identities that build trust and tell your unique story."
     cta:
       text: "Let's discuss your project"
       url: "/en/contact.html"

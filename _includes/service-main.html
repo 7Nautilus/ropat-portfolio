@@ -71,7 +71,7 @@
     <!-- FIN DE LA SECTION TEST-->
     <!-- 1ère sections - Services Card -->
     <section class="services-cards-section">
-      <h2 class="section-title">{{ first_section_subtitle | default: services_title }}</h2>
+      <h3 class="section-title">{{ first_section_subtitle | default: services_title }}</h2>
       <div class="section-grid section-grid-simple">
         {% for service_item in service.services %}
           <div class="service-card service-card-simple">
@@ -93,7 +93,7 @@
       </div>
     </section>
     <section>
-      <h2 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h2>
+      <h3 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h2>
       <!-- Projects Grid -->
       <div class="section-grid" id="projects-grid">
         <!-- Include Projects with "Music" category -->
