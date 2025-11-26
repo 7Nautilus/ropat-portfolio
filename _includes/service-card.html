@@ -25,13 +25,15 @@
 
 <{{ card_tag }} class="{{ article_classes }}"{% if card_tag == "a" %} href="{{ detail_url }}" aria-label="{{ card_aria_label }}"{% endif %}{% unless animations_disabled %} style="--animate-delay: {{ animation_delay }}ms"{% endunless %}>
   <!-- SVG icon -->
-  <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
-    {{ service.icon }}
-  </div>
-  <!-- Text content-->
-  <div class="service-text-content">
-    <h3 class="service-title">{{ service.title[current_lang] }}</h3>
-    <p>{{ service.description[current_lang] }}</p>
+  <div class="service-card-placeholder">
+    <div class="service-icon-placeholder" aria-label="{{ service.icon_aria[current_lang] }}">
+      {{ service.icon }}
+    </div>
+    <!-- Text content-->
+    <div class="service-text-content">
+      <h3 class="service-title">{{ service.title[current_lang] }}</h3>
+      <p>{{ service.description[current_lang] }}</p>
+    </div>
   </div>
   <!-- Tools used -->
   <div class="service-tools">

@@ -900,6 +900,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
   background-color: var(--secondary-color);
   border-radius: var(--border-radius-lg);
   border: 2px solid var(--primary-color);
@@ -922,12 +923,22 @@ main {
   outline-offset: 4px;
 }
 
+.service-card-big {
+  gap: var(--spacing-lg);
+}
+
 .service-card-simple {
   justify-content: space-between;
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   flex: 0 1 auto;
 
+}
+
+.service-card-placeholder {
+  display: flex;
+  flex-direction: inherit;
+  gap: var(--spacing-md);
 }
 
 .service-icon-placeholder {
@@ -1397,6 +1408,12 @@ footer {
 
   .card-grid {
     padding: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  #services-cards .service-card-simple {
+    width: 100%;
   }
 
   /* Footer */
