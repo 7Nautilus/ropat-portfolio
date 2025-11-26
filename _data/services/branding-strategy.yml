@@ -52,3 +52,33 @@ services :
     tools:
       - nom: "#InDesign"
       - nom: "#Brandpad"
+services-page:
+  description:
+    fr: "Construisez une marque mémorable qui résonne avec votre audience"
+    en: "Build a memorable brand that resonates with your audience"
+  sections:
+    - nom:
+        fr: "Identité de marque"
+        en: "Brand Identity"
+      subservices:
+        - nom:
+            fr: "Création de logotype"
+            en: "Logo Design"
+          description:
+            fr: "Logo principal, déclinaisons, favicon"
+            en: "Main logo, variations, favicon"
+        - nom:
+            fr: "Charte graphique complète"
+            en: "Comprehensive Brand Guidelines"
+          description:
+            fr: "Guide d'utilisation de votre identité visuelle"
+            en: "User guide for your visual identity"
+        - nom:
+            fr: "Brandbook Digital"
+            en: "Digital Brandbook"
+          description:
+            fr: "Manuel de marque interactif et évolutif"
+            en: "Interactive and scalable brand manual"
+    - nom:
+        fr: "Stratégie & Positionnement"
+        en: "Strategy & Positioning"
