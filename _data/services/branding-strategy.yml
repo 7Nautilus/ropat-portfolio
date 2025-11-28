@@ -82,3 +82,22 @@ services-page:
     - nom:
         fr: "Stratégie & Positionnement"
         en: "Strategy & Positioning"
+      subservices:
+        - nom:
+            fr: "Audit de marque"
+            en: "Brand Audit"
+          description:
+            fr: "Analyse approfondie de votre marque actuelle"
+            en: "In-depth analysis of your current brand"
+        - nom:
+            fr: "Positionnement de marque"
+            en: "Brand Positioning"
+          description:
+            fr: "Définition claire de votre place sur le marché"
+            en: "Clear definition of your market position"
+        - nom:
+            fr: "Stratégie de communication visuelle"
+            en: "Visual Communication Strategy"
+          description:
+            fr: "Planification des messages et visuels cohérents"
+            en: "Planning of consistent messages and visuals"
