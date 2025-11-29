@@ -7,7 +7,7 @@ CSS File,style.css,.footer-bottom,Default,--font-size-sm,0.875rem,,,
 CSS File,style.css,.footer-text,(max-width: 360px),--font-size-xxs,0.65rem,,,
 CSS File,style.css,.footer-top,Default,--font-size-base,1rem,,,
 CSS File,style.css,.hero-subtitle,Default,--fs-h4,"clamp(1.25rem, 1.5vw + 1rem, 1.75rem)",1.25rem,1.5vw + 1rem,1.75rem
-CSS File,style.css,.hero-text,Default,--fs-text-lg,"clamp(1.125rem, 0.5vw + 1rem, 1.5rem)",1.125rem,0.5vw + 1rem,1.5rem
+CSS File,style.css,.hero-text,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
 CSS File,style.css,.hero-title,Default,--fs-h1,"clamp(2.25rem, 5vw + 1rem, 4rem)",2.25rem,5vw + 1rem,4rem
 CSS File,style.css,.legal-content h2,Default,--fs-h3,"clamp(1.5rem, 2vw + 1rem, 2.25rem)",1.5rem,2vw + 1rem,2.25rem
 CSS File,style.css,.legal-content h3,Default,--fs-h4,"clamp(1.25rem, 1.5vw + 1rem, 1.75rem)",1.25rem,1.5vw + 1rem,1.75rem
@@ -30,6 +30,8 @@ CSS File,style.css,.service-main-text-placeholder,Default,--fs-p,"clamp(1rem, 0.
 CSS File,style.css,.service-main-title,Default,--fs-h2,"clamp(1.75rem, 3vw + 1rem, 3rem)",1.75rem,3vw + 1rem,3rem
 CSS File,style.css,.service-title,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
 CSS File,style.css,.service-tools,Default,--fs-small,"clamp(0.875rem, 0.5vw + 0.5rem, 1rem)",0.875rem,0.5vw + 0.5rem,1rem
+CSS File,style.css,.services-page-description,Default,--fs-p,"clamp(1rem, 0.5vw + 1rem, 1.25rem)",1rem,0.5vw + 1rem,1.25rem
+CSS File,style.css,.services-page-subtitle,Default,--fs-h2,"clamp(1.75rem, 3vw + 1rem, 3rem)",1.75rem,3vw + 1rem,3rem
 CSS File,style.css,.social-links,Default,--font-size-base,1rem,,,
 CSS File,style.css,html,Default,--font-size-base,1rem,,,
 CSS Variable,style.css,:root,Default,--font-size-xs,0.75rem,,,

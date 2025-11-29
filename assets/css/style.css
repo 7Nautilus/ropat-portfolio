@@ -623,7 +623,7 @@ main {
   border-left: var(--border-primary);
   
   /* Typography */
-  font-size: var(--fs-text-lg);
+  font-size: var(--fs-p);
   line-height: 1.6;
 }
 
