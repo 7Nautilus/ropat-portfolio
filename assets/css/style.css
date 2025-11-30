@@ -593,6 +593,25 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
+  position: relative;
+}
+
+.scroll-down-link {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.scroll-down-link:hover {
+  transform: translateX(-50%) translateY(5px);
+}
+
+#second-section {
+  scroll-margin-top: 7rem; /* Ajustez cette valeur en fonction de la hauteur de votre en-tête */
 }
 
 .hero-project-section {
@@ -643,7 +662,7 @@ main {
   width: fit-content;
   
   /* Spacing */
-  padding: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg) var(--spacing-sm) var(--spacing-md);
   gap: var(--spacing-sm);
 
   /* Background */
@@ -683,7 +702,11 @@ main {
 .hero-project{
   display: flex;
 	flex-direction: row;
-  padding-top: 7rem;
+  height: fit-content;
+  padding: 7rem 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: start;
 }
 
 .hero-project-description {
@@ -788,6 +811,7 @@ main {
 #main-image {
     width: 100%;
     height: auto;
+    max-height: 80vh;
     display: block;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
@@ -1092,8 +1116,7 @@ main {
 }
 
 .project-title {
-  font-size: var(--fs-text-lg);
-  font-weight: 600;
+  text-align: start;
 }
 
 .project-description {
@@ -1448,10 +1471,12 @@ footer {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--spacing-md);
   }
-
+  
+  /*
   #services-cards .service-card-simple {
     width: 100%;
   }
+  */
 
   /* Footer */
   .footer-top {

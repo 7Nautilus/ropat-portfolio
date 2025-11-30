@@ -11,7 +11,7 @@
 <!-- Main Content -->
 {% if project and project_locale %}
 <main id="main-content" class="hero-project-section">
-  <section class="hero-project">
+  <section class="hero hero-project">
     <!-- Gallery -->
     <div class="hero-image-container">
       <div class="project-gallery">
@@ -34,7 +34,7 @@
     </div>
     <!-- Description -->
     <div class="hero-project-description">
-      <h1 class="hero-title">{{ project.project_title }}</h1>
+      <h1 class="hero-title project-title">{{ project.project_title }}</h1>
       <div class="hero-text">
         {% assign subtitle_html = project_locale.subtitle | markdownify %}
         <h2 class="hero-subtitle">{{ subtitle_html | strip | replace: '<p>', '' | replace: '</p>', '' }}</h2>
