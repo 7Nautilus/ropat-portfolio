@@ -1,0 +1,19 @@
+fr:
+  title:
+    "Contactez-moi"
+  hero_pitch:
+    "Vous avez une question ou souhaitez collaborer ? Retrouvez-moi sur mes réseaux ou envoyez-moi un email directement !"
+  cta:
+    "Envoyer un email"
+  h2: 
+    "Mes réseaux sociaux"
+
+en:
+  title:
+    "Contact Me"
+  hero_pitch:
+    "Have a question or want to collaborate? Find me on my social networks or send me an email directly!"
+  cta:
+    "Send an email"
+  h2:
+    "My social networks"

@@ -8,27 +8,5 @@ og_title: "Contact Ropat"
 og_description: "Contact me for any question or collaboration. Find me on my social networks or send me an email directly."
 og_url: "https://ropat.art/en/contact.html"
 ---
-<!-- Main Content -->
-<main id="main-content">
-  <!-- Hero Section -->
-  <section class="hero" aria-labelledby="hero-title">
-    <!-- Title -->
-    <h1 class="hero-title" id="hero-title">Contact Me</h1>
 
-    <!-- Contact Information -->
-    <p class="hero-text">Do you have a question or want to collaborate? Find me on my social networks or send me an email directly!</p>
-
-    <!-- Call to Action Button -->
-    <a href="mailto:vultur.psd@gmail.com" class="cta">Send an email</a>
-  </section>
-  <section class="contact-methods" aria-labelledby="contact-methods-title">
-    <h2 id="contact-methods-title" class="section-title">My social networks</h2>
-    <div class="social-links" id="contact-social-links">  
-      {% for item in site.data.socials %}
-        <a href="{{ item.link }}" class="social-link {{ item.name }}">
-          {{ item.icon }}
-        </a>
-      {% endfor %}
-    </div>
-  </section>
-</main>
+{% include pages/contact.html %}

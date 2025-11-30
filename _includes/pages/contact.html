@@ -1,0 +1,26 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign contact = site.data.pages.contact[current_lang] %}
+<!-- Main Content -->
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <!-- Title -->
+    <h1 class="hero-title" id="hero-title">{{ contact.title }}</h1>
+
+    <!-- Contact Information -->
+    <p class="hero-pitch">{{ contact.hero_pitch }}</p>
+
+    <!-- Call to Action Button -->
+    <a href="mailto:vultur.psd@gmail.com" class="cta">{{ contact.cta }}</a>
+  </section>
+  <section class="contact-methods" aria-labelledby="contact-methods-title">
+    <h2 id="contact-methods-title" class="section-title">{{ contact.h2 }}</h2>
+    <div class="social-links" id="contact-social-links">  
+      {% for item in site.data.socials %}
+        <a href="{{ item.link }}" class="social-link {{ item.name }}">
+          {{ item.icon }}
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+</main>

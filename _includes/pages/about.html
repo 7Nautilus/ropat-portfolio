@@ -1,0 +1,14 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign about = site.data.pages.about[current_lang] %}
+<!-- Main Content -->
+<main id="main-content">
+  <section class="hero" aria-labelledby="hero-title">
+    <!-- Title -->
+    <h1 class="hero-title" id="hero-title">{{ about.title }}</h1>
+    <!-- Description -->
+    <div class="hero-pitch">
+      <p>{{ about.hero_pitch1 }}</p>
+      <p>{{ about.hero_pitch2 }}</p>
+    </div>
+  </section>
+</main>
