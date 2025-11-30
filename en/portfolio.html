@@ -7,24 +7,8 @@ canonical_url: "https://ropat.art/en/portfolio.html"
 og_title: "Portfolio - Ropat"
 og_description: "Discover my graphic creations: album covers, logos, posters, motion design animations and branding projects for artists and businesses."
 og_url: "https://ropat.art/en/portfolio.html"
+hero_title: "My Creations"
+hero_intro: "Explore a selection of my recent projects, designed to capture the unique essence of each artist and brand."
 ---
 
-<!-- Main Content -->
-<main id="main-content" class="main-content">
-  <!-- PROJECTS SECTION -->
-  <section class="hero" aria-labelledby="projects-title">
-    <!-- Section title-->
-    <h1 class="hero-title" id="projects-title">My Creations</h1>
-
-    {% include portfolio-filters.html %}
-
-    <!-- Projects grid -->
-    <div class="section-grid" id="projects-grid">
-      {% assign project_slugs = site.data.projects.index.order %}
-      {% for slug in project_slugs %}
-        {% assign item = site.data.projects[slug] %}
-        {% include project-card.html project=item index=forloop.index0 disable_animation=true %}
-      {% endfor %}
-    </div>
-  </section>
-</main>
+{% include pages/portfolio.html %}

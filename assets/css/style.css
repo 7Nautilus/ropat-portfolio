@@ -88,6 +88,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  gap: var(--spacing-lg);
 }
 
 section {
@@ -474,6 +475,7 @@ nav {
   flex-direction: column;
   justify-content: flex-start;
   min-width: 10rem;
+  width: fit-content;
   position: relative;
   margin-left: var(--spacing-lg);
   animation: fadeIn 0.6s ease-out;
@@ -590,7 +592,7 @@ main {
   width: 100%;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-lg);
+  text-align: center;
 }
 
 .hero-project-section {
@@ -602,6 +604,7 @@ main {
   font-weight: 800;
   line-height: 1.2;
   max-width: 100%;
+  text-align: center;
 }
 
 .hero-subtitle {
@@ -629,7 +632,6 @@ main {
   
   /* Typography */
   font-size: var(--fs-p);
-  text-align: center;
   line-height: 1.6;
 }
 
@@ -679,10 +681,9 @@ main {
 }
 
 .hero-project{
-	display: flex;
+  display: flex;
 	flex-direction: row;
-	align-items: flex-start;
-	gap: var(--spacing-lg);
+  padding-top: 7rem;
 }
 
 .hero-project-description {
@@ -819,16 +820,16 @@ main {
    SERVICES SECTION
    ============================================ */
 
-/* Textes */
-
-.service-hero-title {
-  font-size: var(--fs-h1);
-  font-weight: 800;
-  line-height: 1.1;
-  text-align: center;
+.subservice-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-lg);
 }
 
-.service-hero-intro {
+/* Textes */
+
+.hero-intro {
   font-size: var(--fs-p);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.85);
@@ -953,7 +954,9 @@ main {
 }
 
 .service-card-big {
-  gap: var(--spacing-lg);
+  gap: 4rem;
+  border-radius: 3rem;
+  padding: 4rem 2rem;
 }
 
 .service-card-simple {
@@ -1008,6 +1011,7 @@ main {
   padding: 0 var(--spacing-lg) var(--spacing-lg);
 }
 
+/* old hero section
 .service-hero {
   display: flex;
   position: relative;
@@ -1019,6 +1023,7 @@ main {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
 }
+*/
 
 /* ============================================
    PROJECTS SECTION
@@ -1388,11 +1393,13 @@ footer {
   .contact-link {
     padding: 0.75rem var(--spacing-md);
   }
-
+  
+  /*
   .service-hero {
     padding: 5rem var(--spacing-xs);
   }
-  
+  */
+
   /* Dropdown Menu */
   .dropdown {
     margin-left: 0;
@@ -1465,6 +1472,12 @@ footer {
 
   .footer-text {
     font-size: var(--font-size-xxs);
+  }
+}
+
+@media (min-width: 640px) {
+  .service-main-container {
+    padding: 0 2rem;
   }
 }
 

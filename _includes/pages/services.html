@@ -7,50 +7,57 @@
 
 <main id="main-content" class="main-content">
   <!-- HERO-->
-  <section class="service-hero" aria-labelledby="services-title">
-    <h1 class="service-hero-title" id="services-title">{{ services_lang.title }}</h1>
-    <p class="service-hero-intro">
+  <section class="hero" aria-labelledby="services-title">
+    <h1 class="hero-title" id="services-title">{{ services_lang.title }}</h1>
+    <p class="hero-intro">
       {{ services_lang.intro }}
     </p>
   </section>
   <!-- TEST Section-->
   <section id="services-cards">
-    <div class="service-card service-card-big">
-      <div class="service-main-container">
-        {% if branding.icon %}
-          <div class="service-icon-placeholder big-icon">
-            {{ branding.icon }}
-          </div>
-        {% endif %}
-        <div class="service-main-container-text">
-          <h2 class="services-page-subtitle">{{ branding.title[current_lang] }}</h2>
-          <p class="services-page-description">
-            {{ branding.services-page.description[current_lang] }}
-          </p>
-        </div>
-      </div>
-      {% for section in branding.services-page.sections %}
-        <h3 class="section-title">{{ section.nom[current_lang] }}</h3>
-        <div class="card-grid">
-        {% for service_item in section.subservices %}
-          <div class="service-card service-card-simple">
-            <div class="service-text-content">
-              <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
-              {% if service_item.description %}
-                <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
-              {% endif %}
+    {% assign services_id = site.data.services.index.order %}
+    {% for service_category in services_id %}
+      {% assign service = site.data.services[service_category] %}
+      <a class="service-card service-card-big" href="{{ service.detail_url[current_lang] }}">
+        <div class="service-main-container">
+          {% if service.icon %}
+            <div class="service-icon-placeholder big-icon">
+              {{ service.icon }}
             </div>
-            {% if service_item.tools %}
-              <div class="service-tools">
-                {% for tool in service_item.tools %}
-                  <span class="service-tool">{{ tool.nom }}</span>
-                {% endfor %}
-              </div>
-            {% endif %}
+          {% endif %}
+          <div class="service-main-container-text">
+            <h2 class="services-page-subtitle">{{ service.title[current_lang] }}</h2>
+            <p class="services-page-description">
+              {{ service["services-page"].description[current_lang] }}
+            </p>
+          </div>
+        </div>
+        {% for section in service["services-page"].sections %}
+          <!-- AH -->
+          <div class="subservice-section">
+            <h3 class="section-title">{{ section.nom[current_lang] }}</h3>
+            <div class="card-grid">
+              {% for service_item in section.subservices %}
+                <div class="service-card service-card-simple">
+                  <div class="service-text-content">
+                    <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
+                    {% if service_item.description %}
+                      <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
+                    {% endif %}
+                  </div>
+                  {% if service_item.tools %}
+                    <div class="service-tools">
+                      {% for tool in service_item.tools %}
+                        <span class="service-tool">{{ tool.nom }}</span>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           </div>
         {% endfor %}
-        </div>
-      {% endfor %}
-    </div>
+        </a>
+    {% endfor %}
   </section>
 </main>

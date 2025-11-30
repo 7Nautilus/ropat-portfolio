@@ -9,24 +9,4 @@ og_description: "Discover my services: album cover design, logo creation, poster
 og_url: "https://ropat.art/en/services.html"
 ---
 <!-- Main Content -->
-<main id="main-content" class="main-content">
-  <!-- SERVICES SECTION -->
-  <section class="hero" aria-labelledby="services-title">
-    <h1 class="hero-title" id="services-title">My Services</h1>
-
-    <div class="section-grid" id="services-grid">
-      {% assign service_ids = site.data.services.index.order %}
-      {% assign featured_index = 0 %}
-      {% assign featured_rendered = 0 %}
-      {% for id in service_ids %}
-        {% assign item = site.data.services[id] %}
-        {% include service-card.html service=item index=forloop.index0 disable_animation=true %}
-        {% assign featured_index = featured_index | plus: 1 %}
-        {% assign featured_rendered = featured_rendered | plus: 1 %}
-        {% if featured_rendered == 4 %}
-          {% break %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  </section>
-</main>
+{% include pages/services.html %}

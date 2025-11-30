@@ -7,24 +7,8 @@ canonical_url: "https://ropat.art/fr/portfolio.html"
 og_title: "Portfolio - Ropat"
 og_description: "Découvrez mes créations graphiques : pochettes d'album, logos, affiches, animations en motion design et projets de branding pour artistes et entreprises."
 og_url: "https://ropat.art/fr/portfolio.html"
+hero_title: "Mes créations"
+hero_intro: "Explorez une sélection de mes projets récents, conçus pour capturer l'essence unique de chaque artiste et marque."
 ---
 
-<!-- Main Content -->
-<main id="main-content" class="main-content">
-  <!-- SECTION PROJETS -->
-  <section class="hero" aria-labelledby="projects-title">
-    <!-- Services section title-->
-    <h1 class="hero-title" id="projects-title">Mes créations</h1>
-
-    {% include portfolio-filters.html %}
-
-    <!-- Grille des projets -->
-    <div class="section-grid" id="projects-grid">
-      {% assign project_slugs = site.data.projects.index.order %}
-      {% for slug in project_slugs %}
-        {% assign item = site.data.projects[slug] %}
-        {% include project-card.html project=item index=forloop.index0 disable_animation=true %}
-      {% endfor %}
-    </div>
-  </section>
-</main>
+{% include pages/portfolio.html %}
