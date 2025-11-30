@@ -1442,6 +1442,10 @@ footer {
   }
   */
 
+  .scroll-down-link {
+    bottom: 5rem;
+  }
+
   /* Dropdown Menu */
   .dropdown {
     margin-left: 0;
