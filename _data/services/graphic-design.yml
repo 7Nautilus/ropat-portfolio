@@ -16,10 +16,6 @@ title:
 description:
   fr: "Création de logos, identités visuelles complètes, affiches, flyers et tous vos supports de communication print et web."
   en: "Logo creation, complete visual identities, posters, flyers and all your print and web communication materials."
-tools:
-  - nom: "#Illustrator"
-  - nom: "#Photoshop"
-  - nom: "#Figma"
 hero:
   fr:
     title: "Conception graphique"
@@ -33,20 +29,26 @@ hero:
     cta:
       text: "Let's discuss your project"
       url: "/en/contact.html"
+tools:
+  - nom: "#Illustrator"
+  - nom: "#Photoshop"
+  - nom: "#Figma"
+
 subtitles:
-  first_section:
+  subservices:
     fr: "Mes services en Graphisme"
     en: "My Graphic Design services"
-  second_section : 
+  projects : 
     fr: "Projets de Design Récents"
     en: "Recent Design Projects"
+
 services : 
   - nom: 
       fr: "Support Print"
       en: "Print Support"
     description: 
-      fr: "Affiches, flyers, brochures, dépliants"
-      en: "Posters, flyers, brochures, flyers"
+      fr: "Affiches, flyers, brochures, dépliants..."
+      en: "Posters, flyers, brochures, flyers..."
     tools:
       - nom: "#Illustrator"
       - nom: "#InDesign"
@@ -60,6 +62,20 @@ services :
       - nom: "#Figma" 
       - nom: "#Illustrator"
   - nom: 
-      fr: ""
-  - nom: 
-      fr: ""
+      fr: "Réseaux Sociaux"
+      en: "Social Media"
+    description: 
+      fr: "Création de visuels pour vos plateformes sociales"
+      en: "Creation of visuals for your social platforms"
+    tools:
+      - nom: "#Canva"
+      - nom: "#Photoshop"
+  - nom:
+      fr: "Illustration"
+      en: "Illustration"
+    description: 
+      fr: "Illustrations personnalisées pour divers usages"
+      en: "Custom illustrations for various uses"
+    tools:
+      - nom: "#Illustrator"
+      - nom: "#Photoshop"

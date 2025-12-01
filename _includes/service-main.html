@@ -14,9 +14,8 @@
   {% unless hero_cta_url %}
     {% assign hero_cta_url = "/" | append: current_lang | append: "/contact.html" %}
   {% endunless %}
-  {% assign first_section_subtitle = service.subtitles.first_section[current_lang] %}
-  {% assign first_section_description = service.description[current_lang] %}
-  {% assign second_section_subtitle = service.subtitles.second_section[current_lang] %}
+  {% assign subservices_subtitle = service.subtitles.subservices[current_lang] %}
+  {% assign projects_subtitle = service.subtitles.projects[current_lang] %}
   {% assign gallery_cta_url = "/" | append: current_lang | append: "/portfolio.html" %}
   {% if current_lang == "fr" %}
     {% assign services_title = "Ce que je propose" %}
@@ -71,7 +70,7 @@
     <!-- FIN DE LA SECTION TEST-->
     <!-- 1ère sections - Services Card -->
     <section class="services-cards-section">
-      <h3 class="section-title">{{ first_section_subtitle | default: services_title }}</h3>
+      <h3 class="section-title">{{ subservices_subtitle | default: services_title }}</h3>
       <div class="section-grid section-grid-simple">
         {% for service_item in service.services %}
           <div class="service-card service-card-simple">
@@ -93,7 +92,7 @@
       </div>
     </section>
     <section>
-      <h3 class="section-title">{{ second_section_subtitle | default: gallery_title }}</h3>
+      <h3 class="section-title">{{ projects_subtitle | default: gallery_title }}</h3>
       <!-- Projects Grid -->
       <div class="section-grid" id="projects-grid">
         <!-- Include Projects with "Music" category -->
