@@ -1,0 +1,41 @@
+fr: 
+  title: 
+    "Direction Artistique & Design Graphique"
+  hero_pitch:
+    line-1: 
+      "Bonjour ! Je suis <strong>Ropat</strong>, graphiste basé à Angers. J'accompagne les artistes et les labels dans la création de leur <strong>identité visuelle</strong>."
+    line-2: 
+      "Je conçois des <strong>pochettes d'album</strong>, des <strong>visualizers</strong>, des <strong>affiches de concert</strong> et fournis du branding classique (logos, chartes graphiques) pour les entreprises."
+  cta: 
+    "Donner un visuel à votre projet"
+  services:
+    subtitle:
+      "Services & Expertises"
+    cta: 
+      "Voir tous les services"
+  projects:
+    subtitle:
+      "Projets Récents : Musique et Branding"
+    cta:
+      "Voir tous les projets"
+
+en:
+  title: 
+    "Art Direction & Graphic Design"
+  hero_pitch:
+    line-1: 
+      "Hello! I'm <strong>Ropat</strong>, a graphic designer based in Angers. I support artists and labels in creating their <strong>visual identity</strong>."
+    line-2: 
+      "I design <strong>album covers</strong>, <strong>visualizers</strong>, <strong>concert posters</strong> and provide classic branding (logos, guidelines) for businesses."
+  cta: 
+    "Give your project a visual"
+  services:
+    subtitle:
+      "Services & Expertise"
+    cta:
+      "See all services"
+  projects:
+    subtitle:
+      "Featured Projects: Music and Branding"
+    cta:
+      "See all projects"

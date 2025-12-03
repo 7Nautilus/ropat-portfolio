@@ -1,0 +1,91 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign index = site.data.pages.index[current_lang] %}
+
+<!-- Loader de page -->
+<div class="page-loader" id="pageLoader">
+  <div class="loader-content">
+    <div class="loader-logo">Ropat</div>
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main id="main-content">
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 class="hero-title" id="hero-title">{{ index.title }}</h1>
+
+    <!-- Texte d'accroche -->
+    <div class="hero-pitch">
+      <p>{{ index.hero_pitch["line-1"] }}</p>
+      <p>{{ index.hero_pitch["line-2"] }}</p>
+    </div>
+
+    <!-- CTA -->
+    <a href="/fr/contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
+      <span>{{ index.cta }}</span>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">{{ index.services.subtitle }}</h2>
+    <div class="section-grid" id="services-grid">
+      {% assign service_ids = site.data.services.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for id in service_ids %}
+        {% assign item = site.data.services[id] %}
+        {% include service-card.html service=item index=forloop.index0 disable_animation=true %}
+        {% assign featured_index = featured_index | plus: 1 %}
+        {% assign featured_rendered = featured_rendered | plus: 1 %}
+        {% if featured_rendered == 4 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="cta-container">
+      <a href="/fr/services.html" class="cta">
+        Voir tous les services
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="projects" aria-labelledby="projects-title">
+    <!-- Projects Section Title -->
+    <h2 class="section-title" id="projects-title">{{ index.projects.subtitle }}</h2>
+
+    <!-- Projects Grid -->
+    <div class="section-grid" id="projects-grid">
+      {% assign project_slugs = site.data.projects.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for slug in project_slugs %}
+        {% assign item = site.data.projects[slug] %}
+        {% if item.featured %}
+          {% include project-card.html project=item index=featured_index disable_animation=true %}
+          {% assign featured_index = featured_index | plus: 1 %}
+          {% assign featured_rendered = featured_rendered | plus: 1 %}
+          {% if featured_rendered == 4 %}
+            {% break %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="cta-container">
+      <a href="/fr/portfolio.html" class="cta">
+        {{ index.projects.cta }}
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</main>
