@@ -11,7 +11,10 @@
     <p class="hero-pitch">{{ contact.hero_pitch }}</p>
 
     <!-- Call to Action Button -->
-    <a href="mailto:vultur.psd@gmail.com" class="cta">{{ contact.cta }}</a>
+    <a href="mailto:vultur.psd@gmail.com" class="cta">
+      <span>{{ contact.cta }}</span>
+      <img width="20" height="20" style="filter: invert(1);" src="/assets/images/icons/send.svg" alt="send icon" aria-hidden="true" />
+    </a>
   </section>
   <section class="contact-methods" aria-labelledby="contact-methods-title">
     <h2 id="contact-methods-title" class="section-title">{{ contact.h2 }}</h2>
