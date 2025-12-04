@@ -749,6 +749,7 @@ main {
   align-items: center;
   justify-content: center;
   width: fit-content;
+  gap: 0.875rem;
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
   color: var(--white-color);
@@ -1383,7 +1384,6 @@ footer {
 
   .cta {
     padding: 0.875rem 2rem;
-    gap: 0.875rem;
   }
 }
 
