@@ -1,3 +1,5 @@
+- Ajouter les légendes dynamiques aux termes techniques dans les descriptions de projets.
+
 # Composants System
 
 ## Projets

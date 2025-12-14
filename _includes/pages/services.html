@@ -47,7 +47,7 @@
             <h3 class="section-title">{{ section.nom[current_lang] }}</h3>
             <div class="card-grid">
               {% for service_item in section.subservices %}
-                <div class="service-card service-card-simple">
+                <div class="service-card service-card-simple service-card-bg">
                   <div class="service-text-content">
                     <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
                     {% if service_item.description %}

@@ -992,6 +992,11 @@ main {
   outline-offset: 4px;
 }
 
+.service-card-bg:hover {
+  background-color: var(--primary-color-alpha);
+  animation: ease-in-out 1s infinite;
+}
+
 .service-card-big {
   gap: 4rem;
   border-radius: 3rem;
