@@ -1057,6 +1057,16 @@ footer {
 }
 
 .loader-logo {
+  margin-bottom: var(--spacing-md);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loader-logo svg {
+  width: 80%;
+  height: auto;
+}
+
+.loader-logo-text {
   font-size: var(--font-size-4xl);
   font-weight: 800;
   color: var(--white-color);
