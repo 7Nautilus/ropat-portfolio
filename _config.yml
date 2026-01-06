@@ -9,6 +9,10 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
+sass:
+  style: compressed # Optionnel : pour minifier ton CSS
+  sass_dir: _sass   # Si tu mets tes partials dans un dossier nommé _sass
+
 # Configuration Business (pour Schema.org)
 business:
   name: "Ropat"
