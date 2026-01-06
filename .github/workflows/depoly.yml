@@ -25,7 +25,8 @@ jobs:
 
       - name: Compile SCSS
         run: |
-          dart-sass assets/css/main.scss assets/css/main.css
+          mkdir -p assets/css
+          dart-sass assets/css/main.scss assets/css/main.css --load-path=assets/css/_sass
       # -------------------------------------
 
       - name: Upload artifact
