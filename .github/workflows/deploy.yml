@@ -21,6 +21,9 @@ jobs:
         with:
           ruby-version: '3.2'
           bundler-cache: true
+        
+      - name: Fix platform compatibility
+        run: bundle lock --add-platform x86_64-linux
 
       - name: Build Jekyll
         run: bundle exec jekyll build
