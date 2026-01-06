@@ -1,0 +1,45 @@
+name: Deploy site
+
+on:
+  push:
+    branches: ["main"] # Remplace par "master" si nécessaire
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # --- C'est ici qu'on gère ton SCSS ---
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Compile SCSS
+        run: |
+          dart-sass assets/css/_sass/main.scss assets/css/main.css
+      # -------------------------------------
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # On déploie tout le dossier racine
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
