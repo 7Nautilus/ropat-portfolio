@@ -18,13 +18,13 @@ description:
   en: "Logo creation, complete visual identities, posters, flyers and all your print and web communication materials."
 hero:
   fr:
-    title: "Conception graphique"
+    title: "Conception <span class=\"orange\">graphique</span>"
     intro: "Je conçois des identités visuelles et des supports imprimés ou digitaux qui prolongent votre univers et renforcent votre message."
     cta:
       text: "Discutons de votre projet"
       url: "/fr/contact.html"
   en:
-    title: "Graphic Design"
+    title: "<span class=\"orange\">Graphic</span> Design"
     intro: "I craft visual identities and multi-format assets that keep your brand cohesive across print and digital touchpoints."
     cta:
       text: "Let's discuss your project"
@@ -33,6 +33,19 @@ tools:
   - nom: "#Illustrator"
   - nom: "#Photoshop"
   - nom: "#Figma"
+
+fr:
+  details:
+    - nom: "Conception print"
+    - nom: "Papeterie"
+    - nom: "Supports digitaux"
+
+en:
+  details:
+    - nom: "Print Design"
+    - nom: "Stationary"
+    - nom: "Digital Support"
+
 
 subtitles:
   subservices:

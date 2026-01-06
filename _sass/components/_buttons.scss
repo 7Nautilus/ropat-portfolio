@@ -1,0 +1,75 @@
+/* Call to Action Button */
+
+.cta-container {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  padding: 0 var(--spacing-lg);
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  gap: 0.875rem;
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  color: var(--white-color);
+  padding: 0.75rem var(--spacing-lg);
+  border-radius: var(--border-radius-full);
+  font-size: var(--fs-p);
+  font-weight: 600;
+  transition: background-color var(--transition-base), transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.cta:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+// Scroll Down Button
+
+.big-icon-placeholder {
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-color);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.big-icon {
+  width: fit-content;
+  height: fit-content;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-lg);
+}
+
+.big-icon svg {
+  width: 4rem;
+  height: 4rem;
+}
+
+
+// Simple cta
+
+.cta-simple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  gap: 0.875rem;
+
+  transition: 
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .cta-simple {
+  transform: scale(1.05);
+}

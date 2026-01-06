@@ -1,8 +1,14 @@
 slug: a-lone
 project_title: A-LONE
+subtitle: "Cover"
+theme: 
+  fr: "MUSIQUE & DESIGN GRAPHIQUE"
+  en: "MUSIC & GRAPHIC DESIGN"
 category: music
 featured: false
-client: "B-Lone"
+client: 
+  fr: "B-Lone"
+  en: "B-Lone"
 year: "2024"
 tools: "Photoshop, Illustrator"
 image_src: /assets/images/projects/a-lone-cover.webp
@@ -28,7 +34,8 @@ locales:
     image_alt: "Pochette d'album “A-LONE” de B-Lone"
     title: "Pochette d'album “A-LONE”"
     subtitle: "**Direction Artistique** et **Cover Art** pour l'album **A-LONE**"
-    description: "Direction artistique complète et création de la cover pour la sortie de l'album."
+    pitch: "**Direction artistique** et **création de la pochette** pour la sortie de l'album **A-LONE**"
+    description: "**Direction artistique** complèt et **création de la cover** pour la sortie de l'**album**"
     services: "Direction Artistique, Typographie custom & Design de pochette d'album"
     context_title: "Contexte du projet"
     context_content: |
@@ -57,7 +64,8 @@ locales:
     image_alt: "“A-LONE” album cover by B-Lone"
     title: "Album Cover “A-LONE”"
     subtitle: "**Art Direction** and **Cover Art** for the **A-LONE** album"
-    description: "Complete art direction and cover creation for the album release."
+    pitch: "**Art direction** and **cover art design** for the **A-LONE** album release"
+    description: "Complete art direction and cover art design for the album release."
     services: "Art Direction, Custom Typography & Album Cover Design"
     context_title: "Project Context"
     context_content: |

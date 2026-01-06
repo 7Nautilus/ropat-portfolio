@@ -1,0 +1,40 @@
+.hero-project {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2.5rem;
+}
+
+.project-title {
+  line-height: 1;
+}
+
+.hero-project-title-theme {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: Manrope;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.hero-project-title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+.hero-image-container {
+  max-width: 40%;
+  border-radius: var(--spacing-xl); 
+}
+
+
+@media (max-width: 639px) {
+  .hero-image-container {
+    max-width: 100%;
+  }
+}

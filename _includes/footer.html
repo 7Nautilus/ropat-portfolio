@@ -2,36 +2,63 @@
   <div class="footer-content">
     <!-- Footer Top -->
     <div class="footer-top">
-      <!-- Navigation -->
-      <nav class="footer-nav" aria-label="Footer Navigation">
-        {% assign current_lang = page.lang | default: 'en' %}
-        {% for item in site.data.navigation %}
-          {% assign link_name = item.en_name %}
-          {% if current_lang == 'fr' %}
-              {% assign link_name = item.fr_name %}
-          {% endif %}
-
-          {% if item.base_url == '/index.html' %}
-            {% if current_lang == 'fr' %}
-              {% assign final_url = '/index.html' %}
-            {% else %}
-              {% assign final_url = '/en/index.html' %}
-            {% endif %}
+      <div class="footer-left-section">
+        <h2 class="footer-title">Parlons de votre <span class="orange"><strong>projet</strong>.</span></h2>
+        <p class="footer-description">
+          {% if page.lang == 'fr' %}
+            Envie de donner une nouvelle dimension à votre marque ?<br>
+            Contactez-moi pour un devis gratuit.
           {% else %}
-            {% assign final_url = '/' | append: current_lang | append: item.base_url %}
+            Want to give your brand a new dimension?<br>
+            Contact me for a free quote.
           {% endif %}
+        </p>
+        <a href="mailto:contact@ropat.art" class="email">contact@ropat.art</a>
+      </div>
+      <div class="footer-right-section">
+        <div class="footer-nav-container">
+          <h3 class="footer-nav-title nav-element">Navigation</h3>
+          <!-- Navigation -->
+          <nav class="footer-nav" aria-label="Footer Navigation">
+            <ul class="nav-links nav-links-footer">
+              {% assign current_lang = page.lang | default: 'en' %}
+              {% for item in site.data.navigation %}
+                {% assign link_name = item.en_name %}
+                {% if current_lang == 'fr' %}
+                  {% assign link_name = item.fr_name %}
+                {% endif %}
 
-          <a href="{{ final_url | relative_url }}" class="footer-link">{{ link_name }}</a>
-        {% endfor %}
-      </nav>
-      <!-- Social Links -->
-      <div class="social-links">
-        {% for item in site.data.socials %}
-          <div aria-label="{{ item.aria-label }}"><a href="{{ item.link }}" class="social-link {{ item.name }}">
-            {{ item.icon }}
-            {{ item.aria-label }}
-          </a></div>
-        {% endfor %}
+                {% if item.base_url == '/index.html' %}
+                  {% if current_lang == 'fr' %}
+                    {% assign final_url = '/index.html' %}
+                  {% else %}
+                    {% assign final_url = '/en/index.html' %}
+                  {% endif %}
+                {% else %}
+                  {% assign final_url = '/' | append: current_lang | append: item.base_url %}
+                {% endif %}
+                <li class="nav-item">
+                  <a href="{{ final_url | relative_url }}" class="nav-element nav-link">{{ link_name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        </div>
+        <!-- Social Links -->
+        <div class="footer-nav-container">
+          <h3 class="footer-nav-title nav-element">Socials</h3>
+          <ul class="nav-links nav-links-footer" id="footer-social-links">
+            {% comment %} Boucle sur les réseaux sociaux définis dans _data/socials.yml {% endcomment %}
+            {% for item in site.data.socials %}
+              <li class="nav-item">
+                <a href="{{ item.link }}" class="nav-element nav-link social-link {{ item.name }}" aria-label="{{ item.aria-label }}">
+                  <!-- {{ item.icon }} -->
+                  {{ item.aria-label }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   <!-- Footer Bottom -->
@@ -41,8 +68,10 @@
     {% else %}
       {% assign copyright_text = "© 2025 Ropat — Graphic Designer and Art Director in Angers. All rights reserved." %}
     {% endif %}
-    <p class="footer-text">{{ copyright_text }}</p>
-    {% include lang-selector.html %} 
+    <div class="footer-container">
+      <p class="footer-text">{{ copyright_text }}</p>
+      {% include lang-selector.html %} 
+    </div>
     <div class="footer-legal">
       {% if current_lang == 'fr' %}
         <a href="/fr/mentions-legales.html" class="footer-link-small">Mentions légales</a>

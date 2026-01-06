@@ -1,0 +1,24 @@
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-lg);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0 var(--spacing-lg); 
+  gap: var(--spacing-lg);
+}
+
+.grid-four {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0 var(--spacing-lg); 
+  gap: var(--spacing-lg);
+}

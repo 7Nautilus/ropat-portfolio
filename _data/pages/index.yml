@@ -1,13 +1,14 @@
 fr: 
   title: 
-    "Direction Artistique & Design Graphique"
-  hero_pitch:
-    line-1: 
-      "Bonjour ! Je suis <strong>Ropat</strong>, graphiste basé à Angers. J'accompagne les artistes et les labels dans la création de leur <strong>identité visuelle</strong>."
-    line-2: 
-      "Je conçois des <strong>pochettes d'album</strong>, des <strong>visualizers</strong>, des <strong>affiches de concert</strong> et fournis du branding classique (logos, chartes graphiques) pour les entreprises."
+    "DESIGN <span class=\"hero-title-span\">GRAPHIQUE</span> <br><span class=\"hero-title-span2\">&</span> STRATÉGIE"
+  pitch:
+    "Je transforme vos idées en <strong class=\"hero-strong\">identités visuelles</strong> mémorables.<br>Une <strong class=\"hero-strong\">approche épurée</strong> au service de votre message."
   cta: 
-    "Donner un visuel à votre projet"
+    "Lançons votre projet"
+  dispo: 
+    "Disponibilités"
+  dispo-text:
+    "Ouvert aux nouveaux projets"
   services:
     subtitle:
       "Services & Expertises"
@@ -21,14 +22,15 @@ fr:
 
 en:
   title: 
-    "Art Direction & Graphic Design"
-  hero_pitch:
-    line-1: 
-      "Hello! I'm <strong>Ropat</strong>, a graphic designer based in Angers. I support artists and labels in creating their <strong>visual identity</strong>."
-    line-2: 
-      "I design <strong>album covers</strong>, <strong>visualizers</strong>, <strong>concert posters</strong> and provide classic branding (logos, guidelines) for businesses."
+    "Graphic <span class=\"hero-title-span\">DESIGN</span> <br><span class=\"hero-title-span2\">&</span> STRATEGY"
+  pitch:
+    "I transform your ideas into <strong class=\"hero-strong\">memorable visual identities</strong>. A <strong class=\"hero-strong\">refined approach</strong> to serve your message."
   cta: 
-    "Give your project a visual"
+    "Let’s launch your project"
+  dispo: 
+    "Availabilities"
+  dispo-text:
+    "Open to new projects"
   services:
     subtitle:
       "Services & Expertise"

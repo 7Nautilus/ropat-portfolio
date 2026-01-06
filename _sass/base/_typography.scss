@@ -1,0 +1,30 @@
+/* ============================================
+   TEXT ELEMENTS
+   ============================================ */
+
+.nav-element {
+  color: var(--white-color);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.nav-links-header .nav-item a {
+  font-size: var(--font-size-2xl);
+}
+
+.orange {
+  color: var(--primary-color);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-h2 {
+  font-family: "space grotesk", sans-serif;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+}

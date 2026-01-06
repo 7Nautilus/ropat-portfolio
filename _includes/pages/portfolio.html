@@ -3,15 +3,17 @@
   <!-- SECTION PROJETS -->
   <section class="hero" aria-labelledby="projects-title">
     <!-- Services section title-->
-    <h1 class="hero-title" id="projects-title">{{ page.hero_title }}</h1>
-    <p class="hero-intro">
-      {{ page.hero_intro }}
-    </p>
+    <div class="hero-title-container">
+      <h1 class="hero-title" id="projects-title">{{ page.hero_title }}</h1>
+      <div class="bubble-container">
+        <p>{{ page.hero_intro }}</p>
+      </div>
+    </div>
   </section>
   
   <div class="scroll-overlay">
     <a href="#second-section" class="scroll-down-link">
-      <div class="icon-placeholder big-icon">
+      <div class="big-icon-placeholder big-icon">
         {{ site.data.design-system.navigation-arrow-icon }}
       </div>
     </a>

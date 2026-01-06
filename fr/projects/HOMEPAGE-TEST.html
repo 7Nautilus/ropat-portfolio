@@ -1,0 +1,104 @@
+---
+layout: default
+lang: "fr"
+---
+{% assign current_lang = page.lang | default: "en" %}
+{% assign index = site.data.pages.index[current_lang] %}
+
+<main>
+  <section class="hero">
+    <!--
+    <div>
+      <div class="hero-theme-container">
+        <span class="hero-theme-dot"></span>
+        <span class="hero-theme">DIRECTION ARTISTIQUE - Angers</span> 
+      </div>
+      <h1 class="hero-title">DESIGN <span class="hero-title-span">GRAPHIQUE</span> <br><span class="hero-title-span2">&</span> STRATÉGIE</h1>
+    </div> 
+    -->
+    <h1 class="hero-title uppercase">DESIGN <span class="hero-title-span">GRAPHIQUE</span> <br><span class="hero-title-span2">&</span> STRATÉGIE</h1>
+    <div class="hero-container">
+      <p class="hero-pitch">Je transforme vos idées en <strong class="hero-strong">identités visuelles</strong> mémorables.<br>Une <strong class="hero-strong">approche épurée</strong> au service de votre message.</p>
+    </div>
+    <div class="hero-container">
+      <div class="hero-cta-container">
+        <a href="/fr/projects/HOMEPAGE-TEST.html" class="hero-cta">
+          Lançons votre projet
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-cta-icon" aria-hidden="true">
+            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 5L19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="hero-disponibilites-container">
+          <p class="hero-disponibilites">Disponibilités</p>
+          <div class="hero-disponibilites-text-container">
+            <!-- circle -->
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-pulse" aria-hidden="true">
+              <circle cx="5" cy="5" r="5" fill="#34C759"/>
+            </svg>
+            <p class="hero-disponibilites-text">Ouvert aux nouveaux projets</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="services" aria-labelledby="services-title">
+    <h2 class="section-title" id="services-title">{{ index.services.subtitle }}</h2>
+    <div class="section-grid" id="services-grid">
+      {% assign service_ids = site.data.services.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for id in service_ids %}
+        {% assign item = site.data.services[id] %}
+        {% include service-card.html details=true service=item index=forloop.index0 disable_animation=true %}
+        {% assign featured_index = featured_index | plus: 1 %}
+        {% assign featured_rendered = featured_rendered | plus: 1 %}
+        {% if featured_rendered == 4 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="cta-container">
+      <a href="/fr/services.html" class="cta">
+        Voir tous les services
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section class="projects" aria-labelledby="projects-title">
+    <!-- Projects Section Title -->
+    <h2 class="section-title" id="projects-title">{{ index.projects.subtitle }}</h2>
+
+    <!-- Projects Grid -->
+    <div class="section-grid" id="projects-grid">
+      {% assign project_slugs = site.data.projects.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for slug in project_slugs %}
+        {% assign item = site.data.projects[slug] %}
+        {% if item.featured %}
+          {% include project-card.html project=item index=featured_index disable_animation=true %}
+          {% assign featured_index = featured_index | plus: 1 %}
+          {% assign featured_rendered = featured_rendered | plus: 1 %}
+          {% if featured_rendered == 4 %}
+            {% break %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="cta-container">
+      <a href="/fr/portfolio.html" class="cta">
+        {{ index.projects.cta }}
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+</main>

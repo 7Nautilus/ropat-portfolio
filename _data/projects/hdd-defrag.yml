@@ -1,7 +1,14 @@
 slug: hdd-defrag
 project_title: "HDD DEFRAG"
+subtitle: "Poster"
+theme: 
+  fr: "DESIGN GRAPHIQUE & PRINT"
+  en: "GRAPHIC DESIGN & PRINT"
 category: design
 featured: false
+client: 
+  fr: "Projet personnel"
+  en: "Personal project"
 year: "2025"
 tools: "InDesign, Photoshop, Illustrator"
 image_src: /assets/images/projects/hdd-defrag-poster.png
@@ -14,7 +21,8 @@ locales:
     image_alt: "Affiche HDD DEFRAG"
     title: "Affiche “HDD DEFRAG”"
     subtitle: "Design d'**affiche** sur la défragmentation de disque dur"
-    description: "Création d'une affiche sur le thème de la défragmentation de disque dur."
+    pitch: "**Création d'une affiche** sur la défragmentation de disque dur."
+    description: "**Création d'une affiche** sur le thème de la défragmentation de disque dur, utilisant **InDesign**, **Photoshop** et **Illustrator**."
     context_title: "À propos du projet"
     context_content: |
       ### # Contexte et objectif
@@ -42,7 +50,8 @@ locales:
     image_alt: "HDD DEFRAG Poster"
     title: "Poster “HDD DEFRAG”"
     subtitle: "**Graphic design** poster project"
-    description: "Creation of a poster on the theme of hard drive defragmentation."
+    pitch: "**Creation of a poster** on the theme of hard drive defragmentation."
+    description: "**Creation of a poster** on the theme of hard drive defragmentation, using **InDesign**, **Photoshop**, and **Illustrator**."
     context_title: "About the project"
     context_content: |
       ### # Context and objective

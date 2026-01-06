@@ -1,7 +1,14 @@
 slug: jpeja
-project_title: "JPeJA Visualizer"
+project_title: "JPeJA"
+subtitle: "Visualizer"
+theme: 
+  fr: "Animation & Musique"
+  en: "Animation & Music"
 category: animation music
 featured: false
+client: 
+  fr: "Projet personnel"
+  en: "Personal project"
 year: "2025"
 tools: "After Effects"
 image_src: /assets/images/projects/jpeja-thumbnail.jpg
@@ -14,7 +21,8 @@ locales:
     image_alt: "Visualizer musical de JPeJA"
     title: "JPeJA"
     subtitle: "Visualizer musical"
-    description: "Réalisation d'un visualizer musical"
+    pitch: "**Création d'un visualizer musical** pour le single **JPeJA** de **Wasting Shit**"
+    description: "**Réalisation d'un visualizer musical** fictif pour la sortie du single **JPeJA** de **Wasting Shit**. Cette animation a été réalisée en utilisant **After Effects**."
     context_title: "À propos du projet"
     context_content: |
       ### # Contexte et objectif
@@ -42,7 +50,8 @@ locales:
     image_alt: "JPeJA Visualizer"
     title: "JPeJA"
     subtitle: "Musical visualizer"
-    description: "Creation of a musical visualizer"
+    pitch: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**"
+    description: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**. This animation was created using **After Effects**."
     context_title: "About the project"
     context_content: |
       ### # Context and objective

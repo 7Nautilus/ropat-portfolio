@@ -44,18 +44,23 @@
   {% endif %}
   <main id="main-content" class="main-content service-detail">
     <section class="hero">
-      <!-- Icône du service -->
+      <!-- Icône du service
       {% if service.icon %}
         <div class="icon-placeholder big-icon" aria-label="{{ service.icon_aria[current_lang] }}">
           {{ service.icon }}
         </div>
       {% endif %}
-      <!-- Label du service -->
-      <h1 class="hero-title">{{ hero_title | default:""}}</h1>
-      <!-- Texte d'accroche-->
-      {% if hero_intro %}
-        <p class="hero-intro">{{ hero_intro }}</p>
-      {% endif %}
+      -->
+      <div class="hero-container hero-service-container">
+        <!-- Label du service -->
+        <h1 class="hero-title">{{ hero_title | default:""}}</h1>
+        <!-- Texte d'accroche-->
+        {% if hero_intro %}
+          <div class="bubble-container span-spacing">
+            <p>{{ hero_intro }}</p>
+          </div>
+        {% endif %}
+      </div>
       <!-- CTA -->
       <a class="cta" href="{{ hero_cta_url }}">{{ hero_cta_text }}</a>
     </section>
@@ -71,9 +76,9 @@
     <!-- 1ère sections - Services Card -->
     <section class="services-cards-section">
       <h3 class="section-title">{{ subservices_subtitle | default: services_title }}</h3>
-      <div class="section-grid section-grid-simple">
+      <div class="section-grid section-grid-simple grid-four">
         {% for service_item in service.services %}
-          <div class="service-card service-card-simple">
+          <div class="card service-card service-card-simple">
             <div class="service-text-content">
               <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
               {% if service_item.description %}

@@ -12,29 +12,16 @@
 {% if project and project_locale %}
 <main id="main-content" class="hero-project-section">
   <section class="hero hero-project">
-    <!-- Gallery -->
-    <div class="hero-image-container">
-      <div class="project-gallery">
-        <div class="main-display blur-bg">
-          {% if project.media_type == "video" %}
-          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted playsinline width="1200" height="1200"></video>
-          {% else %}
-          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy">
-          {% endif %}
-        </div>
-        {% if project.thumbnails and project.thumbnails.size > 0 %}
-        <div class="thumbnails-container" id="thumbnails">
-          {% for thumbnail in project.thumbnails %}
-          {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en %}
-          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-    </div>
     <!-- Description -->
-    <div class="hero-project-description">
-      <h1 class="hero-title project-title">{{ project.project_title }}</h1>
+    <div class="hero-container hero-project-container">
+      <div class="hero-project-title-container">
+        <div class="hero-project-title-theme">
+          <span class="hero-theme-dot" aria-hidden="true"></span>
+          <span>{{ project.theme[lang] | default: project.theme.en }}</span>
+        </div>
+        <h1 class="hero-title project-title uppercase">{{ project.project_title }}<br><span class="orange">{{ project.subtitle }}</span></h1>
+      </div>
+      <!--
       <div class="hero-text">
         {% assign subtitle_html = project_locale.subtitle | markdownify %}
         <h2 class="hero-subtitle">{{ subtitle_html | strip | replace: '<p>', '' | replace: '</p>', '' }}</h2>
@@ -53,13 +40,40 @@
           {% endif %}
         </div>
       </div>
+      -->
+      <div class="bubble-container">
+        <p>{{ project_locale.description | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+      </div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="hero-image-container">
+      <div class="project-gallery">
+        <div class="main-display blur-bg">
+          {% if project.media_type == "video" %}
+          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted width="1200" height="1200"></video>
+          {% else %}
+          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy">
+          {% endif %}
+        </div>
+        {% if project.thumbnails and project.thumbnails.size > 0 %}
+        <div class="thumbnails-container" id="thumbnails">
+          {% for thumbnail in project.thumbnails %}
+          {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en %}
+          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
     </div>
   </section>
+  <!--
   <section class="hero-project-details">
     <h2 class="section-title">{{ project_locale.context_title }}</h2>
     <div class="hero-text">
       {{ project_locale.context_content | markdownify }}
     </div>
   </section>
+  -->
 </main>
 {% endif %}

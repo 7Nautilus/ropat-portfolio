@@ -1,0 +1,221 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  width: 100%;
+  top: 0;
+  flex-shrink: 0;
+  z-index: 100;
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border-bottom: var(--border-primary);
+  animation: slideDown 0.5s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slideDown {
+  from {
+    -webkit-transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================================
+   Logo
+   ================================ */
+
+.logo {
+  display: inline-block;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  
+  /* Transition spécifique pour le filtre d'ombre */
+  transition: 
+    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.logo path {
+  transition: fill-opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3))
+}
+
+.logo:hover path{
+  fill-opacity: 1 !important;
+}
+
+/* ================================
+   Navigation Links
+   ================================ */
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--spacing-lg);
+}
+
+.nav-links.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn var(--transition-base);
+}
+
+/* specific styles for header nav links */
+.nav-links-header {
+  flex-direction: column;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.98);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+/* specific styles for footer nav links */
+.nav-links-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Navigation Link Items */
+.nav-item {
+  margin: 0;
+}
+
+.nav-item a {
+  transition: all var(--transition-base);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  position: relative;
+}
+
+/* Navigation Link Hover Effects */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover::before,
+.nav-link:focus::before {
+  width: 100%;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--primary-color);
+  transform: translateX(10px);
+  outline: none;
+}
+
+/* Contact Button */
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  background: var(--primary-color-alpha);
+  border: var(--border-primary);
+  border-radius: var(--border-radius-full);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-link:hover {
+  background: var(--primary-color);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* ================================
+   Burger Menu 
+   ================================ */
+
+.burger-menu {
+  display: block;
+  background: none;
+  border: none;
+  color: var(--white-color);
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  z-index: 110;
+  transition: transform var(--transition-base);
+  position: relative;
+}
+
+.burger-menu:hover {
+  transform: scale(1.1);
+}
+
+.burger-menu:focus {
+  border-radius: 5px;
+  outline: 2px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+.burger-icon {
+  height: var(--spacing-md);
+  width: var(--spacing-md);
+  display: block;
+}
+
+/* Animation des lignes du burger en X */
+.burger-menu.active .burger-line-top {
+  transform: translateY(4.25px) translateX(-4.25px) rotate(45deg);
+  transform-origin: center;
+}
+
+.burger-menu.active .burger-line-middle {
+  opacity: 0;
+}
+
+.burger-menu.active .burger-line-bottom {
+  transform: translateY(-4.25px) translateX(-4.25px) rotate(-45deg);
+  transform-origin: center;
+}
+
+.burger-line-top,
+.burger-line-middle,
+.burger-line-bottom {
+  transition: transform 0.3s, opacity 0.3s;
+}

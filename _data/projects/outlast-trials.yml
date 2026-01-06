@@ -1,7 +1,14 @@
 slug: outlast-trials
 project_title: "Outlast Trials"
+subtitle: "Poster"
+theme: 
+  fr: "DESIGN GRAPHIQUE & PRINT"
+  en: "GRAPHIC DESIGN & PRINT"
 category: design
 featured: false
+client: 
+  fr: "Projet personnel"
+  en: "Personal project"
 year: "2025"
 tools: "Photoshop"
 image_src: /assets/images/projects/outlast-trials.png
@@ -14,7 +21,8 @@ locales:
     image_alt: "Affiche Outlast Trials"
     title: "Affiche “Outlast Trials”"
     subtitle: "Projet de **design graphique** d'affiche"
-    description: "Création d'une affiche sur le thème du jeu vidéo Outlast Trials."
+    pitch: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**"
+    description: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**."
     context_title: "À propos du projet"
     context_content: |
       ### # Contexte et objectif
@@ -43,7 +51,8 @@ locales:
     image_alt: "Outlast Trials Poster"
     title: "Poster “Outlast Trials”"
     subtitle: "**Graphic design** poster project"
-    description: "Creation of a poster on the theme of the Outlast Trials video game."
+    pitch: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game"
+    description: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game."
     context_title: "About the project"
     context_content: |
       ### # Context and objective

@@ -1,0 +1,34 @@
+---
+---
+// 1. Base
+@use "base/variables";
+@use "base/reset";
+@use "base/typography";
+@use "base/generic";
+@use "base/bases";
+@use "base/animations";
+@use "base/spacing";
+
+
+// 2. Layout
+@use "layout/header";
+@use "layout/sections";
+@use "layout/grids";
+@use "layout/footer";
+
+// 3. Components
+@use "components/utils";
+@use "components/loader";
+@use "components/buttons";
+@use "components/dropdown";
+@use "components/cards";
+@use "components/gallery";
+@use "components/scroll-down";
+@use "components/containers";
+
+// 4. Pages
+@use "pages/legal";
+@use "pages/project";
+
+// 5. Media Queries
+@use "base/media-queries";

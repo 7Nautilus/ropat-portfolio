@@ -1,0 +1,64 @@
+/* ============================================
+   LEGAL PAGES STYLES
+   ============================================ */
+.legal-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.legal-content section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.legal-content h2 {
+  color: var(--primary-color);
+  font-size: var(--fs-h3);
+  margin-bottom: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+}
+
+.legal-content h3 {
+  color: var(--white-color);
+  font-size: var(--fs-h4);
+  margin-bottom: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+}
+
+.legal-content p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.legal-content ul {
+  margin-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.8;
+}
+
+.legal-content li {
+  margin-bottom: var(--spacing-sm);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.legal-content a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition: opacity var(--transition-base);
+}
+
+.legal-content a:hover {
+  opacity: 0.8;
+}
+
+.legal-content strong {
+  color: var(--white-color);
+  font-weight: 600;
+}
+
+.legal-meta {
+  margin-top: 2rem;
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+}

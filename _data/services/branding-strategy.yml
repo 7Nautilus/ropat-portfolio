@@ -18,13 +18,13 @@ description:
   en: "Development of brand identity, visual positioning and graphic consistency to strengthen your presence."
 hero:
   fr:
-    title: "Branding & Stratégie Visuelle"
+    title: "Branding & <span class=\"orange\">Stratégie Visuelle</span>"
     intro: "L'âme de votre entreprise. Je conçois des identités fortes et cohérentes qui établissent la confiance et racontent votre histoire unique."
     cta:
       text: "Discutons de votre projet"
       url: "/fr/contact.html"
   en:
-    title: "Branding & Visual Strategy"
+    title: "Branding & <span class=\"orange\">Visual Strategy</span>"
     intro: "Your company's soul. I design strong and consistent identities that build trust and tell your unique story."
     cta:
       text: "Let's discuss your project"
@@ -33,7 +33,20 @@ tools:
   - nom: "#Figma"
   - nom: "#Illustrator"
   - nom: "#Photoshop"
-  
+
+fr:
+  details:
+    - nom: "Logotype"
+    - nom: "Charte graphique"
+    - nom: "Brandbook digital"
+
+en:
+  details:
+    - nom: "Logotype"
+    - nom: "Brand Guidelines"
+    - nom: "Digital Brandbook"
+
+
 services : 
   - nom: 
       fr: "Création de Logo"

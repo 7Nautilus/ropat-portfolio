@@ -1,36 +1,92 @@
 {% assign current_lang = page.lang | default: "en" %}
-{% assign services = site.data.pages.services %}
-{% assign services_lang = services[current_lang] %}
+{% assign services = site.data.pages.services[current_lang] %}
+{% assign generic = services.generic %}
 {% assign branding = site.data.services.branding-strategy %}
 {% assign design = site.data.services.graphic-design %}
 {% assign music = site.data.services.music-design %}
+{% assign web = site.data.services.web-design %}
 
 <main id="main-content" class="main-content">
   <!-- HERO-->
   <section class="hero" aria-labelledby="services-title">
-    <h1 class="hero-title" id="services-title">{{ services_lang.title }}</h1>
-    <p class="hero-intro">
-      {{ services_lang.intro }}
-    </p>
+    <div class="hero-title-container">
+      <h1 class="hero-title" id="services-title">{{ services.title }}</h1>
+      <div class="bubble-container span-spacing">
+        <p>
+          {% assign lignes = services.intro | split: "|" %}
+          {% for ligne in lignes %}
+            <span>{{ ligne | strip }}</span>
+          {% endfor %}
+        </p>
+      </div>
+    </div>
+    <div class="hero-container">
+      <p class="hero-pitch">{{ services.pitch | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+    </div>
   </section>
 
   <div class="scroll-overlay">
     <a href="#second-section" class="scroll-down-link">
-      <div class="icon-placeholder big-icon">
+      <div class="big-icon-placeholder big-icon">
         {{ site.data.design-system.navigation-arrow-icon }}
       </div>
     </a>
   </div>
   
-  <!-- TEST Section-->
+  <section id="#second-section">
+    <div class="section-grid" id="services-grid">
+      {% assign service_ids = site.data.services.index.order %}
+      {% assign featured_index = 0 %}
+      {% assign featured_rendered = 0 %}
+      {% for id in service_ids %}
+        {% assign item = site.data.services[id] %}
+        {% include service-card.html details=false cta=true service=item index=forloop.index0 disable_animation=true %}
+        {% assign featured_index = featured_index | plus: 1 %}
+        {% assign featured_rendered = featured_rendered | plus: 1 %}
+        {% if featured_rendered == 4 %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <span class="separator"></span>
+
+  <section id="#third-section">
+    <div class="center-content-vertical spacing-2xl">
+      <div class="flex column spacing-xl center-content-vertical">
+        <div class="flex column spacing-lg">
+          <h2 class="text-h2 text-center">{{ generic.title }}</h2>
+          <p class="hero-pitch">{{ generic.text }}</p>
+        </div>
+        <div class="row spacing-lg max-80h center wrap">
+          <div class="dark-bubble"><strong>Flyers & Print</strong></div>
+          <div class="dark-bubble"><strong>Visuels Social Media</strong></div>
+          <div class="dark-bubble"><strong>Signature Mail</strong></div>
+          <div class="dark-bubble"><strong>Présentation Corporate</strong></div>
+          <div class="dark-bubble"><strong>Mise en Page</strong></div>
+          <div class="dark-bubble"><strong>Copywriting</strong></div>
+          <div class="dark-bubble"><strong>Vectorisation</strong></div>
+        </div>
+      </div>
+      <a href="/fr/contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
+        <span>{{ generic.cta }}</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- TEST Section
   <section id="second-section">
     {% assign services_id = site.data.services.index.order %}
     {% for service_category in services_id %}
       {% assign service = site.data.services[service_category] %}
-      <a class="service-card service-card-big" href="{{ service.detail_url[current_lang] }}">
+      <a class="card service-card service-card-bi" href="{{ service.detail_url[current_lang] }}">
         <div class="service-main-container">
           {% if service.icon %}
-            <div class="icon-placeholder big-icon">
+            <div class="big-icon-placeholder big-icon">
               {{ service.icon }}
             </div>
           {% endif %}
@@ -42,14 +98,14 @@
           </div>
         </div>
         {% for section in service["services-page"].sections %}
-          <!-- AH -->
           <div class="subservice-section">
             <h3 class="section-title">{{ section.nom[current_lang] }}</h3>
             <div class="card-grid">
               {% for service_item in section.subservices %}
-                <div class="service-card service-card-simple service-card-bg">
+                <div class="card service-card service-card-simple service-card-bg">
                   <div class="service-text-content">
                     <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
+                    <span class="separator"></span>
                     {% if service_item.description %}
                       <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
                     {% endif %}
@@ -69,4 +125,5 @@
         </a>
     {% endfor %}
   </section>
+  -->
 </main>

@@ -20,15 +20,28 @@ tools:
   - nom: "#Photoshop"
   - nom: "#After Effects"
   - nom: "#Blender"
+
+fr:
+  details:
+    - nom: "Pochettes d'album"
+    - nom: "Visualizers spotify"
+    - nom: "Supports live & Merch"
+
+en:
+  details:
+    - nom: "Album Cover Art"
+    - nom: "Spotify Visualizers"
+    - nom: "Merch & Lives Supports"
+
 hero:
   fr:
-    title: "Design pour la musique"
+    title: "Design <span class=\"orange\">musical</span>"
     intro: "Design de pochettes, visualizers 3D et identités visuelles pour artistes & labels."
     cta:
       text: "Discutons de votre projet"
       url: "/fr/contact.html"
   en:
-    title: "Music Design"
+    title: "<span class=\"orange\">Music</span> Design"
     intro: "I craft immersive visuals for artists, labels and music events, from single releases to full tour roll-outs."
     cta:
       text: "Let's discuss your project"

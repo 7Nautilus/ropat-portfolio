@@ -1,7 +1,14 @@
 slug: exit
 project_title: "EXIT"
+subtitle: "Poster"
+theme: 
+  fr: "DESIGN GRAPHIQUE & PRINT"
+  en: "GRAPHIC DESIGN & PRINT"
 category: design
 featured: false
+client: 
+  fr: "Projet personnel"
+  en: "Personal project"
 year: "2025"
 tools: "Photoshop, Illustrator"
 image_src: /assets/images/projects/exit.png
@@ -14,7 +21,8 @@ locales:
     image_alt: "Affiche EXIT"
     title: "Affiche “EXIT”"
     subtitle: "**Création d'affiche** vintage"
-    description: "Réinterprétation graphique des panneaux de sorties de secours avec un traitement cuivre oxydé, mêlant typographie, formes géométriques et textures contemporaines."
+    pitch: "**Création d'une affiche vintage** en utilisant **Photoshop** et **Illustrator**"
+    description: "**Réinterprétation graphique** des panneaux de sorties de secours avec un traitement en **cuivre oxydé**, mêlant **typographie**, **formes géométriques** et **textures contemporaines**."
     context_title: "À propos du projet"
     context_content: |
       ### # Contexte et objectif
@@ -48,7 +56,8 @@ locales:
     image_alt: "EXIT Poster"
     title: "Poster “EXIT”"
     subtitle: "**Poster design** project reinterpreting emergency exit signage design"
-    description: "Graphic reinterpretation of emergency exit signs with an oxidized copper treatment, blending typography, geometric shapes, and contemporary textures."
+    pitch: "**Creation of a vintage poster** using **Photoshop** and **Illustrator**"
+    description: "**Graphic reinterpretation** of emergency exit signs with an **oxidized copper** treatment, blending **typography**, **geometric shapes**, and **contemporary textures**."
     context_title: "About the project"
     context_content: |
       ### # Context and objective

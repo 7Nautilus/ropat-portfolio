@@ -1,0 +1,62 @@
+/* ============================================
+   Règles Globales & Accessibilité
+   ============================================ */
+
+/* Skip Link */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 9999;
+}
+
+// Focus visible pour l'accessibilité
+.skip-link:focus {
+  top: 0;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+/* Focus visible pour accessibilité */
+*:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+// REDUCED MOTION
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Désactiver les transformations sauf opacity */
+  .project-card:hover,
+  .service-card:hover,
+  .cta:hover,
+  .nav-link:hover {
+    transform: none !important;
+  }
+
+  .animate-fade-up,
+  .animate-fade-up.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

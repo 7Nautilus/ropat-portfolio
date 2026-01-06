@@ -1,7 +1,14 @@
 slug: logo-process
 project_title: "Logo Design Process"
+subtitle: "Logo"
+theme: 
+  fr: "DESIGN DE LOGO & BRANDING"
+  en: "LOGO DESIGN & BRANDING"
 category: branding
 featured: true
+client: 
+  fr: "Projet personnel"
+  en: "Personal Project"
 year: "2025"
 tools: "Illustrator"
 image_src: /assets/images/projects/logo-design-process.png
@@ -31,6 +38,7 @@ locales:
     image_alt: "Processus de design de logo"
     title: "Processus de design de logo"
     subtitle: "Processus de **création de logo** géométrique"
+    pitch: "**Création d'un logo géométrique** : du croquis initial à la version finale 3D avec effets"
     description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
     context_title: "À propos du projet"
     context_content: |
@@ -59,6 +67,7 @@ locales:
     image_alt: "Logo design process"
     title: "Logo design process"
     subtitle: "**Logo creation** process"
+    pitch: "**Creation of a geometric logo**: from initial sketch to final 3D version with effects"
     description: "Example of logo design process including sketch, development and finalization."
     context_title: "About the project"
     context_content: |

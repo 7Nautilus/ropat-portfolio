@@ -1,0 +1,84 @@
+id: web-design
+slug:
+  fr: web-design
+  en: web-design
+tag: web-design
+detail_url:
+  fr: "/fr/services/web-design.html"
+  en: "/en/services/web-design.html"
+icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml-icon lucide-code-xml"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>'
+icon_aria:
+  fr: "Icône de webdesign"
+  en: "Web design icon"
+title:
+  fr: "Webdesign & UX/UI"
+  en: "Web Design & UI/UX"
+description:
+  fr: "Conception de sites web et d'interfaces utilisateurs responsives et intuitives, esthétiques et optimisées pour une expérience mémorable."
+  en: "Design of responsive and intuitive websites and user interfaces, aesthetic and optimized for a memorable experience."
+hero:
+  fr:
+    title: "Webdesign & <span class=\"orange\">UX/UI</span>"
+    intro: "Je crée des expériences numériques engageantes et intuitives qui captivent vos utilisateurs et renforcent votre présence en ligne."
+    cta:
+      text: "Discutons de votre projet"
+      url: "/fr/contact.html"
+  en:
+    title: "Web Design & <span class=\"orange\">UX/UI</span>"
+    intro: "I create engaging and intuitive digital experiences that captivate your users and strengthen your online presence."
+    cta:
+      text: "Let's discuss your project"
+      url: "/en/contact.html"
+tools:
+  - nom: "#Figma"
+  - nom: "#Notion"
+  - nom: "#HTML/CSS"
+
+fr:
+  details:
+    - nom: "maquettage figma"
+    - nom: "responsive design"
+    - nom: "intégration html/css"
+
+en:
+  details:
+    - nom: "figma wireframing"
+    - nom: "responsive design"
+    - nom: "Front-end Integration"
+
+subtitles:
+  subservices:
+    fr: "Mes services en Webdesign"
+    en: "My Web Design services"
+  projects : 
+    fr: "Projets de Webdesign Récents"
+    en: "Recent Web Design Projects"
+  
+services : 
+  - nom: 
+      fr: "Maquettage UI/UX"
+      en: "UI/UX Wireframing"
+    description: 
+      fr: "Création de maquettes interactives et prototypes pour visualiser l'expérience utilisateur."
+      en: "Creation of interactive wireframes and prototypes to visualize the user experience."
+    tools:
+      - nom: "#Figma"
+      - nom: "#Adobe XD"
+  - nom: 
+      fr: "Design Responsive"
+      en: "Responsive Design"
+    description: 
+      fr: "Conception d'interfaces adaptatives pour une expérience optimale sur tous les appareils."
+      en: "Design of adaptive interfaces for an optimal experience across all devices."
+    tools:
+      - nom: "#Figma"
+      - nom: "#Sketch"
+  - nom:
+      fr: "Intégration HTML/CSS"
+      en: "HTML/CSS Integration"
+    description: 
+      fr: "Conversion de maquettes en site web sur mesure propre et fonctionnel."
+      en: "Conversion of mockups into clean, functional custom websites."
+    tools:
+      - nom: "#HTML/CSS"
+      - nom: "#JavaScript"

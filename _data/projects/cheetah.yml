@@ -1,7 +1,14 @@
 slug: cheetah
 project_title: "Cheetah Animation"
+subtitle: "Animation"
+theme: 
+  fr: "Animation & Motion Design"
+  en: "Animation & Motion Design"
 category: animation
 featured: true
+client: 
+  fr: "Projet personnel"
+  en: "Personal Project"
 year: "2025"
 tools: "After Effects, Illustrator"
 image_src: /assets/images/projects/cheetah-stopmotion.png
@@ -11,10 +18,11 @@ locales:
   fr:
     url: /fr/projects/cheetah.html
     aria_label: "Voir le projet d'animation en stop-motion"
-    image_alt: "Animation Stop-Motion"
-    title: "Animation Stop-Motion"
+    image_alt: "Animation en Stop-Motion"
+    title: "Animation en Stop-Motion"
     subtitle: "Animation en **stop-motion**"
-    description: "Réalisation d'une animation en stop-motion"
+    pitch: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
+    description: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     context_title: "À propos du projet"
     context_content: |
       ### # Contexte et objectif
@@ -42,7 +50,8 @@ locales:
     image_alt: "Stop-Motion Animation"
     title: "Stop-Motion Animation"
     subtitle: "**Stop-motion** animation"
-    description: "Creation of a stop-motion animation"
+    pitch: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
+    description: "**Creation of a stop-motion animation**"
     context_title: "About the project"
     context_content: |
       ### # Context and objective

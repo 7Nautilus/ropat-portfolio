@@ -1,3 +1,5 @@
+- revoir les infos de "en\services\web-design.html"
+
 - Ajouter les légendes dynamiques aux termes techniques dans les descriptions de projets.
 
 # Composants System

@@ -1,31 +1,33 @@
-<ul class="nav-links" id="main-navigation">
+<ul class="nav-links nav-links-header" id="main-navigation">
   {% comment %} Détermine la langue de la page actuelle (définie dans le Front Matter) {% endcomment %}
   {% assign current_lang = page.lang | default: 'en' %}
 
   {% for item in site.data.navigation %}
-    {% assign link_name = item.en_name %}
-    {% if current_lang == 'fr' %}
-        {% assign link_name = item.fr_name %}
-    {% endif %}
+    {% if item.fr_name != 'Accueil' and item.en_name != 'Home' %}
+      {% assign link_name = item.en_name %}
+      {% if current_lang == 'fr' %}
+          {% assign link_name = item.fr_name %}
+      {% endif %}
 
-    {% comment %} Pour la page d'accueil en français, on pointe vers /index.html directement {% endcomment %}
-    {% if current_lang == 'fr' and item.base_url == '/index.html' %}
-      {% assign final_url = item.base_url %}
-    {% else %}
-      {% assign final_url = "/" | append: current_lang | append: item.base_url %}
-    {% endif %}
+      {% comment %} Pour la page d'accueil en français, on pointe vers /index.html directement {% endcomment %}
+      {% if current_lang == 'fr' and item.base_url == '/index.html' %}
+        {% assign final_url = item.base_url %}
+      {% else %}
+        {% assign final_url = "/" | append: current_lang | append: item.base_url %}
+      {% endif %}
 
-    {% assign is_current = false %}
-    {% if page.url == final_url or final_url == '/index.html' and page.url == '/' %}
-      {% assign is_current = true %}
-    {% endif %}
+      {% assign is_current = false %}
+      {% if page.url == final_url or final_url == '/index.html' and page.url == '/' %}
+        {% assign is_current = true %}
+      {% endif %}
 
-    <li class="nav-item">
-      <a href="{{ final_url | relative_url }}"
-         class="{{ item.class }}"
-         {% if is_current %}aria-current="page"{% endif %}>
-         {{ link_name }}
-      </a>
-    </li>
+      <li class="nav-item">
+        <a href="{{ final_url | relative_url }}"
+           class="{{ item.class | join: ' ' }}"
+           {% if is_current %}aria-current="page"{% endif %}>
+           {{ link_name }}
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>

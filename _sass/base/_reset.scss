@@ -1,0 +1,75 @@
+/* ============================================
+   RESET & GLOBAL STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: var(--font-size-base);
+}
+
+body {
+  font-family: var(--font-family);
+  background-image: linear-gradient(var(--secondary-color), var(--secondary-color)),
+    url(/assets/images/backgrounds/main-bg.webp);
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center center;
+  background-attachment: scroll;
+  background-color: var(--background-dark); /* Fallback */
+  /*-webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);*/
+  color: var(--white-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  gap: var(--spacing-xl);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Navigation Bar */
+nav {
+  padding:  0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 0 var(--spacing-xl) 10rem var(--spacing-xl);
+  gap: 10rem;
+  min-height: 100vh;
+}
+
+/* Cible les paragraphes vides */
+p:empty {
+    display: none;
+}

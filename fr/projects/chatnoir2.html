@@ -1,0 +1,233 @@
+---
+layout: default
+lang: "fr"
+project_id: "chatnoir"
+---
+<head>
+  <style>
+    .chatnoir-hero {
+      display: flex;
+      flex-direction: column;
+      max-width: 64rem;
+      gap: 2rem;
+    }
+
+    .chatnoir-hero-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2.5rem;
+    }
+
+    .chatnoir-hero-title-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .chatnoir-hero-title-section-theme {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: Manrope;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .chatnoir-theme-dot {
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 9999px;
+      background-color: var(--primary-color);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .chatnoir-hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.75rem, 6vw + 1rem, 6rem);
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .chatnoir-hero-title-accent {
+      color: var(--primary-color);
+    }
+
+    .chatnoir-hero-intro {
+      line-height: 1.625;
+      max-width: 42rem;
+    }
+
+    .chatnoir-hero-intro p {
+      font-family: Manrope;
+      font-size: 1.25rem;
+      color: var(--text-secondary-color);
+      padding: 1.25rem 2rem;
+      -webkit-backdrop-filter: blur(1px);
+      backdrop-filter: blur(1px);
+      background-color: var(--secondary-color);
+      border-radius: 0 2rem 2rem 2rem;
+      border-left: 0.25rem solid var(--primary-color);
+      border-bottom: 0.125rem solid var(--primary-color);
+    }
+
+    .chatnoir-visual {
+      max-width: 32rem;
+      width: auto;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+    }
+
+    .chatnoir-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      border-radius: inherit;
+      background-color: var(--background-dark);
+    }
+
+    .chatnoir-highlight-band {
+      display: flex;
+      flex-direction: row;
+      gap: 4rem;
+      padding: 2.5rem 0;
+      border-top: 3px solid var(--primary-color-alpha);
+      border-bottom: 3px solid var(--primary-color-alpha);
+    }
+
+    .chatnoir-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4rem;
+      justify-content: space-between;
+      width: -webkit-fill-available;
+      justify-items: center;
+    }
+
+    .chatnoir-highlight-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      /*width: -webkit-fill-available;
+      padding: 1.25rem 2rem;
+      background-color: var(--secondary-color);
+      border-radius: 1.5rem;*/
+    }
+
+    .chatnoir-highlight-title {
+      text-transform: uppercase;
+      font-size: var(--fs-small);
+      line-height: 1;
+      font-weight: 700;
+      font-family: Manrope;
+    }
+
+    .chatnoir-highlight-value {
+      font-weight: 700;
+      font-size: var(--fs-h4);
+      line-height: 1.75rem;
+      font-family: Manrope;
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 1024px) {
+      .chatnoir-hero-section {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .chatnoir-hero {
+        max-width: 100%;
+      }
+
+      .chatnoir-visual {
+        max-width: 100%;
+      }
+
+      .chatnoir-highlight-grid {
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        width: 100%;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .chatnoir-hero-title-section-theme {
+        gap: 0.5rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.18em;
+      }
+
+      .chatnoir-hero-title {
+        font-size: clamp(2.25rem, 10vw + 0.5rem, 3.5rem);
+      }
+
+      .chatnoir-hero-intro {
+        max-width: 100%;
+      }
+
+      .chatnoir-hero-intro p {
+        padding: 1rem 1.25rem;
+      }
+
+      .chatnoir-highlight-band {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .chatnoir-highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .chatnoir-highlight-card {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<main id="main-content" class="hero-project-section">
+  <section class="hero hero-project chatnoir-hero-section">
+    <div class="chatnoir-hero">
+      <div class="chatnoir-hero-title-section">
+        <div class="chatnoir-hero-title-section-theme">
+          <span class="chatnoir-theme-dot" aria-hidden="true"></span>
+          <span>DIRECTION ARTISTIQUE & PRINT</span>
+        </div>
+        <h1 class="chatnoir-hero-title">Chat Noir<br><span class="chatnoir-hero-title-accent">Poster</span></h1>
+      </div>
+      <div class="chatnoir-hero-intro">
+        <p>
+          Réinterpétation de l'affiche emblématique du cabaret parisien "Le Chat Noir" de Rodolphe Salis, dans le style graphique de l'affiche polonaise du film "Godzilla" de 1954.
+        </p>
+      </div>
+    </div>
+    <div class="chatnoir-visual">
+      <img src="/assets/images/projects/chatnoir2.jpg" id="main-image" alt="Affiche réinterprétée du Chat Noir dans le style graphique de l'affiche polonaise de Godzilla" width="1200" height="1200" loading="lazy">
+    </div>
+  </section>
+  <section>
+    <div class="chatnoir-highlight-band">
+      <div class="chatnoir-highlight-grid">
+        <div class="chatnoir-highlight-card">
+          <h3 class="chatnoir-highlight-title">Contexte</h3>
+          <p class="chatnoir-highlight-value">Projet Personnel</p>
+        </div>
+        <div class="chatnoir-highlight-card">
+          <h3 class="chatnoir-highlight-title">Discipline</h3>
+          <p class="chatnoir-highlight-value">Graphic Design</p>
+        </div>
+        <div class="chatnoir-highlight-card">
+          <h3 class="chatnoir-highlight-title">Outils</h3>
+          <p class="chatnoir-highlight-value">Ps iA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

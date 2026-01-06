@@ -1,8 +1,14 @@
 slug: btr
 project_title: BTR
+subtitle: "Cover"
+theme: 
+  fr: "MUSIQUE & DESIGN GRAPHIQUE"
+  en: "MUSIC & GRAPHIC DESIGN"
 category: music
 featured: true
-client: Maltezz
+client: 
+  fr: "Maltezz"
+  en: "Maltezz"
 year: "2025"
 tools: "Photoshop, Illustrator, Blender"
 image_src: /assets/images/projects/btr-cover.png
@@ -15,7 +21,8 @@ locales:
     image_alt: "Pochette du single “BTR” de Maltezz"
     title: "Pochette du single “BTR”"
     subtitle: "**Direction Artistique** et **Cover Art** pour le single **BTR**"
-    description: "Direction artistique complète et création de la cover pour la sortie du single."
+    pitch: "**Direction artistique** et **création de la pochette** pour la sortie du single **BTR** de Maltezz"
+    description: "**Direction artistique** complète et **création de la pochette d'album** pour la sortie du **single** **BTR** de Maltezz."
     services: "Direction Artistique, Typographie custom & Design de pochette de single"
     context_title: "Contexte du projet"
     context_content: |
@@ -44,7 +51,8 @@ locales:
     image_alt: "“BTR” single cover by Maltezz"
     title: "Single Cover “BTR”"
     subtitle: "**Art Direction** and **Cover Art** for the **BTR** single"
-    description: "Complete art direction and cover creation for the single release."
+    pitch: "**Art direction** and **cover design** for Maltezz's **BTR** single release"
+    description: "Complete **art direction** and **cover art design** for the release of the single **BTR** by Maltezz."
     services: "Art Direction, Custom Typography & Single Cover Design"
     context_title: "Project Context"
     context_content: |
