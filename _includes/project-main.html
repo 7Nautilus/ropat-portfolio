@@ -53,7 +53,7 @@
           {% if project.media_type == "video" %}
           <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted width="1200" height="1200"></video>
           {% else %}
-          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy">
+          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy" class="lightbox-trigger" role="button" tabindex="0" aria-label="{% if lang == 'fr' %}Cliquez pour agrandir l'image{% else %}Click to enlarge image{% endif %}">
           {% endif %}
         </div>
         {% if project.thumbnails and project.thumbnails.size > 0 %}
@@ -76,4 +76,10 @@
   </section>
   -->
 </main>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="{% if lang == 'fr' %}Image en plein écran{% else %}Fullscreen image{% endif %}">
+  <button class="lightbox-close" aria-label="{% if lang == 'fr' %}Fermer{% else %}Close{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <img class="lightbox-image" src="" alt="">
+</div>
 {% endif %}

@@ -176,6 +176,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ================================
+  // LIGHTBOX - Image plein écran
+  // ================================
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = lightbox ? lightbox.querySelector('.lightbox-image') : null;
+  const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+  const lightboxTrigger = document.querySelector('.lightbox-trigger');
+
+  if (lightbox && lightboxImage && lightboxTrigger) {
+    const openLightbox = () => {
+      lightboxImage.src = lightboxTrigger.src;
+      lightboxImage.alt = lightboxTrigger.alt;
+      lightbox.classList.add('active');
+      body.style.overflow = 'hidden';
+      lightboxClose.focus();
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      body.style.overflow = '';
+      lightboxTrigger.focus();
+    };
+
+    // Ouvrir au clic sur l'image principale
+    lightboxTrigger.addEventListener('click', openLightbox);
+
+    // Ouvrir avec clavier (Enter ou Espace)
+    lightboxTrigger.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openLightbox();
+      }
+    });
+
+    // Fermer avec le bouton X
+    lightboxClose.addEventListener('click', closeLightbox);
+
+    // Fermer en cliquant sur le fond
+    lightbox.addEventListener('click', event => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Fermer avec Échap
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+
   const animatedBlocks = document.querySelectorAll('.animate-fade-up');
   if (animatedBlocks.length) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
