@@ -139,6 +139,11 @@
   main {
     padding: 0 var(--spacing-md);
   }
+
+  .header {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
   /* Hero Section */
   
   .hero-image {
