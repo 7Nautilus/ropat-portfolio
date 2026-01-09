@@ -11,13 +11,8 @@
     </div>
   </section>
   
-  <div class="scroll-overlay">
-    <a href="#second-section" class="scroll-down-link">
-      <div class="big-icon-placeholder big-icon">
-        {{ site.data.design-system.navigation-arrow-icon }}
-      </div>
-    </a>
-  </div>
+  {% include scroll-down-link.html %}
+
   <section id="second-section">
     {% include portfolio-filters.html %}
 
