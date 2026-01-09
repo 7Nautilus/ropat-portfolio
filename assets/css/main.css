@@ -1763,7 +1763,7 @@ service-card-details
 
 .hero-project {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   gap: 2.5rem;
 }
@@ -1875,13 +1875,11 @@ service-card-details
   .hero-title-span {
     -webkit-text-stroke: 2px #FF5C00;
   }
-}
-/* Small Laptops - 640px - 1023px */
-@media (max-width: 1023px) and (min-width: 640px) {
   .hero-project {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
+/* Small Laptops - 640px - 1023px */
 /* Desktop - 1024px + */
 @media (min-width: 1024px) {
   .section-grid {
@@ -1910,9 +1908,6 @@ service-card-details
     padding: 0 var(--spacing-md);
   }
   /* Hero Section */
-  .hero-project {
-    flex-direction: column;
-  }
   .hero-image {
     border-radius: var(--border-radius-sm);
   }
