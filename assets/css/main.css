@@ -1665,7 +1665,7 @@ service-card-details
 }
 
 .hero-project-container {
-  max-width: 55%;
+  max-width: 100%;
 }
 
 .hero-service-container {
@@ -1877,6 +1877,9 @@ service-card-details
   }
   .hero-project {
     flex-direction: row;
+  }
+  .hero-project-container {
+    max-width: 55%;
   }
 }
 /* Small Laptops - 640px - 1023px */
