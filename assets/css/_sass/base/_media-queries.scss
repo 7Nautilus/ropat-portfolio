@@ -136,6 +136,10 @@
 /* Mobile - Max 639px */
 @media (max-width: 639px) {
 
+  body {
+    gap: var(--spacing-md);
+  }
+
   main {
     padding: 0 var(--spacing-md);
   }
