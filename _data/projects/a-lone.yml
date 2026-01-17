@@ -88,3 +88,23 @@ locales:
       og_description: "Art direction and cover design for B-Lone's A-LONE album."
       og_url: "https://ropat.art/en/projects/a-lone.html"
       og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"
+
+specs:
+  - label:
+      fr: "Client"
+      en: "Client"
+    value:
+      fr: "B-Lone"
+      en: "B-Lone"
+  - label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Sortie d'album"
+      en: "Album release"
+  - label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "Photoshop, Illustrator"
+      en: "Photoshop, Illustrator"

@@ -73,3 +73,26 @@ locales:
       og_description: "Design poster on the theme of hard drive defragmentation."
       og_url: "https://ropat.art/en/projects/hdd-defrag.html"
       og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
+
+specs:
+  - 
+    label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Projet personnel"
+      en: "Personal project"
+  - 
+    label:
+      fr: "Discipline"
+      en: "Discipline"
+    value:
+      fr: "Design Graphique"
+      en: "Graphic Design"
+  - 
+    label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "InDesign, Photoshop"
+      en: "InDesign, Photoshop"

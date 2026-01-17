@@ -90,3 +90,26 @@ locales:
       og_description: "Logo creation process, from initial sketch to final 3D version."
       og_url: "https://ropat.art/en/projects/logo-process.html"
       og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
+
+specs:
+  - 
+    label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Projet personnel"
+      en: "Personal project"
+  - 
+    label:
+      fr: "Discipline"
+      en: "Discipline"
+    value:
+      fr: "Branding"
+      en: "Brand Design"
+  - 
+    label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "Illustrator"
+      en: "Illustrator"

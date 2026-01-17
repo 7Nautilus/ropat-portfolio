@@ -29,9 +29,11 @@
   --fs-h2: clamp(1.75rem, 3vw + 1rem, 3rem); /* 1.8rem, 4vw, var(--font-size-4xl) */
   --fs-h3: clamp(1.5rem, 2vw + 1rem, 2.25rem); /* var(--font-size-xl), 2vw, 1.75rem */
   --fs-h4: clamp(1.25rem, 1.5vw + 1rem, 1.75rem); /* var(--font-size-lg), 1.5vw, var(--font-size-2xl) */
+  --fs-h5: clamp(1.125rem, 1vw + 1rem, 1.5rem); /* var(--font-size-base), 1vw, var(--font-size-xl) */
   --fs-p: clamp(1rem, 0.5vw + 1rem, 1.25rem); /* var(--font-size-lg), var(--font-size-xl), var(--font-size-xl) */
   --fs-text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.5rem);
   --fs-small: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
+  --fs-xsmall: clamp(0.75rem, 0.5vw + 0.25rem, 0.875rem);
   /* Espacement */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -892,6 +894,52 @@ header {
   height: 48px;
 }
 
+/* ============================================
+   PROJECT DETAILS
+   ============================================ */
+.project-details {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: var(--spacing-lg) 0;
+  border-top: #FF5C00 1px solid;
+  border-bottom: #FF5C00 1px solid;
+}
+
+.detail-item-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  width: fit-content;
+}
+
+.detail-title {
+  font-family: "Manrope", sans-serif;
+  font-size: var(--fs-small);
+  color: var(--grey-light-400);
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.detail-content {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: var(--fs-h4);
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -915,6 +963,14 @@ header {
   grid-template-columns: 1fr;
   padding: 0 var(--spacing-lg);
   gap: var(--spacing-lg);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-lg);
+  width: 100%;
 }
 
 /* ============================================
@@ -1896,6 +1952,12 @@ service-card-details
   }
   .grid-four {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .details-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .detail-item-container {
+    align-items: center;
   }
   .hero-intro {
     max-width: 80%;

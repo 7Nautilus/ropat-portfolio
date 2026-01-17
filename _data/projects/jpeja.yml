@@ -73,3 +73,26 @@ locales:
       og_description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
       og_url: "https://ropat.art/en/projects/jpeja.html"
       og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
+
+specs:
+  - 
+    label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Projet personnel"
+      en: "Personal project"
+  - 
+    label:
+      fr: "Discipline"
+      en: "Discipline"
+    value:
+      fr: "Motion Design"
+      en: "Motion Design"
+  - 
+    label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "After Effects"
+      en: "After Effects"

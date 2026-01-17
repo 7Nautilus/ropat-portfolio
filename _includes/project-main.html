@@ -67,6 +67,24 @@
       </div>
     </div>
   </section>
+
+  <!-- TEST -->
+   
+  {% if project.specs and project.specs.size > 0 %}
+  <section class="project-details">
+    <div class="details-grid">
+      {% for detail in project.specs %}
+      <div class="detail-item-container">
+        <div class="detail-item">
+          <h3 class="detail-title">{{ detail.label[lang] | default: detail.label.en }}</h3>
+          <p class="detail-content">{{ detail.value[lang] | default: detail.value.en }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
   <!--
   <section class="hero-project-details">
     <h2 class="section-title">{{ project_locale.context_title }}</h2>

@@ -73,3 +73,26 @@ locales:
       og_description: "Stop-motion animation exploring the cheetah's speed and agility."
       og_url: "https://ropat.art/en/projects/cheetah.html"
       og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
+
+specs:
+  - 
+    label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Projet personnel"
+      en: "Personal project"
+  - 
+    label:
+      fr: "Discipline"
+      en: "Discipline"
+    value:
+      fr: "Motion Design"
+      en: "Motion Design"
+  - 
+    label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "After Effects, Illustrator"
+      en: "After Effects, Illustrator"

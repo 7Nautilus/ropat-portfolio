@@ -75,3 +75,23 @@ locales:
       og_description: "Art direction and cover design for Maltezz's BTR single."
       og_url: "https://ropat.art/en/projects/btr.html"
       og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
+
+specs:
+  - label:
+      fr: "Client"
+      en: "Client"
+    value:
+      fr: "Maltezz"
+      en: "Maltezz"
+  - label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Sortie de single"
+      en: "Single release"
+  - label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "Photoshop, Illustrator, Blender"
+      en: "Photoshop, Illustrator, Blender"

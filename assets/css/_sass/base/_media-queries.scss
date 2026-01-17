@@ -123,6 +123,14 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .details-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .detail-item-container {
+    align-items: center;
+  }
+
   .hero-intro {
     max-width: 80%;
   }

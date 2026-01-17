@@ -85,3 +85,26 @@ locales:
       og_description: "Poster design reinterpreting emergency exit signage."
       og_url: "https://ropat.art/en/projects/exit.html"
       og_image: "https://ropat.art/assets/images/projects/exit.png"
+
+specs:
+  - 
+    label:
+      fr: "Contexte"
+      en: "Context"
+    value:
+      fr: "Projet personnel"
+      en: "Personal project"
+  - 
+    label:
+      fr: "Discipline"
+      en: "Discipline"
+    value:
+      fr: "Design graphique"
+      en: "Graphic Design"
+  - 
+    label:
+      fr: "Outils"
+      en: "Tools"
+    value:
+      fr: "Photoshop, Illustrator"
+      en: "Photoshop, Illustrator"
