@@ -92,3 +92,14 @@ services :
     tools:
       - nom: "#Illustrator"
       - nom: "#Photoshop"
+
+main-page:
+  subtitle:
+    fr: "Donnez vie à votre vision"
+    en: "Bring your vision to life"
+  intro1:
+    fr: "Chaque projet de design graphique est une opportunité de raconter une histoire visuelle unique. Je collabore étroitement avec vous pour comprendre vos besoins et créer des designs qui captivent et communiquent efficacement votre message."
+    en: "Every graphic design project is an opportunity to tell a unique visual story. I work closely with you to understand your needs and create designs that captivate and effectively communicate your message."
+  intro2:
+    fr: "Que vous ayez besoin d'une identité visuelle complète, de supports imprimés ou de visuels pour les réseaux sociaux, je suis là pour transformer vos idées en créations percutantes."
+    en: "Whether you need a complete visual identity, print materials, or social media visuals, I'm here to transform your ideas into impactful creations."

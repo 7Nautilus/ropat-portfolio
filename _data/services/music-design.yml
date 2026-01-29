@@ -90,3 +90,15 @@ services :
     tools:
       - nom: "#Photoshop"
       - nom: "#InDesign"
+
+
+main-page:
+  subtitle:
+    fr: "Marquez les esprits avant même la première note."
+    en: "Make an impression before the first note plays."
+  intro1:
+    fr: "Je crée des visuels immersifs pour les artistes, labels et événements musicaux, allant des sorties de singles aux déploiements complets de tournées."
+    en: "I create immersive visuals for artists, labels, and music events, from single releases to full tour roll-outs."
+  intro2:
+    fr: "Chaque projet est une nouvelle opportunité de fusionner l'art visuel avec la musique, créant ainsi une expérience mémorable pour votre public."
+    en: "Each project is a new opportunity to merge visual art with music, creating a memorable experience for your audience."

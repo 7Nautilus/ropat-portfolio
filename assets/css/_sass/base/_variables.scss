@@ -13,7 +13,7 @@
   --background-light: rgba(255, 255, 255, 0.1);
 
   /* Typographie */
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'Manrope', sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -52,6 +52,11 @@
   --border-radius-md: 1.5rem;
   --border-radius-lg: 2rem;
   --border-radius-full: 9999px;
+
+  /* Bordures squircle */
+  --border-radius-squircle-small: 15%;
+  --border-radius-squircle-medium: 22.5%;
+  --border-radius-squircle-full: 50%;
 
   /* Ombres */
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);

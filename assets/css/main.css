@@ -12,7 +12,7 @@
   --background-dark: #0a0a0a;
   --background-light: rgba(255, 255, 255, 0.1);
   /* Typographie */
-  --font-family: 'Inter', sans-serif;
+  --font-family: 'Manrope', sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -47,6 +47,10 @@
   --border-radius-md: 1.5rem;
   --border-radius-lg: 2rem;
   --border-radius-full: 9999px;
+  /* Bordures squircle */
+  --border-radius-squircle-small: 15%;
+  --border-radius-squircle-medium: 22.5%;
+  --border-radius-squircle-full: 50%;
   /* Ombres */
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 6px 16px rgba(255, 92, 0, 0.5);
@@ -1327,190 +1331,6 @@ footer {
   gap: var(--spacing-sm);
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-family: "manrope", sans-serif;
-  background-color: var(--secondary-color);
-  border-radius: var(--border-radius-lg);
-  border: 2px solid var(--primary-color);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-}
-
-.card:hover {
-  transform: translateY(-0.25rem);
-  box-shadow: var(--shadow-md);
-}
-
-.card:focus-visible {
-  outline: 3px solid var(--primary-color);
-  outline-offset: 4px;
-}
-
-/* ============================================
-   Services Cards
-   ============================================ */
-/*
-service-card
-service-card-placeholder
-service-text-content
-service-title
-service-card-details
-*/
-.service-card {
-  justify-content: space-between;
-  padding: var(--spacing-lg);
-  gap: var(--spacing-lg);
-  text-decoration: none;
-  height: 100%;
-}
-
-.service-card-placeholder {
-  display: flex;
-  flex-direction: inherit;
-  gap: var(--spacing-sm);
-}
-
-/* title */
-.service-card-title {
-  font-size: var(--fs-p);
-  font-weight: 600;
-}
-
-/* description */
-.service-card-description {
-  font-size: var(--font-size-base);
-}
-
-.service-text-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  font-family: "manrope", sans-serif;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
-/* logiciels hashtags */
-.service-tools {
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-xs);
-  flex-wrap: wrap;
-  font-family: "manrope", sans-serif;
-  font-size: var(--fs-small);
-  color: var(--primary-color);
-}
-
-/* details */
-.service-card-details {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  font-family: "space grotesk", sans-serif;
-  text-transform: uppercase;
-  font-weight: 100;
-  font-size: 0.875rem;
-  color: #9CA3AF;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.service-card:hover .service-card-details {
-  color: var(--primary-color);
-  transform: scale(1.05);
-}
-
-/*
-.service-detail {
-  display: flex;
-  padding: 0 var(--spacing-lg) var(--spacing-lg);
-}
-*/
-/* Variations */
-.service-card-big {
-  gap: 4rem;
-  border-radius: 3rem;
-  padding: 4rem 2rem;
-}
-
-.service-card-simple {
-  justify-content: space-between;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
-  flex: 0 1 auto;
-}
-
-.service-tool {
-  padding: 0.25rem 0.6rem;
-  border-radius: var(--border-radius-sm);
-  background-color: var(--primary-color-alpha);
-  width: fit-content;
-}
-
-/* ==============================================
-   PROJECTS CARDS
-   ============================================== */
-.project-card {
-  display: flex;
-}
-
-.project-card-image {
-  background-color: var(--gray-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white-color);
-  font-weight: 700;
-  text-transform: uppercase;
-  border-bottom: 1px solid var(--primary-color);
-  aspect-ratio: 1/1; /* Définit un carré */
-  width: 100%;
-  overflow: hidden;
-}
-
-.project-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-card-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.project-card-footer {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.project-card-content {
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem;
-  gap: var(--spacing-sm);
-}
-
-.project-card-title {
-  text-align: start;
-  font-family: "space grotesk", sans-serif;
-  font-weight: 900;
-}
-
-.project-card-client {
-  color: var(--grey-light-400);
-}
-
-.project-card-description {
-  font-size: var(--font-size-base);
-  color: var(--gray-light);
-  line-height: 1.4;
-}
-
 /* ============================================
    GALLERY
    ============================================ */
@@ -1561,7 +1381,8 @@ service-card-details
 /* Zone de la grande image */
 .main-display {
   flex-grow: 1; /* Prend l'espace restant */
-  border-radius: var(--spacing-xl);
+  corner-shape: squircle;
+  border-radius: var(--border-radius-squircle-medium);
   overflow: hidden;
   box-shadow: var(--shadow-md);
   border: var(--border-primary);
@@ -1702,7 +1523,8 @@ service-card-details
   height: 3rem;
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-squircle-full);
+  corner-shape: squircle;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1750,6 +1572,206 @@ service-card-details
   font-weight: 900;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
+}
+
+#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "manrope", sans-serif;
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius-squircle-medium);
+  border: 2px solid var(--primary-color);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.squircle {
+  corner-shape: squircle;
+}
+
+.card:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: var(--shadow-md);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 4px;
+}
+
+/* ============================================
+   Services Cards
+   ============================================ */
+/*
+service-card
+service-card-placeholder
+service-text-content
+service-title
+service-card-details
+*/
+.service-card {
+  justify-content: space-between;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
+  text-decoration: none;
+  height: 100%;
+}
+
+.service-card-placeholder {
+  display: flex;
+  flex-direction: inherit;
+  gap: var(--spacing-sm);
+}
+
+/* title */
+.service-card-title {
+  font-size: var(--fs-p);
+  font-weight: 600;
+}
+
+/* description */
+.service-card-description {
+  font-size: var(--font-size-base);
+}
+
+.service-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  font-family: "manrope", sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* logiciels hashtags */
+.service-tools {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  font-family: "manrope", sans-serif;
+  font-size: var(--fs-small);
+  color: var(--primary-color);
+}
+
+/* details */
+.service-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  font-family: "space grotesk", sans-serif;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover .service-card-details {
+  color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/*
+.service-detail {
+  display: flex;
+  padding: 0 var(--spacing-lg) var(--spacing-lg);
+}
+*/
+/* Variations */
+.service-card-big {
+  gap: 4rem;
+  border-radius: 3rem;
+  padding: 4rem 2rem;
+}
+
+.service-card-simple {
+  justify-content: space-between;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  flex: 0 1 auto;
+}
+
+.service-tool {
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--primary-color-alpha);
+  width: fit-content;
+}
+
+/* ==============================================
+   PROJECTS CARDS
+   ============================================== */
+.project-card {
+  display: flex;
+  border-radius: var(--border-radius-squircle-small);
+}
+
+.project-card-image {
+  background-color: var(--gray-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--primary-color);
+  aspect-ratio: 1/1; /* Définit un carré */
+  width: 100%;
+  overflow: hidden;
+}
+
+.project-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.project-card-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  gap: var(--spacing-sm);
+}
+
+.project-card-title {
+  text-align: start;
+  font-family: "space grotesk", sans-serif;
+  font-weight: 900;
+}
+
+.project-card-client {
+  color: var(--grey-light-400);
+}
+
+.project-card-description {
+  font-size: var(--font-size-base);
+  color: var(--gray-light);
+  line-height: 1.4;
 }
 
 /* ============================================

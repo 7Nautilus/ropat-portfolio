@@ -4,10 +4,10 @@
 {% assign animation_index = include.index | default: 0 %}
 
 {% if animations_disabled %}
-  {% assign article_classes = "card service-card" %}
+  {% assign article_classes = "card service-card squircle" %}
 {% else %}
   {% assign animation_delay = animation_index | times: 160 | plus: 80 %}
-  {% assign article_classes = "card service-card animate-fade-up" %}
+  {% assign article_classes = "card service-card squircle animate-fade-up" %}
 {% endif %}
 
 {% assign detail_url = service.detail_url[current_lang] %}

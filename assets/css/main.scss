@@ -19,10 +19,14 @@
 @use "components/loader";
 @use "components/buttons";
 @use "components/dropdown";
-@use "components/cards";
 @use "components/gallery";
 @use "components/scroll-down";
 @use "components/containers";
+@use "components/matrix";
+// 3.1 Cards
+@use "components/cards/cards";
+@use "components/cards/service-cards";
+@use "components/cards/project-cards";
 
 // 4. Pages
 @use "pages/legal";

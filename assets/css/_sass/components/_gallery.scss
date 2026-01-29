@@ -48,7 +48,8 @@
 /* Zone de la grande image */
 .main-display {
     flex-grow: 1; /* Prend l'espace restant */
-    border-radius: var(--spacing-xl);
+    corner-shape: squircle;
+    border-radius: var(--border-radius-squircle-medium);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     border: var(--border-primary);

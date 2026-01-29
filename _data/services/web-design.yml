@@ -82,3 +82,15 @@ services :
     tools:
       - nom: "#HTML/CSS"
       - nom: "#JavaScript"
+
+
+main-page:
+  subtitle:
+    fr: "Une présence en ligne qui se démarque"
+    en: "An online presence that stands out"
+  intro1:
+    fr: "Dans le monde numérique d'aujourd'hui, un design web exceptionnel est essentiel pour captiver votre audience et renforcer votre marque. Je crée des sites web et des interfaces utilisateurs qui ne sont pas seulement esthétiques, mais aussi intuitives et performantes."
+    en: "In today's digital world, exceptional web design is essential to captivate your audience and strengthen your brand. I create websites and user interfaces that are not only aesthetic but also intuitive and high-performing."
+  intro2:
+    fr: "Chaque projet est une opportunité de fusionner créativité et fonctionnalité, offrant à vos utilisateurs une expérience mémorable qui convertit et les incite à revenir."
+    en: "Each project is an opportunity to merge creativity and functionality, providing your users with a memorable experience that converts and keeps them coming back."
