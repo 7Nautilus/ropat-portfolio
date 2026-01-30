@@ -239,7 +239,7 @@ lang: "$Lang"
 project_id: "$slug"
 ---
 
-{% include project-main.html project_id=page.project_id %}
+{% include projects/project-main.html project_id=page.project_id %}
 "@
     Set-Content -Path $path -Value $content -Encoding utf8NoBOM
     return $path

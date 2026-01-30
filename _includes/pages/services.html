@@ -34,7 +34,7 @@
       {% assign featured_rendered = 0 %}
       {% for id in service_ids %}
         {% assign item = site.data.services[id] %}
-        {% include service-card.html details=false cta=true service=item index=forloop.index0 disable_animation=true %}
+        {% include services/service-card.html details=false cta=true service=item index=forloop.index0 disable_animation=true %}
         {% assign featured_index = featured_index | plus: 1 %}
         {% assign featured_rendered = featured_rendered | plus: 1 %}
         {% if featured_rendered == 4 %}

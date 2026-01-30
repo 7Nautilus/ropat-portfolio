@@ -70,6 +70,12 @@
     width: 33%;
     justify-content: flex-end;
   }
+
+  .social-icons-card {
+    width: fit-content;
+    max-width: 50vw;
+    gap: 1.5rem;
+  }
 }
 
 /* Medium Tablets - 768px + */
@@ -133,6 +139,10 @@
 
   .hero-intro {
     max-width: 80%;
+  }
+
+  .social-icons-card {
+    max-width: 33vw;
   }
 }
 
@@ -293,6 +303,15 @@
   .footer-right-section {
     flex-direction: column;
     gap: var(--spacing-xl)
+  }
+
+  .social-icons-card {
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+
+  .socialContainer {
+    padding: 0.5rem;
   }
 }
 

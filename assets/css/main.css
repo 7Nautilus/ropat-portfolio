@@ -837,12 +837,6 @@ header {
 /* ============================================
    CONTACT SECTION
    ============================================ */
-.contact-methods {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
 #contact-social-links {
   display: flex;
   flex-direction: row;
@@ -1574,6 +1568,85 @@ footer {
   box-shadow: var(--shadow-sm);
 }
 
+/* ==============================================
+   SOCIAL ICONS
+   ============================================== */
+.social-icons-card {
+  /* Layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  /* Size */
+  width: -webkit-fill-available;
+  height: fit-content;
+  /* Spacing */
+  padding: 1.75rem 2.5rem;
+  gap: 1.25rem;
+  /* Border */
+  border: 2px solid var(--primary-color);
+  border-radius: 7rem;
+  corner-shape: squircle;
+  /* Colors & Background */
+  background-color: var(--secondary-color);
+  /* Effects */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+}
+
+.socialContainer {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Size */
+  width: fit-content;
+  height: fit-content;
+  /* Spacing */
+  padding: 1rem;
+  /* Border */
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius-squircle-full);
+  corner-shape: squircle;
+  /* Colors & Background */
+  background-color: var(--secondary-color);
+  /* Effects */
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+
+.socialContainer:hover {
+  background-color: var(--primary-color-alpha);
+  box-shadow: 0px 0px 15px var(--primary-color);
+  transform: scale(1.1);
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: 0.3s;
+}
+
+.socialSvg {
+  width: 100%;
+}
+
+.socialSvg path {
+  fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 #matrix {
   position: fixed;
   top: 0;
@@ -1937,6 +2010,11 @@ service-card-details
     width: 33%;
     justify-content: flex-end;
   }
+  .social-icons-card {
+    width: fit-content;
+    max-width: 50vw;
+    gap: 1.5rem;
+  }
 }
 /* Medium Tablets - 768px + */
 @media (min-width: 768px) {
@@ -1983,6 +2061,9 @@ service-card-details
   }
   .hero-intro {
     max-width: 80%;
+  }
+  .social-icons-card {
+    max-width: 33vw;
   }
 }
 /* Large Desktops - 1440px + */
@@ -2108,6 +2189,13 @@ service-card-details
   .footer-right-section {
     flex-direction: column;
     gap: var(--spacing-xl);
+  }
+  .social-icons-card {
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+  }
+  .socialContainer {
+    padding: 0.5rem;
   }
 }
 @media (min-width: 640px) {

@@ -120,7 +120,7 @@
     <link rel="icon" href="/assets/images/branding/icon.png" type="image/png">
 
     <!-- Open Graph -->
-    {% include open-graph.html 
+    {% include meta/open-graph.html 
         og_title=final_og_title 
         og_description=final_og_description 
         og_image=final_og_image 
@@ -129,7 +129,7 @@
         page_meta_description=final_meta_description 
     %}
     <!-- Schema.org -->
-    {% include schema-org.html 
+    {% include meta/schema-org.html 
         page_title=final_title 
         page_meta_description=final_meta_description 
     %}
@@ -154,10 +154,10 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    {% include header.html %}
+    {% include layout/header.html %}
 
     {{ content }} 
 
-    {% include footer.html %}
+    {% include layout/footer.html %}
 </body>
 </html>

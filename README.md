@@ -143,7 +143,7 @@ lang: "fr" # ou "en"
 project_id: "exemple"
 ---
 
-{% include project-main.html project_id=page.project_id %}
+{% include projects/project-main.html project_id=page.project_id %}
 ```
 
 `project_id` doit correspondre au slug. Cette clé pilote le chargement des données et des métadonnées SEO.

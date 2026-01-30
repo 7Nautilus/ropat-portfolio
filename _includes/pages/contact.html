@@ -18,14 +18,10 @@
       <img width="20" height="20" style="filter: invert(1);" src="/assets/images/icons/send.svg" alt="send icon" aria-hidden="true" />
     </a>
   </section>
-  <section class="contact-methods" aria-labelledby="contact-methods-title">
+  <section aria-labelledby="contact-methods-title">
     <h2 id="contact-methods-title" class="section-title">{{ contact.h2 }}</h2>
-    <div class="social-links" id="contact-social-links">  
-      {% for item in site.data.socials %}
-        <a href="{{ item.link }}" class="social-link {{ item.name }}">
-          {{ item.icon }}
-        </a>
-      {% endfor %}
+    <div class="flex center">
+      {% include social-media-icons.html %}
     </div>
   </section>
 </main>

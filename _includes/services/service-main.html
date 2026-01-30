@@ -78,21 +78,7 @@
       <h3 class="section-title">{{ subservices_subtitle | default: services_title }}</h3>
       <div class="section-grid section-grid-simple grid-four">
         {% for service_item in service.services %}
-          <div class="card service-card service-card-simple squircle">
-            <div class="service-text-content">
-              <h4 class="service-title">{{ service_item.nom[current_lang] }}</h4>
-              {% if service_item.description %}
-                <p class="service-card-description">{{ service_item.description[current_lang] }}</p>
-              {% endif %}
-            </div>
-            {% if service_item.tools %}
-              <div class="service-tools">
-                {% for tool in service_item.tools %}
-                  <span class="service-tool">{{ tool.nom }}</span>
-                {% endfor %}
-              </div>
-            {% endif %}
-          </div>
+          {% include services/subservices-card.html service_item=service_item current_lang=current_lang %}
         {% endfor %}
       </div>
     </section>
@@ -107,7 +93,7 @@
         {% for slug in project_slugs %}
           {% assign item = site.data.projects[slug] %}
           {% if item.category and item.category contains service.tag %}
-            {% include project-card.html project=item index=featured_index disable_animation=true %}
+            {% include projects/project-card.html project=item index=featured_index disable_animation=true %}
             {% assign featured_index = featured_index | plus: 1 %}
             {% assign featured_rendered = featured_rendered | plus: 1 %}
             {% if featured_rendered == 4 %}
