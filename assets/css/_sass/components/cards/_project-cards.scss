@@ -4,7 +4,6 @@
 
 .project-card {
   display: flex;
-  border-radius: var(--border-radius-squircle-small);
 }
 
 .project-card-image {
@@ -41,7 +40,7 @@
 .project-card-content {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: var(--spacing-lg);
   gap: var(--spacing-sm);
 }
 
