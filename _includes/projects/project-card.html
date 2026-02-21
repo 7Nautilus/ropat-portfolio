@@ -5,7 +5,7 @@
 {% assign animations_disabled = include.disable_animation | default: false %}
 
 {% if animations_disabled %}
-  {% assign article_classes = "card project-card squircle" %}
+  {% assign article_classes = "card project-card" %}
 {% else %}
   {% assign animation_delay = animation_index | times: 140 | plus: 60 %}
   {% assign article_classes = "card project-card animate-fade-up" %}

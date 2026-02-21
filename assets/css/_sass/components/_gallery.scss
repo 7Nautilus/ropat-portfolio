@@ -48,11 +48,17 @@
 /* Zone de la grande image */
 .main-display {
     flex-grow: 1; /* Prend l'espace restant */
+    
+    border: var(--border-primary);
+    border-radius: var(--spacing-xl);
+
+    @supports (corner-shape: squircle) {
+    border-radius: var(--border-radius-squircle-medium);;
     corner-shape: squircle;
-    border-radius: var(--border-radius-squircle-medium);
+    }
+
     overflow: hidden;
     box-shadow: var(--shadow-md);
-    border: var(--border-primary);
 }
 
 #main-image {

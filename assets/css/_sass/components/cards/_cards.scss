@@ -4,17 +4,20 @@
   align-items: flex-start;
   font-family: "manrope", sans-serif;
   background-color: var(--secondary-color);
-  border-radius: var(--border-radius-squircle-medium);
+
+  border-radius: var(--border-radius-lg);
+  
+  @supports (corner-shape: squircle) {
+    border-radius: var(--border-radius-squircle-medium);;
+    corner-shape: squircle;
+  }
+
   border: 2px solid var(--primary-color);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: 
     transform var(--transition-base), 
     box-shadow var(--transition-base);
-}
-
-.squircle {
-  corner-shape: squircle;
 }
 
 .card:hover {

@@ -31,8 +31,13 @@
   height: 3rem;
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  border-radius: var(--border-radius-squircle-full);
-  corner-shape: squircle;
+  border-radius: var(--border-radius-sm);
+  
+  @supports (corner-shape: squircle) {
+    border-radius: var(--border-radius-squircle-full);;
+    corner-shape: squircle;
+  }
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,8 +110,12 @@
 
   /* Border */
   border: 2px solid var(--primary-color);
-  border-radius: 7rem;
-  corner-shape: squircle;
+  border-radius: 3rem;
+
+  @supports (corner-shape: squircle) {
+    border-radius: 7rem;;
+    corner-shape: squircle;
+  }
   
   /* Colors & Background */
   background-color: var(--secondary-color);
@@ -132,8 +141,12 @@
 
   /* Border */
   border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius-squircle-full);
-  corner-shape: squircle;
+  border-radius: var(--border-radius-lg);
+
+  @supports (corner-shape: squircle) {
+    border-radius: var(--border-radius-squircle-full);;
+    corner-shape: squircle;
+  }
 
   /* Colors & Background */
   background-color: var(--secondary-color);
