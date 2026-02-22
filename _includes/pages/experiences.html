@@ -1,0 +1,25 @@
+{% assign current_lang = page.lang | default: "en" %}
+{% assign experiences_page = site.data.pages.experiences[current_lang] %}
+{% assign experiences_list = site.data.pages.experiences.experiences %}
+
+<main id="main-content" class="main-content">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="experiences-title">
+    <h1 class="hero-title" id="experiences-title">{{ experiences_page.title }}</h1>
+    {% if experiences_page.intro %}
+      <div class="bubble-container">
+        <p>{{ experiences_page.intro }}</p>
+      </div>
+    {% endif %}
+  </section>
+
+  {% include scroll-down-link.html %}
+
+  <section id="second-section">
+    <div class="experience-cards-container">
+      {% for exp in experiences_list %}
+        {% include experiences/experience-card.html experience=exp index=forloop.index0 disable_animation=true %}
+      {% endfor %}
+    </div>
+  </section>
+</main>

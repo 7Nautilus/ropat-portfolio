@@ -11,6 +11,11 @@
   padding-bottom: var(--spacing-xs);
 }
 
+/* Compensation du header sticky pour les ancres internes */
+#second-section {
+  scroll-margin-top: 7rem;
+}
+
 .section-grid {
   display: grid;
   grid-template-columns: 1fr;

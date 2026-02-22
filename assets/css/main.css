@@ -49,7 +49,7 @@
   --border-radius-full: 9999px;
   /* Bordures squircle */
   --border-radius-squircle-small: 15%;
-  --border-radius-squircle-medium: 22.5%;
+  --border-radius-squircle-medium: 6rem;
   --border-radius-squircle-full: 50%;
   /* Ombres */
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -584,6 +584,11 @@ header {
   font-weight: 700;
   border-bottom: var(--border-primary);
   padding-bottom: var(--spacing-xs);
+}
+
+/* Compensation du header sticky pour les ancres internes */
+#second-section {
+  scroll-margin-top: 7rem;
 }
 
 .section-grid {
@@ -1375,11 +1380,18 @@ footer {
 /* Zone de la grande image */
 .main-display {
   flex-grow: 1; /* Prend l'espace restant */
-  corner-shape: squircle;
-  border-radius: var(--border-radius-squircle-medium);
+  border: var(--border-primary);
+  border-radius: var(--spacing-xl);
+}
+@supports (corner-shape: squircle) {
+  .main-display {
+    border-radius: var(--border-radius-squircle-medium);
+    corner-shape: squircle;
+  }
+}
+.main-display {
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  border: var(--border-primary);
 }
 
 #main-image {
@@ -1517,8 +1529,15 @@ footer {
   height: 3rem;
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  border-radius: var(--border-radius-squircle-full);
-  corner-shape: squircle;
+  border-radius: var(--border-radius-sm);
+}
+@supports (corner-shape: squircle) {
+  .icon-placeholder {
+    border-radius: var(--border-radius-squircle-full);
+    corner-shape: squircle;
+  }
+}
+.icon-placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1585,8 +1604,15 @@ footer {
   gap: 1.25rem;
   /* Border */
   border: 2px solid var(--primary-color);
-  border-radius: 7rem;
-  corner-shape: squircle;
+  border-radius: 3rem;
+}
+@supports (corner-shape: squircle) {
+  .social-icons-card {
+    border-radius: 7rem;
+    corner-shape: squircle;
+  }
+}
+.social-icons-card {
   /* Colors & Background */
   background-color: var(--secondary-color);
   /* Effects */
@@ -1605,8 +1631,15 @@ footer {
   padding: 1rem;
   /* Border */
   border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius-squircle-full);
-  corner-shape: squircle;
+  border-radius: var(--border-radius-lg);
+}
+@supports (corner-shape: squircle) {
+  .socialContainer {
+    border-radius: var(--border-radius-squircle-full);
+    corner-shape: squircle;
+  }
+}
+.socialContainer {
   /* Colors & Background */
   background-color: var(--secondary-color);
   /* Effects */
@@ -1664,15 +1697,19 @@ footer {
   align-items: flex-start;
   font-family: "manrope", sans-serif;
   background-color: var(--secondary-color);
-  border-radius: var(--border-radius-squircle-medium);
+  border-radius: var(--border-radius-lg);
+}
+@supports (corner-shape: squircle) {
+  .card {
+    border-radius: var(--border-radius-squircle-medium);
+    corner-shape: squircle;
+  }
+}
+.card {
   border: 2px solid var(--primary-color);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
-}
-
-.squircle {
-  corner-shape: squircle;
 }
 
 .card:hover {
@@ -1790,7 +1827,6 @@ service-card-details
    ============================================== */
 .project-card {
   display: flex;
-  border-radius: var(--border-radius-squircle-small);
 }
 
 .project-card-image {
@@ -1827,7 +1863,7 @@ service-card-details
 .project-card-content {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: var(--spacing-lg);
   gap: var(--spacing-sm);
 }
 
@@ -1845,6 +1881,103 @@ service-card-details
   font-size: var(--font-size-base);
   color: var(--gray-light);
   line-height: 1.4;
+}
+
+.experience-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5rem;
+  width: 100%;
+}
+
+.experience-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 850px;
+  padding: 2.5rem;
+  gap: 1.5rem;
+  background-color: var(--secondary-color);
+  border: 3px solid var(--primary-color);
+  border-radius: 6rem;
+}
+@supports (corner-shape: squircle) {
+  .experience-card {
+    corner-shape: squircle;
+  }
+}
+.experience-card {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.experience-card-job {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.experience-card-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.experience-card-work {
+  text-decoration: underline var(--primary-color) 2px;
+  text-underline-offset: 0.5rem;
+}
+
+.experience-card-date {
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+.experience-card-company {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--grey-light-400);
+}
+
+.experience-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.experience-card-description {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+.experience-card-tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.experience-card-tag {
+  background-color: var(--primary-color-alpha);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: 3px solid var(--primary-color);
+  border-radius: 2rem;
+}
+@supports (corner-shape: squircle) {
+  .experience-card-tag {
+    corner-shape: squircle;
+  }
+}
+.experience-card-tag {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 /* ============================================

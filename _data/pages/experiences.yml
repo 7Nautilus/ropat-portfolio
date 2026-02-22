@@ -1,0 +1,44 @@
+fr:
+  title: "Expériences Professionnelles"
+  intro: "Mes expériences professionnelles dans le design graphique et la direction artistique."
+
+en:
+  title: "Professional Experience"
+  intro: "My professional experience in graphic design and art direction."
+
+experiences:
+  - date:
+      fr: "02/2026 - présent"
+      en: "02/2026 - present"
+    title:
+      fr: "Graphiste"
+      en: "Graphic Designer"
+    work:
+      fr: "Freelance"
+      en: "Freelance"
+    company: "Juliette has a gun"
+    description:
+      fr: "Accompagnement de la Maison de parfumerie <strong>Juliette has a gun</strong> dans la stratégie de production de ses contenus publicitaires sur les réseaux sociaux."
+      en: "Supporting the Juliette has a gun brand in the strategy of producing its advertising content on social media."
+    tags:
+      - "Figma"
+      - "After Effects"
+      - "Réseaux Sociaux"
+
+  - date:
+      fr: "02/2026"
+      en: "02/2026"
+    title:
+      fr: "Graphiste"
+      en: "Graphic Designer"
+    work:
+      fr: "Freelance"
+      en: "Freelance"
+    company: "Vetoquinol"
+    description:
+      fr: "Accompagnement de la marque Zylkene (<strong>Groupe Vetoquinol</strong>) dans la célébration de son 20ème anniversaire à travers la conception d'un support de communication print."
+      en: "Supporting the Zylkene brand (Vetoquinol Group) in celebrating its 20th anniversary through the design of a print communication support."
+    tags:
+      - "Affinity"
+      - "Illustrator"
+      - "Design Print"
