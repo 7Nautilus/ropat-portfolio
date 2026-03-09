@@ -11,8 +11,8 @@ client:
   en: "Vetoquinol"
 year: "2026"
 tools: "Photoshop, Illustrator, Affinity"
-image_src: /assets/images/projects/zylkene.webp
-main_image: /assets/images/projects/zylkene.webp
+image_src: /assets/images/projects/zylkene-packaging.webp
+main_image: /assets/images/projects/zylkene-packaging.webp
 media_type: image
 locales:
   fr:
@@ -32,10 +32,10 @@ locales:
       og_title: "Packaging Zylkene - Vetoquinol"
       og_description: "Design graphique et conception de packaging pour la gamme de produits Zylkene de Vetoquinol."
       og_url: "https://ropat.art/fr/projects/zylkene.html"
-      og_image: "https://ropat.art/assets/images/projects/zylkene.webp"
+      og_image: "https://ropat.art/assets/images/projects/zylkene-packaging.webp"
 
   en:
-    url: /en/projects/zylkene.html
+    url: /en/projects/zylkene-packaging.html
     aria_label: "See the Zylkene packaging for Vetoquinol"
     image_alt: "Zylkene packaging for Vetoquinol"
     title: "Zylkene Packaging"
@@ -51,7 +51,7 @@ locales:
       og_title: "Zylkene Packaging - Vetoquinol"
       og_description: "Graphic design and packaging design for Vetoquinol's Zylkene product line."
       og_url: "https://ropat.art/en/projects/zylkene.html"
-      og_image: "https://ropat.art/assets/images/projects/zylkene.webp"
+      og_image: "https://ropat.art/assets/images/projects/zylkene-packaging.webp"
 
 specs:
   - label:
