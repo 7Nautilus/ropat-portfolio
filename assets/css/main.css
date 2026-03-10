@@ -977,7 +977,7 @@ header {
   flex-direction: row;
   width: 100%;
   height: fit-content;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-lg);
 }
 
 .color-swatch {
