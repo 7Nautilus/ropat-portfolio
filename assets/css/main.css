@@ -943,6 +943,105 @@ header {
   font-weight: 700;
 }
 
+/* ==============================================
+   CASE STUDY
+   ============================================== */
+.case-study {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}
+
+.case-study-title {
+  font-family: "space grotesk", sans-serif;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+.case-study-colors-typography {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  padding: 0 var(--spacing-lg);
+}
+
+.case-study-colors-typography-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.case-study-colors-typography-items {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: fit-content;
+  gap: var(--spacing-sm);
+}
+
+.color-swatch {
+  width: 33.33%;
+  aspect-ratio: 1/1;
+  height: auto;
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+}
+@supports (corner-shape: squircle) {
+  .color-swatch {
+    border-radius: var(--border-radius-squircle-full);
+    corner-shape: squircle;
+  }
+}
+
+.color-hex {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: var(--fs-small);
+}
+
+.font-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.font-sample {
+  font-size: var(--fs-h1);
+  color: var(--primary-color-alpha);
+  font-weight: 500;
+  -webkit-text-stroke: 1px #FF5C00;
+  cursor: pointer;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  will-change: color, transform, filter;
+  /* Transition spécifique pour le filtre d'ombre */
+  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.font-sample:hover {
+  color: var(--primary-color);
+  transform: scale(1.02);
+  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+}
+
+.font-name {
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: var(--fs-p);
+}
+
+.font-description {
+  font-family: "Manrope", sans-serif;
+  color: var(--grey-light-400);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: var(--fs-p);
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1473,6 +1572,31 @@ footer {
 .lightbox-close:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
+}
+
+/* Mockup */
+.case-study-mockup {
+  margin: 0 var(--spacing-xl);
+  border: var(--border-primary);
+  border-radius: var(--spacing-xl);
+}
+@supports (corner-shape: squircle) {
+  .case-study-mockup {
+    border-radius: var(--border-radius-squircle-medium);
+    corner-shape: squircle;
+  }
+}
+.case-study-mockup {
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+#mockup-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .scroll-overlay {
@@ -2147,6 +2271,17 @@ service-card-details
     width: fit-content;
     max-width: 50vw;
     gap: 1.5rem;
+  }
+  .case-study-colors-typography {
+    flex-direction: row;
+    padding: 0;
+    gap: var(--spacing-lg);
+  }
+  .color-swatch {
+    padding: var(--spacing-lg);
+  }
+  .color-hex {
+    font-size: var(--fs-p);
   }
 }
 /* Medium Tablets - 768px + */

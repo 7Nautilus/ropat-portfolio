@@ -75,25 +75,26 @@ locales:
       og_url: "https://ropat.art/en/projects/outlast-trials.html"
       og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
 
-specs:
-  - 
-    label:
-      fr: "Contexte"
-      en: "Context"
-    value:
-      fr: "Projet personnel"
-      en: "Personal project"
-  - 
-    label:
-      fr: "Discipline"
-      en: "Discipline"
-    value:
-      fr: "Design Graphique"
-      en: "Graphic Design"
-  - 
-    label:
-      fr: "Outils"
-      en: "Tools"
-    value:
-      fr: "Photoshop"
-      en: "Photoshop"
+case_study:
+  specs:
+    - 
+      label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Projet personnel"
+        en: "Personal project"
+    - 
+      label:
+        fr: "Discipline"
+        en: "Discipline"
+      value:
+        fr: "Design Graphique"
+        en: "Graphic Design"
+    - 
+      label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Photoshop"
+        en: "Photoshop"

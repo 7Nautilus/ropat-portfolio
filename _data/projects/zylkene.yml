@@ -11,8 +11,8 @@ client:
   en: "Vetoquinol"
 year: "2026"
 tools: "Photoshop, Illustrator, Affinity"
-image_src: /assets/images/projects/zylkene-packaging.webp
-main_image: /assets/images/projects/zylkene-packaging.webp
+image_src: /assets/images/projects/zylkene-thumbnail.webp
+main_image: /assets/images/projects/zylkene-thumbnail.webp
 media_type: image
 locales:
   fr:
@@ -32,10 +32,10 @@ locales:
       og_title: "Packaging Zylkene - Vetoquinol"
       og_description: "Design graphique et conception de packaging pour la gamme de produits Zylkene de Vetoquinol."
       og_url: "https://ropat.art/fr/projects/zylkene.html"
-      og_image: "https://ropat.art/assets/images/projects/zylkene-packaging.webp"
+      og_image: "https://ropat.art/assets/images/projects/zylkene-thumbnail.webp"
 
   en:
-    url: /en/projects/zylkene-packaging.html
+    url: /en/projects/zylkene.html
     aria_label: "See the Zylkene packaging for Vetoquinol"
     image_alt: "Zylkene packaging for Vetoquinol"
     title: "Zylkene Packaging"
@@ -51,24 +51,48 @@ locales:
       og_title: "Zylkene Packaging - Vetoquinol"
       og_description: "Graphic design and packaging design for Vetoquinol's Zylkene product line."
       og_url: "https://ropat.art/en/projects/zylkene.html"
-      og_image: "https://ropat.art/assets/images/projects/zylkene-packaging.webp"
+      og_image: "https://ropat.art/assets/images/projects/zylkene-thumbnail.webp"
 
-specs:
-  - label:
-      fr: "Client"
-      en: "Client"
-    value:
-      fr: "Vetoquinol"
-      en: "Vetoquinol"
-  - label:
-      fr: "Contexte"
-      en: "Context"
-    value:
-      fr: "20 ans de la gamme Zylkene"
-      en: "20 years of the Zylkene product line"
-  - label:
-      fr: "Outils"
-      en: "Tools"
-    value:
-      fr: "Photoshop, Illustrator, Affinity"
-      en: "Photoshop, Illustrator, Affinity"
+case_study:
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Vetoquinol"
+        en: "Vetoquinol"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "20 ans de la gamme Zylkene"
+        en: "20 years of the Zylkene product line"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Photoshop, Illustrator, Affinity"
+        en: "Photoshop, Illustrator, Affinity"
+  
+  mockup: 
+    src: /assets/images/projects/zylkene-mockup.webp
+    alt: 
+      - fr: "Mockup du packaging de Zylkene pour Vetoquinol"
+      - en: "Mockup of the Zylkene packaging for Vetoquinol"
+  
+  colors:
+    - hex: "#3CB9D8"
+      name:
+        fr: "Bleu Zylkene"
+        en: "Zylkene Blue"  
+    - hex: "#77B74D"
+      name:
+        fr: "Vert Vetoquinol"
+        en: "Vetoquinol Green"
+  
+  typography:
+    - name: "Exo"
+      usage:
+        fr: "Titres et textes principaux"
+        en: "Headings and main text"
+    

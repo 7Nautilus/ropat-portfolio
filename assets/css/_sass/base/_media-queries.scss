@@ -76,6 +76,20 @@
     max-width: 50vw;
     gap: 1.5rem;
   }
+
+  .case-study-colors-typography {
+    flex-direction: row;
+    padding: 0;
+    gap: var(--spacing-lg);
+  }
+
+  .color-swatch {
+    padding: var(--spacing-lg);
+  }
+
+  .color-hex {
+    font-size: var(--fs-p);
+  }
 }
 
 /* Medium Tablets - 768px + */

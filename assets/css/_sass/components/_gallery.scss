@@ -141,3 +141,28 @@
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
+
+
+/* Mockup */
+
+.case-study-mockup {
+    margin: 0 var(--spacing-xl);
+    border: var(--border-primary);
+    border-radius: var(--spacing-xl);
+
+    @supports (corner-shape: squircle) {
+    border-radius: var(--border-radius-squircle-medium);;
+    corner-shape: squircle;
+    }
+
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+#mockup-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    transition: opacity 0.3s ease-in-out;
+}

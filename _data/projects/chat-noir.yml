@@ -66,25 +66,26 @@ locales:
       og_url: "https://ropat.art/en/projects/chat-noir.html"
       og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
 
-specs:
-  - 
-    label:
-      fr: "Contexte"
-      en: "Context"
-    value:
-      fr: "Projet personnel"
-      en: "Personal project"
-  - 
-    label:
-      fr: "Discipline"
-      en: "Discipline"
-    value:
-      fr: "Design graphique"
-      en: "Graphic design"
-  - 
-    label:
-      fr: "Outils"
-      en: "Tools"
-    value:
-      fr: "Affinity"
-      en: "Affinity"
+case_study:
+  specs:
+    - 
+      label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Projet personnel"
+        en: "Personal project"
+    - 
+      label:
+        fr: "Discipline"
+        en: "Discipline"
+      value:
+        fr: "Design graphique"
+        en: "Graphic design"
+    - 
+      label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Affinity"
+        en: "Affinity"
