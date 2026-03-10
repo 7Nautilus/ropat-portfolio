@@ -1,0 +1,82 @@
+slug: ottony
+project_title: "Ottony Paris"
+subtitle: "Branding"
+theme: 
+  fr: "IDENTITÉ VISUELLE & BRANDING"
+  en: "VISUAL IDENTITY & BRANDING"
+category: branding
+featured: false
+client: 
+  fr: "Ottony Paris"
+  en: "Ottony Paris"
+year: "2026"
+tools: "Figma, Photoshop, Illustrator"
+image_src: /assets/images/projects/ottony_paris.webp
+main_image: /assets/images/projects/ottony_paris.webp
+media_type: image
+locales:
+  fr:
+    url: /fr/projects/ottony-paris.html
+    aria_label: "Voir le projet de branding pour Ottony Paris"
+    image_alt: "Branding pour Ottony Paris"
+    title: "Branding pour Ottony Paris"
+    subtitle: "**Identité visuelle** et **branding** pour la marque de vêtements de luxe Ottony Paris"
+    pitch: "**Identité visuelle** et **branding** pour la marque de vêtements de luxe **Ottony Paris**, visant à créer une image de marque forte et cohérente, en harmonie avec les valeurs et l'esthétique de la marque."
+    description: "**Identité visuelle** complète et **branding** pour la marque de vêtements de luxe **Ottony Paris**, avec une attention particulière portée à la création d'une identité visuelle distinctive, mémorable, et alignée avec les aspirations de la marque."
+    services: "Identité visuelle, Branding, Design de marque"
+    
+    seo:
+      title: "Branding Ottony Paris | Ropat"
+      description: "Identité visuelle et branding pour la marque de vêtements de luxe Ottony Paris. Création d'une image de marque forte et cohérente."
+      canonical_url: "https://ropat.art/fr/projects/ottony-paris.html"
+      og_title: "Branding Ottony Paris"
+      og_description: "Identité visuelle et branding pour la marque de vêtements de luxe Ottony Paris."
+      og_url: "https://ropat.art/fr/projects/ottony-paris.html"
+      og_image: "https://ropat.art/assets/images/projects/ottony_paris.webp"
+  
+  en:
+    url: /en/projects/ottony-paris.html
+    aria_label: "See the branding project for Ottony Paris"
+    image_alt: "Branding for Ottony Paris"
+    title: "Branding for Ottony Paris"
+    subtitle: "**Visual identity** and **branding** for the luxury clothing brand Ottony Paris"
+    pitch: "**Visual identity** and **branding** for the luxury clothing brand **Ottony Paris**, aimed at creating a strong and coherent brand image that resonates with the brand's values and aesthetics."
+    description: "**Comprehensive visual identity** and **branding** for the luxury clothing brand **Ottony Paris**, with a focus on creating a distinctive, memorable visual identity that aligns with the brand's aspirations."
+    services: "Visual identity, Branding, Brand design"
+    
+    seo:
+      title: "Branding Ottony Paris | Ropat"
+      description: "Visual identity and branding for the luxury clothing brand Ottony Paris. Creation of a strong and consistent brand image."
+      canonical_url: "https://ropat.art/en/projects/ottony-paris.html"
+      og_title: "Branding Ottony Paris"
+      og_description: "Visual identity and branding for the luxury clothing brand Ottony Paris."
+      og_url: "https://ropat.art/en/projects/ottony-paris.html"
+      og_image: "https://ropat.art/assets/images/projects/ottony_paris.webp"
+
+case_study:
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Ottony Paris"
+        en: "Ottony Paris"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Lancement de la marque Ottony Paris"
+        en: "Launch of the Ottony Paris brand"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Figma, Photoshop, Illustrator"
+        en: "Figma, Photoshop, Illustrator"
+
+  mockup:
+    src: /assets/images/projects/ottony_paris_mockup.webp
+    alt:
+      - fr: "Mockup de présentation du branding pour Ottony Paris"
+      - en: "Presentation mockup of the branding for Ottony Paris"
+
