@@ -981,6 +981,7 @@ header {
 }
 
 .color-swatch {
+  min-width: fit-content;
   width: 33.33%;
   aspect-ratio: 1/1;
   height: auto;
@@ -1008,7 +1009,7 @@ header {
 }
 
 .font-sample {
-  font-size: var(--fs-h1);
+  font-size: 8rem;
   color: var(--primary-color-alpha);
   font-weight: 500;
   -webkit-text-stroke: 1px #FF5C00;
@@ -1576,7 +1577,6 @@ footer {
 
 /* Mockup */
 .case-study-mockup {
-  margin: 0 var(--spacing-xl);
   border: var(--border-primary);
   border-radius: var(--spacing-xl);
 }
@@ -2282,6 +2282,9 @@ service-card-details
   }
   .color-hex {
     font-size: var(--fs-p);
+  }
+  .case-study-mockup {
+    margin: 0 var(--spacing-xl);
   }
 }
 /* Medium Tablets - 768px + */

@@ -422,6 +422,7 @@
 }
 
 .color-swatch {
+  min-width: fit-content;
   width: 33.33%;
   aspect-ratio: 1 / 1;
   height: auto;
@@ -448,7 +449,7 @@
 }
 
 .font-sample {
-  font-size: var(--fs-h1);
+  font-size: 8rem;
   color: var(--primary-color-alpha);
 
   font-weight: 500;
