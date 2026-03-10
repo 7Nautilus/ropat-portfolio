@@ -394,16 +394,21 @@
 }
 
 .case-study-title {
-  font-family: 'space grotesk', sans-serif;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: var(--fs-h3);
   font-weight: 700;
 }
 
 .case-study-colors-typography {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--spacing-xl);
   padding: 0 var(--spacing-lg);
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr; /* 50% chacun sur desktop */
+    gap: 4rem;
+  }
 }
 
 .case-study-colors-typography-container {
@@ -416,23 +421,37 @@
 .case-study-colors-typography-items {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 100%;
-  height: fit-content;
   gap: var(--spacing-lg);
 }
 
+/* Colors Specific */
+.color-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--spacing-md);
+  width: 100%;
+}
+
 .color-swatch {
-  min-width: fit-content;
-  width: 33.33%;
+  display: flex;
+  align-items: flex-end; /* Pour aligner le texte en bas */
+  width: 100%;
   aspect-ratio: 1 / 1;
-  height: auto;
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-sm);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
   
   @supports (corner-shape: squircle) {
-    border-radius: var(--border-radius-squircle-full);;
+    border-radius: var(--border-radius-squircle-full);
     corner-shape: squircle;
   }
+}
+
+.color-swatch:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
 }
 
 .color-hex {
@@ -440,6 +459,14 @@
   color: var(--white-color);
   font-weight: 500;
   font-size: var(--fs-small);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Améliore la lisibilité sur les couleurs claires */
+}
+
+/* Typography Specific */
+.font-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
 }
 
 .font-item {
@@ -450,8 +477,8 @@
 
 .font-sample {
   font-size: 8rem;
+  line-height: 1;
   color: var(--primary-color-alpha);
-
   font-weight: 500;
   -webkit-text-stroke: 1px #FF5C00;
   cursor: pointer;

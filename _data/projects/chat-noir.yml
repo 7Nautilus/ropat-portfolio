@@ -89,3 +89,23 @@ case_study:
       value:
         fr: "Affinity"
         en: "Affinity"
+
+  colors:
+    - hex: "#2c2d54"
+      name:
+        fr: "Bleu foncé"
+        en: "Dark Blue"
+    - hex: "#f45f4e"
+      name:
+        fr: "Rouge vif"
+        en: "Bright Red"
+    - hex: "#63b0c7"
+      name:
+        fr: "Bleu clair"
+        en: "Light Blue"
+  
+  typography:
+    - name: "Anicon sans"
+      usage:
+        fr: "Titres et textes principaux"
+        en: "Headings and main text"
