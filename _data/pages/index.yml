@@ -14,6 +14,9 @@ fr:
       "Services & Expertises"
     cta: 
       "Voir tous les services"
+  carousel:
+    subtitle:
+      "Ils m'ont fait confiance :"
   projects:
     subtitle:
       "Projets Récents : Musique et Branding"
@@ -36,6 +39,9 @@ en:
       "Services & Expertise"
     cta:
       "See all services"
+  carousel:
+    subtitle:
+      "They trusted me:"
   projects:
     subtitle:
       "Featured Projects: Music and Branding"

@@ -81,6 +81,41 @@
       </a>
     </div>
   </section>
+  
+  <!-- CAROUSEL -->
+  <section class="partners-carousel" aria-labelledby="partners-carousel-title">
+    <h2 class="section-title" id="partners-carousel-title">{{ index.carousel.subtitle }}</h2>
+    <div class="partners-carousel-container">
+      <!-- Carousel Content -->
+      <div class="partners-carousel-track">
+        {% assign partner_ids = site.data.partners.index.order %}
+        <!-- Première boucle -->
+        {% for id in partner_ids %}
+          {% assign item = site.data.partners[id] %}
+          <div class="partner-logo-container">
+            {% if item.logo contains '<svg' %}
+              {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
+            {% else %}
+              <img src="{{ item.logo }}" alt="{{ item.name }} logo" class="partner-logo">
+            {% endif %}
+            <!-- <span>{{ item.name }}</span> -->
+          </div>
+        {% endfor %}
+        <!-- Deuxième boucle pour créer l'illusion d'un défilement infini -->
+        {% for id in partner_ids %}
+          {% assign item = site.data.partners[id] %}
+          <div class="partner-logo-container">
+            {% if item.logo contains '<svg' %}
+              {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
+            {% else %}
+              <img src="{{ item.logo }}" alt="{{ item.name }} logo" class="partner-logo">
+            {% endif %}
+            <!-- <span>{{ item.name }}</span> -->
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
 
   <!-- PROJECTS SECTION -->
   <section class="projects" aria-labelledby="projects-title">
