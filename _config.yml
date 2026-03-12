@@ -8,6 +8,8 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - docs/PLAN-ACTIONS.md
+  - docs/AUDIT-COMPLET.md
 
 sass:
   style: compressed # Optionnel : pour minifier ton CSS
