@@ -1,535 +1,340 @@
-# 🔍 AUDIT COMPLET DU SITE ROPAT.ART
+# AUDIT COMPLET DU SITE ROPAT.ART
 
-**Date de l'audit :** 31 octobre 2025  
-**Site audité :** https://ropat.art  
-**Type :** Portfolio Jekyll - Graphiste & Designer
-
----
-
-## 📊 RÉSUMÉ EXÉCUTIF
-
-### ✅ Points Forts
-- **Architecture DRY excellente** (9.5/10)
-- **Multilingue complet** (FR/EN)
-- **SEO très bien optimisé**
-- **Accessibilité correcte**
-- **Performance optimisée**
-- **Aucune erreur de code détectée**
-
-### ⚠️ Points d'Amélioration
-- Pages légales manquantes (mentions légales, confidentialité)
-- Optimisation d'images incomplète (certaines en PNG)
-- Quelques attributs `alt` sur SVG incorrects
-- Tests de performance à effectuer
-- Formulaire de contact inexistant
+**Date de l'audit :** 12 mars 2026
+**Site audite :** https://ropat.art
+**Type :** Portfolio Jekyll statique bilingue (FR/EN) - Graphiste & Directeur Artistique
+**Deploiement :** GitHub Pages via GitHub Actions
 
 ---
 
-## 🏗️ 1. ARCHITECTURE & CODE
+## RESUME EXECUTIF
 
-### ✅ Points Forts
+**Score global : 7/10** - Architecture solide et bien pensee, mais plusieurs fichiers orphelins, des incoherences de contenu bilingue, et des optimisations de performance manquantes.
 
-#### Structure DRY Exemplaire
-- ✅ Données centralisées dans `_data/` (projects/, services.yml, navigation.yml)
-- ✅ Templates réutilisables (`_includes/` et `_layouts/`)
-- ✅ System unique pour pages projets et pages normales
-- ✅ Pas de duplication de code
-- ✅ Architecture scalable et maintenable
+### Points forts
+- Architecture data-driven tres propre (YAML + includes Jekyll)
+- Systeme bilingue complet FR/EN avec detection de langue
+- SEO avance (Open Graph, Schema.org JSON-LD, hreflang, sitemap)
+- Accessibilite correcte (skip-link, ARIA, clavier, reduced-motion)
+- JavaScript vanilla leger et sans dependances
 
-#### Qualité du Code
-- ✅ **Aucune erreur** détectée par les linters
-- ✅ Code HTML5 valide et sémantique
-- ✅ CSS bien structuré avec variables CSS
-- ✅ JavaScript moderne (ES6+) avec debouncing
-- ✅ Indentation et formatage cohérents
+### Points critiques
+- Incoherence d'emails entre les pages
+- Service "Graphic Design" invisible (absent de l'index)
+- Contenu hardcode en francais sur la page services
+- Fichiers legacy/orphelins encombrant le repo
+- Pas de lazy loading d'images ni de format WebP generalise
 
-#### Configuration Technique
-- ✅ Jekyll correctement configuré
-- ✅ GitHub Actions pour déploiement automatique
-- ✅ Sitemap.xml généré automatiquement
-- ✅ Robots.txt configuré
-- ✅ CNAME pour domaine personnalisé
+---
 
-### ⚠️ Points d'Amélioration
+## 1. ARCHITECTURE & STRUCTURE (8/10)
 
-```markdown
-❌ Pages légales manquantes
-   - Créer /fr/mentions-legales.html
-   - Créer /en/legal-notice.html
-   - Créer /fr/confidentialite.html
-   - Créer /en/privacy.html
-   (Les liens existent dans le footer mais pointent vers des pages inexistantes)
+### Vue d'ensemble
 
-⚠️ Compression CSS/JS
-   - Envisager la minification pour production
-   - Pas critique car fichiers légers
+```
+ropat-portfolio/
+  _config.yml              # Config Jekyll + donnees business
+  _layouts/
+    default.html           # Layout unique (SEO dynamique, analytics, fonts)
+  _includes/
+    layout/                # header, nav, footer
+    meta/                  # open-graph, schema-org, schema (legacy)
+    pages/                 # index, portfolio, services, contact, about, experiences
+    projects/              # project-card, project-main
+    services/              # service-card, subservices-card, service-main
+    experiences/           # experience-card
+    burger-menu.html, lang-detector.html, lang-selector.html, etc.
+  _data/
+    pages/                 # Contenu des pages (index, about, contact, services, experiences)
+    projects/              # 12 fichiers YAML + index.yml (ordre d'affichage)
+    services/              # 4 fichiers YAML + index.yml (ordre d'affichage)
+    navigation.yml, design-system.yml, socials.yml, partners.yml
+  en/                      # Pages anglaises
+  fr/                      # Pages francaises
+  assets/
+    css/_sass/             # SCSS organise (base, components, layout, pages)
+    css/main.scss          # Manifest SCSS
+    js/script.js           # JS principal
+    images/, videos/, fonts/
 ```
 
+### Points forts
+- Toute la donnee dans `_data/` : un seul point de verite par projet/service
+- Pages = wrappers minimalistes (front matter + `{% include %}`)
+- Layout unique avec logique SEO conditionnelle (page vs projet vs service)
+- Script PowerShell (`scripts/new-project.ps1`) pour scaffolding de nouveaux projets
+- Architecture SCSS bien decoupee : base/ -> layout/ -> components/ -> pages/
+
+### Problemes identifies
+
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| A1 | Asymetrie structure FR/EN | Moyenne | Pas de `fr/index.html` (homepage FR = `/index.html` racine) alors que EN a `en/index.html` |
+| A2 | Fichiers legacy dans le repo | Faible | `style.css` (1903 lignes), `services_old.yml`, `schema.html`, `backup.txt`, `extract_font_sizes.py`, `font_sizes_report.csv`, `main.css.map` |
+| A3 | `chatnoir2.html` hors standard | Faible | 190 lignes CSS inline + HTML custom, `project_id: "chatnoir"` vs `"chat-noir"` |
+| A4 | `_utils.scss` vide | Negligeable | Fichier importe mais vide |
+| A5 | `matrix.js` + `_matrix.scss` inutilises | Faible | Commentes dans le layout mais toujours dans le repo |
+
 ---
 
-## 🔍 2. SEO (OPTIMISATION POUR LES MOTEURS DE RECHERCHE)
+## 2. CONTENU & INTERNATIONALISATION (6/10)
 
-### ✅ Points Forts
+### Systeme bilingue
 
-#### Métadonnées Complètes
-- ✅ Titles uniques et descriptifs sur toutes les pages
-- ✅ Meta descriptions pertinentes (< 160 caractères)
-- ✅ Meta keywords (même si moins importants aujourd'hui)
-- ✅ Canonical URLs configurées
-- ✅ Balises author, publisher, copyright
+- Detection automatique de la langue du navigateur (`lang-detector.html`)
+- Cookie `lang_choice` (30 jours) pour memoriser le choix
+- Switch manuel dans le footer avec gestion des slugs differents (FR: `branding-strategie.html` vs EN: `branding-strategy.html`)
+- Cles `fr`/`en` dans chaque fichier YAML de donnees
 
-#### Open Graph & Réseaux Sociaux
-- ✅ Balises Open Graph (OG) complètes
-- ✅ Twitter Cards configurées
-- ✅ Images OG définies
-- ✅ Locales FR/EN spécifiées
-- ✅ Partage social optimisé
+### Problemes identifies
 
-#### Multilingue (Hreflang)
-- ✅ Balises hreflang FR/EN correctes
-- ✅ x-default défini (EN)
-- ✅ URLs distinctes par langue
-- ✅ Gestion spéciale pour la page d'accueil
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| C1 | Incoherence emails | **Critique** | `_config.yml` et contact page : `contact@ropat.art` / Footer : `contact@ropat.art` |
+| C2 | Service "Graphic Design" invisible | **Critique** | `_data/services/graphic-design.yml` existe mais absent de `_data/services/index.yml` -> jamais affiche |
+| C3 | Contenu hardcode FR dans services | **Importante** | Section "generic" avec bulles ("Flyers & Print", "Visuels Social Media") et CTA en francais uniquement |
+| C4 | `fr/experiences.html` sans equivalent EN | Importante | Page experiences pro uniquement en francais |
+| C5 | Projet Chat Noir incomplet | Moyenne | `context_content` vides (headers placeholder sans description) |
+| C6 | `chatnoir2.html` en doublon | Faible | Page FR-only experimentale sans equivalent EN |
 
-#### Structure Technique
-- ✅ Sitemap.xml généré automatiquement
-- ✅ Robots.txt configuré (Allow: /)
-- ✅ URLs propres et parlantes
-- ✅ Structure de liens interne cohérente
+### Inventaire du contenu
 
-#### Schema.org (Données Structurées)
-- ✅ ProfessionalService défini
-- ✅ Adresse et coordonnées GPS
-- ✅ Horaires d'ouverture
-- ✅ Réseaux sociaux (sameAs)
-- ✅ WebPage/Article selon le contexte
-- ✅ Format JSON-LD (recommandé par Google)
+**12 projets :**
 
-### ⚠️ Points d'Amélioration
+| Projet | Categorie | Annee | Client | Featured |
+|--------|-----------|-------|--------|----------|
+| BTR | music | 2025 | Maltezz | oui |
+| Logo Process | branding | 2025 | Personnel | oui |
+| Cheetah | animation | 2025 | Personnel | oui |
+| Zylkene | packaging | 2026 | Vetoquinol | non |
+| Chat Noir | design | 2025 | Personnel | non |
+| Ottony Paris | branding | 2026 | Ottony Paris | non |
+| HDD Defrag | design | 2025 | Personnel | non |
+| A-LONE | music | 2024 | B-Lone | non |
+| EXIT | design | 2025 | Personnel | non |
+| JPeJA | animation/music | 2025 | Personnel | non |
+| Outlast Trials | design | 2025 | Personnel | non |
+| Crow | animation | 2025 | Personnel | non |
 
-```markdown
-⚠️ Rich Snippets Projets
-   - Ajouter schema.org CreativeWork pour chaque projet
-   - Améliorer la visibilité dans les SERPs
+**4 services :** Branding & Visual Strategy, Graphic Design (invisible), Music Design, Web Design & UX/UI
 
-⚠️ Breadcrumbs (fil d'Ariane)
-   - Ajouter breadcrumbs sur pages projets
-   - Améliorer navigation et SEO
+**5 partenaires carousel :** Ottony Paris, Vetoquinol, Juliette has a gun, PrintoClock, Moon VTC
 
-⚠️ AMP (Accelerated Mobile Pages)
-   - Pas nécessaire mais pourrait améliorer vitesse mobile
-   - Optionnel pour un portfolio
+**2 experiences pro :** Juliette has a gun (02/2026+), Vetoquinol (02/2026)
+
+---
+
+## 3. SEO & METADONNEES (7/10)
+
+### Points forts
+- Open Graph complet par page (titre, description, image, URL, locale)
+- Twitter Cards (summary_large_image)
+- Schema.org JSON-LD dynamique : ProfessionalService + WebSite + CreativeWork/WebPage selon contexte
+- Hreflang FR/EN/x-default sur toutes les pages
+- Sitemap XML avec priorites (1.0 homepage, 0.9 portfolio, 0.8 pages, 0.7 projets)
+- `robots.txt` correct
+- Google Analytics 4 + GTM configures
+
+### Problemes identifies
+
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| S1 | `schema.html` legacy present | Faible | Ancien schema.org avec commentaires JS dans JSON-LD (invalide). Remplace par `schema-org.html` |
+| S2 | `canonical_url` hardcodes | Moyenne | Dans chaque front matter -> risque de desynchronisation si URLs changent |
+| S3 | Dates pages legales obsoletes | Faible | "Last updated: November 1, 2025" dans les legal pages |
+| S4 | `anonymize_ip` deprece | Faible | Option deprecee dans GA4 (anonymisation native) |
+| S5 | Font "Inter" chargee inutilement | Moyenne | Google Fonts charge Inter qui n'est plus utilise (legacy de style.css) |
+
+---
+
+## 4. CSS & DESIGN SYSTEM (7/10)
+
+### Architecture SCSS
+
+```
+assets/css/_sass/
+  base/
+    _variables.scss    # Custom properties (couleurs, typo fluide, espacements)
+    _reset.scss        # Reset global + body styling
+    _typography.scss   # Font-face Anicon, classes typo
+    _generic.scss      # Utilitaires (separator, blur-bg, flex helpers)
+    _bases.scss        # Skip-link, selection, focus-visible, reduced-motion
+    _animations.scss   # Fade-up, fade-in, pulse
+    _spacing.scss      # gap utilities
+    _media-queries.scss # 340 lignes, tous breakpoints
+  components/
+    _buttons.scss, _carousel.scss, _containers.scss, _dropdown.scss,
+    _gallery.scss, _loader.scss, _matrix.scss, _scroll-down.scss, _utils.scss
+    cards/
+      _cards.scss, _service-cards.scss, _project-cards.scss, _experience-cards.scss
+  layout/
+    _header.scss, _sections.scss, _grids.scss, _footer.scss
+  pages/
+    _legal.scss, _project.scss
 ```
 
-### 📈 Score SEO Estimé : 85/100
+### Points forts
+- Variables CSS bien structurees avec typo fluide (`clamp()`)
+- Support `corner-shape: squircle` avec fallbacks
+- Support `prefers-reduced-motion`
+- Carousel infini en CSS pur
+- Sass compile et compresse (`compressed`)
+
+### Problemes identifies
+
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| D1 | `style.css` legacy | Moyenne | 1903 lignes legacy (font Inter, anciennes classes `.hero-test`, `.bulle`). Non utilise |
+| D2 | Media queries monolithiques | Moyenne | Fichier unique de 340 lignes avec blocs vides (640-1023px, 1440px+) |
+| D3 | Breakpoint 640px+ duplique | Faible | Service container padding repete en fin de `_media-queries.scss` |
+| D4 | Valeurs magiques | Faible | `10rem` gap, `76px` hauteur header hardcodee dans calc, `6rem` scroll-down |
+| D5 | Prefixes webkit manuels | Faible | Keyframes avec `-webkit-` au lieu d'autoprefixer |
+| D6 | `_utils.scss` vide | Negligeable | Import inutile |
 
 ---
 
-## ♿ 3. ACCESSIBILITÉ (WCAG)
+## 5. JAVASCRIPT (7/10)
 
-### ✅ Points Forts
+### `script.js` (253 lignes) - Fonctionnalites :
+1. Page Loader (delay 800ms + fadeout)
+2. Burger Menu (toggle, aria-expanded, body lock, Escape)
+3. Filtrage projets (dropdown + animations opacity/scale par categorie)
+4. Dropdown custom (toggle open/close, selection active)
+5. Galerie images (swap src, video support, keyboard)
+6. Lightbox (open/close, Escape, backdrop click, focus management)
+7. Scroll animations (IntersectionObserver + reduced-motion)
 
-#### ARIA & Sémantique
-- ✅ Labels ARIA sur sections (`aria-labelledby`)
-- ✅ Labels ARIA sur liens (`aria-label`)
-- ✅ `role="banner"` sur header
-- ✅ Navigation avec `<nav>` et `aria-label`
-- ✅ Bouton burger avec `aria-expanded` et `aria-controls`
+### `matrix.js` (46 lignes) - Effet Matrix rain (commente, non utilise)
 
-#### Images & Médias
-- ✅ Attributs `alt` sur toutes les images
-- ✅ Descriptions alternatives multilingues
-- ✅ `width` et `height` sur images (évite layout shift)
-- ✅ `loading="lazy"` pour performance
-- ✅ Vidéos avec attributs appropriés
+### Problemes identifies
 
-#### Navigation & Interaction
-- ✅ Navigation au clavier fonctionnelle
-- ✅ Support touche Échap pour fermer menu
-- ✅ Focus visible (outline CSS)
-- ✅ Transitions et animations respectueuses
-- ✅ Contraste couleurs correct (orange #FF5C00 sur noir)
-
-#### Structure
-- ✅ Hiérarchie de titres (h1 → h2 → h3)
-- ✅ Landmarks HTML5 (`<header>`, `<main>`, `<footer>`, `<nav>`)
-- ✅ Lang attribute sur `<html>`
-- ✅ Liens externes avec `rel="noopener noreferrer"`
-
-### ⚠️ Points d'Amélioration
-
-```markdown
-❌ SVG avec attribut `alt` incorrect
-   Fichiers concernés :
-   - footer.html (ligne 24, 32, 40)
-   - fr/contact.html (ligne 31, 38, 45)
-   - en/contact.html (ligne 31, 38, 45)
-   
-   Solution :
-   - Retirer `alt=""` des balises <svg>
-   - SVG utilise `aria-label` sur le parent <a>
-   - L'attribut `alt` n'existe pas sur <svg>
-
-⚠️ Skip to content
-   - Ajouter un lien "Aller au contenu" invisible
-   - Améliore navigation clavier
-   
-⚠️ Focus trap dans menu mobile
-   - Vérifier que le focus reste dans le menu ouvert
-   - Empêcher tab de sortir du menu
-
-⚠️ Tests avec lecteur d'écran
-   - Tester avec NVDA, JAWS ou VoiceOver
-   - Vérifier annonces vocales
-```
-
-### 📊 Score Accessibilité Estimé : 78/100
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| J1 | `matrix.js` non utilise | Faible | Commente dans le layout, fichier + SCSS encore presents |
+| J2 | `setInterval(draw, 33)` dans matrix.js | Faible | Devrait utiliser `requestAnimationFrame` si reactive |
+| J3 | Filtrage avec `setTimeout` | Faible | Animations par timeout -> race conditions possibles sur connexions lentes |
+| J4 | Lightbox sans preload | Faible | Image chargee dynamiquement via src swap -> potentiel flash |
+| J5 | Debounce defini mais inutilise | Negligeable | Fonction disponible mais jamais appelee |
 
 ---
 
-## ⚡ 4. PERFORMANCE
+## 6. PERFORMANCE (6/10)
 
-### ✅ Points Forts
+### Points forts
+- Preload du background (`main-bg.webp`)
+- JS charge en `defer`
+- Sass compile en mode `compressed`
+- Vanilla JS sans dependances externes
+- Page loader masquant le chargement
 
-#### Optimisations Chargement
-- ✅ Preconnect vers Google Fonts
-- ✅ DNS-prefetch configuré
-- ✅ Preload de l'image background critique
-- ✅ `defer` sur script.js
-- ✅ Police avec `display=swap`
+### Problemes identifies
 
-#### Images
-- ✅ Background en WebP (main-bg.webp)
-- ✅ Lazy loading sur images projets
-- ✅ Dimensions width/height définies (évite CLS)
-- ✅ Images avec alt descriptifs
-
-#### JavaScript
-- ✅ Debouncing sur événements répétitifs
-- ✅ Délégation d'événements
-- ✅ Pas de bibliothèques lourdes (vanilla JS)
-- ✅ Code minimaliste et optimisé
-
-#### CSS
-- ✅ Variables CSS pour maintenabilité
-- ✅ Transitions fluides
-- ✅ Media queries bien organisées
-- ✅ Pas de frameworks CSS lourds
-
-#### Chargement Différé
-- ✅ Page loader avec animation
-- ✅ Retrait du DOM après chargement
-- ✅ Google Analytics async
-- ✅ GTM script optimisé
-
-### ⚠️ Points d'Amélioration
-
-```markdown
-⚠️ Images PNG à convertir en WebP
-   Fichiers à optimiser :
-   - /assets/images/projects/*.png
-   - Réduction de poids de ~60-80%
-   - Meilleure compression sans perte de qualité
-
-⚠️ Minification CSS/JS
-   - style.css : ~40KB → ~28KB (estimé)
-   - script.js : ~6KB → ~4KB (estimé)
-   - Utiliser Jekyll plugins ou build step
-
-⚠️ Mise en cache
-   - Ajouter headers Cache-Control
-   - Configurer sur GitHub Pages si possible
-   - Ou utiliser Cloudflare
-
-⚠️ Critical CSS
-   - Inline CSS critique dans <head>
-   - Charger reste en async
-   - Réduire le FCP (First Contentful Paint)
-
-⚠️ Font Loading
-   - Envisager fonts locales au lieu de Google Fonts
-   - Ou utiliser font-display: optional
-   - Réduire requêtes externes
-
-⚠️ Tests Performance
-   À effectuer avec :
-   - Google PageSpeed Insights
-   - GTmetrix
-   - WebPageTest
-   - Lighthouse
-```
-
-### 📊 Score Performance Estimé : 75/100
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| P1 | 4 familles Google Fonts | **Importante** | Inter (inutile), Space Grotesk, Manrope, Underdog. 4 requetes HTTP + poids fonts |
+| P2 | Images PNG/JPG non converties | Importante | btr-cover.png, chatnoir.jpg, stopmotions, exit, hdd-defrag, outlast, logo-process |
+| P3 | Pas de `loading="lazy"` | Importante | Aucun lazy loading sur les images |
+| P4 | Pas de `srcset`/`sizes` | Moyenne | Images non responsives (taille unique servie) |
+| P5 | Videos autoplay sans lazy loading | Moyenne | Pages projets chargent les videos immediatement |
+| P6 | SVG inline dans partners.yml | Faible | 5 logos en SVG complet dans le YAML -> fichier lourd |
+| P7 | `main.css.map` dans le repo | Negligeable | Fichier de debug en production |
 
 ---
 
-## 📱 5. RESPONSIVE & UX
+## 7. ACCESSIBILITE (7/10)
 
-### ✅ Points Forts
+### Points forts
+- Skip-to-content link bilingue (FR/EN)
+- `aria-current="page"` sur la nav active
+- `aria-expanded` sur le burger menu
+- `focus-visible` global avec outline orange
+- Keyboard support complet (menu, lightbox, gallery)
+- `prefers-reduced-motion` respecte
+- `::selection` stylise
 
-#### Design Responsive
-- ✅ Mobile-first avec media queries
-- ✅ Breakpoints bien définis (640px, 768px, 1024px, 1440px)
-- ✅ Grille flexible (`grid-template-columns`)
-- ✅ Menu burger fonctionnel sur mobile
-- ✅ Navigation adaptative
+### Problemes identifies
 
-#### Expérience Utilisateur
-- ✅ Loader de page fluide
-- ✅ Animations de transition douces
-- ✅ Filtres de portfolio fonctionnels
-- ✅ Galerie d'images avec thumbnails
-- ✅ Vidéos auto-play (muted)
-
-#### Interactions
-- ✅ Hover states sur liens et boutons
-- ✅ Transformations visuelles (scale, translate)
-- ✅ Fermeture menu avec Échap
-- ✅ Scroll-behavior: smooth
-- ✅ Focus visible pour clavier
-
-### ⚠️ Points d'Amélioration
-
-```markdown
-⚠️ Formulaire de Contact
-   - Page contact n'a qu'un lien email
-   - Créer formulaire avec Formspree/Netlify Forms
-   - Améliorer conversion
-
-⚠️ Dark Mode
-   - Pas de toggle dark/light mode
-   - Design actuel est dark uniquement
-   - Optionnel mais moderne
-
-⚠️ Animations préférence utilisateur
-   - Respecter prefers-reduced-motion
-   - Désactiver animations si demandé
-
-⚠️ Tests sur vrais appareils
-   - Tester sur iOS/Android
-   - Vérifier touch targets (min 44x44px)
-   - Valider performances mobiles
-```
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| AC1 | `.hintrc` desactive des regles | Moyenne | `duplicate-id`, `axe/structure`, `no-inline-styles`, `axe/language` desactives |
+| AC2 | Dropdown custom non semantique | Moyenne | Construit avec `<div>` au lieu de `<select>` ou composant ARIA listbox |
+| AC3 | Thumbnails sans role explicite | Faible | Container scrollable sans `role="list"` ou equivalent |
+| AC4 | Attributs `alt` dependant du YAML | Faible | Si non rempli dans les donnees, images sans alt descriptif |
 
 ---
 
-## 🌍 6. MULTILINGUE
+## 8. SECURITE (8/10)
 
-### ✅ Points Forts
+### Points forts
+- Site statique (pas de backend, pas d'injection)
+- HTTPS via GitHub Pages
+- Politique de confidentialite complete (RGPD)
+- Pas de formulaire donc pas de faille input
+- `rel="noopener noreferrer"` sur les liens externes
 
-#### Structure
-- ✅ URLs distinctes FR/EN (`/fr/*` et `/en/*`)
-- ✅ Balises hreflang correctes
-- ✅ x-default défini
-- ✅ Lang detector automatique
-- ✅ Sélecteur de langue dans footer
+### Problemes identifies
 
-#### Contenu
-- ✅ Toutes pages traduites
-- ✅ Projets bilingues dans YAML
-- ✅ Navigation traduite
-- ✅ Métadonnées SEO traduites
-- ✅ Cohérence terminologique
-
-### ⚠️ Points d'Amélioration
-
-```markdown
-✅ Système multilingue excellent
-   Rien à améliorer significativement
-```
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| SE1 | Email personnel expose | Faible | `contact@ropat.art` visible dans le code source et _config.yml |
+| SE2 | Pas de CSP | Faible | Content Security Policy non configuree (limites GitHub Pages) |
+| SE3 | GTM vecteur potentiel | Faible | Si le compte GTM est compromis, des scripts tiers peuvent etre injectes |
 
 ---
 
-## 🔒 7. SÉCURITÉ
+## 9. DEPLOIEMENT / CI (7/10)
 
-### ✅ Points Forts
-- ✅ `rel="noopener noreferrer"` sur liens externes
-- ✅ HTTPS via GitHub Pages
-- ✅ Pas de formulaires = pas de vulnérabilités input
-- ✅ Pas de scripts tiers suspects
+### Workflow `deploy.yml`
+- Trigger : push sur `main`
+- Build Jekyll (Ruby 3.2) + compile Dart Sass + deploy GitHub Pages
+- Permissions minimales configures
 
-### ⚠️ Points d'Amélioration
+### Problemes identifies
 
-```markdown
-⚠️ Content Security Policy (CSP)
-   - Ajouter headers CSP
-   - Bloquer scripts inline non autorisés
-   - Protection contre XSS
-
-⚠️ Subresource Integrity (SRI)
-   - Ajouter SRI sur Google Fonts
-   - Vérifier intégrité des ressources externes
-```
+| # | Probleme | Severite | Detail |
+|---|----------|----------|--------|
+| CI1 | Pas de cache bundler | Moyenne | `cache: false` sur setup-ruby -> builds plus lents |
+| CI2 | Dart Sass via snap | Faible | Installation fragile sur les runners GitHub |
+| CI3 | Pas de validation | Moyenne | Pas de HTMLProofer, lint CSS/JS dans le pipeline |
+| CI4 | Workflow sitemap desactive | Negligeable | Non nettoye du repo |
 
 ---
 
-## 📊 8. ANALYTICS & TRACKING
+## 10. FICHIERS A NETTOYER
 
-### ✅ Configuré
-- ✅ Google Analytics 4 (G-JDE6T1D92Q)
-- ✅ Google Tag Manager (GTM-KN22K5FS)
-- ✅ Scripts async/defer
-
-### ⚠️ Recommandations
-
-```markdown
-⚠️ Conformité RGPD
-   - Ajouter bannière cookies
-   - Permettre refus tracking
-   - Page de confidentialité (manquante)
-
-⚠️ Analytics événements
-   - Tracker clics CTA
-   - Tracker filtres portfolio
-   - Tracker téléchargements CV (si applicable)
-```
+| Fichier | Raison | Action |
+|---------|--------|--------|
+| `assets/css/style.css` | CSS legacy non utilise (1903 lignes, font Inter) | Supprimer |
+| `assets/css/main.css` + `main.css.map` | Fichiers compiles locaux | Ajouter au .gitignore + supprimer du repo |
+| `_data/services_old.yml` | Ancien format remplace | Supprimer |
+| `_includes/meta/schema.html` | Schema.org legacy remplace par `schema-org.html` | Supprimer |
+| `backup.txt` | Snippets de backup obsoletes | Supprimer |
+| `extract_font_sizes.py` | Script utilitaire one-shot | Supprimer |
+| `font_sizes_report.csv` | Rapport genere | Supprimer |
+| `assets/css/_sass/components/_utils.scss` | Fichier vide | Supprimer + retirer import |
+| `assets/css/_sass/components/_matrix.scss` | Non utilise (commente) | Supprimer + retirer import |
+| `assets/js/matrix.js` | Non utilise (commente) | Supprimer |
+| `fr/projects/chatnoir2.html` | Page experimentale non standard | Supprimer ou normaliser |
+| `.jekyll-cache/` | Fichiers de cache committes | Supprimer du repo (deja dans .gitignore) |
 
 ---
 
-## 📝 9. CONTENU
+## SCORES PAR CATEGORIE
 
-### ✅ Points Forts
-- ✅ Texte clair et professionnel
-- ✅ Hiérarchie visuelle
-- ✅ Call-to-actions présents
-- ✅ Descriptions projets complètes
-
-### ⚠️ Points d'Amélioration
-
-```markdown
-⚠️ Blog/Actualités
-   - Pas de section blog
-   - Pourrait améliorer SEO
-   - Partager processus créatif
-
-⚠️ Témoignages clients
-   - Pas de social proof
-   - Ajouter témoignages/reviews
-   - Renforcer crédibilité
-
-⚠️ Page About
-   - Contenu minimal
-   - Ajouter photo professionnelle
-   - Détailler parcours et expertise
-```
-
----
-
-## 🎯 PLAN D'ACTION PRIORITAIRE
-
-### 🔴 PRIORITÉ HAUTE (à faire immédiatement)
-
-1. **Créer les pages légales manquantes**
-   - [ ] `/fr/mentions-legales.html`
-   - [ ] `/en/legal-notice.html`
-   - [ ] `/fr/confidentialite.html`
-   - [ ] `/en/privacy.html`
-
-2. **Corriger les attributs `alt` sur SVG**
-   - [ ] Retirer `alt=""` des balises `<svg>`
-   - [ ] Fichiers : footer.html, fr/contact.html, en/contact.html
-
-3. **Optimiser les images PNG → WebP**
-   - [ ] Convertir tous les PNG de `/assets/images/projects/`
-   - [ ] Gain estimé : -60% de poids
-
-### 🟡 PRIORITÉ MOYENNE (à planifier)
-
-4. **Ajouter formulaire de contact**
-   - [ ] Intégrer Formspree ou Netlify Forms
-   - [ ] Ajouter validation côté client
-
-5. **Améliorer accessibilité**
-   - [ ] Ajouter lien "Skip to content"
-   - [ ] Tester avec lecteurs d'écran
-   - [ ] Vérifier focus trap menu mobile
-
-6. **Tests de performance**
-   - [ ] PageSpeed Insights
-   - [ ] GTmetrix
-   - [ ] Lighthouse audit complet
-
-### 🟢 PRIORITÉ BASSE (améliorations futures)
-
-7. **Enrichir le contenu**
-   - [ ] Étoffer page About (photo, parcours)
-   - [ ] Ajouter témoignages clients
-   - [ ] Créer section blog
-
-8. **Optimisations avancées**
-   - [ ] Critical CSS inline
-   - [ ] Minification CSS/JS
-   - [ ] Content Security Policy
-   - [ ] Dark mode toggle
-
-9. **Analytics & Conversion**
-   - [ ] Bannière cookies RGPD
-   - [ ] Tracker événements GA4
-   - [ ] A/B testing CTA
-
----
-
-## 📈 SCORES FINAUX
-
-| Catégorie | Score | Niveau |
+| Categorie | Score | Niveau |
 |-----------|-------|--------|
-| **Architecture & Code** | 95/100 | 🟢 Excellent |
-| **SEO** | 85/100 | 🟢 Très Bon |
-| **Accessibilité** | 78/100 | 🟡 Bon |
-| **Performance** | 75/100 | 🟡 Bon |
-| **Responsive & UX** | 90/100 | 🟢 Excellent |
-| **Multilingue** | 95/100 | 🟢 Excellent |
-| **Sécurité** | 80/100 | 🟢 Bon |
-| **Contenu** | 70/100 | 🟡 Correct |
-
-### 🎖️ **SCORE GLOBAL : 83.5/100**
-
----
-
-## 💡 CONCLUSION
-
-Le site **ropat.art** est globalement de **très bonne qualité** avec une architecture exemplaire suivant les principes DRY. Le système multilingue est parfaitement implémenté et le SEO est très bien optimisé.
-
-### Points Forts Majeurs
-✅ Architecture DRY excellente (9.5/10)  
-✅ Aucune erreur de code  
-✅ SEO très complet  
-✅ Multilingue parfait  
-✅ Design responsive  
-
-### Axes d'Amélioration Principaux
-⚠️ Pages légales manquantes (bloquant)  
-⚠️ Optimisation images (performance)  
-⚠️ Formulaire de contact (conversion)  
-⚠️ Accessibilité à renforcer  
-⚠️ Contenu à enrichir  
+| Architecture & Structure | 8/10 | Tres bon |
+| Contenu & i18n | 6/10 | Correct - a ameliorer |
+| SEO & Metadonnees | 7/10 | Bon |
+| CSS & Design System | 7/10 | Bon |
+| JavaScript | 7/10 | Bon |
+| Performance | 6/10 | Correct - a ameliorer |
+| Accessibilite | 7/10 | Bon |
+| Securite | 8/10 | Tres bon |
+| Deploiement / CI | 7/10 | Bon |
+| **SCORE GLOBAL** | **7/10** | **Bon** |
 
 ---
 
-## 📚 RESSOURCES UTILES
-
-### Outils de Test
-- [Google PageSpeed Insights](https://pagespeed.web.dev/)
-- [GTmetrix](https://gtmetrix.com/)
-- [WAVE Accessibility](https://wave.webaim.org/)
-- [Lighthouse (Chrome DevTools)](https://developers.google.com/web/tools/lighthouse)
-
-### Validateurs
-- [W3C HTML Validator](https://validator.w3.org/)
-- [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
-- [Schema.org Validator](https://validator.schema.org/)
-
-### Optimisation Images
-- [Squoosh](https://squoosh.app/) - Conversion WebP
-- [TinyPNG](https://tinypng.com/) - Compression PNG/JPG
-- [ImageOptim](https://imageoptim.com/) - Mac app
-
-### Accessibilité
-- [NVDA](https://www.nvaccess.org/) - Lecteur d'écran Windows
-- [axe DevTools](https://www.deque.com/axe/devtools/) - Extension Chrome
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-
----
-
-**Audit réalisé le 31 octobre 2025**  
-**Prochaine révision recommandée : Janvier 2026**
+**Audit realise le 12 mars 2026**
+**Prochaine revision recommandee : Juin 2026**
