@@ -8,4 +8,9 @@ fr:
     cta: "Me confier une mission"
 en:
   title: "My Services"
-  intro: "Whether you're an artist, collective, or brand, I offer a comprehensive range of services to bring your vision to life. Discover how I can help you create a strong and cohesive visual identity."
+  intro: "Whether you're an artist, collective, or brand, I offer a comprehensive range of services to bring your vision to life."
+  pitch: "Discover how I can help you create a **strong** and **cohesive visual identity** :"
+  generic:
+    title: "One-off needs?"
+    text: "For your <strong>flyers</strong>, <strong>banners</strong>, <strong>social media templates</strong> or <strong>urgent edits</strong>. <br>A <strong>flexible solution</strong> for your day-to-day tasks."
+    cta: "Assign me a project"

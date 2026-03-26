@@ -33,7 +33,9 @@
           {% if project.media_type == "video" %}
           <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted width="1200" height="1200"></video>
           {% else %}
-          <img src="{{ project.main_image }}" id="main-image" alt="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy" class="lightbox-trigger" role="button" tabindex="0" aria-label="{% if lang == 'fr' %}Cliquez pour agrandir l'image{% else %}Click to enlarge image{% endif %}">
+          {% assign img_alt = primary_thumbnail_alt | default: project_locale.image_alt %}
+          {% if lang == 'fr' %}{% assign img_action = "— Cliquez pour agrandir" %}{% else %}{% assign img_action = "— Click to enlarge" %}{% endif %}
+          <img src="{{ project.main_image }}" id="main-image" alt="{{ img_alt }}" aria-label="{{ img_alt }} {{ img_action }}" width="1200" height="1200" loading="lazy" class="lightbox-trigger" role="button" tabindex="0">
           {% endif %}
         </div>
         {% if project.thumbnails and project.thumbnails.size > 0 %}

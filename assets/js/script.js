@@ -228,6 +228,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ================================
+  // SÉLECTEUR DE LANGUE
+  // ================================
+  document.addEventListener('click', event => {
+    const langLink = event.target.closest('[data-set-lang]');
+    if (langLink) {
+      const lang = langLink.dataset.setLang;
+      const expires = new Date();
+      expires.setTime(expires.getTime() + 30 * 24 * 60 * 60 * 1000); // 30 jours
+      document.cookie = `lang_choice=${lang};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
+    }
+  });
+
   const animatedBlocks = document.querySelectorAll('.animate-fade-up');
   if (animatedBlocks.length) {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
