@@ -3,6 +3,7 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+.claude/
 
 # Le sitemap.xml contient du code Jekyll et DOIT être commité
 # Il sera transformé en XML pur par Jekyll lors du build
@@ -18,3 +19,8 @@ Thumbs.db
 # Backup files
 *.bak
 *~
+
+_demo/
+
+extract_font_sizes.py
+font_sizes_report.csv

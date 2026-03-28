@@ -17,6 +17,74 @@ const debounce = (func, wait) => {
 };
 
 // ================================
+// CURSEUR BLOB — Desktop uniquement
+// ================================
+(function () {
+  // Activer uniquement sur appareil avec souris précise
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+
+  const blob = document.getElementById('cursor-blob');
+  if (!blob) return;
+
+  let mouseX = 0, mouseY = 0;
+  let blobX = 0, blobY = 0;
+  const LERP = 0.12; // Facteur de lissage (trailing)
+
+  // Suivi de la position souris
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  // Boucle d'animation fluide (trailing)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  (function animateBlob() {
+    if (prefersReducedMotion) {
+      // Pas de trailing si prefers-reduced-motion
+      blobX = mouseX;
+      blobY = mouseY;
+    } else {
+      blobX += (mouseX - blobX) * LERP;
+      blobY += (mouseY - blobY) * LERP;
+    }
+    blob.style.left = blobX + 'px';
+    blob.style.top  = blobY + 'px';
+    requestAnimationFrame(animateBlob);
+  })();
+
+  // Gestion des états hover
+  function clearCursorStates() {
+    document.body.classList.remove('cursor-hover', 'cursor-text', 'cursor-zoom');
+  }
+
+  // Éléments interactifs → état hover (blob orange élargi)
+  const hoverSelectors = 'a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .cta, .dropdown .select, .social-link, .socialContainer, label';
+  document.querySelectorAll(hoverSelectors).forEach(el => {
+    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', clearCursorStates);
+  });
+
+  // Texte pur → état text (barre fine)
+  const textSelectors = 'p, h1, h2, h3, h4, h5, li, blockquote, .section-description';
+  document.querySelectorAll(textSelectors).forEach(el => {
+    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-text'); });
+    el.addEventListener('mouseleave', clearCursorStates);
+  });
+
+  // Images cliquables / lightbox → état zoom (cercle + croix)
+  const zoomSelectors = '.lightbox-trigger, .thumbnail-image, .zoomable';
+  document.querySelectorAll(zoomSelectors).forEach(el => {
+    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-zoom'); });
+    el.addEventListener('mouseleave', clearCursorStates);
+  });
+
+  // Masquer le blob quand la souris quitte la fenêtre
+  document.addEventListener('mouseleave', () => { blob.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { blob.style.opacity = '1'; });
+})();
+
+// ================================
 // PAGE LOADER
 // ================================
 window.addEventListener('load', () => {

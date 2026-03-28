@@ -2621,4 +2621,81 @@ service-card-details
   }
 }
 
+/* ================================
+   CURSEUR PERSONNALISÉ — BLOB
+   Actif uniquement sur pointer: fine (souris desktop)
+================================ */
+@media (pointer: fine) {
+  /* Masque le curseur natif sur tout le site */
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+
+  #cursor-blob {
+    position: fixed;
+    top: 0; left: 0;
+    width: 20px; height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    corner-shape: squircle;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition:
+      width  .35s cubic-bezier(.25, .46, .45, .94),
+      height .35s cubic-bezier(.25, .46, .45, .94),
+      border-radius .35s ease,
+      background .3s ease,
+      border .3s ease;
+    will-change: transform;
+  }
+
+  /* État hover — boutons, liens, cartes */
+  body.cursor-hover #cursor-blob {
+    width: 64px; height: 64px;
+    background: rgba(255, 92, 0, 0.1);
+    border: 3px solid var(--primary-color);
+  }
+
+  /* État texte — paragraphes, titres */
+  body.cursor-text #cursor-blob {
+    width: 3px; height: 28px;
+    border-radius: 9999px;
+    border: none;
+    background: var(--white-color);
+  }
+
+  /* État zoom — images cliquables / lightbox */
+  body.cursor-zoom #cursor-blob {
+    width: 48px; height: 48px;
+    background: transparent;
+    border: 2px solid var(--white-color);
+  }
+
+  /* Croix centrale sur l'état zoom */
+  body.cursor-zoom #cursor-blob::before,
+  body.cursor-zoom #cursor-blob::after {
+    content: '';
+    position: absolute;
+    background: var(--white-color);
+    top: 50%; left: 50%;
+  }
+  body.cursor-zoom #cursor-blob::before {
+    width: 14px; height: 2px;
+    transform: translate(-50%, -50%);
+  }
+  body.cursor-zoom #cursor-blob::after {
+    width: 2px; height: 14px;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Disparaît si prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    #cursor-blob {
+      transition: none;
+    }
+  }
+}
+
 /*# sourceMappingURL=main.css.map */
