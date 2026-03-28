@@ -1,0 +1,89 @@
+// ================================
+// CURSEUR PERSONNALISÉ — BLOB
+// Actif uniquement sur pointer: fine (souris desktop)
+// ================================
+
+@media (pointer: fine) {
+  // Masque le curseur natif sur tout le site
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+
+  #cursor-blob {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--primary-color);
+    border-radius: 50%;
+    corner-shape: squircle;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    transition:
+      width  0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-radius 0.35s ease,
+      background    0.3s ease,
+      border        0.3s ease;
+
+    // État hover — boutons, liens, cartes
+    body.cursor-hover & {
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 92, 0, 0.1);
+      border: 3px solid var(--primary-color);
+    }
+
+    // État texte — paragraphes, titres
+    body.cursor-text & {
+      width: 3px;
+      height: 28px;
+      border-radius: 9999px;
+      border: none;
+      background: var(--white-color);
+    }
+
+    // État zoom — images cliquables / lightbox
+    body.cursor-zoom & {
+      width: 48px;
+      height: 48px;
+      background: transparent;
+      border: 2px solid var(--white-color);
+
+      // Croix centrale
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        background: var(--white-color);
+        top: 50%;
+        left: 50%;
+      }
+
+      &::before {
+        width: 14px;
+        height: 2px;
+        transform: translate(-50%, -50%);
+      }
+
+      &::after {
+        width: 2px;
+        height: 14px;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  // Désactive le trailing si prefers-reduced-motion
+  @media (prefers-reduced-motion: reduce) {
+    #cursor-blob {
+      transition: none;
+    }
+  }
+}
