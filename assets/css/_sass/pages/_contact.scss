@@ -154,7 +154,7 @@ main:has(.contact-hero) {
 
   // Sticky sur desktop
   @media (min-width: 768px) {
-    position: sticky;
+    /* position: sticky; */
     top: calc(var(--spacing-xl) + 80px); // header height + marge
     align-self: start;
   }
