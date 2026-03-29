@@ -1,8 +1,7 @@
 fr:
   title: "À propos"
 
-  intro_1: "Je suis Ropat, graphiste & directeur artistique basé à Angers. Je bidouille des trucs sur mon pc depuis toujours, mais c'est il y a 2~3 ans que j'ai vraiment décidé d'en faire un métier."
-  intro_2: "Autodidacte pur jus. J'ai commencé deux formations en design, lâchées rapidement parce qu'elles ne m'apprenaient rien que je ne savais pas déjà trouver sur internet. Aujourd'hui j'accompagne des artistes et des entreprises qui veulent une identité visuelle qui leur ressemble vraiment."
+  intro_1: "Designer graphique spécialisé dans la <strong>direction artistique</strong> et le <strong>branding</strong>, je collabore avec des acteurs de la <strong>mode</strong>, du <strong>luxe</strong> et de l'<strong>industrie musicale</strong>. Mon approche hybride mêle <strong>sensibilité artistique</strong> et <strong>expertise technique</strong> pour concevoir des univers de marque mémorables, du <strong>print</strong> au <strong>digital</strong>."
 
   availability: "Disponible pour de nouveaux projets"
 
@@ -35,7 +34,7 @@ fr:
     title: "Parcours"
     items:
       - period: "Depuis toujours"
-        description: "Bidouillage en tout genre, graphisme, code, design. Autodidacte par nature."
+        description: "Bidouillage en tout genre, graphisme, code, design.."
       - period: "Il y a 2-3 ans"
         description: "Prise de conscience : le design, c'est un vrai métier. Début de la professionnalisation."
       - period: "Premier projet rémunéré"
@@ -51,8 +50,7 @@ fr:
 en:
   title: "About"
 
-  intro_1: "I'm Ropat, a graphic designer & art director based in Angers. I've been tinkering with stuff on my computer for as long as I can remember, but it was only about 2-3 years ago that I decided to make it my career."
-  intro_2: "Pure self-taught. I started two design courses, but quickly dropped them because they didn't teach me anything I couldn't already find on the internet. Today, I work with artists and businesses who want a visual identity that truly reflects them."
+  intro_1: "Graphic designer specializing in <strong>art direction</strong> and <strong>branding</strong>, I collaborate with players in the <strong>fashion</strong>, <strong>luxury</strong>, and <strong>music industry</strong>. My hybrid approach combines <strong>artistic sensibility</strong> with <strong>technical expertise</strong> to create memorable brand universes, from <strong>print</strong> to <strong>digital</strong>."
 
   availability: "Available for new projects"
 
@@ -85,15 +83,15 @@ en:
     title: "Journey"
     items:
       - period: "Always"
-        description: "Tinkering with everything — design, code, graphics. Self-taught by nature."
+        description: "Tinkering with all sorts of things, graphic design, coding, design.."
       - period: "2-3 years ago"
-        description: "The realization: design is a real career. Time to make it official."
+        description: "Realization: design is a real profession. Start of professionalization."
       - period: "First paid project"
-        description: "Cover for the album <em>A-Lone</em> — my first client project, and one of the most meaningful."
+        description: "Cover of the album <em>A-Lone</em>, my first paid client project, and one of the most significant."
       - period: "Recently"
-        description: "<em>Banana Rush</em> ads campaign for the fragrance house Juliette has a gun."
+        description: "Ads campaign <em>Banana Rush</em> for the perfumery house Juliette has a gun."
       - period: "Today"
-        description: "Around twenty client projects, 5/5 on Malt, and collaborations that actually matter."
+        description: "About twenty client projects, 5/5 on Malt, and collaborations that matter."
 
   cta:
     label: "Want to work together?"
