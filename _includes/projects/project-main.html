@@ -8,12 +8,40 @@
   {% assign primary_thumbnail_alt = primary_thumbnail.alt[lang] | default: primary_thumbnail.alt.en %}
 {% endif %}
 
+<!-- Prev / Next : parcourt l'ordre sans break -->
+{% assign project_order = site.data.projects.index.order %}
+{% assign found_current = false %}
+{% assign prev_slug = nil %}
+{% assign next_slug = nil %}
+{% for slug in project_order %}
+  {% if found_current and next_slug == nil %}{% assign next_slug = slug %}{% endif %}
+  {% if slug == include.project_id %}{% assign found_current = true %}{% endif %}
+  {% unless found_current %}{% assign prev_slug = slug %}{% endunless %}
+{% endfor %}
+{% if prev_slug %}
+  {% assign prev_project = site.data.projects[prev_slug] %}
+  {% assign prev_locale  = prev_project.locales[lang] | default: prev_project.locales.en %}
+{% endif %}
+{% if next_slug %}
+  {% assign next_project = site.data.projects[next_slug] %}
+  {% assign next_locale  = next_project.locales[lang] | default: next_project.locales.en %}
+{% endif %}
+
 <!-- Main Content -->
 {% if project and project_locale %}
 <main id="main-content" class="hero-project-section">
+
+  <!-- ── HERO ──────────────────────────────── -->
   <section class="hero hero-project">
     <!-- Description -->
     <div class="hero-container hero-project-container">
+
+      <!-- Fil d'ariane retour portfolio -->
+      <a href="/{{ lang }}/portfolio.html" class="project-back-link" aria-label="{% if lang == 'fr' %}Retour au portfolio{% else %}Back to portfolio{% endif %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        Portfolio
+      </a>
+
       <div class="hero-project-title-container">
         <div class="hero-project-title-theme">
           <span class="hero-theme-dot" aria-hidden="true"></span>
@@ -42,7 +70,9 @@
         <div class="thumbnails-container" id="thumbnails">
           {% for thumbnail in project.thumbnails %}
           {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en %}
-          <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          <button class="thumbnail-btn" aria-label="{{ thumbnail_alt }}"{% if forloop.first %} data-active="true"{% endif %}>
+            <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          </button>
           {% endfor %}
         </div>
         {% endif %}
@@ -50,45 +80,77 @@
     </div>
   </section>
 
+  <!-- ── CASE STUDY ───────────────────────── -->
   {% if project.case_study %}
-  <section class="case-study">
-    <!-- Mockup -->
-    {% if project.case_study.mockup %}
-    <div class="case-study-mockup">
-      {% if project.case_study.mockup.media_type == "video" %}
-      <video src="{{ project.case_study.mockup.src }}" id="mockup-image" autoplay loop muted width="1200" height="1200"></video>
-      {% else %}
-      <img src="{{ project.case_study.mockup.src }}" id="mockup-image" alt="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}" width="1200" height="1200" loading="lazy">
+  <section class="case-study" aria-label="{% if lang == 'fr' %}Étude de cas{% else %}Case Study{% endif %}">
+
+    <!-- 1. Specs ── Client · Année · Services · Outils -->
+    <div class="cs-specs">
+      {% if project.client %}
+      <div class="cs-spec">
+        <span class="cs-spec-label">{% if lang == 'fr' %}Client{% else %}Client{% endif %}</span>
+        <span class="cs-spec-value">{{ project.client[lang] | default: project.client.fr }}</span>
+      </div>
+      {% endif %}
+      {% if project.year %}
+      <div class="cs-spec">
+        <span class="cs-spec-label">{% if lang == 'fr' %}Année{% else %}Year{% endif %}</span>
+        <span class="cs-spec-value">{{ project.year }}</span>
+      </div>
+      {% endif %}
+      {% if project_locale.services %}
+      <div class="cs-spec">
+        <span class="cs-spec-label">Services</span>
+        <span class="cs-spec-value">{{ project_locale.services }}</span>
+      </div>
+      {% endif %}
+      {% if project.tools %}
+      <div class="cs-spec">
+        <span class="cs-spec-label">{% if lang == 'fr' %}Outils{% else %}Tools{% endif %}</span>
+        <span class="cs-spec-value">{{ project.tools }}</span>
+      </div>
       {% endif %}
     </div>
-    {% endif %}
-    
-    <!-- Case Study Specs -->
-    {% if project.case_study.specs and project.case_study.specs.size > 0 %}
-    <div class="project-details">
-      <div class="details-grid">
-        {% for detail in project.case_study.specs %}
-        <div class="detail-item-container">
-          <div class="detail-item">
-            <h3 class="detail-title">{{ detail.label[lang] | default: detail.label.en }}</h3>
-            <p class="detail-content">{{ detail.value[lang] | default: detail.value.en }}</p>
-          </div>
-        </div>
-        {% endfor %}
+
+    <!-- 2. Processus / Context narrative -->
+    {% if project_locale.context_content %}
+    <div class="cs-process">
+      <div class="cs-process-header">
+        <h2 class="cs-process-title">{{ project_locale.context_title | default: "Contexte du projet" }}</h2>
+      </div>
+      <div class="cs-process-content">
+        {{ project_locale.context_content | replace: '### # ', '### ' | markdownify }}
       </div>
     </div>
     {% endif %}
 
-    <!-- Case Study | Color & Typography -->
+    <!-- 3. Mockup visuel -->
+    {% if project.case_study.mockup %}
+    <div class="cs-mockup">
+      {% if project.case_study.mockup.media_type == "video" %}
+      <video src="{{ project.case_study.mockup.src }}" autoplay loop muted width="1200" height="1200"
+        aria-label="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
+      </video>
+      {% else %}
+      <img src="{{ project.case_study.mockup.src }}" width="1200" height="1200" loading="lazy"
+        alt="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- 4. Design System ── Couleurs + Typographie -->
     {% if project.case_study.colors or project.case_study.typography %}
-    <div class="case-study-colors-typography">
+    <div class="cs-design-system">
+
       {% if project.case_study.colors %}
-      <div class="case-study-colors-typography-container colors">
-        <h3 class="case-study-title">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h3>
-        <div class="case-study-colors-typography-items color-palette">
+      <div class="cs-design-block">
+        <h3 class="cs-design-title">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h3>
+        <div class="cs-color-palette">
           {% for color in project.case_study.colors %}
-          <div class="color-swatch" style="background-color: {{ color.hex }};" aria-label="{% if lang == 'fr' %}Couleur {{ color.name[lang] | default: color.name.en }} avec le code hexadécimal {{ color.hex }}{% else %}Color {{ color.name[lang] | default: color.name.en }} with hex code {{ color.hex }}{% endif %}">
-            <span class="color-hex">{{ color.hex }}</span>
+          <div class="cs-color-swatch" style="--swatch-color: {{ color.hex }}; background-color: {{ color.hex }};"
+            aria-label="{{ color.name[lang] | default: color.name.en }} — {{ color.hex }}">
+            <span class="cs-color-name">{{ color.name[lang] | default: color.name.en }}</span>
+            <span class="cs-color-hex">{{ color.hex }}</span>
           </div>
           {% endfor %}
         </div>
@@ -96,28 +158,95 @@
       {% endif %}
 
       {% if project.case_study.typography %}
-      <div class="case-study-colors-typography-container typography">
-        <h3 class="case-study-title">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
-        <div class="case-study-colors-typography-items font-stack">
+      <div class="cs-design-block">
+        <h3 class="cs-design-title">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
+        <div class="cs-font-stack">
           {% for font in project.case_study.typography %}
-          <div class="font-item">
-            <span class="font-sample" style="font-family: '{{ font.name }}', sans-serif;" aria-label="{% if lang == 'fr' %}Exemple de la police {{ font.name }}{% else %}Sample of the {{ font.name }} font{% endif %}">Aa</span>
-            <span class="font-name">{{ font.name }}</span>
-            <span class="font-description">{{ font.usage[lang] | default: font.usage.en }}</span>
+          <div class="cs-font-item">
+            <span class="cs-font-sample" style="font-family: '{{ font.name }}', sans-serif;" aria-hidden="true">Aa</span>
+            <div class="cs-font-info">
+              <span class="cs-font-name">{{ font.name }}</span>
+              <span class="cs-font-usage">{{ font.usage[lang] | default: font.usage.en }}</span>
+            </div>
           </div>
           {% endfor %}
         </div>
       </div>
       {% endif %}
+
     </div>
     {% endif %}
+
   </section>
   {% endif %}
+
+  <!-- ── CTA ──────────────────────────────── -->
+  <section class="project-cta" aria-labelledby="project-cta-title">
+    <p class="project-cta-eyebrow">
+      {% if lang == 'fr' %}Un projet similaire en tête ?{% else %}Got a similar project in mind?{% endif %}
+    </p>
+    <h2 class="project-cta-title" id="project-cta-title">
+      {% if lang == 'fr' %}Travaillons <span class="orange">ensemble !</span>{% else %}Let's work <span class="orange">together !</span>{% endif %}
+    </h2>
+    <a href="/{{ lang }}/contact.html" class="cta">
+      {% if lang == 'fr' %}Prendre contact{% else %}Get in touch{% endif %}
+      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> -->
+      <img width="18" height="18" style="filter: invert(1);" src="/assets/images/icons/send.svg" alt="send icon" aria-hidden="true" />
+    </a>
+  </section>
+
+  <!-- ── NAVIGATION PROJETS ───────────────── -->
+  <nav class="project-nav" aria-label="{% if lang == 'fr' %}Navigation entre projets{% else %}Project navigation{% endif %}">
+
+    <!-- Précédent -->
+    {% if prev_project %}
+    <a href="{{ prev_locale.url }}" class="project-nav-item project-nav-prev">
+      <svg class="project-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      <div class="project-nav-info">
+        <span class="project-nav-label">{% if lang == 'fr' %}Précédent{% else %}Previous{% endif %}</span>
+        <span class="project-nav-title">{{ prev_project.project_title }}</span>
+        <span class="project-nav-sub">{{ prev_project.subtitle }}</span>
+      </div>
+      <div class="project-nav-thumb" aria-hidden="true">
+        <img src="{{ prev_project.image_src }}" alt="" loading="lazy">
+      </div>
+    </a>
+    {% else %}
+    <div class="project-nav-item project-nav-empty"></div>
+    {% endif %}
+
+    <!-- Retour portfolio -->
+    <a href="/{{ lang }}/portfolio.html" class="project-nav-portfolio" aria-label="{% if lang == 'fr' %}Retour au portfolio{% else %}Back to portfolio{% endif %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>
+      <span>Portfolio</span>
+    </a>
+
+    <!-- Suivant -->
+    {% if next_project %}
+    <a href="{{ next_locale.url }}" class="project-nav-item project-nav-next">
+      <div class="project-nav-thumb" aria-hidden="true">
+        <img src="{{ next_project.image_src }}" alt="" loading="lazy">
+      </div>
+      <div class="project-nav-info">
+        <span class="project-nav-label">{% if lang == 'fr' %}Suivant{% else %}Next{% endif %}</span>
+        <span class="project-nav-title">{{ next_project.project_title }}</span>
+        <span class="project-nav-sub">{{ next_project.subtitle }}</span>
+      </div>
+      <svg class="project-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+    {% else %}
+    <div class="project-nav-item project-nav-empty"></div>
+    {% endif %}
+
+  </nav>
+
 </main>
 
 <!-- Lightbox -->
 <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="{% if lang == 'fr' %}Image en plein écran{% else %}Fullscreen image{% endif %}">
-  <button class="lightbox-close" aria-label="{% if lang == 'fr' %}Fermer{% else %}Close{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+  <button class="lightbox-close" aria-label="{% if lang == 'fr' %}Fermer{% else %}Close{% endif %}">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
   <img class="lightbox-image" src="" alt="">
 </div>
 {% endif %}

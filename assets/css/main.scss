@@ -1,5 +1,6 @@
 // 1. Base
 @use "base/variables";
+@use "base/mixins" as *; // Mixins globaux (squircle, etc.)
 @use "base/reset";
 @use "base/typography";
 @use "base/generic";
@@ -35,6 +36,8 @@
 // 4. Pages
 @use "pages/legal";
 @use "pages/project";
+@use "pages/about";
+@use "pages/contact";
 
 // 5. Media Queries
 @use "base/media-queries";

@@ -3,6 +3,11 @@
 // Actif uniquement sur pointer: fine (souris desktop)
 // ================================
 
+// Par défaut, masqué (mobile / pointer: coarse)
+#cursor-blob {
+  display: none;
+}
+
 @media (pointer: fine) {
   // Masque le curseur natif sur tout le site
   *,
@@ -12,6 +17,7 @@
   }
 
   #cursor-blob {
+    display: block;
     position: fixed;
     top: 0;
     left: 0;

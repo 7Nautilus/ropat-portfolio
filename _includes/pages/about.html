@@ -1,16 +1,92 @@
 {% assign current_lang = page.lang | default: "en" %}
 {% assign about = site.data.pages.about[current_lang] %}
-<!-- Main Content -->
-<main id="main-content">
-  <section class="hero" aria-labelledby="hero-title">
-    <!-- Title -->
-    <h1 class="hero-title" id="hero-title">{{ about.title }}</h1>
-    <!-- Description -->
-    <div class="hero-container">
-      <div class="hero-pitch">
-        <p>{{ about.hero_pitch1 }}</p>
-        <p>{{ about.hero_pitch2 }}</p>
+
+<main id="main-content" class="about-page">
+
+  <!-- ── HERO ── -->
+  <section class="about-hero" aria-labelledby="about-title">
+    <div class="about-hero-photo">
+      <img
+        src="/assets/images/branding/about-photo.jpg"
+        alt="Portrait de Ropat, graphiste et directeur artistique"
+        width="400"
+        height="400"
+        class="about-photo-img"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+      >
+      <!-- <div class="about-photo-placeholder" aria-hidden="true"></div> -->
+    </div>
+
+    <div class="about-hero-content">
+      <h1 class="about-title" id="about-title">{{ about.title }}</h1>
+      <p class="about-intro">{{ about.intro_1 }}</p>
+      <p class="about-intro">{{ about.intro_2 }}</p>
+      <div class="about-availability">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-pulse" aria-hidden="true">
+          <circle cx="5" cy="5" r="5" fill="#34C759"/>
+        </svg>
+        <span>{{ about.availability }}</span>
       </div>
     </div>
   </section>
+
+  <!-- ── STATS ── -->
+  <section class="about-stats" aria-label="{% if current_lang == 'fr' %}Chiffres clés{% else %}Key numbers{% endif %}">
+    {% for stat in about.stats %}
+    <div class="about-stat">
+      <span class="about-stat-value">{{ stat.value }}</span>
+      <span class="about-stat-label">{{ stat.label }}</span>
+    </div>
+    {% unless forloop.last %}
+    <div class="about-stat-divider" aria-hidden="true"></div>
+    {% endunless %}
+    {% endfor %}
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section class="about-skills" aria-labelledby="skills-title">
+    <div class="about-skills-block">
+      <h2 class="about-section-title" id="skills-title">{{ about.skills.title }}</h2>
+      <ul class="about-tools-list" role="list">
+        {% for tool in about.skills.tools %}
+        <li class="about-tool-tag">{{ tool }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="about-skills-block">
+      <h2 class="about-section-title">{{ about.skills.specialties.title }}</h2>
+      <ul class="about-specialties-list" role="list">
+        {% for item in about.skills.specialties.items %}
+        <li class="about-specialty-item">
+          <span class="about-specialty-dot" aria-hidden="true"></span>
+          {{ item.label }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── PARCOURS ── -->
+  <section class="about-journey" aria-labelledby="journey-title">
+    <h2 class="about-section-title" id="journey-title">{{ about.journey.title }}</h2>
+    <ol class="about-timeline" role="list">
+      {% for item in about.journey.items %}
+      <li class="about-timeline-item animate-fade-up">
+        <span class="about-timeline-period">{{ item.period }}</span>
+        <p class="about-timeline-desc">{{ item.description }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="about-cta-section" aria-label="Contact">
+    <a href="/{{ current_lang }}/contact.html" class="cta about-cta">
+      {{ about.cta.label }}
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      </svg>
+    </a>
+  </section>
+
 </main>

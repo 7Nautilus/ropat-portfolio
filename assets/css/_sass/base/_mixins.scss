@@ -1,0 +1,21 @@
+// ================================
+// MIXINS GLOBAUX
+// ================================
+
+// ── SQUIRCLE ──────────────────────────────────────────
+// Applique un border-radius avec corner-shape: squircle
+// quand le navigateur le supporte. Fallback = radius standard.
+//
+// Usage :
+//   @include squircle();           → medium (6rem)
+//   @include squircle(3rem);       → radius personnalisé
+//   @include squircle(var(--border-radius-sm)); → variable CSS
+//
+@mixin squircle($radius: var(--border-radius-squircle-medium)) {
+  border-radius: $radius;
+
+  @supports (corner-shape: squircle) {
+    border-radius: $radius;
+    corner-shape: squircle;
+  }
+}

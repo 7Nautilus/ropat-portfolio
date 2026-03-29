@@ -105,10 +105,10 @@
   height: fit-content;
   
   /* Spacing */
-  padding: 1.75rem 2.5rem;
+  /* padding: 1.75rem 2.5rem; */
   gap: 1.25rem;
 
-  /* Border */
+  /* Border
   border: 2px solid var(--primary-color);
   border-radius: 3rem;
 
@@ -116,12 +116,14 @@
     border-radius: 7rem;;
     corner-shape: squircle;
   }
+  */
   
-  /* Colors & Background */
+  /* Colors & Background
   background-color: var(--secondary-color);
-  
-  /* Effects */
+  */
+  /* Effects
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+  */
 }
 
 

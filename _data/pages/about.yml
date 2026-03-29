@@ -1,15 +1,99 @@
 fr:
-  title: 
-    "À propos de moi"
-  hero_pitch1: 
-    "Je suis Ropat, graphiste et directeur artistique basé à Angers. J'accompagne les artistes et les entreprises dans la création de leur identité visuelle."
-  hero_pitch2: 
-    "Passionné par le design, je suis actuellement une formation en création numérique pour approfondir mes compétences, notamment en motion design et en UX/UI."
+  title: "À propos"
+
+  intro_1: "Je suis Ropat, graphiste & directeur artistique basé à Angers. Je bidouille des trucs sur mon pc depuis toujours, mais c'est il y a 2~3 ans que j'ai vraiment décidé d'en faire un métier."
+  intro_2: "Autodidacte pur jus. J'ai commencé deux formations en design, lâchées rapidement parce qu'elles ne m'apprenaient rien que je ne savais pas déjà trouver sur internet. Aujourd'hui j'accompagne des artistes et des entreprises qui veulent une identité visuelle qui leur ressemble vraiment."
+
+  availability: "Disponible pour de nouveaux projets"
+
+  stats:
+    - value: "~20"
+      label: "Projets clients"
+    - value: "5/5"
+      label: "Note sur Malt"
+    - value: "3"
+      label: "Avis clients"
+
+  skills:
+    title: "Outils"
+    tools:
+      - "Figma"
+      - "Photoshop"
+      - "Illustrator"
+      - "After Effects"
+      - "Premiere Pro"
+      - "Affinity Suite"
+      - "VS Code"
+    specialties:
+      title: "Spécialités"
+      items:
+        - label: "Branding"
+        - label: "Création d'affiches"
+        - label: "Web design"
+
+  journey:
+    title: "Parcours"
+    items:
+      - period: "Depuis toujours"
+        description: "Bidouillage en tout genre, graphisme, code, design. Autodidacte par nature."
+      - period: "Il y a 2-3 ans"
+        description: "Prise de conscience : le design, c'est un vrai métier. Début de la professionnalisation."
+      - period: "Premier projet rémunéré"
+        description: "Cover de l'album <em>A-Lone</em>, mon premier projet client rémunéré, et l'un des plus marquants."
+      - period: "Récemment"
+        description: "Campagne ads <em>Banana Rush</em> pour la maison de parfumerie Juliette has a gun."
+      - period: "Aujourd'hui"
+        description: "Une vingtaine de projets clients, 5/5 sur Malt, et des collaborations qui comptent."
+
+  cta:
+    label: "On travaille ensemble ?"
 
 en:
-  title: 
-    "About Me"
-  hero_pitch1:
-    "I am Ropat, a graphic designer and art director based in Angers. I assist artists and businesses in creating their visual identity."
-  hero_pitch2: 
-    "Passionate about design, I am currently pursuing a training in digital creation to deepen my skills, particularly in motion design and UX/UI."
+  title: "About"
+
+  intro_1: "I'm Ropat, a graphic designer & art director based in Angers. I've been tinkering with stuff on my computer for as long as I can remember, but it was only about 2-3 years ago that I decided to make it my career."
+  intro_2: "Pure self-taught. I started two design courses, but quickly dropped them because they didn't teach me anything I couldn't already find on the internet. Today, I work with artists and businesses who want a visual identity that truly reflects them."
+
+  availability: "Available for new projects"
+
+  stats:
+    - value: "~20"
+      label: "Client projects"
+    - value: "5/5"
+      label: "Rating on Malt"
+    - value: "3"
+      label: "Client reviews"
+
+  skills:
+    title: "Tools"
+    tools:
+      - "Figma"
+      - "Photoshop"
+      - "Illustrator"
+      - "After Effects"
+      - "Premiere Pro"
+      - "Affinity Suite"
+      - "VS Code"
+    specialties:
+      title: "Specialties"
+      items:
+        - label: "Branding"
+        - label: "Poster design"
+        - label: "Web design"
+
+  journey:
+    title: "Journey"
+    items:
+      - period: "Always"
+        description: "Tinkering with everything — design, code, graphics. Self-taught by nature."
+      - period: "2-3 years ago"
+        description: "The realization: design is a real career. Time to make it official."
+      - period: "First paid project"
+        description: "Cover for the album <em>A-Lone</em> — my first client project, and one of the most meaningful."
+      - period: "Recently"
+        description: "<em>Banana Rush</em> ads campaign for the fragrance house Juliette has a gun."
+      - period: "Today"
+        description: "Around twenty client projects, 5/5 on Malt, and collaborations that actually matter."
+
+  cta:
+    label: "Want to work together?"

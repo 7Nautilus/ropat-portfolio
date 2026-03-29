@@ -1,3 +1,5 @@
+@use "base/mixins" as *;
+
 .experience-cards-container {
   display: flex;
   flex-direction: column;
@@ -16,10 +18,7 @@
   background-color: var(--secondary-color);
 
   border: 3px solid var(--primary-color);
-  border-radius: 6rem;
-  @supports (corner-shape: squircle) {
-    corner-shape: squircle;
-  }
+  @include squircle(var(--border-radius-squircle-medium));
 
   font-family: "Space Grotesk", sans-serif;
 }
@@ -82,11 +81,8 @@
   padding: 0.5rem 1.5rem;
 
   border: 3px solid var(--primary-color);
-  border-radius: 2rem;
-  @supports (corner-shape: squircle) {
-    corner-shape: squircle;
-  }
-  
+  @include squircle(var(--border-radius-sm));
+
   font-size: 1.25rem;
   font-weight: 600;
   text-decoration: none;

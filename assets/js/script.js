@@ -210,7 +210,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const mainImage = document.getElementById('main-image');
-  const thumbnails = document.querySelectorAll('.thumbnail-image');
+  // Supporte les <button class="thumbnail-btn"> (nouveau) et les <img class="thumbnail-image"> (legacy)
+  const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+  const thumbnailImgs = document.querySelectorAll('.thumbnail-image');
+  const thumbnails = thumbnailBtns.length ? thumbnailBtns : thumbnailImgs;
+
   if (mainImage && thumbnails.length) {
     const changeImage = newSrc => {
       if (mainImage.tagName.toLowerCase() === 'video') {
@@ -221,25 +225,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    thumbnails.forEach(thumbnail => {
-      thumbnail.setAttribute('tabindex', '0');
-
-      thumbnail.addEventListener('click', event => {
-        const fullSrc = event.currentTarget.getAttribute('src');
-        if (!fullSrc) {
-          return;
-        }
+    thumbnails.forEach(thumb => {
+      thumb.addEventListener('click', event => {
+        // Récupère le src depuis le bouton (data-src) ou depuis l'img enfant
+        const btn = event.currentTarget;
+        const img = btn.querySelector('img') || btn;
+        const fullSrc = img.getAttribute('src');
+        if (!fullSrc) return;
 
         changeImage(fullSrc);
-        thumbnails.forEach(t => t.removeAttribute('data-active'));
-        event.currentTarget.setAttribute('data-active', 'true');
-      });
-
-      thumbnail.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          thumbnail.click();
-        }
+        thumbnails.forEach(t => {
+          t.removeAttribute('data-active');
+          const tImg = t.querySelector('img');
+          if (tImg) tImg.removeAttribute('data-active');
+        });
+        btn.setAttribute('data-active', 'true');
+        if (img !== btn) img.setAttribute('data-active', 'true');
       });
     });
   }
@@ -330,5 +331,96 @@ document.addEventListener('DOMContentLoaded', () => {
 
       animatedBlocks.forEach(element => observer.observe(element));
     }
+  }
+
+  // ================================
+  // DROPDOWN CONTACT — sujet
+  // ================================
+  const contactDropdownBtn = document.getElementById('contact-subject-btn');
+  const contactDropdownMenu = document.getElementById('contact-subject-list');
+  const contactDropdownSelected = contactDropdownBtn ? contactDropdownBtn.querySelector('.contact-dropdown-selected') : null;
+  const contactSubjectValue = document.getElementById('contact-subject-value');
+
+  if (contactDropdownBtn && contactDropdownMenu && contactDropdownSelected && contactSubjectValue) {
+    const options = contactDropdownMenu.querySelectorAll('.contact-dropdown-option');
+    let focusedIndex = -1;
+
+    const openDropdown = () => {
+      contactDropdownBtn.setAttribute('aria-expanded', 'true');
+      contactDropdownMenu.classList.add('is-open');
+      focusedIndex = [...options].findIndex(o => o.getAttribute('aria-selected') === 'true');
+      if (focusedIndex >= 0) options[focusedIndex].focus();
+    };
+
+    const closeDropdown = () => {
+      contactDropdownBtn.setAttribute('aria-expanded', 'false');
+      contactDropdownMenu.classList.remove('is-open');
+      contactDropdownBtn.focus();
+    };
+
+    const selectOption = (option) => {
+      options.forEach(o => {
+        o.setAttribute('aria-selected', 'false');
+        o.removeAttribute('tabindex');
+      });
+      option.setAttribute('aria-selected', 'true');
+      contactSubjectValue.value = option.getAttribute('data-value');
+      // Affiche le texte sans l'icône SVG
+      contactDropdownSelected.textContent = option.textContent.trim();
+      contactDropdownSelected.removeAttribute('data-empty');
+      closeDropdown();
+    };
+
+    // Initialise les options comme non-focusables
+    options.forEach((option, i) => {
+      option.setAttribute('tabindex', '-1');
+      option.addEventListener('click', () => selectOption(option));
+      option.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(option); }
+        if (e.key === 'ArrowDown') { e.preventDefault(); const next = options[i + 1]; if (next) next.focus(); }
+        if (e.key === 'ArrowUp') { e.preventDefault(); const prev = options[i - 1]; if (prev) prev.focus(); else contactDropdownBtn.focus(); }
+        if (e.key === 'Escape') closeDropdown();
+      });
+    });
+
+    contactDropdownBtn.addEventListener('click', () => {
+      const isOpen = contactDropdownBtn.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeDropdown() : openDropdown();
+    });
+
+    contactDropdownBtn.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        openDropdown();
+      }
+      if (e.key === 'Escape') closeDropdown();
+    });
+
+    document.addEventListener('click', e => {
+      if (!contactDropdownBtn.contains(e.target) && !contactDropdownMenu.contains(e.target)) {
+        closeDropdown();
+      }
+    });
+  }
+
+  // ================================
+  // FORMULAIRE CONTACT — validation
+  // ================================
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', event => {
+      if (!contactForm.checkValidity()) {
+        event.preventDefault();
+        contactForm.classList.add('was-validated');
+      }
+      // Validation manuelle du dropdown (hidden input)
+      const subjectInput = document.getElementById('contact-subject-value');
+      if (subjectInput && !subjectInput.value) {
+        event.preventDefault();
+        contactForm.classList.add('was-validated');
+        const dropdown = document.getElementById('contact-subject-btn');
+        if (dropdown) dropdown.classList.add('is-invalid');
+      }
+    });
   }
 });

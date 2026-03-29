@@ -1,13 +1,8 @@
+@use "base/mixins" as *;
+
 /* ============================================
    Services Cards
    ============================================ */
-/*
-service-card
-service-card-placeholder
-service-text-content
-service-title
-service-card-details
-*/
 
 .service-card {
   justify-content: space-between;
@@ -66,8 +61,8 @@ service-card-details
   font-size: 0.875rem;
   color: #9CA3AF;
 
-  transition: 
-    color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+  transition:
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -76,18 +71,11 @@ service-card-details
   transform: scale(1.05);
 }
 
-/*
-.service-detail {
-  display: flex;
-  padding: 0 var(--spacing-lg) var(--spacing-lg);
-}
-*/
-
 /* Variations */
 .service-card-big {
   gap: 4rem;
-  border-radius: 3rem;
   padding: 4rem 2rem;
+  @include squircle(var(--border-radius-squircle-medium));
 }
 
 .service-card-simple {
@@ -99,7 +87,7 @@ service-card-details
 
 .service-tool {
   padding: 0.25rem 0.6rem;
-  border-radius: var(--border-radius-sm);
   background-color: var(--primary-color-alpha);
   width: fit-content;
+  @include squircle(var(--border-radius-sm));
 }

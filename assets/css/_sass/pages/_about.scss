@@ -1,0 +1,394 @@
+// ================================
+// PAGE ABOUT
+// ================================
+@use "base/mixins" as *;
+
+.about-page {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  padding-bottom: var(--spacing-xl);
+}
+
+// ── HERO ──────────────────────────────
+.about-hero {
+  display: grid;
+  // Colonne photo fluide : 200px minimum, 22% du viewport, 320px maximum
+  // → s'adapte naturellement sans breakpoint dur
+  grid-template-columns: clamp(200px, 22vw, 320px) 1fr;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.about-hero-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius-md);
+  @include squircle(var(--border-radius-lg));
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-photo-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+// Placeholder visible si la photo n'est pas encore fournie
+.about-photo-placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--background-light) 0%,
+    rgba(255, 92, 0, 0.08) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: inherit;
+
+  // Initiales centrées
+  &::after {
+    content: 'R';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    opacity: 0.25; // Augmenté pour meilleure visibilité pendant le chargement
+  }
+}
+
+// Le placeholder est toujours visible par défaut.
+// Le JS masque l'img en cas d'erreur → le placeholder apparaît.
+// Si l'img charge, elle couvre le placeholder (position: absolute inset: 0).
+
+.about-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-xs);
+}
+
+.about-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.about-intro {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--fs-p);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.8);
+
+  // Extra espace entre les deux paragraphes d'intro (plus grand que le gap parent)
+  & + & {
+    margin-top: var(--spacing-sm);
+  }
+}
+
+.about-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: #34C759;
+  font-weight: 600;
+  margin-top: var(--spacing-xs);
+}
+
+// ── STATS ─────────────────────────────
+.about-stats {
+  display: flex;
+  flex-direction: row; // Explicite : écrase la règle globale section { flex-direction: column }
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto; // Centrage horizontal dans le flux
+  gap: var(--spacing-xl);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  @include squircle(var(--border-radius-xl));
+  text-align: center;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.about-stat-value {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.about-stat-label {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.7); // Augmenté de 0.5 → 0.7 pour conformité WCAG AA
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.about-stat-divider {
+  width: 1px;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+// ── SKILLS ────────────────────────────
+.about-skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-xl);
+  
+  /* border-top: var(--border-primary); */
+}
+
+.about-skills-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  border-top: var(--border-primary);
+}
+
+.about-section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--white-color);
+}
+
+.about-tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-tool-tag {
+  display: inline-block;
+  padding: 0.5rem 0.9rem; // Padding vertical équilibré (0.35 → 0.5)
+  border: 2px solid var(--primary-color);
+  border-radius: var(--border-radius-full);
+  @include squircle(var(--border-radius-full));
+  font-size: var(--font-size-sm);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.7);
+  background: var(--secondary-color);
+  transition: border-color var(--transition-base), color var(--transition-base);
+
+  &:hover {
+    border-color: var(--primary-color);
+    color: var(--white-color);
+  }
+
+  // WCAG 2.4.7 — Focus visible pour navigation clavier
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    color: var(--white-color);
+    border-color: var(--primary-color);
+  }
+}
+
+.about-specialties-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-specialty-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--fs-p);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.about-specialty-dot {
+  width: 0.4em;  // Relatif au texte → scale sur high-DPI et zoom navigateur
+  height: 0.4em;
+  min-width: 6px; // Garde un minimum visible
+  min-height: 6px;
+  border-radius: 50%;
+  @include squircle(50%);
+  background: var(--primary-color);
+  flex-shrink: 0;
+}
+
+// ── PARCOURS / TIMELINE ───────────────
+.about-journey {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: var(--border-primary);
+}
+
+.about-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  padding-left: var(--spacing-lg);
+}
+
+.about-timeline-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+  padding: var(--spacing-md) 0;
+
+  // Ligne séparatrice entre items (sauf dernier)
+  &:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  // WCAG 2.4.7 — Focus visible
+  &:focus-visible .about-timeline-period {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.about-timeline-period {
+  position: relative; // ancre le dot sur cet élément
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+
+  // Dot : centré sur la hauteur naturelle du span — aucun calcul manuel
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--spacing-lg) - 5px); // centre sur le border-left de .about-timeline
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: 2px solid var(--background-dark);
+    transition: transform var(--transition-base);
+  }
+}
+
+// Hover : grossissement du dot sans écraser le translateY
+.about-timeline-item:hover .about-timeline-period::before,
+.about-timeline-item:focus-visible .about-timeline-period::before {
+  transform: translateY(-50%) scale(1.4);
+}
+
+.about-timeline-desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--fs-p);
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+
+  em {
+    font-style: italic;
+    color: var(--white-color);
+  }
+}
+
+// ── CTA ───────────────────────────────
+.about-cta-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.about-cta {
+  font-size: var(--font-size-lg);
+  padding: var(--spacing-md) var(--spacing-xl);
+
+  // WCAG 2.4.7 — Focus visible pour navigation clavier
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+  }
+}
+
+// ── RESPONSIVE ────────────────────────
+@media (max-width: 768px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .about-hero-photo {
+    // En grille 1fr, la photo prend toute la largeur → on la contraint
+    width: clamp(160px, 50vw, 260px);
+    margin: 0 auto;
+  }
+
+  .about-hero-content {
+    padding-top: 0;
+    text-align: start; // Paragraphes à gauche pour lisibilité (dyslexie, basse vision)
+  }
+
+  .about-title {
+    text-align: center; // Titre centré uniquement
+  }
+
+  .about-intro {
+    text-align: start; // Lecture naturelle gauche→droite
+  }
+
+  .about-availability {
+    justify-content: center; // Badge dispo centré sous le titre
+  }
+
+  .about-stats {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 100%; // Pleine largeur sur mobile
+    margin: 0;   // Pas de margin auto en colonne pleine largeur
+  }
+
+  .about-stat-divider {
+    width: 3rem;
+    height: 1px;
+  }
+
+  .about-skills {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .about-timeline-item {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xs);
+  }
+}
