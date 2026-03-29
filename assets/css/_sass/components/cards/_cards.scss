@@ -7,7 +7,7 @@
   font-family: "manrope", sans-serif;
   background-color: var(--secondary-color);
 
-  @include squircle(var(--border-radius-squircle-medium));
+  @include squircle(5rem);
 
   border: 2px solid var(--primary-color);
   box-shadow: var(--shadow-sm);

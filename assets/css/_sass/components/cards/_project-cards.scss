@@ -7,7 +7,7 @@
 .project-card {
   display: flex;
   overflow: hidden; // clip de l'image dans les coins squircle
-  @include squircle(var(--border-radius-squircle-medium));
+  /*@include squircle(var(--border-radius-squircle-medium));*/
 }
 
 .project-card-image {
