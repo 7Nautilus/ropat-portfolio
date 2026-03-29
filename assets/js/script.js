@@ -352,10 +352,10 @@ document.addEventListener('DOMContentLoaded', () => {
       if (focusedIndex >= 0) options[focusedIndex].focus();
     };
 
-    const closeDropdown = () => {
+    const closeDropdown = (focusBtn = true) => {
       contactDropdownBtn.setAttribute('aria-expanded', 'false');
       contactDropdownMenu.classList.remove('is-open');
-      contactDropdownBtn.focus();
+      if (focusBtn) contactDropdownBtn.focus();
     };
 
     const selectOption = (option) => {
@@ -368,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Affiche le texte sans l'icône SVG
       contactDropdownSelected.textContent = option.textContent.trim();
       contactDropdownSelected.removeAttribute('data-empty');
+      contactDropdownBtn.classList.remove('is-invalid');
       closeDropdown();
     };
 
@@ -397,8 +398,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', e => {
-      if (!contactDropdownBtn.contains(e.target) && !contactDropdownMenu.contains(e.target)) {
-        closeDropdown();
+      if (contactDropdownBtn.getAttribute('aria-expanded') === 'true') {
+        if (!contactDropdownBtn.contains(e.target) && !contactDropdownMenu.contains(e.target)) {
+          closeDropdown(false);
+        }
       }
     });
   }
