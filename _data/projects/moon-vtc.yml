@@ -1,0 +1,152 @@
+slug: moon-vtc
+project_title: "Moon VTC"
+subtitle:
+  fr: "Identité visuelle"
+  en: "Visual Identity"
+theme:
+  fr: "IDENTITÉ VISUELLE"
+  en: "VISUAL IDENTITY"
+category: branding
+featured: false
+client:
+  fr: "Moon VTC"
+  en: "Moon VTC"
+year: "2026"
+tools: "Illustrator, Figma"
+image_src: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
+main_image: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
+media_type: image
+
+locales:
+  fr:
+    url: /fr/projects/moon-vtc.html
+    aria_label: "Voir l'identité visuelle Moon VTC"
+    image_alt: "Logo Moon VTC - version typographique blanche"
+    title: "Moon VTC - Identité visuelle"
+    subtitle: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de transport avec chauffeur en phase de lancement"
+    pitch: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de VTC en phase de lancement : logo, palette de couleurs, typographie et charte graphique."
+    description: "Conception de l'**identité visuelle complète** de Moon VTC, société de transport avec chauffeur en phase de lancement. La mission comprenait la création d'un **set de logos**, une sélection de **palette de couleurs** et de **typographie**, ainsi qu'une **charte graphique** complète pour cadrer l'usage de ces éléments."
+    services: "Identité visuelle, Création de logo, Charte graphique"
+    context_title: "À propos du projet"
+    context_content: |
+      Contacté par Moon VTC alors que la société était en pleine phase de lancement, l'objectif était de construire une identité visuelle forte, cohérente et évocatrice, à la hauteur de l'ambition du service.
+
+      ### # Univers & direction artistique
+      La palette de couleurs de Moon VTC est une immersion dans l'atmosphère sereine de la nuit. 
+      <br>**Bleu Nuit** : couleur de fondation, elle représente la profondeur de l'obscurité urbaine et le sérieux du service. 
+      <br>**Bleu Canard** : cette nuance vibrante évoque les reflets des lumières de la ville et apporte une élégance contemporaine. 
+      <br>**Violet Parme** : symbole de la lune et de la tranquillité, cette touche de violet adoucit l'ensemble et renforce le sentiment de sérénité. 
+      <br>**Blanc Cassé** : utilisé pour la clarté et le contraste, il représente la lumière rassurante qui guide le passager.
+
+      ### # Livrables
+      Un set de logos complet (icône et version typographique, déclinaisons noires et blanches), une palette de couleurs documentée, une sélection typographique et une charte graphique encadrant les règles d'usage.
+
+    seo:
+      title: "Moon VTC - Identité visuelle | Ropat"
+      description: "Création de l'identité visuelle complète pour Moon VTC : logo, palette de couleurs, typographie et charte graphique pour cette société de VTC en lancement."
+      canonical_url: "https://ropat.art/fr/projects/moon-vtc.html"
+      og_title: "Moon VTC - Identité visuelle"
+      og_description: "Création du logo, de la palette et de la charte graphique pour Moon VTC, société de transport avec chauffeur."
+      og_url: "https://ropat.art/fr/projects/moon-vtc.html"
+      og_image: "https://ropat.art/assets/images/projects/moon_vtc/moon_vtc_typo_white.png"
+
+  en:
+    url: /en/projects/moon-vtc.html
+    aria_label: "See the Moon VTC visual identity"
+    image_alt: "Moon VTC logo - white typographic version"
+    title: "Moon VTC - Visual Identity"
+    subtitle: "Creation of a **complete visual identity** for **Moon VTC**, a chauffeur-driven car service launching its brand"
+    pitch: "Creation of a **complete visual identity** for **Moon VTC**, a VTC company launching its brand: logo, color palette, typography, and brand guidelines."
+    description: "Design of the **complete visual identity** for Moon VTC, a chauffeur-driven car service in its launch phase. The mission included creating a **logo set**, a **color palette** and **typography** selection, as well as a full **brand guidelines** document to frame the usage of these elements."
+    services: "Visual Identity, Logo Design, Brand Guidelines"
+    context_title: "About the project"
+    context_content: |
+      Contacted by Moon VTC during their launch phase, the goal was to build a strong, coherent and evocative visual identity - one that matches the ambition of the service.
+
+      ### # Universe & art direction
+      Moon VTC's color palette is an immersion into the serene atmosphere of the night. **Night Blue (#151E3D)**: the foundation color, representing the depth of urban darkness and the seriousness of the service. **Teal Blue (#006d77)**: this vibrant hue evokes city light reflections and brings contemporary elegance. **Parme Violet (#6559a1)**: a symbol of the moon and tranquility, this violet softens the whole and reinforces the feeling of serenity. **Off-White (#f4f6f9)**: used for clarity and contrast, it represents the reassuring light that guides the passenger.
+
+      ### # Deliverables
+      A complete logo set (icon and typographic versions, black and white variants), a documented color palette, a typography selection, and a brand guidelines document covering usage rules.
+
+    seo:
+      title: "Moon VTC - Visual Identity | Ropat"
+      description: "Creation of the complete visual identity for Moon VTC: logo, color palette, typography and brand guidelines for this launching VTC company."
+      canonical_url: "https://ropat.art/en/projects/moon-vtc.html"
+      og_title: "Moon VTC - Visual Identity"
+      og_description: "Logo creation, color palette and brand guidelines for Moon VTC, a chauffeur-driven car service."
+      og_url: "https://ropat.art/en/projects/moon-vtc.html"
+      og_image: "https://ropat.art/assets/images/projects/moon_vtc/moon_vtc_typo_white.png"
+
+thumbnails:
+  - src: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
+    type: image
+    alt:
+      fr: "Logo Moon VTC - version typographique blanche"
+      en: "Moon VTC logo - white typographic version"
+  - src: /assets/images/projects/moon_vtc/moon_vtc_icon_white.png
+    type: image
+    alt:
+      fr: "Icône Moon VTC - version blanche"
+      en: "Moon VTC icon - white version"
+  - src: /assets/images/projects/moon_vtc/moon_vtc_typo_black.png
+    type: image
+    alt:
+      fr: "Logo Moon VTC - version typographique noire"
+      en: "Moon VTC logo - black typographic version"
+  - src: /assets/images/projects/moon_vtc/moon_vtc_icon_black.png
+    type: image
+    alt:
+      fr: "Icône Moon VTC - version noire"
+      en: "Moon VTC icon - black version"
+
+case_study:
+  colors:
+    - hex: "#151E3D"
+      name:
+        fr: "Bleu Nuit"
+        en: "Night Blue"
+    - hex: "#006d77"
+      name:
+        fr: "Bleu Canard"
+        en: "Teal Blue"
+    - hex: "#6559a1"
+      name:
+        fr: "Violet Parme"
+        en: "Parme Violet"
+    - hex: "#f4f6f9"
+      name:
+        fr: "Blanc Cassé"
+        en: "Off-White"
+
+  typography:
+    - name: "Montserrat"
+      usage:
+        fr: "Typographie principale"
+        en: "Primary typeface"
+
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Moon VTC"
+        en: "Moon VTC"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Lancement de marque"
+        en: "Brand launch"
+    - label:
+        fr: "Livrables"
+        en: "Deliverables"
+      value:
+        fr: "Logo, Palette, Charte graphique"
+        en: "Logo, Color palette, Brand guidelines"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Illustrator, Figma"
+        en: "Illustrator, Figma"

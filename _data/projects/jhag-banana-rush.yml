@@ -1,0 +1,159 @@
+slug: jhag-banana-rush
+project_title: "Juliette has a Gun"
+subtitle: "Banana Rush"
+theme:
+  fr: "CAMPAGNE PAID SOCIAL"
+  en: "PAID SOCIAL CAMPAIGN"
+category: social-ads
+featured: true
+client:
+  fr: "Juliette has a Gun"
+  en: "Juliette has a Gun"
+year: "2026"
+tools: "Figma, After Effects"
+image_src: /assets/images/projects/jhag/1440x1440_SBN_2.png
+main_image: /assets/images/projects/jhag/1440x1440_SBN_2.png
+media_type: image
+locales:
+  fr:
+    url: /fr/projects/jhag-banana-rush.html
+    aria_label: "Voir la campagne paid social Banana Rush - Juliette has a Gun"
+    image_alt: "Campagne paid social Banana Rush - Juliette has a Gun"
+    title: "Banana Rush - Social Ads"
+    subtitle: "**Création des assets graphiques** pour la campagne paid social de lancement de la gamme **Banana Rush**"
+    pitch: "**Création des assets graphiques** pour la campagne paid social de lancement de la gamme **Banana Rush** de la maison de parfumerie **Juliette has a Gun**"
+    description: "Conception de l'ensemble des **assets statiques et animés** pour la campagne paid social de lancement de la gamme **Banana Rush** de **Juliette has a Gun**. Campagne déclinée en **3 phases**, sur les formats 1:1, 4:5 et 9:16, en anglais et en français."
+    services: "Motion Design, Création d'assets paid social, Déclinaisons multi-formats"
+    context_title: "À propos de la campagne"
+    context_content: |
+      ### # Phase 1 - Lancement
+      Conception des visuels clés et des premières animations annonçant l'arrivée de la gamme Banana Rush. Les assets ont été déclinés sur 3 formats de placement : carré 1:1, portrait 4:5 et stories/reels 9:16.
+
+      ### # Phase 2 - Gamme complète
+      Présentation individuelle de chaque fragrance de la gamme. 8 déclinaisons produits disponibles en statics et en motion, sur les 3 formats - pour un total de 24 assets statiques et 9 vidéos sur cette phase.
+
+      ### # Phase 3 - Storytelling olfactif
+      Mise en avant de l'univers sensoriel de la gamme à travers des visuels narratifs : desserts, pile de flacons, flambé banane. Animations complémentaires sur les ingrédients et la composition olfactive. Versions bilingues anglais/français pour une diffusion internationale.
+
+    seo:
+      title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
+      description: "Création des assets paid social pour la campagne de lancement de la gamme Banana Rush de Juliette has a Gun. Statics et motion design, 3 phases, formats Meta."
+      canonical_url: "https://ropat.art/fr/projects/jhag-banana-rush.html"
+      og_title: "Campagne Banana Rush - Juliette has a Gun"
+      og_description: "Assets paid social pour le lancement de la gamme Banana Rush de Juliette has a Gun."
+      og_url: "https://ropat.art/fr/projects/jhag-banana-rush.html"
+      og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
+
+  en:
+    url: /en/projects/jhag-banana-rush.html
+    aria_label: "See the Banana Rush paid social campaign - Juliette has a Gun"
+    image_alt: "Banana Rush paid social campaign - Juliette has a Gun"
+    title: "Banana Rush - Juliette has a Gun"
+    subtitle: "**Graphic assets creation** for the paid social launch campaign of the **Banana Rush** line"
+    pitch: "**Graphic assets creation** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**"
+    description: "Design of all **static and animated assets** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**. Campaign rolled out in **3 phases**, across 1:1, 4:5 and 9:16 formats, in both English and French."
+    services: "Motion Design, Paid Social Asset Creation, Multi-format Adaptation"
+    context_title: "About the campaign"
+    context_content: |
+      ### # Phase 1 - Launch
+      Design of key visuals and first animations announcing the arrival of the Banana Rush line. Assets adapted to 3 placement formats: square 1:1, portrait 4:5, and stories/reels 9:16.
+
+      ### # Phase 2 - Full Range
+      Individual visuals for each fragrance in the lineup. 8 product variants available as statics and motion, across all 3 formats - totalling 24 static assets and 9 videos for this phase.
+
+      ### # Phase 3 - Olfactory Storytelling
+      Highlighting the sensory world of the line through narrative visuals: desserts, flacon stacks, banana flambé. Complementary animations on ingredients and olfactory composition. Bilingual English/French versions for international reach.
+
+    seo:
+      title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
+      description: "Paid social asset creation for the Banana Rush launch campaign by Juliette has a Gun. Statics and motion design, 3 phases, Meta formats."
+      canonical_url: "https://ropat.art/en/projects/jhag-banana-rush.html"
+      og_title: "Banana Rush Campaign - Juliette has a Gun"
+      og_description: "Paid social assets for the Banana Rush launch campaign by Juliette has a Gun."
+      og_url: "https://ropat.art/en/projects/jhag-banana-rush.html"
+      og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
+
+thumbnails:
+  # Phase 1
+  - src: /assets/images/projects/jhag/jhag-br-p2-kv.png
+    type: image
+    alt:
+      fr: "Phase 1 - Visuel clé Banana Rush"
+      en: "Phase 1 - Banana Rush Key Visual"
+  - src: /assets/videos/jhag/BR_PL_1440x1440.mp4
+    type: video
+    preview: /assets/images/projects/jhag/1440x1440_SP_2.png
+    alt:
+      fr: "Phase 3 - Animation Banana Rush Flacons"
+      en: "Phase 3 - Banana Rush Flacons Animation"
+  # Phase 2
+  - src: /assets/images/projects/jhag/jhag-sd.png
+    type: image
+    alt:
+      fr: "Phase 2 - Visuel clé Banana Rush"
+      en: "Phase 2 - Banana Rush Key Visual"
+  - src: /assets/videos/jhag/jhag-br-p1-od.mp4
+    type: video
+    preview: /assets/images/projects/jhag/jhag-br-p1-od.jpg
+    alt:
+      fr: "Phase 2 - Animation Banana Rush"
+      en: "Phase 2 - Banana Rush Animation"
+  # Phase 3
+  - src: /assets/images/projects/jhag/jhag-br-p3-pile.png
+    type: image
+    alt:
+      fr: "Phase 3 - Flacons Banana Rush"
+      en: "Phase 3 - Banana Rush Flacons"
+  - src: /assets/videos/jhag/jhag-br-p2-ai.mp4
+    type: video
+    preview: /assets/images/projects/jhag/jhag-br-p2-kv.png
+    alt:
+      fr: "Phase 2 - Animation Banana Rush"
+      en: "Phase 2 - Banana Rush Animation"
+
+case_study:
+  colors:
+    - hex: "#d50032"
+      name:
+        fr: "Rouge"
+        en: "Red"
+    - hex: "#f0A205"
+      name:
+        fr: "Or"
+        en: "Gold"
+    - hex: "#f8d585"
+      name:
+        fr: "Or clair"
+        en: "Light gold"
+
+  typography:
+    - name: "CoFo Raffine"
+      usage:
+        fr: "Typographie principale"
+        en: "Primary typeface"
+
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Juliette has a Gun"
+        en: "Juliette has a Gun"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Lancement de la gamme Banana Rush"
+        en: "Banana Rush line launch"
+    - label:
+        fr: "Formats"
+        en: "Formats"
+      value:
+        fr: "1:1 · 4:5 · 9:16"
+        en: "1:1 · 4:5 · 9:16"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Figma, After Effects"
+        en: "Figma, After Effects"

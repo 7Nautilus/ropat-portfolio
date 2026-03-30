@@ -47,7 +47,7 @@
           <span class="hero-theme-dot" aria-hidden="true"></span>
           <span>{{ project.theme[lang] | default: project.theme.en }}</span>
         </div>
-        <h1 class="hero-title project-title uppercase">{{ project.project_title }}<br><span class="orange">{{ project.subtitle }}</span></h1>
+        <h1 class="hero-title project-title uppercase">{{ project.project_title }}<br><span class="orange">{{ project.subtitle[lang] | default: project.subtitle.en | default: project.subtitle }}</span></h1>
       </div>
       <div class="bubble-container">
         <p>{{ project_locale.description | markdownify | remove: '<p>' | remove: '</p>' }}</p>
@@ -58,20 +58,40 @@
     <div class="hero-image-container">
       <div class="project-gallery">
         <div class="main-display blur-bg">
-          {% if project.media_type == "video" %}
-          <video src="{{ project.main_image }}" id="main-image" aria-label="{% if primary_thumbnail_alt %}{{ primary_thumbnail_alt }}{% else %}{{ project_locale.image_alt }}{% endif %}" autoplay loop muted width="1200" height="1200"></video>
-          {% else %}
           {% assign img_alt = primary_thumbnail_alt | default: project_locale.image_alt %}
           {% if lang == 'fr' %}{% assign img_action = "— Cliquez pour agrandir" %}{% else %}{% assign img_action = "— Click to enlarge" %}{% endif %}
-          <img src="{{ project.main_image }}" id="main-image" alt="{{ img_alt }}" aria-label="{{ img_alt }} {{ img_action }}" width="1200" height="1200" loading="lazy" class="lightbox-trigger" role="button" tabindex="0">
+          {% comment %} Detect video thumbnails for mixed media support {% endcomment %}
+          {% assign _has_video_thumbs = false %}
+          {% if project.thumbnails %}
+            {% assign _vt = project.thumbnails | where: "type", "video" %}
+            {% if _vt.size > 0 %}{% assign _has_video_thumbs = true %}{% endif %}
+          {% endif %}
+          {% comment %} Compute initial src from first thumbnail or main_image {% endcomment %}
+          {% assign _init_src = project.main_image %}
+          {% if project.thumbnails and project.thumbnails.size > 0 %}
+            {% assign _init_src = project.thumbnails[0].src %}
+          {% endif %}
+          {% if project.media_type == "video" and project.thumbnails == nil %}
+          <video src="{{ project.main_image }}" id="main-image" aria-label="{{ img_alt }}" autoplay loop muted width="1200" height="1200"></video>
+          {% else %}
+          <img src="{{ _init_src }}" id="main-image" alt="{{ img_alt }}" aria-label="{{ img_alt }} {{ img_action }}" width="1200" height="1200" loading="lazy" class="lightbox-trigger" role="button" tabindex="0">
+          {% if _has_video_thumbs %}
+          <video id="main-video" src="" autoplay loop muted aria-label="{{ img_alt }}" style="display:none;width:100%;height:auto;max-height:80vh;object-fit:contain" aria-hidden="true"></video>
+          {% endif %}
           {% endif %}
         </div>
         {% if project.thumbnails and project.thumbnails.size > 0 %}
         <div class="thumbnails-container" id="thumbnails">
           {% for thumbnail in project.thumbnails %}
           {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en %}
-          <button class="thumbnail-btn" aria-label="{{ thumbnail_alt }}"{% if forloop.first %} data-active="true"{% endif %}>
-            <img src="{{ thumbnail.src }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
+          {% assign thumb_type = thumbnail.type | default: "image" %}
+          {% assign thumb_preview = thumbnail.preview | default: thumbnail.src %}
+          <button class="thumbnail-btn"
+            aria-label="{{ thumbnail_alt }}"
+            data-media-type="{{ thumb_type }}"
+            data-full-src="{{ thumbnail.src }}"
+            {% if forloop.first %} data-active="true"{% endif %}>
+            <img src="{{ thumb_preview }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
           </button>
           {% endfor %}
         </div>
@@ -205,7 +225,7 @@
       <div class="project-nav-info">
         <span class="project-nav-label">{% if lang == 'fr' %}Précédent{% else %}Previous{% endif %}</span>
         <span class="project-nav-title">{{ prev_project.project_title }}</span>
-        <span class="project-nav-sub">{{ prev_project.subtitle }}</span>
+        <span class="project-nav-sub">{{ prev_project.subtitle[lang] | default: prev_project.subtitle.en | default: prev_project.subtitle }}</span>
       </div>
       <div class="project-nav-thumb" aria-hidden="true">
         <img src="{{ prev_project.image_src }}" alt="" loading="lazy">
@@ -230,7 +250,7 @@
       <div class="project-nav-info">
         <span class="project-nav-label">{% if lang == 'fr' %}Suivant{% else %}Next{% endif %}</span>
         <span class="project-nav-title">{{ next_project.project_title }}</span>
-        <span class="project-nav-sub">{{ next_project.subtitle }}</span>
+        <span class="project-nav-sub">{{ next_project.subtitle[lang] | default: next_project.subtitle.en | default: next_project.subtitle }}</span>
       </div>
       <svg class="project-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
     </a>

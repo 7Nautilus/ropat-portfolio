@@ -210,37 +210,59 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const mainImage = document.getElementById('main-image');
+  const mainVideo = document.getElementById('main-video');
   // Supporte les <button class="thumbnail-btn"> (nouveau) et les <img class="thumbnail-image"> (legacy)
   const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
   const thumbnailImgs = document.querySelectorAll('.thumbnail-image');
   const thumbnails = thumbnailBtns.length ? thumbnailBtns : thumbnailImgs;
 
   if (mainImage && thumbnails.length) {
-    const changeImage = newSrc => {
-      if (mainImage.tagName.toLowerCase() === 'video') {
-        mainImage.src = newSrc;
-        mainImage.load();
+    const changeMedia = btn => {
+      const mediaType = btn.getAttribute('data-media-type') || 'image';
+      const fullSrc = btn.getAttribute('data-full-src');
+      const previewImg = btn.querySelector('img');
+      const src = fullSrc || (previewImg ? previewImg.getAttribute('src') : null);
+      if (!src) return;
+
+      if (mediaType === 'video' && mainVideo) {
+        // Médias mixtes : afficher la vidéo, masquer l'image
+        mainImage.style.display = 'none';
+        mainImage.setAttribute('aria-hidden', 'true');
+        mainVideo.src = src;
+        mainVideo.load();
+        mainVideo.style.display = '';
+        mainVideo.removeAttribute('aria-hidden');
+      } else if (mediaType === 'image' && mainVideo) {
+        // Médias mixtes : afficher l'image, masquer la vidéo
+        mainVideo.style.display = 'none';
+        mainVideo.setAttribute('aria-hidden', 'true');
+        mainImage.src = src;
+        mainImage.style.display = '';
+        mainImage.removeAttribute('aria-hidden');
       } else {
-        mainImage.src = newSrc;
+        // Comportement legacy (projet tout-image ou tout-vidéo)
+        if (mainImage.tagName.toLowerCase() === 'video') {
+          mainImage.src = src;
+          mainImage.load();
+        } else {
+          mainImage.src = src;
+        }
       }
     };
 
     thumbnails.forEach(thumb => {
       thumb.addEventListener('click', event => {
-        // Récupère le src depuis le bouton (data-src) ou depuis l'img enfant
         const btn = event.currentTarget;
-        const img = btn.querySelector('img') || btn;
-        const fullSrc = img.getAttribute('src');
-        if (!fullSrc) return;
+        changeMedia(btn);
 
-        changeImage(fullSrc);
         thumbnails.forEach(t => {
           t.removeAttribute('data-active');
           const tImg = t.querySelector('img');
           if (tImg) tImg.removeAttribute('data-active');
         });
         btn.setAttribute('data-active', 'true');
-        if (img !== btn) img.setAttribute('data-active', 'true');
+        const btnImg = btn.querySelector('img');
+        if (btnImg) btnImg.setAttribute('data-active', 'true');
       });
     });
   }

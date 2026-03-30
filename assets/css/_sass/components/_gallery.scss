@@ -65,6 +65,26 @@
         outline: 2px solid var(--primary-color);
         outline-offset: 2px;
     }
+
+    /* Indicateur vidéo — triangle ▶ centré */
+    &[data-media-type="video"] {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 7px 0 7px 14px;
+            border-color: transparent transparent transparent white;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
+            pointer-events: none;
+        }
+    }
 }
 
 /* ── Image à l'intérieur du bouton ───────────────── */
@@ -80,6 +100,8 @@
 
 /* Zone de la grande image */
 .main-display {
+    display: flex;
+    gap: 0;
     flex-grow: 1; /* Prend l'espace restant */
     
     border: var(--border-primary);
@@ -101,6 +123,14 @@
     display: block;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
+}
+
+#main-video {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
 }
 
 /* Image cliquable pour lightbox */
