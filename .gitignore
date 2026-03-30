@@ -10,6 +10,7 @@ _site/
 
 # IDE
 .vscode/
+!.vscode/tasks.json
 .idea/
 
 # OS
