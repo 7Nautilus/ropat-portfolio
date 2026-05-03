@@ -1,0 +1,137 @@
+slug: stelya
+project_title: "Stelya"
+subtitle: "Branding"
+theme:
+  fr: "IDENTITÉ VISUELLE & BRANDING"
+  en: "VISUAL IDENTITY & BRANDING"
+category: branding
+featured: false
+client:
+  fr: "Stelya"
+  en: "Stelya"
+year: "2026"
+tools: "Figma, Affinity, Illustrator"
+image_src: /assets/images/projects/Stelya/icon.png
+main_image: /assets/images/projects/Stelya/icon.png
+media_type: image
+thumbnails:
+  - src: /assets/images/projects/Stelya/icon.png
+    alt:
+      fr: "Icône de Stelya, cabinet de conseil en ingénierie"
+      en: "Stelya icon, engineering consulting firm"
+  - src: /assets/images/projects/Stelya/logo.png
+    alt:
+      fr: "Logo de Stelya, cabinet de conseil en ingénierie"
+      en: "Stelya logo, engineering consulting firm"
+
+context_sections:
+  - title:
+      fr: "Brief et objectifs"
+      en: "Brief and Objectives"
+    content:
+      fr: |
+        Stelya est un cabinet de conseil en ingénierie dont la promesse repose sur une idée forte : **faire grandir ses clients à travers la collaboration**. L'identité visuelle devait incarner cette ambition tout en reflétant les valeurs du secteur : **rigueur technique, stabilité et vision stratégique**.
+      en: |
+        Stelya is an engineering consulting firm built around a core promise: **helping clients grow through collaboration**. The visual identity had to embody that ambition while reflecting the values of the industry: **technical precision, stability, and strategic vision**.
+
+  - title:
+      fr: "Concept & construction du logo"
+      en: "Concept & Logo Construction"
+    content:
+      fr: |
+        Pour ancrer le logo dans l'univers de l'ingénierie, j'ai opté pour une **construction sur grille vectorielle stricte**, garantissant des proportions rigoureuses entre chaque élément. Cette approche structurée renforce la crédibilité et le sérieux de la marque.
+
+        La promesse de Stelya est traduite visuellement par une **étoile filante** dont la traîne prend naissance à la base des lettres et se prolonge jusqu'à la fin du logotype, un symbole discret mais chargé de sens, évoquant l'élan, la trajectoire et la croissance des clients accompagnés.
+      en: |
+        To ground the logo in the engineering world, I built it on a **strict vector grid**, ensuring rigorous proportions between every element. This structured approach reinforces the brand's credibility and professionalism.
+
+        Stelya's promise is expressed visually through a **shooting star** whose tail originates at the base of the letterforms and extends to the end of the logotype, a subtle yet meaningful symbol evoking momentum, trajectory, and the growth of the clients they support.
+
+  - title:
+      fr: "Typographie"
+      en: "Typography"
+    content:
+      fr: |
+        Après plusieurs échanges avec le client, notre choix s'est porté sur **Montserrat** pour son caractère premium et classique, en cohérence avec le positionnement haut de gamme de Stelya. Ma proposition initiale orientée vers **Space Grotesk**, dont la géométrie technique aurait bien évoqué l'univers de l'ingénierie, a finalement laissé place à une typographie plus intemporelle, plus alignée avec les attentes du client.
+      en: |
+        After several discussions with the client, we settled on **Montserrat** for its premium, timeless character, in line with Stelya's high-end positioning. My initial proposal leaned toward **Space Grotesk**, whose geometric structure would have nicely echoed the engineering world, but we ultimately chose a more classic typeface that better matched the client's expectations.
+
+locales:
+  fr:
+    url: /fr/projects/stelya.html
+    aria_label: "Voir le projet de branding pour Stelya"
+    image_alt: "Branding pour Stelya, cabinet de conseil en ingénierie"
+    title: "Branding pour Stelya"
+    subtitle: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie"
+    pitch: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie"
+    description: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie. Création d'un logo, d'une icône et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **haut de gamme, sérieux et tech**."
+    services: "Logo, Icône, Pack LinkedIn, Palette, Typographie"
+    context_title: "Contexte du projet"
+    seo:
+      title: "Branding Stelya | Ropat"
+      description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie. Logo, icône, pack LinkedIn, palette et typographie."
+      canonical_url: "https://ropat.art/fr/projects/stelya.html"
+      og_title: "Branding Stelya"
+      og_description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie."
+      og_url: "https://ropat.art/fr/projects/stelya.html"
+      og_image: "https://ropat.art/assets/images/projects/Stelya/icon.png"
+
+  en:
+    url: /en/projects/stelya.html
+    aria_label: "See the branding project for Stelya"
+    image_alt: "Branding for Stelya, engineering consulting firm"
+    title: "Branding for Stelya"
+    subtitle: "**Complete visual identity** for **Stelya**, engineering consulting firm"
+    pitch: "**Complete visual identity** for **Stelya**, engineering consulting firm"
+    description: "**Complete visual identity** for **Stelya**, an engineering consulting firm. Creation of a logo, icon, and **LinkedIn identity pack**, with a defined color palette and typography. A positioning that is **premium, serious, and tech-forward**."
+    services: "Logo, Icon, LinkedIn Pack, Color Palette, Typography"
+    context_title: "Project Context"
+    seo:
+      title: "Branding Stelya | Ropat"
+      description: "Complete visual identity for Stelya, engineering consulting firm. Logo, icon, LinkedIn pack, color palette and typography."
+      canonical_url: "https://ropat.art/en/projects/stelya.html"
+      og_title: "Branding Stelya"
+      og_description: "Complete visual identity for Stelya, engineering consulting firm."
+      og_url: "https://ropat.art/en/projects/stelya.html"
+      og_image: "https://ropat.art/assets/images/projects/Stelya/icon.png"
+
+case_study:
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Stelya"
+        en: "Stelya"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Cabinet de conseil en ingénierie"
+        en: "Engineering consulting firm"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Figma, Affinity, Illustrator"
+        en: "Figma, Affinity, Illustrator"
+
+  colors:
+    - hex: "#00205C"
+      name:
+        fr: "Navy"
+        en: "Navy"
+    - hex: "#000000"
+      name:
+        fr: "Noir"
+        en: "Black"
+    - hex: "#FFFFFF"
+      name:
+        fr: "Blanc"
+        en: "White"
+
+  typography:
+    - name: "Montserrat"
+      usage:
+        fr: "Titres & corps de texte"
+        en: "Headings & body text"

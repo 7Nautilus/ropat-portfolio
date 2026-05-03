@@ -8,6 +8,7 @@
   display: flex;
   overflow: hidden; // clip de l'image dans les coins squircle
   /*@include squircle(var(--border-radius-squircle-medium));*/
+  padding: 0;
 }
 
 .project-card-image {

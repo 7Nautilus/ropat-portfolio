@@ -107,25 +107,25 @@
     <!-- 1. Specs ── Client · Année · Services · Outils -->
     <div class="cs-specs">
       {% if project.client %}
-      <div class="cs-spec">
+      <div class="cs-spec animate-fade-up" style="--animate-delay: 0ms">
         <span class="cs-spec-label">{% if lang == 'fr' %}Client{% else %}Client{% endif %}</span>
         <span class="cs-spec-value">{{ project.client[lang] | default: project.client.fr }}</span>
       </div>
       {% endif %}
       {% if project.year %}
-      <div class="cs-spec">
+      <div class="cs-spec animate-fade-up" style="--animate-delay: 80ms">
         <span class="cs-spec-label">{% if lang == 'fr' %}Année{% else %}Year{% endif %}</span>
         <span class="cs-spec-value">{{ project.year }}</span>
       </div>
       {% endif %}
       {% if project_locale.services %}
-      <div class="cs-spec">
+      <div class="cs-spec animate-fade-up" style="--animate-delay: 160ms">
         <span class="cs-spec-label">Services</span>
         <span class="cs-spec-value">{{ project_locale.services }}</span>
       </div>
       {% endif %}
       {% if project.tools %}
-      <div class="cs-spec">
+      <div class="cs-spec animate-fade-up" style="--animate-delay: 240ms">
         <span class="cs-spec-label">{% if lang == 'fr' %}Outils{% else %}Tools{% endif %}</span>
         <span class="cs-spec-value">{{ project.tools }}</span>
       </div>
@@ -133,20 +133,32 @@
     </div>
 
     <!-- 2. Processus / Context narrative -->
-    {% if project_locale.context_content %}
+    {% if project.context_sections or project_locale.context_content %}
     <div class="cs-process">
-      <div class="cs-process-header">
-        <h2 class="cs-process-title">{{ project_locale.context_title | default: "Contexte du projet" }}</h2>
-      </div>
-      <div class="cs-process-content">
-        {{ project_locale.context_content | replace: '### # ', '### ' | markdownify }}
-      </div>
+      <h2 class="cs-process-title animate-fade-up">{{ project_locale.context_title | default: "Contexte du projet" }}</h2>
+
+      {% if project.context_sections %}
+        <div class="cs-process-sections">
+          {% for section in project.context_sections %}
+          {% assign delay = forloop.index0 | times: 120 | plus: 80 %}
+          <div class="cs-process-section animate-fade-up" style="--animate-delay: {{ delay }}ms">
+            <h3>{{ section.title[lang] | default: section.title.fr }}</h3>
+            {{ section.content[lang] | default: section.content.fr | markdownify }}
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="cs-process-content animate-fade-up" style="--animate-delay: 80ms">
+          {{ project_locale.context_content | replace: '### # ', '### ' | markdownify }}
+        </div>
+      {% endif %}
+
     </div>
     {% endif %}
 
     <!-- 3. Mockup visuel -->
     {% if project.case_study.mockup %}
-    <div class="cs-mockup">
+    <div class="cs-mockup animate-fade-up">
       {% if project.case_study.mockup.media_type == "video" %}
       <video src="{{ project.case_study.mockup.src }}" autoplay loop muted width="1200" height="1200"
         aria-label="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
@@ -164,10 +176,11 @@
 
       {% if project.case_study.colors %}
       <div class="cs-design-block">
-        <h3 class="cs-design-title">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h3>
+        <h3 class="cs-design-title animate-fade-up">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h3>
         <div class="cs-color-palette">
           {% for color in project.case_study.colors %}
-          <div class="cs-color-swatch" style="--swatch-color: {{ color.hex }}; background-color: {{ color.hex }};"
+          {% assign delay = forloop.index0 | times: 80 %}
+          <div class="cs-color-swatch animate-fade-up" style="--animate-delay: {{ delay }}ms; --swatch-color: {{ color.hex }}; background-color: {{ color.hex }};"
             aria-label="{{ color.name[lang] | default: color.name.en }} — {{ color.hex }}">
             <span class="cs-color-name">{{ color.name[lang] | default: color.name.en }}</span>
             <span class="cs-color-hex">{{ color.hex }}</span>
@@ -179,10 +192,11 @@
 
       {% if project.case_study.typography %}
       <div class="cs-design-block">
-        <h3 class="cs-design-title">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
+        <h3 class="cs-design-title animate-fade-up">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
         <div class="cs-font-stack">
           {% for font in project.case_study.typography %}
-          <div class="cs-font-item">
+          {% assign delay = forloop.index0 | times: 80 %}
+          <div class="cs-font-item animate-fade-up" style="--animate-delay: {{ delay }}ms">
             <span class="cs-font-sample" style="font-family: '{{ font.name }}', sans-serif;" aria-hidden="true">Aa</span>
             <div class="cs-font-info">
               <span class="cs-font-name">{{ font.name }}</span>
