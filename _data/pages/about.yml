@@ -10,7 +10,7 @@ fr:
       label: "Projets clients"
     - value: "5/5"
       label: "Note sur Malt"
-    - value: "3"
+    - value: "9"
       label: "Avis clients"
 
   skills:
@@ -59,7 +59,7 @@ en:
       label: "Client projects"
     - value: "5/5"
       label: "Rating on Malt"
-    - value: "3"
+    - value: "9"
       label: "Client reviews"
 
   skills:
