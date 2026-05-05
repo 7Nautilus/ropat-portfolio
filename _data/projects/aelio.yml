@@ -11,8 +11,8 @@ client:
   en: "Aélio"
 year: "2026"
 tools: "Figma, Affinity, Illustrator"
-image_src: /assets/images/projects/aelio/monogram.png
-main_image: /assets/images/projects/aelio/monogram.png
+image_src: /assets/images/projects/aelio/monogram.avif
+main_image: /assets/images/projects/aelio/monogram.avif
 media_type: image
 
 context_sections:
@@ -122,19 +122,19 @@ case_study:
       alt:
         fr: "Mockup carte de visite Aélio"
         en: "Aélio business card mockup"
-    - src: /assets/images/projects/aelio/aelio-app-mockup.png
+    - src: /assets/images/projects/aelio/aelio-app-mockup.avif
       cols: 1
       rows: 1
       alt:
         fr: "Mockup application mobile Aélio"
         en: "Aélio mobile app mockup"
-    - src: /assets/images/projects/aelio/icon.png
+    - src: /assets/images/projects/aelio/icon-gold-on-navy.svg
       cols: 1
       rows: 1
       alt:
         fr: "Icône Aélio, orange sur navy"
         en: "Aélio icon, orange on navy"
-    - src: /assets/images/projects/aelio/logo.png
+    - src: /assets/images/projects/aelio/logo.svg
       cols: 2
       rows: 1
       alt:
