@@ -1,0 +1,202 @@
+slug: aelio
+project_title: "Aélio"
+subtitle: "Branding"
+theme:
+  fr: "IDENTITÉ VISUELLE & BRANDING"
+  en: "VISUAL IDENTITY & BRANDING"
+category: branding
+featured: false
+client:
+  fr: "Aélio"
+  en: "Aélio"
+year: "2026"
+tools: "Figma, Affinity, Illustrator"
+image_src: /assets/images/projects/aelio/monogram.png
+main_image: /assets/images/projects/aelio/monogram.png
+media_type: image
+
+context_sections:
+  - title:
+      fr: "Brief et objectifs"
+      en: "Brief and Objectives"
+    content:
+      fr: |
+        **Aélio** est un **cabinet de conseil réunionnais** spécialisé en **IA** et en **automatisation**. La mission consistait à créer une **identité visuelle** capable d'illustrer la dualité de l'entreprise : une **expertise technique de pointe** alliée à une approche résolument **innovante, ancrée dans son territoire**.
+
+        L’enjeu était de concevoir un **écosystème complet**, du **logotype à la charte graphique**, déclinable sur des supports variés **(social media et print)**. Le projet était marqué par un défi de taille : une grande réactivité était de mise pour livrer les éléments clés avant un événement entrepreneurial majeur à l'échelle de l'**océan Indien**, seulement quelques jours après le lancement de la collaboration.
+      en: |
+        **Aélio** is a **Reunion Island-based consulting firm** specializing in **AI** and **automation**. The mission was to create a **visual identity** that could illustrate the duality of the company: **cutting-edge technical expertise** combined with a resolutely **innovative approach rooted in its territory**.
+
+        The challenge was to design a **comprehensive ecosystem**, from the **logotype to the graphic charter**, adaptable across various media **(social media and print)**. The project was marked by a significant challenge: a high level of responsiveness was required to deliver key elements ahead of a major entrepreneurial event in the **Indian Ocean region**, just days after the collaboration began.
+
+  - title:
+      fr: "Concept & construction du logo"
+      en: "Concept & Logo Construction"
+    content:
+      fr: |
+        Pour traduire l'essence de l'intelligence artificielle et de l'automatisation, j'ai conçu un logotype qui allie **sobriété et technicité**. Le design s'appuie sur une typographie moderne aux lignes épurées, évoquant la fluidité et la précision des processus technologiques. 
+
+        La construction du logo repose sur un équilibre rigoureux, garantissant une lisibilité optimale sur tous les supports. L'identité visuelle a été pensée pour refléter une image d'innovation constante tout en restant accessible et humaine, un enjeu clé pour un cabinet de conseil en IA.
+      en: |
+        To capture the essence of artificial intelligence and automation, I designed a logotype that combines **sobriety and technicality**. The design is based on a modern typography with clean lines, evoking the fluidity and precision of technological processes.
+
+        The logo construction is based on a rigorous balance, ensuring optimal readability across all media. The visual identity was designed to reflect an image of constant innovation while remaining accessible and human, a key challenge for an AI consulting firm.
+
+  - title:
+      fr: "Identité visuelle & Design System"
+      en: "Visual Identity & Design System"
+    content:
+      fr: |
+        Au-delà du logotype, j'ai développé un **écosystème visuel complet** pour ancrer Aélio dans la modernité. La palette chromatique est dominée par un Pantone **Doré**, symbolisant la valeur et l'excellence, complété par un **Navy profond**, évoquant la confiance et la stabilité, ainsi que des nuances à la fois de ces deux couleurs, mais aussi de **blanc et de noir**, pour assurer une grande flexibilité d'application. 
+
+        Le choix typographique s'est porté sur une police sans-serif géométrique, Raleway, assurant une clarté maximale tant sur les supports print que sur les interfaces numériques complexes propres à l'IA.
+      en: |
+        Beyond the logotype, I developed a **comprehensive visual ecosystem** to anchor Aélio in modernity. The color palette is dominated by a Pantone **Gold**, symbolizing value and excellence, complemented by a deep **Navy**, evoking trust and stability, as well as shades of both colors, along with **white and black**, to ensure great application flexibility.
+
+        The typographic choice fell on a geometric sans-serif font, Raleway, ensuring maximum clarity both on print media and on complex digital interfaces typical of AI.
+
+  - title:
+      fr: "Déploiement & Réactivité"
+      en: "Deployment & Responsiveness"
+    content:
+      fr: |
+        Le véritable défi de ce projet résidait dans le calendrier. Pour accompagner Aélio lors de l'événement majeure auquel l'entreprise participait, j'ai dû faire preuve d'une grande agilité.
+
+        En quelques jours, j'ai livré un pack opérationnel complet : cartes de visite premium, templates de carrousels LinkedIn stratégiques pour leur communication digitale, et des supports de présentation. Ce déploiement rapide a permis à l'entreprise de se présenter avec une image de marque forte et cohérente dès sa première prise de parole publique.
+      en: |
+        The real challenge of this project lay in the timeline. To support Aélio during the major event the company was participating in, I had to demonstrate great agility.
+
+        In just a few days, I delivered a complete operational pack: premium business cards, strategic LinkedIn carousel templates for their digital communication, and presentation materials. This rapid deployment allowed the company to present itself with a strong and coherent brand image from its first public appearance.
+
+locales:
+  fr:
+    url: /fr/projects/aelio.html
+    aria_label: "Voir le projet de branding pour Aélio"
+    image_alt: "Branding pour Aélio"
+    title: "Branding pour Aélio"
+    subtitle: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation"
+    pitch: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation"
+    description: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation. Création d'un logo, d'une charte graphique et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **innovant, technique et ancré dans son territoire**."
+    services: "Logo, Charte graphique, Pack Social Media, Design System"
+    context_title: "Contexte du projet"
+    seo:
+      title: "Branding Aélio | Ropat"
+      description: "[SEO description FR]"
+      canonical_url: "https://ropat.art/fr/projects/aelio.html"
+      og_title: "Branding Aélio"
+      og_description: "[OG description FR]"
+      og_url: "https://ropat.art/fr/projects/aelio.html"
+      og_image: "https://ropat.art/assets/images/projects/aelio/monogram.png"
+
+  en:
+    url: /en/projects/aelio.html
+    aria_label: "See the branding project for Aélio"
+    image_alt: "Branding for Aélio"
+    title: "Branding for Aélio"
+    subtitle: "[Subtitle EN]"
+    pitch: "[Pitch EN]"
+    description: "[Description EN]"
+    services: "[Services EN]"
+    context_title: "Project Context"
+    seo:
+      title: "Branding Aélio | Ropat"
+      description: "[SEO description EN]"
+      canonical_url: "https://ropat.art/en/projects/aelio.html"
+      og_title: "Branding Aélio"
+      og_description: "[OG description EN]"
+      og_url: "https://ropat.art/en/projects/aelio.html"
+      og_image: "https://ropat.art/assets/images/projects/aelio/monogram.png"
+
+case_study:
+  mockups_grid_cols: 3
+  mockups:
+    - src: /assets/images/projects/aelio/icon-white-on-black.png
+      cols: 1
+      rows: 1
+      alt:
+        fr: "Icône Aélio, blanc sur noir"
+        en: "Aélio icon, white on black"
+    - src: /assets/images/projects/aelio/aelio-business-card-mockup.png
+      cols: 1
+      rows: 1
+      alt:
+        fr: "Mockup carte de visite Aélio"
+        en: "Aélio business card mockup"
+    - src: /assets/images/projects/aelio/aelio-app-mockup.png
+      cols: 1
+      rows: 1
+      alt:
+        fr: "Mockup application mobile Aélio"
+        en: "Aélio mobile app mockup"
+    - src: /assets/images/projects/aelio/icon.png
+      cols: 1
+      rows: 1
+      alt:
+        fr: "Icône Aélio, orange sur navy"
+        en: "Aélio icon, orange on navy"
+    - src: /assets/images/projects/aelio/logo.png
+      cols: 2
+      rows: 1
+      alt:
+        fr: "Logo Aélio complet avec icône et logotype"
+        en: "Full Aélio logo with icon and logotype"
+
+  specs:
+    - label:
+        fr: "Client"
+        en: "Client"
+      value:
+        fr: "Aélio"
+        en: "Aélio"
+    - label:
+        fr: "Contexte"
+        en: "Context"
+      value:
+        fr: "Lancement du cabinet de conseil en IA Aélio"
+        en: "Launch of Aélio's AI consulting firm"
+    - label:
+        fr: "Outils"
+        en: "Tools"
+      value:
+        fr: "Figma, Affinity, Illustrator"
+        en: "Figma, Affinity, Illustrator"
+
+  colors:
+    - hex: "#1A2E4A"
+      name:
+        fr: "Navy Profond"
+        en: "Deep Navy"
+    - hex: "#F5A623"
+      name:
+        fr: "Or"
+        en: "Gold"
+    - hex: "#FFFFFF"
+      name:
+        fr: "Blanc Pur"
+        en: "Pure White"
+    - hex: "#000000"
+      name:
+        fr: "Noir"
+        en: "Black"
+    - hex: "#2E4A6E"
+      name:
+        fr: "Navy Moyen"
+        en: "Medium Navy"
+    - hex: "#C4831A"
+      name:
+        fr: "Or Profond"
+        en: "Dark Gold"
+    - hex: "#EEF2F7"
+      name:
+        fr: "Bleu Glacier"
+        en: "Glacier Blue"
+    - hex: "#FDF3DF"
+      name:
+        fr: "Crème"
+        en: "Cream"
+
+  typography:
+    - name: "Raleway"
+      usage:
+        fr: "Titres & corps de texte"
+        en: "Headings & body text"

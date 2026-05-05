@@ -50,7 +50,17 @@
     {% endif %}
 
     {% comment %} Gestion des hreflang {% endcomment %}
-    {% if page_path_no_lang == "/index.html" or page_path_no_lang == "/" %}
+    {% if page.hreflang_alternate %}
+      {% if page.lang == 'fr' %}
+      <link rel="alternate" hreflang="fr" href="{{ current_canonical }}" />
+      <link rel="alternate" hreflang="en" href="{{ page.hreflang_alternate }}" />
+      <link rel="alternate" hreflang="x-default" href="{{ page.hreflang_alternate }}" />
+      {% else %}
+      <link rel="alternate" hreflang="fr" href="{{ page.hreflang_alternate }}" />
+      <link rel="alternate" hreflang="en" href="{{ current_canonical }}" />
+      <link rel="alternate" hreflang="x-default" href="{{ current_canonical }}" />
+      {% endif %}
+    {% elsif page_path_no_lang == "/index.html" or page_path_no_lang == "/" %}
       <link rel="alternate" hreflang="fr" href="{{ site.url }}/index.html" />
       <link rel="alternate" hreflang="en" href="{{ site.url }}/en/index.html" />
       <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en/index.html" />

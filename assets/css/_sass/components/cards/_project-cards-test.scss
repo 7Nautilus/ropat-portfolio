@@ -1,0 +1,70 @@
+@use "base/mixins" as *;
+
+/* ==============================================
+   PROJECTS CARDS
+   ============================================== */
+
+.project-card {
+  display: flex;
+  overflow: hidden; // clip de l'image dans les coins squircle
+  /*@include squircle(var(--border-radius-squircle-medium));*/
+  padding: 0.5rem;
+}
+
+.project-card-image {
+  background-color: var(--gray-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 4rem;
+  @supports (corner-shape: squircle) {
+    corner-shape: squircle;
+  }
+  /* border-bottom: 1px solid var(--primary-color); */
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.project-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.project-card-footer {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.project-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--spacing-lg) - 0.5rem);
+  gap: var(--spacing-sm);
+}
+
+.project-card-title {
+  text-align: start;
+  font-family: 'space grotesk', sans-serif;
+  font-weight: 900;
+}
+
+.project-card-client {
+  color: var(--grey-light-400);
+}
+
+.project-card-description {
+  font-size: var(--font-size-base);
+  color: var(--gray-light);
+  line-height: 1.4;
+}

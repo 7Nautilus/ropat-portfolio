@@ -273,12 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = lightbox ? lightbox.querySelector('.lightbox-image') : null;
   const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
-  const lightboxTrigger = document.querySelector('.lightbox-trigger');
+  const lightboxTriggers = lightbox ? document.querySelectorAll('.lightbox-trigger') : [];
+  let activeLightboxTrigger = null;
 
-  if (lightbox && lightboxImage && lightboxTrigger) {
-    const openLightbox = () => {
-      lightboxImage.src = lightboxTrigger.src;
-      lightboxImage.alt = lightboxTrigger.alt;
+  if (lightbox && lightboxImage && lightboxTriggers.length > 0) {
+    const openLightbox = (trigger) => {
+      activeLightboxTrigger = trigger;
+      lightboxImage.src = trigger.src;
+      lightboxImage.alt = trigger.alt;
       lightbox.classList.add('active');
       body.style.overflow = 'hidden';
       lightboxClose.focus();
@@ -287,35 +289,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeLightbox = () => {
       lightbox.classList.remove('active');
       body.style.overflow = '';
-      lightboxTrigger.focus();
+      if (activeLightboxTrigger) activeLightboxTrigger.focus();
     };
 
-    // Ouvrir au clic sur l'image principale
-    lightboxTrigger.addEventListener('click', openLightbox);
-
-    // Ouvrir avec clavier (Enter ou Espace)
-    lightboxTrigger.addEventListener('keydown', event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        openLightbox();
-      }
+    lightboxTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => openLightbox(trigger));
+      trigger.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openLightbox(trigger);
+        }
+      });
     });
 
-    // Fermer avec le bouton X
     lightboxClose.addEventListener('click', closeLightbox);
 
-    // Fermer en cliquant sur le fond
     lightbox.addEventListener('click', event => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
+      if (event.target === lightbox) closeLightbox();
     });
 
-    // Fermer avec Échap
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && lightbox.classList.contains('active')) {
-        closeLightbox();
-      }
+      if (event.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
     });
   }
 
@@ -449,3 +443,142 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// ================================
+// SCROLL PROGRESS BAR — Pages projet
+// ================================
+(function () {
+  if (!document.querySelector('.hero-project')) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const size = 44;
+  const svgSize = size + 4;   // 48px — 2px de débordement de chaque côté pour bordure centrée
+  const r = 12;               // border-radius du squircle (28% de 44 ≈ 12px)
+
+  // Périmètre du squircle : 4 côtés droits + 4 quarts de cercle
+  const circumference = 4 * (size - 2 * r) + 2 * Math.PI * r; // ≈ 155.4
+
+  // Chemin squircle dans le SVG 48x48, partant du centre-haut, sens horaire
+  const sp = `M 24 2 L 34 2 Q 46 2 46 14 L 46 34 Q 46 46 34 46 L 14 46 Q 2 46 2 34 L 2 14 Q 2 2 14 2 Z`;
+
+  const btn = document.createElement('button');
+  btn.id = 'scroll-top-btn';
+  btn.setAttribute('aria-label', 'Retour en haut');
+  btn.innerHTML = `
+    <svg width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}"
+      style="position:absolute;top:-2px;left:-2px;pointer-events:none;" aria-hidden="true">
+      <path class="stt-track" d="${sp}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0"/>
+      <path class="stt-progress" d="${sp}" fill="none"
+        stroke="var(--primary-color)" stroke-width="2"
+        stroke-dasharray="${circumference}"
+        stroke-dashoffset="${circumference}"
+        stroke-linecap="round"/>
+    </svg>
+    <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="position:relative;">
+      <path d="M4 13 L11 5 L18 13 M11 5 V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>`;
+
+  Object.assign(btn.style, {
+    position:        'fixed',
+    bottom:          '2rem',
+    right:           '2rem',
+    width:           size + 'px',
+    height:          size + 'px',
+    background:      'var(--primary-color-alpha)',
+    border:          'none',
+    borderRadius:    '28%',
+    cursor:          'pointer',
+    zIndex:          '998',
+    backdropFilter:  'none',
+    opacity:         '0',
+    transform:       'translateY(12px)',
+    transition:      'opacity 0.3s ease, transform 0.3s ease',
+    padding:         '0',
+    display:         'flex',
+    alignItems:      'center',
+    justifyContent:  'center',
+    color:           'white',
+  });
+
+  document.body.appendChild(btn);
+
+  const progressCircle = btn.querySelector('.stt-progress');
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress  = docHeight > 0 ? scrollTop / docHeight : 0;
+
+    progressCircle.style.strokeDashoffset = circumference * (1 - progress);
+
+    // Apparaît après 10% de scroll
+    if (progress > 0.1) {
+      btn.style.opacity   = '1';
+      btn.style.transform = 'translateY(0)';
+    } else {
+      btn.style.opacity   = '0';
+      btn.style.transform = 'translateY(12px)';
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+})();
+
+// ================================
+// PARALLAX HERO IMAGE — Fade + Scale (Desktop uniquement)
+// ================================
+(function () {
+  if (!window.matchMedia('(pointer: fine)').matches) return;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  const heroSection = document.querySelector('.hero-project');
+  if (!heroSection) return;
+
+  // Layers avec leur vitesse propre : [sélecteur, facteurY, facteurScale]
+  const layers = [
+    { el: heroSection.querySelector('.hero-project-title-container'), speedY: 0.06, speedScale: 0 },
+    { el: heroSection.querySelector('.bubble-container'),             speedY: 0.10, speedScale: 0 },
+    { el: heroSection.querySelector('.hero-image-container'),         speedY: 0.18, speedScale: 0.05 },
+  ].filter(l => l.el);
+
+  layers.forEach(l => { l.el.style.willChange = 'transform, opacity, filter'; });
+  heroSection.style.willChange = 'opacity, filter';
+
+  let ticking = false;
+
+  function updateParallax() {
+    const heroHeight = heroSection.offsetHeight;
+    const delay    = heroHeight * 0.25;
+    const progress = Math.min(Math.max((window.scrollY - delay) / (heroHeight - delay), 0), 1);
+
+    const opacity = Math.max(1 - progress * 0.85, 0.15);
+    const blur    = progress * 12;
+
+    // Fade + blur global sur le hero
+    heroSection.style.opacity = opacity;
+    heroSection.style.filter  = `blur(${blur}px)`;
+
+    // Chaque layer bouge à sa propre vitesse
+    layers.forEach(l => {
+      const translateY = window.scrollY * l.speedY;
+      const scale      = 1 + progress * l.speedScale;
+      l.el.style.transform = `translateY(${translateY}px) scale(${scale})`;
+    });
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(updateParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+})();

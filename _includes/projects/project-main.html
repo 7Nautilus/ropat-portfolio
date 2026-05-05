@@ -156,17 +156,46 @@
     </div>
     {% endif %}
 
-    <!-- 3. Mockup visuel -->
-    {% if project.case_study.mockup %}
-    <div class="cs-mockup animate-fade-up">
-      {% if project.case_study.mockup.media_type == "video" %}
-      <video src="{{ project.case_study.mockup.src }}" autoplay loop muted width="1200" height="1200"
-        aria-label="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
-      </video>
+    <!-- 3. Mockup(s) visuel(s) -->
+    {% if project.case_study.mockups %}
+    {% assign _is_bento = false %}
+    {% for mockup in project.case_study.mockups %}
+      {% if mockup.cols or mockup.rows %}{% assign _is_bento = true %}{% endif %}
+    {% endfor %}
+    {% assign _bento_cols = project.case_study.mockups_grid_cols | default: 4 %}
+    <div class="cs-mockups{% if project.case_study.mockups.size > 1 %}{% if _is_bento %} cs-mockups--bento{% else %} cs-mockups--grid{% endif %}{% endif %}"{% if _is_bento %} style="--grid-cols: {{ _bento_cols }}"{% endif %}>
+      {% for mockup in project.case_study.mockups %}
+      {% assign mockup_alt = mockup.alt[lang] | default: mockup.alt.en | default: project_locale.image_alt %}
+      {% assign mockup_cols = mockup.cols | default: 1 %}
+      {% assign mockup_rows = mockup.rows | default: 1 %}
+      {% if mockup.aspect %}
+        {% assign mockup_aspect = mockup.aspect %}
+      {% elsif mockup_cols == 1 and mockup_rows == 1 %}
+        {% assign mockup_aspect = "1" %}
       {% else %}
-      <img src="{{ project.case_study.mockup.src }}" width="1200" height="1200" loading="lazy"
-        alt="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
+        {% assign mockup_aspect = "" %}
       {% endif %}
+      <div class="cs-mockup animate-fade-up" style="--animate-delay: {{ forloop.index0 | times: 100 }}ms; --cols: {{ mockup_cols }}; --rows: {{ mockup_rows }}{% if mockup_aspect != "" %}; --aspect: {{ mockup_aspect }}{% endif %}{% if mockup.fit %}; --fit: {{ mockup.fit }}{% endif %}{% if mockup.bg %}; --bg: {{ mockup.bg }}{% endif %}">
+        {% if mockup.media_type == "video" %}
+        <video src="{{ mockup.src }}" autoplay loop muted playsinline aria-label="{{ mockup_alt }}"></video>
+        {% else %}
+        <img src="{{ mockup.src }}" loading="lazy" alt="{{ mockup_alt }}" aria-label="{{ mockup_alt }} {{ img_action }}" class="lightbox-trigger" role="button" tabindex="0">
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% elsif project.case_study.mockup %}
+    <div class="cs-mockups">
+      <div class="cs-mockup animate-fade-up">
+        {% if project.case_study.mockup.media_type == "video" %}
+        <video src="{{ project.case_study.mockup.src }}" autoplay loop muted playsinline
+          aria-label="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
+        </video>
+        {% else %}
+        <img src="{{ project.case_study.mockup.src }}" loading="lazy"
+          alt="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
+        {% endif %}
+      </div>
     </div>
     {% endif %}
 

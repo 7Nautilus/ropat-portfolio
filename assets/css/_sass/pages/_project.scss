@@ -52,7 +52,7 @@
 .case-study {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: 10rem;
   padding-top: var(--spacing-xl);
 }
 
@@ -211,7 +211,76 @@
   }
 }
 
-// ── 3. MOCKUP ────────────────────────────
+// ── 3. MOCKUP(S) ─────────────────────────
+.cs-mockups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.cs-mockups--grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .cs-mockup:first-child {
+      grid-column: 1 / -1;
+    }
+  }
+}
+
+.cs-mockups--bento {
+  --grid-cols: 4;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  gap: var(--spacing-sm);
+
+  .cs-mockup {
+    aspect-ratio: var(--aspect);
+    grid-column: span var(--cols, 1);
+    grid-row: span var(--rows, 1);
+    background: var(--bg, transparent);
+    min-height: 0;
+
+    img,
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: var(--fit, cover);
+      padding: var(--fit-padding, 0);
+    }
+
+    // Items spanning multiple cols/rows without an explicit aspect ratio
+    // must use absolute positioning so the image doesn't inflate the grid row.
+    // The row height is then set by the adjacent 1×1 items (aspect-ratio: 1).
+    &:not([style*="--aspect"]) {
+      position: relative;
+
+      img, video {
+        position: absolute;
+        inset: 0;
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    --grid-cols: 2;
+  }
+
+  @media (max-width: 639px) {
+    --grid-cols: 1;
+
+    .cs-mockup {
+      aspect-ratio: 1;
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+    }
+  }
+}
+
 .cs-mockup {
   width: 100%;
   @include squircle(var(--border-radius-lg));

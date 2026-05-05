@@ -1,0 +1,122 @@
+slug: test
+project_title: "Test"
+subtitle: "Page de test"
+theme:
+  fr: "PAGE DE TEST"
+  en: "TEST PAGE"
+category: branding
+featured: false
+client:
+  fr: "Test"
+  en: "Test"
+year: "2026"
+tools: "Figma"
+image_src: /assets/images/projects/Stelya/icon.png
+main_image: /assets/images/projects/Stelya/icon.png
+media_type: image
+thumbnails:
+  - src: /assets/images/projects/Stelya/icon.png
+    alt:
+      fr: "Image de test"
+      en: "Test image"
+  - src: /assets/images/projects/Stelya/logo.png
+    alt:
+      fr: "Image de test 2"
+      en: "Test image 2"
+
+context_sections:
+  - title:
+      fr: "Section test"
+      en: "Test section"
+    content:
+      fr: |
+        Ceci est une **page de test** pour expérimenter sans casser les pages existantes.
+      en: |
+        This is a **test page** to experiment without breaking existing pages.
+
+locales:
+  fr:
+    url: /fr/projects/test.html
+    aria_label: "Page de test"
+    image_alt: "Image de test"
+    title: "Page de test"
+    subtitle: "Page de test"
+    description: "Page de test pour expérimenter de nouveaux styles et composants."
+    services: "Test"
+    context_title: "Contexte"
+    seo:
+      title: "Test | Ropat"
+      description: "Page de test"
+      canonical_url: "https://ropat.art/fr/projects/test.html"
+      og_title: "Test"
+      og_description: "Page de test"
+      og_url: "https://ropat.art/fr/projects/test.html"
+      og_image: "https://ropat.art/assets/images/projects/Stelya/icon.png"
+  en:
+    url: /en/projects/test.html
+    aria_label: "Test page"
+    image_alt: "Test image"
+    title: "Test page"
+    subtitle: "Test page"
+    description: "Test page to experiment with new styles and components."
+    services: "Test"
+    context_title: "Context"
+    seo:
+      title: "Test | Ropat"
+      description: "Test page"
+      canonical_url: "https://ropat.art/en/projects/test.html"
+      og_title: "Test"
+      og_description: "Test page"
+      og_url: "https://ropat.art/en/projects/test.html"
+      og_image: "https://ropat.art/assets/images/projects/Stelya/icon.png"
+
+case_study:
+  mockups:
+    - src: /assets/images/projects/ottony_paris.webp
+      cols: 1
+      rows: 2
+      alt:
+        fr: "Mockup test 1"
+        en: "Test mockup 1"
+    - src: /assets/images/projects/ottony_paris_mockup.webp
+      cols: 3
+      rows: 1
+      alt:
+        fr: "Mockup test 2"
+        en: "Test mockup 2"
+    - src: /assets/images/projects/a-lone-mockup.webp
+      cols: 2
+      rows: 1
+      alt:
+        fr: "Mockup test 3"
+        en: "Test mockup 3"
+    - src: /assets/images/projects/chat-noir-mockup.png
+      cols: 1
+      rows: 1
+      alt:
+        fr: "Mockup test 4"
+        en: "Test mockup 4"
+
+  colors:
+    - hex: "#FF5C00"
+      name:
+        fr: "Orange"
+        en: "Orange"
+    - hex: "#000000"
+      name:
+        fr: "Noir"
+        en: "Black"
+    - hex: "#FFFFFF"
+      name:
+        fr: "Blanc"
+        en: "White"
+
+  typography:
+    - name: "Space Grotesk"
+      usage:
+        fr: "Titres"
+        en: "Headings"
+    - name: "Manrope"
+      usage:
+        fr: "Corps de texte"
+        en: "Body text"

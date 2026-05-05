@@ -8,8 +8,14 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-  - docs/PLAN-ACTIONS.md
-  - docs/AUDIT-COMPLET.md
+  - docs/
+  - backup.txt
+  - extract_font_sizes.py
+  - font_sizes_report.csv
+  - VEILLE.md
+  - TODO.md
+  - CLAUDE.md
+  - scripts/
 
 sass:
   style: compressed # Optionnel : pour minifier ton CSS

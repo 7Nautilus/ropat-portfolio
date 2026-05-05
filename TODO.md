@@ -2,7 +2,7 @@
 
 ---
 
-## ✅ Corrections appliquées (mars 2026)
+## ✅ Corrections appliquées
 
 - ✅ `onclick` inline supprimé du sélecteur de langue → délégation d'événements dans `script.js`
 - ✅ Cookie de langue avec `SameSite=Lax` (sécurité CSRF)
@@ -11,6 +11,10 @@
 - ✅ `_data/services_old.yml` supprimé (fichier orphelin)
 - ✅ Référence `matrix.js` commentée supprimée de `default.html`
 - ✅ `en/projects/chatnoir2.html` créé (projet manquant côté EN)
+- ✅ `rel="noopener noreferrer"` + `target="_blank"` ajoutés sur les liens sociaux (`_includes/social-media-icons.html`)
+- ✅ Page About enrichie (stats, skills, parcours, CTA — `_data/pages/about.yml`)
+- ✅ `en/services/web-design.html` : contenu complet FR+EN dans le YAML de service
+- ✅ `prefers-reduced-motion` géré en CSS (`_bases.scss`, `_cursor.scss`) et JS
 
 ---
 
@@ -33,20 +37,9 @@
   - Dupliquer `/fr/experiences.html` et traduire le contenu
   - Fichier data : `_data/pages/experiences.yml`
 
-### Sécurité
-
-- [ ] **Ajouter `rel="noopener noreferrer"` sur tous les liens sociaux**
-  - Fichier : `_includes/social-media-icons.html`
-  - Tous les liens `target="_blank"` (Instagram, Pinterest, LinkedIn, Behance) exposés au vecteur `window.opener`
-  - Fix : ajouter `rel="noopener noreferrer"` dans le template
-
 ### Accessibilité
 
-- [ ] **Corriger le contraste de `--grey-light-400: #9CA3AF`**
-  - Ratio actuel sur fond blanc : ~3.5:1 → **sous le seuil WCAG AA (4.5:1)**
-  - Remplacer par `#6B7280` (ratio ~5.4:1) ou `#7A8895`
-  - Fichier : `_sass/base/_variables.scss`
-  - Vérifie tous les endroits où cette couleur est utilisée (textes secondaires, labels)
+- ✅ **Contraste `--grey-light-400: #9CA3AF`** — faux positif : utilisé exclusivement sur fond sombre (`#0a0a0a`), ratio ~8:1, conforme WCAG AA
 
 ---
 
@@ -54,31 +47,22 @@
 
 ### Contact & conversion
 
-- [ ] **Remplacer le `mailto:` par un vrai formulaire de contact**
-  - Expose l'email aux scrapers, dépend du client mail de l'utilisateur
-  - Solution recommandée : **Web3Forms** (250 envois/mois gratuit, simple à intégrer)
-  - Implémenter un honeypot anti-spam (champ caché)
-  - Garder le `mailto:` en fallback secondaire
-  - Fichier : `_includes/pages/contact.html`
-
-### Contenu / SEO
-
-- [ ] **Enrichir la page About (50 mots actuels → 300+ mots)**
-  - Contenu trop court : faible SEO, engagement limité, aucune preuve sociale
-  - Ajouter : photo professionnelle, skills, timeline d'expériences, noms de projets/clients reconnus
-  - Ton humain et direct (les clients musicaux indés l'exigent)
-  - Fichiers : `_includes/pages/about.html`, `_data/pages/about.yml`
-
-- [ ] **Corriger et compléter `en/services/web-design.html`**
-  - Contenu incomplet ou inexact côté EN
+- ✅ **Formulaire de contact Web3Forms** — déjà implémenté avec honeypot `botcheck`, dropdown sujet et validation JS. Le `mailto:` visible est le fallback secondaire intentionnel.
 
 ### SEO technique
 
-- [ ] **Corriger le sitemap.xml : pages manquantes**
-  - Pages légales absentes : `/fr/mentions-legales.html`, `/fr/confidentialite.html`, `/en/legal-notice.html`, `/en/privacy.html`
-  - Pages services absentes : `/fr/services/*.html`, `/en/services/*.html`
-  - Simplifier la logique Liquid (conditionnelles trop complexes)
-  - Fichier : `sitemap.xml`
+- ✅ **Sitemap.xml** — la logique Liquid couvre bien les pages légales et de services (vérification faite)
+
+- ✅ **Corriger le hreflang des pages de services** — `hreflang_alternate` ajouté dans le front matter des 6 pages concernées, `default.html` mis à jour pour l'utiliser en priorité
+
+- ✅ **`fr/projects/chatnoir2.html`** — page de test locale, non committée
+
+- ✅ **Améliorer les titres de la page About** — `"À propos - Ropat, Graphiste & Directeur Artistique"` / `"About - Ropat, Graphic Designer & Art Director"`
+
+- [ ] **Ajouter une OG image dédiée pour les pages principales**
+  - L'image OG par défaut est `icon.png` (petit logo) pour home, portfolio, about, contact
+  - Recommandé : créer un visuel 1200×630 pour le partage social
+  - Fichier : `_includes/meta/open-graph.html` (fallback) + front matter des pages concernées
 
 ---
 
@@ -87,12 +71,12 @@
 ### Performance
 
 - [ ] **Ajouter `preload` explicite pour les fonts critiques**
-  - `preconnect` déjà en place mais pas de `<link rel="preload" as="font" crossorigin>`
+  - `preconnect` Google Fonts en place mais pas de `<link rel="preload" as="font" crossorigin>` pour les fonts custom (ANICON SANS BLACK, CoFoRaffine)
   - Impact : -~300ms sur le FCP
-  - Fichier : `_layouts/default.html` (lignes 93-97)
-  - Option avancée : self-héberger les fonts Google (RGPD + perf, zéro requête DNS externe)
+  - Fichier : `_layouts/default.html`
 
-- [ ] **Convertir la font `ANICON SANS BLACK.OTF` en WOFF2**
+- [ ] **Convertir les fonts custom en WOFF2**
+  - `ANICON SANS BLACK.OTF`, `CoFoRaffine-VF-Trial.ttf`, `Fontspring-DEMO-resort-sansregular.otf` → WOFF2
   - Format plus léger et universel pour les navigateurs modernes
   - Fichier : `assets/fonts/`
 
@@ -104,7 +88,7 @@
   - Augmente significativement la conversion visiteur → client
 
 - [ ] **Afficher la disponibilité sur la home**
-  - Exemple : "Disponible pour nouveaux projets — Avril 2026"
+  - Exemple : "Disponible pour nouveaux projets — Juin 2026"
   - Crée de l'urgence, rassure le client, visible sans scroll
   - Fichier : `_data/pages/index.yml` + `_includes/pages/index.html`
 
@@ -118,9 +102,6 @@
   - Gestionnaire `onerror` JS ou placeholder CSS
   - Fichier : `_includes/projects/project-card.html`
 
-- [ ] **Ajouter les légendes dynamiques aux termes techniques**
-  - Tooltip ou définition inline dans les descriptions de projets
-
 - [ ] **Revoir la config `.hintrc`**
   - Vérifications désactivées : `axe/structure`, `no-inline-styles`, `axe/language`
   - Les réactiver progressivement pour détecter d'autres problèmes
@@ -128,16 +109,19 @@
 ### Qualité du code
 
 - [ ] **Supprimer `assets/js/matrix.js`**
-  - Fichier orphelin (référence HTML déjà commentée)
-  - Ne sert à rien, mauvaise hygiène de code
+  - Fichier orphelin (référence HTML déjà commentée, jamais chargé)
+  - Fichier : `assets/js/matrix.js`
 
-- [ ] **Vérifier et clarifier `_includes/meta/schema.html`**
-  - Doublon potentiel avec `_includes/meta/schema-org.html`
-  - Supprimer si redondant, documenter si spécialisé
+- [ ] **Supprimer `_includes/meta/schema.html`**
+  - Ancienne version hardcodée, non utilisée (`default.html` charge `schema-org.html`)
+  - Risque de confusion entre les deux fichiers
+  - Fichier : `_includes/meta/schema.html`
 
-- [ ] **Vérifier `fr/projects/chatnoir2.html` + `en/projects/chatnoir2.html`**
-  - Double fichier → risque de contenu dupliqué
-  - Confirmer si intentionnel
+- [ ] **Clarifier `fr/projects/chatnoir2.html` + `en/projects/chatnoir2.html`**
+  - Double fichier avec `chat-noir.html` → risque de contenu dupliqué côté SEO
+  - Supprimer si redondant, ou ajouter `<meta name="robots" content="noindex">` si intentionnel
+
+- ✅ **Exclure les fichiers parasites du build Jekyll** — `backup.txt`, `extract_font_sizes.py`, `font_sizes_report.csv`, `VEILLE.md`, `TODO.md`, `CLAUDE.md`, `docs/`, `scripts/` ajoutés à `exclude:` dans `_config.yml`
 
 ---
 
@@ -151,10 +135,6 @@
   - Structure : Problème → Contraintes → Démarche → Résultat
   - Les clients musicaux indés veulent comprendre la pensée derrière
   - Format : 6-8 écrans, ratio texte/image équilibré
-
-- [ ] **Ajouter `prefers-reduced-motion` côté CSS**
-  - Déjà géré dans `script.js` ✅ mais animations CSS pures à vérifier
-  - Fichiers : `_sass/` (animations, transitions)
 
 - [ ] **Configurer les headers de sécurité**
   - `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`

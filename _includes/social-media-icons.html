@@ -1,6 +1,6 @@
 <div class="social-icons-card">
   {% for item in site.data.socials %}
-    <a href="{{ item.link }}" class="socialContainer {{ item.name }}" title="{{ item.aria-label }}" aria-label="{{ item.aria-label }}">
+    <a href="{{ item.link }}" class="socialContainer {{ item.name }}" title="{{ item.aria-label }}" aria-label="{{ item.aria-label }}" target="_blank" rel="noopener noreferrer">
       {{ item.icon }}
     </a>
   {% endfor %}
