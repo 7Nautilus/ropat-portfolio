@@ -116,7 +116,7 @@ case_study:
       alt:
         fr: "Icône Aélio, blanc sur noir"
         en: "Aélio icon, white on black"
-    - src: /assets/images/projects/aelio/aelio-business-card-mockup.png
+    - src: /assets/images/projects/aelio/aelio-business-card-mockup.avif
       cols: 1
       rows: 1
       alt:
