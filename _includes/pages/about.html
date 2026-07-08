@@ -14,7 +14,7 @@
         class="about-photo-img"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
       >
-      <!-- <div class="about-photo-placeholder" aria-hidden="true"></div> -->
+      <div class="about-photo-placeholder" aria-hidden="true"></div>
     </div>
 
     <div class="about-hero-content">
@@ -83,9 +83,7 @@
   <section class="about-cta-section" aria-label="Contact">
     <a href="/{{ current_lang }}/contact.html" class="cta about-cta">
       {{ about.cta.label }}
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-      </svg>
+      {% include ui/icon-arrow.html %}
     </a>
   </section>
 

@@ -51,8 +51,9 @@
 
 .project-card-title {
   text-align: start;
-  font-family: 'space grotesk', sans-serif;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--fs-p);
+  font-weight: 700;
 }
 
 .project-card-client {

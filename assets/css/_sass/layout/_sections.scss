@@ -1,10 +1,11 @@
+@use "base/mixins" as *;
 /* ============================================
    SECTIONS
    ============================================ */
 
 .section-title {
   width: 100%;
-  font-family: 'space grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
   border-bottom: var(--border-primary);
@@ -42,42 +43,23 @@
 }
 
 .hero-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   // font-size: 6rem;
   font-size: var(--fs-h1);
 }
 
 .hero-title-span {
   display: inline-block;
-  color: var(--primary-color-alpha);
-  -webkit-text-stroke: 1px #FF5C00;
-  cursor: pointer;
-
-  backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-font-smoothing: antialiased;
-  will-change: color, transform, filter;
-  
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: 
-    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hero-title-span:hover {
-  color: var(--primary-color);
-  transform: scale(1.02);
-  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+  @include text-stroke-hover;
 }
 
 .hero-title-span2 {
-  font-family: "Underdog", cursive;
+  font-family: var(--font-accent);
   color: rgba(255, 255, 255, 0.2);
 }
 
 .hero-pitch {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: var(--grey-light-400);
   font-weight: 100;
@@ -105,7 +87,7 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   padding: 1rem 2rem;
   background-color: var(--primary-color-alpha);
   color: var(--white-color);
@@ -133,15 +115,15 @@
   flex-direction: column;
   justify-content: center;
   padding-left: 2rem;
-  border-left: 1px solid #9CA3AF;
+  border-left: 1px solid var(--grey-light-400);
   height: fit-content;
   gap: 0.875rem;
 }
 
 .hero-disponibilites {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-small);
-  color: #9CA3AF;
+  color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -158,7 +140,7 @@
 .hero-disponibilites-text {
   font-size: var(--fs-p);
   font-weight: 600;
-  color: #34C759;
+  color: var(--color-success);
   line-height: 1;
 }
 
@@ -176,7 +158,7 @@
 }
 
 .hero-theme {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--white-color);
   font-weight: 700;
@@ -254,17 +236,8 @@
   line-height: 1.6;
 }
 
-.service-text-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  font-family: 'manrope', sans-serif;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
 .service-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-p);
   font-weight: 700;
 }
@@ -345,8 +318,8 @@
   flex-direction: row;
   width: 100%;
   padding: var(--spacing-lg) 0;
-  border-top: #FF5C00 1px solid;
-  border-bottom: #FF5C00 1px solid;
+  border-top: var(--primary-color) 1px solid;
+  border-bottom: var(--primary-color) 1px solid;
 }
 
 .detail-item-container {
@@ -366,7 +339,7 @@
 }
 
 .detail-title {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-small);
   color: var(--grey-light-400);
   font-weight: 400;
@@ -377,7 +350,7 @@
 }
 
 .detail-content {  
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   color: var(--primary-color);
   font-weight: 700;
@@ -394,7 +367,7 @@
 }
 
 .case-study-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
 }
@@ -455,7 +428,7 @@
 }
 
 .color-hex {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   color: var(--white-color);
   font-weight: 500;
   font-size: var(--fs-small);
@@ -478,38 +451,19 @@
 .font-sample {
   font-size: 8rem;
   line-height: 1;
-  color: var(--primary-color-alpha);
   font-weight: 500;
-  -webkit-text-stroke: 1px #FF5C00;
-  cursor: pointer;
-
-  backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-font-smoothing: antialiased;
-  will-change: color, transform, filter;
-  
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: 
-    color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-    filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
-    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.font-sample:hover {
-  color: var(--primary-color);
-  transform: scale(1.02);
-  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+  @include text-stroke-hover;
 }
 
 .font-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   color: var(--white-color);
   font-weight: 500;
   font-size: var(--fs-h4);
 }
 
 .font-description {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1.6;

@@ -57,7 +57,7 @@
         opacity: 1;
         // Pas de scale ici : scale(1.05) sur l'état actif permanent ferait déborder
         // le bouton (116px) hors du conteneur (110px), clippant la bordure orange.
-        box-shadow: 0 0 8px rgba(255, 92, 0, 0.35);
+        box-shadow: 0 0 8px color-mix(in srgb, var(--primary-color) 35%, transparent);
     }
 
     /* Focus clavier accessible */

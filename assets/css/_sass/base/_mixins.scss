@@ -19,3 +19,26 @@
     corner-shape: squircle;
   }
 }
+
+// ── CONTOUR + RELIEF AU SURVOL ────────────────────────
+// Contour orange, relief 3D leger et zoom au survol.
+// Utilise par .hero-title-span et .font-sample.
+@mixin text-stroke-hover {
+  color: var(--primary-color-alpha);
+  -webkit-text-stroke: 1px var(--primary-color);
+  cursor: pointer;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  will-change: color, transform, filter;
+  transition:
+    color 0.5s var(--ease-out),
+    filter 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+
+  &:hover {
+    color: var(--primary-color);
+    transform: scale(1.02);
+    filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
+  }
+}

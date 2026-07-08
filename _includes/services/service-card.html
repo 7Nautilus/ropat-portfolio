@@ -32,7 +32,7 @@
     <!-- Text content-->
     <div class="service-text-content">
       <h3 class="service-title">{{ service.title[current_lang] }}</h3>
-      <p>{{ service.description[current_lang] }}</p>
+      <p class="service-card-description">{{ service.description[current_lang] }}</p>
     </div>
   </div>
   <!-- Tools used
@@ -61,9 +61,7 @@
   {% if include.cta %}
     <div class="cta-simple orange" href="{{ detail_url }}">
       Découvrir l'offre
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-      </svg>
+      {% include ui/icon-arrow.html %}
     </div>
   {% endif %}
 </{{ card_tag }}>

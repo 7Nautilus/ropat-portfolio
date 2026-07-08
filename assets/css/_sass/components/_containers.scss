@@ -5,7 +5,7 @@
 }
 
 .bubble-container p {
-  font-family: Manrope;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: var(--text-secondary-color);
   padding: 1.25rem 2rem;
@@ -84,7 +84,7 @@
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
   font-size: var(--fs-small);
-  font-weight: 900;
+  font-weight: 800;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
 }

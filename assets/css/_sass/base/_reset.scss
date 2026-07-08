@@ -1,8 +1,13 @@
 /* ============================================
    RESET & GLOBAL STYLES
    ============================================ */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
@@ -10,10 +15,11 @@
 html {
   scroll-behavior: smooth;
   font-size: var(--font-size-base);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   background-image: linear-gradient(var(--secondary-color), var(--secondary-color)),
     url(/assets/images/backgrounds/main-bg.webp);
   background-size: contain;
@@ -21,8 +27,6 @@ body {
   background-position: center center;
   background-attachment: scroll;
   background-color: var(--background-dark); /* Fallback */
-  /*-webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);*/
   color: var(--white-color);
   min-height: 100vh;
   display: flex;
@@ -32,6 +36,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   gap: var(--spacing-xl);
+  text-wrap: pretty;
 }
 
 section {
@@ -42,7 +47,7 @@ section {
 
 /* Navigation Bar */
 nav {
-  padding:  0;
+  padding: 0;
 }
 
 a {
@@ -54,6 +59,14 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Les contrôles de formulaire héritent de la typographie */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
 }
 
 /* ============================================

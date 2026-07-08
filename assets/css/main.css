@@ -3,7 +3,7 @@
 :root {
   /* Couleurs */
   --primary-color: #ff5c00;
-  --primary-color-alpha: rgba(255, 92, 0, 0.2);
+  --primary-color-alpha: color-mix(in srgb, var(--primary-color) 20%, transparent);
   --secondary-color: rgba(0, 0, 0, 0.5);
   --white-color: #ffffff;
   --gray-dark: #2d3748;
@@ -11,26 +11,21 @@
   --gray-light: #e2e8f0;
   --background-dark: #0a0a0a;
   --background-light: rgba(255, 255, 255, 0.1);
+  --color-success: #34C759;
   /* Typographie */
-  --font-family: 'Manrope', sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+  --font-accent: 'Underdog', cursive;
+  /* Tailles fixes : racine et cas UI spécifiques */
   --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
   --font-size-2xl: 1.5rem;
-  --font-size-3xl: 2rem;
-  --font-size-4xl: 3rem;
-  /* Nouvelles variables harmonisées */
-  --font-size-xxs: 0.65rem;
-  --font-size-tiny: 0.5rem;
-  /* Tailles de police fluides */
-  --fs-h1: clamp(3rem, 5vw + 1rem, 6rem); /* 2.5rem, 5vw, 3.5rem */
-  --fs-h2: clamp(1.75rem, 3vw + 1rem, 3rem); /* 1.8rem, 4vw, var(--font-size-4xl) */
-  --fs-h3: clamp(1.5rem, 2vw + 1rem, 2.25rem); /* var(--font-size-xl), 2vw, 1.75rem */
-  --fs-h4: clamp(1.25rem, 1.5vw + 1rem, 1.75rem); /* var(--font-size-lg), 1.5vw, var(--font-size-2xl) */
-  --fs-h5: clamp(1.125rem, 1vw + 1rem, 1.5rem); /* var(--font-size-base), 1vw, var(--font-size-xl) */
-  --fs-p: clamp(1rem, 0.5vw + 1rem, 1.25rem); /* var(--font-size-lg), var(--font-size-xl), var(--font-size-xl) */
+  /* Échelle typographique fluide (principale) */
+  --fs-h1: clamp(3rem, 5vw + 1rem, 6rem);
+  --fs-h2: clamp(1.75rem, 3vw + 1rem, 3rem);
+  --fs-h3: clamp(1.5rem, 2vw + 1rem, 2.25rem);
+  --fs-h4: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
+  --fs-h5: clamp(1.125rem, 1vw + 1rem, 1.5rem);
+  --fs-p: clamp(1rem, 0.5vw + 1rem, 1.25rem);
   --fs-text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.5rem);
   --fs-small: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
   --fs-xsmall: clamp(0.75rem, 0.5vw + 0.25rem, 0.875rem);
@@ -54,17 +49,24 @@
   --border-radius-squircle-full: 50%;
   /* Ombres */
   --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 6px 16px rgba(255, 92, 0, 0.5);
+  --shadow-md: 0 6px 16px color-mix(in srgb, var(--primary-color) 50%, transparent);
   --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
   /* Transitions */
   --transition-base: 0.3s ease;
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ============================================
    RESET & GLOBAL STYLES
    ============================================ */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+* {
   margin: 0;
   padding: 0;
 }
@@ -72,18 +74,17 @@
 html {
   scroll-behavior: smooth;
   font-size: var(--font-size-base);
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   background-image: linear-gradient(var(--secondary-color), var(--secondary-color)), url(/assets/images/backgrounds/main-bg.webp);
   background-size: contain;
   background-repeat: repeat;
   background-position: center center;
   background-attachment: scroll;
   background-color: var(--background-dark); /* Fallback */
-  /*-webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);*/
   color: var(--white-color);
   min-height: 100vh;
   display: flex;
@@ -93,6 +94,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   gap: var(--spacing-xl);
+  text-wrap: pretty;
 }
 
 section {
@@ -115,6 +117,14 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Les contrôles de formulaire héritent de la typographie */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
 }
 
 /* ============================================
@@ -163,7 +173,7 @@ p:empty {
    ============================================ */
 .nav-element {
   color: var(--white-color);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -183,7 +193,7 @@ p:empty {
 }
 
 .text-h2 {
-  font-family: "space grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 700;
 }
@@ -430,21 +440,21 @@ header {
   backface-visibility: hidden;
   perspective: 1000px;
   /* Transition spécifique pour le filtre d'ombre */
-  transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
   cursor: pointer;
 }
 
 .logo path {
-  transition: fill-opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: fill-opacity 0.6s var(--ease-out);
 }
 
 .logo:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
 }
 
 .logo:hover path {
-  fill-opacity: 1 !important;
+  fill-opacity: 1;
 }
 
 /* ================================
@@ -604,7 +614,7 @@ header {
    ============================================ */
 .section-title {
   width: 100%;
-  font-family: "space grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
   border-bottom: var(--border-primary);
@@ -641,36 +651,34 @@ header {
 }
 
 .hero-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h1);
 }
 
 .hero-title-span {
   display: inline-block;
   color: var(--primary-color-alpha);
-  -webkit-text-stroke: 1px #FF5C00;
+  -webkit-text-stroke: 1px var(--primary-color);
   cursor: pointer;
   backface-visibility: hidden;
   perspective: 1000px;
   -webkit-font-smoothing: antialiased;
   will-change: color, transform, filter;
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.5s var(--ease-out), filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
-
 .hero-title-span:hover {
   color: var(--primary-color);
   transform: scale(1.02);
-  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
 }
 
 .hero-title-span2 {
-  font-family: "Underdog", cursive;
+  font-family: var(--font-accent);
   color: rgba(255, 255, 255, 0.2);
 }
 
 .hero-pitch {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: var(--grey-light-400);
   font-weight: 100;
@@ -697,7 +705,7 @@ header {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   padding: 1rem 2rem;
   background-color: var(--primary-color-alpha);
   color: var(--white-color);
@@ -724,15 +732,15 @@ header {
   flex-direction: column;
   justify-content: center;
   padding-left: 2rem;
-  border-left: 1px solid #9CA3AF;
+  border-left: 1px solid var(--grey-light-400);
   height: fit-content;
   gap: 0.875rem;
 }
 
 .hero-disponibilites {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-small);
-  color: #9CA3AF;
+  color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
@@ -749,7 +757,7 @@ header {
 .hero-disponibilites-text {
   font-size: var(--fs-p);
   font-weight: 600;
-  color: #34C759;
+  color: var(--color-success);
   line-height: 1;
 }
 
@@ -766,7 +774,7 @@ header {
 }
 
 .hero-theme {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: var(--white-color);
   font-weight: 700;
@@ -842,17 +850,8 @@ header {
   line-height: 1.6;
 }
 
-.service-text-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  font-family: "manrope", sans-serif;
-  font-weight: 400;
-  line-height: 1.4;
-}
-
 .service-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-p);
   font-weight: 700;
 }
@@ -930,8 +929,8 @@ header {
   flex-direction: row;
   width: 100%;
   padding: var(--spacing-lg) 0;
-  border-top: #FF5C00 1px solid;
-  border-bottom: #FF5C00 1px solid;
+  border-top: var(--primary-color) 1px solid;
+  border-bottom: var(--primary-color) 1px solid;
 }
 
 .detail-item-container {
@@ -951,7 +950,7 @@ header {
 }
 
 .detail-title {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-small);
   color: var(--grey-light-400);
   font-weight: 400;
@@ -962,7 +961,7 @@ header {
 }
 
 .detail-content {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   color: var(--primary-color);
   font-weight: 700;
@@ -978,7 +977,7 @@ header {
 }
 
 .case-study-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
 }
@@ -1041,7 +1040,7 @@ header {
 }
 
 .color-hex {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   color: var(--white-color);
   font-weight: 500;
   font-size: var(--fs-small);
@@ -1064,33 +1063,31 @@ header {
 .font-sample {
   font-size: 8rem;
   line-height: 1;
-  color: var(--primary-color-alpha);
   font-weight: 500;
-  -webkit-text-stroke: 1px #FF5C00;
+  color: var(--primary-color-alpha);
+  -webkit-text-stroke: 1px var(--primary-color);
   cursor: pointer;
   backface-visibility: hidden;
   perspective: 1000px;
   -webkit-font-smoothing: antialiased;
   will-change: color, transform, filter;
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.5s var(--ease-out), filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
 }
-
 .font-sample:hover {
   color: var(--primary-color);
   transform: scale(1.02);
-  filter: drop-shadow(0 8px 15px rgba(255, 92, 0, 0.3));
+  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
 }
 
 .font-name {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   color: var(--white-color);
   font-weight: 500;
   font-size: var(--fs-h4);
 }
 
 .font-description {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1.6;
@@ -1163,7 +1160,7 @@ footer {
 }
 
 .footer-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 700;
   text-transform: uppercase;
@@ -1198,14 +1195,14 @@ footer {
 
 .footer-description {
   font-size: var(--fs-p);
-  color: #9CA3AF;
+  color: var(--grey-light-400);
   line-height: 1.75;
   font-weight: 500;
 }
 
 .email {
   width: fit-content;
-  font-family: "space grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   line-height: 1.75;
   font-weight: 700;
@@ -1221,7 +1218,7 @@ footer {
   padding: var(--spacing-md) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--white-color);
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   text-transform: uppercase;
   font-weight: 300;
   font-size: var(--fs-small);
@@ -1268,12 +1265,12 @@ footer {
     z-index: 9999;
     transform: translate(-50%, -50%);
     will-change: transform;
-    transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), height 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-radius 0.35s ease, background 0.3s ease, border 0.3s ease;
+    transition: width 0.35s var(--ease-smooth), height 0.35s var(--ease-smooth), border-radius 0.35s ease, background 0.3s ease, border 0.3s ease;
   }
   body.cursor-hover #cursor-blob {
     width: 64px;
     height: 64px;
-    background: rgba(255, 92, 0, 0.1);
+    background: color-mix(in srgb, var(--primary-color) 10%, transparent);
     border: 3px solid var(--primary-color);
   }
   body.cursor-text #cursor-blob {
@@ -1349,7 +1346,7 @@ footer {
 }
 
 .loader-logo-text {
-  font-size: var(--font-size-4xl);
+  font-size: var(--fs-h2);
   font-weight: 800;
   color: var(--white-color);
   margin-bottom: var(--spacing-md);
@@ -1396,7 +1393,7 @@ footer {
 /* Call to Action Button */
 .cta-container {
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: flex-end;
   width: 100%;
   padding: 0 var(--spacing-lg);
 }
@@ -1422,6 +1419,18 @@ footer {
   background-color: var(--primary-color);
   transform: scale(1.05);
   box-shadow: var(--shadow-md);
+}
+
+.cta svg,
+.cta-simple svg,
+.hero-cta-icon {
+  transition: transform var(--transition-base);
+}
+
+.cta:hover svg,
+.card:hover .cta-simple svg,
+.hero-cta:hover .hero-cta-icon {
+  transform: rotate(-45deg);
 }
 
 .big-icon-placeholder {
@@ -1453,7 +1462,7 @@ footer {
   justify-content: center;
   width: fit-content;
   gap: 0.875rem;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
 .card:hover .cta-simple {
@@ -1609,7 +1618,7 @@ footer {
 .thumbnail-btn[data-active=true] {
   border-color: var(--primary-color);
   opacity: 1;
-  box-shadow: 0 0 8px rgba(255, 92, 0, 0.35);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--primary-color) 35%, transparent);
 }
 .thumbnail-btn {
   /* Focus clavier accessible */
@@ -1812,7 +1821,7 @@ footer {
 }
 
 .bubble-container p {
-  font-family: Manrope;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: var(--text-secondary-color);
   padding: 1.25rem 2rem;
@@ -1889,7 +1898,7 @@ footer {
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
   font-size: var(--fs-small);
-  font-weight: 900;
+  font-weight: 800;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
 }
@@ -1987,17 +1996,6 @@ footer {
     opacity: 1;
   }
 }
-#matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.25;
-}
-
 .partners-carousel {
   /* Configuration responsive du nombre d''items */
   container-type: inline-size;
@@ -2109,7 +2107,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: "manrope", sans-serif;
+  font-family: var(--font-body);
   background-color: var(--secondary-color);
   border-radius: 5rem;
 }
@@ -2153,12 +2151,6 @@ footer {
   gap: var(--spacing-sm);
 }
 
-/* title */
-.service-card-title {
-  font-size: var(--fs-p);
-  font-weight: 600;
-}
-
 /* description */
 .service-card-description {
   font-size: var(--font-size-base);
@@ -2168,7 +2160,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  font-family: "manrope", sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.4;
 }
@@ -2179,7 +2171,7 @@ footer {
   flex-direction: row;
   gap: var(--spacing-xs);
   flex-wrap: wrap;
-  font-family: "manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-small);
   color: var(--primary-color);
 }
@@ -2189,12 +2181,12 @@ footer {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  font-family: "space grotesk", sans-serif;
+  font-family: var(--font-heading);
   text-transform: uppercase;
   font-weight: 100;
   font-size: 0.875rem;
-  color: #9CA3AF;
-  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--grey-light-400);
+  transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
 
 .service-card:hover .service-card-details {
@@ -2285,8 +2277,9 @@ footer {
 
 .project-card-title {
   text-align: start;
-  font-family: "space grotesk", sans-serif;
-  font-weight: 900;
+  font-family: var(--font-heading);
+  font-size: var(--fs-p);
+  font-weight: 700;
 }
 
 .project-card-client {
@@ -2325,7 +2318,7 @@ footer {
   }
 }
 .experience-card {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
 }
 
 .experience-card-job {
@@ -2459,7 +2452,7 @@ footer {
 
 .legal-meta {
   margin-top: 2rem;
-  font-size: var(--font-size-sm);
+  font-size: var(--fs-small);
   opacity: 0.7;
 }
 
@@ -2478,8 +2471,8 @@ footer {
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 700;
@@ -2536,8 +2529,8 @@ footer {
 }
 
 .cs-spec-label {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   color: rgba(255, 255, 255, 0.45);
   font-weight: 600;
   text-transform: uppercase;
@@ -2545,7 +2538,7 @@ footer {
 }
 
 .cs-spec-value {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-p);
   color: var(--white-color);
   font-weight: 600;
@@ -2579,7 +2572,7 @@ footer {
 }
 
 .cs-process-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.15;
@@ -2598,7 +2591,7 @@ footer {
   gap: var(--spacing-lg);
   padding-top: var(--spacing-lg);
   margin-top: var(--spacing-sm);
-  border-top: 1px solid rgba(255, 92, 0, 0.25);
+  border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 .cs-process-section:first-of-type {
   padding-top: 0;
@@ -2606,13 +2599,13 @@ footer {
   border-top: none;
 }
 .cs-process-section h3 {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--primary-color);
 }
 .cs-process-section p {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   line-height: 1.85;
   color: rgba(255, 255, 255, 0.75);
@@ -2628,13 +2621,13 @@ footer {
   gap: var(--spacing-lg);
 }
 .cs-process-content h3 {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--primary-color);
   padding-top: var(--spacing-lg);
   margin-top: var(--spacing-sm);
-  border-top: 1px solid rgba(255, 92, 0, 0.25);
+  border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
 }
 .cs-process-content h3:first-child {
   padding-top: 0;
@@ -2642,7 +2635,7 @@ footer {
   border-top: none;
 }
 .cs-process-content p {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   line-height: 1.85;
   color: rgba(255, 255, 255, 0.75);
@@ -2710,8 +2703,8 @@ footer {
   }
   .cs-mockups--bento .cs-mockup {
     aspect-ratio: 1;
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
+    grid-column: span 1;
+    grid-row: span 1;
   }
 }
 
@@ -2757,8 +2750,8 @@ footer {
 }
 
 .cs-design-title {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -2800,16 +2793,16 @@ footer {
 }
 
 .cs-color-name {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0/0.85);
   line-height: 1.3;
 }
 
 .cs-color-hex {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-heading);
+  font-size: var(--fs-xsmall);
   font-weight: 500;
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0/0.65);
   text-transform: uppercase;
@@ -2842,14 +2835,14 @@ footer {
 }
 .cs-font-item:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 92, 0, 0.3);
+  border-color: color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
 .cs-font-sample {
   font-size: 4rem;
   line-height: 1;
   font-weight: 700;
-  color: rgba(255, 92, 0, 0.2);
+  color: color-mix(in srgb, var(--primary-color) 20%, transparent);
   -webkit-text-stroke: 1.5px var(--primary-color);
   flex-shrink: 0;
   width: 5rem;
@@ -2859,7 +2852,7 @@ footer {
   user-select: none;
 }
 .cs-font-item:hover .cs-font-sample {
-  color: rgba(255, 92, 0, 0.5);
+  color: color-mix(in srgb, var(--primary-color) 50%, transparent);
 }
 
 .cs-font-info {
@@ -2869,7 +2862,7 @@ footer {
 }
 
 .cs-font-name {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--white-color);
@@ -2877,8 +2870,8 @@ footer {
 }
 
 .cs-font-usage {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.5;
 }
@@ -2887,8 +2880,8 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -2918,8 +2911,8 @@ footer {
 }
 
 .project-cta-eyebrow {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -2927,7 +2920,7 @@ footer {
 }
 
 .project-cta-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.1;
@@ -2964,7 +2957,7 @@ footer {
 }
 .project-nav-item:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 92, 0, 0.35);
+  border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
 }
 .project-nav-item:hover .project-nav-arrow {
   color: var(--primary-color);
@@ -3031,8 +3024,8 @@ footer {
 }
 
 .project-nav-label {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
@@ -3040,7 +3033,7 @@ footer {
 }
 
 .project-nav-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--font-size-base);
   font-weight: 700;
   color: var(--white-color);
@@ -3051,8 +3044,8 @@ footer {
 }
 
 .project-nav-sub {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -3064,8 +3057,8 @@ footer {
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
   color: rgba(255, 255, 255, 0.45);
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -3083,7 +3076,7 @@ footer {
 }
 .project-nav-portfolio:hover {
   color: var(--white-color);
-  border-color: rgba(255, 92, 0, 0.35);
+  border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -3094,13 +3087,15 @@ footer {
   }
   .cs-spec {
     padding: var(--spacing-md) 0;
-    border-left: none !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     flex: none;
   }
   .cs-spec:first-child {
     border-top: none;
     padding-top: 0;
+  }
+  .cs-spec:not(:first-child) {
+    border-left: none;
   }
   .project-nav {
     grid-template-columns: 1fr;
@@ -3166,7 +3161,7 @@ footer {
 .about-photo-placeholder {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--background-light) 0%, rgba(255, 92, 0, 0.08) 100%);
+  background: linear-gradient(135deg, var(--background-light) 0%, color-mix(in srgb, var(--primary-color) 8%, transparent) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: inherit;
 }
@@ -3177,7 +3172,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: 6rem;
   font-weight: 700;
   color: var(--primary-color);
@@ -3192,14 +3187,14 @@ footer {
 }
 
 .about-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h1);
   font-weight: 700;
   line-height: 1.1;
 }
 
 .about-intro {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   line-height: 1.75;
   color: rgba(255, 255, 255, 0.8);
@@ -3212,8 +3207,8 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  font-size: var(--font-size-sm);
-  color: #34C759;
+  font-size: var(--fs-small);
+  color: var(--color-success);
   font-weight: 600;
   margin-top: var(--spacing-xs);
 }
@@ -3247,7 +3242,7 @@ footer {
 }
 
 .about-stat-value {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 700;
   color: var(--primary-color);
@@ -3255,7 +3250,7 @@ footer {
 }
 
 .about-stat-label {
-  font-size: var(--font-size-sm);
+  font-size: var(--fs-small);
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -3284,7 +3279,7 @@ footer {
 }
 
 .about-section-title {
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--white-color);
@@ -3313,9 +3308,9 @@ footer {
   }
 }
 .about-tool-tag {
-  font-size: var(--font-size-sm);
-  font-family: "Manrope", sans-serif;
-  font-weight: 900;
+  font-size: var(--fs-small);
+  font-family: var(--font-body);
+  font-weight: 800;
   color: rgba(255, 255, 255, 0.7);
   background: var(--secondary-color);
   transition: border-color var(--transition-base), color var(--transition-base);
@@ -3344,7 +3339,7 @@ footer {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: rgba(255, 255, 255, 0.8);
 }
@@ -3404,8 +3399,8 @@ footer {
 
 .about-timeline-period {
   position: relative;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
   font-weight: 700;
   color: var(--primary-color);
   text-transform: uppercase;
@@ -3432,7 +3427,7 @@ footer {
 }
 
 .about-timeline-desc {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--fs-p);
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.7;
@@ -3449,7 +3444,7 @@ footer {
 }
 
 .about-cta {
-  font-size: var(--font-size-lg);
+  font-size: var(--fs-text-lg);
   padding: var(--spacing-md) var(--spacing-xl);
 }
 .about-cta:focus-visible {
@@ -3526,8 +3521,8 @@ main:has(.contact-hero) {
 }
 
 .contact-section-label {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -3567,14 +3562,14 @@ main:has(.contact-hero) {
 }
 
 .contact-label {
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .contact-input {
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
@@ -3601,7 +3596,7 @@ main:has(.contact-hero) {
 }
 .contact-input:focus {
   border: 2px solid var(--primary-color);
-  background: rgba(255, 92, 0, 0.04);
+  background: color-mix(in srgb, var(--primary-color) 4%, transparent);
 }
 .contact-form.was-validated .contact-input:invalid {
   border-color: rgba(255, 80, 80, 0.5);
@@ -3689,15 +3684,15 @@ main:has(.contact-hero) {
   margin-top: 2px;
 }
 .contact-info-icon--available {
-  color: #4ade80;
+  color: var(--color-success);
   background: rgba(74, 222, 128, 0.08);
   border-color: rgba(74, 222, 128, 0.2);
 }
 
 .contact-info-label {
   display: block;
-  font-family: "Manrope", sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
@@ -3707,7 +3702,7 @@ main:has(.contact-hero) {
 
 .contact-info-value {
   display: block;
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--white-color);
@@ -3723,12 +3718,12 @@ main:has(.contact-hero) {
 }
 
 .contact-available {
-  color: #4ade80;
+  color: var(--color-success);
 }
 
 .contact-dropdown {
   position: relative;
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
@@ -3759,7 +3754,7 @@ main:has(.contact-hero) {
 .contact-dropdown:focus-visible, .contact-dropdown[aria-expanded=true] {
   border: 2px solid var(--primary-color);
   border-color: var(--primary-color);
-  background: rgba(255, 92, 0, 0.04);
+  background: color-mix(in srgb, var(--primary-color) 4%, transparent);
 }
 .contact-form.was-validated ~ * .contact-dropdown, .contact-form.was-validated .contact-dropdown.is-invalid {
   border-color: rgba(255, 80, 80, 0.5);
@@ -3778,7 +3773,7 @@ main:has(.contact-hero) {
 .contact-dropdown-caret {
   flex-shrink: 0;
   color: rgba(255, 255, 255, 0.4);
-  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.25s var(--ease-smooth);
 }
 .contact-dropdown[aria-expanded=true] .contact-dropdown-caret {
   transform: rotate(180deg);
@@ -3793,7 +3788,7 @@ main:has(.contact-hero) {
   list-style: none;
   /*background: #1c1c1e; */
   border: 2px solid var(--primary-color);
-  background: rgba(255, 92, 0, 0.04);
+  background: color-mix(in srgb, var(--primary-color) 4%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--border-radius-md);
@@ -3813,7 +3808,7 @@ main:has(.contact-hero) {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
-  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-smooth);
 }
 .contact-dropdown-menu.is-open {
   opacity: 1;
@@ -3827,7 +3822,7 @@ main:has(.contact-hero) {
   gap: 0.6rem;
   padding: 0.6rem 0.75rem;
   border-radius: calc(var(--border-radius-sm) - 4px);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.75);
@@ -3839,7 +3834,7 @@ main:has(.contact-hero) {
   color: var(--white-color);
 }
 .contact-dropdown-option[aria-selected=true] {
-  background: rgba(255, 92, 0, 0.12);
+  background: color-mix(in srgb, var(--primary-color) 12%, transparent);
   color: var(--primary-color);
 }
 .contact-dropdown-option[aria-selected=true] .contact-dropdown-icon {
@@ -3885,15 +3880,6 @@ main:has(.contact-hero) {
     gap: var(--spacing-lg);
     flex-direction: column;
   }
-  /*
-  .footer-nav-title {
-    font-size: var(--font-size-base);
-  }
-
-  .nav-link {
-    font-size: var(--font-size-base);
-  }
-  */
   .nav-link:hover {
     transform: none;
   }
@@ -3935,6 +3921,9 @@ main:has(.contact-hero) {
   .case-study-mockup {
     margin: 0 var(--spacing-xl);
   }
+  .service-main-container {
+    padding: 0 2rem;
+  }
 }
 /* Medium Tablets - 768px + */
 @media (min-width: 768px) {
@@ -3949,7 +3938,7 @@ main:has(.contact-hero) {
     padding: 0.875rem 2rem;
   }
   .hero-title-span {
-    -webkit-text-stroke: 2px #FF5C00;
+    -webkit-text-stroke: 2px var(--primary-color);
   }
   .hero-project {
     flex-direction: row;
@@ -3957,8 +3946,10 @@ main:has(.contact-hero) {
   .hero-project-container {
     max-width: 55%;
   }
+  .hero-image-container {
+    width: 40%;
+  }
 }
-/* Small Laptops - 640px - 1023px */
 /* Desktop - 1024px + */
 @media (min-width: 1024px) {
   .section-grid {
@@ -3986,10 +3977,6 @@ main:has(.contact-hero) {
     max-width: 33vw;
   }
 }
-/* Large Desktops - 1440px + */
-@media (min-width: 1440px) {
-  /* Removed manual font-size overrides as we now use clamp() */
-}
 /* Mobile - Max 639px */
 @media (max-width: 639px) {
   body {
@@ -4011,7 +3998,7 @@ main:has(.contact-hero) {
   }
   /* CTA */
   .hero-cta-container {
-    flex-direction: column; /* Empile les éléments */
+    flex-direction: column;
     width: 100%;
     gap: var(--spacing-lg);
   }
@@ -4020,11 +4007,11 @@ main:has(.contact-hero) {
   }
   .hero-disponibilites-container {
     padding-left: 0;
-    border-left: none; /* On enlève la barre verticale */
-    border-top: 1px solid #9CA3AF; /* On met une barre horizontale */
+    border-left: none;
+    border-top: 1px solid var(--grey-light-400);
     padding-top: var(--spacing-lg);
     width: fit-content;
-    align-items: center; /* Centre le texte */
+    align-items: center;
   }
   .hero-image-container {
     max-width: 100%;
@@ -4036,11 +4023,6 @@ main:has(.contact-hero) {
   .contact-link {
     padding: 0.75rem var(--spacing-md);
   }
-  /*
-  .service-hero {
-    padding: 5rem var(--spacing-xs);
-  }
-  */
   .scroll-down-link {
     bottom: 3rem;
   }
@@ -4052,6 +4034,9 @@ main:has(.contact-hero) {
   .section-grid {
     grid-template-columns: 1fr;
     margin: 0;
+    padding: 0;
+  }
+  .cta-container {
     padding: 0;
   }
   .service-detail {
@@ -4073,19 +4058,10 @@ main:has(.contact-hero) {
   .projects-title {
     font-size: var(--font-size-2xl);
   }
-  /* .project-title override removed as we use clamp() */
-  .hero-image-container {
-    max-width: 100%;
-  }
   .card-grid {
     padding: 0;
     gap: var(--spacing-md);
   }
-  /*
-  #services-cards .service-card-simple {
-    width: 100%;
-  }
-  */
   /* Footer */
   .footer-top {
     justify-content: space-between;
@@ -4104,7 +4080,7 @@ main:has(.contact-hero) {
     padding: var(--spacing-xs) var(--spacing-sm);
   }
   .footer-text {
-    font-size: var(--font-size-xxs);
+    font-size: var(--fs-xsmall);
   }
   .footer-right-section {
     flex-direction: column;
@@ -4116,10 +4092,5 @@ main:has(.contact-hero) {
   }
   .socialContainer {
     padding: 0.5rem;
-  }
-}
-@media (min-width: 640px) {
-  .service-main-container {
-    padding: 0 2rem;
   }
 }

@@ -39,8 +39,8 @@ main:has(.contact-hero) {
 }
 
 .contact-section-label {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -80,14 +80,14 @@ main:has(.contact-hero) {
 }
 
 .contact-label {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .contact-input {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
@@ -107,7 +107,7 @@ main:has(.contact-hero) {
 
   &:focus {
     border: 2px solid var(--primary-color);
-    background: rgba(255, 92, 0, 0.04);
+    background: color-mix(in srgb, var(--primary-color) 4%, transparent);
   }
 
   // Validation visuelle uniquement après interaction utilisateur
@@ -192,7 +192,7 @@ main:has(.contact-hero) {
   margin-top: 2px;
 
   &--available {
-    color: #4ade80;
+    color: var(--color-success);
     background: rgba(74, 222, 128, 0.08);
     border-color: rgba(74, 222, 128, 0.2);
   }
@@ -200,8 +200,8 @@ main:has(.contact-hero) {
 
 .contact-info-label {
   display: block;
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
@@ -211,7 +211,7 @@ main:has(.contact-hero) {
 
 .contact-info-value {
   display: block;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--white-color);
@@ -226,13 +226,13 @@ main:has(.contact-hero) {
 }
 
 .contact-available {
-  color: #4ade80;
+  color: var(--color-success);
 }
 
 // ── DROPDOWN CUSTOM ──────────────
 .contact-dropdown {
   position: relative;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
@@ -256,7 +256,7 @@ main:has(.contact-hero) {
   &[aria-expanded="true"] {
     border: 2px solid var(--primary-color);
     border-color: var(--primary-color);
-    background: rgba(255, 92, 0, 0.04);
+    background: color-mix(in srgb, var(--primary-color) 4%, transparent);
   }
 
   // Validation : champ vide après tentative de submit
@@ -281,7 +281,7 @@ main:has(.contact-hero) {
 .contact-dropdown-caret {
   flex-shrink: 0;
   color: rgba(255, 255, 255, 0.4);
-  transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.25s var(--ease-smooth);
 
   .contact-dropdown[aria-expanded="true"] & {
     transform: rotate(180deg);
@@ -297,7 +297,7 @@ main:has(.contact-hero) {
   list-style: none;
   /*background: #1c1c1e; */
   border: 2px solid var(--primary-color);
-  background: rgba(255, 92, 0, 0.04);
+  background: color-mix(in srgb, var(--primary-color) 4%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   @include squircle(var(--border-radius-md));
@@ -311,7 +311,7 @@ main:has(.contact-hero) {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
-  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.2s ease, transform 0.2s var(--ease-smooth);
 
   &.is-open {
     opacity: 1;
@@ -326,7 +326,7 @@ main:has(.contact-hero) {
   gap: 0.6rem;
   padding: 0.6rem 0.75rem;
   border-radius: calc(var(--border-radius-sm) - 4px);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.75);
@@ -339,7 +339,7 @@ main:has(.contact-hero) {
   }
 
   &[aria-selected="true"] {
-    background: rgba(255, 92, 0, 0.12);
+    background: color-mix(in srgb, var(--primary-color) 12%, transparent);
     color: var(--primary-color);
 
     .contact-dropdown-icon {

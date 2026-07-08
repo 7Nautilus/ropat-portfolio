@@ -77,8 +77,8 @@ case_study:
   mockup: 
     src: /assets/images/projects/zylkene-mockup.webp
     alt: 
-      - fr: "Mockup du packaging de Zylkene pour Vetoquinol"
-      - en: "Mockup of the Zylkene packaging for Vetoquinol"
+      fr: "Mockup du packaging de Zylkene pour Vetoquinol"
+      en: "Mockup of the Zylkene packaging for Vetoquinol"
   
   colors:
     - hex: "#3CB9D8"

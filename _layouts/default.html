@@ -88,7 +88,7 @@
     <meta name="author" content="Ropat">
     <meta name="publisher" content="Ropat">
     <meta name="copyright" content="Ropat">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{{ page.robots | default: 'index, follow' }}">
 
     <!-- Canonical -->
     <link rel="canonical" href="{{ current_canonical }}">

@@ -20,7 +20,7 @@
   border: 3px solid var(--primary-color);
   @include squircle(var(--border-radius-squircle-medium));
 
-  font-family: "Space Grotesk", sans-serif;
+  font-family: var(--font-heading);
 }
 
 .experience-card-job {

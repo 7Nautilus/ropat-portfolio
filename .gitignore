@@ -26,3 +26,12 @@ VEILLE.md
 
 extract_font_sizes.py
 font_sizes_report.csv
+
+# Fichiers générés
+assets/css/main.css.map
+
+# Docs & fichiers internes
+backup.txt
+TODO.md
+CLAUDE.md
+docs/

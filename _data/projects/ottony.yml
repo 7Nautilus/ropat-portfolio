@@ -77,8 +77,8 @@ case_study:
   mockup:
     src: /assets/images/projects/ottony_paris_mockup.webp
     alt:
-      - fr: "Mockup de présentation du branding pour Ottony Paris"
-      - en: "Presentation mockup of the branding for Ottony Paris"
+      fr: "Mockup de présentation du branding pour Ottony Paris"
+      en: "Presentation mockup of the branding for Ottony Paris"
 
   colors:
     - hex: "#000000"

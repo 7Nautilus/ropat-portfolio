@@ -19,8 +19,8 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   letter-spacing: 0.25em;
   text-transform: uppercase;
   font-weight: 700;
@@ -83,8 +83,8 @@
 }
 
 .cs-spec-label {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   color: rgba(255, 255, 255, 0.45);
   font-weight: 600;
   text-transform: uppercase;
@@ -92,7 +92,7 @@
 }
 
 .cs-spec-value {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-p);
   color: var(--white-color);
   font-weight: 600;
@@ -125,7 +125,7 @@
 }
 
 .cs-process-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.15;
@@ -146,7 +146,7 @@
   gap: var(--spacing-lg);
   padding-top: var(--spacing-lg);
   margin-top: var(--spacing-sm);
-  border-top: 1px solid rgba(255, 92, 0, 0.25);
+  border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
 
   &:first-of-type {
     padding-top: 0;
@@ -155,14 +155,14 @@
   }
 
   h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-h4);
     font-weight: 700;
     color: var(--primary-color);
   }
 
   p {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-body);
     font-size: var(--fs-p);
     line-height: 1.85;
     color: rgba(255, 255, 255, 0.75);
@@ -182,13 +182,13 @@
 
   // Chapitres (h3 depuis le YAML)
   h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-h4);
     font-weight: 700;
     color: var(--primary-color);
     padding-top: var(--spacing-lg);
     margin-top: var(--spacing-sm);
-    border-top: 1px solid rgba(255, 92, 0, 0.25);
+    border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
 
     &:first-child {
       padding-top: 0;
@@ -198,7 +198,7 @@
   }
 
   p {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--font-body);
     font-size: var(--fs-p);
     line-height: 1.85;
     color: rgba(255, 255, 255, 0.75);
@@ -275,8 +275,8 @@
 
     .cs-mockup {
       aspect-ratio: 1;
-      grid-column: span 1 !important;
-      grid-row: span 1 !important;
+      grid-column: span 1;
+      grid-row: span 1;
     }
   }
 }
@@ -316,8 +316,8 @@
 }
 
 .cs-design-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
   font-weight: 700;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -356,16 +356,16 @@
 }
 
 .cs-color-name {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0 / 0.85);
   line-height: 1.3;
 }
 
 .cs-color-hex {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-heading);
+  font-size: var(--fs-xsmall);
   font-weight: 500;
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0 / 0.65);
   text-transform: uppercase;
@@ -391,7 +391,7 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 92, 0, 0.3);
+    border-color: color-mix(in srgb, var(--primary-color) 30%, transparent);
   }
 }
 
@@ -399,7 +399,7 @@
   font-size: 4rem;
   line-height: 1;
   font-weight: 700;
-  color: rgba(255, 92, 0, 0.2);
+  color: color-mix(in srgb, var(--primary-color) 20%, transparent);
   -webkit-text-stroke: 1.5px var(--primary-color);
   flex-shrink: 0;
   width: 5rem;
@@ -409,7 +409,7 @@
   user-select: none;
 
   .cs-font-item:hover & {
-    color: rgba(255, 92, 0, 0.5);
+    color: color-mix(in srgb, var(--primary-color) 50%, transparent);
   }
 }
 
@@ -420,7 +420,7 @@
 }
 
 .cs-font-name {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--white-color);
@@ -428,8 +428,8 @@
 }
 
 .cs-font-usage {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.5;
 }
@@ -442,8 +442,8 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -475,8 +475,8 @@
 }
 
 .project-cta-eyebrow {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
@@ -484,7 +484,7 @@
 }
 
 .project-cta-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 700;
   line-height: 1.1;
@@ -519,7 +519,7 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 92, 0, 0.35);
+    border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
 
     .project-nav-arrow { color: var(--primary-color); }
     .project-nav-title { color: var(--primary-color); }
@@ -571,8 +571,8 @@
 }
 
 .project-nav-label {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.35);
   text-transform: uppercase;
@@ -580,7 +580,7 @@
 }
 
 .project-nav-title {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: var(--font-size-base);
   font-weight: 700;
   color: var(--white-color);
@@ -591,8 +591,8 @@
 }
 
 .project-nav-sub {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -605,8 +605,8 @@
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
   color: rgba(255, 255, 255, 0.45);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--font-size-xs);
+  font-family: var(--font-body);
+  font-size: var(--fs-xsmall);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -616,7 +616,7 @@
 
   &:hover {
     color: var(--white-color);
-    border-color: rgba(255, 92, 0, 0.35);
+    border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
     background: rgba(255, 255, 255, 0.03);
   }
 }
@@ -630,13 +630,16 @@
 
   .cs-spec {
     padding: var(--spacing-md) 0;
-    border-left: none !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     flex: none;
 
     &:first-child {
       border-top: none;
       padding-top: 0;
+    }
+
+    &:not(:first-child) {
+      border-left: none;
     }
   }
 

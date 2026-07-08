@@ -25,6 +25,7 @@ Génère automatiquement les balises Schema.org selon le type de page
 {% assign social_instagram = site.social.instagram | default: "https://www.instagram.com/9.ropat/" %}
 {% assign social_pinterest = site.social.pinterest | default: "https://fr.pinterest.com/9ropat/" %}
 {% assign social_behance = site.social.behance | default: "https://www.behance.net/ropat" %}
+{% assign social_linkedin = site.social.linkedin | default: "https://www.linkedin.com/in/ropat-art/" %}
 
 {% comment %} Price range {% endcomment %}
 {% assign price_range = site.business.price_range | default: "€€" %}
@@ -109,6 +110,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
       "sameAs": [
         "{{ social_instagram }}",
         "{{ social_pinterest }}",
+        "{{ social_linkedin }}",
         "{{ social_behance }}"
       ]
     },

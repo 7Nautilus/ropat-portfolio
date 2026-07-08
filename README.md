@@ -12,10 +12,11 @@ Bienvenue sur mon portfolio en ligne. Ce site présente mes projets, compétence
 
 ## Stack technique
 
-- **HTML5 / CSS3 / JavaScript**
-- **Jekyll** pour la génération statique
+- **Jekyll** (Ruby + Bundler) pour la génération statique
+- **Dart Sass** (SCSS, modules `@use`, architecture ITCSS) pour les styles
+- **JavaScript vanilla** (aucun framework)
 - **GitHub Pages** pour l'hébergement
-- **GitHub Actions** pour l'automatisation CI/CD
+- **GitHub Actions** pour l'automatisation CI/CD (build + sitemap)
 
 ## Architecture des contenus
 
@@ -26,10 +27,14 @@ _data/
 ├── navigation.yml             # Navigation principale
 ├── projects/                  # 1 fichier YAML par projet + ordre d'affichage
 │   ├── index.yml              # Liste ordonnée des slugs
-│   ├── a-lone.yml             # Contenu & SEO du projet "A-LONE"
+│   ├── aelio.yml              # Contenu & SEO du projet "Aélio"
 │   ├── btr.yml
 │   └── ...
-└── services.yml               # Liste des services proposés
+├── pages/                     # Contenu des pages (about, contact, services, experiences...)
+├── services/                  # Offres de services (4 services + index.yml)
+├── design-system.yml          # Référence design system (couleurs, typo)
+├── partners.yml               # Partenaires / clients
+└── socials.yml                # Liens réseaux sociaux
 ```
 
 Chaque projet possède son propre fichier YAML. Les champs globaux (année, outils, client, média) sont partagés et les traductions sont rangées sous `locales`. Le principe DRY est ainsi respecté : une seule source de vérité pour les contenus et les métadonnées.
@@ -37,9 +42,9 @@ Chaque projet possède son propre fichier YAML. Les champs globaux (année, outi
 ### Layouts et includes
 
 - `_layouts/default.html` : détecte `project_id`, charge les données YAML, gère les balises hreflang
-- `_includes/project-main.html`, `_includes/project-card.html`, `_includes/service-card.html` : blocs réutilisables pour projets/services
-- `_includes/open-graph.html`, `_includes/schema-org.html` : balises SEO centralisées
-- `header.html`, `footer.html`, `nav.html`, `portfolio-filters.html` : structure globale
+- `_includes/projects/project-main.html`, `_includes/projects/project-card.html`, `_includes/services/service-card.html` : blocs réutilisables pour projets/services
+- `_includes/meta/open-graph.html`, `_includes/meta/schema-org.html` : balises SEO centralisées
+- `_includes/layout/header.html`, `_includes/layout/footer.html`, `_includes/layout/nav.html`, `_includes/portfolio-filters.html` : structure globale
 
 ## Système multilingue
 
@@ -90,8 +95,8 @@ featured: false
 client: "Nom du client (optionnel)"
 year: "2025"
 tools: "Photoshop, Illustrator"
-image_src: /assets/images/projects/exemple.png
-main_image: /assets/images/projects/exemple.png
+image_src: /assets/images/projects/exemple.avif
+main_image: /assets/images/projects/exemple.avif
 media_type: image
 locales:
   fr:
@@ -112,7 +117,7 @@ locales:
       og_title: "Titre Open Graph FR"
       og_description: "Description Open Graph FR"
       og_url: "https://ropat.art/fr/projects/exemple.html"
-      og_image: "https://ropat.art/assets/images/projects/exemple.png"
+      og_image: "https://ropat.art/assets/images/projects/exemple.avif"
   en:
     url: /en/projects/exemple.html
     aria_label: "View the Exemple project"
@@ -131,8 +136,10 @@ locales:
       og_title: "Open Graph Title EN"
       og_description: "Open Graph Description EN"
       og_url: "https://ropat.art/en/projects/exemple.html"
-      og_image: "https://ropat.art/assets/images/projects/exemple.png"
+      og_image: "https://ropat.art/assets/images/projects/exemple.avif"
 ```
+
+> Modèle minimal. Les projets aboutis enrichissent ce schéma avec une liste `context_sections` (sections titre + contenu bilingue) et un bloc `case_study` (`mockups`, `colors`, `typography`, `specs`). Voir `_data/projects/aelio.yml` comme exemple complet.
 
 ### Pages générées (FR/EN)
 
@@ -154,19 +161,29 @@ project_id: "exemple"
   1. Le front matter définit `project_id`
   2. `_layouts/default.html` charge `_data/projects/<slug>.yml`
   3. Les variables sont exposées à la page et aux includes
-  4. `_includes/open-graph.html` et `_includes/schema-org.html` injectent les balises
+  4. `_includes/meta/open-graph.html` et `_includes/meta/schema-org.html` injectent les balises
 - **Pages classiques** : métadonnées définies directement dans le front matter puis relayées par le layout
 
 ## Projets disponibles
 
-- ✅ A-LONE — Pochette d'album B-Lone
-- ✅ BTR — Pochette EP Maltezz
-- ✅ Cheetah Animation — Stop-motion (vidéo)
-- ✅ Crow Animation — Stop-motion (vidéo)
-- ✅ EXIT — Affiche design
-- ✅ HDD DEFRAG — Affiche design
-- ✅ JPeJA Animation — Visualizer
-- ✅ Logo Design Process — Processus de création de logo
+Liste ordonnée dans `_data/projects/index.yml` (16 projets) :
+
+1. **Juliette has a Gun** : social ads
+2. **BTR** : pochette musicale
+3. **Aélio** : identité visuelle / branding
+4. **Logo Design Process** : branding
+5. **Cheetah** : animation stop-motion (vidéo)
+6. **Stelya** : identité visuelle / branding
+7. **Zylkene** : packaging
+8. **Chat Noir** : design graphique
+9. **Ottony Paris** : branding
+10. **HDD DEFRAG** : design graphique (affiche)
+11. **A-LONE** : pochette musicale
+12. **EXIT** : design graphique (affiche)
+13. **Moon VTC** : branding
+14. **JPeJA** : animation / visualizer (vidéo)
+15. **Outlast Trials** : design graphique
+16. **Crow** : animation stop-motion (vidéo)
 
 ## Points forts
 

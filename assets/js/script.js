@@ -1,22 +1,4 @@
 // ================================
-// OPTIMISATIONS & PERFORMANCES
-// ================================
-
-// Utilisation de la délégation d'événements
-// Débounce pour les événements répétitifs
-const debounce = (func, wait) => {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-};
-
-// ================================
 // CURSEUR BLOB — Desktop uniquement
 // ================================
 (function () {

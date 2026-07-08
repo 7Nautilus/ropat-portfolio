@@ -1,0 +1,715 @@
+---
+layout: default
+lang: fr
+title: Design System — Ropat
+sitemap: false
+robots: noindex, nofollow
+---
+
+<style>
+  /* Styles propres à cette page de documentation */
+  .ds-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-lg) 8rem;
+    color: var(--white-color);
+    font-family: var(--font-family);
+  }
+
+  /* Internal badge */
+  .ds-internal-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: rgba(255, 92, 0, 0.15);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: var(--fs-xsmall);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--border-radius-full);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .ds-internal-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Sections */
+  .ds-section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Token rows */
+  .ds-token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .ds-token {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .ds-token-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-xs);
+    word-break: break-all;
+  }
+
+  .ds-token-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+  }
+
+  /* Color swatches */
+  .ds-color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .ds-color-swatch {
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .ds-color-preview {
+    height: 80px;
+    width: 100%;
+  }
+
+  .ds-color-info {
+    padding: 0.75rem;
+    background-color: rgba(255,255,255,0.04);
+  }
+
+  .ds-color-info strong {
+    display: block;
+    font-size: var(--fs-small);
+    font-weight: 700;
+    color: var(--white-color);
+    margin-bottom: 0.2rem;
+  }
+
+  .ds-color-info code {
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Typography specimens */
+  .ds-type-specimen {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .ds-type-specimen .ds-type-meta {
+    text-align: right;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+    line-height: 1.6;
+  }
+
+  /* Spacing scale */
+  .ds-spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    padding: 0.75rem var(--spacing-sm);
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0.5rem;
+  }
+
+  .ds-spacing-bar {
+    background-color: var(--primary-color);
+    height: var(--spacing-sm);
+    border-radius: 0.25rem;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  .ds-spacing-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--primary-color);
+    width: 5rem;
+    flex-shrink: 0;
+  }
+
+  .ds-spacing-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+  }
+
+  /* Border radius */
+  .ds-radius-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .ds-radius-item {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md) var(--spacing-sm);
+    text-align: center;
+  }
+
+  .ds-radius-preview {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: var(--border-primary);
+    background-color: var(--primary-color-alpha);
+    margin: 0 auto var(--spacing-xs);
+  }
+
+  .ds-radius-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--primary-color);
+    margin-bottom: 0.2rem;
+  }
+
+  .ds-radius-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+  }
+
+  /* Shadow specimens */
+  .ds-shadow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .ds-shadow-item {
+    background-color: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-lg) var(--spacing-md);
+    text-align: center;
+  }
+
+  .ds-shadow-preview {
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--gray-dark);
+    border-radius: var(--border-radius-sm);
+    margin: 0 auto var(--spacing-sm);
+  }
+
+  .ds-shadow-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+  }
+
+  .ds-shadow-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+    word-break: break-all;
+  }
+
+  /* Component showcase rows */
+  .ds-component-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .ds-component-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Font family preview */
+  .ds-font-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-sm);
+  }
+
+  .ds-font-card {
+    background-color: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+  }
+
+  .ds-font-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: var(--fs-xsmall);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .ds-font-preview {
+    font-size: 2rem;
+    line-height: 1.2;
+    color: var(--white-color);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .ds-font-usage {
+    font-size: var(--fs-xsmall);
+    color: var(--grey-light-400);
+  }
+
+</style>
+
+<div class="ds-page">
+
+  <!-- En-tête -->
+  <div class="ds-internal-badge">Usage interne uniquement</div>
+  <h1 class="hero-title">Design <span class="orange">System</span></h1>
+  <p class="hero-pitch" style="text-align: left; margin-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2rem;">Référence complète des tokens, composants et patterns de ropat.art</p>
+
+  <!-- ============================
+       1. COULEURS
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Couleurs</h2>
+
+    <div class="ds-color-grid">
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #ff5c00;"></div>
+        <div class="ds-color-info">
+          <strong>Primary</strong>
+          <code>--primary-color · #ff5c00</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: rgba(255,92,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-info">
+          <strong>Primary Alpha</strong>
+          <code>--primary-color-alpha · rgba(255,92,0,.2)</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #0a0a0a; border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-info">
+          <strong>Background Dark</strong>
+          <code>--background-dark · #0a0a0a</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-info">
+          <strong>Secondary</strong>
+          <code>--secondary-color · rgba(0,0,0,.5)</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-info" style="background: #111;">
+          <strong>White</strong>
+          <code>--white-color · #ffffff</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #2d3748;"></div>
+        <div class="ds-color-info">
+          <strong>Gray Dark</strong>
+          <code>--gray-dark · #2d3748</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #9CA3AF;"></div>
+        <div class="ds-color-info">
+          <strong>Gray 400</strong>
+          <code>--grey-light-400 · #9CA3AF</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #e2e8f0;"></div>
+        <div class="ds-color-info" style="background: #111;">
+          <strong>Gray Light</strong>
+          <code>--gray-light · #e2e8f0</code>
+        </div>
+      </div>
+      <div class="ds-color-swatch">
+        <div class="ds-color-preview" style="background: #34C759;"></div>
+        <div class="ds-color-info">
+          <strong>Availability</strong>
+          <code>#34C759 (disponibilité)</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       2. TYPOGRAPHIE
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Typographie</h2>
+
+    <!-- Familles -->
+    <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin-bottom: 1rem; font-weight: 600;">Familles de polices</h3>
+    <div class="ds-font-grid" style="margin-bottom: 3rem;">
+      <div class="ds-font-card">
+        <div class="ds-font-name">Manrope · Corps de texte principal</div>
+        <div class="ds-font-preview" style="font-family: 'Manrope', sans-serif;">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">--font-family · Paragraphes, labels, UI</div>
+      </div>
+      <div class="ds-font-card">
+        <div class="ds-font-name">Space Grotesk · Titres & navigation</div>
+        <div class="ds-font-preview" style="font-family: 'Space Grotesk', sans-serif;">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">Headings, nav links</div>
+      </div>
+      <div class="ds-font-card">
+        <div class="ds-font-name">Underdog · Accent cursive</div>
+        <div class="ds-font-preview" style="font-family: 'Underdog', cursive;">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">Éléments décoratifs, accents</div>
+      </div>
+      <div class="ds-font-card" style="opacity: 0.5; border-style: dashed;">
+        <div class="ds-font-name">CoFo Raffine · Display variable</div>
+        <div class="ds-font-preview" style="font-family: 'CoFo Raffine', sans-serif; font-weight: 900;">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">Usage spécifique · page Juliette Has a Gun uniquement</div>
+      </div>
+    </div>
+
+    <!-- Échelle fluide -->
+    <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin-bottom: 1rem; font-weight: 600;">Échelle fluide (clamp)</h3>
+    <div class="ds-type-specimen">
+      <h1 style="font-size: var(--fs-h1); line-height: 1.1; font-weight: 900; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H1</h1>
+      <div class="ds-type-meta">--fs-h1<br>clamp(3rem, 5vw+1rem, 6rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <h2 style="font-size: var(--fs-h2); line-height: 1.2; font-weight: 800; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H2</h2>
+      <div class="ds-type-meta">--fs-h2<br>clamp(1.75rem, 3vw+1rem, 3rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <h3 style="font-size: var(--fs-h3); line-height: 1.3; font-weight: 700; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H3</h3>
+      <div class="ds-type-meta">--fs-h3<br>clamp(1.5rem, 2vw+1rem, 2.25rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <h4 style="font-size: var(--fs-h4); line-height: 1.4; font-weight: 700; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H4</h4>
+      <div class="ds-type-meta">--fs-h4<br>clamp(1.25rem, 1.5vw+1rem, 1.75rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <h5 style="font-size: var(--fs-h5); line-height: 1.4; font-weight: 600; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H5</h5>
+      <div class="ds-type-meta">--fs-h5<br>clamp(1.125rem, 1vw+1rem, 1.5rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <p style="font-size: var(--fs-p); margin: 0;">Paragraphe de texte courant. Design graphique & motion.</p>
+      <div class="ds-type-meta">--fs-p<br>clamp(1rem, 0.5vw+1rem, 1.25rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <p style="font-size: var(--fs-small); margin: 0; color: var(--grey-light-400);">Texte secondaire, labels, metadata</p>
+      <div class="ds-type-meta">--fs-small<br>clamp(0.875rem, 0.5vw+0.5rem, 1rem)</div>
+    </div>
+    <div class="ds-type-specimen">
+      <p style="font-size: var(--fs-xsmall); margin: 0; color: var(--grey-light-400);">Caption, mentions légales, timestamps</p>
+      <div class="ds-type-meta">--fs-xsmall<br>clamp(0.75rem, 0.5vw+0.25rem, 0.875rem)</div>
+    </div>
+
+    <!-- Poids -->
+    <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin: 2rem 0 1rem; font-weight: 600;">Graisses utilisées</h3>
+    <div class="ds-component-row" style="flex-direction: column; align-items: flex-start; gap: 0.5rem;">
+      <p style="font-weight: 100; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">100 — Thin · Manrope</p>
+      <p style="font-weight: 400; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">400 — Regular · Manrope</p>
+      <p style="font-weight: 600; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">600 — SemiBold · Manrope</p>
+      <p style="font-weight: 700; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">700 — Bold · Manrope</p>
+      <p style="font-weight: 800; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">800 — ExtraBold · Manrope</p>
+      <p style="font-weight: 900; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">900 — Black · Manrope</p>
+    </div>
+  </section>
+
+  <!-- ============================
+       3. ESPACEMENT
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Espacement</h2>
+
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-xs</span>
+      <div class="ds-spacing-bar" style="width: 0.5rem;"></div>
+      <span class="ds-spacing-value">0.5rem · 8px</span>
+    </div>
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-sm</span>
+      <div class="ds-spacing-bar" style="width: 1rem;"></div>
+      <span class="ds-spacing-value">1rem · 16px</span>
+    </div>
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-md</span>
+      <div class="ds-spacing-bar" style="width: 1.5rem;"></div>
+      <span class="ds-spacing-value">1.5rem · 24px</span>
+    </div>
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-lg</span>
+      <div class="ds-spacing-bar" style="width: 2rem;"></div>
+      <span class="ds-spacing-value">2rem · 32px</span>
+    </div>
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-xl</span>
+      <div class="ds-spacing-bar" style="width: 3rem;"></div>
+      <span class="ds-spacing-value">3rem · 48px</span>
+    </div>
+    <div class="ds-spacing-row">
+      <span class="ds-spacing-label">--spacing-2xl</span>
+      <div class="ds-spacing-bar" style="width: 4.5rem;"></div>
+      <span class="ds-spacing-value">4.5rem · 72px</span>
+    </div>
+  </section>
+
+  <!-- ============================
+       4. BORDER RADIUS
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Border Radius</h2>
+
+    <div class="ds-radius-grid">
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 1rem;"></div>
+        <div class="ds-radius-name">--border-radius-sm</div>
+        <div class="ds-radius-value">1rem</div>
+      </div>
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 1.5rem;"></div>
+        <div class="ds-radius-name">--border-radius-md</div>
+        <div class="ds-radius-value">1.5rem</div>
+      </div>
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 2rem;"></div>
+        <div class="ds-radius-name">--border-radius-lg</div>
+        <div class="ds-radius-value">2rem</div>
+      </div>
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 6rem;"></div>
+        <div class="ds-radius-name">--border-radius-xl</div>
+        <div class="ds-radius-value">6rem</div>
+      </div>
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 9999px;"></div>
+        <div class="ds-radius-name">--border-radius-full</div>
+        <div class="ds-radius-value">9999px · pill</div>
+      </div>
+      <div class="ds-radius-item">
+        <div class="ds-radius-preview" style="border-radius: 50%;"></div>
+        <div class="ds-radius-name">squircle-full</div>
+        <div class="ds-radius-value">50% (fallback)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       5. OMBRES
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Ombres</h2>
+
+    <div class="ds-shadow-grid">
+      <div class="ds-shadow-item">
+        <div class="ds-shadow-preview" style="box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+        <div class="ds-shadow-name">--shadow-sm</div>
+        <div class="ds-shadow-value">0 4px 6px rgba(0,0,0,.1)</div>
+      </div>
+      <div class="ds-shadow-item">
+        <div class="ds-shadow-preview" style="box-shadow: 0 6px 16px rgba(255,92,0,0.5); background-color: #ff5c0022; border: 1px solid var(--primary-color);"></div>
+        <div class="ds-shadow-name">--shadow-md</div>
+        <div class="ds-shadow-value">0 6px 16px rgba(255,92,0,.5) · glow orange</div>
+      </div>
+      <div class="ds-shadow-item">
+        <div class="ds-shadow-preview" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);"></div>
+        <div class="ds-shadow-name">--shadow-dark</div>
+        <div class="ds-shadow-value">0 4px 6px rgba(0,0,0,.3)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       6. BOUTONS
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Boutons</h2>
+
+    <div class="ds-component-label">CTA principal (.cta)</div>
+    <div class="ds-component-row">
+      <a href="#" class="cta">Voir le projet
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#" class="cta" style="pointer-events: none; opacity: 0.5;">État désactivé</a>
+    </div>
+
+    <div class="ds-component-label" style="margin-top: 1.5rem;">CTA simple (.cta-simple)</div>
+    <div class="ds-component-row">
+      <a href="#" class="cta-simple" style="color: var(--white-color);">Voir plus
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="ds-component-label" style="margin-top: 1.5rem;">Dark bubble badge (.dark-bubble)</div>
+    <div class="ds-component-row">
+      <span class="dark-bubble">Disponible</span>
+      <span class="dark-bubble">Branding</span>
+      <span class="dark-bubble">Motion Design</span>
+    </div>
+
+    <div class="ds-component-label" style="margin-top: 1.5rem;">Icon container (.icon-placeholder)</div>
+    <div class="ds-component-row">
+      <div class="icon-placeholder" style="width: 3rem; height: 3rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div class="icon-placeholder" style="width: 3rem; height: 3rem;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       7. CARTES
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Cartes</h2>
+
+    <div class="ds-component-label">Base card (.card)</div>
+    <div class="ds-component-row" style="align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;">
+      <div class="card" style="width: 240px; padding: 1.5rem; gap: 0.75rem;">
+        <div style="font-size: var(--fs-small); color: var(--grey-light-400); text-transform: uppercase; letter-spacing: 0.08em;">Catégorie</div>
+        <div style="font-size: var(--fs-h5); font-weight: 700;">Titre du projet</div>
+        <div style="font-size: var(--fs-small); color: var(--grey-light-400);">Description courte du projet ou du service présenté.</div>
+        <a href="#" class="cta-simple" style="color: var(--primary-color); font-size: var(--fs-small); margin-top: 0.5rem;">Voir le projet →</a>
+      </div>
+      <div class="card" style="width: 240px; padding: 1.5rem; gap: 0.75rem;">
+        <div style="font-size: var(--fs-small); color: var(--grey-light-400); text-transform: uppercase; letter-spacing: 0.08em;">Motion</div>
+        <div style="font-size: var(--fs-h5); font-weight: 700;">Deuxième projet</div>
+        <div style="font-size: var(--fs-small); color: var(--grey-light-400);">Hover pour voir l'effet translateY + glow orange.</div>
+        <a href="#" class="cta-simple" style="color: var(--primary-color); font-size: var(--fs-small); margin-top: 0.5rem;">Voir le projet →</a>
+      </div>
+    </div>
+
+    <div class="ds-component-label" style="margin-top: 1.5rem;">Bubble container (.bubble-container)</div>
+    <div class="ds-component-row">
+      <div class="bubble-container">
+        <p>Texte dans une bulle avec bordure gauche et basse orange. Utilisé pour les descriptions de projets et les pitchs sur la page d'accueil.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       8. GRILLES
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Grilles</h2>
+
+    <div class="ds-token-grid">
+      <div class="ds-token">
+        <div class="ds-token-name">.card-grid</div>
+        <div class="ds-token-value">1 colonne responsive · flex fallback</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">.projects-grid</div>
+        <div class="ds-token-value">Grille projets · auto-fill</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">.grid-four</div>
+        <div class="ds-token-value">4 colonnes adaptatives</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">.details-grid</div>
+        <div class="ds-token-value">2 colonnes · détails projet</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">.section-grid</div>
+        <div class="ds-token-value">Section wrapper générique</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">.section-grid-simple</div>
+        <div class="ds-token-value">Variant simplifié</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       9. ANIMATIONS & TRANSITIONS
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Animations & Transitions</h2>
+
+    <div class="ds-token-grid">
+      <div class="ds-token">
+        <div class="ds-token-name">--transition-base</div>
+        <div class="ds-token-value">0.3s ease</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">cubic-bezier nav</div>
+        <div class="ds-token-value">cubic-bezier(0.4, 0, 0.2, 1)</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">slideDown (header)</div>
+        <div class="ds-token-value">translateY(-100%) → 0 · sticky nav</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">slide-in-top (social)</div>
+        <div class="ds-token-value">translateY(-50px) → 0 · hover icons</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">card hover</div>
+        <div class="ds-token-value">translateY(-0.25rem) + shadow-md</div>
+      </div>
+      <div class="ds-token">
+        <div class="ds-token-name">cta hover</div>
+        <div class="ds-token-value">scale(1.05) + bg primary</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================
+       10. ICÔNES SOCIALES
+       ============================ -->
+  <section class="ds-section">
+    <h2 class="section-title">Icônes sociales</h2>
+    <div class="ds-component-label">.socialContainer (hover pour voir l'animation)</div>
+    <div class="ds-component-row">
+      {% include social-media-icons.html %}
+    </div>
+  </section>
+
+</div>
