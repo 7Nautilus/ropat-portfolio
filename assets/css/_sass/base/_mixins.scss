@@ -42,3 +42,11 @@
     filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
   }
 }
+
+// ── TITRE DE CARTE ────────────────────────────────────
+// Base typo partagee par .project-card-title et .service-title.
+@mixin card-title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-p);
+  font-weight: 700;
+}

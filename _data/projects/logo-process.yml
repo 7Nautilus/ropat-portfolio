@@ -14,6 +14,12 @@ tools: "Illustrator"
 image_src: /assets/images/projects/logo-design-process.png
 main_image: /assets/images/projects/logo-design-process.png
 media_type: image
+context:
+  fr: "Projet personnel"
+  en: "Personal project"
+discipline:
+  fr: "Branding"
+  en: "Brand Design"
 thumbnails:
   - src: /assets/images/projects/logo-design-process.png
     alt:
@@ -92,25 +98,3 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
 
 case_study:
-  specs:
-    - 
-      label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Projet personnel"
-        en: "Personal project"
-    - 
-      label:
-        fr: "Discipline"
-        en: "Discipline"
-      value:
-        fr: "Branding"
-        en: "Brand Design"
-    - 
-      label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Illustrator"
-        en: "Illustrator"

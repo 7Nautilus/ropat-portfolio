@@ -14,6 +14,9 @@ tools: "Figma, Affinity, Illustrator"
 image_src: /assets/images/projects/Stelya/icon_navy_on_white.svg
 main_image: /assets/images/projects/Stelya/icon_navy_on_white.svg
 media_type: image
+context:
+  fr: "Cabinet de conseil en ingénierie"
+  en: "Engineering consulting firm"
 
 context_sections:
   - title:
@@ -128,26 +131,6 @@ case_study:
       alt:
         fr: "Application mobile Stelya"
         en: "Stelya mobile app mockup"
-
-  specs:
-    - label:
-        fr: "Client"
-        en: "Client"
-      value:
-        fr: "Stelya"
-        en: "Stelya"
-    - label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Cabinet de conseil en ingénierie"
-        en: "Engineering consulting firm"
-    - label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Figma, Affinity, Illustrator"
-        en: "Figma, Affinity, Illustrator"
 
   colors:
     - hex: "#00205C"

@@ -14,6 +14,9 @@ tools: "Figma, Affinity, Illustrator"
 image_src: /assets/images/projects/aelio/monogram.avif
 main_image: /assets/images/projects/aelio/monogram.avif
 media_type: image
+context:
+  fr: "Lancement du cabinet de conseil en IA Aélio"
+  en: "Launch of Aélio's AI consulting firm"
 
 context_sections:
   - title:
@@ -140,26 +143,6 @@ case_study:
       alt:
         fr: "Logo Aélio complet avec icône et logotype"
         en: "Full Aélio logo with icon and logotype"
-
-  specs:
-    - label:
-        fr: "Client"
-        en: "Client"
-      value:
-        fr: "Aélio"
-        en: "Aélio"
-    - label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Lancement du cabinet de conseil en IA Aélio"
-        en: "Launch of Aélio's AI consulting firm"
-    - label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Figma, Affinity, Illustrator"
-        en: "Figma, Affinity, Illustrator"
 
   colors:
     - hex: "#1A2E4A"

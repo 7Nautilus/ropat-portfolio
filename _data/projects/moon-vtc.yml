@@ -14,6 +14,12 @@ tools: "Illustrator, Figma"
 image_src: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
 main_image: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
 media_type: image
+context:
+  fr: "Lancement de marque"
+  en: "Brand launch"
+livrables:
+  fr: "Logo, Palette, Charte graphique"
+  en: "Logo, Color palette, Brand guidelines"
 
 context_sections:
   - title:
@@ -109,32 +115,6 @@ thumbnails:
       en: "Moon VTC icon - black version"
 
 case_study:
-  specs:
-    - label:
-        fr: "Client"
-        en: "Client"
-      value:
-        fr: "Moon VTC"
-        en: "Moon VTC"
-    - label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Lancement de marque"
-        en: "Brand launch"
-    - label:
-        fr: "Livrables"
-        en: "Deliverables"
-      value:
-        fr: "Logo, Palette, Charte graphique"
-        en: "Logo, Color palette, Brand guidelines"
-    - label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Illustrator, Figma"
-        en: "Illustrator, Figma"
-
   colors:
     - hex: "#151E3D"
       name:

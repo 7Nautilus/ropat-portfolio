@@ -14,6 +14,12 @@ tools: "Affinity"
 image_src: /assets/images/projects/chat-noir-mockup.png
 main_image: /assets/images/projects/chatnoir.jpg
 media_type: image
+context:
+  fr: "Projet personnel"
+  en: "Personal project"
+discipline:
+  fr: "Design graphique"
+  en: "Graphic design"
 locales:
   fr:
     url: /fr/projects/chat-noir.html
@@ -67,29 +73,6 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
 
 case_study:
-  specs:
-    - 
-      label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Projet personnel"
-        en: "Personal project"
-    - 
-      label:
-        fr: "Discipline"
-        en: "Discipline"
-      value:
-        fr: "Design graphique"
-        en: "Graphic design"
-    - 
-      label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Affinity"
-        en: "Affinity"
-
   colors:
     - hex: "#2c2d54"
       name:

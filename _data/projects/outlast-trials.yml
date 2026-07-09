@@ -14,6 +14,12 @@ tools: "Photoshop"
 image_src: /assets/images/projects/outlast-trials.png
 main_image: /assets/images/projects/outlast-trials.png
 media_type: image
+context:
+  fr: "Projet personnel"
+  en: "Personal project"
+discipline:
+  fr: "Design Graphique"
+  en: "Graphic Design"
 locales:
   fr:
     url: /fr/projects/outlast-trials.html
@@ -76,25 +82,3 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
 
 case_study:
-  specs:
-    - 
-      label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Projet personnel"
-        en: "Personal project"
-    - 
-      label:
-        fr: "Discipline"
-        en: "Discipline"
-      value:
-        fr: "Design Graphique"
-        en: "Graphic Design"
-    - 
-      label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Photoshop"
-        en: "Photoshop"

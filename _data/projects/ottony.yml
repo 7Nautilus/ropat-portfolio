@@ -14,6 +14,9 @@ tools: "Figma, Photoshop, Illustrator"
 image_src: /assets/images/projects/ottony_paris.webp
 main_image: /assets/images/projects/ottony_paris.webp
 media_type: image
+context:
+  fr: "Lancement de la marque Ottony Paris"
+  en: "Launch of the Ottony Paris brand"
 locales:
   fr:
     url: /fr/projects/ottony-paris.html
@@ -54,26 +57,6 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/ottony_paris.webp"
 
 case_study:
-  specs:
-    - label:
-        fr: "Client"
-        en: "Client"
-      value:
-        fr: "Ottony Paris"
-        en: "Ottony Paris"
-    - label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Lancement de la marque Ottony Paris"
-        en: "Launch of the Ottony Paris brand"
-    - label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Figma, Photoshop, Illustrator"
-        en: "Figma, Photoshop, Illustrator"
-
   mockup:
     src: /assets/images/projects/ottony_paris_mockup.webp
     alt:

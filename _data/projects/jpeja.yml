@@ -14,6 +14,12 @@ tools: "After Effects"
 image_src: /assets/images/projects/jpeja-thumbnail.jpg
 main_image: /assets/videos/JPeJA.mp4
 media_type: video
+context:
+  fr: "Projet personnel"
+  en: "Personal project"
+discipline:
+  fr: "Motion Design"
+  en: "Motion Design"
 locales:
   fr:
     url: /fr/projects/jpeja.html
@@ -75,25 +81,3 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
 
 case_study:
-  specs:
-    - 
-      label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Projet personnel"
-        en: "Personal project"
-    - 
-      label:
-        fr: "Discipline"
-        en: "Discipline"
-      value:
-        fr: "Motion Design"
-        en: "Motion Design"
-    - 
-      label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "After Effects"
-        en: "After Effects"

@@ -101,7 +101,7 @@
   </section>
 
   <!-- ── CASE STUDY ───────────────────────── -->
-  {% if project.case_study %}
+  {% if project.case_study or project.context_sections or project_locale.context_content or project.client or project.tools %}
   <section class="case-study" aria-label="{% if lang == 'fr' %}Étude de cas{% else %}Case Study{% endif %}">
 
     <!-- 1. Specs ── Client · Année · Services · Outils -->

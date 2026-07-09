@@ -14,6 +14,12 @@ tools: "After Effects, Illustrator"
 image_src: /assets/images/projects/cheetah-stopmotion.png
 main_image: /assets/videos/CHEETAH.mp4
 media_type: video
+context:
+  fr: "Projet personnel"
+  en: "Personal project"
+discipline:
+  fr: "Motion Design"
+  en: "Motion Design"
 locales:
   fr:
     url: /fr/projects/cheetah.html
@@ -75,25 +81,3 @@ locales:
       og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
 
 case_study:
-  specs:
-    - 
-      label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Projet personnel"
-        en: "Personal project"
-    - 
-      label:
-        fr: "Discipline"
-        en: "Discipline"
-      value:
-        fr: "Motion Design"
-        en: "Motion Design"
-    - 
-      label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "After Effects, Illustrator"
-        en: "After Effects, Illustrator"

@@ -14,6 +14,12 @@ tools: "Figma, After Effects"
 image_src: /assets/images/projects/jhag/1440x1440_SBN_2.png
 main_image: /assets/images/projects/jhag/1440x1440_SBN_2.png
 media_type: image
+context:
+  fr: "Lancement de la gamme Banana Rush"
+  en: "Banana Rush line launch"
+formats:
+  fr: "1:1 · 4:5 · 9:16"
+  en: "1:1 · 4:5 · 9:16"
 locales:
   fr:
     url: /fr/projects/jhag-banana-rush.html
@@ -132,28 +138,3 @@ case_study:
         fr: "Typographie principale"
         en: "Primary typeface"
 
-  specs:
-    - label:
-        fr: "Client"
-        en: "Client"
-      value:
-        fr: "Juliette has a Gun"
-        en: "Juliette has a Gun"
-    - label:
-        fr: "Contexte"
-        en: "Context"
-      value:
-        fr: "Lancement de la gamme Banana Rush"
-        en: "Banana Rush line launch"
-    - label:
-        fr: "Formats"
-        en: "Formats"
-      value:
-        fr: "1:1 · 4:5 · 9:16"
-        en: "1:1 · 4:5 · 9:16"
-    - label:
-        fr: "Outils"
-        en: "Tools"
-      value:
-        fr: "Figma, After Effects"
-        en: "Figma, After Effects"
