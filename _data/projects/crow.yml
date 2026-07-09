@@ -20,6 +20,40 @@ context:
 discipline:
   fr: "Motion Design"
   en: "Motion Design"
+context_sections:
+  - title:
+      fr: "Contexte et objectif"
+      en: "Context and objective"
+    content:
+      fr: |
+        A la suite du projet Cheetah, j'ai souhaité poursuivre l'exploration de l'animation en stop-motion en me concentrant cette fois sur un animal volant : le corbeau. L'objectif de ce projet était de capturer et d'analyser visuellement le cycle de vol du corbeau, en utilisant une approche similaire mêlant techniques traditionnelles et outils numériques.
+      en: |
+        Following the Cheetah project, I wanted to continue exploring stop-motion animation by focusing this time on a flying animal: the crow. The goal of this project was to visually capture and analyze the crow's flight cycle, using a similar approach that combines traditional techniques with digital tools.
+  - title:
+      fr: "Recherche et concept"
+      en: "Research and concept"
+    content:
+      fr: |
+        A l'instar du projet précédent, j'ai débuté par définir le style graphique de l'animation. J'ai donc recréé le corbeau en pixel art arrondi, avant de le modéliser en 3D pour lui donner plus de profondeur et de réalisme dans ses mouvements.
+      en: |
+        Following the previous project, I began by defining the graphic style of the animation. I recreated the crow in rounded pixel art, then modeled it in 3D to give it more depth and realism in its movements.
+  - title:
+      fr: "Conception graphique"
+      en: "Design execution"
+    content:
+      fr: |
+        Les frames de l'animation ont été réalisées en combinant des dessins vectoriels créés dans Illustrator et l'assemblage/animation dans After Effects. J'ai veillé à positionner chaque frame avec soin pour respecter la fluidité naturelle du vol tout en conservant l'esthétique stylisée du stop-motion.
+      en: |
+        The frames of the animation were created by combining vector drawings made in Illustrator with assembly/animation in After Effects. I made sure to position each frame carefully to respect the natural fluidity of flight while maintaining the stylized aesthetic of stop-motion.
+  - title:
+      fr: "Finitions et rendu"
+      en: "Finishing touches"
+    content:
+      fr: |
+        Le travail de post-production a permis de peaufiner la colorimétrie, de jouer sur la lumière et d'ajouter des effets subtils afin de donner plus de profondeur à l'animation.
+      en: |
+        The post-production work refined the colorimetry, played with light, and added subtle effects to give more depth to the animation.
+
 locales:
   fr:
     url: /fr/projects/crow.html
@@ -30,18 +64,6 @@ locales:
     pitch: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     description: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     context_title: "À propos du projet"
-    context_content: |
-      ### # Contexte et objectif
-      A la suite du projet Cheetah, j'ai souhaité poursuivre l'exploration de l'animation en stop-motion en me concentrant cette fois sur un animal volant : le corbeau. L'objectif de ce projet était de capturer et d'analyser visuellement le cycle de vol du corbeau, en utilisant une approche similaire mêlant techniques traditionnelles et outils numériques.
-
-      ### # Recherche et concept
-      A l'instar du projet précédent, j'ai débuté par définir le style graphique de l'animation. J'ai donc recréé le corbeau en pixel art arrondi, avant de le modéliser en 3D pour lui donner plus de profondeur et de réalisme dans ses mouvements.
-
-      ### # Conception graphique
-      Les frames de l'animation ont été réalisées en combinant des dessins vectoriels créés dans Illustrator et l'assemblage/animation dans After Effects. J'ai veillé à positionner chaque frame avec soin pour respecter la fluidité naturelle du vol tout en conservant l'esthétique stylisée du stop-motion.
-
-      ### # Finitions et rendu
-      Le travail de post-production a permis de peaufiner la colorimétrie, de jouer sur la lumière et d'ajouter des effets subtils afin de donner plus de profondeur à l'animation.
     seo:
       title: "Crow Animation - Ropat"
       description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
@@ -59,19 +81,6 @@ locales:
     pitch: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     description: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     context_title: "About the project"
-    context_content: |
-      ### # Context and objective
-      Following the Cheetah project, I wanted to continue exploring stop-motion animation by focusing this time on a flying animal: the crow. The goal of this project was to visually capture and analyze the crow's flight cycle, using a similar approach that combines traditional techniques with digital tools.
-      
-      ### # Research and concept
-      Following the previous project, I began by defining the graphic style of the animation. I recreated the crow in rounded pixel art, then modeled it in 3D to give it more depth and realism in its movements.
-      
-
-      ### # Design execution
-      The frames of the animation were created by combining vector drawings made in Illustrator with assembly/animation in After Effects. I made sure to position each frame carefully to respect the natural fluidity of flight while maintaining the stylized aesthetic of stop-motion.
-
-      ### # Finishing touches
-      The post-production work refined the colorimetry, played with light, and added subtle effects to give more depth to the animation.
     seo:
       title: "Crow Animation - Ropat"
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."

@@ -20,6 +20,40 @@ context:
 discipline:
   fr: "Design Graphique"
   en: "Graphic Design"
+context_sections:
+  - title:
+      fr: "Contexte et objectif"
+      en: "Context and objective"
+    content:
+      fr: |
+        Je souhaitais explorer un thème technique rarement traité en design graphique : la défragmentation des disques durs et son impact sur les professionnels du numérique. L'ambition était de transformer ce sujet froid en affiche informative et accrocheuse.
+      en: |
+        I wanted to tackle a technical subject seldom spotlighted in graphic design: hard drive defragmentation and how digital creatives experience it. The goal was to package this utilitarian topic into an attention-grabbing yet informative poster.
+  - title:
+      fr: "Recherche et concept"
+      en: "Research and concept"
+    content:
+      fr: |
+        J'ai d'abord collecté des références visuelles autour des codes de prévention, puis construit un concept qui détourne ces signaux pour capter l'œil. Reproduire en 3D le symbole universel du recyclage dans Illustrator est devenu le pivot narratif du projet.
+      en: |
+        I began by gathering references tied to safety and prevention posters, then built a concept that subverts those visual codes. Modeling the universal recycling symbol in Illustrator became the anchor that guided the storytelling.
+  - title:
+      fr: "Conception graphique"
+      en: "Design execution"
+    content:
+      fr: |
+        La composition a été élaborée dans InDesign : l'effet de demi-ton appliqué sur un disque dur via Photoshop apporte la matière, tandis qu'Illustrator a servi à modéliser les éléments clés. L'affiche juxtapose Impact pour les messages forts, Minion Pro pour le texte courant et Onyx pour les slogans “Empty The Bin” (inspiré par la série de mixtape de La Fève) et “Clean The Dump” afin de créer rythme et profondeur.
+      en: |
+        The composition took shape in InDesign. I brought in a halftone-treated hard drive photo from Photoshop to add texture, while Illustrator supplied the structural 3D elements. Impact drives the headline presence, Minion Pro keeps the body text legible, and Onyx elevates the “Empty The Bin” (inspired by La Fève's mixtape series) and “Clean The Dump” callouts with a subtle retro tone.
+  - title:
+      fr: "Finitions et rendu"
+      en: "Finishing touches"
+    content:
+      fr: |
+        Après assemblage, le passage dans Photoshop m'a permis d'ajouter textures et marques d'usure pour renforcer l'aspect tangible. Le résultat final associe pédagogie et esthétique, avec une hiérarchie lisible autour du symbole central.
+      en: |
+        Final tweaks in Photoshop layered additional wear and grain, giving the piece a tangible, lived-in finish. The end result balances information and aesthetics around the recycling symbol at the center of the narrative.
+
 locales:
   fr:
     url: /fr/projects/hdd-defrag.html
@@ -30,18 +64,6 @@ locales:
     pitch: "**Création d'une affiche** sur la défragmentation de disque dur."
     description: "**Création d'une affiche** sur le thème de la défragmentation de disque dur, utilisant **InDesign**, **Photoshop** et **Illustrator**."
     context_title: "À propos du projet"
-    context_content: |
-      ### # Contexte et objectif
-      Je souhaitais explorer un thème technique rarement traité en design graphique : la défragmentation des disques durs et son impact sur les professionnels du numérique. L'ambition était de transformer ce sujet froid en affiche informative et accrocheuse.
-
-      ### # Recherche et concept
-      J'ai d'abord collecté des références visuelles autour des codes de prévention, puis construit un concept qui détourne ces signaux pour capter l'œil. Reproduire en 3D le symbole universel du recyclage dans Illustrator est devenu le pivot narratif du projet.
-
-      ### # Conception graphique
-      La composition a été élaborée dans InDesign : l'effet de demi-ton appliqué sur un disque dur via Photoshop apporte la matière, tandis qu'Illustrator a servi à modéliser les éléments clés. L'affiche juxtapose Impact pour les messages forts, Minion Pro pour le texte courant et Onyx pour les slogans “Empty The Bin” (inspiré par la série de mixtape de La Fève) et “Clean The Dump” afin de créer rythme et profondeur.
-
-      ### # Finitions et rendu
-      Après assemblage, le passage dans Photoshop m'a permis d'ajouter textures et marques d'usure pour renforcer l'aspect tangible. Le résultat final associe pédagogie et esthétique, avec une hiérarchie lisible autour du symbole central.
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
       description: "Design d'affiche sur le thème de la défragmentation  des disques durs."
@@ -59,18 +81,6 @@ locales:
     pitch: "**Creation of a poster** on the theme of hard drive defragmentation."
     description: "**Creation of a poster** on the theme of hard drive defragmentation, using **InDesign**, **Photoshop**, and **Illustrator**."
     context_title: "About the project"
-    context_content: |
-      ### # Context and objective
-      I wanted to tackle a technical subject seldom spotlighted in graphic design: hard drive defragmentation and how digital creatives experience it. The goal was to package this utilitarian topic into an attention-grabbing yet informative poster.
-
-      ### # Research and concept
-      I began by gathering references tied to safety and prevention posters, then built a concept that subverts those visual codes. Modeling the universal recycling symbol in Illustrator became the anchor that guided the storytelling.
-
-      ### # Design execution
-      The composition took shape in InDesign. I brought in a halftone-treated hard drive photo from Photoshop to add texture, while Illustrator supplied the structural 3D elements. Impact drives the headline presence, Minion Pro keeps the body text legible, and Onyx elevates the “Empty The Bin” (inspired by La Fève's mixtape series) and “Clean The Dump” callouts with a subtle retro tone.
-
-      ### # Finishing touches
-      Final tweaks in Photoshop layered additional wear and grain, giving the piece a tangible, lived-in finish. The end result balances information and aesthetics around the recycling symbol at the center of the narrative.
     seo:
       title: "HDD DEFRAG - Poster | Ropat"
       description: "Poster design on the theme of hard drive defragmentation."

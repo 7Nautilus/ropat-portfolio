@@ -20,6 +20,40 @@ context:
 discipline:
   fr: "Motion Design"
   en: "Motion Design"
+context_sections:
+  - title:
+      fr: "Contexte et objectif"
+      en: "Context and objective"
+    content:
+      fr: |
+        Pour ce projet j'ai voulu imaginer ce qu'aurait donner un visualizer musical à ma manière pour accompagner la sortie du single JPeJA de Wasting Shit.
+      en: |
+        For this project, I wanted to imagine what a musical visualizer would look like in my style to accompany the release of the single JPeJA by Wasting Shit.
+  - title:
+      fr: "Recherche et concept"
+      en: "Research and concept"
+    content:
+      fr: |
+        Pour la recherche de ce projet, je me suis inspiré de l'esthétique visuelle du clip du single, avec deux éléments en particulier : la scène où "JPeJA" passe sur une télévision, et celle se déroulant devant une pharmacie, avec son panneau lumineux clignotant.
+      en: |
+        For the research phase of this project, I drew inspiration from the visual aesthetic of the single's music video, particularly two elements: the scene where "JPeJA" appears on a television, and the one set in front of a pharmacy with its flashing neon sign.
+  - title:
+      fr: "Conception graphique"
+      en: "Design execution"
+    content:
+      fr: |
+        J'ai donc voulu recréer ces ambiances dans le visualizer, à travers un effet recréant un écran de nokia 3310.
+      en: |
+        I aimed to recreate these atmospheres in the visualizer, through an effect mimicking a Nokia 3310 screen.
+  - title:
+      fr: "Finitions et rendu"
+      en: "Finishing touches"
+    content:
+      fr: |
+        Le rendu a été réalisé en utilisant After Effects, avec une attention particulière portée sur les détails visuels pour capturer l'essence du clip original.
+      en: |
+        The final rendering was done using After Effects, with particular attention paid to the visual details to capture the essence of the original music video.
+
 locales:
   fr:
     url: /fr/projects/jpeja.html
@@ -30,18 +64,6 @@ locales:
     pitch: "**Création d'un visualizer musical** pour le single **JPeJA** de **Wasting Shit**"
     description: "**Réalisation d'un visualizer musical** fictif pour la sortie du single **JPeJA** de **Wasting Shit**. Cette animation a été réalisée en utilisant **After Effects**."
     context_title: "À propos du projet"
-    context_content: |
-      ### # Contexte et objectif
-      Pour ce projet j'ai voulu imaginer ce qu'aurait donner un visualizer musical à ma manière pour accompagner la sortie du single JPeJA de Wasting Shit.
-
-      ### # Recherche et concept
-      Pour la recherche de ce projet, je me suis inspiré de l'esthétique visuelle du clip du single, avec deux éléments en particulier : la scène où "JPeJA" passe sur une télévision, et celle se déroulant devant une pharmacie, avec son panneau lumineux clignotant.
-      
-      ### # Conception graphique
-      J'ai donc voulu recréer ces ambiances dans le visualizer, à travers un effet recréant un écran de nokia 3310. 
-
-      ### # Finitions et rendu
-      Le rendu a été réalisé en utilisant After Effects, avec une attention particulière portée sur les détails visuels pour capturer l'essence du clip original.
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
@@ -59,18 +81,6 @@ locales:
     pitch: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**"
     description: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**. This animation was created using **After Effects**."
     context_title: "About the project"
-    context_content: |
-      ### # Context and objective
-      For this project, I wanted to imagine what a musical visualizer would look like in my style to accompany the release of the single JPeJA by Wasting Shit.
-
-      ### # Research and concept
-      For the research phase of this project, I drew inspiration from the visual aesthetic of the single's music video, particularly two elements: the scene where "JPeJA" appears on a television, and the one set in front of a pharmacy with its flashing neon sign.
-
-      ### # Design execution
-      I aimed to recreate these atmospheres in the visualizer, through an effect mimicking a Nokia 3310 screen.
-
-      ### # Finishing touches
-      The final rendering was done using After Effects, with particular attention paid to the visual details to capture the essence of the original music video.
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'

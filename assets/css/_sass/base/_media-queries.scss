@@ -1,9 +1,10 @@
+@use "base/mixins" as *;
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
 
 /* Tablet & Desktop - 640px + */
-@media (min-width: 640px) {
+@include respond-to("sm") {
   .burger-menu {
     display: none;
   }
@@ -91,7 +92,7 @@
 }
 
 /* Medium Tablets - 768px + */
-@media (min-width: 768px) {
+@include respond-to("md") {
   .hero-title {
     max-width: 100%;
   }
@@ -123,7 +124,7 @@
 }
 
 /* Desktop - 1024px + */
-@media (min-width: 1024px) {
+@include respond-to("lg") {
   .section-grid {
     grid-template-columns: repeat(3, 1fr);
   }

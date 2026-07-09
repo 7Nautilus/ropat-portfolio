@@ -223,7 +223,7 @@
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
 
-  @media (min-width: 640px) {
+  @include respond-to("sm") {
     grid-template-columns: repeat(2, 1fr);
 
     .cs-mockup:first-child {
@@ -303,7 +303,7 @@
   padding-top: var(--spacing-xl);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 
-  @media (min-width: 768px) {
+  @include respond-to("md") {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
   }

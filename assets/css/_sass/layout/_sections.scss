@@ -376,7 +376,7 @@
   gap: var(--spacing-xl);
   padding: 0 var(--spacing-lg);
   
-  @media (min-width: 768px) {
+  @include respond-to("md") {
     grid-template-columns: 1fr 1fr; /* 50% chacun sur desktop */
     gap: 4rem;
   }

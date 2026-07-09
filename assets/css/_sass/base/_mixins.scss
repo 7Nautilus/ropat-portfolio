@@ -1,3 +1,4 @@
+@use "sass:map";
 // ================================
 // MIXINS GLOBAUX
 // ================================
@@ -49,4 +50,24 @@
   font-family: var(--font-heading);
   font-size: var(--fs-p);
   font-weight: 700;
+}
+
+// ── BREAKPOINTS ───────────────────────────────────────
+// Valeurs centralisees + mixin mobile-first.
+// Usage : @include respond-to("md") { ... }  ->  @include respond-to("md")
+$breakpoints: (
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1440px,
+);
+
+@mixin respond-to($bp) {
+  @if map.has-key($breakpoints, $bp) {
+    @media (min-width: map.get($breakpoints, $bp)) {
+      @content;
+    }
+  } @else {
+    @error "Breakpoint inconnu : #{$bp}. Valeurs : #{map.keys($breakpoints)}.";
+  }
 }
