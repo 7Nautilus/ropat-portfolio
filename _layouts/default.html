@@ -19,12 +19,14 @@
       {% assign lang = page.lang | default: "fr" %}
       {% if project %}
         {% assign project_locale = project.locales[lang] | default: project.locales.en %}
+        {% comment %} og_image : chemin dedie si le projet en declare un, sinon la vignette {% endcomment %}
+        {% assign og_image_path = project.og_image | default: project.image_src %}
+        {% assign page_og_image = site.url | append: og_image_path %}
         {% if project_locale.seo %}
           {% assign page_title = project_locale.seo.title %}
           {% assign page_meta_description = project_locale.seo.meta_description | default: project_locale.seo.description %}
           {% assign page_og_title = project_locale.seo.og_title %}
           {% assign page_og_description = project_locale.seo.og_description %}
-          {% assign page_og_image = project_locale.seo.og_image %}
         {% endif %}
       {% endif %}
     {% endif %}

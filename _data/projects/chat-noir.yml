@@ -14,6 +14,7 @@ tools: "Affinity"
 image_src: /assets/images/projects/chat-noir-mockup.png
 main_image: /assets/images/projects/chatnoir.jpg
 media_type: image
+og_image: /assets/images/projects/chatnoir.jpg
 context:
   fr: "Projet personnel"
   en: "Personal project"
@@ -68,7 +69,6 @@ locales:
       description: "Design d'affiche sur le thème du cabaret parisien \"Le Chat Noir\"."
       og_title: "Chat Noir - Affiche"
       og_description: "Affiche design sur le thème du cabaret parisien \"Le Chat Noir\"."
-      og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
   en:
     url: /en/projects/chat-noir.html
     aria_label: "View the Chat Noir poster project"
@@ -82,7 +82,6 @@ locales:
       description: "Poster design on the theme of the Parisian cabaret \"Le Chat Noir\"."
       og_title: "Chat Noir - Poster"
       og_description: "Design poster on the theme of the Parisian cabaret \"Le Chat Noir\"."
-      og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
 
 case_study:
   colors:

@@ -66,7 +66,6 @@ locales:
       description: "Direction artistique et création de la pochette pour le single BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
       og_title: "Pochette BTR - Maltezz"
       og_description: "Direction artistique et création de la pochette pour le single BTR de Maltezz."
-      og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
   en:
     url: /en/projects/btr.html
     aria_label: "View the 'BTR' single cover project by Maltezz"
@@ -81,6 +80,5 @@ locales:
       description: "Art direction and cover design for Maltezz's BTR single. Graphic composition, color choices and typography."
       og_title: "BTR Cover - Maltezz"
       og_description: "Art direction and cover design for Maltezz's BTR single."
-      og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
 
 case_study:

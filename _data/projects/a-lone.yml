@@ -79,7 +79,6 @@ locales:
       description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone. Typographie custom et identité visuelle complète."
       og_title: "Pochette A-LONE - B-Lone"
       og_description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone."
-      og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"
   en:
     url: /en/projects/a-lone.html
     aria_label: "View the “A-LONE” album cover by B-Lone"
@@ -94,6 +93,5 @@ locales:
       description: "Art direction and cover design for B-Lone's A-LONE album. Custom typography and complete visual identity."
       og_title: "A-LONE Cover - B-Lone"
       og_description: "Art direction and cover design for B-Lone's A-LONE album."
-      og_image: "https://ropat.art/assets/images/projects/a-lone-cover.webp"
 
 case_study:

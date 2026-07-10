@@ -68,7 +68,6 @@ locales:
       description: "Animation en stop motion explorant la vitesse et l'agilité du guépard à travers l'analyse de son cycle de course."
       og_title: "Cheetah Animation - Ropat"
       og_description: "Animation en stop motion explorant la vitesse et l'agilité du guépard."
-      og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
   en:
     url: /en/projects/cheetah.html
     aria_label: "View the stop-motion animation project"
@@ -82,6 +81,5 @@ locales:
       description: "Stop-motion animation exploring the cheetah's speed and agility through analysis of its running cycle."
       og_title: "Cheetah Animation - Ropat"
       og_description: "Stop-motion animation exploring the cheetah's speed and agility."
-      og_image: "https://ropat.art/assets/images/projects/cheetah-stopmotion.png"
 
 case_study:

@@ -68,7 +68,6 @@ locales:
       description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
       og_title: "Crow Animation - Ropat"
       og_description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau."
-      og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
   en:
     url: /en/projects/crow.html
     aria_label: "View the stop-motion animation project"
@@ -82,6 +81,5 @@ locales:
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."
       og_title: "Crow Animation - Ropat"
       og_description: "Stop-motion animation exploring the crow's speed and agility."
-      og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
 
 case_study:

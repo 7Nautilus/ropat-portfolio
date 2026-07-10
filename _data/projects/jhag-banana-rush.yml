@@ -14,6 +14,7 @@ tools: "Figma, After Effects"
 image_src: /assets/images/projects/jhag/1440x1440_SBN_2.png
 main_image: /assets/images/projects/jhag/1440x1440_SBN_2.png
 media_type: image
+og_image: /assets/images/projects/jhag-br-p1-kv.png
 context:
   fr: "Lancement de la gamme Banana Rush"
   en: "Banana Rush line launch"
@@ -61,7 +62,6 @@ locales:
       description: "Création des assets paid social pour la campagne de lancement de la gamme Banana Rush de Juliette has a Gun. Statics et motion design, 3 phases, formats Meta."
       og_title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
       og_description: "Assets paid social pour le lancement de la gamme Banana Rush de Juliette has a Gun."
-      og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
 
   en:
     url: /en/projects/jhag-banana-rush.html
@@ -77,7 +77,6 @@ locales:
       description: "Paid social asset creation for the Banana Rush launch campaign by Juliette has a Gun. Statics and motion design, 3 phases, Meta formats."
       og_title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
       og_description: "Paid social assets for the Banana Rush launch campaign by Juliette has a Gun."
-      og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
 
 thumbnails:
   # Phase 1

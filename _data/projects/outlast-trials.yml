@@ -68,7 +68,6 @@ locales:
       description: "Design d'affiche sur le thème du jeu vidéo Outlast Trials."
       og_title: "Outlast Trials - Affiche"
       og_description: "Affiche design sur le thème du jeu vidéo Outlast Trials."
-      og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
   en:
     url: /en/projects/outlast-trials.html
     aria_label: "View the Outlast Trials poster project"
@@ -82,6 +81,5 @@ locales:
       description: "Poster design on the theme of the Outlast Trials video game."
       og_title: "Outlast Trials - Poster"
       og_description: "Design poster on the theme of the Outlast Trials video game."
-      og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
 
 case_study:

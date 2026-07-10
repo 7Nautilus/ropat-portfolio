@@ -68,7 +68,6 @@ locales:
       description: "Design d'affiche sur le thème de la défragmentation  des disques durs."
       og_title: "HDD DEFRAG - Affiche"
       og_description: "Affiche design sur le thème de la défragmentation de disque dur."
-      og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
   en:
     url: /en/projects/hdd-defrag.html
     aria_label: "View the HDD DEFRAG poster project"
@@ -82,6 +81,5 @@ locales:
       description: "Poster design on the theme of hard drive defragmentation."
       og_title: "HDD DEFRAG - Poster"
       og_description: "Design poster on the theme of hard drive defragmentation."
-      og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
 
 case_study:

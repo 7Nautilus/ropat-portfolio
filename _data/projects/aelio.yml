@@ -86,7 +86,6 @@ locales:
       description: "Identité visuelle complète pour Aélio, cabinet de conseil en IA et automatisation : logo, charte graphique, design system et pack LinkedIn, livrés en quelques jours."
       og_title: "Branding Aélio"
       og_description: "Création de l'identité visuelle d'Aélio, cabinet de conseil en IA : logotype, charte graphique, design system et supports LinkedIn, dans un positionnement innovant et ancré à La Réunion."
-      og_image: "https://ropat.art/assets/images/projects/aelio/monogram.avif"
 
   en:
     url: /en/projects/aelio.html
@@ -102,7 +101,6 @@ locales:
       description: "Complete visual identity for Aélio, an AI and automation consulting firm: logo, graphic charter, design system and LinkedIn pack."
       og_title: "Branding Aélio"
       og_description: "Visual identity for Aélio, an AI consulting firm: logotype, graphic charter, design system and LinkedIn assets, with an innovative positioning rooted in Réunion Island."
-      og_image: "https://ropat.art/assets/images/projects/aelio/monogram.avif"
 
 case_study:
   mockups_grid_cols: 3

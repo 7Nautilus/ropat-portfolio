@@ -85,7 +85,6 @@ locales:
       description: "Découvrez le processus de création d'un logo géométrique, de l'esquisse initiale à la version finale 3D avec effets."
       og_title: "Logo Design Process"
       og_description: "Processus de création d'un logo, de l'esquisse initiale à la version finale 3D."
-      og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
   en:
     url: /en/projects/logo-process.html
     aria_label: "View the logo creation process"
@@ -99,6 +98,5 @@ locales:
       description: "Discover the geometric logo creation process, from initial sketch to final 3D version with effects."
       og_title: "Logo Design Process"
       og_description: "Logo creation process, from initial sketch to final 3D version."
-      og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
 
 case_study:

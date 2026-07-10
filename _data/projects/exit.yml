@@ -80,7 +80,6 @@ locales:
       description: "Création d'affiche détournant le design des panneaux de sorties de secours avec un aspect cuivre oxydé."
       og_title: "EXIT - Affiche Design"
       og_description: "Création d'affiche détournant le design des panneaux de sorties de secours."
-      og_image: "https://ropat.art/assets/images/projects/exit.png"
   en:
     url: /en/projects/exit.html
     aria_label: "View the EXIT poster project"
@@ -94,6 +93,5 @@ locales:
       description: "Poster design reinterpreting emergency exit signage with an oxidized copper aesthetic."
       og_title: "EXIT - Poster Design"
       og_description: "Poster design reinterpreting emergency exit signage."
-      og_image: "https://ropat.art/assets/images/projects/exit.png"
 
 case_study:

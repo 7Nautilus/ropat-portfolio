@@ -68,7 +68,6 @@ locales:
       description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
       og_title: "JPeJA Animation - Ropat"
       og_description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
-      og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
   en:
     url: /en/projects/jpeja.html
     aria_label: "View the visualizer project"
@@ -82,6 +81,5 @@ locales:
       description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
       og_title: "JPeJA - Ropat"
       og_description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
-      og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
 
 case_study:

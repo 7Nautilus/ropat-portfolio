@@ -14,6 +14,7 @@ tools: "Figma, Affinity, Illustrator"
 image_src: /assets/images/projects/Stelya/icon_navy_on_white.svg
 main_image: /assets/images/projects/Stelya/icon_navy_on_white.svg
 media_type: image
+og_image: /assets/images/projects/Stelya/stelya-mockup-bureau.avif
 context:
   fr: "Cabinet de conseil en ingénierie"
   en: "Engineering consulting firm"
@@ -65,7 +66,6 @@ locales:
       description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie. Logo, icône, pack LinkedIn, palette et typographie."
       og_title: "Branding Stelya"
       og_description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie."
-      og_image: "https://ropat.art/assets/images/projects/Stelya/stelya-mockup-bureau.avif"
 
   en:
     url: /en/projects/stelya.html
@@ -81,7 +81,6 @@ locales:
       description: "Complete visual identity for Stelya, engineering consulting firm. Logo, icon, LinkedIn pack, color palette and typography."
       og_title: "Branding Stelya"
       og_description: "Complete visual identity for Stelya, engineering consulting firm."
-      og_image: "https://ropat.art/assets/images/projects/Stelya/stelya-mockup-bureau.avif"
 
 case_study:
   mockups_grid_cols: 3
