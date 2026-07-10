@@ -51,6 +51,7 @@ locales:
     pitch: "**Identité visuelle** et **branding** pour la marque de vêtements de luxe **Ottony Paris**"
     description: "**Identité visuelle** complète et **branding** pour la marque de vêtements de luxe **Ottony Paris**, avec une attention particulière portée à la création d'une identité visuelle distinctive, mémorable, et alignée avec les aspirations de la marque."
     services: "Identité visuelle, Branding, Design de marque"
+    context_title: "À propos du projet"
     
     seo:
       title: "Branding Ottony Paris | Ropat"
@@ -66,6 +67,7 @@ locales:
     pitch: "**Visual identity** and **branding** for the luxury clothing brand **Ottony Paris**"
     description: "**Comprehensive visual identity** and **branding** for the luxury clothing brand **Ottony Paris**, with a focus on creating a distinctive, memorable visual identity that aligns with the brand's aspirations."
     services: "Visual identity, Branding, Brand design"
+    context_title: "About the project"
     
     seo:
       title: "Branding Ottony Paris | Ropat"

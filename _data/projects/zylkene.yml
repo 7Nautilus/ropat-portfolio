@@ -51,6 +51,7 @@ locales:
     pitch: "**Design graphique** et **conception de packaging** pour la gamme de produits **Zylkene** de Vetoquinol"
     description: "**Design graphique** complet et **conception de packaging** pour la gamme de produits **Zylkene** de Vetoquinol, avec une attention particulière portée à l'esthétique, la fonctionnalité, et la cohérence avec l'identité de la marque."
     services: "Design graphique, Conception de packaging, Identité visuelle"
+    context_title: "À propos du projet"
     
     seo:
       title: "Packaging Zylkene - Vetoquinol | Ropat"
@@ -66,6 +67,7 @@ locales:
     pitch: "**Graphic design** and **packaging design** for the **Zylkene** product line by Vetoquinol"
     description: "**Comprehensive graphic design** and **packaging design** for the **Zylkene** product line by Vetoquinol, with a focus on aesthetics, functionality, and consistency with the brand's identity."
     services: "Graphic design, Packaging design, Visual identity"
+    context_title: "About the project"
     
     seo:
       title: "Zylkene Packaging - Vetoquinol | Ropat"

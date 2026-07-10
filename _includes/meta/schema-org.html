@@ -21,11 +21,7 @@ Génère automatiquement les balises Schema.org selon le type de page
 {% assign geo_lat = site.business.geo.latitude | default: "47.478419" %}
 {% assign geo_lon = site.business.geo.longitude | default: "-0.563166" %}
 
-{% comment %} Réseaux sociaux {% endcomment %}
-{% assign social_instagram = site.social.instagram | default: "https://www.instagram.com/9.ropat/" %}
-{% assign social_pinterest = site.social.pinterest | default: "https://fr.pinterest.com/9ropat/" %}
-{% assign social_behance = site.social.behance | default: "https://www.behance.net/ropat" %}
-{% assign social_linkedin = site.social.linkedin | default: "https://www.linkedin.com/in/ropat-art/" %}
+{% comment %} Réseaux sociaux : source unique _data/socials.yml (aussi lue par le footer et les icones) {% endcomment %}
 
 {% comment %} Price range {% endcomment %}
 {% assign price_range = site.business.price_range | default: "€€" %}
@@ -84,7 +80,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
         "@type": "ImageObject",
         "url": "{{ business_logo }}"
       },
-      "description": "{{ business_description }}",
+      "description": {{ business_description | default: "" | jsonify }},
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "{{ address_city }}",
@@ -107,11 +103,8 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
         }{% unless forloop.last %},{% endunless %}
         {% endfor %}
       ],
-      "sameAs": [
-        "{{ social_instagram }}",
-        "{{ social_pinterest }}",
-        "{{ social_linkedin }}",
-        "{{ social_behance }}"
+      "sameAs": [{% for item in site.data.socials %}
+        "{{ item.link }}"{% unless forloop.last %},{% endunless %}{% endfor %}
       ]
     },
     {
@@ -119,7 +112,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
       "@id": "{{ business_url }}#website",
       "url": "{{ business_url }}",
       "name": "{{ business_name }}",
-      "description": "{{ business_description }}",
+      "description": {{ business_description | default: "" | jsonify }},
       "inLanguage": "{{ page_language }}",
       "publisher": {
         "@id": "{{ business_url }}#professionalService"
@@ -133,7 +126,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
     {
       "@type": "CreativeWork",
       "@id": "{{ page.url | absolute_url }}#creativework",
-      "name": "{{ project_locale.title }}",
+      "name": {{ project_locale.title | default: "" | jsonify }},
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "{{ page_language }}",
       "creator": {
@@ -147,13 +140,15 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
         "url": "{{ business_url }}"
       },
       "datePublished": "{{ project.year }}-01-01",
-      "description": "{{ project_locale.description }}",
+      "description": {{ project_locale.description | default: "" | jsonify }},
+      {% comment %} main_image pointe vers un .mp4 pour les projets video : on prend l'image representative {% endcomment %}
+      {% assign schema_image = project.og_image | default: project.image_src %}
       "image": {
         "@type": "ImageObject",
-        "url": "{{ business_url }}{{ project.main_image }}"
+        "url": "{{ business_url }}{{ schema_image }}"
       },
       {% if project.tools %}
-      "keywords": "{{ project.tools }}",
+      "keywords": {{ project.tools | default: "" | jsonify }},
       {% endif %}
       "genre": "{% if project.category == 'music' %}Album Cover Design{% elsif project.category == 'branding' %}Branding{% elsif project.category == 'animation' %}Motion Design{% else %}Graphic Design{% endif %}",
       "isPartOf": {
@@ -163,7 +158,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
     {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}#webpage",
-      "name": "{{ final_page_title }}",
+      "name": {{ final_page_title | default: "" | jsonify }},
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "{{ page_language }}",
       "isPartOf": {
@@ -182,8 +177,8 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
     {
       "@type": "Article",
       "@id": "{{ page.url | absolute_url }}#article",
-      "name": "{{ final_page_title }}",
-      "headline": "{{ final_page_title }}",
+      "name": {{ final_page_title | default: "" | jsonify }},
+      "headline": {{ final_page_title | default: "" | jsonify }},
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "{{ page_language }}",
       "isPartOf": {
@@ -214,7 +209,7 @@ GÉNÉRATION DU SCHEMA.ORG JSON-LD
     {
       "@type": "WebPage",
       "@id": "{{ page.url | absolute_url }}#webpage",
-      "name": "{{ final_page_title }}",
+      "name": {{ final_page_title | default: "" | jsonify }},
       "url": "{{ page.url | absolute_url }}",
       "inLanguage": "{{ page_language }}",
       "isPartOf": {

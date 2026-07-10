@@ -43,10 +43,10 @@ hero:
       text: "Let's discuss your project"
       url: "/en/contact.html"
 subtitles:
-  first_section:
+  subservices:
     fr: "Mes services pour les Musiciens"
     en: "My Services for Musicians"
-  second_section : 
+  projects: 
     fr: "Projets Musicaux Récents"
     en: "Recent Musical Projects"
 services : 

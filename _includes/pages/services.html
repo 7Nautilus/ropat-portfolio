@@ -54,16 +54,12 @@
           <p class="hero-pitch">{{ generic.text }}</p>
         </div>
         <div class="row spacing-lg max-80h center wrap">
-          <div class="dark-bubble"><strong>Flyers & Print</strong></div>
-          <div class="dark-bubble"><strong>Visuels Social Media</strong></div>
-          <div class="dark-bubble"><strong>Signature Mail</strong></div>
-          <div class="dark-bubble"><strong>Présentation Corporate</strong></div>
-          <div class="dark-bubble"><strong>Mise en Page</strong></div>
-          <div class="dark-bubble"><strong>Copywriting</strong></div>
-          <div class="dark-bubble"><strong>Vectorisation</strong></div>
+          {% for tag in generic.tags %}
+          <div class="dark-bubble"><strong>{{ tag }}</strong></div>
+          {% endfor %}
         </div>
       </div>
-      <a href="/fr/contact.html" class="cta" aria-label="Contactez-moi pour créer votre identité visuelle">
+      <a href="/{{ current_lang }}/contact.html" class="cta" aria-label="{{ generic.cta_aria }}">
         <span>{{ generic.cta }}</span>
         {% include ui/icon-arrow.html %}
       </a>

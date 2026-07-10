@@ -1,5 +1,5 @@
 {% assign project = site.data.projects[include.project_id] %}
-{% assign lang = page.lang | default: "fr" %}
+{% assign lang = page.lang | default: "en" %}
 {% if project %}
   {% assign project_locale = project.locales[lang] | default: project.locales.en %}
 {% endif %}
@@ -135,7 +135,8 @@
     <!-- 2. Processus / Context narrative -->
     {% if project.context_sections %}
     <div class="cs-process">
-      <h2 class="cs-process-title animate-fade-up">{{ project_locale.context_title | default: "Contexte du projet" }}</h2>
+      {% if lang == 'fr' %}{% assign context_title_default = "Contexte du projet" %}{% else %}{% assign context_title_default = "Project context" %}{% endif %}
+      <h2 class="cs-process-title animate-fade-up">{{ project_locale.context_title | default: context_title_default }}</h2>
 
       <div class="cs-process-sections">
         {% for section in project.context_sections %}
