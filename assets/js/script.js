@@ -40,26 +40,21 @@
     document.body.classList.remove('cursor-hover', 'cursor-text', 'cursor-zoom');
   }
 
+  function bindCursorState(selectors, stateClass) {
+    document.querySelectorAll(selectors).forEach(el => {
+      el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add(stateClass); });
+      el.addEventListener('mouseleave', clearCursorStates);
+    });
+  }
+
   // Éléments interactifs → état hover (blob orange élargi)
-  const hoverSelectors = 'a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .cta, .dropdown .select, .social-link, .socialContainer, label';
-  document.querySelectorAll(hoverSelectors).forEach(el => {
-    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-hover'); });
-    el.addEventListener('mouseleave', clearCursorStates);
-  });
+  bindCursorState('a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .cta, .dropdown .select, .social-link, .socialContainer, label', 'cursor-hover');
 
   // Texte pur → état text (barre fine)
-  const textSelectors = 'p, h1, h2, h3, h4, h5, li, blockquote, .section-description';
-  document.querySelectorAll(textSelectors).forEach(el => {
-    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-text'); });
-    el.addEventListener('mouseleave', clearCursorStates);
-  });
+  bindCursorState('p, h1, h2, h3, h4, h5, li, blockquote, .section-description', 'cursor-text');
 
   // Images cliquables / lightbox → état zoom (cercle + croix)
-  const zoomSelectors = '.lightbox-trigger, .thumbnail-image, .zoomable';
-  document.querySelectorAll(zoomSelectors).forEach(el => {
-    el.addEventListener('mouseenter', () => { clearCursorStates(); document.body.classList.add('cursor-zoom'); });
-    el.addEventListener('mouseleave', clearCursorStates);
-  });
+  bindCursorState('.lightbox-trigger, .thumbnail-image, .zoomable', 'cursor-zoom');
 
   // Masquer le blob quand la souris quitte la fenêtre
   document.addEventListener('mouseleave', () => { blob.style.opacity = '0'; });
@@ -89,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const burgerMenu = document.querySelector('.burger-menu');
   const navLinks = document.querySelector('.nav-links');
   if (burgerMenu && navLinks) {
+    const closeMenu = () => {
+      navLinks.classList.remove('active');
+      burgerMenu.classList.remove('active');
+      burgerMenu.setAttribute('aria-expanded', 'false');
+      body.style.overflow = '';
+    };
+
     burgerMenu.addEventListener('click', () => {
       const isActive = navLinks.classList.toggle('active');
       burgerMenu.classList.toggle('active');
@@ -99,21 +101,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const navInteractiveSelectors = ['.nav-link', '.contact-link'];
     navInteractiveSelectors.forEach(selector => {
       document.querySelectorAll(selector).forEach(link => {
-        link.addEventListener('click', () => {
-          navLinks.classList.remove('active');
-          burgerMenu.classList.remove('active');
-          burgerMenu.setAttribute('aria-expanded', 'false');
-          body.style.overflow = '';
-        });
+        link.addEventListener('click', closeMenu);
       });
     });
 
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        burgerMenu.classList.remove('active');
-        burgerMenu.setAttribute('aria-expanded', 'false');
-        body.style.overflow = '';
+        closeMenu();
       }
     });
   }

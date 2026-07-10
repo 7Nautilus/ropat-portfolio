@@ -42,11 +42,11 @@ main:has(.contact-hero) {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: var(--spacing-lg);
 }
 
@@ -186,7 +186,7 @@ main:has(.contact-hero) {
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   @include squircle(var(--border-radius-sm));
   color: rgba(255, 255, 255, 0.5);
   margin-top: 2px;

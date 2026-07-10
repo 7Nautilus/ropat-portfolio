@@ -29,10 +29,6 @@ hero:
     cta:
       text: "Let's discuss your project"
       url: "/en/contact.html"
-tools:
-  - nom: "#Illustrator"
-  - nom: "#Photoshop"
-  - nom: "#Figma"
 
 fr:
   details:

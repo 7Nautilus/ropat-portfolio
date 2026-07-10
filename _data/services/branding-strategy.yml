@@ -29,10 +29,6 @@ hero:
     cta:
       text: "Let's discuss your project"
       url: "/en/contact.html"
-tools:
-  - nom: "#Figma"
-  - nom: "#Illustrator"
-  - nom: "#Photoshop"
 
 fr:
   details:
@@ -93,54 +89,3 @@ main-page:
   intro2:
     fr: "<strong>L'objectif :</strong> vous équiper d’outils visuels et stratégiques pour communiquer avec assurance et de construire une relation durable avec votre audience.</p>"
     en: "<strong>The goal:</strong> to equip you with visual and strategic tools to communicate with confidence and build a lasting relationship with your audience.</p>"
-
-
-services-page:
-  description:
-    fr: "Construisez une marque mémorable qui résonne avec votre audience"
-    en: "Build a memorable brand that resonates with your audience"
-  sections:
-    - nom:
-        fr: "Identité de marque"
-        en: "Brand Identity"
-      subservices:
-        - nom:
-            fr: "Création de logotype"
-            en: "Logo Design"
-          description:
-            fr: "Logo principal, déclinaisons, favicon"
-            en: "Main logo, variations, favicon"
-        - nom:
-            fr: "Charte graphique complète"
-            en: "Comprehensive Brand Guidelines"
-          description:
-            fr: "Guide d'utilisation de votre identité visuelle"
-            en: "User guide for your visual identity"
-        - nom:
-            fr: "Brandbook Digital"
-            en: "Digital Brandbook"
-          description:
-            fr: "Manuel de marque interactif et évolutif"
-            en: "Interactive and scalable brand manual"
-    - nom:
-        fr: "Stratégie & Positionnement"
-        en: "Strategy & Positioning"
-      subservices:
-        - nom:
-            fr: "Audit de marque"
-            en: "Brand Audit"
-          description:
-            fr: "Analyse approfondie de votre marque actuelle"
-            en: "In-depth analysis of your current brand"
-        - nom:
-            fr: "Positionnement de marque"
-            en: "Brand Positioning"
-          description:
-            fr: "Définition claire de votre place sur le marché"
-            en: "Clear definition of your market position"
-        - nom:
-            fr: "Stratégie de communication visuelle"
-            en: "Visual Communication Strategy"
-          description:
-            fr: "Planification des messages et visuels cohérents"
-            en: "Planning of consistent messages and visuals"

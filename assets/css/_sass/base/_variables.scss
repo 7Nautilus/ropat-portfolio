@@ -13,6 +13,10 @@
   --background-light: rgba(255, 255, 255, 0.1);
   --color-success: #34C759;
 
+  /* Surfaces sur fond sombre : bordures discretes et texte secondaire */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --text-muted: rgba(255, 255, 255, 0.45);
+
   /* Typographie */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Manrope', sans-serif;

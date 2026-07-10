@@ -47,6 +47,11 @@
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+// Pastille de disponibilite (include ui/status-dot.html)
+.status-dot {
+  fill: var(--color-success);
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.7; transform: scale(1.05); }

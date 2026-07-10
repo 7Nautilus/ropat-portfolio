@@ -22,9 +22,7 @@
       <p class="about-intro">{{ about.intro_1 }}</p>
       <p class="about-intro">{{ about.intro_2 }}</p>
       <div class="about-availability">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" class="animate-pulse" aria-hidden="true">
-          <circle cx="5" cy="5" r="5" fill="#34C759"/>
-        </svg>
+        {% include ui/status-dot.html %}
         <span>{{ about.availability }}</span>
       </div>
     </div>

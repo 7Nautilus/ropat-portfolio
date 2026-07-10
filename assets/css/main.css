@@ -12,6 +12,9 @@
   --background-dark: #0a0a0a;
   --background-light: rgba(255, 255, 255, 0.1);
   --color-success: #34C759;
+  /* Surfaces sur fond sombre : bordures discretes et texte secondaire */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --text-muted: rgba(255, 255, 255, 0.45);
   /* Typographie */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Manrope', sans-serif;
@@ -362,6 +365,10 @@ p:empty {
    ================================ */
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.status-dot {
+  fill: var(--color-success);
 }
 
 @keyframes pulse {
@@ -2309,8 +2316,8 @@ footer {
   flex-wrap: wrap;
   gap: 0;
   padding: var(--spacing-lg) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .cs-spec {
@@ -2328,13 +2335,13 @@ footer {
   padding-right: 0;
 }
 .cs-spec:not(:first-child) {
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 1px solid var(--border-subtle);
 }
 
 .cs-spec-label {
   font-family: var(--font-body);
   font-size: var(--fs-xsmall);
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -2507,7 +2514,7 @@ footer {
   grid-template-columns: 1fr;
   gap: var(--spacing-xl);
   padding-top: var(--spacing-xl);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-subtle);
 }
 @media (min-width: 768px) {
   .cs-design-system {
@@ -2526,11 +2533,11 @@ footer {
   font-family: var(--font-heading);
   font-size: var(--fs-small);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .cs-color-palette {
@@ -2656,7 +2663,7 @@ footer {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -2680,14 +2687,14 @@ footer {
   text-align: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-xl) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .project-cta-eyebrow {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -2705,7 +2712,7 @@ footer {
   align-items: center;
   gap: var(--spacing-md);
   padding: var(--spacing-lg) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .project-nav-item {
@@ -2829,7 +2836,7 @@ footer {
   gap: 0.4rem;
   padding: var(--spacing-sm) var(--spacing-md);
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   font-family: var(--font-body);
   font-size: var(--fs-xsmall);
   font-weight: 600;
@@ -2844,7 +2851,7 @@ footer {
   }
 }
 .project-nav-portfolio {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
 }
 .project-nav-portfolio:hover {
@@ -2860,7 +2867,7 @@ footer {
   }
   .cs-spec {
     padding: var(--spacing-md) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border-subtle);
     flex: none;
   }
   .cs-spec:first-child {
@@ -2935,7 +2942,7 @@ footer {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, var(--background-light) 0%, color-mix(in srgb, var(--primary-color) 8%, transparent) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   border-radius: inherit;
 }
 .about-photo-placeholder::after {
@@ -3297,11 +3304,11 @@ main:has(.contact-hero) {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: var(--spacing-lg);
 }
 
@@ -3443,7 +3450,7 @@ main:has(.contact-hero) {
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--border-radius-sm);
 }
 @supports (corner-shape: squircle) {
