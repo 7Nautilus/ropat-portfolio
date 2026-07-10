@@ -83,29 +83,6 @@
   gap: 2rem;
 }
 
-.hero-cta {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  font-family: var(--font-heading);
-  padding: 1rem 2rem;
-  background-color: var(--primary-color-alpha);
-  color: var(--white-color);
-  border: 3px solid var(--primary-color);
-  border-radius: var(--border-radius-full);
-  font-size: var(--fs-p);
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
-}
-
-.hero-cta:hover {
-  background-color: var(--primary-color);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-md);
-}
-
 /* ============================================
    HERO DISPONIBILITÉS (right of CTA)
    ============================================ */

@@ -1,6 +1,7 @@
 {% assign current_lang = page.lang | default: "en" %}
 {% assign services = site.data.pages.services[current_lang] %}
 {% assign generic = services.generic %}
+{% assign contact_url = "/" | append: current_lang | append: "/contact.html" %}
 {% assign branding = site.data.services.branding-strategy %}
 {% assign design = site.data.services.graphic-design %}
 {% assign music = site.data.services.music-design %}
@@ -59,10 +60,10 @@
           {% endfor %}
         </div>
       </div>
-      <a href="/{{ current_lang }}/contact.html" class="cta" aria-label="{{ generic.cta_aria }}">
-        <span>{{ generic.cta }}</span>
-        {% include ui/icon-arrow.html %}
-      </a>
+      {% include ui/button.html
+         href=contact_url
+         label=generic.cta
+         aria=generic.cta_aria %}
     </div>
   </section>
 

@@ -1,49 +1,128 @@
-/* Call to Action Button */
+@use "base/mixins" as *;
+
+/* ============================================
+   BOUTON — composant à propriétés
+   ============================================
+   .btn          base commune
+   variantes :   .btn--solid (défaut) | .btn--ghost
+   tailles :     .btn--md (défaut) | .btn--lg | .btn--xl
+
+   Le padding responsive vit ICI et non dans _media-queries.scss :
+   ce dernier est chargé en dernier et écrasait silencieusement le
+   padding déclaré sur .cta et sur .about-cta.
+   ============================================ */
 
 .cta-container {
   display: flex;
   justify-content: flex-end;
   width: 100%;
   padding: 0 var(--spacing-lg);
+
+  @media (max-width: 639px) {
+    padding: 0;
+  }
 }
 
-.cta {
+// Padding partagé par les tailles md et lg (comportement historique de .cta)
+@mixin btn-padding-base {
+  padding: var(--spacing-xs) var(--spacing-md);
+
+  @include respond-to("sm") {
+    padding: 0.875rem 2rem;
+  }
+
+  @media (max-width: 360px) {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
   gap: 0.875rem;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+
+  // Flèche : rotation -45° au survol
+  svg {
+    transition: transform var(--transition-base);
+  }
+}
+
+/* ── Variantes ──────────────────────────── */
+
+// La typographie appartient à la variante, pas à la base :
+// le bouton texte hérite de la taille et de la graisse de son contexte.
+.btn--solid {
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  color: var(--white-color);
-  padding: 0.75rem var(--spacing-lg);
   border-radius: var(--border-radius-full);
+  color: var(--white-color);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
   font-size: var(--fs-p);
   font-weight: 600;
-  transition: background-color var(--transition-base), transform var(--transition-base);
-  box-shadow: var(--shadow-sm);
+
+  &:hover {
+    background-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    transform: scale(1.05);
+  }
+
+  &:hover svg {
+    transform: rotate(-45deg);
+  }
 }
 
-.cta:hover {
-  background-color: var(--primary-color);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-md);
+// Bouton texte : pas de fond, pas de bordure, pas de padding.
+// Il vit à l'intérieur d'une carte cliquable, c'est le survol de la carte
+// qui l'anime.
+.btn--ghost {
+  padding: 0;
+  color: var(--primary-color);
+
+  .card:hover & {
+    transform: scale(1.05);
+  }
+
+  .card:hover & svg {
+    transform: rotate(-45deg);
+  }
 }
 
-// Flèche des CTA : rotation -45° au survol (couvre .cta, le hero CTA et .cta-simple)
-.cta svg,
-.cta-simple svg,
-.hero-cta-icon {
-  transition: transform var(--transition-base);
+/* ── Tailles ────────────────────────────── */
+
+.btn--md {
+  @include btn-padding-base;
 }
 
-.cta:hover svg,
-.card:hover .cta-simple svg,
-.hero-cta:hover .hero-cta-icon {
-  transform: rotate(-45deg);
+.btn--lg {
+  @include btn-padding-base;
+  font-size: var(--fs-text-lg);
 }
 
-// Scroll Down Button
+// CTA principal du hero. Conserve Space Grotesk : divergence assumée,
+// à réévaluer (cf. TODO).
+.btn--xl {
+  gap: 1.5rem;
+  padding: 1rem 2rem;
+  font-family: var(--font-heading);
+}
+
+/* ── Icônes ─────────────────────────────── */
+
+.btn-icon-send {
+  filter: invert(1);
+}
+
+/* ============================================
+   Scroll Down Button
+   ============================================ */
 
 .big-icon-placeholder {
   background-color: var(--primary-color-alpha);
@@ -66,23 +145,4 @@
 .big-icon svg {
   width: 4rem;
   height: 4rem;
-}
-
-
-// Simple cta
-
-.cta-simple {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  gap: 0.875rem;
-
-  transition: 
-    color 0.3s var(--ease-out), 
-    transform 0.3s var(--ease-out);
-}
-
-.card:hover .cta-simple {
-  transform: scale(1.05);
 }

@@ -1,5 +1,6 @@
 {% assign current_lang = page.lang | default: "en" %}
 {% assign about = site.data.pages.about[current_lang] %}
+{% assign about_contact_url = "/" | append: current_lang | append: "/contact.html" %}
 
 <main id="main-content" class="about-page">
 
@@ -79,10 +80,10 @@
 
   <!-- ── CTA ── -->
   <section class="about-cta-section" aria-label="Contact">
-    <a href="/{{ current_lang }}/contact.html" class="cta about-cta">
-      {{ about.cta.label }}
-      {% include ui/icon-arrow.html %}
-    </a>
+    {% include ui/button.html
+       href=about_contact_url
+       label=about.cta.label
+       size="lg" %}
   </section>
 
 </main>

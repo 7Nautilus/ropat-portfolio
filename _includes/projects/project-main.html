@@ -246,11 +246,9 @@
     <h2 class="project-cta-title" id="project-cta-title">
       {% if lang == 'fr' %}Travaillons <span class="orange">ensemble !</span>{% else %}Let's work <span class="orange">together !</span>{% endif %}
     </h2>
-    <a href="/{{ lang }}/contact.html" class="cta">
-      {% if lang == 'fr' %}Prendre contact{% else %}Get in touch{% endif %}
-      <!-- <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> -->
-      <img width="18" height="18" style="filter: invert(1);" src="/assets/images/icons/send.svg" alt="send icon" aria-hidden="true" />
-    </a>
+    {% if lang == 'fr' %}{% assign cta_label = "Prendre contact" %}{% else %}{% assign cta_label = "Get in touch" %}{% endif %}
+    {% assign project_contact_url = "/" | append: lang | append: "/contact.html" %}
+    {% include ui/button.html href=project_contact_url label=cta_label icon="send" %}
   </section>
 
   <!-- ── NAVIGATION PROJETS ───────────────── -->

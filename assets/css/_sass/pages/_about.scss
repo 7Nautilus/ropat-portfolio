@@ -329,17 +329,6 @@
   padding: var(--spacing-lg) 0;
 }
 
-.about-cta {
-  font-size: var(--fs-text-lg);
-  padding: var(--spacing-md) var(--spacing-xl);
-
-  // WCAG 2.4.7 — Focus visible pour navigation clavier
-  &:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 4px;
-  }
-}
-
 // ── RESPONSIVE ────────────────────────
 @media (max-width: 768px) {
   .about-hero {

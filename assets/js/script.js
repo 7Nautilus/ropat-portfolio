@@ -48,7 +48,7 @@
   }
 
   // Éléments interactifs → état hover (blob orange élargi)
-  bindCursorState('a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .cta, .dropdown .select, .social-link, .socialContainer, label', 'cursor-hover');
+  bindCursorState('a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .btn, .dropdown .select, .social-link, .socialContainer, label', 'cursor-hover');
 
   // Texte pur → état text (barre fine)
   bindCursorState('p, h1, h2, h3, h4, h5, li, blockquote, .section-description', 'cursor-text');

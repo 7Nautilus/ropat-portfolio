@@ -50,9 +50,8 @@
 
   <!-- cta -->
   {% if include.cta %}
-    <div class="cta-simple orange" href="{{ detail_url }}">
-      Découvrir l'offre
-      {% include ui/icon-arrow.html %}
-    </div>
+    {% comment %} tag="div" : la carte entière est déjà un <a>, on ne peut pas imbriquer deux liens {% endcomment %}
+    {% assign card_cta_label = site.data.services.index.card_cta[current_lang] %}
+    {% include ui/button.html tag="div" variant="ghost" label=card_cta_label %}
   {% endif %}
 </{{ card_tag }}>

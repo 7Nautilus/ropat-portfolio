@@ -48,7 +48,8 @@
   /* Désactiver les transformations sauf opacity */
   .project-card:hover,
   .service-card:hover,
-  .cta:hover,
+  .btn:hover,
+  .card:hover .btn--ghost,
   .nav-link:hover {
     transform: none !important;
   }

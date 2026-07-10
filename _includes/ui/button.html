@@ -1,0 +1,59 @@
+{% comment %}
+  ============================================================
+  BOUTON / CTA — composant à propriétés
+  ============================================================
+
+  Propriétés :
+    label    (requis)  texte du bouton
+    href               destination. Si présent, rend un <a>.
+    tag                force la balise : "a" | "button" | "div" | "span"
+                       défaut : "a" si href, sinon "button"
+                       (utiliser "div" quand le bouton est DANS un <a>,
+                        car imbriquer deux liens est invalide)
+    type               type du <button>, défaut "submit"
+    variant            "solid" (défaut) | "ghost"
+    size               "md" (défaut) | "lg" | "xl"
+                       ignoré pour ghost, qui n'a ni fond ni padding
+    icon               "arrow" (défaut) | "arrow-long" | "send" | "none"
+    aria               valeur de aria-label
+    class              classes additionnelles (positionnement, marges…)
+
+  Exemples :
+    {% include ui/button.html href="/fr/contact.html" label="Me contacter" %}
+    {% include ui/button.html href=url label=txt size="xl" icon="arrow-long" %}
+    {% include ui/button.html label=txt tag="button" icon="send" class="contact-submit" %}
+    {% include ui/button.html label=txt tag="div" variant="ghost" %}
+  ============================================================
+{% endcomment %}
+
+{% comment %}
+  PIÈGE LIQUID : `size` est une propriété réservée. Si le paramètre n'est pas
+  passé, `include.size` ne vaut PAS nil : il retourne le nombre de paramètres
+  de l'include (d'où des classes absurdes comme `btn--3`). On valide donc la
+  valeur contre une liste blanche au lieu d'utiliser `| default:`.
+{% endcomment %}
+{% assign valid_sizes = "md,lg,xl" | split: "," %}
+{% assign size = "md" %}
+{% if valid_sizes contains include.size %}{% assign size = include.size %}{% endif %}
+
+{% assign variant = include.variant | default: "solid" %}
+{% assign icon = include.icon | default: "arrow" %}
+
+{% if include.tag %}
+  {% assign tag = include.tag %}
+{% elsif include.href %}
+  {% assign tag = "a" %}
+{% else %}
+  {% assign tag = "button" %}
+{% endif %}
+
+{% capture classes %}btn btn--{{ variant }}{% unless variant == "ghost" %} btn--{{ size }}{% endunless %}{% if include.class %} {{ include.class }}{% endif %}{% endcapture %}
+
+<{{ tag }} class="{{ classes }}"{% if include.href %} href="{{ include.href }}"{% endif %}{% if tag == "button" %} type="{{ include.type | default: 'submit' }}"{% endif %}{% if include.aria %} aria-label="{{ include.aria }}"{% endif %}>
+  <span>{{ include.label }}</span>
+  {% case icon %}
+    {% when "arrow" %}{% include ui/icon-arrow.html %}
+    {% when "arrow-long" %}{% include ui/icon-arrow-long.html %}
+    {% when "send" %}{% include ui/icon-send.html %}
+  {% endcase %}
+</{{ tag }}>

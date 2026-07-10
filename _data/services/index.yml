@@ -2,3 +2,8 @@ order:
   - branding-strategy
   - music-design
   - web-design
+
+# Libellé du bouton présent sur chaque carte de service
+card_cta:
+  fr: "Découvrir l'offre"
+  en: "Explore the service"
