@@ -56,7 +56,6 @@ locales:
     aria_label: "Voir le projet de branding pour Stelya"
     image_alt: "Branding pour Stelya, cabinet de conseil en ingénierie"
     title: "Branding pour Stelya"
-    subtitle: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie"
     pitch: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie"
     description: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie. Création d'un logo, d'une icône et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **haut de gamme, sérieux et tech**."
     services: "Logo, Icône, Pack LinkedIn, Palette, Typographie"
@@ -64,10 +63,8 @@ locales:
     seo:
       title: "Branding Stelya | Ropat"
       description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie. Logo, icône, pack LinkedIn, palette et typographie."
-      canonical_url: "https://ropat.art/fr/projects/stelya.html"
       og_title: "Branding Stelya"
       og_description: "Identité visuelle complète pour Stelya, cabinet de conseil en ingénierie."
-      og_url: "https://ropat.art/fr/projects/stelya.html"
       og_image: "https://ropat.art/assets/images/projects/Stelya/stelya-mockup-bureau.avif"
 
   en:
@@ -75,7 +72,6 @@ locales:
     aria_label: "See the branding project for Stelya"
     image_alt: "Branding for Stelya, engineering consulting firm"
     title: "Branding for Stelya"
-    subtitle: "**Complete visual identity** for **Stelya**, engineering consulting firm"
     pitch: "**Complete visual identity** for **Stelya**, engineering consulting firm"
     description: "**Complete visual identity** for **Stelya**, an engineering consulting firm. Creation of a logo, icon, and **LinkedIn identity pack**, with a defined color palette and typography. A positioning that is **premium, serious, and tech-forward**."
     services: "Logo, Icon, LinkedIn Pack, Color Palette, Typography"
@@ -83,10 +79,8 @@ locales:
     seo:
       title: "Branding Stelya | Ropat"
       description: "Complete visual identity for Stelya, engineering consulting firm. Logo, icon, LinkedIn pack, color palette and typography."
-      canonical_url: "https://ropat.art/en/projects/stelya.html"
       og_title: "Branding Stelya"
       og_description: "Complete visual identity for Stelya, engineering consulting firm."
-      og_url: "https://ropat.art/en/projects/stelya.html"
       og_image: "https://ropat.art/assets/images/projects/Stelya/stelya-mockup-bureau.avif"
 
 case_study:

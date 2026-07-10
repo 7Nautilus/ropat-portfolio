@@ -60,34 +60,28 @@ locales:
     aria_label: "Voir le projet de visualizer musical de JPeJA"
     image_alt: "Visualizer musical de JPeJA"
     title: "JPeJA"
-    subtitle: "Visualizer musical"
     pitch: "**Création d'un visualizer musical** pour le single **JPeJA** de **Wasting Shit**"
     description: "**Réalisation d'un visualizer musical** fictif pour la sortie du single **JPeJA** de **Wasting Shit**. Cette animation a été réalisée en utilisant **After Effects**."
     context_title: "À propos du projet"
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
-      canonical_url: "https://ropat.art/fr/projects/jpeja.html"
       og_title: "JPeJA Animation - Ropat"
       og_description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
-      og_url: "https://ropat.art/fr/projects/jpeja.html"
       og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
   en:
     url: /en/projects/jpeja.html
     aria_label: "View the visualizer project"
     image_alt: "JPeJA Visualizer"
     title: "JPeJA"
-    subtitle: "Musical visualizer"
     pitch: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**"
     description: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**. This animation was created using **After Effects**."
     context_title: "About the project"
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
-      canonical_url: "https://ropat.art/en/projects/jpeja.html"
       og_title: "JPeJA - Ropat"
       og_description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'
-      og_url: "https://ropat.art/en/projects/jpeja.html"
       og_image: "https://ropat.art/assets/images/projects/jpeja-thumbnail.jpg"
 
 case_study:

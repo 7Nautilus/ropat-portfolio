@@ -60,34 +60,28 @@ locales:
     aria_label: "Voir le projet d'affiche HDD DEFRAG"
     image_alt: "Affiche HDD DEFRAG"
     title: "Affiche “HDD DEFRAG”"
-    subtitle: "Design d'**affiche** sur la défragmentation de disque dur"
     pitch: "**Création d'une affiche** sur la défragmentation de disque dur."
     description: "**Création d'une affiche** sur le thème de la défragmentation de disque dur, utilisant **InDesign**, **Photoshop** et **Illustrator**."
     context_title: "À propos du projet"
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
       description: "Design d'affiche sur le thème de la défragmentation  des disques durs."
-      canonical_url: "https://ropat.art/fr/projects/hdd-defrag.html"
       og_title: "HDD DEFRAG - Affiche"
       og_description: "Affiche design sur le thème de la défragmentation de disque dur."
-      og_url: "https://ropat.art/fr/projects/hdd-defrag.html"
       og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
   en:
     url: /en/projects/hdd-defrag.html
     aria_label: "View the HDD DEFRAG poster project"
     image_alt: "HDD DEFRAG Poster"
     title: "Poster “HDD DEFRAG”"
-    subtitle: "**Graphic design** poster project"
     pitch: "**Creation of a poster** on the theme of hard drive defragmentation."
     description: "**Creation of a poster** on the theme of hard drive defragmentation, using **InDesign**, **Photoshop**, and **Illustrator**."
     context_title: "About the project"
     seo:
       title: "HDD DEFRAG - Poster | Ropat"
       description: "Poster design on the theme of hard drive defragmentation."
-      canonical_url: "https://ropat.art/en/projects/hdd-defrag.html"
       og_title: "HDD DEFRAG - Poster"
       og_description: "Design poster on the theme of hard drive defragmentation."
-      og_url: "https://ropat.art/en/projects/hdd-defrag.html"
       og_image: "https://ropat.art/assets/images/projects/hdd-defrag-poster.png"
 
 case_study:

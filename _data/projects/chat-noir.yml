@@ -60,34 +60,28 @@ locales:
     aria_label: "Voir le projet d'affiche Chat Noir"
     image_alt: "Affiche Chat Noir"
     title: "Affiche “Chat Noir”"
-    subtitle: "Projet de **design graphique** d'affiche"
     pitch: "**Création d'une affiche rétro** inspirée du **cabaret parisien \"Le Chat Noir\"**"
     description: "Réinterprétation de l'affiche emblématique du **cabaret parisien \"Le Chat Noir\"** de **Rodolphe Salis**, dans le style graphique de l'**affiche polonaise** du film **\"Godzilla\"** de 1954."
     context_title: "À propos du projet"
     seo:
       title: "Chat Noir - Affiche | Ropat"
       description: "Design d'affiche sur le thème du cabaret parisien \"Le Chat Noir\"."
-      canonical_url: "https://ropat.art/fr/projects/chat-noir.html"
       og_title: "Chat Noir - Affiche"
       og_description: "Affiche design sur le thème du cabaret parisien \"Le Chat Noir\"."
-      og_url: "https://ropat.art/fr/projects/chat-noir.html"
       og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
   en:
     url: /en/projects/chat-noir.html
     aria_label: "View the Chat Noir poster project"
     image_alt: "Chat Noir Poster"
     title: "Poster “Chat Noir”"
-    subtitle: "**Graphic design** poster project"
     pitch: "**Creation of a retro poster** inspired by the **Parisian cabaret \"Le Chat Noir\"**"
     description: "Reinterpretation of the iconic poster of the **Parisian cabaret \"Le Chat Noir\"** by **Rodolphe Salis**, in the graphic style of the **Polish poster** for the **1954 film \"Godzilla.\"**"
     context_title: "About the project"
     seo:
       title: "Chat Noir - Poster | Ropat"
       description: "Poster design on the theme of the Parisian cabaret \"Le Chat Noir\"."
-      canonical_url: "https://ropat.art/en/projects/chat-noir.html"
       og_title: "Chat Noir - Poster"
       og_description: "Design poster on the theme of the Parisian cabaret \"Le Chat Noir\"."
-      og_url: "https://ropat.art/en/projects/chat-noir.html"
       og_image: "https://ropat.art/assets/images/projects/chatnoir.jpg"
 
 case_study:

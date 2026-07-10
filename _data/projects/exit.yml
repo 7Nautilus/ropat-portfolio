@@ -72,34 +72,28 @@ locales:
     aria_label: "Voir le projet d'affiche EXIT"
     image_alt: "Affiche EXIT"
     title: "Affiche “EXIT”"
-    subtitle: "**Création d'affiche** vintage"
     pitch: "**Création d'une affiche vintage** en utilisant **Photoshop** et **Illustrator**"
     description: "**Réinterprétation graphique** des panneaux de sorties de secours avec un traitement en **cuivre oxydé**, mêlant **typographie**, **formes géométriques** et **textures contemporaines**."
     context_title: "À propos du projet"
     seo:
       title: "EXIT - Affiche Design | Ropat"
       description: "Création d'affiche détournant le design des panneaux de sorties de secours avec un aspect cuivre oxydé."
-      canonical_url: "https://ropat.art/fr/projects/exit.html"
       og_title: "EXIT - Affiche Design"
       og_description: "Création d'affiche détournant le design des panneaux de sorties de secours."
-      og_url: "https://ropat.art/fr/projects/exit.html"
       og_image: "https://ropat.art/assets/images/projects/exit.png"
   en:
     url: /en/projects/exit.html
     aria_label: "View the EXIT poster project"
     image_alt: "EXIT Poster"
     title: "Poster “EXIT”"
-    subtitle: "**Poster design** project reinterpreting emergency exit signage design"
     pitch: "**Creation of a vintage poster** using **Photoshop** and **Illustrator**"
     description: "**Graphic reinterpretation** of emergency exit signs with an **oxidized copper** treatment, blending **typography**, **geometric shapes**, and **contemporary textures**."
     context_title: "About the project"
     seo:
       title: "EXIT - Poster Design | Ropat"
       description: "Poster design reinterpreting emergency exit signage with an oxidized copper aesthetic."
-      canonical_url: "https://ropat.art/en/projects/exit.html"
       og_title: "EXIT - Poster Design"
       og_description: "Poster design reinterpreting emergency exit signage."
-      og_url: "https://ropat.art/en/projects/exit.html"
       og_image: "https://ropat.art/assets/images/projects/exit.png"
 
 case_study:

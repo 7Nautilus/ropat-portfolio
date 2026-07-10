@@ -77,34 +77,28 @@ locales:
     aria_label: "Voir le processus de création de logo"
     image_alt: "Processus de design de logo"
     title: "Processus de design de logo"
-    subtitle: "Processus de **création de logo** géométrique"
     pitch: "**Création d'un logo géométrique** : du croquis initial à la version finale 3D avec effets"
     description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
     context_title: "À propos du projet"
     seo:
       title: "Logo Design Process | Ropat"
       description: "Découvrez le processus de création d'un logo géométrique, de l'esquisse initiale à la version finale 3D avec effets."
-      canonical_url: "https://ropat.art/fr/projects/logo-process.html"
       og_title: "Logo Design Process"
       og_description: "Processus de création d'un logo, de l'esquisse initiale à la version finale 3D."
-      og_url: "https://ropat.art/fr/projects/logo-process.html"
       og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
   en:
     url: /en/projects/logo-process.html
     aria_label: "View the logo creation process"
     image_alt: "Logo design process"
     title: "Logo design process"
-    subtitle: "**Logo creation** process"
     pitch: "**Creation of a geometric logo**: from initial sketch to final 3D version with effects"
     description: "Example of logo design process including sketch, development and finalization."
     context_title: "About the project"
     seo:
       title: "Logo Design Process | Ropat"
       description: "Discover the geometric logo creation process, from initial sketch to final 3D version with effects."
-      canonical_url: "https://ropat.art/en/projects/logo-process.html"
       og_title: "Logo Design Process"
       og_description: "Logo creation process, from initial sketch to final 3D version."
-      og_url: "https://ropat.art/en/projects/logo-process.html"
       og_image: "https://ropat.art/assets/images/projects/logo-design-process.png"
 
 case_study:

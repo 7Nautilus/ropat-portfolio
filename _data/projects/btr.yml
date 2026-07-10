@@ -57,7 +57,6 @@ locales:
     aria_label: "Voir le projet de la pochette du single 'BTR' de Maltezz"
     image_alt: "Pochette du single “BTR” de Maltezz"
     title: "Pochette du single “BTR”"
-    subtitle: "**Direction Artistique** et **Cover Art** pour le single **BTR**"
     pitch: "**Direction artistique** et **création de la pochette** pour la sortie du single **BTR** de Maltezz"
     description: "**Direction artistique** complète et **création de la pochette d'album** pour la sortie du **single** **BTR** de Maltezz."
     services: "Direction Artistique, Typographie custom & Design de pochette de single"
@@ -65,17 +64,14 @@ locales:
     seo:
       title: "Pochette BTR - Maltezz | Ropat"
       description: "Direction artistique et création de la pochette pour le single BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
-      canonical_url: "https://ropat.art/fr/projects/btr.html"
       og_title: "Pochette BTR - Maltezz"
       og_description: "Direction artistique et création de la pochette pour le single BTR de Maltezz."
-      og_url: "https://ropat.art/fr/projects/btr.html"
       og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
   en:
     url: /en/projects/btr.html
     aria_label: "View the 'BTR' single cover project by Maltezz"
     image_alt: "“BTR” single cover by Maltezz"
     title: "Single Cover “BTR”"
-    subtitle: "**Art Direction** and **Cover Art** for the **BTR** single"
     pitch: "**Art direction** and **cover design** for Maltezz's **BTR** single release"
     description: "Complete **art direction** and **cover art design** for the release of the single **BTR** by Maltezz."
     services: "Art Direction, Custom Typography & Single Cover Design"
@@ -83,10 +79,8 @@ locales:
     seo:
       title: "BTR Cover - Maltezz | Ropat"
       description: "Art direction and cover design for Maltezz's BTR single. Graphic composition, color choices and typography."
-      canonical_url: "https://ropat.art/en/projects/btr.html"
       og_title: "BTR Cover - Maltezz"
       og_description: "Art direction and cover design for Maltezz's BTR single."
-      og_url: "https://ropat.art/en/projects/btr.html"
       og_image: "https://ropat.art/assets/images/projects/btr-cover.png"
 
 case_study:

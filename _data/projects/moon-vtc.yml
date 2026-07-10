@@ -59,7 +59,6 @@ locales:
     aria_label: "Voir l'identité visuelle Moon VTC"
     image_alt: "Logo Moon VTC - version typographique blanche"
     title: "Moon VTC - Identité visuelle"
-    subtitle: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de transport avec chauffeur en phase de lancement"
     pitch: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de VTC en phase de lancement : logo, palette de couleurs, typographie et charte graphique."
     description: "Conception de l'**identité visuelle complète** de Moon VTC, société de transport avec chauffeur en phase de lancement. La mission comprenait la création d'un **set de logos**, une sélection de **palette de couleurs** et de **typographie**, ainsi qu'une **charte graphique** complète pour cadrer l'usage de ces éléments."
     services: "Identité visuelle, Création de logo, Charte graphique"
@@ -67,10 +66,8 @@ locales:
     seo:
       title: "Moon VTC - Identité visuelle | Ropat"
       description: "Création de l'identité visuelle complète pour Moon VTC : logo, palette de couleurs, typographie et charte graphique pour cette société de VTC en lancement."
-      canonical_url: "https://ropat.art/fr/projects/moon-vtc.html"
       og_title: "Moon VTC - Identité visuelle | Ropat"
       og_description: "Création du logo, de la palette et de la charte graphique pour Moon VTC, société de transport avec chauffeur."
-      og_url: "https://ropat.art/fr/projects/moon-vtc.html"
       og_image: "https://ropat.art/assets/images/projects/moon_vtc/moon_vtc_typo_white.png"
 
   en:
@@ -78,7 +75,6 @@ locales:
     aria_label: "See the Moon VTC visual identity"
     image_alt: "Moon VTC logo - white typographic version"
     title: "Moon VTC - Visual Identity"
-    subtitle: "Creation of a **complete visual identity** for **Moon VTC**, a chauffeur-driven car service launching its brand"
     pitch: "Creation of a **complete visual identity** for **Moon VTC**, a VTC company launching its brand: logo, color palette, typography, and brand guidelines."
     description: "Design of the **complete visual identity** for Moon VTC, a chauffeur-driven car service in its launch phase. The mission included creating a **logo set**, a **color palette** and **typography** selection, as well as a full **brand guidelines** document to frame the usage of these elements."
     services: "Visual Identity, Logo Design, Brand Guidelines"
@@ -86,10 +82,8 @@ locales:
     seo:
       title: "Moon VTC - Visual Identity | Ropat"
       description: "Creation of the complete visual identity for Moon VTC: logo, color palette, typography and brand guidelines for this launching VTC company."
-      canonical_url: "https://ropat.art/en/projects/moon-vtc.html"
       og_title: "Moon VTC - Visual Identity | Ropat"
       og_description: "Logo creation, color palette and brand guidelines for Moon VTC, a chauffeur-driven car service."
-      og_url: "https://ropat.art/en/projects/moon-vtc.html"
       og_image: "https://ropat.art/assets/images/projects/moon_vtc/moon_vtc_typo_white.png"
 
 thumbnails:

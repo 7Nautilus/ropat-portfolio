@@ -60,34 +60,28 @@ locales:
     aria_label: "Voir le projet d'animation en stop-motion"
     image_alt: "Animation en Stop-Motion"
     title: "Animation en Stop-Motion"
-    subtitle: "Animation en **stop-motion**"
     pitch: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     description: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     context_title: "À propos du projet"
     seo:
       title: "Crow Animation - Ropat"
       description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
-      canonical_url: "https://ropat.art/fr/projects/crow.html"
       og_title: "Crow Animation - Ropat"
       og_description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau."
-      og_url: "https://ropat.art/fr/projects/crow.html"
       og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
   en:
     url: /en/projects/crow.html
     aria_label: "View the stop-motion animation project"
     image_alt: "Stop-Motion Animation"
     title: "Stop-Motion Animation"
-    subtitle: "**Stop-motion** animation"
     pitch: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     description: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     context_title: "About the project"
     seo:
       title: "Crow Animation - Ropat"
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."
-      canonical_url: "https://ropat.art/en/projects/crow.html"
       og_title: "Crow Animation - Ropat"
       og_description: "Stop-motion animation exploring the crow's speed and agility."
-      og_url: "https://ropat.art/en/projects/crow.html"
       og_image: "https://ropat.art/assets/images/projects/crow-stopmotion.png"
 
 case_study:

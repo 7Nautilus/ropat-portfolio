@@ -48,7 +48,6 @@ locales:
     aria_label: "Voir le packaging de Zylkene pour Vetoquinol"
     image_alt: "Packaging de Zylkene pour Vetoquinol"
     title: "Packaging de Zylkene"
-    subtitle: "**Design graphique** et **packaging** pour la gamme de produits Zylkene de Vetoquinol"
     pitch: "**Design graphique** et **conception de packaging** pour la gamme de produits **Zylkene** de Vetoquinol"
     description: "**Design graphique** complet et **conception de packaging** pour la gamme de produits **Zylkene** de Vetoquinol, avec une attention particulière portée à l'esthétique, la fonctionnalité, et la cohérence avec l'identité de la marque."
     services: "Design graphique, Conception de packaging, Identité visuelle"
@@ -56,10 +55,8 @@ locales:
     seo:
       title: "Packaging Zylkene - Vetoquinol | Ropat"
       description: "Design graphique et conception de packaging pour la gamme de produits Zylkene de Vetoquinol. Renforcement de l'identité visuelle et attrait commercial."
-      canonical_url: "https://ropat.art/fr/projects/zylkene.html"
       og_title: "Packaging Zylkene - Vetoquinol"
       og_description: "Design graphique et conception de packaging pour la gamme de produits Zylkene de Vetoquinol."
-      og_url: "https://ropat.art/fr/projects/zylkene.html"
       og_image: "https://ropat.art/assets/images/projects/zylkene-thumbnail.webp"
 
   en:
@@ -67,7 +64,6 @@ locales:
     aria_label: "See the Zylkene packaging for Vetoquinol"
     image_alt: "Zylkene packaging for Vetoquinol"
     title: "Zylkene Packaging"
-    subtitle: "**Graphic design** and **packaging** for Vetoquinol's Zylkene product line"
     pitch: "**Graphic design** and **packaging design** for the **Zylkene** product line by Vetoquinol"
     description: "**Comprehensive graphic design** and **packaging design** for the **Zylkene** product line by Vetoquinol, with a focus on aesthetics, functionality, and consistency with the brand's identity."
     services: "Graphic design, Packaging design, Visual identity"
@@ -75,10 +71,8 @@ locales:
     seo:
       title: "Zylkene Packaging - Vetoquinol | Ropat"
       description: "Graphic design and packaging design for Vetoquinol's Zylkene product line. Enhancing visual identity and commercial appeal."
-      canonical_url: "https://ropat.art/en/projects/zylkene.html"
       og_title: "Zylkene Packaging - Vetoquinol"
       og_description: "Graphic design and packaging design for Vetoquinol's Zylkene product line."
-      og_url: "https://ropat.art/en/projects/zylkene.html"
       og_image: "https://ropat.art/assets/images/projects/zylkene-thumbnail.webp"
 
 case_study:

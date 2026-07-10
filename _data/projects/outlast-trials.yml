@@ -60,34 +60,28 @@ locales:
     aria_label: "Voir le projet d'affiche Outlast Trials"
     image_alt: "Affiche Outlast Trials"
     title: "Affiche “Outlast Trials”"
-    subtitle: "Projet de **design graphique** d'affiche"
     pitch: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**"
     description: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**."
     context_title: "À propos du projet"
     seo:
       title: "Outlast Trials - Affiche | Ropat"
       description: "Design d'affiche sur le thème du jeu vidéo Outlast Trials."
-      canonical_url: "https://ropat.art/fr/projects/outlast-trials.html"
       og_title: "Outlast Trials - Affiche"
       og_description: "Affiche design sur le thème du jeu vidéo Outlast Trials."
-      og_url: "https://ropat.art/fr/projects/outlast-trials.html"
       og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
   en:
     url: /en/projects/outlast-trials.html
     aria_label: "View the Outlast Trials poster project"
     image_alt: "Outlast Trials Poster"
     title: "Poster “Outlast Trials”"
-    subtitle: "**Graphic design** poster project"
     pitch: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game"
     description: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game."
     context_title: "About the project"
     seo:
       title: "Outlast Trials - Poster | Ropat"
       description: "Poster design on the theme of the Outlast Trials video game."
-      canonical_url: "https://ropat.art/en/projects/outlast-trials.html"
       og_title: "Outlast Trials - Poster"
       og_description: "Design poster on the theme of the Outlast Trials video game."
-      og_url: "https://ropat.art/en/projects/outlast-trials.html"
       og_image: "https://ropat.art/assets/images/projects/outlast-trials.png"
 
 case_study:

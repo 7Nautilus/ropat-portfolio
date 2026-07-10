@@ -52,7 +52,6 @@ locales:
     aria_label: "Voir la campagne paid social Banana Rush - Juliette has a Gun"
     image_alt: "Campagne paid social Banana Rush - Juliette has a Gun"
     title: "Banana Rush - Social Ads"
-    subtitle: "**Création des assets graphiques** pour la campagne paid social de lancement de la gamme **Banana Rush**"
     pitch: "**Création des assets graphiques** pour la campagne paid social de lancement de la gamme **Banana Rush** de la maison de parfumerie **Juliette has a Gun**"
     description: "Conception de l'ensemble des **assets statiques et animés** pour la campagne paid social de lancement de la gamme **Banana Rush** de **Juliette has a Gun**. Campagne déclinée en **3 phases**, sur les formats 1:1, 4:5 et 9:16, en anglais et en français."
     services: "Motion Design, Création d'assets paid social, Déclinaisons multi-formats"
@@ -60,10 +59,8 @@ locales:
     seo:
       title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
       description: "Création des assets paid social pour la campagne de lancement de la gamme Banana Rush de Juliette has a Gun. Statics et motion design, 3 phases, formats Meta."
-      canonical_url: "https://ropat.art/fr/projects/jhag-banana-rush.html"
       og_title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
       og_description: "Assets paid social pour le lancement de la gamme Banana Rush de Juliette has a Gun."
-      og_url: "https://ropat.art/fr/projects/jhag-banana-rush.html"
       og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
 
   en:
@@ -71,7 +68,6 @@ locales:
     aria_label: "See the Banana Rush paid social campaign - Juliette has a Gun"
     image_alt: "Banana Rush paid social campaign - Juliette has a Gun"
     title: "Banana Rush - Juliette has a Gun"
-    subtitle: "**Graphic assets creation** for the paid social launch campaign of the **Banana Rush** line"
     pitch: "**Graphic assets creation** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**"
     description: "Design of all **static and animated assets** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**. Campaign rolled out in **3 phases**, across 1:1, 4:5 and 9:16 formats, in both English and French."
     services: "Motion Design, Paid Social Asset Creation, Multi-format Adaptation"
@@ -79,10 +75,8 @@ locales:
     seo:
       title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
       description: "Paid social asset creation for the Banana Rush launch campaign by Juliette has a Gun. Statics and motion design, 3 phases, Meta formats."
-      canonical_url: "https://ropat.art/en/projects/jhag-banana-rush.html"
       og_title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
       og_description: "Paid social assets for the Banana Rush launch campaign by Juliette has a Gun."
-      og_url: "https://ropat.art/en/projects/jhag-banana-rush.html"
       og_image: "https://ropat.art/assets/images/projects/jhag-br-p1-kv.png"
 
 thumbnails:

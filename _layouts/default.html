@@ -22,10 +22,8 @@
         {% if project_locale.seo %}
           {% assign page_title = project_locale.seo.title %}
           {% assign page_meta_description = project_locale.seo.meta_description | default: project_locale.seo.description %}
-          {% assign page_canonical_url = project_locale.seo.canonical_url %}
           {% assign page_og_title = project_locale.seo.og_title %}
           {% assign page_og_description = project_locale.seo.og_description %}
-          {% assign page_og_url = project_locale.seo.og_url %}
           {% assign page_og_image = project_locale.seo.og_image %}
         {% endif %}
       {% endif %}
@@ -34,10 +32,9 @@
   {% comment %} Utiliser les valeurs du frontmatter ou celles de _data/projects/<slug>.yml {% endcomment %}
     {% assign final_title = page.title | default: page_title %}
     {% assign final_meta_description = page.meta_description | default: page_meta_description %}
-    {% assign final_canonical_url = page.canonical_url | default: page_canonical_url %}
+    {% assign final_canonical_url = page.canonical_url %}
     {% assign final_og_title = page.og_title | default: page_og_title %}
     {% assign final_og_description = page.og_description | default: page_og_description %}
-    {% assign final_og_url = page.og_url | default: page_og_url %}
     {% assign final_og_image = page.og_image | default: page_og_image %}
 
     {% assign page_path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
