@@ -80,10 +80,12 @@
 
   <!-- ── CTA ── -->
   <section class="about-cta-section" aria-label="Contact">
+    {% comment %} Même traitement que le CTA principal du hero de la home {% endcomment %}
     {% include ui/button.html
        href=about_contact_url
        label=about.cta.label
-       size="lg" %}
+       size="xl"
+       icon="arrow-long" %}
   </section>
 
 </main>

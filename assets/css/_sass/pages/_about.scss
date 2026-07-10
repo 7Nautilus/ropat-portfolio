@@ -325,7 +325,9 @@
 // ── CTA ───────────────────────────────
 .about-cta-section {
   display: flex;
-  justify-content: center;
+  // La règle globale `section` impose flex-direction: column. Le centrage
+  // horizontal passe donc par align-items, pas par justify-content.
+  align-items: center;
   padding: var(--spacing-lg) 0;
 }
 

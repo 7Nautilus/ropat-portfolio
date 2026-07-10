@@ -5,7 +5,7 @@
    ============================================
    .btn          base commune
    variantes :   .btn--solid (défaut) | .btn--ghost
-   tailles :     .btn--md (défaut) | .btn--lg | .btn--xl
+   tailles :     .btn--md (défaut) | .btn--xl (CTA principal)
 
    Le padding responsive vit ICI et non dans _media-queries.scss :
    ce dernier est chargé en dernier et écrasait silencieusement le
@@ -23,7 +23,7 @@
   }
 }
 
-// Padding partagé par les tailles md et lg (comportement historique de .cta)
+// Padding de la taille md (comportement historique de .cta)
 @mixin btn-padding-base {
   padding: var(--spacing-xs) var(--spacing-md);
 
@@ -101,13 +101,8 @@
   @include btn-padding-base;
 }
 
-.btn--lg {
-  @include btn-padding-base;
-  font-size: var(--fs-text-lg);
-}
-
-// CTA principal du hero. Conserve Space Grotesk : divergence assumée,
-// à réévaluer (cf. TODO).
+// CTA principal : hero de la home et clôture de la page À propos.
+// Conserve Space Grotesk : divergence assumée, à réévaluer (cf. TODO).
 .btn--xl {
   gap: 1.5rem;
   padding: 1rem 2rem;

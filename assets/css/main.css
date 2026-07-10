@@ -1199,7 +1199,7 @@ footer {
    ============================================
    .btn          base commune
    variantes :   .btn--solid (défaut) | .btn--ghost
-   tailles :     .btn--md (défaut) | .btn--lg | .btn--xl
+   tailles :     .btn--md (défaut) | .btn--xl (CTA principal)
 
    Le padding responsive vit ICI et non dans _media-queries.scss :
    ce dernier est chargé en dernier et écrasait silencieusement le
@@ -1273,23 +1273,6 @@ footer {
   .btn--md {
     padding: var(--spacing-xs) var(--spacing-sm);
   }
-}
-
-.btn--lg {
-  padding: var(--spacing-xs) var(--spacing-md);
-}
-@media (min-width: 640px) {
-  .btn--lg {
-    padding: 0.875rem 2rem;
-  }
-}
-@media (max-width: 360px) {
-  .btn--lg {
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-}
-.btn--lg {
-  font-size: var(--fs-text-lg);
 }
 
 .btn--xl {
@@ -3253,7 +3236,7 @@ footer {
 
 .about-cta-section {
   display: flex;
-  justify-content: center;
+  align-items: center;
   padding: var(--spacing-lg) 0;
 }
 

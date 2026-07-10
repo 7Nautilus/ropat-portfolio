@@ -12,7 +12,8 @@
                         car imbriquer deux liens est invalide)
     type               type du <button>, défaut "submit"
     variant            "solid" (défaut) | "ghost"
-    size               "md" (défaut) | "lg" | "xl"
+    size               "md" (défaut) | "xl"
+                       xl = CTA principal (hero de la home, clôture de À propos)
                        ignoré pour ghost, qui n'a ni fond ni padding
     icon               "arrow" (défaut) | "arrow-long" | "send" | "none"
     aria               valeur de aria-label
@@ -32,7 +33,7 @@
   de l'include (d'où des classes absurdes comme `btn--3`). On valide donc la
   valeur contre une liste blanche au lieu d'utiliser `| default:`.
 {% endcomment %}
-{% assign valid_sizes = "md,lg,xl" | split: "," %}
+{% assign valid_sizes = "md,xl" | split: "," %}
 {% assign size = "md" %}
 {% if valid_sizes contains include.size %}{% assign size = include.size %}{% endif %}
 
