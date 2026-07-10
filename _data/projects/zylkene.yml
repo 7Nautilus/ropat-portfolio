@@ -17,6 +17,31 @@ media_type: image
 context:
   fr: "20 ans de la gamme Zylkene"
   en: "20 years of the Zylkene product line"
+context_sections:
+  - title:
+      fr: "Contexte et objectif"
+      en: "Context and objective"
+    content:
+      fr: |
+        À l'occasion des **20 ans de la gamme Zylkene**, Vetoquinol souhaitait marquer l'anniversaire avec un goodie commémoratif : une **pochette en tissu**. L'objectif : un objet à la fois utile et désirable, fidèle à l'identité de la marque.
+      en: |
+        For the **20th anniversary of the Zylkene product line**, Vetoquinol wanted to celebrate the milestone with a commemorative goodie: a **fabric pouch**. The goal: an object that is both useful and desirable, true to the brand's identity.
+  - title:
+      fr: "Démarche & design"
+      en: "Approach & design"
+    content:
+      fr: |
+        J'ai décliné le design graphique sur le support textile, autour des couleurs signatures de la marque, le **bleu Zylkene** et le **vert Vetoquinol**, et de la typographie Exo, le tout pensé pour bien rendre à l'impression sur tissu.
+      en: |
+        I applied the graphic design to the textile medium, built around the brand's signature colors, **Zylkene blue** and **Vetoquinol green**, and the Exo typeface, all crafted to translate well to fabric printing.
+  - title:
+      fr: "Résultat"
+      en: "Result"
+    content:
+      fr: |
+        Le résultat est une pochette goodie qui célèbre l'anniversaire de Zylkene tout en prolongeant l'univers Vetoquinol au-delà du produit.
+      en: |
+        The result is a goodie pouch that celebrates Zylkene's anniversary while extending the Vetoquinol world beyond the product itself.
 locales:
   fr:
     url: /fr/projects/zylkene.html

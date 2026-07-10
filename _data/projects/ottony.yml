@@ -17,6 +17,31 @@ media_type: image
 context:
   fr: "Lancement de la marque Ottony Paris"
   en: "Launch of the Ottony Paris brand"
+context_sections:
+  - title:
+      fr: "Contexte et objectif"
+      en: "Context and objective"
+    content:
+      fr: |
+        Ottony Paris est une marque de vêtements de luxe dont j'ai accompagné le lancement. L'enjeu : construire une **identité visuelle distinctive et mémorable**, à la hauteur des aspirations de la marque, capable d'incarner son positionnement haut de gamme dès sa première prise de parole.
+      en: |
+        Ottony Paris is a luxury clothing brand whose launch I supported. The challenge: to build a **distinctive, memorable visual identity** worthy of the brand's aspirations, able to embody its premium positioning from its very first public appearance.
+  - title:
+      fr: "Direction créative"
+      en: "Creative direction"
+    content:
+      fr: |
+        J'ai fait le choix d'une palette **noir et blanc**, gage d'élégance et d'intemporalité, pour laisser toute la place au vêtement. La typographie Resort Sans porte les titres et l'identité de marque, avec une signature à la fois raffinée et affirmée.
+      en: |
+        I chose a **black and white** palette, a mark of elegance and timelessness, letting the garment take center stage. The Resort Sans typeface carries the headings and brand identity, with a signature that is both refined and assertive.
+  - title:
+      fr: "Image de marque"
+      en: "Brand image"
+    content:
+      fr: |
+        Décliné en un système cohérent, ce travail dote Ottony Paris d'une image de marque forte, distinctive et immédiatement reconnaissable, fidèle à son univers de luxe.
+      en: |
+        Rolled out as a coherent system, this work gives Ottony Paris a strong, distinctive and instantly recognizable brand image, true to its luxury world.
 locales:
   fr:
     url: /fr/projects/ottony-paris.html
