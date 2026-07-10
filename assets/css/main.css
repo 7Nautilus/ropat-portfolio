@@ -3644,35 +3644,9 @@ main:has(.contact-hero) {
    ============================================ */
 /* Tablet & Desktop - 640px + */
 @media (min-width: 640px) {
-  .burger-menu {
-    display: none;
-  }
-  .nav-links-header .nav-item a {
-    font-size: 1rem;
-  }
-  .nav-links {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    gap: var(--spacing-sm);
-    background: transparent;
-    width: auto;
-    height: auto;
-    opacity: 1;
-  }
-  .nav-links-header {
-    flex-direction: row;
-    align-items: center;
-  }
   .nav-links-footer {
     gap: var(--spacing-lg);
     flex-direction: column;
-  }
-  .nav-link:hover {
-    transform: none;
-  }
-  .contact-link {
-    font-size: var(--font-size-base);
   }
   .section-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -3701,6 +3675,34 @@ main:has(.contact-hero) {
 }
 /* Medium Tablets - 768px + */
 @media (min-width: 768px) {
+  /* Bascule de la navigation du header : burger (mobile) -> barre (desktop).
+     À "md" (768px) et non "sm" (640px) : entre les deux, la barre horizontale
+     était plus large que l'espace disponible et provoquait un scroll horizontal.
+     Ces règles ciblent .nav-links-header (et non .nav-links, partagé avec le
+     footer) pour ne pas toucher la nav du footer. */
+  .burger-menu {
+    display: none;
+  }
+  .nav-links-header {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: transparent;
+    width: auto;
+    height: auto;
+    opacity: 1;
+  }
+  .nav-links-header .nav-item a {
+    font-size: 1rem;
+  }
+  .nav-link:hover {
+    transform: none;
+  }
+  .contact-link {
+    font-size: var(--font-size-base);
+  }
   .hero-title {
     max-width: 100%;
   }
@@ -3743,6 +3745,16 @@ main:has(.contact-hero) {
   }
 }
 /* Mobile - Max 639px */
+/* Navigation en mode overlay mobile : jusqu'au breakpoint de bascule (md).
+   Padding confortable des liens tant que le menu est un overlay plein écran.
+   Doit couvrir toute la plage mobile (< 768px), pas seulement < 640px, sinon
+   les liens de l'overlay perdent leur padding entre 640 et 767. */
+@media (max-width: 767px) {
+  .nav-links-header .nav-item a,
+  .contact-link {
+    padding: 0.75rem var(--spacing-md);
+  }
+}
 @media (max-width: 639px) {
   body {
     gap: var(--spacing-md);
@@ -3777,10 +3789,6 @@ main:has(.contact-hero) {
   }
   .hero-image-container {
     max-width: 100%;
-  }
-  /* Contact Button */
-  .contact-link {
-    padding: 0.75rem var(--spacing-md);
   }
   .scroll-down-link {
     bottom: 3rem;
@@ -3825,9 +3833,6 @@ main:has(.contact-hero) {
   }
   .footer-bottom {
     gap: var(--spacing-lg);
-  }
-  .nav-links-header .nav-item a {
-    padding: 0.75rem var(--spacing-md);
   }
 }
 /* Very Small Mobile - Max 360px */
