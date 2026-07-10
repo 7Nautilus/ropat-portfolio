@@ -1341,13 +1341,14 @@ footer {
   font-weight: bold;
 }
 
-/* Clicked styles */
-.select.clicked {
+/* État ouvert : porté par aria-expanded, posé par le contrôleur JS.
+   L'ancien `.select.clicked` était mort : le JS posait `select-clicked`. */
+.select[aria-expanded=true] {
   border: var(--border-primary);
   box-shadow: var(--shadow-md);
 }
 
-.select.clicked:hover {
+.select[aria-expanded=true]:hover {
   background-color: var(--primary-color);
 }
 
@@ -1360,7 +1361,7 @@ footer {
   transition: 0.3s;
 }
 
-.caret-rotate {
+.select[aria-expanded=true] .caret {
   transform: rotate(180deg);
 }
 
@@ -1380,7 +1381,7 @@ footer {
   transform: translateX(-50%);
   opacity: 0;
   visibility: hidden;
-  transition: 0.2s;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
   z-index: 1;
   gap: var(--spacing-sm);
 }
@@ -1397,12 +1398,11 @@ footer {
   font-weight: bold;
 }
 
-.menu-open {
-  display: flex;
-  flex-direction: column;
+/* Le menu est le frère immédiat du déclencheur (cf. ui/dropdown.html) */
+.select[aria-expanded=true] + .menu {
   opacity: 1;
   visibility: visible;
-  gap: var(--spacing-sm);
+  transition: opacity 0.2s ease, visibility 0s linear 0s;
 }
 
 /* ============================================
@@ -3598,7 +3598,7 @@ main:has(.contact-hero) {
   transform: translateY(-6px);
   transition: opacity 0.2s ease, transform 0.2s var(--ease-smooth);
 }
-.contact-dropdown-menu.is-open {
+.contact-dropdown[aria-expanded=true] + .contact-dropdown-menu {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);

@@ -1,0 +1,37 @@
+# Filtres du portfolio : ordre d'affichage et libellés.
+#
+# `value` doit correspondre au champ `category` des projets (_data/projects/<slug>.yml).
+# Un projet peut porter plusieurs catégories, séparées par une espace.
+#
+# INVARIANT : toute catégorie utilisée par un projet doit apparaître ici, sinon
+# le projet devient inatteignable au filtrage. Le template ajoute en secours les
+# catégories orphelines à la fin de la liste, avec leur valeur brute en libellé.
+options:
+  - value: all
+    label:
+      fr: "Tous"
+      en: "All"
+  - value: social-ads
+    label:
+      fr: "Social Ads"
+      en: "Social Ads"
+  - value: music
+    label:
+      fr: "Musique"
+      en: "Music"
+  - value: branding
+    label:
+      fr: "Branding"
+      en: "Branding"
+  - value: animation
+    label:
+      fr: "Animation"
+      en: "Animation"
+  - value: design
+    label:
+      fr: "Print"
+      en: "Print"
+  - value: packaging
+    label:
+      fr: "Packaging"
+      en: "Packaging"

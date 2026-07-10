@@ -1,17 +1,53 @@
 {% assign current_lang = page.lang | default: 'en' %}
 
+{% comment %}
+  Les options sont dérivées des données, pas écrites en dur.
+
+  1. `options` vient de _data/projects/categories.yml (ordre + libellés).
+  2. On collecte les catégories réellement portées par les projets et on ajoute
+     en fin de liste celles qui ne sont pas déclarées. Sans ce filet, un projet
+     d'une catégorie nouvelle devient inatteignable au filtrage, comme l'était
+     `packaging` (zylkene).
+{% endcomment %}
+
+{% assign cat_options = site.data.projects.categories.options %}
+
+{% assign used_categories = "" | split: "" %}
+{% for slug in site.data.projects.index.order %}
+  {% assign p = site.data.projects[slug] %}
+  {% assign parts = p.category | split: " " %}
+  {% assign used_categories = used_categories | concat: parts %}
+{% endfor %}
+{% assign used_categories = used_categories | uniq %}
+
+{% assign declared = "" | split: "" %}
+{% for opt in cat_options %}
+  {% assign one = opt.value | split: "|" %}
+  {% assign declared = declared | concat: one %}
+{% endfor %}
+
+{% assign orphan_categories = "" | split: "" %}
+{% for c in used_categories %}
+  {% unless declared contains c %}
+    {% assign one = c | split: "|" %}
+    {% assign orphan_categories = orphan_categories | concat: one %}
+  {% endunless %}
+{% endfor %}
+
+{% if current_lang == 'fr' %}
+  {% assign filter_label = "Filtrer les projets par catégorie" %}
+{% else %}
+  {% assign filter_label = "Filter projects by category" %}
+{% endif %}
+
 <!-- Filtres de catégories -->
-<div class="dropdown" aria-label="{% if current_lang == 'fr' %}Filtrer les projets{% else %}Filter projects{% endif %}">
-  <div class="select">
-    <span class="selected">{% if current_lang == 'fr' %}Tous{% else %}All{% endif %}</span>
-    <div class="caret"></div>
-  </div>
-  <ul class="menu blur-bg">
-    <li data-filter="all" class="active">{% if current_lang == 'fr' %}Tous{% else %}All{% endif %}</li>
-    <li data-filter="social-ads">Social Ads</li>
-    <li data-filter="music">{% if current_lang == 'fr' %}Musique{% else %}Music{% endif %}</li>
-    <li data-filter="branding">Branding</li>
-    <li data-filter="animation">Animation</li>
-    <li data-filter="design">Print</li>
-  </ul>
+<div class="dropdown">
+  {% include ui/dropdown.html
+     id="portfolio-filter"
+     variant="filter"
+     lang=current_lang
+     label=filter_label
+     options=cat_options
+     extra=orphan_categories
+     selected="all" %}
 </div>

@@ -1,0 +1,102 @@
+{% comment %}
+  ============================================================
+  DROPDOWN — composant à propriétés (combobox + listbox ARIA)
+  ============================================================
+
+  Rend le déclencheur et le menu. Le CONTENEUR positionné est à la charge
+  de l'appelant (`.dropdown` pour le filtre, `.contact-field` pour le
+  formulaire), car ce dernier contient parfois d'autres éléments (label,
+  champ caché).
+
+  Le comportement est piloté par un contrôleur unique dans script.js, qui
+  trouve les dropdowns via `[data-dropdown-trigger]` et retrouve leur menu
+  via `aria-controls`. Aucune dépendance aux classes CSS : les deux
+  habillages (`filter` et `form`) partagent le même contrat.
+
+  Propriétés :
+    id          (requis)  préfixe des identifiants ("<id>-btn", "<id>-list")
+    options     (requis)  tableau de { value, label: {fr,en}, icon? }
+    lang        (requis)  "fr" | "en"
+    variant     "filter" (défaut) | "form"
+    label                 texte de l'aria-label du déclencheur
+    labelledby            id d'un élément servant d'étiquette (prioritaire)
+    selected              `value` de l'option sélectionnée au chargement
+    placeholder           texte affiché tant que rien n'est choisi (variant form)
+    extra                 tableau de valeurs brutes à ajouter en fin de liste
+                          (catégories déclarées nulle part : filet de sécurité)
+
+  L'état ouvert/fermé est porté par `aria-expanded` sur le déclencheur, et
+  le CSS s'y accroche. Le JS ne manipule aucune classe de présentation.
+  ============================================================
+{% endcomment %}
+
+{% assign dd_variant = include.variant | default: "filter" %}
+{% assign dd_lang = include.lang %}
+
+{% if dd_variant == "form" %}
+  {% assign c_trigger = "contact-dropdown" %}
+  {% assign c_selected = "contact-dropdown-selected" %}
+  {% assign c_menu = "contact-dropdown-menu" %}
+  {% assign c_option = "contact-dropdown-option" %}
+{% else %}
+  {% assign c_trigger = "select" %}
+  {% assign c_selected = "selected" %}
+  {% assign c_menu = "menu blur-bg" %}
+  {% assign c_option = "" %}
+{% endif %}
+
+{% comment %} Libellé affiché au chargement {% endcomment %}
+{% assign dd_initial = include.placeholder %}
+{% for opt in include.options %}
+  {% if opt.value == include.selected %}
+    {% assign dd_initial = opt.label[dd_lang] | default: opt.label.en %}
+  {% endif %}
+{% endfor %}
+
+<div class="{{ c_trigger }}"
+     id="{{ include.id }}-btn"
+     data-dropdown-trigger
+     data-dropdown-variant="{{ dd_variant }}"
+     role="combobox"
+     aria-haspopup="listbox"
+     aria-expanded="false"
+     aria-controls="{{ include.id }}-list"
+     tabindex="0"
+     {% if include.labelledby %}aria-labelledby="{{ include.labelledby }}"{% else %}aria-label="{{ include.label }}"{% endif %}>
+  <span class="{{ c_selected }}" data-dropdown-selected{% unless include.selected %} data-empty="true" data-placeholder="{{ include.placeholder }}"{% endunless %}>{{ dd_initial }}</span>
+  {% if dd_variant == "form" %}
+    <svg class="contact-dropdown-caret" data-dropdown-caret xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+  {% else %}
+    <div class="caret" data-dropdown-caret aria-hidden="true"></div>
+  {% endif %}
+</div>
+
+<ul class="{{ c_menu }}"
+    id="{{ include.id }}-list"
+    data-dropdown-menu
+    role="listbox"
+    {% if include.labelledby %}aria-labelledby="{{ include.labelledby }}"{% else %}aria-label="{{ include.label }}"{% endif %}>
+  {% for opt in include.options %}
+    {% assign is_selected = false %}
+    {% if opt.value == include.selected %}{% assign is_selected = true %}{% endif %}
+  <li class="{{ c_option }}{% if is_selected %} active{% endif %}"
+      id="{{ include.id }}-opt-{{ forloop.index0 }}"
+      role="option"
+      tabindex="-1"
+      data-dropdown-option
+      data-value="{{ opt.value }}"
+      aria-selected="{{ is_selected }}">
+    {% if opt.icon %}<span class="contact-dropdown-icon" aria-hidden="true">{{ opt.icon }}</span>{% endif %}{{ opt.label[dd_lang] | default: opt.label.en }}
+  </li>
+  {% endfor %}
+  {% comment %} Filet de sécurité : catégories présentes dans les données mais non déclarées {% endcomment %}
+  {% for value in include.extra %}
+  <li class="{{ c_option }}"
+      id="{{ include.id }}-extra-{{ forloop.index0 }}"
+      role="option"
+      tabindex="-1"
+      data-dropdown-option
+      data-value="{{ value }}"
+      aria-selected="false">{{ value }}</li>
+  {% endfor %}
+</ul>

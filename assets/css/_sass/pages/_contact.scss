@@ -313,7 +313,10 @@ main:has(.contact-hero) {
   transform: translateY(-6px);
   transition: opacity 0.2s ease, transform 0.2s var(--ease-smooth);
 
-  &.is-open {
+  // État ouvert : porté par aria-expanded sur le déclencheur, qui est le
+  // frère immédiat de ce menu (cf. ui/dropdown.html). Le JS ne pose plus
+  // de classe de présentation.
+  .contact-dropdown[aria-expanded="true"] + & {
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);

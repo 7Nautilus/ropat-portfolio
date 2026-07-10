@@ -77,6 +77,109 @@ window.addEventListener('load', () => {
   }
 });
 
+// ================================
+// DROPDOWN — controleur unique
+// ================================
+// Un seul comportement pour tous les dropdowns du site (filtre du portfolio,
+// sujet du formulaire de contact). Les elements sont trouves par
+// [data-dropdown-trigger] et leur menu par aria-controls : aucune dependance
+// aux classes CSS, donc les deux habillages partagent le meme code.
+//
+// L'etat ouvert/ferme est porte par aria-expanded sur le declencheur ; le CSS
+// s'y accroche. Le JS ne manipule aucune classe de presentation.
+//
+// Chaque selection emet un CustomEvent 'dropdown:change' { value, label }.
+function initDropdowns(root) {
+  (root || document).querySelectorAll('[data-dropdown-trigger]').forEach(trigger => {
+    const menu = document.getElementById(trigger.getAttribute('aria-controls'));
+    if (!menu) return;
+
+    const options = Array.from(menu.querySelectorAll('[data-dropdown-option]'));
+    const label = trigger.querySelector('[data-dropdown-selected]');
+    if (!options.length || !label) return;
+
+    const isOpen = () => trigger.getAttribute('aria-expanded') === 'true';
+
+    const open = index => {
+      trigger.setAttribute('aria-expanded', 'true');
+      // Le menu du filtre est `visibility: hidden` tant qu'il est ferme, et un
+      // element invisible n'est pas focalisable. On force le recalcul de style
+      // avant de deplacer le focus : sans cela, la premiere ouverture au clavier
+      // ne focalise aucune option.
+      void menu.offsetHeight;
+      // Si rien n'est selectionne, on focalise la premiere option.
+      const selectedIndex = options.findIndex(o => o.getAttribute('aria-selected') === 'true');
+      const target = typeof index === 'number' ? index : Math.max(selectedIndex, 0);
+      options[target].focus();
+    };
+
+    const close = (focusTrigger = true) => {
+      trigger.setAttribute('aria-expanded', 'false');
+      if (focusTrigger) trigger.focus();
+    };
+
+    const select = option => {
+      options.forEach(o => {
+        o.setAttribute('aria-selected', 'false');
+        o.classList.remove('active');
+      });
+      option.setAttribute('aria-selected', 'true');
+      option.classList.add('active');
+      label.textContent = option.textContent.trim();
+      label.removeAttribute('data-empty');
+      trigger.classList.remove('is-invalid');
+      trigger.dispatchEvent(new CustomEvent('dropdown:change', {
+        bubbles: true,
+        detail: { value: option.getAttribute('data-value'), label: label.textContent }
+      }));
+      close();
+    };
+
+    trigger.addEventListener('click', () => (isOpen() ? close() : open()));
+
+    trigger.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ' || event.key === 'ArrowDown') {
+        event.preventDefault();
+        open();
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        open(options.length - 1);
+      } else if (event.key === 'Escape' && isOpen()) {
+        close();
+      }
+    });
+
+    options.forEach((option, i) => {
+      option.addEventListener('click', () => select(option));
+      option.addEventListener('keydown', event => {
+        switch (event.key) {
+          case 'Enter':
+          case ' ':
+            event.preventDefault(); select(option); break;
+          case 'ArrowDown':
+            event.preventDefault(); options[(i + 1) % options.length].focus(); break;
+          case 'ArrowUp':
+            event.preventDefault(); options[(i - 1 + options.length) % options.length].focus(); break;
+          case 'Home':
+            event.preventDefault(); options[0].focus(); break;
+          case 'End':
+            event.preventDefault(); options[options.length - 1].focus(); break;
+          case 'Escape':
+            event.preventDefault(); close(); break;
+          case 'Tab':
+            close(false); break;
+        }
+      });
+    });
+
+    document.addEventListener('click', event => {
+      if (isOpen() && !trigger.contains(event.target) && !menu.contains(event.target)) {
+        close(false);
+      }
+    });
+  });
+}
+
 // Menu burger toggle, filtrage, dropdowns et galerie projets
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
@@ -113,8 +216,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const projectCards = document.querySelectorAll('.project-card');
-  const filterOptions = document.querySelectorAll('.dropdown .menu li');
-  if (projectCards.length && filterOptions.length) {
+  const filterTrigger = document.getElementById('portfolio-filter-btn');
+  if (projectCards.length && filterTrigger) {
     projectCards.forEach(card => {
       card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     });
@@ -148,42 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    filterOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        const filterValue = option.getAttribute('data-filter') || 'all';
-        filterProjects(filterValue);
-      });
-    });
+    filterTrigger.addEventListener('dropdown:change', e => filterProjects(e.detail.value));
   }
 
-  document.querySelectorAll('.dropdown').forEach(dropdown => {
-    const select = dropdown.querySelector('.select');
-    const caret = dropdown.querySelector('.caret');
-    const menu = dropdown.querySelector('.menu');
-    const options = dropdown.querySelectorAll('.menu li');
-    const selected = dropdown.querySelector('.selected');
-
-    if (!select || !caret || !menu || !selected) {
-      return;
-    }
-
-    select.addEventListener('click', () => {
-      select.classList.toggle('select-clicked');
-      caret.classList.toggle('caret-rotate');
-      menu.classList.toggle('menu-open');
-    });
-
-    options.forEach(option => {
-      option.addEventListener('click', () => {
-        selected.innerText = option.innerText;
-        select.classList.remove('select-clicked');
-        caret.classList.remove('caret-rotate');
-        menu.classList.remove('menu-open');
-        options.forEach(opt => opt.classList.remove('active'));
-        option.classList.add('active');
-      });
-    });
-  });
+  initDropdowns();
 
   const mainImage = document.getElementById('main-image');
   const mainVideo = document.getElementById('main-video');
@@ -328,73 +399,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================================
   // DROPDOWN CONTACT — sujet
   // ================================
-  const contactDropdownBtn = document.getElementById('contact-subject-btn');
-  const contactDropdownMenu = document.getElementById('contact-subject-list');
-  const contactDropdownSelected = contactDropdownBtn ? contactDropdownBtn.querySelector('.contact-dropdown-selected') : null;
+  // Le comportement vient du controleur unique (initDropdowns).
+  // Ici on ne fait que reporter la valeur choisie dans le champ cache soumis.
+  const contactSubjectTrigger = document.getElementById('contact-subject-btn');
   const contactSubjectValue = document.getElementById('contact-subject-value');
-
-  if (contactDropdownBtn && contactDropdownMenu && contactDropdownSelected && contactSubjectValue) {
-    const options = contactDropdownMenu.querySelectorAll('.contact-dropdown-option');
-    let focusedIndex = -1;
-
-    const openDropdown = () => {
-      contactDropdownBtn.setAttribute('aria-expanded', 'true');
-      contactDropdownMenu.classList.add('is-open');
-      focusedIndex = [...options].findIndex(o => o.getAttribute('aria-selected') === 'true');
-      if (focusedIndex >= 0) options[focusedIndex].focus();
-    };
-
-    const closeDropdown = (focusBtn = true) => {
-      contactDropdownBtn.setAttribute('aria-expanded', 'false');
-      contactDropdownMenu.classList.remove('is-open');
-      if (focusBtn) contactDropdownBtn.focus();
-    };
-
-    const selectOption = (option) => {
-      options.forEach(o => {
-        o.setAttribute('aria-selected', 'false');
-        o.removeAttribute('tabindex');
-      });
-      option.setAttribute('aria-selected', 'true');
-      contactSubjectValue.value = option.getAttribute('data-value');
-      // Affiche le texte sans l'icône SVG
-      contactDropdownSelected.textContent = option.textContent.trim();
-      contactDropdownSelected.removeAttribute('data-empty');
-      contactDropdownBtn.classList.remove('is-invalid');
-      closeDropdown();
-    };
-
-    // Initialise les options comme non-focusables
-    options.forEach((option, i) => {
-      option.setAttribute('tabindex', '-1');
-      option.addEventListener('click', () => selectOption(option));
-      option.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(option); }
-        if (e.key === 'ArrowDown') { e.preventDefault(); const next = options[i + 1]; if (next) next.focus(); }
-        if (e.key === 'ArrowUp') { e.preventDefault(); const prev = options[i - 1]; if (prev) prev.focus(); else contactDropdownBtn.focus(); }
-        if (e.key === 'Escape') closeDropdown();
-      });
-    });
-
-    contactDropdownBtn.addEventListener('click', () => {
-      const isOpen = contactDropdownBtn.getAttribute('aria-expanded') === 'true';
-      isOpen ? closeDropdown() : openDropdown();
-    });
-
-    contactDropdownBtn.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        openDropdown();
-      }
-      if (e.key === 'Escape') closeDropdown();
-    });
-
-    document.addEventListener('click', e => {
-      if (contactDropdownBtn.getAttribute('aria-expanded') === 'true') {
-        if (!contactDropdownBtn.contains(e.target) && !contactDropdownMenu.contains(e.target)) {
-          closeDropdown(false);
-        }
-      }
+  if (contactSubjectTrigger && contactSubjectValue) {
+    contactSubjectTrigger.addEventListener('dropdown:change', e => {
+      contactSubjectValue.value = e.detail.value;
     });
   }
 
