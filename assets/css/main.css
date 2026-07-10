@@ -921,179 +921,6 @@ header {
   height: 48px;
 }
 
-/* ============================================
-   PROJECT DETAILS
-   ============================================ */
-.project-details {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  padding: var(--spacing-lg) 0;
-  border-top: var(--primary-color) 1px solid;
-  border-bottom: var(--primary-color) 1px solid;
-}
-
-.detail-item-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.detail-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-sm);
-  width: fit-content;
-}
-
-.detail-title {
-  font-family: var(--font-body);
-  font-size: var(--fs-small);
-  color: var(--grey-light-400);
-  font-weight: 400;
-  line-height: 1.6;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.detail-content {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h4);
-  color: var(--primary-color);
-  font-weight: 700;
-}
-
-/* ==============================================
-   CASE STUDY
-   ============================================== */
-.case-study {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
-}
-
-.case-study-title {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  font-weight: 700;
-}
-
-.case-study-colors-typography {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-  padding: 0 var(--spacing-lg);
-}
-@media (min-width: 768px) {
-  .case-study-colors-typography {
-    grid-template-columns: 1fr 1fr; /* 50% chacun sur desktop */
-    gap: 4rem;
-  }
-}
-
-.case-study-colors-typography-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  width: 100%;
-}
-
-.case-study-colors-typography-items {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: var(--spacing-lg);
-}
-
-/* Colors Specific */
-.color-palette {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: var(--spacing-md);
-  width: 100%;
-}
-
-.color-swatch {
-  display: flex;
-  align-items: flex-end; /* Pour aligner le texte en bas */
-  width: 100%;
-  aspect-ratio: 1/1;
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-}
-@supports (corner-shape: squircle) {
-  .color-swatch {
-    border-radius: var(--border-radius-squircle-full);
-    corner-shape: squircle;
-  }
-}
-
-.color-swatch:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.color-hex {
-  font-family: var(--font-heading);
-  color: var(--white-color);
-  font-weight: 500;
-  font-size: var(--fs-small);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); /* Améliore la lisibilité sur les couleurs claires */
-}
-
-/* Typography Specific */
-.font-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.font-item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.font-sample {
-  font-size: 8rem;
-  line-height: 1;
-  font-weight: 500;
-  color: var(--primary-color-alpha);
-  -webkit-text-stroke: 1px var(--primary-color);
-  cursor: pointer;
-  backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-font-smoothing: antialiased;
-  will-change: color, transform, filter;
-  transition: color 0.5s var(--ease-out), filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
-}
-.font-sample:hover {
-  color: var(--primary-color);
-  transform: scale(1.02);
-  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
-}
-
-.font-name {
-  font-family: var(--font-heading);
-  color: var(--white-color);
-  font-weight: 500;
-  font-size: var(--fs-h4);
-}
-
-.font-description {
-  font-family: var(--font-body);
-  color: var(--grey-light-400);
-  font-weight: 400;
-  line-height: 1.6;
-  font-size: var(--fs-p);
-}
-
 .card-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1117,14 +944,6 @@ header {
   grid-template-columns: 1fr;
   padding: 0 var(--spacing-lg);
   gap: var(--spacing-lg);
-}
-
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 0 var(--spacing-lg);
-  gap: var(--spacing-lg);
-  width: 100%;
 }
 
 /* ============================================
@@ -1765,22 +1584,6 @@ footer {
 .lightbox-close:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
-}
-
-/* Mockup */
-.case-study-mockup {
-  border: var(--border-primary);
-  border-radius: var(--spacing-xl);
-}
-@supports (corner-shape: squircle) {
-  .case-study-mockup {
-    border-radius: var(--border-radius-squircle-medium);
-    corner-shape: squircle;
-  }
-}
-.case-study-mockup {
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
 }
 
 #mockup-image {
@@ -2611,36 +2414,6 @@ footer {
   color: rgba(255, 255, 255, 0.75);
 }
 .cs-process-section strong {
-  color: var(--white-color);
-  font-weight: 700;
-}
-
-.cs-process-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-.cs-process-content h3 {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h4);
-  font-weight: 700;
-  color: var(--primary-color);
-  padding-top: var(--spacing-lg);
-  margin-top: var(--spacing-sm);
-  border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
-}
-.cs-process-content h3:first-child {
-  padding-top: 0;
-  margin-top: 0;
-  border-top: none;
-}
-.cs-process-content p {
-  font-family: var(--font-body);
-  font-size: var(--fs-p);
-  line-height: 1.85;
-  color: rgba(255, 255, 255, 0.75);
-}
-.cs-process-content strong {
   color: var(--white-color);
   font-weight: 700;
 }
@@ -3907,20 +3680,6 @@ main:has(.contact-hero) {
     max-width: 50vw;
     gap: 1.5rem;
   }
-  .case-study-colors-typography {
-    flex-direction: row;
-    padding: 0;
-    gap: var(--spacing-xl);
-  }
-  .color-swatch {
-    padding: var(--spacing-lg);
-  }
-  .color-hex {
-    font-size: var(--fs-p);
-  }
-  .case-study-mockup {
-    margin: 0 var(--spacing-xl);
-  }
   .service-main-container {
     padding: 0 2rem;
   }
@@ -3963,12 +3722,6 @@ main:has(.contact-hero) {
   }
   .grid-four {
     grid-template-columns: repeat(4, 1fr);
-  }
-  .details-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .detail-item-container {
-    align-items: center;
   }
   .hero-intro {
     max-width: 80%;

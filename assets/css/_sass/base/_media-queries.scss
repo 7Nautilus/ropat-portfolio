@@ -68,23 +68,6 @@
     gap: 1.5rem;
   }
 
-  .case-study-colors-typography {
-    flex-direction: row;
-    padding: 0;
-    gap: var(--spacing-xl);
-  }
-
-  .color-swatch {
-    padding: var(--spacing-lg);
-  }
-
-  .color-hex {
-    font-size: var(--fs-p);
-  }
-
-  .case-study-mockup {
-    margin: 0 var(--spacing-xl);
-  }
 
   .service-main-container {
     padding: 0 2rem;
@@ -139,14 +122,6 @@
 
   .grid-four {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  .details-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .detail-item-container {
-    align-items: center;
   }
 
   .hero-intro {

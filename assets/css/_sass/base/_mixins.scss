@@ -23,7 +23,7 @@
 
 // ── CONTOUR + RELIEF AU SURVOL ────────────────────────
 // Contour orange, relief 3D leger et zoom au survol.
-// Utilise par .hero-title-span et .font-sample.
+// Utilise par .hero-title-span.
 @mixin text-stroke-hover {
   color: var(--primary-color-alpha);
   -webkit-text-stroke: 1px var(--primary-color);

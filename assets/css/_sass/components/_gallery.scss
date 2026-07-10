@@ -205,22 +205,6 @@
     outline-offset: 2px;
 }
 
-
-/* Mockup */
-
-.case-study-mockup {
-    border: var(--border-primary);
-    border-radius: var(--spacing-xl);
-
-    @supports (corner-shape: squircle) {
-    border-radius: var(--border-radius-squircle-medium);;
-    corner-shape: squircle;
-    }
-
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
 #mockup-image {
     width: 100%;
     height: auto;

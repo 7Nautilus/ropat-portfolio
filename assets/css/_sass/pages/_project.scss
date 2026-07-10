@@ -174,43 +174,6 @@
   }
 }
 
-// Contenu markdown rendu dynamiquement (ancien format context_content)
-.cs-process-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-
-  // Chapitres (h3 depuis le YAML)
-  h3 {
-    font-family: var(--font-heading);
-    font-size: var(--fs-h4);
-    font-weight: 700;
-    color: var(--primary-color);
-    padding-top: var(--spacing-lg);
-    margin-top: var(--spacing-sm);
-    border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
-
-    &:first-child {
-      padding-top: 0;
-      margin-top: 0;
-      border-top: none;
-    }
-  }
-
-  p {
-    font-family: var(--font-body);
-    font-size: var(--fs-p);
-    line-height: 1.85;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  // Termes mis en avant avec **gras** dans le YAML
-  strong {
-    color: var(--white-color);
-    font-weight: 700;
-  }
-}
-
 // ── 3. MOCKUP(S) ─────────────────────────
 .cs-mockups {
   display: flex;
@@ -524,10 +487,6 @@
     .project-nav-arrow { color: var(--primary-color); }
     .project-nav-title { color: var(--primary-color); }
   }
-}
-
-.project-nav-empty {
-  // Espace vide quand il n'y a pas de projet précédent/suivant
 }
 
 .project-nav-prev { justify-content: flex-start; }
