@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "Lancement de marque"
   en: "Brand launch"
+secteur:
+  fr: "Société de VTC"
+  en: "Private-hire car service"
 livrables:
   fr: "Logo, Palette, Charte graphique"
   en: "Logo, Color palette, Brand guidelines"

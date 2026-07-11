@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "Sortie d'album"
   en: "Album release"
+secteur:
+  fr: "Artiste musical"
+  en: "Music artist"
 thumbnails:
   - src: /assets/images/projects/a-lone-cover.webp
     alt:

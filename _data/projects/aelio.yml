@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "Lancement du cabinet de conseil en IA Aélio"
   en: "Launch of Aélio's AI consulting firm"
+secteur:
+  fr: "Cabinet de conseil en IA"
+  en: "AI consulting firm"
 
 context_sections:
   - title:

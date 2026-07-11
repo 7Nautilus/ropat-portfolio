@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "Sortie de single"
   en: "Single release"
+secteur:
+  fr: "Artiste musical"
+  en: "Music artist"
 context_sections:
   - title:
       fr: "Contexte et objectif"

@@ -18,6 +18,9 @@ og_image: /assets/images/projects/jhag-br-p1-kv.png
 context:
   fr: "Lancement de la gamme Banana Rush"
   en: "Banana Rush line launch"
+secteur:
+  fr: "Maison de parfumerie"
+  en: "Perfume house"
 formats:
   fr: "1:1 · 4:5 · 9:16"
   en: "1:1 · 4:5 · 9:16"

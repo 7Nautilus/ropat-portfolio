@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "Lancement de la marque Ottony Paris"
   en: "Launch of the Ottony Paris brand"
+secteur:
+  fr: "Marque de vêtements de luxe"
+  en: "Luxury clothing brand"
 context_sections:
   - title:
       fr: "Contexte et objectif"

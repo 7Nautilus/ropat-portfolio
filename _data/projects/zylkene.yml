@@ -17,6 +17,9 @@ media_type: image
 context:
   fr: "20 ans de la gamme Zylkene"
   en: "20 years of the Zylkene product line"
+secteur:
+  fr: "Santé animale"
+  en: "Animal health"
 context_sections:
   - title:
       fr: "Contexte et objectif"

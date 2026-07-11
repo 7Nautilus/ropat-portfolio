@@ -16,8 +16,11 @@ main_image: /assets/images/projects/Stelya/icon_navy_on_white.svg
 media_type: image
 og_image: /assets/images/projects/Stelya/stelya-mockup-bureau.avif
 context:
+  fr: "Lancement de marque"
+  en: "Brand launch"
+secteur:
   fr: "Cabinet de conseil en ingénierie"
-  en: "Engineering consulting firm"
+  en: "Engineering consultancy"
 
 context_sections:
   - title:
