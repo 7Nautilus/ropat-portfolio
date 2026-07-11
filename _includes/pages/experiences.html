@@ -18,7 +18,7 @@
   <section id="second-section">
     <div class="experience-cards-container">
       {% for exp in experiences_list %}
-        {% include experiences/experience-card.html experience=exp index=forloop.index0 disable_animation=true %}
+        {% include experiences/experience-card.html experience=exp %}
       {% endfor %}
     </div>
   </section>

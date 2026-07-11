@@ -52,12 +52,10 @@
     <h2 class="section-title" id="services-title">{{ index.services.subtitle }}</h2>
     <div class="section-grid" id="services-grid">
       {% assign service_ids = site.data.services.index.order %}
-      {% assign featured_index = 0 %}
       {% assign featured_rendered = 0 %}
       {% for id in service_ids %}
         {% assign item = site.data.services[id] %}
-        {% include services/service-card.html details=true service=item index=forloop.index0 disable_animation=true %}
-        {% assign featured_index = featured_index | plus: 1 %}
+        {% include services/service-card.html details=true service=item %}
         {% assign featured_rendered = featured_rendered | plus: 1 %}
         {% if featured_rendered == 4 %}
           {% break %}
@@ -112,13 +110,11 @@
     <!-- Projects Grid -->
     <div class="section-grid" id="projects-grid">
       {% assign project_slugs = site.data.projects.index.order %}
-      {% assign featured_index = 0 %}
       {% assign featured_rendered = 0 %}
       {% for slug in project_slugs %}
         {% assign item = site.data.projects[slug] %}
         {% if item.featured %}
-          {% include projects/project-card.html project=item index=featured_index disable_animation=true %}
-          {% assign featured_index = featured_index | plus: 1 %}
+          {% include projects/project-card.html project=item %}
           {% assign featured_rendered = featured_rendered | plus: 1 %}
           {% if featured_rendered == 4 %}
             {% break %}
