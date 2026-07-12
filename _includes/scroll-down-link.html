@@ -1,6 +1,6 @@
 <div class="scroll-overlay">
-  <a href="#second-section" class="scroll-down-link">
-    <div class="big-icon-placeholder big-icon">
+  <a href="#second-section" class="scroll-down-link" aria-label="{% if page.lang == 'fr' %}Aller à la section suivante{% else %}Skip to next section{% endif %}">
+    <div class="big-icon-placeholder big-icon" aria-hidden="true">
       {{ site.data.design-system.navigation-arrow-icon }}
     </div>
   </a>
