@@ -82,17 +82,17 @@ locales:
       og_description: "Creation and layout of bilingual static paid social assets for the Juliette has a Gun Discovery Set."
 
 thumbnails:
-  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_34_BACK_FR_1440x1440.jpg
+  - src: /assets/images/projects/jhag/...
     type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Rose Fuchsia au format carré 1:1"
       en: "Discovery Set Ad Composition - Fuchsia Pink Concept in 1:1 square format"
-  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_TRY_THEM_FR_1440x1440.jpg
+  - src: /assets/images/projects/jhag/...
     type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Botanique au format carré 1:1"
       en: "Discovery Set Ad Composition - Botanical Concept in 1:1 square format"
-  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_BLIND_BUY_FR_1440x1440.jpg
+  - src: /assets/images/projects/jhag/...
     type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Lifestyle Jaune au format carré 1:1"
