@@ -16,7 +16,7 @@ main_image: /assets/images/projects/jhag/1440x1440_SBN_2.png
 media_type: image
 og_image: /assets/images/projects/jhag-br-p1-kv.png
 context:
-  fr: "Lancement de la gamme Banana Rush"
+  fr: "Lancement de la ligne Banana Rush"
   en: "Banana Rush line launch"
 secteur:
   fr: "Maison de parfumerie"
@@ -26,29 +26,29 @@ formats:
   en: "1:1 · 4:5 · 9:16"
 context_sections:
   - title:
-      fr: "Phase 1 - Lancement"
-      en: "Phase 1 - Launch"
+      fr: "Direction graphique & Co-branding Sephora"
+      en: "Graphic Direction & Sephora Co-branding"
     content:
       fr: |
-        Conception des visuels clés et des premières animations annonçant l'arrivée de la gamme Banana Rush. Les assets ont été déclinés sur 3 formats de placement : carré 1:1, portrait 4:5 et stories/reels 9:16.
+        Intégration des codes esthétiques de la maison pour le lancement du parfum Banana Rush. L'enjeu majeur de cette campagne reposait sur une double déclinaison systématique : une version standard pour la marque, et une version co-brandée spécifiquement pour Sephora, intégrant harmonieusement leurs éléments d'identité visuelle respectifs sur l'ensemble des compositions.
       en: |
-        Design of key visuals and first animations announcing the arrival of the Banana Rush line. Assets adapted to 3 placement formats: square 1:1, portrait 4:5, and stories/reels 9:16.
+        Integration of the house’s aesthetic codes for the launch of the Banana Rush fragrance. The main challenge of this campaign relied on a systematic dual layout: a standard brand version and a co-branded version specifically for Sephora, seamlessly blending both brand identities across all layouts.
   - title:
-      fr: "Phase 2 - Gamme complète"
-      en: "Phase 2 - Full Range"
+      fr: "Architecture créative & Concepts"
+      en: "Creative Architecture & Concepts"
     content:
       fr: |
-        Présentation individuelle de chaque fragrance de la gamme. 8 déclinaisons produits disponibles en statics et en motion, sur les 3 formats - pour un total de 24 assets statiques et 9 vidéos sur cette phase.
+        La campagne a été structurée autour de 10 concepts visuels forts, adaptés à des objectifs de conversion différents : 7 concepts purement statiques axés sur l'impact visuel du flacon, 1 concept exclusivement axé sur le mouvement (vidéo), et 2 concepts hybrides déclinés à la fois en statique et en motion design pour maximiser la mémorisation sur Meta Ads.
       en: |
-        Individual visuals for each fragrance in the lineup. 8 product variants available as statics and motion, across all 3 formats - totalling 24 static assets and 9 videos for this phase.
+        The campaign was structured around 10 distinct visual concepts tailored to different conversion goals: 7 static-only concepts focused on the bottle's visual impact, 1 video-only concept, and 2 hybrid concepts developed in both static and motion design formats to maximize brand recall on Meta Ads.
   - title:
-      fr: "Phase 3 - Storytelling olfactif"
-      en: "Phase 3 - Olfactory Storytelling"
+      fr: "Déploiement bilingue & Multi-format"
+      en: "Bilingual Deployment & Multi-format Rollout"
     content:
       fr: |
-        Mise en avant de l'univers sensoriel de la gamme à travers des visuels narratifs : desserts, pile de flacons, flambé banane. Animations complémentaires sur les ingrédients et la composition olfactive. Versions bilingues anglais/français pour une diffusion internationale.
+        Pour couvrir l'ensemble des placements publicitaires, chaque concept et chaque déclinaison (standard et Sephora) ont été rigoureusement adaptés sur 3 ratios clés (carré 1:1, portrait 4:5 et stories 9:16). L'ensemble de la campagne a également fait l'objet d'une adaptation bilingue (français/anglais), représentant un important volume d'assets finaux parfaitement calibrés pour une diffusion internationale.
       en: |
-        Highlighting the sensory world of the line through narrative visuals: desserts, flacon stacks, banana flambé. Complementary animations on ingredients and olfactory composition. Bilingual English/French versions for international reach.
+        To ensure complete ad placement coverage, every concept and variation (both standard and Sephora) was meticulously adapted to 3 key ratios (1:1 square, 4:5 portrait, and 9:16 stories). The entire campaign was also rolled out in bilingual versions (French/English), delivering a high-volume library of assets optimized for global markets.
 
 locales:
   fr:
@@ -56,68 +56,65 @@ locales:
     aria_label: "Voir la campagne paid social Banana Rush - Juliette has a Gun"
     image_alt: "Campagne paid social Banana Rush - Juliette has a Gun"
     title: "Banana Rush"
-    pitch: "**Création des assets graphiques** pour la campagne paid social de lancement de la gamme **Banana Rush** de la maison de parfumerie **Juliette has a Gun**"
-    description: "Conception de l'ensemble des **assets statiques et animés** pour la campagne paid social de lancement de la gamme **Banana Rush** de **Juliette has a Gun**. Campagne déclinée en **3 phases**, sur les formats 1:1, 4:5 et 9:16, en anglais et en français."
-    services: "Motion Design, Création d'assets paid social, Déclinaisons multi-formats"
-    context_title: "À propos de la campagne"
+    pitch: "**Composition graphique, co-branding et motion design** pour la campagne publicitaire de lancement du parfum **Banana Rush** de **Juliette has a Gun**."
+    description: "Habillage publicitaire et animation de 10 concepts visuels déclinés en versions bilingues (FR/EN), formats Meta Ads (1:1, 4:5, 9:16), avec intégration systématique d'une déclinaison co-brandée pour Sephora."
+    services: "Composition graphique, Motion Design, Co-branding Sephora, Déclinaisons multi-formats"
+    context_title: "Coulisses du projet"
     seo:
       title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
-      description: "Création des assets paid social pour la campagne de lancement de la gamme Banana Rush de Juliette has a Gun. Statics et motion design, 3 phases, formats Meta."
+      description: "Composition graphique, co-branding Sephora et motion design pour le lancement de Banana Rush par Juliette has a Gun. Assets publicitaires multi-formats."
       og_title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
-      og_description: "Assets paid social pour le lancement de la gamme Banana Rush de Juliette has a Gun."
+      og_description: "Création et animation d'assets publicitaires co-brandés Sephora pour le parfum Banana Rush."
 
   en:
     url: /en/projects/jhag-banana-rush.html
     aria_label: "See the Banana Rush paid social campaign - Juliette has a Gun"
     image_alt: "Banana Rush paid social campaign - Juliette has a Gun"
     title: "Banana Rush"
-    pitch: "**Graphic assets creation** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**"
-    description: "Design of all **static and animated assets** for the paid social launch campaign of the **Banana Rush** line by **Juliette has a Gun**. Campaign rolled out in **3 phases**, across 1:1, 4:5 and 9:16 formats, in both English and French."
-    services: "Motion Design, Paid Social Asset Creation, Multi-format Adaptation"
-    context_title: "About the campaign"
+    pitch: "**Graphic composition, co-branding, and motion design** for the **Banana Rush** fragrance launch campaign by **Juliette has a Gun**."
+    description: "Graphic layouts and animation of 10 visual concepts adapted in bilingual versions (FR/EN) across Meta Ads formats (1:1, 4:5, 9:16), featuring a systematic co-branded rollout for Sephora."
+    services: "Graphic Composition, Motion Design, Sephora Co-branding, Multi-format Adaptation"
+    context_title: "Project details"
     seo:
       title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
-      description: "Paid social asset creation for the Banana Rush launch campaign by Juliette has a Gun. Statics and motion design, 3 phases, Meta formats."
+      description: "Graphic composition, Sephora co-branding, and motion design for Juliette has a Gun's Banana Rush launch. Multi-format ad assets."
       og_title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
-      og_description: "Paid social assets for the Banana Rush launch campaign by Juliette has a Gun."
+      og_description: "Creation and animation of Sephora co-branded paid social assets for Juliette has a Gun's Banana Rush perfume."
 
 thumbnails:
-  # Phase 1
   - src: /assets/images/projects/jhag/jhag-br-p2-kv.png
     type: image
     alt:
-      fr: "Phase 1 - Visuel clé Banana Rush"
-      en: "Phase 1 - Banana Rush Key Visual"
+      fr: "Visuel clé Banana Rush"
+      en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/BR_PL_1440x1440.mp4
     type: video
     preview: /assets/images/projects/jhag/1440x1440_SP_2.png
     alt:
-      fr: "Phase 3 - Animation Banana Rush Flacons"
-      en: "Phase 3 - Banana Rush Flacons Animation"
-  # Phase 2
+      fr: "Animation Banana Rush Pile"
+      en: "Banana Rush Pile Animation"
   - src: /assets/images/projects/jhag/jhag-sd.png
     type: image
     alt:
-      fr: "Phase 2 - Visuel clé Banana Rush"
-      en: "Phase 2 - Banana Rush Key Visual"
+      fr: "Visuel clé Banana Rush"
+      en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/jhag-br-p1-od.mp4
     type: video
     preview: /assets/images/projects/jhag/jhag-br-p1-od.jpg
     alt:
-      fr: "Phase 2 - Animation Banana Rush"
-      en: "Phase 2 - Banana Rush Animation"
-  # Phase 3
+      fr: "Animation Banana Rush OD"
+      en: "Banana Rush OD Animation"
   - src: /assets/images/projects/jhag/jhag-br-p3-pile.png
     type: image
     alt:
-      fr: "Phase 3 - Flacons Banana Rush"
-      en: "Phase 3 - Banana Rush Flacons"
+      fr: "Visuel Banana Rush Pile"
+      en: "Banana Rush Pile Visual"
   - src: /assets/videos/jhag/jhag-br-p2-ai.mp4
     type: video
     preview: /assets/images/projects/jhag/jhag-br-p2-kv.png
     alt:
-      fr: "Phase 2 - Animation Banana Rush"
-      en: "Phase 2 - Banana Rush Animation"
+      fr: "Animation du visuel clé Banana Rush"
+      en: "Banana Rush Key Visual Animation"
 
 case_study:
   colors:
