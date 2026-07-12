@@ -1,0 +1,124 @@
+slug: jhag-discovery-set
+project_title: "Discovery Set"
+subtitle: "Social Ads"
+theme:
+  fr: "CAMPAGNE PAID SOCIAL"
+  en: "PAID SOCIAL CAMPAIGN"
+category: social-ads
+featured: false
+client:
+  fr: "Juliette has a Gun"
+  en: "Juliette has a Gun"
+year: "2026"
+tools: "Figma"
+image_src: /assets/images/projects/jhag/...
+main_image: /assets/images/projects/jhag/...
+media_type: image
+og_image: /assets/images/projects/...
+context:
+  fr: "Campagne de conversion Coffret Découverte"
+  en: "Discovery Set conversion campaign"
+secteur:
+  fr: "Maison de parfumerie"
+  en: "Perfume house"
+formats:
+  fr: "1:1 · 4:5 · 9:16"
+  en: "1:1 · 4:5 · 9:16"
+context_sections:
+  - title:
+      fr: "Mécanique publicitaire & Anti 'Blind Buy'"
+      en: "Ad Mechanics & Anti-Blind Buy Strategy"
+    content:
+      fr: |
+        Mise en avant graphique de la mécanique de conversion "Try before you buy" pour le Coffret Découverte. L'objectif créatif était de lever le frein de l'achat de parfum en ligne (l'achat à l'aveugle ou *blind buy*) en valorisant une offre imparable : tester l'ensemble des bestsellers de la maison pour 30€, intégralement remboursés sous forme de bon d'achat sur le parfum de son choix.
+      en: |
+        Graphic curation of the "Try before you buy" conversion mechanics for the Discovery Set. The creative challenge was to overcome the friction of online fragrance shopping (blind buying) by highlighting an irresistible offer: test all the house's bestsellers for €30, fully refundable as a voucher towards a full-size favorite bottle.
+  - title:
+      fr: "Territoires visuels & Scénographies"
+      en: "Visual Territories & Set Design"
+    content:
+      fr: |
+        Habillage graphique et intégration de la copy publicitaire sur 3 concepts visuels distincts transmis par la maison. Un premier univers rose fuchsia épuré axé sur l'offre brute ; un second univers gris texturé mettant en scène les ingrédients naturels des fragrances (citron vert, vanille, lavande) ; et un troisième univers jaune safran au stylisme lifestyle affirmé évoquant un rituel d'écriture et de sélection.
+      en: |
+        Ad layouts and copy integration across 3 distinct visual environments provided by the brand. The first, a minimalist fuchsia pink setup focusing on the raw offer; the second, a textured grey environment highlighting the natural ingredients of the fragrances (lime, vanilla, lavender); and the third, a saffron yellow setup with lifestyle-forward styling evoking a ritual of curation and writing.
+  - title:
+      fr: "Composition typographique & Multi-format"
+      en: "Typographic Layout & Multi-format Execution"
+    content:
+      fr: |
+        Hiérarchisation des messages publicitaires statiques et intégration de la charte typographique haut de gamme de la maison. Chaque concept visuel a été minutieusement adapté sur 3 ratios clés (carré 1:1, portrait 4:5 et stories 9:16) tout en optimisant la lisibilité des textes d'accroche ("sans engagement", "-30€") en versions bilingues français/anglais.
+      en: |
+        Information hierarchy and integration of the brand's premium typographic guidelines. Each static concept was meticulously adapted to 3 key ratios (1:1 square, 4:5 portrait, and 9:16 stories) while focusing on the high-impact legibility of key conversion hooks ("risk-free", "€30 off") in bilingual English/French versions.
+
+locales:
+  fr:
+    url: /fr/projects/jhag-discovery-set.html
+    aria_label: "Voir la campagne paid social Coffret Découverte - Juliette has a Gun"
+    image_alt: "Campagne paid social Coffret Découverte - Juliette has a Gun"
+    title: "Discovery Set"
+    pitch: "**Composition graphique et habillage d'assets publicitaires** pour la campagne de conversion du Coffret Découverte de **Juliette has a Gun**."
+    description: "Intégration typographique, habillage graphique et déclinaisons de 3 concepts publicitaires bilingues (FR/EN) sur les formats statiques Meta Ads (1:1, 4:5, 9:16) pour promouvoir l'offre de remboursement du Coffret Découverte."
+    services: "Composition graphique, Habillage publicitaire, Intégration typographique, Déclinaisons multi-formats"
+    context_title: "Coulisses du projet"
+    seo:
+      title: "Campagne Coffret Découverte - Juliette has a Gun | Ropat"
+      description: "Composition graphique, habillage typographique et déclinaisons d'assets publicitaires statiques pour le Coffret Découverte de Juliette has a Gun (formats Meta Ads)."
+      og_title: "Campagne Coffret Découverte - Juliette has a Gun | Ropat"
+      og_description: "Création et déclinaisons d'assets graphiques publicitaires bilingues et statiques pour le Coffret Découverte."
+
+  en:
+    url: /en/projects/jhag-discovery-set.html
+    aria_label: "See the Discovery Set paid social campaign - Juliette has a Gun"
+    image_alt: "Discovery Set paid social campaign - Juliette has a Gun"
+    title: "Discovery Set"
+    pitch: "**Graphic composition and ad layout styling** for the Discovery Set conversion campaign by **Juliette has a Gun**."
+    description: "Typographic integration, ad layout styling, and multi-format adaptations (1:1, 4:5, 9:16) for 3 bilingual (FR/EN) static ad concepts promoting the Discovery Set."
+    services: "Graphic Composition, Advertising Layouts, Typographic Integration, Multi-format Adaptation"
+    context_title: "Project details"
+    seo:
+      title: "Discovery Set Campaign - Juliette has a Gun | Ropat"
+      description: "Graphic composition, ad layouts, and multi-format adaptations of static advertising assets for Juliette has a Gun's Discovery Set campaign (Meta Ads)."
+      og_title: "Discovery Set Campaign - Juliette has a Gun | Ropat"
+      og_description: "Creation and layout of bilingual static paid social assets for the Juliette has a Gun Discovery Set."
+
+thumbnails:
+  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_34_BACK_FR_1440x1440.jpg
+    type: image
+    alt:
+      fr: "Composition publicitaire Coffret Découverte - Concept Rose Fuchsia au format carré 1:1"
+      en: "Discovery Set Ad Composition - Fuchsia Pink Concept in 1:1 square format"
+  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_TRY_THEM_FR_1440x1440.jpg
+    type: image
+    alt:
+      fr: "Composition publicitaire Coffret Découverte - Concept Botanique au format carré 1:1"
+      en: "Discovery Set Ad Composition - Botanical Concept in 1:1 square format"
+  - src: /assets/images/projects/jhag/.../2026_05_PAID_DK_BLIND_BUY_FR_1440x1440.jpg
+    type: image
+    alt:
+      fr: "Composition publicitaire Coffret Découverte - Concept Lifestyle Jaune au format carré 1:1"
+      en: "Discovery Set Ad Composition - Saffron Yellow Lifestyle Concept in 1:1 square format"
+
+case_study:
+  colors:
+    - hex: "#e52b69"
+      name:
+        fr: "Rose Fuchsia"
+        en: "Fuchsia Pink"
+    - hex: "#e9b72b"
+      name:
+        fr: "Jaune Safran"
+        en: "Saffron Yellow"
+    - hex: "#e3e3e3"
+      name:
+        fr: "Gris Minéral"
+        en: "Mineral Grey"
+    - hex: "#000000"
+      name:
+        fr: "Noir"
+        en: "Black"
+
+  typography:
+    - name: "ABChannel"
+      usage:
+        fr: "Typographie principale"
+        en: "Primary typeface"
