@@ -62,4 +62,12 @@
   font-size: var(--font-size-base);
   color: var(--gray-light);
   line-height: 1.4;
+  // Clamp à 3 lignes : hauteurs de carte homogènes dans la grille (les pitchs
+  // longs — moon-vtc, banana-rush — ne gonflent plus leur rangée). Le pitch
+  // complet reste sur la page projet.
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
