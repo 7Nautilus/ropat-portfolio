@@ -16,6 +16,7 @@ exclude:
   - TODO.md
   - CLAUDE.md
   - scripts/
+  - DESIGN.md
 
 sass:
   style: compressed # Optionnel : pour minifier ton CSS

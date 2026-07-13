@@ -11,8 +11,8 @@ client:
   en: "Maltezz"
 year: "2025"
 tools: "Photoshop, Illustrator, Blender"
-image_src: /assets/images/projects/btr-cover.png
-main_image: /assets/images/projects/btr-cover.png
+image_src: /assets/images/projects/btr-cover.webp
+main_image: /assets/images/projects/btr-cover.webp
 media_type: image
 context:
   fr: "Sortie de single"

@@ -11,8 +11,8 @@ client:
   en: "Personal project"
 year: "2025"
 tools: "InDesign, Photoshop, Illustrator"
-image_src: /assets/images/projects/hdd-defrag-poster.png
-main_image: /assets/images/projects/hdd-defrag-poster.png
+image_src: /assets/images/projects/hdd-defrag-poster.webp
+main_image: /assets/images/projects/hdd-defrag-poster.webp
 media_type: image
 context:
   fr: "Projet personnel"

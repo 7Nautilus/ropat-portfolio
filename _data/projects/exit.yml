@@ -11,8 +11,8 @@ client:
   en: "Personal project"
 year: "2025"
 tools: "Photoshop, Illustrator"
-image_src: /assets/images/projects/exit.png
-main_image: /assets/images/projects/exit.png
+image_src: /assets/images/projects/exit.webp
+main_image: /assets/images/projects/exit.webp
 media_type: image
 context:
   fr: "Projet personnel"

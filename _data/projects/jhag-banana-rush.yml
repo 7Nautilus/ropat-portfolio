@@ -11,10 +11,10 @@ client:
   en: "Juliette has a Gun"
 year: "2026"
 tools: "Figma, After Effects"
-image_src: /assets/images/projects/jhag/1440x1440_SBN_2.png
-main_image: /assets/images/projects/jhag/1440x1440_SBN_2.png
+image_src: /assets/images/projects/jhag/1440x1440_SBN_2.webp
+main_image: /assets/images/projects/jhag/1440x1440_SBN_2.webp
 media_type: image
-og_image: /assets/images/projects/jhag-br-p1-kv.png
+og_image: /assets/images/projects/jhag/jhag-br-p1-kv.webp
 context:
   fr: "Lancement de la ligne Banana Rush"
   en: "Banana Rush line launch"
@@ -82,36 +82,36 @@ locales:
       og_description: "Creation and animation of Sephora co-branded paid social assets for Juliette has a Gun's Banana Rush perfume."
 
 thumbnails:
-  - src: /assets/images/projects/jhag/jhag-br-p2-kv.png
+  - src: /assets/images/projects/jhag/jhag-br-p2-kv.webp
     type: image
     alt:
       fr: "Visuel clé Banana Rush"
       en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/BR_PL_1440x1440.mp4
     type: video
-    preview: /assets/images/projects/jhag/1440x1440_SP_2.png
+    preview: /assets/images/projects/jhag/1440x1440_SP_2.webp
     alt:
       fr: "Animation Banana Rush Pile"
       en: "Banana Rush Pile Animation"
-  - src: /assets/images/projects/jhag/jhag-sd.png
+  - src: /assets/images/projects/jhag/jhag-sd.webp
     type: image
     alt:
       fr: "Visuel clé Banana Rush"
       en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/jhag-br-p1-od.mp4
     type: video
-    preview: /assets/images/projects/jhag/jhag-br-p1-od.jpg
+    preview: /assets/images/projects/jhag/jhag-br-p1-od.webp
     alt:
       fr: "Animation Banana Rush OD"
       en: "Banana Rush OD Animation"
-  - src: /assets/images/projects/jhag/jhag-br-p3-pile.png
+  - src: /assets/images/projects/jhag/jhag-br-p3-pile.webp
     type: image
     alt:
       fr: "Visuel Banana Rush Pile"
       en: "Banana Rush Pile Visual"
   - src: /assets/videos/jhag/jhag-br-p2-ai.mp4
     type: video
-    preview: /assets/images/projects/jhag/jhag-br-p2-kv.png
+    preview: /assets/images/projects/jhag/jhag-br-p2-kv.webp
     alt:
       fr: "Animation du visuel clé Banana Rush"
       en: "Banana Rush Key Visual Animation"
