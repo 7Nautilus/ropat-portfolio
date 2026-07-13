@@ -28,7 +28,9 @@
 
   {% include scroll-down-link.html %}
   
-  <section id="second-section">
+  <section id="second-section" aria-labelledby="services-section-title">
+    {% comment %} Titre de section masqué : évite le saut h1 -> h3 (cartes) pour les lecteurs d'écran {% endcomment %}
+    <h2 id="services-section-title" class="sr-only">{% if page.lang == 'fr' %}Prestations{% else %}Services{% endif %}</h2>
     <div class="section-grid" id="services-grid">
       {% assign service_ids = site.data.services.index.order %}
       {% assign featured_rendered = 0 %}
