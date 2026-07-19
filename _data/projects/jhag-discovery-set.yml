@@ -14,7 +14,7 @@ tools: "Figma"
 image_src: /assets/images/projects/jhag/jhag-discovery-set-thumbnail.webp
 main_image: /assets/images/projects/jhag/jhag-discovery-set-thumbnail.webp
 media_type: image
-og_image: /assets/images/projects/...
+aspect: "4/5"
 context:
   fr: "Campagne de conversion Coffret Découverte"
   en: "Discovery Set conversion campaign"
@@ -59,7 +59,6 @@ locales:
     pitch: "**Composition graphique et habillage d'assets publicitaires** pour la campagne de conversion du Coffret Découverte de **Juliette has a Gun**."
     description: "Intégration typographique, habillage graphique et déclinaisons de 3 concepts publicitaires bilingues (FR/EN) sur les formats statiques Meta Ads (1:1, 4:5, 9:16) pour promouvoir l'offre de remboursement du Coffret Découverte."
     services: "Composition graphique, Habillage publicitaire, Intégration typographique, Déclinaisons multi-formats"
-    context_title: "Coulisses du projet"
     seo:
       title: "Campagne Coffret Découverte - Juliette has a Gun | Ropat"
       description: "Composition graphique, habillage typographique et déclinaisons d'assets publicitaires statiques pour le Coffret Découverte de Juliette has a Gun (formats Meta Ads)."
@@ -74,7 +73,6 @@ locales:
     pitch: "**Graphic composition and ad layout styling** for the Discovery Set conversion campaign by **Juliette has a Gun**."
     description: "Typographic integration, ad layout styling, and multi-format adaptations (1:1, 4:5, 9:16) for 3 bilingual (FR/EN) static ad concepts promoting the Discovery Set."
     services: "Graphic Composition, Advertising Layouts, Typographic Integration, Multi-format Adaptation"
-    context_title: "Project details"
     seo:
       title: "Discovery Set Campaign - Juliette has a Gun | Ropat"
       description: "Graphic composition, ad layouts, and multi-format adaptations of static advertising assets for Juliette has a Gun's Discovery Set campaign (Meta Ads)."
@@ -83,17 +81,14 @@ locales:
 
 thumbnails:
   - src: /assets/images/projects/jhag/2026_05_PAID_DK_BLIND_BUY_US_1440x1800.webp
-    type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Rose Fuchsia au format carré 1:1"
       en: "Discovery Set Ad Composition - Fuchsia Pink Concept in 1:1 square format"
   - src: /assets/images/projects/jhag/2026_05_PAID_DK_34_BACK_US_1440x1800.webp
-    type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Botanique au format carré 1:1"
       en: "Discovery Set Ad Composition - Botanical Concept in 1:1 square format"
   - src: /assets/images/projects/jhag/2026_05_PAID_DK_TRY_THEM_US_1440x1800.webp
-    type: image
     alt:
       fr: "Composition publicitaire Coffret Découverte - Concept Lifestyle Jaune au format carré 1:1"
       en: "Discovery Set Ad Composition - Saffron Yellow Lifestyle Concept in 1:1 square format"

@@ -14,6 +14,7 @@ tools: "After Effects"
 image_src: /assets/images/projects/jpeja-thumbnail.jpg
 main_image: /assets/videos/JPeJA.mp4
 media_type: video
+aspect: "4/5"
 context:
   fr: "Projet personnel"
   en: "Personal project"
@@ -62,7 +63,6 @@ locales:
     title: "JPeJA"
     pitch: "**Création d'un visualizer musical** pour le single **JPeJA** de **Wasting Shit**"
     description: "**Réalisation d'un visualizer musical** fictif pour la sortie du single **JPeJA** de **Wasting Shit**. Cette animation a été réalisée en utilisant **After Effects**."
-    context_title: "À propos du projet"
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: "Visualizer musical fictif pour la sortie du single JPeJA de Wasting Shit"
@@ -75,7 +75,6 @@ locales:
     title: "JPeJA"
     pitch: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**"
     description: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**. This animation was created using **After Effects**."
-    context_title: "About the project"
     seo:
       title: "JPeJA Visualizer - Ropat"
       description: 'Fictional musical visualizer for the "JPeJA" single by Wasting Shit'

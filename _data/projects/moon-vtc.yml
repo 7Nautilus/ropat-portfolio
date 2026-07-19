@@ -65,7 +65,6 @@ locales:
     pitch: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de VTC en phase de lancement : logo, palette de couleurs, typographie et charte graphique."
     description: "Conception de l'**identité visuelle complète** de Moon VTC, société de transport avec chauffeur en phase de lancement. La mission comprenait la création d'un **set de logos**, une sélection de **palette de couleurs** et de **typographie**, ainsi qu'une **charte graphique** complète pour cadrer l'usage de ces éléments."
     services: "Identité visuelle, Création de logo, Charte graphique"
-    context_title: "Contexte du projet"
     seo:
       title: "Moon VTC - Identité visuelle | Ropat"
       description: "Création de l'identité visuelle complète pour Moon VTC : logo, palette de couleurs, typographie et charte graphique pour cette société de VTC en lancement."
@@ -80,7 +79,6 @@ locales:
     pitch: "Creation of a **complete visual identity** for **Moon VTC**, a VTC company launching its brand: logo, color palette, typography, and brand guidelines."
     description: "Design of the **complete visual identity** for Moon VTC, a chauffeur-driven car service in its launch phase. The mission included creating a **logo set**, a **color palette** and **typography** selection, as well as a full **brand guidelines** document to frame the usage of these elements."
     services: "Visual Identity, Logo Design, Brand Guidelines"
-    context_title: "About the project"
     seo:
       title: "Moon VTC - Visual Identity | Ropat"
       description: "Creation of the complete visual identity for Moon VTC: logo, color palette, typography and brand guidelines for this launching VTC company."
@@ -89,22 +87,18 @@ locales:
 
 thumbnails:
   - src: /assets/images/projects/moon_vtc/moon_vtc_typo_white.png
-    type: image
     alt:
       fr: "Logo Moon VTC - version typographique blanche"
       en: "Moon VTC logo - white typographic version"
   - src: /assets/images/projects/moon_vtc/moon_vtc_icon_white.png
-    type: image
     alt:
       fr: "Icône Moon VTC - version blanche"
       en: "Moon VTC icon - white version"
   - src: /assets/images/projects/moon_vtc/moon_vtc_typo_black.png
-    type: image
     alt:
       fr: "Logo Moon VTC - version typographique noire"
       en: "Moon VTC logo - black typographic version"
   - src: /assets/images/projects/moon_vtc/moon_vtc_icon_black.png
-    type: image
     alt:
       fr: "Icône Moon VTC - version noire"
       en: "Moon VTC icon - black version"

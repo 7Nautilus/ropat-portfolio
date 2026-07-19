@@ -59,7 +59,6 @@ locales:
     pitch: "**Composition graphique, co-branding et motion design** pour la campagne publicitaire de lancement du parfum **Banana Rush** de **Juliette has a Gun**."
     description: "Habillage publicitaire et animation de 10 concepts visuels déclinés en versions bilingues (FR/EN), formats Meta Ads (1:1, 4:5, 9:16), avec intégration systématique d'une déclinaison co-brandée pour Sephora."
     services: "Composition graphique, Motion Design, Co-branding Sephora, Déclinaisons multi-formats"
-    context_title: "Coulisses du projet"
     seo:
       title: "Campagne Banana Rush - Juliette has a Gun | Ropat"
       description: "Composition graphique, co-branding Sephora et motion design pour le lancement de Banana Rush par Juliette has a Gun. Assets publicitaires multi-formats."
@@ -74,7 +73,6 @@ locales:
     pitch: "**Graphic composition, co-branding, and motion design** for the **Banana Rush** fragrance launch campaign by **Juliette has a Gun**."
     description: "Graphic layouts and animation of 10 visual concepts adapted in bilingual versions (FR/EN) across Meta Ads formats (1:1, 4:5, 9:16), featuring a systematic co-branded rollout for Sephora."
     services: "Graphic Composition, Motion Design, Sephora Co-branding, Multi-format Adaptation"
-    context_title: "Project details"
     seo:
       title: "Banana Rush Campaign - Juliette has a Gun | Ropat"
       description: "Graphic composition, Sephora co-branding, and motion design for Juliette has a Gun's Banana Rush launch. Multi-format ad assets."
@@ -83,34 +81,28 @@ locales:
 
 thumbnails:
   - src: /assets/images/projects/jhag/jhag-br-p2-kv.webp
-    type: image
     alt:
       fr: "Visuel clé Banana Rush"
       en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/BR_PL_1440x1440.mp4
-    type: video
     preview: /assets/images/projects/jhag/1440x1440_SP_2.webp
     alt:
       fr: "Animation Banana Rush Pile"
       en: "Banana Rush Pile Animation"
   - src: /assets/images/projects/jhag/jhag-sd.webp
-    type: image
     alt:
       fr: "Visuel clé Banana Rush"
       en: "Banana Rush Key Visual"
   - src: /assets/videos/jhag/jhag-br-p1-od.mp4
-    type: video
     preview: /assets/images/projects/jhag/jhag-br-p1-od.webp
     alt:
       fr: "Animation Banana Rush OD"
       en: "Banana Rush OD Animation"
   - src: /assets/images/projects/jhag/jhag-br-p3-pile.webp
-    type: image
     alt:
       fr: "Visuel Banana Rush Pile"
       en: "Banana Rush Pile Visual"
   - src: /assets/videos/jhag/jhag-br-p2-ai.mp4
-    type: video
     preview: /assets/images/projects/jhag/jhag-br-p2-kv.webp
     alt:
       fr: "Animation du visuel clé Banana Rush"

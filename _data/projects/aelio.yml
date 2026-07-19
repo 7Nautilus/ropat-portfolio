@@ -12,6 +12,8 @@ client:
 year: "2026"
 tools: "Figma, Affinity, Illustrator"
 image_src: /assets/images/projects/aelio/monogram.avif
+# WebP dedie : les crawlers sociaux ne lisent pas l'AVIF
+og_image: /assets/images/projects/aelio/aelio-og.webp
 main_image: /assets/images/projects/aelio/monogram.avif
 media_type: image
 context:
@@ -83,7 +85,6 @@ locales:
     pitch: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation"
     description: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation. Création d'un logo, d'une charte graphique et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **innovant, technique et ancré dans son territoire**."
     services: "Logo, Charte graphique, Pack Social Media, Design System"
-    context_title: "Contexte du projet"
     seo:
       title: "Branding Aélio | Ropat"
       description: "Identité visuelle complète pour Aélio, cabinet de conseil en IA et automatisation : logo, charte graphique, design system et pack LinkedIn, livrés en quelques jours."
@@ -98,7 +99,6 @@ locales:
     pitch: "Complete **visual identity** for **Aélio**, an AI and automation consulting firm"
     description: "Complete **visual identity** for **Aélio**, an AI and automation consulting firm. Creation of a logo, a graphic charter and a **LinkedIn identity pack**, with a defined color palette and typography. A positioning that is at once **innovative, technical and rooted in its territory**."
     services: "Logo, Graphic Charter, Social Media Pack, Design System"
-    context_title: "Project Context"
     seo:
       title: "Branding Aélio | Ropat"
       description: "Complete visual identity for Aélio, an AI and automation consulting firm: logo, graphic charter, design system and LinkedIn pack."

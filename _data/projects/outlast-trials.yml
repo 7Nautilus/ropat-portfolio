@@ -14,6 +14,7 @@ tools: "Photoshop"
 image_src: /assets/images/projects/outlast-trials.png
 main_image: /assets/images/projects/outlast-trials.png
 media_type: image
+aspect: "808/1206"
 context:
   fr: "Projet personnel"
   en: "Personal project"
@@ -62,7 +63,6 @@ locales:
     title: "Affiche “Outlast Trials”"
     pitch: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**"
     description: "**Création d'une affiche rétro** sur le thème du jeu vidéo **Outlast Trials**."
-    context_title: "À propos du projet"
     seo:
       title: "Outlast Trials - Affiche | Ropat"
       description: "Design d'affiche sur le thème du jeu vidéo Outlast Trials."
@@ -75,7 +75,6 @@ locales:
     title: "Poster “Outlast Trials”"
     pitch: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game"
     description: "**Creation of a vintage poster** on the theme of the **Outlast Trials** video game."
-    context_title: "About the project"
     seo:
       title: "Outlast Trials - Poster | Ropat"
       description: "Poster design on the theme of the Outlast Trials video game."

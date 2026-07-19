@@ -62,7 +62,6 @@ locales:
     title: "Animation en Stop-Motion"
     pitch: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     description: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
-    context_title: "À propos du projet"
     seo:
       title: "Crow Animation - Ropat"
       description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau à travers l'analyse de son cycle de vol."
@@ -75,7 +74,6 @@ locales:
     title: "Stop-Motion Animation"
     pitch: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     description: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
-    context_title: "About the project"
     seo:
       title: "Crow Animation - Ropat"
       description: "Stop-motion animation exploring the crow's speed and agility through analysis of its flying cycle."

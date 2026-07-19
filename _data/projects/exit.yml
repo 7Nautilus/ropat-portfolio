@@ -14,6 +14,7 @@ tools: "Photoshop, Illustrator"
 image_src: /assets/images/projects/exit.webp
 main_image: /assets/images/projects/exit.webp
 media_type: image
+aspect: "4/5"
 context:
   fr: "Projet personnel"
   en: "Personal project"
@@ -74,7 +75,6 @@ locales:
     title: "Affiche “EXIT”"
     pitch: "**Création d'une affiche vintage** en utilisant **Photoshop** et **Illustrator**"
     description: "**Réinterprétation graphique** des panneaux de sorties de secours avec un traitement en **cuivre oxydé**, mêlant **typographie**, **formes géométriques** et **textures contemporaines**."
-    context_title: "À propos du projet"
     seo:
       title: "EXIT - Affiche Design | Ropat"
       description: "Création d'affiche détournant le design des panneaux de sorties de secours avec un aspect cuivre oxydé."
@@ -87,7 +87,6 @@ locales:
     title: "Poster “EXIT”"
     pitch: "**Creation of a vintage poster** using **Photoshop** and **Illustrator**"
     description: "**Graphic reinterpretation** of emergency exit signs with an **oxidized copper** treatment, blending **typography**, **geometric shapes**, and **contemporary textures**."
-    context_title: "About the project"
     seo:
       title: "EXIT - Poster Design | Ropat"
       description: "Poster design reinterpreting emergency exit signage with an oxidized copper aesthetic."

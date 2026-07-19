@@ -63,7 +63,6 @@ locales:
     pitch: "**Direction artistique** et **création de la pochette** pour la sortie du single **BTR** de Maltezz"
     description: "**Direction artistique** complète et **création de la pochette d'album** pour la sortie du **single** **BTR** de Maltezz."
     services: "Direction Artistique, Typographie custom & Design de pochette de single"
-    context_title: "Contexte du projet"
     seo:
       title: "Pochette BTR - Maltezz | Ropat"
       description: "Direction artistique et création de la pochette pour le single BTR de Maltezz. Composition graphique, choix des couleurs et typographie."
@@ -77,7 +76,6 @@ locales:
     pitch: "**Art direction** and **cover design** for Maltezz's **BTR** single release"
     description: "Complete **art direction** and **cover art design** for the release of the single **BTR** by Maltezz."
     services: "Art Direction, Custom Typography & Single Cover Design"
-    context_title: "Project Context"
     seo:
       title: "BTR Cover - Maltezz | Ropat"
       description: "Art direction and cover design for Maltezz's BTR single. Graphic composition, color choices and typography."

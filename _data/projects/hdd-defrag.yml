@@ -14,6 +14,7 @@ tools: "InDesign, Photoshop, Illustrator"
 image_src: /assets/images/projects/hdd-defrag-poster.webp
 main_image: /assets/images/projects/hdd-defrag-poster.webp
 media_type: image
+aspect: "900/1274"
 context:
   fr: "Projet personnel"
   en: "Personal project"
@@ -62,7 +63,6 @@ locales:
     title: "Affiche “HDD DEFRAG”"
     pitch: "**Création d'une affiche** sur la défragmentation de disque dur."
     description: "**Création d'une affiche** sur le thème de la défragmentation de disque dur, utilisant **InDesign**, **Photoshop** et **Illustrator**."
-    context_title: "À propos du projet"
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
       description: "Design d'affiche sur le thème de la défragmentation  des disques durs."
@@ -75,7 +75,6 @@ locales:
     title: "Poster “HDD DEFRAG”"
     pitch: "**Creation of a poster** on the theme of hard drive defragmentation."
     description: "**Creation of a poster** on the theme of hard drive defragmentation, using **InDesign**, **Photoshop**, and **Illustrator**."
-    context_title: "About the project"
     seo:
       title: "HDD DEFRAG - Poster | Ropat"
       description: "Poster design on the theme of hard drive defragmentation."

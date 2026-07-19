@@ -76,7 +76,6 @@ locales:
     pitch: "**Direction artistique** et **création de la pochette** pour la sortie de l'album **A-LONE**"
     description: "**Direction artistique** complète et **création de la cover** pour la sortie de l'**album**"
     services: "Direction Artistique, Typographie custom & Design de pochette d'album"
-    context_title: "Contexte du projet"
     seo:
       title: "Pochette A-LONE - B-Lone | Ropat"
       description: "Direction artistique et création de la pochette pour l'album A-LONE de B-Lone. Typographie custom et identité visuelle complète."
@@ -90,7 +89,6 @@ locales:
     pitch: "**Art direction** and **cover art design** for the **A-LONE** album release"
     description: "Complete art direction and cover art design for the album release."
     services: "Art Direction, Custom Typography & Album Cover Design"
-    context_title: "Project Context"
     seo:
       title: "A-LONE Cover - B-Lone | Ropat"
       description: "Art direction and cover design for B-Lone's A-LONE album. Custom typography and complete visual identity."
