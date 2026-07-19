@@ -1,0 +1,135 @@
+slug: jhag-pinterest
+project_title: "Pinterest Campaign"
+subtitle: "Social Ads"
+theme:
+  fr: "CAMPAGNE PAID SOCIAL"
+  en: "PAID SOCIAL CAMPAIGN"
+category: social-ads
+featured: false
+client:
+  fr: "Juliette has a Gun"
+  en: "Juliette has a Gun"
+year: "2026"
+tools: "Figma, After Effects"
+image_src: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_12_1000x1500.avif
+main_image: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_12_1000x1500.avif
+media_type: image
+aspect: "2/3"
+# WebP dedie : les crawlers sociaux (Facebook, LinkedIn, X, Pinterest) ne lisent pas l'AVIF
+og_image: /assets/images/projects/jhag/jhag-pinterest-og.webp
+context:
+  fr: "Lancement de la première campagne Pinterest de Juliette has a Gun"
+  en: "Launch of Juliette has a Gun's first Pinterest campaign"
+secteur:
+  fr: "Maison de parfumerie"
+  en: "Perfume house"
+formats:
+  fr: "2:3"
+  en: "2:3"
+
+context_sections:
+  - title:
+      fr: "Restructuration de format & Grille Pinterest"
+      en: "Layout Restructuring & Pinterest Grid"
+    content:
+      fr: |
+        Déploiement de la toute première campagne publicitaire de la marque sur Pinterest. L'enjeu de cette création résidait dans l'adaptation de 14 contenus publicitaires existants pour les transposer dans le format vertical natif 2:3 de la plateforme. Ce travail a nécessité une restructuration complète des compositions d'origine afin de préserver l'équilibre visuel, le prestige des flacons et l'efficacité de lecture propre au flux Pinterest.
+      en: |
+        Rollout of the brand's very first advertising campaign on Pinterest. The core design challenge was adapting 14 existing ad assets into the platform's native 2:3 vertical format. This required a complete restructuring of the original layouts to maintain visual balance, emphasize bottle luxury, and ensure the high readability required for the Pinterest feed.
+  - title:
+      fr: "Concepts publicitaires & Hybridation créative"
+      en: "Ad Concepts & Creative Hybridization"
+    content:
+      fr: |
+        La campagne s'articule autour de 14 univers créatifs forts mettant en scène différentes lignes iconiques de la marque. Sur ces 14 concepts, 13 ont été traités comme des statics percutants axés sur la lisibilité immédiate du message. Le concept phare « Wild Strawberry & Whipped Cream » a quant à lui bénéficié d'une double exécution : un visuel statique d'une part, et une déclinaison en motion design (vidéo) d'autre part, fluidifiant la narration et maximisant l'engagement des utilisateurs.
+      en: |
+        The campaign is structured around 14 powerful creative concepts highlighting the brand’s various iconic product lines. Out of these 14 setups, 13 were designed as striking static layouts focused on instant message clarity. The signature concept "Wild Strawberry & Whipped Cream" received a dual execution: a high-impact static visual and a motion design (video) adaptation, enhancing storytelling and user engagement.
+  - title:
+      fr: "Écosystème typographique & Cohérence"
+      en: "Typographic Ecosystem & Visual Consistency"
+    content:
+      fr: |
+        Mise en place d'un système de mise en page rigoureux mariant plusieurs territoires typographiques. La composition s'appuie principalement sur la police institutionnelle *ABChannel*, soutenue par *Raleway* pour les titrages secondaires. Pour assurer une passerelle visuelle harmonieuse, la typographie *CoFo Raffine* a été ponctuellement intégrée sur les concepts liés à la ligne Banana Rush, garantissant une cohérence globale bilingue (français/anglais) forte d'un concept à l'autre.
+      en: |
+        Implementation of a rigorous layout system merging distinct typographic territories. The layout relies mainly on the institutional typeface *ABChannel*, supported by *Raleway* for secondary display text. To ensure a harmonious brand bridge, the *CoFo Raffine* typeface was selectively integrated into the Banana Rush line concepts, guaranteeing flawless bilingual (English/French) visual consistency across all assets.
+
+locales:
+  fr:
+    url: /fr/projects/jhag-pinterest.html
+    aria_label: "Voir la campagne paid social Pinterest - Juliette has a Gun"
+    image_alt: "Campagne paid social Pinterest - Juliette has a Gun"
+    title: "Pinterest Campaign"
+    pitch: "**Composition graphique, habillage publicitaire et motion design** pour la campagne de conversion de **Juliette has a Gun** sur Pinterest."
+    description: "Composition graphique, habillage typographique et déclinaisons de 14 concepts publicitaires bilingues (FR/EN) sur le format vertical 2:3 spécifique à Pinterest Ads, associant des assets statiques et une création vidéo."
+    services: "Composition graphique, Habillage publicitaire, Intégration typographique, Motion Design"
+    seo:
+      title: "Campagne Pinterest - Juliette has a Gun | Ropat"
+      description: "Composition graphique, habillage typographique et déclinaisons d'assets publicitaires statiques et vidéos pour la campagne Pinterest de Juliette has a Gun."
+      og_title: "Campagne Pinterest - Juliette has a Gun | Ropat"
+      og_description: "Création et déclinaisons d'assets graphiques publicitaires bilingues, statiques et vidéos pour la campagne Pinterest de Juliette has a Gun."
+
+  en:
+    url: /en/projects/jhag-pinterest.html
+    aria_label: "See the Pinterest paid social campaign - Juliette has a Gun"
+    image_alt: "Pinterest paid social campaign - Juliette has a Gun"
+    title: "Pinterest Campaign"
+    pitch: "**Graphic composition, ad layout styling, and motion design** for the Pinterest conversion campaign by **Juliette has a Gun**."
+    description: "Graphic composition, typographic styling, and multi-concept rollout (14 setups) in bilingual versions (FR/EN) for Pinterest's vertical 2:3 format, featuring static layouts and a motion design video."
+    services: "Graphic Composition, Advertising Layouts, Typographic Integration, Motion Design"
+    seo: 
+      title: "Pinterest Campaign - Juliette has a Gun | Ropat"
+      description: "Graphic composition, ad layouts, and vertical format adaptations of static and video advertising assets for Juliette has a Gun's Pinterest campaign."
+      og_title: "Pinterest Campaign - Juliette has a Gun | Ropat"
+      og_description: "Creation and layout of bilingual static and video paid social assets for the Juliette has a Gun Pinterest campaign."
+
+thumbnails:
+  - src: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_12_1000x1500.avif
+    alt:
+      fr: "Composition publicitaire Pinterest - Concept Not a Perfume au format pinterest 2:3"
+      en: "Pinterest Ad Composition - Not a Perfume Concept in 2:3 Pinterest format"
+  - src: /assets/videos/jhag/Wild Strawberry & Whipped Cream_1000x1500.mp4
+    preview: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_01_1000x1500.avif
+    alt:
+      fr: "Animation publicitaire Pinterest - Concept Wild Strawberry & Whipped Cream au format pinterest 2:3"
+      en: "Pinterest Ad Animation - Wild Strawberry & Whipped Cream Concept in 2:3 Pinterest format"
+  - src: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_03_1000x1500.avif
+    alt:
+      fr: "Composition publicitaire Pinterest - Concept Miami Shake au format pinterest 2:3"
+      en: "Pinterest Ad Composition - Miami Shake Concept in 2:3 Pinterest format"
+  - src: /assets/images/projects/jhag/2026_05_PAID_SEPHORA_PINTEREST_07_1000x1500.avif
+    alt:
+      fr: "Composition publicitaire Pinterest - Concept Banana Rush au format pinterest 2:3"
+      en: "Pinterest Ad Composition - Banana Rush Concept in 2:3 Pinterest format"
+
+case_study:
+  colors:
+    - hex: "#e9b72b"
+      name:
+        fr: "Jaune Safran"
+        en: "Saffron Yellow"
+    - hex: "#ff908f"
+      name:
+        fr: "Rose Framboise"
+        en: "Raspberry Pink"
+    - hex: "#c3e7a9"
+      name:
+        fr: "Vert Poire"
+        en: "Pear Green"
+    - hex: "#e3e3e3"
+      name:
+        fr: "Gris Minéral"
+        en: "Mineral Grey"
+
+  typography:
+    - name: "ABChannel"
+      usage:
+        fr: "Typographie principale de la maison"
+        en: "Primary typeface"
+    - name: "CoFo Raffine"
+      usage:
+        fr: "Typographie signature de la ligne Banana Rush"
+        en: "Signature typeface for the Banana Rush line"
+    - name: "Raleway"
+      usage:
+        fr: "Typographie de titrage secondaire"
+        en: "Secondary display typeface"

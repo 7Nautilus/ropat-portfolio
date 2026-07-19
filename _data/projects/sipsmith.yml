@@ -1,0 +1,122 @@
+slug: sipsmith
+project_title: "Sipsmith"
+subtitle: "Menu & Invitation"
+theme:
+  fr: "IDENTITÉ ÉVÉNEMENTIELLE & PRINT"
+  en: "EVENT IDENTITY & PRINT"
+category: design
+featured: false
+client:
+  fr: "Sipsmith"
+  en: "Sipsmith"
+year: "2026"
+tools: "Figma, Affinity"
+image_src: /assets/images/projects/sipsmith/sipsmith.avif
+main_image: /assets/images/projects/sipsmith/sipsmith.avif
+media_type: image
+aspect: "4/3"
+# WebP dedie : les crawlers sociaux ne lisent pas l'AVIF
+og_image: /assets/images/projects/sipsmith/sipsmith-og.webp
+context:
+  fr: "Création d'un menu et d'un carton d'invitation pour la distillerie londonienne Sipsmith"
+  en: "Creation of a menu and invitation card for the London distillery Sipsmith"
+secteur:
+  fr: "Alimentation & Boissons"
+  en: "Food & Beverage"
+formats:
+  fr: "148x210 mm (A5) · 105x148 mm (A6)"
+  en: "148x210 mm (A5) · 105x148 mm (A6)"
+
+context_sections:
+  - title:
+      fr: "Héritage londonien & Esthétique victorienne"
+      en: "London Heritage & Victorian Aesthetic"
+    content:
+      fr: |
+        Conception graphique d'un menu et d'un carton d'invitation pour un événement exclusif de la distillerie Sipsmith. L'objectif était de retranscrire visuellement l'ADN haut de gamme de la marque, profondément ancrée dans l'art de la distillation traditionnelle londonienne. L'habillage graphique fait la part belle aux détails ornementaux raffinés et à une rigueur géométrique évoquant l'époque victorienne.
+      en: |
+        Graphic design of a menu and invitation card for an exclusive event hosted by Sipsmith Distillery. The creative goal was to capture the high-end DNA of the brand, deeply rooted in traditional London dry gin distillation. The graphic layout emphasizes refined ornamental details and structural geometry evoking the Victorian era.
+  - title:
+      fr: "Dualité chromatique & Motifs signatures"
+      en: "Chromatic Duality & Signature Patterns"
+    content:
+      fr: |
+        La papeterie a été développée en deux variantes contrastées exploitant les deux motifs de tapisserie signatures de la marque. La première version propose un habillage classique utilisant la tapisserie « vert clair sur blanc », offrant une clarté lumineuse sur papier texturé premium. La seconde version décline un concept inversé « vert clair sur vert foncé », créant un effet de clair-obscur prestigieux, idéal pour un dîner nocturne et intimiste.
+      en: |
+        The stationery suite was developed in two contrasting colorways leveraging the brand's signature background patterns. The first version features a classic setup using the "light green on white" tapestry pattern, offering bright clarity on premium textured paper. The second version presents an inverted "light green on dark green" concept, creating a prestigious chiaroscuro effect, ideal for an intimate evening dinner.
+  - title:
+      fr: "Grille éditoriale & Choix typographiques"
+      en: "Editorial Grid & Typographic Choices"
+    content:
+      fr: |
+        Travail minutieux sur la hiérarchie de l'information pour garantir une lisibilité optimale malgré la densité du menu. La composition s'appuie sur la typographie de titrage *Joane*, aux courbes élégantes et aux empattements marqués, associée au caractère historique *P22 Mackinac Pro* pour le texte de labeur. Cette combinaison assure un équilibre parfait entre élégance classique et lisibilité contemporaine.
+      en: |
+        Meticulous information hierarchy to ensure optimal readability within the menu's layout constraints. The composition pairs the elegant curves and sharp serifs of the *Joane* display typeface with the historical character of *P22 Mackinac Pro* for body text. This combination strikes a perfect balance between classic elegance and contemporary legibility.
+
+locales: 
+  fr: 
+    url: /fr/projects/sipsmith.html
+    aria_label: "Voir le projet de papeterie Sipsmith"
+    image_alt: "Mockup de présentation du menu et du carton d'invitation pour Sipsmith"
+    title: "Menu & Invitation Sipsmith"
+    pitch: "**Design graphique et mise en page d'un menu et d'un carton d'invitation** pour un événement de la distillerie de gin londonienne **Sipsmith**."
+    description: "Création d'un ensemble de papeterie événementielle haut de gamme pour Sipsmith. Recherche typographique, mise en page éditoriale et déclinaison en deux variantes chromatiques basées sur les tapisseries signatures de la marque."
+    services: "Design graphique, Mise en page éditoriale, Identité événementielle, Préparation print"
+    seo:
+      title: "Design de menu et d'invitation Sipsmith | Ropat"
+      description: "Découvrez la création de la papeterie événementielle (menu et carton d'invitation) pour la distillerie de gin londonienne Sipsmith. Deux variantes graphiques."
+      og_title: "Design de menu et d'invitation Sipsmith | Ropat"
+      og_description: "Papeterie haut de gamme conçue pour un événement de la célèbre distillerie de gin londonienne Sipsmith."
+  
+  en:
+    url: /en/projects/sipsmith.html
+    aria_label: "See the Sipsmith project"
+    image_alt: "Presentation mockup of Sipsmith's event menu and invitation card"
+    title: "Sipsmith Menu & Invitation"
+    pitch: "**Graphic design and layout of a menu and invitation card** for an exclusive event of the London gin distillery **Sipsmith**."
+    description: "Creation of a premium event stationery suite for Sipsmith. Typographic curation, editorial layout, and design rollout in two distinct chromatic variations based on the brand's signature tapestries."
+    services: "Graphic Design, Editorial Layout, Event Identity, Print Preparation"
+    seo:
+      title: "Sipsmith Menu & Invitation Design | Ropat"
+      description: "Discover the creation of the event stationery (menu and invitation card) for London gin distillery Sipsmith. Two graphic variations."
+      og_title: "Sipsmith Menu & Invitation Design | Ropat"
+      og_description: "Premium stationery designed for an exclusive event of the famous London gin distillery Sipsmith."
+
+thumbnails:
+  - src: /assets/images/projects/sipsmith/sipsmith.avif
+    alt:
+      fr: "Mockup du menu pour la distillerie londonienne Sipsmith"
+      en: "Mockup of the menu for the London distillery Sipsmith"
+  - src: /assets/images/projects/sipsmith/sipsmith2.avif
+    alt:
+      fr: "Mockup du menu pour la distillerie londonienne Sipsmith"
+      en: "Mockup of the menu for the London distillery Sipsmith"
+
+case_study:
+  colors:
+    - hex: "#004E3E"
+      name:
+        fr: "London Dry Night"
+        en: "London Dry Night"
+    - hex: "#D3A171"
+      name:
+        fr: "Constance Copper"
+        en: "Copper Constance"
+    - hex: "#80a79f"
+      name:
+        fr: "London Dry Mist"
+        en: "London Dry Mist"
+    - hex: "#deb995"
+      name:
+        fr: "Constance Copper Clair"
+        en: "Light Copper Constance"
+
+  typography:
+    - name: "Joane"
+      usage: 
+        fr: "Typographie de titrage principale"
+        en: "Primary display typeface"
+    - name: "P22 Mackinac Pro"
+      usage: 
+        fr: "Texte de labeur et description"
+        en: "Body text and description"

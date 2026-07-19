@@ -1,0 +1,92 @@
+slug: hors-champ
+project_title: "Hors Champ"
+subtitle: "Branding"
+theme:
+  fr: "IDENTITÉ VISUELLE & BRANDING"
+  en: "VISUAL IDENTITY & BRANDING"
+category: branding
+featured: false
+client:
+  fr: "Hors Champ"
+  en: "Hors Champ"
+year: "2026"
+tools: "Illustrator, Affinity"
+image_src: /assets/images/projects/hors-champ/hors-champ-paper.avif
+main_image: /assets/images/projects/hors-champ/hors-champ-paper.avif
+media_type: image
+aspect: "4/3"
+# WebP dedie : les crawlers sociaux ne lisent pas l'AVIF
+og_image: /assets/images/projects/hors-champ/hors-champ-og.webp
+context:
+  fr: "Création d'une identité visuelle complète pour l'école supérieure d'audiovisuelle Hors Champ"
+  en: "Creation of a complete visual identity for the Hors Champ audiovisual higher school"
+secteur:
+  fr: "Éducation & Formation"
+  en: "Education & Training"
+
+context_sections:
+  - title:
+      fr: "Le concept du cadre & Récit visuel"
+      en: "The Framing Concept & Visual Storytelling"
+    content:
+      fr: |
+        Création de l'identité de marque de l'école supérieure d'audiovisuel Hors Champ. Le concept graphique repose sur une mise en abyme littérale du nom de l'école : jouer sur l'idée du cadre cinématographique, de ce qui est montré et de ce qui est suggéré (le « hors-champ »). Le logotype est ainsi dessiné pour évoquer subtilement la structure et les perforations d'une pellicule de film traditionnelle, capturant la tension créative entre contrainte technique et liberté de narration.
+      en: |
+        Brand identity creation for the Hors Champ higher school of audiovisual arts. The graphic concept is a literal play on the school's name ("Off-Camera" / "Out of Frame"): exploring the idea of the cinematic frame, what is shown and what is suggested. The logotype is subtly designed to evoke the structure and perforations of a traditional filmstrip, capturing the creative tension between technical constraint and narrative freedom.
+  - title:
+      fr: "Un système de logo modulaire"
+      en: "A Modular Logo System"
+    content:
+      fr: |
+        Conception d'un système de logotype adaptatif pensé pour s'intégrer de manière fluide sur tous les supports physiques et numériques de l'école. L'identité s'articule autour de trois variantes clés : une version signature sur deux lignes optimisée pour les compositions éditoriales, une version horizontale sur une seule ligne pour les bannières et en-têtes étroits, et enfin un monogramme d'initiales « HC » impactant, idéal pour les favicons, avatars et réseaux sociaux.
+      en: |
+        Design of an adaptive logotype system engineered to fit seamlessly across all physical and digital touchpoints of the school. The brand identity revolves around three key variants: a signature stack on two lines optimized for editorial layouts, a horizontal single-line version for narrow banners and headers, and a high-impact "HC" monogram, perfect for favicons, avatars, and social media.
+  - title:
+      fr: "Charte graphique & Sobriété technique"
+      en: "Brand Guidelines & Technical Minimalist"
+    content:
+      fr: |
+        Développement d'un territoire visuel sobre et haut de gamme, empruntant aux codes minimalistes du cinéma contemporain. L'univers typographique s'appuie sur une police sans-serif géométrique, forte et intemporelle, contrastée par un jeu de grilles strictes inspiré des fenêtres de cadrage. La palette de couleurs est pensée pour s'effacer au profit des productions vidéos des étudiants tout en conservant une signature institutionnelle forte.
+      en: |
+        Development of a clean and high-end visual territory, borrowing from the minimalist aesthetics of contemporary cinema. The typographic universe relies on a strong, timeless geometric sans-serif, contrasted by structured grids inspired by camera viewfinders. The color palette is designed to recede behind the students' video productions while retaining a powerful institutional signature.
+
+  
+locales:
+  fr:
+    url: /fr/projects/hors-champ.html
+    aria_label: "Voir le projet de branding pour Hors Champ"
+    image_alt: "Mise en situation de l'identité visuelle de l'école d'audiovisuel Hors Champ"
+    title: "Hors Champ"
+    pitch: "Création de l'identité visuelle et d'un système de logo modulaire pour l'école supérieure d'audiovisuel Hors Champ."
+    description: "Conception de l'identité de marque globale pour Hors Champ. Création d'un système de logotype inspiré de la pellicule de film et décliné en trois variantes (sur deux lignes, sur une ligne, et monogramme HC), choix de la charte typographique et définition du design system."
+    services: "Direction artistique, Logotype System, Charte graphique, Design System"
+    seo:
+      title: "Identité visuelle Hors Champ | Ropat"
+      description: "Découvrez la création de la charte graphique et du système de logo modulaire inspiré d'une pellicule de film pour l'école supérieure d'audiovisuel Hors Champ."
+      og_title: "Identité visuelle Hors Champ | Ropat"
+      og_description: "Système de logotype et univers graphique épuré conçus pour l'école supérieure d'audiovisuel Hors Champ."
+
+  en:
+    url: /en/projects/hors-champ.html
+    aria_label: "See the branding project for Hors Champ"
+    image_alt: "Mockup of the visual identity for the Hors Champ audiovisual school"
+    title: "Hors Champ"
+    pitch: "Visual identity design and modular logo system created for the Hors Champ higher audiovisual school."
+    description: "Global brand identity design for Hors Champ. Creation of a flexible logotype system inspired by movie filmstrips in three distinct variants (two lines, single line, and HC monogram), typographic curation, and design system setup."
+    services: "Art Direction, Logo System, Brand Guidelines, Design System"
+    seo:
+      title: "Hors Champ Visual Identity | Ropat"
+      description: "Discover the creation of the brand guidelines and modular logo system inspired by classic filmstrips for the Hors Champ higher audiovisual school."
+      og_title: "Hors Champ Visual Identity | Ropat"
+      og_description: "Logo system and refined visual identity designed for the Hors Champ higher school of audiovisual arts."
+
+  
+thumbnails:
+  - src: /assets/images/projects/hors-champ/hors-champ-paper.avif
+    alt:
+      fr: "Mise en situation de l'identité visuelle de l'école d'audiovisuelle Hors Champ"
+      en: "Mockup of the visual identity for the Hors Champ audiovisual school"
+  - src: /assets/images/projects/hors-champ/hors-champ-office.avif
+    alt:
+      fr: "Mise en situation de l'identité visuelle de l'école d'audiovisuelle Hors Champ"
+      en: "Mockup of the visual identity for the Hors Champ audiovisual school"
