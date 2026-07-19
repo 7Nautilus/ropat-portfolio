@@ -102,7 +102,8 @@
 .main-display {
     display: flex;
     gap: 0;
-    flex-grow: 1; /* Prend l'espace restant */
+    flex-grow: 0;
+    align-self: center; /* La bordure epouse le media : pas d'etirement, donc pas de vide interne (bug portrait sur viewport court). */
 
     border: var(--border-primary);
     border-radius: var(--spacing-xl);
@@ -117,12 +118,26 @@
 }
 
 #main-image {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
     height: auto;
     max-height: 80vh;
     display: block;
     object-fit: contain;
     transition: opacity 0.3s ease-in-out;
+}
+
+#main-video {
+    max-height: 80vh;
+}
+
+/* Galerie AVEC vignettes : le media (image ou video) laisse la place sous lui
+   pour que la bande de vignettes reste visible dans l'ecran sans scroll.
+   275px = nav + hauteur des vignettes + marges. Scope via :has() : les projets
+   sans vignettes gardent 80vh. */
+.project-gallery:has(.thumbnails-container) #main-image,
+.project-gallery:has(.thumbnails-container) #main-video {
+    max-height: calc(100vh - 275px);
 }
 
 #main-video {
