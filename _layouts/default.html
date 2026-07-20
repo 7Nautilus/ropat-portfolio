@@ -106,10 +106,10 @@
     <!-- Underdog n'existe qu'en 400 : demander 700 faisait fabriquer un faux gras. -->
     <link href="https://fonts.googleapis.com/css2?family=Underdog&amp;display=swap" rel="stylesheet">
 
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/assets/images/backgrounds/main-bg.webp" as="image">
-
     <!-- JS -->
+    <!-- Le fond n'est plus une image mais un shader : plus rien à précharger,
+         et main-bg.webp (453 Ko) n'est plus demandé du tout. -->
+    <script src="/assets/js/dither.js" defer></script>
     <script src="/assets/js/script.js" defer></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -143,6 +143,11 @@
     %}
 </head>
 <body>
+
+    <!-- Fond dither : remplace main-bg.webp. Rendu par assets/js/dither.js,
+         qui s'y accroche seul via cet identifiant. Si WebGL manque, le canvas
+         est retiré et la couleur de fond CSS prend le relais. -->
+    <canvas id="fond-dither" aria-hidden="true"></canvas>
 
     <!-- Curseur personnalisé (desktop uniquement) -->
     <div id="cursor-blob" aria-hidden="true"></div>

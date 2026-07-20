@@ -18,15 +18,31 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* FOND DITHER : remplace l'ancienne image de fond (main-bg.webp, 453 Ko).
+   Genere en shader par assets/js/dither.js, qui pose lui-meme les dimensions
+   d'affichage et le transform de rattrapage : une ligne de canvas doit valoir
+   exactement `pixelScale` px CSS, sinon le verrouillage au defilement derape.
+   Ne pas y ajouter width/height en %. */
+#fond-dither {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Sous tout le contenu : tous les autres z-index du site sont >= 1. */
+  z-index: -1;
+  display: block;
+  /* Le revele ecoute au niveau de window, le canvas n'a rien a intercepter. */
+  pointer-events: none;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  will-change: transform;
+}
+
 body {
   font-family: var(--font-body);
-  background-image: linear-gradient(var(--secondary-color), var(--secondary-color)),
-    url(/assets/images/backgrounds/main-bg.webp);
-  background-size: contain;
-  background-repeat: repeat;
-  background-position: center center;
-  background-attachment: scroll;
-  background-color: var(--background-dark); /* Fallback */
+  /* Repli : si WebGL manque, le module rend null et c'est cette couleur qu'on
+     voit. C'est le plancher du trio, donc la degradation est un aplat de la
+     bonne couleur et non un noir etranger. */
+  background-color: var(--fond-profond);
   color: var(--white-color);
   min-height: 100vh;
   display: flex;
