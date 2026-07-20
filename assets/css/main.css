@@ -18,7 +18,10 @@
   /* Typographie */
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Manrope', sans-serif;
-  --font-accent: 'Underdog', cursive;
+  /* Repli en sans-serif et NON en cursive : sur Windows, le mot-cle cursive
+     retombe sur Comic Sans MS (mesure). Si Underdog ne charge pas, un mot
+     d'accent s'afficherait donc en Comic Sans en plein titre. */
+  --font-accent: 'Underdog', sans-serif;
   /* Tailles fixes : racine et cas UI spécifiques */
   --font-size-base: 1rem;
   --font-size-2xl: 1.5rem;
