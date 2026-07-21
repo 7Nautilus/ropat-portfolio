@@ -1,30 +1,26 @@
 /* ============================================
    FONTS
+   ============================================
+   Aucun @font-face ici, et c'est voulu.
+
+   Les trois familles du site (Chakra Petch, Manrope, Underdog) viennent de
+   Google Fonts, declarees dans _layouts/default.html.
+
+   Ce bloc hebergeait autrefois trois fontes CLIENTES (Resort Sans, Anicon
+   sans, CoFo Raffine), servies pour afficher un « Aa » de specimen sur les
+   pages projet. Elles ont ete retirees le 21/07/2026 pour trois raisons :
+     - la licence : les fichiers portaient leur statut dans leur propre table
+       de noms, « CoFo Raffine VF Trial » et « FONTSPRING DEMO - Resort Sans ».
+       Des versions d'essai, prevues pour maquetter en local, pas pour etre
+       servies depuis un site public ;
+     - le poids : 688 Ko de fonte pour dessiner deux lettres ;
+     - la coherence : seules 3 des 11 polices citees par les etudes de cas
+       etaient reellement servies, les autres affichaient un Arial de repli
+       sous le nom d'une autre police.
+
+   Les specimens servent desormais un trace SVG (_data/typefaces.yml, genere
+   par scripts/contours-typo.py) : on montre le dessin, pas la fonte.
    ============================================ */
-
-@font-face {
-  font-family: 'Resort Sans';
-  src: url('/assets/fonts/Fontspring-DEMO-resort-sansregular.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Anicon sans';
-  src: url('/assets/fonts/ANICON%20SANS%20BLACK.OTF') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CoFo Raffine';
-  src: url('/assets/fonts/CoFoRaffine-VF-Trial.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ============================================
    TEXT ELEMENTS

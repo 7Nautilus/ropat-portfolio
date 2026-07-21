@@ -342,8 +342,12 @@
 }
 
 .cs-font-item {
-  display: flex;
-  flex-direction: row;
+  /* Grille et non flex : la premiere colonne est tenue par la fente du
+     specimen, qui est emise meme quand la police n'a pas encore de trace.
+     Les cartes gardent ainsi le meme alignement de texte les unes sous les
+     autres, avec ou sans specimen. */
+  display: grid;
+  grid-template-columns: 5rem 1fr;
   align-items: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-md);
@@ -358,21 +362,42 @@
   }
 }
 
-.cs-font-sample {
-  font-size: 4rem;
-  line-height: 1;
-  font-weight: 700;
-  color: color-mix(in srgb, var(--primary-color) 20%, transparent);
-  -webkit-text-stroke: 1.5px var(--primary-color);
-  flex-shrink: 0;
+/* Le specimen est un trace SVG (cf. _data/typefaces.yml), plus du texte vivant.
+   C'est la HAUTEUR qui fixe l'echelle, et la largeur qui suit : les viewBox
+   partagent une fenetre verticale constante, donc une police a grande hauteur
+   de capitale se voit plus haute que sa voisine, comme elle le serait dans un
+   texte compose au meme corps. Contraindre la largeur casserait ce rapport.
+
+   La fente reste a 5rem, la largeur d'origine : un « Aa » de 4rem y tenait
+   deja tout juste, et les polices plus chassees debordaient. Le trace fait
+   pareil, centre et sans rognage, dans un ecart de 2rem qui l'absorbe. */
+.cs-font-sample-slot {
   width: 5rem;
-  text-align: center;
-  transition: color var(--transition-base);
-  -webkit-user-select: none;
-  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cs-font-sample {
+  height: 4rem;
+  width: auto;
+  flex-shrink: 0;
+  fill: color-mix(in srgb, var(--primary-color) 20%, transparent);
+  stroke: var(--primary-color);
+  transition: fill var(--transition-base);
+
+  path {
+    /* Garde le contour a 1,5 px reels quelle que soit l'echelle du viewBox,
+       comme le faisait -webkit-text-stroke sur le texte. Sans cette ligne,
+       l'epaisseur serait multipliee par le facteur d'echelle (environ 0,064)
+       et le contour disparaitrait. */
+    vector-effect: non-scaling-stroke;
+    stroke-width: 1.5px;
+  }
 
   .cs-font-item:hover & {
-    color: color-mix(in srgb, var(--primary-color) 50%, transparent);
+    fill: color-mix(in srgb, var(--primary-color) 50%, transparent);
   }
 }
 

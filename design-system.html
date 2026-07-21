@@ -301,6 +301,22 @@ robots: noindex, nofollow
     color: var(--grey-light-400);
   }
 
+  /* Note de bas de section : explique une absence, pas un token. */
+  .ds-note {
+    margin-top: var(--spacing-sm);
+    padding-left: var(--spacing-sm);
+    border-left: 2px solid var(--border-subtle);
+    font-size: var(--fs-xsmall);
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+
+  .ds-note code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color: var(--grey-light-400);
+  }
+
 </style>
 
 <div class="ds-page">
@@ -407,12 +423,14 @@ robots: noindex, nofollow
         <div class="ds-font-preview" style="font-family: var(--font-accent);">Aa Bb Cc 123</div>
         <div class="ds-font-usage">--font-accent · Sur des <strong>mots</strong>, jamais une phrase. Une seule graisse.</div>
       </div>
-      <div class="ds-font-card" style="opacity: 0.5; border-style: dashed;">
-        <div class="ds-font-name">CoFo Raffine · Display variable</div>
-        <div class="ds-font-preview" style="font-family: 'CoFo Raffine', sans-serif; font-weight: 900;">Aa Bb Cc 123</div>
-        <div class="ds-font-usage">Usage spécifique · page Juliette Has a Gun uniquement</div>
-      </div>
     </div>
+    <p class="ds-note">
+      Trois familles, et rien d'autre. Une quatrième carte documentait ici CoFo Raffine,
+      police cliente servie depuis un fichier d'essai : retirée le 21/07/2026, en même temps que
+      les trois <code>@font-face</code> de fontes clientes. Les typographies des projets sont
+      désormais présentées en tracé SVG sur les pages projet elles-mêmes
+      (<code>_data/typefaces.yml</code>), donc le site n'héberge plus aucune fonte de client.
+    </p>
 
     <!-- Échelle fluide -->
     <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin-bottom: 1rem; font-weight: 600;">Échelle fluide (clamp)</h3>

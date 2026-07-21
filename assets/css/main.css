@@ -205,28 +205,27 @@ p:empty {
 
 /* ============================================
    FONTS
+   ============================================
+   Aucun @font-face ici, et c'est voulu.
+
+   Les trois familles du site (Chakra Petch, Manrope, Underdog) viennent de
+   Google Fonts, declarees dans _layouts/default.html.
+
+   Ce bloc hebergeait autrefois trois fontes CLIENTES (Resort Sans, Anicon
+   sans, CoFo Raffine), servies pour afficher un « Aa » de specimen sur les
+   pages projet. Elles ont ete retirees le 21/07/2026 pour trois raisons :
+     - la licence : les fichiers portaient leur statut dans leur propre table
+       de noms, « CoFo Raffine VF Trial » et « FONTSPRING DEMO - Resort Sans ».
+       Des versions d'essai, prevues pour maquetter en local, pas pour etre
+       servies depuis un site public ;
+     - le poids : 688 Ko de fonte pour dessiner deux lettres ;
+     - la coherence : seules 3 des 11 polices citees par les etudes de cas
+       etaient reellement servies, les autres affichaient un Arial de repli
+       sous le nom d'une autre police.
+
+   Les specimens servent desormais un trace SVG (_data/typefaces.yml, genere
+   par scripts/contours-typo.py) : on montre le dessin, pas la fonte.
    ============================================ */
-@font-face {
-  font-family: "Resort Sans";
-  src: url("/assets/fonts/Fontspring-DEMO-resort-sansregular.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Anicon sans";
-  src: url("/assets/fonts/ANICON%20SANS%20BLACK.OTF") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "CoFo Raffine";
-  src: url("/assets/fonts/CoFoRaffine-VF-Trial.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 /* ============================================
    TEXT ELEMENTS
    ============================================ */
@@ -2714,8 +2713,12 @@ footer {
 }
 
 .cs-font-item {
-  display: flex;
-  flex-direction: row;
+  /* Grille et non flex : la premiere colonne est tenue par la fente du
+     specimen, qui est emise meme quand la police n'a pas encore de trace.
+     Les cartes gardent ainsi le meme alignement de texte les unes sous les
+     autres, avec ou sans specimen. */
+  display: grid;
+  grid-template-columns: 5rem 1fr;
   align-items: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-md);
@@ -2737,21 +2740,41 @@ footer {
   border-color: color-mix(in srgb, var(--primary-color) 30%, transparent);
 }
 
-.cs-font-sample {
-  font-size: 4rem;
-  line-height: 1;
-  font-weight: 700;
-  color: color-mix(in srgb, var(--primary-color) 20%, transparent);
-  -webkit-text-stroke: 1.5px var(--primary-color);
-  flex-shrink: 0;
+/* Le specimen est un trace SVG (cf. _data/typefaces.yml), plus du texte vivant.
+   C'est la HAUTEUR qui fixe l'echelle, et la largeur qui suit : les viewBox
+   partagent une fenetre verticale constante, donc une police a grande hauteur
+   de capitale se voit plus haute que sa voisine, comme elle le serait dans un
+   texte compose au meme corps. Contraindre la largeur casserait ce rapport.
+
+   La fente reste a 5rem, la largeur d'origine : un « Aa » de 4rem y tenait
+   deja tout juste, et les polices plus chassees debordaient. Le trace fait
+   pareil, centre et sans rognage, dans un ecart de 2rem qui l'absorbe. */
+.cs-font-sample-slot {
   width: 5rem;
-  text-align: center;
-  transition: color var(--transition-base);
-  -webkit-user-select: none;
-  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cs-font-sample {
+  height: 4rem;
+  width: auto;
+  flex-shrink: 0;
+  fill: color-mix(in srgb, var(--primary-color) 20%, transparent);
+  stroke: var(--primary-color);
+  transition: fill var(--transition-base);
+}
+.cs-font-sample path {
+  /* Garde le contour a 1,5 px reels quelle que soit l'echelle du viewBox,
+     comme le faisait -webkit-text-stroke sur le texte. Sans cette ligne,
+     l'epaisseur serait multipliee par le facteur d'echelle (environ 0,064)
+     et le contour disparaitrait. */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.5px;
 }
 .cs-font-item:hover .cs-font-sample {
-  color: color-mix(in srgb, var(--primary-color) 50%, transparent);
+  fill: color-mix(in srgb, var(--primary-color) 50%, transparent);
 }
 
 .cs-font-info {

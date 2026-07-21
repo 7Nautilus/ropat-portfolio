@@ -226,10 +226,26 @@
       <div class="cs-design-block">
         <h3 class="cs-design-title animate-fade-up">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
         <div class="cs-font-stack">
+          {% comment %}
+            Le specimen sert le DESSIN des deux lettres, pas la fonte. Il
+            declarait avant `font-family: '<nom>'` sur du texte vivant, donc il
+            pariait sur le fait que le visiteur ait la police du client
+            installee : sur 12 specimens, 8 affichaient un Arial de repli sous
+            le nom d'une autre police. Les contours vivent dans
+            _data/typefaces.yml, indexes sur `name` a la lettre pres.
+            Sans contour, la carte se replie sur son seul nom : muette, jamais
+            fausse.
+          {% endcomment %}
           {% for font in project.case_study.typography %}
           {% assign delay = forloop.index0 | times: 80 %}
+          {% assign contour = site.data.typefaces[font.name] %}
           <div class="cs-font-item animate-fade-up" style="--animate-delay: {{ delay }}ms">
-            <span class="cs-font-sample" style="font-family: '{{ font.name }}', sans-serif;" aria-hidden="true">Aa</span>
+            {%- comment -%}
+              La fente est toujours emise, meme vide : elle tient la premiere
+              colonne de la grille, donc une carte sans trace garde son texte
+              aligne sur les autres au lieu de revenir a ras du bord.
+            {%- endcomment -%}
+            <span class="cs-font-sample-slot">{% if contour %}<svg class="cs-font-sample" viewBox="{{ contour.viewBox }}" aria-hidden="true" focusable="false"><path d="{{ contour.path }}" /></svg>{% endif %}</span>
             <div class="cs-font-info">
               <span class="cs-font-name">{{ font.name }}</span>
               <span class="cs-font-usage">{{ font.usage[lang] | default: font.usage.en }}</span>
