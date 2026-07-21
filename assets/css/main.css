@@ -28,11 +28,23 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --text-muted: rgba(255, 255, 255, 0.45);
   /* Typographie */
-  --font-heading: 'Space Grotesk', sans-serif;
+  /* Chakra Petch remplace Space Grotesk, jugee trop convenue.
+     ⚠️ Elle est STATIQUE, 5 graisses de 300 a 700 : pas de 100, 200, 800 ni 900.
+     Toute graisse hors de cette plage sera fabriquee par le navigateur.
+     Decision et reserves : docs/CHANTIER-IDENTITE-2026-07.md section 5. */
+  --font-heading: 'Chakra Petch', sans-serif;
   --font-body: 'Manrope', sans-serif;
-  /* Repli en sans-serif et NON en cursive : sur Windows, le mot-cle cursive
+  /* REGLE : Underdog ne porte JAMAIS une phrase, elle met l'emphase sur des
+     MOTS. Aujourd'hui : l'esperluette du titre de la home, rien d'autre.
+
+     Repli en sans-serif et NON en cursive : sur Windows, le mot-cle cursive
      retombe sur Comic Sans MS (mesure). Si Underdog ne charge pas, un mot
-     d'accent s'afficherait donc en Comic Sans en plein titre. */
+     d'accent s'afficherait donc en Comic Sans en plein titre.
+
+     ⚠️ Si un jour elle sert dans du LABEUR : sa hauteur d'x est 6 % plus basse
+     que celle de Manrope, il faut donc compenser avec font-size: 1.06em.
+     Inutile dans un titre : Chakra Petch et Underdog ont les memes proportions
+     (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
   /* Tailles fixes : racine et cas UI spécifiques */
   --font-size-base: 1rem;
@@ -146,6 +158,18 @@ nav {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* La valeur par defaut du navigateur est `bolder`, qui est RELATIVE : elle
+   monte d'un cran au-dessus du parent, sans borne haute. Dans un contexte
+   deja gras elle depasse donc ce que la fonte possede et le navigateur
+   fabrique la graisse manquante.
+   Mesure du 21/07/2026 sur 9 pages : 15 faux gras, dont le <strong> du pied
+   de page (Chakra Petch 900, alors qu'elle s'arrete a 700) present sur les
+   64 pages du site. 700 est absolu, et c'est le gras reel des trois familles. */
+strong,
+b {
+  font-weight: 700;
 }
 
 img {
@@ -727,6 +751,10 @@ header {
 
 .hero-title-span2 {
   font-family: var(--font-accent);
+  /* Underdog n'a qu'UNE graisse (400). Sans cette ligne, l'esperluette
+     heritait du 700 de .hero-title et le navigateur fabriquait un gras :
+     le seul glyphe Underdog du site etait un faux. */
+  font-weight: 400;
   color: rgba(255, 255, 255, 0.2);
 }
 
@@ -734,7 +762,10 @@ header {
   font-family: var(--font-body);
   font-size: var(--fs-p);
   color: var(--grey-light-400);
-  font-weight: 100;
+  /* 300 et non 100 : c'est deja ce que le navigateur affichait, la graisse la
+     plus fine chargee. Manrope etant variable de 200 a 800, on pourrait
+     descendre a 200 si on voulait reellement plus fin. */
+  font-weight: 300;
   line-height: 1.6;
   text-align: center;
 }
@@ -1268,6 +1299,11 @@ footer {
   justify-content: center;
   width: fit-content;
   gap: 0.875rem;
+  /* Chakra Petch sur TOUS les boutons, pas seulement le CTA principal.
+     Auparavant seul .btn--xl la portait et .btn--md heritait de Manrope :
+     une divergence sans intention, laissee en suspens dans le TODO. La
+     decision typographique la tranche, les boutons vont avec les titres. */
+  font-family: var(--font-heading);
   transition: color var(--transition-base), background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
 }
 .btn svg {
@@ -1323,7 +1359,6 @@ footer {
 .btn--xl {
   gap: 1.5rem;
   padding: 1rem 2rem;
-  font-family: var(--font-heading);
 }
 
 /* ── Icônes ─────────────────────────────── */
@@ -2070,7 +2105,9 @@ footer {
   gap: var(--spacing-sm);
   font-family: var(--font-heading);
   text-transform: uppercase;
-  font-weight: 100;
+  /* 300 et non 100 : Chakra Petch n'a pas de graisse sous 300, le navigateur
+     rendait deja 300. On declare ce qui est reellement affiche. */
+  font-weight: 300;
   font-size: 0.875rem;
   color: var(--grey-light-400);
   transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);

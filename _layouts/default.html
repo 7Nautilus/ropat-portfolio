@@ -102,9 +102,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&amp;family=Manrope:wght@300;400;600&amp;display=swap" rel="stylesheet">
-    <!-- Underdog n'existe qu'en 400 : demander 700 faisait fabriquer un faux gras. -->
-    <link href="https://fonts.googleapis.com/css2?family=Underdog&amp;display=swap" rel="stylesheet">
+    <!-- Une seule requête pour les trois familles : deux <link> vers le même hôte
+         coûtaient deux allers-retours au lieu d'un.
+         Chakra Petch : titres, micro-libellés, boutons. STATIQUE, 300 à 700.
+         Manrope : texte de labeur. Variable, 200 à 800.
+         Underdog : accent, sur des mots seulement. Une seule graisse existe. -->
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&amp;family=Manrope:wght@200..800&amp;family=Underdog&amp;display=swap" rel="stylesheet">
 
     <!-- JS -->
     <!-- Le fond n'est plus une image mais un shader : plus rien à précharger,

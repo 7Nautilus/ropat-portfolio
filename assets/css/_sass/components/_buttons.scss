@@ -42,6 +42,11 @@
   justify-content: center;
   width: fit-content;
   gap: 0.875rem;
+  /* Chakra Petch sur TOUS les boutons, pas seulement le CTA principal.
+     Auparavant seul .btn--xl la portait et .btn--md heritait de Manrope :
+     une divergence sans intention, laissee en suspens dans le TODO. La
+     decision typographique la tranche, les boutons vont avec les titres. */
+  font-family: var(--font-heading);
   transition:
     color var(--transition-base),
     background-color var(--transition-base),
@@ -102,11 +107,10 @@
 }
 
 // CTA principal : hero de la home et clôture de la page À propos.
-// Conserve Space Grotesk : divergence assumée, à réévaluer (cf. TODO).
+// La police vient désormais de .btn : plus de divergence à réévaluer.
 .btn--xl {
   gap: 1.5rem;
   padding: 1rem 2rem;
-  font-family: var(--font-heading);
 }
 
 /* ── Icônes ─────────────────────────────── */

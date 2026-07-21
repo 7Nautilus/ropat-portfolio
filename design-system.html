@@ -66,7 +66,7 @@ robots: noindex, nofollow
   }
 
   .ds-token-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--primary-color);
     margin-bottom: var(--spacing-xs);
@@ -74,7 +74,7 @@ robots: noindex, nofollow
   }
 
   .ds-token-value {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
   }
@@ -113,7 +113,7 @@ robots: noindex, nofollow
   .ds-color-info code {
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
   }
 
   /* Typography specimens */
@@ -131,7 +131,7 @@ robots: noindex, nofollow
 
   .ds-type-specimen .ds-type-meta {
     text-align: right;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
     line-height: 1.6;
@@ -158,7 +158,7 @@ robots: noindex, nofollow
   }
 
   .ds-spacing-label {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--primary-color);
     width: 5rem;
@@ -166,7 +166,7 @@ robots: noindex, nofollow
   }
 
   .ds-spacing-value {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
   }
@@ -195,14 +195,14 @@ robots: noindex, nofollow
   }
 
   .ds-radius-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--primary-color);
     margin-bottom: 0.2rem;
   }
 
   .ds-radius-value {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
   }
@@ -231,14 +231,14 @@ robots: noindex, nofollow
   }
 
   .ds-shadow-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--primary-color);
     margin-bottom: 0.25rem;
   }
 
   .ds-shadow-value {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
     word-break: break-all;
@@ -258,7 +258,7 @@ robots: noindex, nofollow
   }
 
   .ds-component-label {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--grey-light-400);
     margin-bottom: var(--spacing-xs);
@@ -281,7 +281,7 @@ robots: noindex, nofollow
   }
 
   .ds-font-name {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: var(--font-heading);
     font-size: var(--fs-xsmall);
     color: var(--primary-color);
     text-transform: uppercase;
@@ -393,19 +393,19 @@ robots: noindex, nofollow
     <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin-bottom: 1rem; font-weight: 600;">Familles de polices</h3>
     <div class="ds-font-grid" style="margin-bottom: 3rem;">
       <div class="ds-font-card">
-        <div class="ds-font-name">Manrope · Corps de texte principal</div>
-        <div class="ds-font-preview" style="font-family: 'Manrope', sans-serif;">Aa Bb Cc 123</div>
-        <div class="ds-font-usage">--font-family · Paragraphes, labels, UI</div>
+        <div class="ds-font-name">Chakra Petch · Titres, micro-libellés &amp; boutons</div>
+        <div class="ds-font-preview" style="font-family: var(--font-heading);">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">--font-heading · Statique, 300 à 700. Pas de 800 ni 900.</div>
       </div>
       <div class="ds-font-card">
-        <div class="ds-font-name">Space Grotesk · Titres & navigation</div>
-        <div class="ds-font-preview" style="font-family: 'Space Grotesk', sans-serif;">Aa Bb Cc 123</div>
-        <div class="ds-font-usage">Headings, nav links</div>
+        <div class="ds-font-name">Manrope · Texte de labeur</div>
+        <div class="ds-font-preview" style="font-family: var(--font-body);">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">--font-body · Variable, 200 à 800. Paragraphes, labels, UI.</div>
       </div>
       <div class="ds-font-card">
-        <div class="ds-font-name">Underdog · Accent cursive</div>
-        <div class="ds-font-preview" style="font-family: 'Underdog', cursive;">Aa Bb Cc 123</div>
-        <div class="ds-font-usage">Éléments décoratifs, accents</div>
+        <div class="ds-font-name">Underdog · Accent</div>
+        <div class="ds-font-preview" style="font-family: var(--font-accent);">Aa Bb Cc 123</div>
+        <div class="ds-font-usage">--font-accent · Sur des <strong>mots</strong>, jamais une phrase. Une seule graisse.</div>
       </div>
       <div class="ds-font-card" style="opacity: 0.5; border-style: dashed;">
         <div class="ds-font-name">CoFo Raffine · Display variable</div>
@@ -417,23 +417,23 @@ robots: noindex, nofollow
     <!-- Échelle fluide -->
     <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin-bottom: 1rem; font-weight: 600;">Échelle fluide (clamp)</h3>
     <div class="ds-type-specimen">
-      <h1 style="font-size: var(--fs-h1); line-height: 1.1; font-weight: 900; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H1</h1>
+      <h1 style="font-size: var(--fs-h1); line-height: 1.1; font-weight: 700; margin: 0; font-family: var(--font-heading);">Titre H1</h1>
       <div class="ds-type-meta">--fs-h1<br>clamp(3rem, 5vw+1rem, 6rem)</div>
     </div>
     <div class="ds-type-specimen">
-      <h2 style="font-size: var(--fs-h2); line-height: 1.2; font-weight: 800; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H2</h2>
+      <h2 style="font-size: var(--fs-h2); line-height: 1.2; font-weight: 700; margin: 0; font-family: var(--font-heading);">Titre H2</h2>
       <div class="ds-type-meta">--fs-h2<br>clamp(1.75rem, 3vw+1rem, 3rem)</div>
     </div>
     <div class="ds-type-specimen">
-      <h3 style="font-size: var(--fs-h3); line-height: 1.3; font-weight: 700; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H3</h3>
+      <h3 style="font-size: var(--fs-h3); line-height: 1.3; font-weight: 700; margin: 0; font-family: var(--font-heading);">Titre H3</h3>
       <div class="ds-type-meta">--fs-h3<br>clamp(1.5rem, 2vw+1rem, 2.25rem)</div>
     </div>
     <div class="ds-type-specimen">
-      <h4 style="font-size: var(--fs-h4); line-height: 1.4; font-weight: 700; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H4</h4>
+      <h4 style="font-size: var(--fs-h4); line-height: 1.4; font-weight: 700; margin: 0; font-family: var(--font-heading);">Titre H4</h4>
       <div class="ds-type-meta">--fs-h4<br>clamp(1.25rem, 1.5vw+1rem, 1.75rem)</div>
     </div>
     <div class="ds-type-specimen">
-      <h5 style="font-size: var(--fs-h5); line-height: 1.4; font-weight: 600; margin: 0; font-family: 'Space Grotesk', sans-serif;">Titre H5</h5>
+      <h5 style="font-size: var(--fs-h5); line-height: 1.4; font-weight: 600; margin: 0; font-family: var(--font-heading);">Titre H5</h5>
       <div class="ds-type-meta">--fs-h5<br>clamp(1.125rem, 1vw+1rem, 1.5rem)</div>
     </div>
     <div class="ds-type-specimen">
@@ -452,12 +452,18 @@ robots: noindex, nofollow
     <!-- Poids -->
     <h3 style="font-size: var(--fs-h5); color: var(--grey-light-400); margin: 2rem 0 1rem; font-weight: 600;">Graisses utilisées</h3>
     <div class="ds-component-row" style="flex-direction: column; align-items: flex-start; gap: 0.5rem;">
-      <p style="font-weight: 100; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">100 — Thin · Manrope</p>
-      <p style="font-weight: 400; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">400 — Regular · Manrope</p>
-      <p style="font-weight: 600; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">600 — SemiBold · Manrope</p>
-      <p style="font-weight: 700; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">700 — Bold · Manrope</p>
-      <p style="font-weight: 800; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">800 — ExtraBold · Manrope</p>
-      <p style="font-weight: 900; font-size: 1.25rem; margin: 0; font-family: 'Manrope', sans-serif;">900 — Black · Manrope</p>
+      <p style="font-weight: 200; font-size: 1.25rem; margin: 0; font-family: var(--font-body);">200 — ExtraLight · Manrope</p>
+      <p style="font-weight: 300; font-size: 1.25rem; margin: 0; font-family: var(--font-body);">300 — Light · Manrope</p>
+      <p style="font-weight: 400; font-size: 1.25rem; margin: 0; font-family: var(--font-body);">400 — Regular · Manrope</p>
+      <p style="font-weight: 600; font-size: 1.25rem; margin: 0; font-family: var(--font-body);">600 — SemiBold · Manrope</p>
+      <p style="font-weight: 800; font-size: 1.25rem; margin: 0; font-family: var(--font-body);">800 — ExtraBold · Manrope</p>
+    </div>
+    <div class="ds-component-row" style="flex-direction: column; align-items: flex-start; gap: 0.5rem; margin-top: 1rem;">
+      <p style="font-weight: 300; font-size: 1.25rem; margin: 0; font-family: var(--font-heading);">300 — Light · Chakra Petch</p>
+      <p style="font-weight: 400; font-size: 1.25rem; margin: 0; font-family: var(--font-heading);">400 — Regular · Chakra Petch</p>
+      <p style="font-weight: 500; font-size: 1.25rem; margin: 0; font-family: var(--font-heading);">500 — Medium · Chakra Petch</p>
+      <p style="font-weight: 600; font-size: 1.25rem; margin: 0; font-family: var(--font-heading);">600 — SemiBold · Chakra Petch</p>
+      <p style="font-weight: 700; font-size: 1.25rem; margin: 0; font-family: var(--font-heading);">700 — Bold · Chakra Petch. Aucune graisse au-delà.</p>
     </div>
   </section>
 

@@ -56,7 +56,12 @@
         </div>
         <div class="row spacing-lg max-80h center wrap">
           {% for tag in generic.tags %}
-          <div class="dark-bubble"><strong>{{ tag }}</strong></div>
+          {%- comment -%}
+            Pas de <strong> : il enveloppait la totalite du texte, donc il ne
+            designait rien comme plus important que le reste. Il ne servait
+            qu'a forcer la graisse, que .dark-bubble declare deja (800).
+          {%- endcomment -%}
+          <div class="dark-bubble">{{ tag }}</div>
           {% endfor %}
         </div>
       </div>

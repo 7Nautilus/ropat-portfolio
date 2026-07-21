@@ -31,11 +31,23 @@
   --text-muted: rgba(255, 255, 255, 0.45);
 
   /* Typographie */
-  --font-heading: 'Space Grotesk', sans-serif;
+  /* Chakra Petch remplace Space Grotesk, jugee trop convenue.
+     ⚠️ Elle est STATIQUE, 5 graisses de 300 a 700 : pas de 100, 200, 800 ni 900.
+     Toute graisse hors de cette plage sera fabriquee par le navigateur.
+     Decision et reserves : docs/CHANTIER-IDENTITE-2026-07.md section 5. */
+  --font-heading: 'Chakra Petch', sans-serif;
   --font-body: 'Manrope', sans-serif;
-  /* Repli en sans-serif et NON en cursive : sur Windows, le mot-cle cursive
+  /* REGLE : Underdog ne porte JAMAIS une phrase, elle met l'emphase sur des
+     MOTS. Aujourd'hui : l'esperluette du titre de la home, rien d'autre.
+
+     Repli en sans-serif et NON en cursive : sur Windows, le mot-cle cursive
      retombe sur Comic Sans MS (mesure). Si Underdog ne charge pas, un mot
-     d'accent s'afficherait donc en Comic Sans en plein titre. */
+     d'accent s'afficherait donc en Comic Sans en plein titre.
+
+     ⚠️ Si un jour elle sert dans du LABEUR : sa hauteur d'x est 6 % plus basse
+     que celle de Manrope, il faut donc compenser avec font-size: 1.06em.
+     Inutile dans un titre : Chakra Petch et Underdog ont les memes proportions
+     (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
 
   /* Tailles fixes : racine et cas UI spécifiques */

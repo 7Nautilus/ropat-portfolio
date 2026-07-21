@@ -7,26 +7,26 @@ colors:
   secondary: "#9CA3AF"
   accent: "#FF5C00"
   accent-soft: "rgba(255, 92, 0, 0.2)"
-  neutral: "#0A0A0A"
+  neutral: "#030808"
   surface: "rgba(255, 255, 255, 0.1)"
   border: "rgba(255, 255, 255, 0.08)"
   muted: "rgba(255, 255, 255, 0.45)"
   success: "#34C759"
 typography:
   display:
-    fontFamily: Space Grotesk
+    fontFamily: Chakra Petch
     fontSize: 6rem
     fontWeight: 700
   heading-lg:
-    fontFamily: Space Grotesk
+    fontFamily: Chakra Petch
     fontSize: 3rem
     fontWeight: 700
   heading-md:
-    fontFamily: Space Grotesk
+    fontFamily: Chakra Petch
     fontSize: 2.25rem
     fontWeight: 700
   nav:
-    fontFamily: Space Grotesk
+    fontFamily: Chakra Petch
     fontSize: 1rem
     fontWeight: 700
     letterSpacing: 3px
@@ -74,9 +74,9 @@ Portfolio de directeur artistique : le design EST le produit. L'exécution doit 
 
 ## Colors
 
-Le socle est sombre : fond quasi noir (`neutral`, #0A0A0A), texte blanc (`primary`). L'orange (`accent`, #FF5C00) est une couleur d'accent, posée par petites touches (appels à l'action, survols, éléments actifs, détails de signature), jamais en aplats dominants.
+Le socle est sombre : le fond n'est pas une couleur plate mais un **dither tricolore procedural** rendu en shader (`assets/js/dither.js`), qui remplace l'ancienne image de fond. Ses trois tons sont `#030808`, `#030F0C` et `#051510` ; `neutral` en donne le plancher, qui sert aussi de repli si WebGL manque. Texte blanc (`primary`). L'orange (`accent`, #FF5C00) est une couleur d'accent, posée par petites touches (appels à l'action, survols, éléments actifs, détails de signature), jamais en aplats dominants.
 
-L'orange ne sert pas de fond à du texte blanc : le contraste ne monte qu'à 3.1:1, sous le seuil WCAG AA. Sur fond orange, écrire en sombre (#0A0A0A, environ 6.4:1).
+L'orange ne sert pas de fond à du texte blanc : le contraste ne monte qu'à 3.1:1, sous le seuil WCAG AA. Sur fond orange, écrire en sombre (#030808, environ 6.5:1).
 
 Le gris (`secondary`, #9CA3AF) porte les informations secondaires : métadonnées, client, légendes. `muted` sert au texte atténué, `border` aux séparations discrètes entre surfaces. Le vert (`success`) est réservé aux états de succès et à l'indicateur de disponibilité.
 
@@ -84,9 +84,9 @@ Le gris (`secondary`, #9CA3AF) porte les informations secondaires : métadonnée
 
 Trois familles, trois rôles :
 
-- **Space Grotesk** porte les titres, la navigation et les boutons. Souvent en capitales, interlettrage marqué (3px sur la navigation), graisse 700. C'est la signature visuelle.
-- **Manrope** porte le corps de texte : paragraphes, descriptions, contenu long. Graisses 300 à 600.
-- **Underdog** est une police d'accent occasionnelle, pour une touche décalée.
+- **Chakra Petch** porte les titres, les micro-libellés, la navigation et les boutons. Souvent en capitales, interlettrage marqué (3px sur la navigation), graisse 700. C'est la signature visuelle. Attention : elle est **statique**, cinq graisses de 300 à 700 seulement. Toute graisse hors de cette plage sera fabriquée par le navigateur.
+- **Manrope** porte le corps de texte : paragraphes, descriptions, contenu long. Fonte variable, 200 à 800.
+- **Underdog** est la police d'accent. Elle ne porte **jamais une phrase** : elle met l'emphase sur des **mots**, et n'a qu'une seule graisse.
 
 Les tailles ci-dessus sont les valeurs de grand écran. En réalité l'échelle est fluide (`clamp`) : un titre de héros va de 3rem sur mobile à 6rem sur desktop, un paragraphe de 1rem à 1.25rem. Les héros sont volontairement grands et affirmés.
 
@@ -117,7 +117,7 @@ Les angles sont généreux : 1rem à 2rem sur les cartes et conteneurs, jusqu'à
 
 **Bouton** : gélule, bordure orange de 3px, fond orange à 20 %, qui devient orange plein au survol. Deux variantes, `solid` et `ghost`. Deux tailles, `md` par défaut et `xl` réservée aux appels à l'action principaux (héros de l'accueil, clôture de la page à propos). Un bouton texte existe aussi : ni fond, ni bordure, ni padding.
 
-**Carte projet** : image en ratio 1:1 surmontant le contenu, séparée par un filet orange de 1px. Titre en Space Grotesk, client en gris, description en Manrope tronquée à 3 lignes.
+**Carte projet** : image en ratio 1:1 surmontant le contenu, séparée par un filet orange de 1px. Titre en Chakra Petch, client en gris, description en Manrope tronquée à 3 lignes.
 
 **Menu déroulant** : l'état ouvert vit dans `aria-expanded`, jamais dans une classe.
 

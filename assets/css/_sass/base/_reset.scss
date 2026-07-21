@@ -71,6 +71,18 @@ a {
   color: inherit;
 }
 
+/* La valeur par defaut du navigateur est `bolder`, qui est RELATIVE : elle
+   monte d'un cran au-dessus du parent, sans borne haute. Dans un contexte
+   deja gras elle depasse donc ce que la fonte possede et le navigateur
+   fabrique la graisse manquante.
+   Mesure du 21/07/2026 sur 9 pages : 15 faux gras, dont le <strong> du pied
+   de page (Chakra Petch 900, alors qu'elle s'arrete a 700) present sur les
+   64 pages du site. 700 est absolu, et c'est le gras reel des trois familles. */
+strong,
+b {
+  font-weight: 700;
+}
+
 img {
   max-width: 100%;
   height: auto;
