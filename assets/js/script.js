@@ -562,13 +562,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
     const CONTRASTE = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
     const L_CLAIRE = 0.2126 * lin(240) + 0.7152 * lin(244) + 0.0722 * lin(241);   // --ink
+    const L_SOMBRE = 0.2126 * lin(5) + 0.7152 * lin(16) + 0.0722 * lin(15);      // --p-encre-sombre
 
-    // Luminance REPRESENTATIVE sous une boite : un percentile haut, pas le
-    // maximum. Un seul pixel clair perdu dans une oeuvre sombre ne doit pas
-    // faire basculer toute la barre ; il en existe sur presque chaque image.
-    const PERCENTILE = 0.9;
+    // ⚠️ DEUX BORNES ET NON UNE, et c'est la correction du 28/07.
+    //
+    // Ma premiere version ne mesurait QUE le pire cas de l'encre claire (le
+    // pixel le plus clair), puis comparait a un seuil de retour. Le defaut
+    // saute aux yeux une fois ecrit : je jugeais le blanc sans jamais juger le
+    // sombre. Sur aelio, la mesure plafonnait a 4,32 pour un seuil de retour a
+    // 7, donc la barre ne revenait JAMAIS au blanc tant qu'elle survolait
+    // l'oeuvre, meme la ou le blanc aurait ete meilleur. C'est le defaut que
+    // Ropat a vu : « le header ne revient pas a la normale quand il passe sur
+    // un fond plus sombre ».
+    //
+    // La bonne question n'est pas « le blanc tient-il ? » mais « LAQUELLE DES
+    // DEUX ENCRES tient le mieux ICI ? ». Elle est symetrique, donc elle a une
+    // reponse partout, y compris la ou aucune des deux n'atteint 4,5.
+    // Chaque encre a son pire cas, et ce n'est pas le meme pixel :
+    //   . l'encre CLAIRE souffre du pixel le plus CLAIR   -> percentile 90
+    //   . l'encre SOMBRE souffre du pixel le plus SOMBRE  -> percentile 10
+    // Les extremes absolus seraient trop sensibles : un pixel isole suffirait.
+    const P_HAUT = 0.9, P_BAS = 0.1;
 
-    const luminanceSous = (boite) => {
+    const bornesSous = (boite) => {
       let vals = null;
       for (const el of mediasPage) {
         if (el.offsetParent === null && el.tagName !== 'VIDEO') continue;
@@ -588,56 +604,68 @@ document.addEventListener('DOMContentLoaded', () => {
           vals.push(0.2126 * lin(d[i]) + 0.7152 * lin(d[i + 1]) + 0.0722 * lin(d[i + 2]));
         }
       }
-      if (!vals || !vals.length) return null;    // rien d'autre que le sol
+      if (!vals || !vals.length) return null;    // rien d'autre que le sol dither
       vals.sort((a, b) => a - b);
-      return vals[Math.min(vals.length - 1, Math.floor(PERCENTILE * (vals.length - 1)))];
+      const q = (f) => vals[Math.min(vals.length - 1, Math.floor(f * (vals.length - 1)))];
+      return { bas: q(P_BAS), haut: q(P_HAUT) };
     };
 
-    // ⚠️ DEUX GARDE-FOUS, ET IL EN FALLAIT DEUX. Mesure a l'appui.
-    //
-    // 1. HYSTERESIS. On sort du blanc sous 4,5 et on n'y revient qu'au-dessus
-    //    de 7. Sans bande morte, un controle pose pile au seuil basculerait a
-    //    chaque pixel de defilement.
-    //
-    // 2. DUREE DE MAINTIEN. L'hysteresis seule ne suffisait pas, et c'est un
-    //    test de defilement fin qui l'a montre : sur Ottony, une oeuvre pourtant
-    //    SOMBRE mais brodee de fil clair, la sequence relevee tous les 10 px
-    //    donnait `CCCCCCCCCCCCSSCCCCCCSSSS...`, soit un aller-retour de deux
-    //    positions, donc un clignotement.
-    //    La cause n'est pas un seuil mal choisi : a ces instants la barre
-    //    surplombe VRAIMENT une zone claire, la mesure est juste. Le defaut est
-    //    TEMPOREL, il fallait donc une reponse temporelle. On interdit deux
-    //    bascules a moins de 400 ms : le chrome reste au pire un instant de
-    //    retard sur le fond, ce qui se voit infiniment moins qu'un clignotement.
-    const SEUIL_SORTIE = 4.5, SEUIL_RETOUR = 7;
+    // ⚠️ UNE MARGE, ET NON DEUX SEUILS. Puisque la decision compare les deux
+    // encres entre elles, l'hysteresis devient un simple RAPPORT : on ne change
+    // que si l'autre encre est meilleure d'au moins 25 %. Une bascule ne se
+    // declenche donc pas sur un ecart insignifiant.
+    const MARGE = 1.25;
+    // ⚠️ DUREE DE MAINTIEN. La marge seule ne suffit pas : un test de
+    // defilement fin sur Ottony, oeuvre sombre mais brodee de fil clair,
+    // donnait un aller-retour de deux positions, donc un clignotement. A ces
+    // instants la mesure est JUSTE, le defaut est temporel, la reponse doit
+    // l'etre aussi.
     const MAINTIEN = 400;
     let encreSombre = false;
     let dernierChangement = 0;
+    let rappel = 0;
 
     const majEncre = (surMedia, bas) => {
       if (!surMedia) {
         if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
         return;
       }
-      // Tous les controles, et c'est le PIRE qui decide : la barre n'a qu'une
-      // variante, elle doit donc servir celui qui est le plus en peine.
-      let pire = null;
+      // Le pire cas de CHAQUE encre, sur l'ensemble des controles : la barre
+      // n'a qu'une variante, elle doit servir celui qui est le plus en peine.
+      let pireClair = Infinity, pireSombre = Infinity, vu = false;
       barre.querySelectorAll('.logo, .nav-link, .nav-contact, .burger-menu').forEach(el => {
         const b = el.getBoundingClientRect();
         if (b.width < 1 || b.height < 1 || b.top > bas) return;
-        const L = luminanceSous(b);
-        if (L === null) return;
-        if (pire === null || L > pire) pire = L;      // le plus CLAIR est le pire pour une encre claire
+        const q = bornesSous(b);
+        if (!q) return;
+        vu = true;
+        pireClair = Math.min(pireClair, CONTRASTE(L_CLAIRE, q.haut));
+        pireSombre = Math.min(pireSombre, CONTRASTE(L_SOMBRE, q.bas));
       });
-      if (pire === null) {                             // que du sol dither
+      if (!vu) {                                   // que du sol dither, quasi noir
         if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
         return;
       }
-      const c = CONTRASTE(L_CLAIRE, pire);
-      const veutSombre = encreSombre ? c <= SEUIL_RETOUR : c < SEUIL_SORTIE;
+      if (window.__debugEncre) {
+        barre.setAttribute('data-dbg', 'clair ' + pireClair.toFixed(2) + ' / sombre ' + pireSombre.toFixed(2));
+      }
+      const veutSombre = encreSombre
+        ? !(pireClair > pireSombre * MARGE)        // on ne revient au clair que s'il est NETTEMENT meilleur
+        : pireSombre > pireClair * MARGE;          // on ne part au sombre que s'il est NETTEMENT meilleur
       if (veutSombre === encreSombre) return;
+
       const t = performance.now();
-      if (t - dernierChangement < MAINTIEN) return;
+      const reste = MAINTIEN - (t - dernierChangement);
+      if (reste > 0) {
+        // ⚠️ SANS CE RAPPEL, l'etat pouvait rester FAUX indefiniment : la
+        // bascule n'est recalculee que sur `scroll` et `resize`. Si la derniere
+        // frame d'un geste tombait dans la duree de maintien, plus rien ne
+        // repassait, et le chrome gardait une encre qui n'etait plus la bonne
+        // jusqu'au prochain mouvement.
+        clearTimeout(rappel);
+        rappel = setTimeout(planifier, reste + 20);
+        return;
+      }
       dernierChangement = t;
       encreSombre = veutSombre;
       if (encreSombre) barre.setAttribute('data-encre', 'sombre');
