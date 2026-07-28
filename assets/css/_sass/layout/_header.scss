@@ -2,7 +2,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--surface-chrome);
+  /* ⚠️ AUCUN FOND. Retire le 28/07 sur demande de Ropat.
+     La barre portait un `rgba(0, 0, 0, 0.1)` depuis l'origine, tokenise la
+     veille sous le nom `--surface-chrome`. C'etait un assombrissement qui ne
+     servait rien : sur le sol dither il est invisible, et sur une section
+     claire il salissait le haut de page au lieu de detacher la barre.
+     Le `backdrop-filter: blur(12px)` de `.blur-bg` suffit a decoller le chrome
+     du contenu, sans rien assombrir.
+     ⚠️ A ne pas confondre avec le VOILE des pages projet, plus bas
+     (`header[data-sur-media]::before`), qui reste : celui-la n'est pas un fond
+     de barre, c'est un degrade pose sur l'IMAGE, et c'est lui qui garantit
+     7,43:1 a la nav au-dessus de n'importe quel media. Le retirer rendrait la
+     navigation illisible sur 16 projets sur 19. */
   box-shadow: var(--shadow-sm);
   position: sticky;
   width: 100%;

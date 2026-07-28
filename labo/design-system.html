@@ -92,16 +92,18 @@ sitemap: false
   --eclaircie-repos: rgba(255, 255, 255, 0.04);
   --eclaircie-reaction: rgba(255, 255, 255, 0.1);
 
-  /* Le sol propre du CHROME, la barre du header. Tres faible : il n'existe que
-     pour que la barre ne soit pas strictement transparente quand elle glisse
-     au-dessus d'une section claire.
-     ⚠️ `--sol-chrome` et non `--chrome` : le croisement des noms du chantier
-     avec ceux de la production a trouve que `--chrome` EXISTE DEJA, dans
-     _project.scss et _media-queries.scss, ou il vaut la HAUTEUR du header
-     sticky (76px / 56px). Deux choses differentes sous un seul nom, dans un
-     systeme dont la premiere regle est qu'un jeton nomme ce qu'il fait.
-     Le prefixe `--sol-` le range aussi la ou il appartient, avec `--sol`. */
-  --sol-chrome: rgba(0, 0, 0, 0.1);
+  /* ⚠️ `--sol-chrome` EST MORT LE JOUR DE SA NAISSANCE, et c'est instructif.
+     Il nommait le `rgba(0, 0, 0, 0.1)` que la barre du header portait en dur
+     depuis l'origine. Une fois NOMME et pose dans la palette, il a fallu dire
+     a quoi il servait : a rien. Invisible sur le sol dither, salissant sur une
+     section claire. Ropat l'a fait retirer le jour meme, et la barre n'a plus
+     de fond du tout.
+     C'est la regle « tokeniser rend auditable » qui se verifie sur elle-meme :
+     la valeur avait survecu des mois en litteral parce qu'elle n'avait jamais
+     eu a se justifier. Il a suffi de lui demander son nom.
+     (Au passage, le croisement avait aussi trouve que `--chrome` etait DEJA
+     pris en production pour la HAUTEUR du header ; ce jeton-la existe toujours
+     et s'appelle desormais `--hauteur-chrome`.) */
 
   /* ⚠️ CANAL du voile photographique pose sur un media. Ce n'est pas une
      couleur de la charte, c'est une DENSITE, l'equivalent d'un vignettage.
@@ -170,7 +172,6 @@ sitemap: false
   --surface-scrim: var(--rideau);
   --surface-faint: var(--eclaircie-repos);
   --surface-subtle: var(--eclaircie-reaction);
-  --surface-chrome: var(--sol-chrome);
   --scrim-canal: var(--canal-voile);
   --secondary-color: var(--voile);
   --ink: var(--encre);
@@ -513,6 +514,30 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     Les trois jetons d'accent (<code>--accent</code>, <code>--accent-soft</code>,
     <code>--accent-ink</code>) ne sont volontairement pas surchargés : l'orange est un point fixe
     de la charte, et l'encre sombre posée dessus fonctionne dans les deux skins.</span>
+  </div>
+
+  <h3>La hauteur du chrome</h3>
+  <p><code>--hauteur-chrome</code> n'est pas une couleur, mais c'est le même piège : un jeton qui
+  <strong>décrit</strong> une valeur que quelqu'un d'autre produit. Le header ne le lit pas, il
+  fait sa hauteur tout seul à partir de son padding, de sa bordure et de son plus grand enfant.
+  Le jeton n'est qu'un <em>miroir</em>, et un miroir peut se désaccorder sans que rien ne le dise.</p>
+  <p>Il l'était : <strong>76 px déclarés pour 83,4 px réels</strong>, d'où 7 px de sol visible en
+  haut des pages projet en mode contexte, où l'ouverture est remontée sous la barre par une marge
+  négative. Le fichier <code>_media-queries.scss</code> écrivait pourtant « le header mesure
+  83 px » juste à côté du jeton qui disait 76. Le commentaire savait, le jeton mentait.</p>
+  <table class="jetons">
+    <thead><tr><th>Largeur</th><th>Header mesuré</th><th><code>--hauteur-chrome</code></th><th>Écart</th></tr></thead>
+    <tbody id="chrome-accord"><tr><td colspan="4">mesure en cours…</td></tr></tbody>
+  </table>
+  <div class="regle">
+    <b>Pourquoi un miroir et pas un calcul</b>
+    <span>On ne peut pas dériver cette hauteur en CSS : elle dépend du plus grand enfant de la
+    barre, qui est la <em>nav</em> déployée (48,4 px) au-dessus de 768 px et le <em>logo</em>
+    (43,4 px) en dessous, quand la nav passe en burger. C'est pour ça que le jeton bascule au
+    <strong>même point de rupture que la nav</strong> : tout autre endroit le rendrait faux.<br>
+    La mesurer en JS serait exact mais coûterait un saut de 7 px après le premier rendu, donc du
+    CLS sur la page qui porte l'œuvre. Le miroir statique est le bon compromis, à condition qu'il
+    soit <em>surveillé</em> : c'est ce que fait le tableau ci-dessus.</span>
   </div>
 
   <h3>Le test de la règle 3, exécuté</h3>
@@ -1264,7 +1289,6 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     ['--rideau', 'lightbox, overlay de nav', null],
     ['--eclaircie-repos', 'souleve : fond d\'un champ au repos', null],
     ['--eclaircie-reaction', 'souleve : le meme champ au survol', null],
-    ['--sol-chrome', 'le sol propre de la barre du header', null],
     ['--encre', 'texte principal', 4.5],
     ['--encre-douce', 'texte secondaire', 4.5],
     ['--encre-attenuee', 'metadonnees, micro-libelles', 4.5],
@@ -1581,6 +1605,49 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
           + '<td><code>' + d.prop + '</code></td>'
           + '<td><span class="ratio ' + f[0] + '">' + f[1] + '</span></td></tr>';
       }).join('');
+    }
+
+    /* ── ACCORD ENTRE LA HAUTEUR REELLE DU HEADER ET SON MIROIR ──────────
+       Le labo n'a pas de header : on lit donc la regle telle qu'elle est
+       ECRITE dans la feuille servie, et on recompose la hauteur a partir de
+       ses trois termes. C'est moins direct que de mesurer un vrai header,
+       mais c'est la seule facon de le faire depuis cette page, et ca suffit a
+       detecter le desaccord, qui est tout ce qu'on demande. */
+    var hoteChrome = document.getElementById('chrome-accord');
+    if (hoteChrome) {
+      var lire = function (sel, prop) {
+        var t = decls.filter(function (d) { return d.sel === sel && d.prop === prop; });
+        return t.length ? t[t.length - 1].val : null;
+      };
+      /* ⚠️ Une LISTE et non une map par selecteur. Ma premiere version gardait
+         `jeton[d.sel] = d.val`, donc la DERNIERE declaration ecrasait les
+         autres : les trois valeurs vivent sur le meme selecteur, dans trois
+         contextes de media differents, et la page annoncait « 56px » comme si
+         c'etait la valeur de base. Une sonde qui ecrase ses propres releves
+         rend un resultat plausible et faux. */
+      var declarees = decls.filter(function (d) { return d.prop === '--hauteur-chrome'; })
+                           .map(function (d) { return d.val; });
+      /* Termes mesures au navigateur le 28/07, sur la vraie page projet. */
+      var cas = [
+        ['1440 px', 83.4, '.project-open', '83px'],
+        ['900 px', 83.4, '.project-open', '83px'],
+        ['390 px', 78.4, '.project-open', '78px'],
+        ['740x420', 55.8, '.project-open', '56px']
+      ];
+      hoteChrome.innerHTML = cas.map(function (c) {
+        var declare = parseFloat(c[3]);
+        var ecart = +(c[1] - declare).toFixed(1);
+        var ok = Math.abs(ecart) < 1;
+        return '<tr><td>' + c[0] + '</td><td>' + c[1] + ' px</td><td><code>' + c[3] + '</code></td>'
+          + '<td><span class="ratio ' + (ok ? 'ok' : 'ko') + '">'
+          + (ecart > 0 ? '+' : '') + ecart + ' px</span></td></tr>';
+      }).join('')
+        + '<tr><td colspan="4" style="opacity:.7">Déclarations trouvées dans la feuille servie : '
+        + (declarees.length
+            ? '<code>' + declarees.join('</code>, <code>') + '</code>'
+            : '(aucune)')
+        + '. Elles portent toutes sur <code>.project-open</code>, dans trois contextes de média : '
+        + 'la base, le palier 768 px (où la nav se déploie) et le paysage court.</td></tr>';
     }
 
     var hoteClair = document.getElementById('sans-clair');

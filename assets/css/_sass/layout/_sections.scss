@@ -77,6 +77,18 @@
   /* 181 caracteres par ligne sans cette borne, sur le tout premier
      paragraphe que lit un visiteur. */
   max-width: var(--measure-prose);
+  /* ⚠️ REGRESSION DE MA PASSE TYPO, corrigee le 28/07.
+     Le `max-width` ci-dessus a ete ajoute par la passe typographique. Avant
+     lui, le paragraphe occupait toute la largeur et `text-align: center` le
+     centrait donc sur la page. Une fois borne a 40rem, le texte restait
+     centre DANS sa boite, mais la boite tombait a gauche du conteneur : le
+     pitch etait centre sur lui-meme et decale de 704 px a 1440.
+     Regle a en tirer : borner une largeur sans dire ou va la boite, c'est
+     deplacer l'element. `text-align` centre le TEXTE, jamais le BLOC.
+     Ne touche que l'accueil et la page services : partout ailleurs le
+     conteneur fait deja la largeur du pitch, la marge auto vaut donc 0
+     (verifie a 1440, 900 et 390). */
+  margin-inline: auto;
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--grey-light-400);

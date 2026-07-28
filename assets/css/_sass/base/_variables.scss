@@ -130,12 +130,19 @@
   --surface-scrim: rgba(0, 0, 0, 0.98);    /* lightbox, overlay de nav */
   /* Meme rapatriement : etait #2d3748, un gris bleute a 218 degres. */
   --surface-placeholder: #2D4836;
-  /* Le sol propre du chrome (barre du header). Tres faible : sur le sol sombre
-     il ne fait presque rien, il n'existe que pour que la barre ne soit pas
-     STRICTEMENT transparente quand elle glisse au-dessus d'une section claire.
-     Il etait ecrit en dur, donc invisible dans la palette et impossible a
-     re-teinter avec le skin. */
-  --surface-chrome: rgba(0, 0, 0, 0.1);
+  /* ⚠️ `--surface-chrome` A VECU UNE JOURNEE, et sa mort vaut d'etre notee.
+     Le 27/07 la barre du header portait un `rgba(0, 0, 0, 0.1)` ecrit en dur.
+     Le 28 je l'ai tokenise, en appliquant la regle de Ropat : toute couleur
+     porte un nom, meme celles qui ne servent qu'une fois. Une fois NOMMEE et
+     posee dans la palette, il a fallu dire a quoi elle servait, et la reponse
+     etait : a rien. Invisible sur le sol dither, salissante sur une section
+     claire. Ropat l'a fait retirer le jour meme.
+     C'est la demonstration exacte de la regle : tokeniser ne valide pas
+     l'ecart, ca le rend AUDITABLE. Une valeur qui n'a jamais eu a se justifier
+     survit indefiniment ; une valeur qu'on doit inscrire dans une palette doit
+     dire ce qu'elle fait, et celle-la n'avait pas de reponse.
+     La barre n'a donc plus de fond du tout : le `backdrop-filter` de
+     `.blur-bg` suffit a la decoller du contenu. */
 
   /* ⚠️ CANAL DU VOILE PHOTOGRAPHIQUE, pas une couleur de la charte.
      Un triplet et non une couleur complete, parce que ses consommateurs ont
@@ -464,12 +471,6 @@
   --ink-decorative: rgba(5, 16, 15, 0.2);
   --surface-scrim: rgba(240, 244, 241, 0.98);
   --surface-placeholder: var(--p-neige-basse);
-  /* Direction inversee : sur un sol clair, une barre legerement plus SOMBRE
-     ne se detache pas, c'est un blanc leger qui la souleve. Ce jeton est
-     exactement la raison pour laquelle le rgba en dur devait mourir : ecrit
-     en litteral, il posait du noir a 10 % sur un sol neige. */
-  --surface-chrome: rgba(255, 255, 255, 0.35);
-
   /* ⚠️ Le canal du voile reste NOIR dans le skin clair, et ce n'est pas un
      oubli : il ne teinte pas une surface du site, il assombrit une image pour
      garantir 5,3:1 a une encre CLAIRE posee dessus. Le jour ou le chrome

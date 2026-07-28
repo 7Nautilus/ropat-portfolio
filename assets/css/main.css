@@ -123,12 +123,19 @@
   --surface-scrim: rgba(0, 0, 0, 0.98); /* lightbox, overlay de nav */
   /* Meme rapatriement : etait #2d3748, un gris bleute a 218 degres. */
   --surface-placeholder: #2D4836;
-  /* Le sol propre du chrome (barre du header). Tres faible : sur le sol sombre
-     il ne fait presque rien, il n'existe que pour que la barre ne soit pas
-     STRICTEMENT transparente quand elle glisse au-dessus d'une section claire.
-     Il etait ecrit en dur, donc invisible dans la palette et impossible a
-     re-teinter avec le skin. */
-  --surface-chrome: rgba(0, 0, 0, 0.1);
+  /* ⚠️ `--surface-chrome` A VECU UNE JOURNEE, et sa mort vaut d'etre notee.
+     Le 27/07 la barre du header portait un `rgba(0, 0, 0, 0.1)` ecrit en dur.
+     Le 28 je l'ai tokenise, en appliquant la regle de Ropat : toute couleur
+     porte un nom, meme celles qui ne servent qu'une fois. Une fois NOMMEE et
+     posee dans la palette, il a fallu dire a quoi elle servait, et la reponse
+     etait : a rien. Invisible sur le sol dither, salissante sur une section
+     claire. Ropat l'a fait retirer le jour meme.
+     C'est la demonstration exacte de la regle : tokeniser ne valide pas
+     l'ecart, ca le rend AUDITABLE. Une valeur qui n'a jamais eu a se justifier
+     survit indefiniment ; une valeur qu'on doit inscrire dans une palette doit
+     dire ce qu'elle fait, et celle-la n'avait pas de reponse.
+     La barre n'a donc plus de fond du tout : le `backdrop-filter` de
+     `.blur-bg` suffit a la decoller du contenu. */
   /* ⚠️ CANAL DU VOILE PHOTOGRAPHIQUE, pas une couleur de la charte.
      Un triplet et non une couleur complete, parce que ses consommateurs ont
      besoin d'opacites DIFFERENTES du meme noir : 0,62 / 0,58 / 0,30 / 0 pour
@@ -426,11 +433,6 @@
   --ink-decorative: rgba(5, 16, 15, 0.2);
   --surface-scrim: rgba(240, 244, 241, 0.98);
   --surface-placeholder: var(--p-neige-basse);
-  /* Direction inversee : sur un sol clair, une barre legerement plus SOMBRE
-     ne se detache pas, c'est un blanc leger qui la souleve. Ce jeton est
-     exactement la raison pour laquelle le rgba en dur devait mourir : ecrit
-     en litteral, il posait du noir a 10 % sur un sol neige. */
-  --surface-chrome: rgba(255, 255, 255, 0.35);
   /* ⚠️ Le canal du voile reste NOIR dans le skin clair, et ce n'est pas un
      oubli : il ne teinte pas une surface du site, il assombrit une image pour
      garantir 5,3:1 a une encre CLAIRE posee dessus. Le jour ou le chrome
@@ -872,7 +874,18 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--surface-chrome);
+  /* ⚠️ AUCUN FOND. Retire le 28/07 sur demande de Ropat.
+     La barre portait un `rgba(0, 0, 0, 0.1)` depuis l'origine, tokenise la
+     veille sous le nom `--surface-chrome`. C'etait un assombrissement qui ne
+     servait rien : sur le sol dither il est invisible, et sur une section
+     claire il salissait le haut de page au lieu de detacher la barre.
+     Le `backdrop-filter: blur(12px)` de `.blur-bg` suffit a decoller le chrome
+     du contenu, sans rien assombrir.
+     ⚠️ A ne pas confondre avec le VOILE des pages projet, plus bas
+     (`header[data-sur-media]::before`), qui reste : celui-la n'est pas un fond
+     de barre, c'est un degrade pose sur l'IMAGE, et c'est lui qui garantit
+     7,43:1 a la nav au-dessus de n'importe quel media. Le retirer rendrait la
+     navigation illisible sur 16 projets sur 19. */
   box-shadow: var(--shadow-sm);
   position: sticky;
   width: 100%;
@@ -1267,6 +1280,18 @@ header[data-sur-media] .logo {
   /* 181 caracteres par ligne sans cette borne, sur le tout premier
      paragraphe que lit un visiteur. */
   max-width: var(--measure-prose);
+  /* ⚠️ REGRESSION DE MA PASSE TYPO, corrigee le 28/07.
+     Le `max-width` ci-dessus a ete ajoute par la passe typographique. Avant
+     lui, le paragraphe occupait toute la largeur et `text-align: center` le
+     centrait donc sur la page. Une fois borne a 40rem, le texte restait
+     centre DANS sa boite, mais la boite tombait a gauche du conteneur : le
+     pitch etait centre sur lui-meme et decale de 704 px a 1440.
+     Regle a en tirer : borner une largeur sans dire ou va la boite, c'est
+     deplacer l'element. `text-align` centre le TEXTE, jamais le BLOC.
+     Ne touche que l'accueil et la page services : partout ailleurs le
+     conteneur fait deja la largeur du pitch, la marge auto vaut donc 0
+     (verifie a 1440, 900 et 390). */
+  margin-inline: auto;
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--grey-light-400);
@@ -2945,11 +2970,36 @@ body:has(.project-page) {
    le sol dither ; les mots occupent le sol a cote d'elle. Rien ne se pose
    sur le travail du client, rien ne le voile.
 
-   `--chrome` : la hauteur du header sticky, a retirer partout ou l'on veut
-   « le reste de l'ecran ». Sans ca, un bloc en 100svh est toujours pousse
-   de 76 px sous la ligne de flottaison. */
+   `--hauteur-chrome` : la hauteur du header sticky, a retirer partout ou l'on
+   veut « le reste de l'ecran ». Sans ca, un bloc en 100svh est toujours pousse
+   d'autant sous la ligne de flottaison.
+
+   ⚠️ RENOMME ET CORRIGE le 28/07, deux defauts d'un coup.
+   1. Le NOM. Il s'appelait `--chrome`, ce qui nomme une chose et non ce
+      qu'elle fait ; c'est la regle 4 de la doctrine. Il entrait aussi en
+      collision avec le jeton de COULEUR du chantier, qui a du etre renomme
+      `--sol-chrome` pour lui ceder la place. Le prefixe `hauteur-` regle les
+      deux.
+   2. La VALEUR. Elle valait 76 px alors que le header en mesure 83,4 : le
+      bloc `--contexte`, remonte par une marge negative de 76 px sous une
+      barre de 83, laissait donc 7 px de sol visible en haut de l'ecran. C'est
+      le defaut que Ropat a vu. Le commentaire de _media-queries.scss ecrivait
+      d'ailleurs deja « le header mesure 83 px », a cote d'un jeton qui disait
+      76 : le fichier savait, le jeton mentait.
+      La valeur avait ete reglee pour le seul cas PAYSAGE COURT (56 px pour
+      55,8 reels), et jamais reprise pour les autres.
+
+   Decomposition mesuree, pour que la prochaine correction n'ait pas a la
+   refaire : padding 16 + 16, bordure basse 3, plus le plus grand enfant.
+   Cet enfant est la NAV (48,4 px) tant qu'elle est une barre, et le LOGO
+   (43,4 px) des qu'elle passe en burger, d'ou la bascule a 768 px.
+     >= 768 px  : 16 + 16 + 3 + 48,4 = 83,4  -> 83px
+     <  768 px  : 16 + 16 + 3 + 43,4 = 78,4  -> 78px
+     paysage court : padding 6,4, logo 34,3  = 55,8  -> 56px (deja juste)
+   Le labo verifie l'accord en direct, section « La hauteur du chrome ». */
 .project-open {
-  --chrome: 76px;
+  /* Valeur mobile par defaut ; l'override desktop vit dans _media-queries. */
+  --hauteur-chrome: 78px;
   --air-haut: clamp(1.5rem, 4vw, 3rem);
   --air-bas: clamp(2rem, 5vw, 4rem);
   /* Le header est `sticky`, donc il OCCUPE deja sa hauteur dans le flux :
@@ -2960,7 +3010,7 @@ body:has(.project-page) {
      sous la ligne de flottaison. C'est le signal de defilement le moins
      cher et le seul qui n'a jamais besoin d'une icone. Sans lui, l'ouverture
      remplissait l'ecran au pixel pres et rien n'indiquait une suite. */
-  min-height: calc(100svh - var(--chrome) - 3rem);
+  min-height: calc(100svh - var(--hauteur-chrome) - 3rem);
   padding: var(--air-haut) var(--page-gutter) var(--air-bas);
   /* Ancre l'indice de defilement DANS l'ouverture : `.scroll-overlay` est en
      `position: absolute`, sans ancetre positionne il remonterait au bloc
@@ -2993,7 +3043,7 @@ body:has(.project-page) {
   /* `contain` et non `cover` : le format complet EST le livrable. Avec
      `cover`, de 12 a 58 % de l'oeuvre etait masquee selon le ratio, et sur
      8 projets sur 20 il n'existait aucun moyen de la voir entiere. */
-  max-height: calc(100svh - var(--chrome) - var(--air-haut) - var(--air-bas));
+  max-height: calc(100svh - var(--hauteur-chrome) - var(--air-haut) - var(--air-bas));
   max-width: 100%;
   width: auto;
   height: auto;
@@ -3023,12 +3073,12 @@ body:has(.project-page) {
   padding: 0;
   overflow: hidden;
   /* L'image occupe TOUTE la hauteur de l'ecran, header compris. Le header
-     est `sticky`, donc il prend ses 76 px dans le flux et poussait l'image
+     est `sticky`, donc il prend sa hauteur dans le flux et poussait l'image
      d'autant : on les reprend par une marge negative, et la barre survole
      l'image en z au lieu de la decaler. Pas de retrait de 3 rem non plus
      ici : en mode `contexte` l'image saigne d'elle-meme sous la ligne de
      flottaison, elle n'a pas besoin qu'on fasse affleurer la bande suivante. */
-  margin-top: calc(-1 * var(--chrome));
+  margin-top: calc(-1 * var(--hauteur-chrome));
   min-height: 100svh;
 }
 .project-open--contexte .project-open-media-wrap {
@@ -3067,7 +3117,7 @@ body:has(.project-page) {
   min-height: 100svh;
   /* Le padding haut reprend la hauteur du header : le texte est ancre en
      bas, mais s'il devenait tres long il ne passerait pas sous la barre. */
-  padding: calc(var(--chrome) + var(--air-haut)) var(--page-gutter) clamp(3rem, 8vw, 6rem);
+  padding: calc(var(--hauteur-chrome) + var(--air-haut)) var(--page-gutter) clamp(3rem, 8vw, 6rem);
   justify-content: flex-end;
 }
 .project-open--contexte {
@@ -4559,6 +4609,15 @@ main:has(.contact-hero) {
   .burger-menu {
     display: none;
   }
+  /* ⚠️ MEME POINT DE RUPTURE, ET CE N'EST PAS UN HASARD : c'est exactement la
+     ligne au-dessus qui fait grandir le header. En dessous de 768 px son plus
+     grand enfant est le logo (43,4 px) ; a partir d'ici c'est la nav deployee
+     (48,4 px), donc la barre passe de 78,4 a 83,4. Le jeton de hauteur doit
+     donc basculer AU MEME endroit que la nav, sinon il redevient faux.
+     Detail de la decomposition dans pages/_project.scss. */
+  .project-open {
+    --hauteur-chrome: 83px;
+  }
   .nav-links-header {
     display: flex;
     position: static;
@@ -4815,15 +4874,17 @@ footer {
     --text-subhead: clamp(1.125rem, 4svh, 1.625rem);
   }
   .project-open--contexte .project-open-lede {
-    padding-top: calc(var(--chrome) + 0.75rem);
+    padding-top: calc(var(--hauteur-chrome) + 0.75rem);
     padding-bottom: 1.5rem;
     gap: 0.5rem;
   }
   .project-open {
     --air-haut: 0.75rem;
     --air-bas: 1rem;
-    /* Le header mesure 83 px, soit 22 % d'un ecran de 375 px de haut. */
-    --chrome: 56px;
+    /* Le header resserre juste en dessous mesure 55,8 px : padding 6,4 x 2,
+       bordure 3, logo 34,3. C'etait la SEULE valeur juste des trois avant le
+       28/07, parce que c'est le cas pour lequel elle avait ete reglee. */
+    --hauteur-chrome: 56px;
   }
   /* Le chrome se resserre : en paysage la hauteur est la ressource rare. */
   header {
