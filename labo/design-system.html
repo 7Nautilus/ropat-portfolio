@@ -160,6 +160,24 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 .duo { display: grid; gap: 2rem; grid-template-columns: 1fr; }
 @media (min-width: 900px) { .duo { grid-template-columns: 1fr 1fr; } }
 .ouvert { color: #ff5c00; font-family: 'Chakra Petch', sans-serif; font-weight: 600; }
+
+/* Pistes de courbes */
+#pistes { container-type: inline-size; }
+.piste { margin-bottom: 1.1rem; }
+.piste-nom { display: flex; gap: .8rem; align-items: baseline; margin-bottom: .35rem; }
+.piste-nom code { font-family: 'Chakra Petch', monospace; font-size: .85rem; color: #e2e8f0; }
+.piste-nom span { font-size: .85rem; color: rgba(255,255,255,.46); }
+.piste-rail { position: relative; height: .7rem; background: rgba(255,255,255,.05); }
+.piste-bille { position: absolute; top: 0; left: 0; width: 2rem; height: .7rem;
+               background: #ff5c00; will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  /* La demonstration EST le mouvement : on ne peut pas la remplacer par un
+     fondu. On l'immobilise et on l'annonce, plutot que de la jouer quand
+     meme ou de faire semblant qu'elle a un equivalent statique. */
+  .piste-bille { transition: none !important; transform: translateX(var(--course)) !important; }
+  #pistes::after { content: "Mouvement reduit actif : les courbes ne sont pas jouees.";
+                   display: block; font-size: .85rem; color: #FF6B6B; margin-top: .5rem; }
+}
 </style>
 </head>
 <body>
@@ -401,6 +419,55 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   la planche n'attend pas ses données, elle attend une autre idée.</p>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Mouvement</h2>
+  <p>Trois durées, quatre courbes. Passe la souris sur les barres : elles jouent la courbe
+  réelle, lue depuis le jeton.</p>
+
+  <div class="scene">
+    <p class="scene-titre">Les quatre courbes, à durée égale (<code>--dur-reveal</code>)</p>
+    <div id="pistes"></div>
+    <p style="margin-top:1rem">L'exponentielle sort vite puis s'arrête longuement : c'est celle
+    qui donne l'impression que l'objet <em>arrive</em>. La quadratique est son équivalent discret,
+    pour les micro-mouvements. <code>ease</code>, la valeur par défaut du navigateur, est une
+    <strong>ease-in-out</strong> : elle démarre lentement, donc elle retarde le retour visuel.</p>
+  </div>
+
+  <h3>⚠️ Le système de courbes existe et ne sert presque pas</h3>
+  <p>Relevé du 28/07 sur les 51 déclarations <code>animation</code> et <code>transition</code>
+  de <code>_sass/</code> :</p>
+  <table class="jetons">
+    <thead><tr><th>Occurrences</th><th>Ce que c'est</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ratio ok">9</span></td><td>utilisent une courbe nommée <code>var(--ease-*)</code></td></tr>
+      <tr><td><span class="ratio ko">16</span></td><td>passent par <code>--transition-base</code>, qui vaut <code>0.3s ease</code></td></tr>
+      <tr><td><span class="ratio ko">21</span></td><td>durée <em>et</em> courbe écrites en dur</td></tr>
+      <tr><td><span class="ratio">5</span></td><td>autres (durée seule, <code>none</code>, mots-clés)</td></tr>
+    </tbody>
+  </table>
+  <p><strong>42 déclarations sur 51 n'emploient aucune des quatre courbes du système</strong>, soit
+  82 %. Les courbes réellement en service, comptées dans le CSS : <code>ease</code> 22 fois,
+  <code>ease-out</code> 4, <code>linear</code> 3, <code>ease-in-out</code> 3.</p>
+
+  <div class="regle" style="border-color:rgba(255,107,107,.35)">
+    <b style="color:#FF6B6B">Le jeton le plus utilisé est celui qui sort du système</b>
+    <span><code>--transition-base</code> vaut <code>var(--dur-base) ease</code>. Son nom le fait
+    passer pour le mouvement <em>de référence</em> du site, et sa valeur choisit la courbe par
+    défaut du navigateur, c'est-à-dire aucune des quatre décidées.
+    <em>C'est exactement le motif de la règle 4</em>, pour la troisième fois : après
+    <code>--border-primary</code> qui imposait l'orange et <code>--surface-raised</code> qui
+    assombrissait, voici un jeton dont le nom annonce l'appartenance au système pendant que sa
+    valeur en sort. Un jeton bien nommé qui contient la mauvaise valeur est plus dangereux qu'une
+    valeur en dur : la valeur en dur, au moins, se voit.</span>
+  </div>
+
+  <h3>Mouvement réduit</h3>
+  <p><code>prefers-reduced-motion</code> est traité dans <strong>4 fichiers SCSS</strong>
+  (<code>_bases</code>, <code>_carousel</code>, <code>_cursor</code>, <code>_project</code>) et
+  <strong>7 fois dans <code>script.js</code></strong>. Ce n'est pas une couverture, c'est une
+  liste : rien ne garantit qu'une animation ajoutée demain aura son repli. Une règle globale qui
+  neutralise par défaut, avec dérogation explicite, serait plus sûre qu'une liste à tenir à jour.</p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>Les composants réels</h2>
   <p>Vrais composants, vrai CSS de production, posés sur les jetons du chantier.</p>
 
@@ -623,7 +690,45 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     });
   }
 
-  remplirTypo(); compterMesure(); remplirEspace();
+  /* ── Les courbes, jouees pour de vrai ────────────────────────────────
+     Une courbe ne se juge pas sur ses quatre nombres : il faut la voir
+     bouger. Chaque piste rejoue au survol, a duree egale, pour que la seule
+     variable soit la courbe. */
+  function remplirCourbes() {
+    var hote = document.getElementById('pistes');
+    if (!hote) return;
+    var courbes = [
+      ['--ease-expo-out', 'exponentielle, les revelations'],
+      ['--ease-quad-out', 'quadratique, les micro-mouvements'],
+      ['--ease-smooth', 'douce'],
+      ['--ease-out', 'sortie standard'],
+      [null, "ease, le defaut du navigateur, aucun jeton"]
+    ];
+    var duree = val('--dur-reveal') || '0.6s';
+    hote.innerHTML = courbes.map(function (c) {
+      var v = c[0] ? val(c[0]) : 'ease';
+      return '<div class="piste" data-courbe="' + v + '">'
+        + '<div class="piste-nom"><code>' + (c[0] || 'ease') + '</code>'
+        + '<span>' + c[1] + '</span></div>'
+        + '<div class="piste-rail"><span class="piste-bille" style="transition:transform '
+        + duree + ' ' + v + '"></span></div></div>';
+    }).join('');
+    function jouer() {
+      hote.querySelectorAll('.piste-bille').forEach(function (b) {
+        b.style.transform = 'translateX(0)';
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { b.style.transform = 'translateX(calc(100% * 0 + var(--course)))'; });
+        });
+      });
+    }
+    hote.style.setProperty('--course', 'calc(100cqw - 2rem)');
+    hote.addEventListener('mouseenter', jouer);
+    hote.querySelectorAll('.piste').forEach(function (p) { p.addEventListener('mouseenter', jouer); });
+    jouer();
+    setInterval(jouer, 2600);
+  }
+
+  remplirTypo(); compterMesure(); remplirEspace(); remplirCourbes();
   /* Les clamp() suivent la fenetre : les mesures doivent suivre aussi, sinon
      la page afficherait des chiffres faux des le premier redimensionnement. */
   addEventListener('resize', function () { remplirTypo(); compterMesure(); });
