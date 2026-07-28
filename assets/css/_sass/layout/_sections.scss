@@ -64,6 +64,13 @@
      heritait du 700 de .hero-title et le navigateur fabriquait un gras :
      le seul glyphe Underdog du site etait un faux. */
   font-weight: 400;
+  /* ⚠️ SEULE encre restee en dur du site, et c'est une EXCEPTION ASSUMEE.
+     1,72:1, tres en dessous des 4,5:1 d'un texte, et c'est un mot du H1 de
+     l'accueil (« DESIGN GRAPHIQUE & STRATEGIE »). Signale a Ropat le 28/07,
+     qui a choisi de le garder tel quel pour l'instant : c'est un effet
+     typographique voulu, pas un oubli.
+     Ne pas le tokeniser sans le lui redemander : aucun jeton d'encre ne
+     descend aussi bas, et c'est tres bien ainsi. */
   color: rgba(255, 255, 255, 0.2);
 }
 
@@ -221,7 +228,7 @@
 
 .service-main-intro {
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--ink-soft);
   text-align: center;
 }
 

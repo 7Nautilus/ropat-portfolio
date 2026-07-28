@@ -28,7 +28,7 @@
 .legal-content p {
   margin-bottom: var(--spacing-md);
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--ink-soft);
 }
 
 .legal-content ul {
@@ -39,7 +39,7 @@
 
 .legal-content li {
   margin-bottom: var(--spacing-sm);
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--ink-soft);
 }
 
 .legal-content a {
