@@ -37,6 +37,11 @@
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  /* ⚠️ `corner-shape` NE S'HERITE PAS, contrairement au rayon juste au-dessus.
+     L'image restait donc ronde dans un cadre squircle, et mon balayage l'avait
+     sautee parce que son VOISIN portait deja un `corner-shape` : le contexte ne
+     dit rien de l'element. */
+  corner-shape: squircle;
 }
 
 // Placeholder visible si la photo n'est pas encore fournie
@@ -50,6 +55,7 @@
   );
   border: 1px solid var(--border-subtle);
   border-radius: inherit;
+  corner-shape: squircle;
 
   // Initiales centrées
   &::after {
@@ -304,6 +310,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
+    corner-shape: squircle;
     background: var(--primary-color);
     border: 2px solid var(--background-dark);
     transition: transform var(--transition-base);

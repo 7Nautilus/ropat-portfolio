@@ -1005,6 +1005,40 @@ header {
    au-dessus d'un media elle marque `surImage` et son ratio ne veut rien dire.
    Un « 0 echec » de sa part ne valide rien ici. */
 /* ══════════════════════════════════════════════════════════════════════════
+   LE CHROME S'ESCAMOTE AU DEFILEMENT
+   ══════════════════════════════════════════════════════════════════════════
+   Il se retire quand on descend (on lit, on regarde) et revient quand on
+   remonte (on cherche a naviguer).
+
+   ⚠️ Etendu a TOUTES LES PAGES le 28/07, sur demande de Ropat. Le comportement
+   n'existait que sur les pages projet, ou il etait justifie par l'oeuvre : ne
+   pas rester pose en permanence sur le travail du client. Mais l'argument vaut
+   plus largement, une barre qui suit pendant qu'on lit prend de la hauteur
+   d'ecran a du contenu sans rien apporter.
+   Il vit donc ici et non dans pages/_project.scss, qui ne garde que ce qui lui
+   est propre : la barre transparente sur l'ouverture.
+
+   La transition ne porte que sur ce qui bouge ici. `all` aurait attrape les
+   couleurs de la bascule d'encre, qui a deja la sienne plus bas. */
+header {
+  transition: transform var(--dur-base) var(--ease-expo-out), background-color var(--dur-base) ease, border-bottom-color var(--dur-base) ease;
+}
+
+header[data-chrome=retire] {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header {
+    transition: none;
+  }
+  /* Pas d'escamotage si l'on demande moins de mouvement : le chrome reste,
+     ce qui vaut mieux qu'une barre qui saute. */
+  header[data-chrome=retire] {
+    transform: none;
+  }
+}
+/* ══════════════════════════════════════════════════════════════════════════
    LA BASCULE D'ENCRE
    ══════════════════════════════════════════════════════════════════════════
    Deux variables locales, et TOUT le chrome les lit. C'est ce qui permet a la
@@ -1303,6 +1337,7 @@ header[data-sur-media] {
 
 .burger-menu:focus {
   border-radius: 5px;
+  corner-shape: squircle;
   outline: 2px solid var(--signal-chrome);
   outline-offset: 4px;
 }
@@ -1529,6 +1564,7 @@ header[data-sur-media] {
   width: 0.5rem;
   background-color: var(--primary-color);
   border-radius: 50%;
+  corner-shape: squircle;
   display: inline-block;
   flex-shrink: 0;
 }
@@ -1828,7 +1864,20 @@ footer {
     border-radius: 50%;
     corner-shape: squircle;
     pointer-events: none;
-    z-index: 9999;
+    /* ⚠️ LE CURSEUR EST LE SEUL ELEMENT QUI A LE DROIT D'ETRE AU-DESSUS DE
+       TOUT, et il doit l'etre : il remplace le pointeur du systeme, donc s'il
+       passe DERRIERE quelque chose, l'utilisateur perd son pointeur.
+       Il etait a 9999, exactement comme la lightbox, et a valeur egale c'est le
+       dernier dans le DOM qui gagne : la lightbox est injectee en fin de
+       `body`, donc elle recouvrait le curseur. Symptome signale par Ropat :
+       « on ne voit plus le curseur dans la lightbox ».
+       Le bouton de fermeture de la lightbox est lui a 10000 : monter d'un cran
+       n'aurait regle que la moitie du probleme, et le prochain calque poserait
+       la meme question. On prend le maximum de la propriete, une fois pour
+       toutes.
+       Aucun risque de masquage : `pointer-events: none` juste au-dessus, donc
+       il ne peut rien intercepter. */
+    z-index: 2147483647;
     transform: translate(-50%, -50%);
     will-change: transform;
     transition: width 0.35s var(--ease-smooth), height 0.35s var(--ease-smooth), border-radius 0.35s ease, background 0.3s ease, border 0.3s ease;
@@ -1843,6 +1892,7 @@ footer {
     width: 3px;
     height: 28px;
     border-radius: 9999px;
+    corner-shape: squircle;
     border: none;
     background: var(--white-color);
   }
@@ -1929,6 +1979,7 @@ footer {
   /* La gelule se clampe a la moitie de la hauteur : sur 4px de haut, le
      rendu est identique a l'ancien 2px en dur, sans valeur magique. */
   border-radius: var(--radius-pill);
+  corner-shape: squircle;
   overflow: hidden;
   position: relative;
 }
@@ -1942,6 +1993,7 @@ footer {
   height: 100%;
   background: var(--accent);
   border-radius: var(--radius-pill);
+  corner-shape: squircle;
   animation: loading 1.5s ease-in-out infinite;
 }
 
@@ -2146,6 +2198,7 @@ footer {
   height: fit-content;
   padding: var(--spacing-sm);
   border-radius: var(--border-radius-lg);
+  corner-shape: squircle;
 }
 
 .big-icon svg {
@@ -2171,6 +2224,7 @@ footer {
   background-color: var(--primary-color-alpha);
   color: var(--white-color);
   border-radius: var(--border-radius-sm);
+  corner-shape: squircle;
   border: var(--border-primary);
   padding: var(--spacing-sm);
   cursor: pointer;
@@ -2215,6 +2269,7 @@ footer {
   border: var(--border-primary);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-sm);
+  corner-shape: squircle;
   position: absolute;
   top: 110%;
   left: 50%;
@@ -2371,6 +2426,7 @@ footer {
      Filet neutre sur les quatre cotes : la bulle garde son contour, sans
      depenser du signal pour un paragraphe d'introduction. */
   border-radius: 0 2rem 2rem 2rem;
+  corner-shape: squircle;
   border: var(--hairline-width) solid var(--line);
 }
 
@@ -2438,6 +2494,7 @@ footer {
   color: var(--white-color);
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
+  corner-shape: squircle;
   font-size: var(--text-caption);
   font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);
@@ -3302,6 +3359,7 @@ body:has(.project-page) {
   width: 6px;
   height: 6px;
   border-radius: 50%;
+  corner-shape: squircle;
   background: var(--accent);
   flex: none;
 }
@@ -3841,10 +3899,6 @@ body:has(.project-page) {
    Ce qui change ici, c'est seulement son COMPORTEMENT : elle s'efface quand
    on lit et revient quand on la demande, pour ne pas rester posee en
    permanence sur le travail du client. */
-body:has(.project-page) header {
-  transition: transform var(--dur-base) var(--ease-expo-out), background-color var(--dur-base) ease, border-bottom-color var(--dur-base) ease;
-}
-
 /* SUR L'OUVERTURE : ni fond ni bordure. La barre est alors posee sur
    l'oeuvre elle-meme ; lui donner un aplat et un filet orange reviendrait a
    l'encadrer. Des qu'on a depasse le hero, elle reprend son habillage
@@ -3858,21 +3912,10 @@ body:has(.project-page) header[data-zone=ouverture] {
   border-bottom-color: transparent;
 }
 
-/* On descend : le chrome se retire. */
-body:has(.project-page) header[data-chrome=retire] {
-  transform: translateY(-100%);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body:has(.project-page) header {
-    transition: none;
-  }
-  /* Pas d'escamotage si l'on demande moins de mouvement : le chrome reste,
-     ce qui vaut mieux qu'une barre qui saute. */
-  body:has(.project-page) header[data-chrome=retire] {
-    transform: none;
-  }
-}
+/* ⚠️ L'ESCAMOTAGE N'EST PLUS ICI : il vaut pour TOUTES les pages depuis le
+   28/07 et vit donc dans layout/_header.scss. Ce fichier ne garde que ce qui
+   est propre a la page projet, c'est-a-dire la barre transparente sur
+   l'ouverture. */
 /* ── CTA ─────────────────────────────────────────────────────────────── */
 .project-cta {
   display: flex;
@@ -3965,6 +4008,11 @@ body:has(.project-page) header[data-chrome=retire] {
   height: 100%;
   object-fit: cover;
   border-radius: inherit;
+  /* ⚠️ `corner-shape` NE S'HERITE PAS, contrairement au rayon juste au-dessus.
+     L'image restait donc ronde dans un cadre squircle, et mon balayage l'avait
+     sautee parce que son VOISIN portait deja un `corner-shape` : le contexte ne
+     dit rien de l'element. */
+  corner-shape: squircle;
 }
 
 .about-photo-placeholder {
@@ -3973,6 +4021,7 @@ body:has(.project-page) header[data-chrome=retire] {
   background: linear-gradient(135deg, var(--background-light) 0%, color-mix(in srgb, var(--primary-color) 8%, transparent) 100%);
   border: 1px solid var(--border-subtle);
   border-radius: inherit;
+  corner-shape: squircle;
 }
 .about-photo-placeholder::after {
   content: "R";
@@ -4231,6 +4280,7 @@ body:has(.project-page) header[data-chrome=retire] {
   width: 8px;
   height: 8px;
   border-radius: 50%;
+  corner-shape: squircle;
   background: var(--primary-color);
   border: 2px solid var(--background-dark);
   transition: transform var(--transition-base);
@@ -4686,6 +4736,7 @@ main:has(.contact-hero) {
   gap: 0.6rem;
   padding: 0.6rem 0.75rem;
   border-radius: calc(var(--border-radius-sm) - 4px);
+  corner-shape: squircle;
   font-family: var(--font-body);
   font-size: var(--text-meta);
   font-weight: 500;
@@ -4853,6 +4904,7 @@ main:has(.contact-hero) {
   /* Hero Section */
   .hero-image {
     border-radius: var(--border-radius-sm);
+    corner-shape: squircle;
   }
   .big-icon svg {
     width: 3rem;

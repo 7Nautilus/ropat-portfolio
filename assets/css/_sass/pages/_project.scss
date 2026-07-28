@@ -223,6 +223,7 @@ body:has(.project-page) {
     width: 6px;
     height: 6px;
     border-radius: 50%;
+    corner-shape: squircle;
     background: var(--accent);
     flex: none;
   }
@@ -757,13 +758,6 @@ body:has(.project-page) {
    Ce qui change ici, c'est seulement son COMPORTEMENT : elle s'efface quand
    on lit et revient quand on la demande, pour ne pas rester posee en
    permanence sur le travail du client. */
-body:has(.project-page) header {
-  transition:
-    transform var(--dur-base) var(--ease-expo-out),
-    background-color var(--dur-base) ease,
-    border-bottom-color var(--dur-base) ease;
-}
-
 /* SUR L'OUVERTURE : ni fond ni bordure. La barre est alors posee sur
    l'oeuvre elle-meme ; lui donner un aplat et un filet orange reviendrait a
    l'encadrer. Des qu'on a depasse le hero, elle reprend son habillage
@@ -777,17 +771,10 @@ body:has(.project-page) header[data-zone="ouverture"] {
   border-bottom-color: transparent;
 }
 
-/* On descend : le chrome se retire. */
-body:has(.project-page) header[data-chrome="retire"] {
-  transform: translateY(-100%);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  body:has(.project-page) header { transition: none; }
-  /* Pas d'escamotage si l'on demande moins de mouvement : le chrome reste,
-     ce qui vaut mieux qu'une barre qui saute. */
-  body:has(.project-page) header[data-chrome="retire"] { transform: none; }
-}
+/* ⚠️ L'ESCAMOTAGE N'EST PLUS ICI : il vaut pour TOUTES les pages depuis le
+   28/07 et vit donc dans layout/_header.scss. Ce fichier ne garde que ce qui
+   est propre a la page projet, c'est-a-dire la barre transparente sur
+   l'ouverture. */
 
 
 /* ── CTA ─────────────────────────────────────────────────────────────── */

@@ -28,6 +28,7 @@
      Filet neutre sur les quatre cotes : la bulle garde son contour, sans
      depenser du signal pour un paragraphe d'introduction. */
   border-radius: 0 2rem 2rem 2rem;
+  corner-shape: squircle;
   border: var(--hairline-width) solid var(--line);
 }
 
@@ -97,6 +98,7 @@
   color: var(--white-color);
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
+  corner-shape: squircle;
   font-size: var(--text-caption);
   font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);

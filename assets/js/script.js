@@ -382,15 +382,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================
-  // CHROME ESCAMOTABLE : pages projet
+  // CHROME ESCAMOTABLE : toutes les pages
   // ================================
-  // Le header ne doit jamais concurrencer l'oeuvre. Il se retire quand on
-  // descend (on lit, on regarde) et revient quand on remonte (on cherche a
-  // naviguer). En haut de page il reste transparent : il est alors pose sur
-  // le sol dither, pas sur le travail du client.
-  const pageProjet = document.querySelector('.project-page');
+  // Il se retire quand on descend (on lit, on regarde) et revient quand on
+  // remonte (on cherche a naviguer).
+  //
+  // ⚠️ Etendu a TOUTES les pages le 28/07, sur demande de Ropat. La garde
+  // `pageProjet` a saute : le comportement etait justifie par l'oeuvre, mais
+  // l'argument vaut plus largement, une barre qui suit pendant qu'on lit prend
+  // de la hauteur d'ecran a du contenu sans rien apporter.
+  // Seule la barre TRANSPARENTE sur l'ouverture reste propre a la page projet,
+  // et elle est geree ailleurs, par `data-zone`.
   const chrome = document.querySelector('header');
-  if (pageProjet && chrome) {
+  if (chrome) {
     const SEUIL = 8;        // px de mouvement avant de reagir, evite le tremblement
     const HAUT = 120;       // en deca, on est encore dans l'ouverture
     let dernierY = window.scrollY;
@@ -1269,6 +1273,12 @@ document.addEventListener('DOMContentLoaded', () => {
     background:      'var(--primary-color-alpha)',
     border:          'none',
     borderRadius:    '28%',
+    // ⚠️ La forme de coin doit etre posee ICI aussi. Ce bouton est dessine par
+    // le JS avec un style en ligne : aucune regle CSS ne l'atteint, donc le
+    // passage au squircle du 28/07 l'avait laisse rond. Meme piege que les deux
+    // couleurs trouvees le matin meme, et meme lecon : ce qui est ecrit depuis
+    // le JS echappe a tout balayage de la feuille de style.
+    cornerShape:     'squircle',
     cursor:          'pointer',
     zIndex:          '998',
     backdropFilter:  'none',

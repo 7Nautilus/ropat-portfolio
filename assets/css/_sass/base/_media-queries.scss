@@ -168,6 +168,7 @@
   /* Hero Section */
   .hero-image {
     border-radius: var(--border-radius-sm);
+    corner-shape: squircle;
   }
 
   .big-icon svg {

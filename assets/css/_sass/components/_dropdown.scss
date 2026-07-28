@@ -16,6 +16,7 @@
   background-color: var(--primary-color-alpha);
   color: var(--white-color);
   border-radius: var(--border-radius-sm);
+  corner-shape: squircle;
   border: var(--border-primary);
   padding: var(--spacing-sm);
   cursor: pointer;
@@ -62,6 +63,7 @@
   border: var(--border-primary);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-sm);
+  corner-shape: squircle;
   position: absolute;
   top: 110%;
   left: 50%;

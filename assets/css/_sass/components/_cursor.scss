@@ -31,7 +31,20 @@
     border-radius: 50%;
     corner-shape: squircle;
     pointer-events: none;
-    z-index: 9999;
+    /* ⚠️ LE CURSEUR EST LE SEUL ELEMENT QUI A LE DROIT D'ETRE AU-DESSUS DE
+       TOUT, et il doit l'etre : il remplace le pointeur du systeme, donc s'il
+       passe DERRIERE quelque chose, l'utilisateur perd son pointeur.
+       Il etait a 9999, exactement comme la lightbox, et a valeur egale c'est le
+       dernier dans le DOM qui gagne : la lightbox est injectee en fin de
+       `body`, donc elle recouvrait le curseur. Symptome signale par Ropat :
+       « on ne voit plus le curseur dans la lightbox ».
+       Le bouton de fermeture de la lightbox est lui a 10000 : monter d'un cran
+       n'aurait regle que la moitie du probleme, et le prochain calque poserait
+       la meme question. On prend le maximum de la propriete, une fois pour
+       toutes.
+       Aucun risque de masquage : `pointer-events: none` juste au-dessus, donc
+       il ne peut rien intercepter. */
+    z-index: 2147483647;
     transform: translate(-50%, -50%);
     will-change: transform;
     transition:
@@ -54,6 +67,7 @@
       width: 3px;
       height: 28px;
       border-radius: 9999px;
+      corner-shape: squircle;
       border: none;
       background: var(--white-color);
     }

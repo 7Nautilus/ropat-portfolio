@@ -120,6 +120,40 @@ header {
    au-dessus d'un media elle marque `surImage` et son ratio ne veut rien dire.
    Un « 0 echec » de sa part ne valide rien ici. */
 /* ══════════════════════════════════════════════════════════════════════════
+   LE CHROME S'ESCAMOTE AU DEFILEMENT
+   ══════════════════════════════════════════════════════════════════════════
+   Il se retire quand on descend (on lit, on regarde) et revient quand on
+   remonte (on cherche a naviguer).
+
+   ⚠️ Etendu a TOUTES LES PAGES le 28/07, sur demande de Ropat. Le comportement
+   n'existait que sur les pages projet, ou il etait justifie par l'oeuvre : ne
+   pas rester pose en permanence sur le travail du client. Mais l'argument vaut
+   plus largement, une barre qui suit pendant qu'on lit prend de la hauteur
+   d'ecran a du contenu sans rien apporter.
+   Il vit donc ici et non dans pages/_project.scss, qui ne garde que ce qui lui
+   est propre : la barre transparente sur l'ouverture.
+
+   La transition ne porte que sur ce qui bouge ici. `all` aurait attrape les
+   couleurs de la bascule d'encre, qui a deja la sienne plus bas. */
+header {
+  transition:
+    transform var(--dur-base) var(--ease-expo-out),
+    background-color var(--dur-base) ease,
+    border-bottom-color var(--dur-base) ease;
+}
+
+header[data-chrome="retire"] {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header { transition: none; }
+  /* Pas d'escamotage si l'on demande moins de mouvement : le chrome reste,
+     ce qui vaut mieux qu'une barre qui saute. */
+  header[data-chrome="retire"] { transform: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    LA BASCULE D'ENCRE
    ══════════════════════════════════════════════════════════════════════════
    Deux variables locales, et TOUT le chrome les lit. C'est ce qui permet a la
@@ -431,6 +465,7 @@ header[data-sur-media] {
 
 .burger-menu:focus {
   border-radius: 5px;
+  corner-shape: squircle;
   outline: 2px solid var(--signal-chrome);
   outline-offset: 4px;
 }
