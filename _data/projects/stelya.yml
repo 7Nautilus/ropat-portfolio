@@ -1,4 +1,8 @@
 slug: stelya
+# Le header garde l'encre claire et le logo orange sur cette page : la mesure
+# y donne les deux encres a moins de 0,3 l'une de l'autre, donc a l'ex aequo,
+# et c'est l'oeil qui tranche. Arbitrage de Ropat, 28/07/2026.
+chrome: clair
 project_title: "Stelya"
 subtitle: "Branding"
 theme:

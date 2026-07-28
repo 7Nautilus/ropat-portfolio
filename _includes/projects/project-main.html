@@ -126,7 +126,22 @@
   {% assign zoom_label = "Enlarge: " %}
 {% endif %}
 
-<main id="main-content" class="project-page">
+{%- comment -%}
+  ── ENCRE DU CHROME, SURCHARGE EDITORIALE ──────────────────────────────
+  Le header choisit son encre tout seul, en mesurant ce qu'il surplombe. Ce
+  champ ne desactive pas ce systeme, il tranche pour UNE piece quand la mesure
+  est a l'ex aequo et que l'oeil, lui, ne l'est pas.
+
+  ⚠️ Ce n'est PAS une liste blanche, et la nuance compte. Une liste blanche
+  demande qu'on pense a elle a chaque ajout, et elle echoue en silence quand on
+  oublie. Ici le defaut reste l'automatisme : un projet qui ne dit rien est
+  mesure comme les autres. Le champ est une DECISION, declaree la ou vivent les
+  decisions d'un projet.
+
+  Valeurs : `clair` (encre blanche, logo orange) ou `sombre`. Absent = mesure.
+{%- endcomment -%}
+<main id="main-content" class="project-page"
+      {% if project.chrome %}data-chrome-fige="{{ project.chrome }}"{% endif %}>
 
   {%- comment -%}
     ── OUVERTURE ────────────────────────────────────────────────────────

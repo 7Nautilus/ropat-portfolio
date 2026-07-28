@@ -749,6 +749,22 @@ document.addEventListener('DOMContentLoaded', () => {
     //  Ne pas « ameliorer » les seuils en visant ces trois pages : on
     //  degraderait les dix-sept autres pour rien.
     // ══════════════════════════════════════════════════════════════════
+    // ⚠️ LA SURCHARGE EDITORIALE. Une piece peut FIGER l'encre du chrome, via
+    // `chrome: clair` ou `chrome: sombre` dans son YAML, lu ici sur
+    // `.project-page[data-chrome-fige]`.
+    //
+    // Ce n'est pas un retour de la liste blanche qu'on a supprimee, et la
+    // nuance est le coeur du sujet : une liste blanche demande qu'on pense a
+    // elle a chaque ajout et echoue en silence quand on oublie. Ici le DEFAUT
+    // reste la mesure ; une page qui ne dit rien est traitee comme les autres.
+    // Le champ n'existe que pour les EX AEQUO, ces cas ou les deux encres sont
+    // a moins de la marge l'une de l'autre : la mesure n'a alors pas de
+    // preference et le resultat depend de l'ordre, alors que l'oeil, lui,
+    // tranche. Releve du 28/07 : stelya (1,09 / 1,36) et aelio (1,88 / 1,92),
+    // les deux figes en `clair` par Ropat.
+    const fige = (document.querySelector('.project-page[data-chrome-fige]') || {}).dataset;
+    const ENCRE_FIGEE = fige ? fige.chromeFige : null;
+
     const majEncre = (bas, force) => {
       const maintenant = performance.now();
       if (!force && maintenant - derniereMesure < PERIODE_MESURE) return;
@@ -797,10 +813,14 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.__debugEncre) {
         barre.setAttribute('data-dbg', 'clair ' + pireClair.toFixed(2) + ' / sombre ' + pireSombre.toFixed(2) + ' / n=' + vals.length);
       }
-      const veutSombre = !etabli
+      // La surcharge court-circuite la DECISION, pas la mesure : `data-sur-media`
+      // vient d'etre pose au-dessus, donc le garde-fou CSS reste juste, et les
+      // valeurs restent lisibles en debug pour comprendre pourquoi on a fige.
+      const veutSombre = ENCRE_FIGEE ? (ENCRE_FIGEE === 'sombre')
+        : (!etabli
         ? pireSombre > pireClair                          // premier choix : le meilleur, point
         : (encreSombre ? !(pireClair > pireSombre + MARGE)
-                       : pireSombre > pireClair + MARGE);
+                       : pireSombre > pireClair + MARGE));
       if (veutSombre === encreSombre && etabli) return;
       if (!etabli) {
         etabli = true; dernierChangement = performance.now();
