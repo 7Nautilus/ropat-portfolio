@@ -1686,7 +1686,15 @@ footer {
   box-shadow: var(--shadow-md);
   transform: scale(1.05);
 }
-.btn--solid:hover svg {
+.btn--solid {
+  /* ⚠️ `:not(.btn-icon-send)`. La rotation de -45° fait décoller la FLÈCHE,
+     qui pointe à l'horizontale au repos. L'icône d'envoi, elle, est déjà
+     dessinée penchée à 45° : la faire tourner encore la couchait à plat.
+     La règle visait « la flèche » et attrapait tous les svg, ce qui n'était
+     visible que depuis que l'icône d'envoi est en ligne et non plus une
+     image. */
+}
+.btn--solid:hover svg:not(.btn-icon-send) {
   transform: rotate(-45deg);
 }
 
@@ -1697,7 +1705,10 @@ footer {
 .card:hover .btn--ghost {
   transform: scale(1.05);
 }
-.card:hover .btn--ghost svg {
+.btn--ghost {
+  /* Même exclusion que sur le solide, pour la même raison. */
+}
+.card:hover .btn--ghost svg:not(.btn-icon-send) {
   transform: rotate(-45deg);
 }
 
