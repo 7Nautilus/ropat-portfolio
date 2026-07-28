@@ -715,35 +715,110 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </div>
 
   <div class="scene">
-    <p class="scene-titre">Dropdown · via <code>ui/dropdown.html</code>, variante filtre</p>
-    {%- comment -%}
-      Le vrai composant, avec les vraies options lues dans les donnees. Son
-      comportement vient d'un controleur unique de script.js branche sur
-      [data-dropdown-trigger] : ici il n'est PAS charge, donc le dropdown est
-      inerte. C'est volontaire et c'est une limite a connaitre du labo : il
-      montre les etats au repos, jamais l'interaction.
-    {%- endcomment -%}
-    {% include ui/dropdown.html id="labo-filtre" variant="filter" lang="fr"
-       options=site.data.projects.categories.options label="Filtrer" placeholder="Tous" %}
+    <p class="scene-titre">Dropdown · <code>ui/dropdown.html</code>, par axes</p>
+
+    <table class="jetons" style="margin-bottom:1.5rem">
+      <thead><tr><th>Propriété</th><th>Valeurs</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code> · <code>options</code></td><td>identifiant · liste</td>
+            <td style="color:#9CA3AF"><span style="color:#FF6B6B">requis</span></td></tr>
+        <tr><td><code>variant</code></td><td><code>filter</code>, <code>form</code></td>
+            <td style="color:#9CA3AF">habillages distincts, comportement identique</td></tr>
+        <tr><td><code>label</code> · <code>labelledby</code></td><td>texte · id</td>
+            <td style="color:#9CA3AF">l'un des deux, jamais aucun</td></tr>
+        <tr><td><code>selected</code> · <code>placeholder</code></td><td>valeur · texte</td>
+            <td style="color:#9CA3AF">l'invite est du <strong>texte</strong>, donc soumise aux 4,5:1</td></tr>
+        <tr><td><code>lang</code> · <code>extra</code></td><td>fr/en · passe-plat</td><td></td></tr>
+      </tbody>
+    </table>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 1 · la variante</p>
+    <div class="duo" style="margin-bottom:1.6rem">
+      <div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .5rem">filter</p>
+        {% include ui/dropdown.html id="labo-f1" variant="filter" lang="fr"
+           options=site.data.projects.categories.options label="Filtrer" placeholder="Tous" %}
+      </div>
+      <div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .5rem">form</p>
+        {% include ui/dropdown.html id="labo-f2" variant="form" lang="fr"
+           options=site.data.projects.categories.options label="Sujet" placeholder="Choisissez un sujet" %}
+      </div>
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · l'état</p>
+    <div class="duo" style="margin-bottom:1rem">
+      <div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .5rem">vide, l'invite est visible</p>
+        {% include ui/dropdown.html id="labo-f3" variant="form" lang="fr"
+           options=site.data.projects.categories.options label="Sujet" placeholder="Choisissez un sujet" %}
+      </div>
+      <div>
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .5rem">rempli</p>
+        {% include ui/dropdown.html id="labo-f4" variant="form" lang="fr"
+           options=site.data.projects.categories.options label="Sujet" selected="branding" placeholder="Choisissez un sujet" %}
+      </div>
+    </div>
+    <p>L'invite était à <strong>2,2:1</strong> avant le 27/07, soit le point le plus faible du
+    site, alors que c'est le seul endroit qui dit ce que le champ attend. Elle tient 7,4:1.</p>
+    <p>⚠️ <strong>L'état ouvert est manquant</strong>, et il ne peut pas être montré ici :
+    l'ouverture vit dans <code>aria-expanded</code>, posé par un contrôleur de
+    <code>script.js</code> qui n'est pas chargé sur cette page. Le dropdown est donc inerte.
+    C'est aussi l'état le plus important à vérifier au clavier, et il fait partie des six points
+    en attente de la passe au lecteur d'écran.</p>
   </div>
 
+
   <div class="scene">
-    <p class="scene-titre">Champ de formulaire · au repos, puis en erreur</p>
-    <div class="duo">
+    <p class="scene-titre">Champ de formulaire · par axes</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 1 · l'état</p>
+    <div class="duo" style="margin-bottom:1.6rem">
       <div class="contact-field">
-        <label for="labo-a" class="contact-label">Nom</label>
+        <label for="labo-a" class="contact-label">Repos</label>
         <input type="text" id="labo-a" class="contact-input" placeholder="Votre nom">
       </div>
       <div class="contact-field">
-        <label for="labo-b" class="contact-label">Email</label>
+        <label for="labo-b" class="contact-label">Erreur</label>
         <input type="text" id="labo-b" class="contact-input" placeholder="votre@email.com"
                aria-invalid="true" aria-describedby="labo-b-err" style="border-color:var(--danger)">
         <p class="contact-erreur" id="labo-b-err">L'adresse email est obligatoire.</p>
       </div>
     </div>
-    <p style="margin-top:1rem">L'erreur est portée par du <strong>texte</strong>, pas par la
-    bordure. Avant le 27/07 elle n'existait qu'en couleur, ce qui échouait WCAG 3.3.1 et 1.4.1,
-    tous deux de niveau A : le bouton ne faisait rien, sans dire pourquoi.</p>
+    <p style="margin:-.6rem 0 1.6rem">L'erreur est portée par du <strong>texte</strong>, la
+    bordure ne fait que la répéter. Avant le 27/07 elle n'existait qu'en couleur : le bouton ne
+    faisait rien, sans dire pourquoi. Deux échecs de <strong>niveau A</strong>, WCAG 3.3.1
+    (l'erreur doit être décrite) et 1.4.1 (la couleur ne peut pas être le seul vecteur).</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · le type de champ</p>
+    <div class="duo" style="margin-bottom:1.6rem">
+      <div class="contact-field">
+        <label for="labo-c" class="contact-label">Ligne simple</label>
+        <input type="text" id="labo-c" class="contact-input" placeholder="Votre nom">
+      </div>
+      <div class="contact-field">
+        <label for="labo-d" class="contact-label">Zone de texte</label>
+        <textarea id="labo-d" class="contact-input contact-textarea" rows="3"
+                  placeholder="Décrivez votre projet en quelques lignes…"></textarea>
+      </div>
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 3 · ce qui porte le sens</p>
+    <table class="jetons">
+      <thead><tr><th>Élément</th><th>Rôle</th><th>Mesure</th></tr></thead>
+      <tbody>
+        <tr><td><code>.contact-label</code></td><td>nomme le champ, toujours visible</td>
+            <td style="color:#9CA3AF">une invite n'est pas une étiquette, elle disparaît à la saisie</td></tr>
+        <tr><td><code>::placeholder</code></td><td>donne le <strong>format attendu</strong></td>
+            <td><span class="ratio ok">7,45:1</span> <span style="color:rgba(255,255,255,.46)">était 2,2</span></td></tr>
+        <tr><td><code>.contact-erreur</code></td><td>décrit l'erreur, avec un signe non coloré</td>
+            <td><span class="ratio ok">7,26:1</span></td></tr>
+      </tbody>
+    </table>
+    <p>⚠️ Un <code>::placeholder</code> est un pseudo-élément : il n'existe dans <strong>aucun
+    nœud du DOM</strong>. Une sonde de contraste qui parcourt les éléments le déclare conforme
+    par omission, ce qui est exactement ce qui s'est passé le 27/07. Il faut le viser
+    explicitement.</p>
   </div>
 
   <div class="scene">
