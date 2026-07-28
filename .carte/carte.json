@@ -1,0 +1,625 @@
+{
+  "genere_le": "2026-07-28T23:37:49Z",
+  "commit": "59f3125",
+  "pages_construites": 66,
+  "perime": null,
+  "indetermines": 7,
+  "routes": [
+    {
+      "source": "index.html",
+      "url": "/",
+      "lang": "fr"
+    },
+    {
+      "source": "DESIGN.md",
+      "url": "/DESIGN.html",
+      "lang": null
+    },
+    {
+      "source": "design-system.html",
+      "url": "/design-system.html",
+      "lang": "fr"
+    },
+    {
+      "source": "en/index.html",
+      "url": "/en/",
+      "lang": "en"
+    },
+    {
+      "source": "en/about.html",
+      "url": "/en/about.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/contact.html",
+      "url": "/en/contact.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/legal-notice.html",
+      "url": "/en/legal-notice.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/portfolio.html",
+      "url": "/en/portfolio.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/privacy.html",
+      "url": "/en/privacy.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/a-lone.html",
+      "url": "/en/projects/a-lone.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/aelio.html",
+      "url": "/en/projects/aelio.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/btr.html",
+      "url": "/en/projects/btr.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/chat-noir.html",
+      "url": "/en/projects/chat-noir.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/cheetah.html",
+      "url": "/en/projects/cheetah.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/crow.html",
+      "url": "/en/projects/crow.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/exit.html",
+      "url": "/en/projects/exit.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/hdd-defrag.html",
+      "url": "/en/projects/hdd-defrag.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/hors-champ.html",
+      "url": "/en/projects/hors-champ.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/jhag-banana-rush.html",
+      "url": "/en/projects/jhag-banana-rush.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/jhag-discovery-set.html",
+      "url": "/en/projects/jhag-discovery-set.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/jhag-pinterest.html",
+      "url": "/en/projects/jhag-pinterest.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/jpeja.html",
+      "url": "/en/projects/jpeja.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/logo-process.html",
+      "url": "/en/projects/logo-process.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/moon-vtc.html",
+      "url": "/en/projects/moon-vtc.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/ottony-paris.html",
+      "url": "/en/projects/ottony-paris.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/outlast-trials.html",
+      "url": "/en/projects/outlast-trials.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/sipsmith.html",
+      "url": "/en/projects/sipsmith.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/stelya.html",
+      "url": "/en/projects/stelya.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/projects/zylkene.html",
+      "url": "/en/projects/zylkene.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/services.html",
+      "url": "/en/services.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/services/branding-strategy.html",
+      "url": "/en/services/branding-strategy.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/services/graphic-design.html",
+      "url": "/en/services/graphic-design.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/services/music-design.html",
+      "url": "/en/services/music-design.html",
+      "lang": "en"
+    },
+    {
+      "source": "en/services/web-design.html",
+      "url": "/en/services/web-design.html",
+      "lang": "en"
+    },
+    {
+      "source": "fr/about.html",
+      "url": "/fr/about.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/confidentialite.html",
+      "url": "/fr/confidentialite.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/contact.html",
+      "url": "/fr/contact.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/experiences.html",
+      "url": "/fr/experiences.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/mentions-legales.html",
+      "url": "/fr/mentions-legales.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/portfolio.html",
+      "url": "/fr/portfolio.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/a-lone.html",
+      "url": "/fr/projects/a-lone.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/aelio.html",
+      "url": "/fr/projects/aelio.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/btr.html",
+      "url": "/fr/projects/btr.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/chat-noir.html",
+      "url": "/fr/projects/chat-noir.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/cheetah.html",
+      "url": "/fr/projects/cheetah.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/crow.html",
+      "url": "/fr/projects/crow.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/exit.html",
+      "url": "/fr/projects/exit.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/hdd-defrag.html",
+      "url": "/fr/projects/hdd-defrag.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/hors-champ.html",
+      "url": "/fr/projects/hors-champ.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/jhag-banana-rush.html",
+      "url": "/fr/projects/jhag-banana-rush.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/jhag-discovery-set.html",
+      "url": "/fr/projects/jhag-discovery-set.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/jhag-pinterest.html",
+      "url": "/fr/projects/jhag-pinterest.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/jpeja.html",
+      "url": "/fr/projects/jpeja.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/logo-process.html",
+      "url": "/fr/projects/logo-process.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/moon-vtc.html",
+      "url": "/fr/projects/moon-vtc.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/ottony-paris.html",
+      "url": "/fr/projects/ottony-paris.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/outlast-trials.html",
+      "url": "/fr/projects/outlast-trials.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/sipsmith.html",
+      "url": "/fr/projects/sipsmith.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/stelya.html",
+      "url": "/fr/projects/stelya.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/projects/zylkene.html",
+      "url": "/fr/projects/zylkene.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/services.html",
+      "url": "/fr/services.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/services/branding-strategie.html",
+      "url": "/fr/services/branding-strategie.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/services/conception-graphique.html",
+      "url": "/fr/services/conception-graphique.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/services/design-musique.html",
+      "url": "/fr/services/design-musique.html",
+      "lang": "fr"
+    },
+    {
+      "source": "fr/services/web-design.html",
+      "url": "/fr/services/web-design.html",
+      "lang": "fr"
+    },
+    {
+      "source": "labo/design-system.html",
+      "url": "/labo/design-system.html",
+      "lang": null
+    },
+    {
+      "source": "sitemap.xml",
+      "url": "/sitemap.xml",
+      "lang": null
+    }
+  ],
+  "includes": [
+    "_layouts/default.html -> lang-detector.html",
+    "_layouts/default.html -> layout/footer.html",
+    "_layouts/default.html -> layout/header.html",
+    "_layouts/default.html -> meta/open-graph.html",
+    "_layouts/default.html -> meta/schema-org.html",
+    "design-system.html -> social-media-icons.html",
+    "en/about.html -> pages/about.html",
+    "en/contact.html -> pages/contact.html",
+    "en/index.html -> pages/index.html",
+    "en/portfolio.html -> pages/portfolio.html",
+    "en/projects/a-lone.html -> projects/project-main.html",
+    "en/projects/aelio.html -> projects/project-main.html",
+    "en/projects/btr.html -> projects/project-main.html",
+    "en/projects/chat-noir.html -> projects/project-main.html",
+    "en/projects/cheetah.html -> projects/project-main.html",
+    "en/projects/crow.html -> projects/project-main.html",
+    "en/projects/exit.html -> projects/project-main.html",
+    "en/projects/hdd-defrag.html -> projects/project-main.html",
+    "en/projects/hors-champ.html -> projects/project-main.html",
+    "en/projects/jhag-banana-rush.html -> projects/project-main.html",
+    "en/projects/jhag-discovery-set.html -> projects/project-main.html",
+    "en/projects/jhag-pinterest.html -> projects/project-main.html",
+    "en/projects/jpeja.html -> projects/project-main.html",
+    "en/projects/logo-process.html -> projects/project-main.html",
+    "en/projects/moon-vtc.html -> projects/project-main.html",
+    "en/projects/ottony-paris.html -> projects/project-main.html",
+    "en/projects/outlast-trials.html -> projects/project-main.html",
+    "en/projects/sipsmith.html -> projects/project-main.html",
+    "en/projects/stelya.html -> projects/project-main.html",
+    "en/projects/zylkene.html -> projects/project-main.html",
+    "en/services.html -> pages/services.html",
+    "en/services/branding-strategy.html -> services/service-main.html",
+    "en/services/graphic-design.html -> services/service-main.html",
+    "en/services/music-design.html -> services/service-main.html",
+    "en/services/web-design.html -> services/service-main.html",
+    "fr/about.html -> pages/about.html",
+    "fr/contact.html -> pages/contact.html",
+    "fr/experiences.html -> pages/experiences.html",
+    "fr/portfolio.html -> pages/portfolio.html",
+    "fr/projects/a-lone.html -> projects/project-main.html",
+    "fr/projects/aelio.html -> projects/project-main.html",
+    "fr/projects/btr.html -> projects/project-main.html",
+    "fr/projects/chat-noir.html -> projects/project-main.html",
+    "fr/projects/cheetah.html -> projects/project-main.html",
+    "fr/projects/crow.html -> projects/project-main.html",
+    "fr/projects/exit.html -> projects/project-main.html",
+    "fr/projects/hdd-defrag.html -> projects/project-main.html",
+    "fr/projects/hors-champ.html -> projects/project-main.html",
+    "fr/projects/jhag-banana-rush.html -> projects/project-main.html",
+    "fr/projects/jhag-discovery-set.html -> projects/project-main.html",
+    "fr/projects/jhag-pinterest.html -> projects/project-main.html",
+    "fr/projects/jpeja.html -> projects/project-main.html",
+    "fr/projects/logo-process.html -> projects/project-main.html",
+    "fr/projects/moon-vtc.html -> projects/project-main.html",
+    "fr/projects/ottony-paris.html -> projects/project-main.html",
+    "fr/projects/outlast-trials.html -> projects/project-main.html",
+    "fr/projects/sipsmith.html -> projects/project-main.html",
+    "fr/projects/stelya.html -> projects/project-main.html",
+    "fr/projects/zylkene.html -> projects/project-main.html",
+    "fr/services.html -> pages/services.html",
+    "fr/services/branding-strategie.html -> services/service-main.html",
+    "fr/services/conception-graphique.html -> services/service-main.html",
+    "fr/services/design-musique.html -> services/service-main.html",
+    "fr/services/web-design.html -> services/service-main.html",
+    "index.html -> pages/index.html",
+    "labo/design-system.html -> ui/button.html",
+    "labo/design-system.html -> ui/dropdown.html",
+    "labo/design-system.html -> ui/status-dot.html",
+    "layout/footer.html -> lang-selector.html",
+    "layout/header.html -> burger-menu.html",
+    "layout/header.html -> layout/nav.html",
+    "layout/header.html -> ui/logo.html",
+    "layout/nav.html -> ui/button.html",
+    "pages/about.html -> ui/button.html",
+    "pages/about.html -> ui/status-dot.html",
+    "pages/contact.html -> social-media-icons.html",
+    "pages/contact.html -> ui/button.html",
+    "pages/contact.html -> ui/dropdown.html",
+    "pages/experiences.html -> experiences/experience-card.html",
+    "pages/experiences.html -> scroll-down-link.html",
+    "pages/index.html -> projects/project-card.html",
+    "pages/index.html -> services/service-card.html",
+    "pages/index.html -> ui/button.html",
+    "pages/index.html -> ui/logo.html",
+    "pages/index.html -> ui/status-dot.html",
+    "pages/portfolio.html -> portfolio-filters.html",
+    "pages/portfolio.html -> projects/project-card.html",
+    "pages/portfolio.html -> scroll-down-link.html",
+    "pages/services.html -> scroll-down-link.html",
+    "pages/services.html -> services/service-card.html",
+    "pages/services.html -> ui/button.html",
+    "portfolio-filters.html -> ui/dropdown.html",
+    "projects/project-main.html -> projects/project-note.html",
+    "projects/project-main.html -> scroll-down-link.html",
+    "projects/project-main.html -> ui/button.html",
+    "services/service-card.html -> ui/button.html",
+    "services/service-main.html -> projects/project-card.html",
+    "services/service-main.html -> services/subservices-card.html",
+    "services/service-main.html -> ui/button.html",
+    "ui/button.html -> ui/icon-arrow.html",
+    "ui/button.html -> ui/icon-send.html"
+  ],
+  "jetons": [
+    "--accent",
+    "--accent-ink",
+    "--accent-soft",
+    "--air-bas",
+    "--air-haut",
+    "--background-dark",
+    "--background-light",
+    "--bevel-cut",
+    "--border-primary",
+    "--border-radius-full",
+    "--border-radius-lg",
+    "--border-radius-md",
+    "--border-radius-sm",
+    "--border-radius-squircle-full",
+    "--border-radius-squircle-medium",
+    "--border-radius-xl",
+    "--border-subtle",
+    "--carousel-gap",
+    "--carousel-item-width",
+    "--carousel-items-visible",
+    "--carousel-speed",
+    "--color-success",
+    "--danger",
+    "--dur-base",
+    "--dur-quick",
+    "--dur-reveal",
+    "--ease-expo-out",
+    "--ease-out",
+    "--ease-quad-out",
+    "--ease-smooth",
+    "--encre-chrome",
+    "--font-accent",
+    "--font-body",
+    "--font-heading",
+    "--gray-dark",
+    "--gray-light",
+    "--grey-light-400",
+    "--hairline-width",
+    "--hauteur-chrome",
+    "--ink",
+    "--ink-decorative",
+    "--ink-muted",
+    "--ink-soft",
+    "--ink-subtle",
+    "--leading-body",
+    "--leading-meta",
+    "--leading-tight",
+    "--line",
+    "--line-control",
+    "--measure-lede",
+    "--measure-prose",
+    "--p-encre-sombre",
+    "--p-neige-basse",
+    "--p-neige-haute",
+    "--p-neige-mediane",
+    "--p-orange",
+    "--p-rouge-erreur",
+    "--p-vert-basse",
+    "--p-vert-haute",
+    "--p-vert-mediane",
+    "--p-vert-succes",
+    "--page-gutter",
+    "--primary-color",
+    "--primary-color-alpha",
+    "--radius-lg",
+    "--radius-md",
+    "--radius-pill",
+    "--radius-sm",
+    "--radius-xl",
+    "--rhythm-lg",
+    "--rhythm-md",
+    "--rhythm-sm",
+    "--scrim-canal",
+    "--secondary-color",
+    "--shadow-ambient",
+    "--shadow-ambient-strong",
+    "--shadow-md",
+    "--shadow-signal",
+    "--shadow-sm",
+    "--signal-chrome",
+    "--signal-width",
+    "--spacing-lg",
+    "--spacing-md",
+    "--spacing-sm",
+    "--spacing-xl",
+    "--spacing-xs",
+    "--squircle-full",
+    "--squircle-medium",
+    "--squircle-small",
+    "--success",
+    "--surface",
+    "--surface-faint",
+    "--surface-placeholder",
+    "--surface-scrim",
+    "--surface-subtle",
+    "--surface-veil",
+    "--text-body",
+    "--text-caption",
+    "--text-display",
+    "--text-meta",
+    "--text-muted",
+    "--text-subhead",
+    "--text-title",
+    "--track-caps",
+    "--track-display",
+    "--transition-base",
+    "--white-color"
+  ],
+  "jetons_sans_consommateur": [
+    "--dur-reveal",
+    "--p-vert-haute",
+    "--p-vert-mediane",
+    "--rhythm-lg",
+    "--rhythm-md",
+    "--rhythm-sm",
+    "--scrim-canal",
+    "--shadow-ambient-strong",
+    "--squircle-small",
+    "--text-muted",
+    "--track-display"
+  ],
+  "selecteurs_absents": [
+    ".reveal-arme",
+    ".is-visible",
+    ".transparent-orange-bg",
+    ".card-grid",
+    ".service-main-container",
+    ".hero-project",
+    ".hero-project-container",
+    ".hero-image-container",
+    ".hero-intro",
+    ".hero-image",
+    ".service-main-container-text",
+    ".services-page-subtitle",
+    ".services-page-description",
+    ".cursor-hover",
+    ".cursor-text",
+    ".cursor-zoom",
+    ".lightbox-image",
+    ".loaded",
+    ".loader-logo-text",
+    ".service-card-big",
+    ".subservice-section",
+    "#contact-social-links",
+    ".social-links",
+    ".social-icon",
+    ".was-validated",
+    ".contact-select",
+    ".is-invalid",
+    ".galerie-plus",
+    ".project-back-link"
+  ],
+  "assets_orphelins": [
+    "/assets/videos/crow-noir-fluo.mp4",
+    "/assets/videos/jhag/jhag-br-p3-anim-pile.mp4",
+    "/assets/videos/crow-ascii.mp4",
+    "/assets/videos/cheetah-noir-fluo.mp4",
+    "/assets/images/projects/chatnoir.jpg",
+    "/assets/images/backgrounds/main-bg.webp",
+    "/assets/images/projects/jhag/jhag-br-p1-kv.webp",
+    "/assets/images/projects/JPeJA-thumbnail2.jpg",
+    "/assets/images/projects/aelio/aelio-app-mockup-alone.avif",
+    "/assets/images/projects/jhag/jhag-br-p3-flambe.webp",
+    "/assets/images/projects/Stelya/stelya-og.webp",
+    "/assets/images/projects/hors-champ/hors-champ-og.webp",
+    "/assets/images/projects/sipsmith/sipsmith-og.webp",
+    "/assets/images/projects/aelio/aelio-og.webp",
+    "/assets/images/projects/jhag/jhag-pinterest-og.webp",
+    "/assets/images/partners/ottony-paris.svg"
+  ],
+  "assets_manquants": [],
+  "css_octets": {
+    "brut": 175566,
+    "gzip": 51177,
+    "sans_commentaires": 76287,
+    "gzip_sans": 12451
+  }
+}

@@ -15,6 +15,8 @@ exclude:
   - VEILLE.md
   - TODO.md
   - CLAUDE.md
+  # Sortie de `scripts/carte.rb`. Sans cette ligne Jekyll la rend en /CARTE.html.
+  - CARTE.md
   - scripts/
   - DESIGN.md
 
