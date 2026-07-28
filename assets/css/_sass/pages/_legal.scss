@@ -13,14 +13,14 @@
 
 .legal-content h2 {
   color: var(--primary-color);
-  font-size: var(--fs-h3);
+  font-size: var(--text-subhead);
   margin-bottom: var(--spacing-md);
   margin-top: var(--spacing-xl);
 }
 
 .legal-content h3 {
   color: var(--white-color);
-  font-size: var(--fs-h4);
+  font-size: var(--text-subhead);
   margin-bottom: var(--spacing-sm);
   margin-top: var(--spacing-lg);
 }
@@ -59,6 +59,6 @@
 
 .legal-meta {
   margin-top: 2rem;
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   opacity: 0.7;
 }

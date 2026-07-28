@@ -38,15 +38,19 @@ main:has(.contact-hero) {
   }
 }
 
+/* C'est un <h2>, et c'etait la TROISIEME convention du site pour le meme
+   role : Manrope 700 en capitales a 12 px ici, Chakra 500 en capitales sur
+   la page projet, Chakra 700 sans capitales sur A propos. Les trois
+   rejoignent `subhead`. Un titre de section n'est pas une etiquette de
+   metadonnee. */
 .contact-section-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-family: var(--font-heading);
+  font-size: var(--text-subhead);
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  line-height: var(--leading-tight);
+  color: var(--ink);
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--line);
   margin-bottom: var(--spacing-lg);
 }
 
@@ -81,14 +85,14 @@ main:has(.contact-hero) {
 
 .contact-label {
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .contact-input {
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -101,8 +105,16 @@ main:has(.contact-hero) {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 
+  /* Le texte d'invite est du TEXTE : 4,5:1 comme le reste (WCAG 1.4.3).
+     A 0,25 d'opacite il tenait 2,2:1, et c'est lui qui porte le format
+     attendu (« votre@email.com »), donc l'information la plus utile du champ.
+     ⚠️ Un ::placeholder est un pseudo-element : il n'existe dans aucun noeud
+     du DOM. Une sonde de contraste qui parcourt les elements ne le voit pas
+     et le declare conforme par omission. Verifie a l'oeil sur capture, puis
+     mesure a part. */
   &::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--ink-muted);
+    opacity: 1;   /* Firefox applique une opacite de 0,54 par defaut */
   }
 
   &:focus {
@@ -112,7 +124,31 @@ main:has(.contact-hero) {
 
   // Validation visuelle uniquement après interaction utilisateur
   .contact-form.was-validated &:invalid {
-    border-color: rgba(255, 80, 80, 0.5);
+    border-color: var(--danger);
+  }
+}
+
+/* Le message d'erreur, en TEXTE. C'est lui qui porte l'information ; la
+   bordure rouge ne fait que la repeter pour ceux qui la voient.
+   Pose par script.js et rattache au champ par aria-describedby, donc relu a
+   chaque prise de focus et pas seulement au moment de l'echec. */
+.contact-erreur {
+  font-family: var(--font-body);
+  font-size: var(--text-meta);
+  line-height: 1.4;
+  color: var(--danger);
+  margin-top: 0.4rem;
+
+  /* Vide, il ne doit occuper aucune place : sinon chaque champ traine une
+     ligne blanche sous lui en permanence. `:empty` et non une classe, l'etat
+     est deja porte par le contenu. */
+  &:empty { display: none; }
+
+  /* Le signe ne peut pas etre la seule couleur (WCAG 1.4.1). */
+  &::before {
+    content: '\00d7';
+    font-weight: 700;
+    margin-right: 0.4rem;
   }
 }
 
@@ -201,18 +237,22 @@ main:has(.contact-hero) {
 .contact-info-label {
   display: block;
   font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
+  font-size: var(--text-caption);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.35);
+  /* Etait rgba(255,255,255,0.35), mesure a 3,09:1 sur le sol : sous les 4,5:1
+     qu'exige WCAG 1.4.3 pour du texte. Un libelle attenue reste attenue par
+     sa taille, sa graisse et ses capitales ; il n'a pas besoin d'etre en plus
+     a demi efface. `--ink-muted` tient 7,4:1 sur le meme fond. */
+  color: var(--ink-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-caps);
   margin-bottom: 0.15rem;
 }
 
 .contact-info-value {
   display: block;
   font-family: var(--font-heading);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   font-weight: 600;
   color: var(--white-color);
 }
@@ -233,7 +273,7 @@ main:has(.contact-hero) {
 .contact-dropdown {
   position: relative;
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -262,7 +302,7 @@ main:has(.contact-hero) {
   // Validation : champ vide après tentative de submit
   .contact-form.was-validated ~ * &,
   .contact-form.was-validated &.is-invalid {
-    border-color: rgba(255, 80, 80, 0.5);
+    border-color: var(--danger);
   }
 }
 
@@ -272,9 +312,13 @@ main:has(.contact-hero) {
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  /* L'invite « Choisissez un sujet » est du TEXTE, pas une decoration : elle
+     est soumise aux 4,5:1 de WCAG 1.4.3 comme le reste. A 0,25 d'opacite elle
+     tombait a 2,22:1 sur le champ, soit le point le plus faible du site.
+     C'est aussi le seul endroit qui dit ce que le champ attend. */
   &[data-empty="true"],
   &:not([data-value]) {
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--ink-muted);
   }
 }
 
@@ -330,7 +374,7 @@ main:has(.contact-hero) {
   padding: 0.6rem 0.75rem;
   border-radius: calc(var(--border-radius-sm) - 4px);
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.75);
   cursor: pointer;

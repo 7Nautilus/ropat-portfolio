@@ -2,13 +2,25 @@
    FADE UP
    ================================ */
 
-.animate-fade-up {
+/* ⚠️ Le masquage est conditionne a `html.reveal-arme`, ajoute le 28/07/2026.
+   `.animate-fade-up { opacity: 0 }` etait l'etat par DEFAUT, en CSS, et seul
+   le JS le levait en posant `.is-visible`. Aucun repli. Consequence mesuree :
+   20 elements par page projet, dont TOUTE la planche, le colophon et le bloc
+   systeme, restaient invisibles si `script.js` ne s'executait pas. Sur un
+   portfolio, ou l'oeuvre EST le produit, la page se serait servie vide.
+   Ce n'est pas theorique : c'est arrive deux fois en capture pendant cette
+   passe, l'observateur n'ayant pas encore declenche.
+   Desormais le contenu est visible par defaut et ne se cache QUE si le JS a
+   pu s'armer. Le garde-fou du layout leve l'armement au bout de 2,5 s si
+   l'observateur n'a jamais confirme : une revelation ratee coute une
+   animation, plus une section blanche. */
+.reveal-arme .animate-fade-up {
   opacity: 0;
   transform: translate3d(0, 24px, 0);
   will-change: opacity, transform;
 }
 
-.animate-fade-up.is-visible {
+.reveal-arme .animate-fade-up.is-visible {
   animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--animate-delay, 0ms) forwards;
 }
 

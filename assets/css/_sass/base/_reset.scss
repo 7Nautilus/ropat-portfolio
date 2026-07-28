@@ -14,7 +14,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -37,17 +37,28 @@ html {
   will-change: transform;
 }
 
+/* Le dither est sombre par construction (trio vert profond). Sous le skin
+   clair il n'a rien a faire a l'ecran : on le retire, et la surface claire
+   reste un aplat. Sa matiere propre (neige / lichen) est un livrable de la
+   Phase 3 ; d'ici la, l'aplat est un etat correct, pas un etat casse. */
+[data-theme="light"] #fond-dither {
+  display: none;
+}
+
 body {
   font-family: var(--font-body);
   /* Repli : si WebGL manque, le module rend null et c'est cette couleur qu'on
      voit. C'est le plancher du trio, donc la degradation est un aplat de la
      bonne couleur et non un noir etranger. */
-  background-color: var(--fond-profond);
-  color: var(--white-color);
+  background-color: var(--surface);
+  color: var(--ink);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  /* 1,65 et non 1,2 : 1,2 est une valeur de TITRE. Herite par tout texte
+     qui n'en declare pas, elle composait le labeur en interligne d'affiche
+     (mesure : .about-specialty-item, 86 caracteres en 1,2). */
+  line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;

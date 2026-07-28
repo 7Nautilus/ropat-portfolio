@@ -1,20 +1,34 @@
 // Texte entouré de la bordure orange dans le coin inférieur droit
 .bubble-container {
-  line-height: 1.625;
+  line-height: var(--leading-body);
   max-width: 42rem;
 }
 
 .bubble-container p {
   font-family: var(--font-body);
-  font-size: var(--fs-p);
-  color: var(--text-secondary-color);
+  font-size: var(--text-body);
+  /* Etait `--text-secondary-color`, un token FANTOME : utilise ici une seule
+     fois dans toute la feuille, et defini nulle part. La declaration etait
+     donc invalide et le paragraphe heritait d'une couleur au hasard. La
+     Phase 0 devait les supprimer, celui-ci avait survecu. */
+  color: var(--ink-soft);
   padding: 1.25rem 2rem;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   background-color: var(--secondary-color);
+
+  /* La forme de bulle reste : elle est de la voix, c'est elle qui dit que ce
+     paragraphe s'adresse au visiteur. Ce qui tombe, c'est le LISERE LATERAL
+     orange de 4px (plus un filet de 2px en bas). Deux raisons :
+       . il ne signalait rien, comme les 20 autres bordures orange soldees
+         dans cette phase ;
+       . un `border-left` epais et colore en guise d'accent est un cas connu
+         de faux accent : la forme de la bulle porte deja l'intention, le
+         liseré ne fait que la repeter en criant.
+     Filet neutre sur les quatre cotes : la bulle garde son contour, sans
+     depenser du signal pour un paragraphe d'introduction. */
   border-radius: 0 2rem 2rem 2rem;
-  border-left: 0.25rem solid var(--primary-color);
-  border-bottom: 0.125rem solid var(--primary-color);
+  border: var(--hairline-width) solid var(--line);
 }
 
 // Titre en haut à gauche
@@ -83,8 +97,8 @@
   color: var(--white-color);
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
-  font-size: var(--fs-small);
-  font-weight: 800;
+  font-size: var(--text-caption);
+  font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
 }

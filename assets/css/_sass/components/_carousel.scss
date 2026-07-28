@@ -1,7 +1,10 @@
 ﻿.partners-carousel {
   /* Configuration responsive du nombre d''items */
   container-type: inline-size;
-  --carousel-items-visible: 3;
+  /* 5 et non 3 : sans carte pour les structurer, trois logos sur toute la
+     largeur laissaient trop d'air entre eux. Une bande de confiance se lit
+     comme une SUITE, la densite fait partie de l'argument. */
+  --carousel-items-visible: 5;
   --carousel-gap: 2rem;
   /* Calcule la largeur d''un item pour que "X" items rentrent parfaitement (espacements inclus) */
   --carousel-item-width: calc((100cqw / var(--carousel-items-visible)) - (var(--carousel-gap) * (var(--carousel-items-visible) - 1) / var(--carousel-items-visible)));
@@ -43,36 +46,52 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    padding: 2.5rem 1.5rem;
+    /* Le vertical passe de 2,5rem a 1rem : sans fond ni bordure, il ne
+       dessinait plus rien, il ne faisait qu'ajouter de la hauteur a une boite
+       invisible. L'horizontal se resserre aussi, la place par logo ayant ete
+       divisee par 5 au lieu de 3. */
+    padding: 1rem;
 
-    background-color: var(--secondary-color);
-    border: 2px solid var(--primary-color);
-    border-radius: var(--border-radius-lg);
-  
-    @supports (corner-shape: squircle) {
-      border-radius: var(--border-radius-squircle-medium);;
-      corner-shape: squircle;
-    }
+    /* ── SANS CARTE, essai du 28/07/2026 ──────────────────────────────
+       Les logos sont poses directement sur le sol dither. Ce qu'il y avait
+       avant, et pourquoi ca tombe :
+         . un contour orange de 2px, qui revenait a signer chaque marque
+           tierce aux couleurs de Ropat et a repeter le signal une fois par
+           logo ;
+         . puis un filet neutre sur un voile noir a 50 %, soit une boite a
+           peine perceptible qui n'etait ni assez presente pour etre une
+           carte, ni assez absente pour laisser respirer.
+       Une bande de confiance n'a pas besoin de cadre : ce sont les marques
+       qu'on doit lire, pas les boites qui les contiennent. Le voile servait a
+       calmer le dither sous les logos, mais les logos sont en niveau de gris
+       a pleine opacite, donc clairs, et le sol est quasi noir : le contraste
+       ne depend pas de lui.
+       Reversible en une fois : reposer `background-color: var(--secondary-color)`
+       et un `border`. */
 
-    span {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #555;
-      text-align: center;
-      white-space: nowrap;
-      transition: color 0.3s ease;
-    }
+    /* ⚠️ Les regles `span` sont SUPPRIMEES : elles etaient du CSS mort. Aucun
+       `<span>` n'existe dans `.partner-logo-container` (verifie au DOM), donc
+       elles n'ont jamais rien peint. Elles posaient un gris moyen au repos et
+       du noir pur au survol : ecrites pour un fond clair, elles auraient de
+       toute facon donne du noir sur du quasi-noir, le fond de carte calcule
+       valant rgb(1,4,4). Le survol y rendait le texte MOINS lisible. */
 
-    /* Effet global au survol du partenaire */
-    &:hover {
-      .partner-logo {
-        filter: grayscale(0%);
-        opacity: 1;
-        transform: scale(1.05);
-      }
-      span {
-        color: #000;
-      }
+    /* ── SURVOL : les deux couches de la charte ───────────────────────
+       Realtree, c'est un camouflage dense ET un blaze orange qui claque
+       CONTRE lui. Le carrousel avait deja la premiere couche sans le savoir :
+       le niveau de gris au repos, c'est le logo dissimule, et le survol le
+       fait sortir du camouflage en lui rendant ses couleurs.
+       Il manquait le blaze. Le halo orange suit le TRACE du logo et non une
+       boite, ce qui est la seule forme possible depuis qu'il n'y a plus de
+       carte. L'orange n'est pose nulle part au repos : il n'apparait qu'a
+       l'engagement, donc il signale encore quelque chose.
+       Les deux fonctions se composent dans un seul `filter`, dans cet ordre :
+       la desaturation d'abord, le halo ensuite, sinon le halo serait
+       desature avec le reste et virerait au gris. */
+    &:hover .partner-logo {
+      filter: grayscale(0%)
+              drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 55%, transparent));
+      transform: scale(1.05);
     }
   }
 
@@ -81,9 +100,34 @@
     max-width: 180px;
     height: 80px;
     object-fit: contain;
+
+    /* `opacity: 0.6` est RETIRE. Cette section s'intitule « Ils m'ont fait
+       confiance » : c'est la preuve, et sa valeur tient entierement a ce que
+       les noms soient RECONNAISSABLES. Desaturer ET effacer a 60 % sur un
+       fond a rgb(1,4,4) rendait Vetoquinol, Juliette has a gun et Seiko
+       fantomatiques, donc la section se retournait contre son propre but.
+       Le niveau de gris reste, lui : il tient la coherence visuelle entre des
+       chartes tierces qui n'ont aucune raison de s'accorder, et il laisse au
+       survol quelque chose a reveler. */
     filter: grayscale(100%);
-    opacity: 0.6;
-    transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+}
+
+/* Mouvement reduit : le defilement s'arrete. Une bande qui glisse en boucle
+   sans fin est exactement ce que ce reglage systeme demande de supprimer.
+   ⚠️ Ce n'est PAS suffisant au regard de WCAG 2.2.2 (niveau A), qui exige un
+   moyen de mettre en pause tout mouvement automatique de plus de 5 secondes.
+   La pause au survol existe mais ne compte pas : elle est inaccessible au
+   clavier et au tactile. Il manque un vrai bouton. */
+@media (prefers-reduced-motion: reduce) {
+  .partners-carousel .partners-carousel-track {
+    animation: none;
+    /* Sans l'animation, la piste en `width: max-content` deborderait : on la
+       ramene a une bande lisible et defilable a la main. */
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 }
 
@@ -99,15 +143,26 @@
 }
 
 /* Responsive */
+/* Paliers reajustes avec le passage a 5 : tomber directement de 5 a 2 a
+   992px faisait doubler la taille des logos d'un coup. */
+@media (max-width: 1200px) {
+  .partners-carousel {
+    --carousel-items-visible: 4;
+  }
+}
+
 @media (max-width: 992px) {
   .partners-carousel {
-    --carousel-items-visible: 2;
+    --carousel-items-visible: 3;
   }
 }
 
 @media (max-width: 768px) {
   .partners-carousel {
-    --carousel-items-visible: 1;
+    /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
+       clients, donc la section perd son argument. Deux gardent la lecture de
+       bande, et les logos sont larges de 180px au plus, donc ils tiennent. */
+    --carousel-items-visible: 2;
     --carousel-speed: 20s;
 
     .partners-carousel-container {

@@ -6,9 +6,13 @@
 .section-title {
   width: 100%;
   font-family: var(--font-heading);
-  font-size: var(--fs-h3);
+  font-size: var(--text-title);
   font-weight: 700;
-  border-bottom: var(--border-primary);
+  /* Etait `--border-primary`, soit 3px d'orange sous CHAQUE titre de section.
+     C'est le cas d'ecole du signal devenu grammaire : repete a chaque section
+     de chaque page, il ne distingue plus rien. Le titre porte deja sa
+     hierarchie par sa taille et sa graisse ; le filet ne fait que separer. */
+  border-bottom: var(--hairline-width) solid var(--line);
   padding-bottom: var(--spacing-xs);
 }
 
@@ -45,7 +49,8 @@
 .hero-title {
   font-family: var(--font-heading);
   // font-size: 6rem;
-  font-size: var(--fs-h1);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
 }
 
 .hero-title-span {
@@ -63,13 +68,16 @@
 }
 
 .hero-pitch {
+  /* 181 caracteres par ligne sans cette borne, sur le tout premier
+     paragraphe que lit un visiteur. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: var(--grey-light-400);
   /* 300 et non 100 : c'est deja ce que le navigateur affichait, la graisse la
      plus fine chargee. Manrope etant variable de 200 a 800, on pourrait
      descendre a 200 si on voulait reellement plus fin. */
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   text-align: center;
 }
@@ -106,12 +114,12 @@
 
 .hero-disponibilites {
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: var(--track-caps);
 }
 
 .hero-disponibilites-text-container {
@@ -122,7 +130,7 @@
 }
 
 .hero-disponibilites-text {
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   font-weight: 600;
   color: var(--color-success);
   line-height: 1;
@@ -141,14 +149,20 @@
   gap: 1rem;
 }
 
+/* ⚠️ Ce selecteur a ete signale comme du CSS mort lors de la passe typeset.
+   Il ne l'est pas : le balisage est bien emis par _includes/pages/index.html
+   et present sur 2 pages generees. Verifie avant de supprimer quoi que ce
+   soit. Il rejoint donc l'echelle au lieu de disparaitre.
+   `letter-spacing` etait en 3px absolus, soit 25 % a cette taille, bien
+   au-dela du plafond de 12 % pour des capitales. */
 .hero-theme {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--white-color);
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  color: var(--ink);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  line-height: 1.2;
+  letter-spacing: var(--track-caps);
+  line-height: var(--leading-tight);
 }
 
 .hero-theme-dot {
@@ -188,14 +202,14 @@
 
 .service-main-title {
   text-align: center;
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
 }
 
 .service-main-text-placeholder {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   max-width: 80%;
 }
 
@@ -212,11 +226,11 @@
 }
 
 .services-page-subtitle {
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
 }
 
 .services-page-description {
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   line-height: 1.6;
 }
 
@@ -249,7 +263,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--spacing-sm);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
 }
 
 .social-links li {

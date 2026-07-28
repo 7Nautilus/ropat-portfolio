@@ -23,8 +23,8 @@
 }
 
 .select span {
-  font-size: var(--fs-p);
-  font-weight: bold;
+  font-size: var(--text-body);
+  font-weight: 600;
 }
 
 /* État ouvert : porté par aria-expanded, posé par le contrôleur JS.
@@ -88,7 +88,7 @@
 }
 
 .menu .active {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* Le menu est le frère immédiat du déclencheur (cf. ui/dropdown.html) */

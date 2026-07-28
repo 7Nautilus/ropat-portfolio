@@ -1,5 +1,5 @@
 // ================================
-// CURSEUR PERSONNALISÉ — BLOB
+// CURSEUR PERSONNALISÉ : BLOB
 // Actif uniquement sur pointer: fine (souris desktop)
 // ================================
 
@@ -38,7 +38,7 @@
       background    0.3s ease,
       border        0.3s ease;
 
-    // État hover — boutons, liens, cartes
+    // État hover : boutons, liens, cartes
     body.cursor-hover & {
       width: 64px;
       height: 64px;
@@ -46,7 +46,7 @@
       border: 3px solid var(--primary-color);
     }
 
-    // État texte — paragraphes, titres
+    // État texte : paragraphes, titres
     body.cursor-text & {
       width: 3px;
       height: 28px;
@@ -55,7 +55,7 @@
       background: var(--white-color);
     }
 
-    // État zoom — images cliquables / lightbox
+    // État zoom : images cliquables / lightbox
     body.cursor-zoom & {
       width: 48px;
       height: 48px;

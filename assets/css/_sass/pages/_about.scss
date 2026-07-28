@@ -80,15 +80,17 @@
 
 .about-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h1);
+  font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.1;
 }
 
 .about-intro {
+  /* 140 caracteres par ligne sans cette borne. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
-  line-height: 1.75;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: rgba(255, 255, 255, 0.8);
 
   // Extra espace entre les deux paragraphes d'intro (plus grand que le gap parent)
@@ -101,7 +103,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--color-success);
   font-weight: 600;
   margin-top: var(--spacing-xs);
@@ -130,17 +132,17 @@
 
 .about-stat-value {
   font-family: var(--font-heading);
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
   font-weight: 700;
   color: var(--primary-color);
   line-height: 1;
 }
 
 .about-stat-label {
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: rgba(255, 255, 255, 0.7); // Augmenté de 0.5 → 0.7 pour conformité WCAG AA
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-caps);
 }
 
 .about-stat-divider {
@@ -169,7 +171,7 @@
 
 .about-section-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h4);
+  font-size: var(--text-subhead);
   font-weight: 700;
   color: var(--white-color);
 }
@@ -189,9 +191,9 @@
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-full);
   @include squircle(var(--border-radius-full));
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   background: var(--secondary-color);
   transition: border-color var(--transition-base), color var(--transition-base);
@@ -201,7 +203,7 @@
     color: var(--white-color);
   }
 
-  // WCAG 2.4.7 — Focus visible pour navigation clavier
+  // WCAG 2.4.7 : Focus visible pour navigation clavier
   &:focus-visible {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
@@ -220,11 +222,13 @@
 }
 
 .about-specialty-item {
+  max-width: var(--measure-prose);
+  line-height: var(--leading-body);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -271,7 +275,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  // WCAG 2.4.7 — Focus visible
+  // WCAG 2.4.7 : Focus visible
   &:focus-visible .about-timeline-period {
     text-decoration: underline;
     text-underline-offset: 3px;
@@ -281,14 +285,14 @@
 .about-timeline-period {
   position: relative; // ancre le dot sur cet élément
   font-family: var(--font-heading);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-weight: 700;
   color: var(--primary-color);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--track-caps);
   line-height: 1.6;
 
-  // Dot : centré sur la hauteur naturelle du span — aucun calcul manuel
+  // Dot : centré sur la hauteur naturelle du span : aucun calcul manuel
   &::before {
     content: '';
     position: absolute;
@@ -311,10 +315,12 @@
 }
 
 .about-timeline-desc {
+  /* 156 caracteres par ligne sans cette borne. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: rgba(255, 255, 255, 0.75);
-  line-height: 1.7;
+  line-height: var(--leading-body);
 
   em {
     font-style: italic;
@@ -354,6 +360,8 @@
   }
 
   .about-intro {
+  /* 140 caracteres par ligne sans cette borne. */
+  max-width: var(--measure-prose);
     text-align: start; // Lecture naturelle gauche→droite
   }
 

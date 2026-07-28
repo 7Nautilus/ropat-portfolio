@@ -53,16 +53,99 @@ header {
 }
 
 .logo path {
-  transition: fill-opacity 0.6s var(--ease-out);
+  transition: fill-opacity 0.6s var(--ease-out), fill 0.4s var(--ease-out);
 }
 
-.logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent))
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   CHROME AU-DESSUS D'UN MEDIA
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ REMPLACE `header[data-fond="clair"]`, retire le 27/07/2026 apres mesure.
 
-.logo:hover path{
-  fill-opacity: 1;
+   Ce bloc repeignait tout le chrome en --vert-profond des qu'une jauge
+   estimait le media « clair ». Deux erreurs, dont une fatale :
+     . --vert-profond vaut #030808, soit EXACTEMENT --surface. L'encre du mode
+       clair etait donc la couleur du sol : mesure sur Sipsmith, contour du
+       logo a 1:1, litteralement invisible, parce qu'il surplombait le sol et
+       non l'image.
+     . Un seul verdict pour une barre de 1440 px, alors que le logo et la nav
+       peuvent surplomber des contenus opposes (15,4:1 d'un cote, 1:1 de
+       l'autre, au meme instant).
+
+   Mais le vrai constat est plus dur, et il condamne toute la methode. Fond
+   reel mesure sous chaque controle, 19 projets, plusieurs positions de
+   defilement : la luminance va de 0,000 a 1,000 sous UN SEUL controle.
+   Une encre plate ne tient 3:1 partout que si Lmin >= 0,10 (encre sombre) ou
+   Lmax <= 0,30 (encre claire). Sur 16 projets sur 19, ni l'un ni l'autre.
+   Aucune couleur plate n'existe. Chercher la bonne teinte etait donc une
+   impasse, pas un reglage a affiner.
+
+   On arrete de DEDUIRE la couleur du fond, on la GARANTIT.
+
+   LE VOILE. Un degrade sombre, sans bord ni arete, pose au sommet de la page.
+   Ce n'est pas un fond de barre : il n'a pas de limite visible, il deborde
+   sous le header et s'eteint. Il appartient au traitement de l'image, comme
+   un vignettage, pas au chrome. La contrainte « ni fond ni bordure sur le
+   hero projet » reste donc tenue : la barre elle-meme n'a toujours ni aplat
+   ni filet.
+
+   LE CALCUL. Un voile noir a 58 % ramene n'importe quel fond, blanc pur
+   compris, a 255 x 0,42 = 107 en srgb, soit L = 0,147. Encre blanche dessus :
+   1,05 / 0,197 = 5,3:1. La garantie ne depend plus de l'image, donc plus du
+   projet, donc plus du defilement.
+   Il faut que le voile tienne 58 % sur TOUTE la hauteur de la barre, sinon la
+   garantie s'arrete au milieu des glyphes : il est plein jusqu'a 96 px, puis
+   seulement il s'eteint.
+
+   L'ENCRE. La nav et le burger sont deja blancs par defaut, ils n'ont donc
+   rien a changer : il suffisait d'arreter de les repeindre.
+   Le logo reste ORANGE, et c'est un choix documente : l'orange (L = 0,289)
+   ne tient 3:1 que sous L = 0,063, ce qui demanderait un voile a 73 %, soit
+   deux fois plus sombre sur l'oeuvre. Or WCAG 1.4.3 et 1.4.11 exemptent
+   explicitement les logotypes de tout minimum de contraste. On paye donc le
+   voile pour les controles qui l'exigent, pas pour la marque qui en est
+   dispensee. A rediscuter si le logo devient illisible a l'usage : c'est le
+   seul point du bloc qui repose sur un arbitrage et non sur une mesure. */
+header[data-sur-media] {
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 180px;
+    pointer-events: none;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.62) 0,
+      rgba(0, 0, 0, 0.58) 96px,
+      rgba(0, 0, 0, 0.30) 132px,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  /* Le bouton contact garde son orange, mais sur un aplat OPAQUE. Son texte
+     est du texte : il lui faut 4,5:1, que le voile seul ne donne pas a
+     l'orange (3,0:1 au mieux). Sur --surface plein, il tient 6,5:1.
+     Un bouton a le droit d'avoir un fond, c'est meme sa nature.
+     Mesure apres coup, 6 projets : 7,34:1 au pire. */
+  .contact-link {
+    background: var(--surface);
+    box-shadow: none;
+  }
+
+  /* LE LOGO, et le seul point de ce bloc qui repose sur un arbitrage.
+     Mesure apres voile, 6 projets : 1,85 a 2,82:1, sous les 3:1 d'un
+     composant d'interface. Ce n'est pas un reglage rate, c'est l'orange :
+     a L = 0,289 il ne tient 3:1 que sous un fond a L = 0,063, ce qui
+     imposerait un voile a 73 % au lieu de 58, donc un tiers de noir en plus
+     pose sur l'oeuvre. Or WCAG 1.4.3 et 1.4.11 exemptent explicitement les
+     logotypes de tout minimum de contraste : on ne paye pas ce prix-la sur
+     le travail du client pour une regle qui ne s'applique pas.
+     Le halo suit le TRACE et non une boite : il donne au contour orange un
+     voisinage quasi noir, donc une lisibilite reelle, sans rien assombrir
+     autour. ⚠️ Contrairement au reste de ce bloc, son gain n'est PAS mesure :
+     ma sonde masque le logo pour lire le fond, elle masque donc aussi son
+     halo. A confirmer a l'oeil. */
+  .logo { filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.92)); }
 }
 
 /* ================================

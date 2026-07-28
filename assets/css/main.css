@@ -1,33 +1,120 @@
 @charset "UTF-8";
-/* Variables CSS */
+/* ============================================================
+   TOKENS
+   ============================================================
+   Trois couches, dans cet ordre :
+
+   1. PRIMITIVES  les valeurs brutes. Ne dependent d'aucun theme.
+                  On ne les consomme PAS directement dans les composants.
+   2. SEMANTIQUE  les roles (surface, encre, filet, accent...). C'est la
+                  seule couche que les composants ont le droit d'utiliser.
+                  Elle est redefinie par skin : sombre par defaut,
+                  clair sous [data-theme="light"].
+   3. ALIAS       les anciens noms, conserves pour ne rien casser pendant
+                  la refonte. Chacun pointe vers un role. Ils disparaissent
+                  au fur et a mesure que les composants sont migres.
+
+   REGLE DE L'ORANGE (point fixe, filiation Realtree) : l'orange est un
+   SIGNAL, pas un motif. Il ne doit jamais devenir la bordure par defaut de
+   tout ce qui est une boite, sinon il ne signale plus rien. Il n'est jamais
+   du texte de labeur. Voir docs/CHANTIER-IDENTITE-2026-07.md.
+   ============================================================ */
 :root {
-  /* Couleurs */
-  --primary-color: #ff5c00;
-  --primary-color-alpha: color-mix(in srgb, var(--primary-color) 20%, transparent);
-  --secondary-color: rgba(0, 0, 0, 0.5);
-  --white-color: #ffffff;
-  --gray-dark: #2d3748;
-  --grey-light-400: #9CA3AF;
-  --gray-light: #e2e8f0;
-  --background-dark: #0a0a0a;
-  --background-light: rgba(255, 255, 255, 0.1);
-  --color-success: #34C759;
-  /* Trio du fond, TEL QUE RENDU A L'ECRAN.
+  /* ==========================================================
+     1. PRIMITIVES
+     ========================================================== */
+  /* Orange de marque. Point fixe absolu. */
+  --orange-500: #ff5c00;
+  /* Trio du fond sombre, TEL QUE RENDU A L'ECRAN.
      Le voile noir a 50 % de l'ancienne image y est deja integre : ce sont les
      valeurs finales, relevees a la pipette, pas les verts bruts de l'image.
-     Pas egaux corriges (mediane recentree) : dE 6,3 / 6,4 au lieu de 4,0 / 8,7.
-     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3. */
-  /* Trio abaisse le 21/07/2026 : le plancher est inchange, les deux autres
+     Trio abaisse le 21/07/2026 : le plancher est inchange, les deux autres
      descendent d'un cran pour retrouver la profondeur de l'ancienne image
      (L* moyen 3,10 contre 3,12). Prix : la separation passe de dE 6,3/6,4
-     a 3,1/3,2, la texture est donc deux fois plus discrete. */
-  --fond-profond: #030808;
-  --fond-median: #030F0C;
-  --fond-releve: #051510;
-  /* Surfaces sur fond sombre : bordures discretes et texte secondaire */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --text-muted: rgba(255, 255, 255, 0.45);
-  /* Typographie */
+     a 3,1/3,2, la texture est donc deux fois plus discrete.
+     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3. */
+  --vert-profond: #030808;
+  --vert-median: #030F0C;
+  --vert-releve: #051510;
+  /* Trio clair (camouflage neige / lichen). Valide dans le chantier identite,
+     pas encore eprouve a l'ecran : la matiere du skin clair est un livrable
+     de la Phase 3, et ces valeurs seront mesurees a ce moment-la. */
+  --neige-haute: #F0F4F1;
+  --neige-mediane: #DCE6E0;
+  --neige-basse: #BFD1C7;
+  --encre-sombre: #05100F;
+  --blanc: #ffffff;
+  --vert-succes: #34C759;
+  /* Il n'existait aucune couleur d'erreur : le formulaire de contact peignait
+     ses bordures fautives en rgba(255,80,80,0.5) en dur, et le vert de
+     disponibilite en rgba(74,222,128,...) alors que --vert-succes vaut
+     #34C759. Deux valeurs inventees sur place pour deux etats.
+     #FF6B6B est mesure a 7,26:1 sur le sol #030808 : un message d'erreur est
+     du texte courant, il lui faut donc 4,5:1, pas les 3:1 d'une bordure. */
+  --rouge-erreur: #FF6B6B;
+  /* ==========================================================
+     2. SEMANTIQUE  skin sombre (defaut)
+     ========================================================== */
+  /* Surfaces */
+  --surface: var(--vert-profond); /* fond de page ; repli du dither */
+  /* LE VOILE : il ASSOMBRIT le sol sous le contenu, il ne le souleve pas.
+     Le dither est un motif vivant et charge ; poser un noir a 50 % dessus le
+     calme localement pour que le texte et les logos aient une base stable.
+     10 consommateurs, tous via l'alias --secondary-color : cartes, carrousel,
+     conteneurs, pied de page, blocs de la page A propos.
+
+     ⚠️ Renomme le 28/07/2026, apres une correction ratee le meme jour.
+     Le token s'appelait `--surface-raised` et rendait rgb(1,4,4) sur un sol a
+     rgb(3,8,8), donc plus sombre que ce sur quoi il repose. J'en ai conclu
+     que la VALEUR etait fausse et je l'ai passee a un vert plein plus clair.
+     C'etait l'inverse : Ropat, le 28/07, « la couleur portait mal son nom,
+     elle avait vraiment pour but d'assombrir le fond avec un noir 50 % ».
+     C'est le NOM qui mentait, pas la valeur. Le commentaire d'origine disait
+     d'ailleurs deja « voile ».
+     Regle a en tirer : quand un nom et une valeur se contredisent, demander
+     lequel des deux est faux. Changer la valeur est le geste qui se fait tout
+     seul, ce n'est pas pour autant le bon.
+
+     Le skin clair suit exactement la meme logique (--neige-mediane sur un sol
+     --neige-haute, donc plus sombre aussi) : les deux skins voilent, ce qui
+     confirme que le role est coherent et que seul le nom clochait. */
+  --surface-veil: rgba(0, 0, 0, 0.5);
+  --surface-subtle: rgba(255, 255, 255, 0.1);
+  --surface-scrim: rgba(0, 0, 0, 0.98); /* lightbox, overlay de nav */
+  --surface-placeholder: #2d3748;
+  /* Encre. Quatre niveaux, du plus present au plus retire. */
+  --ink: var(--blanc);
+  --ink-soft: #e2e8f0;
+  --ink-muted: #9CA3AF;
+  /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
+     trio, sous le minimum AA de 4,5. Calcul WCAG sur les deux extremes du
+     fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore
+     verifie au navigateur sur le motif reel. */
+  --ink-subtle: rgba(255, 255, 255, 0.46);
+  /* Filets neutres. Le trait qui separe sans signaler. */
+  --line: rgba(255, 255, 255, 0.08);
+  --hairline-width: 1px;
+  /* Accent = signal. Volontairement rare. */
+  --accent: var(--orange-500);
+  --accent-soft: color-mix(in srgb, var(--accent) 20%, transparent);
+  /* Texte pose SUR un aplat d'orange : il doit etre SOMBRE.
+     Mesure : blanc sur #ff5c00 = 3,10:1, sous AA pour du texte courant.
+     Encre sombre sur #ff5c00 = 6,51:1. Vaut dans les deux skins, l'orange
+     ne changeant pas d'un theme a l'autre.
+     Dette soldee le 28/07/2026 : .btn--solid:hover bascule desormais sur ce
+     token au lieu de garder un texte blanc a 3,10:1. */
+  --accent-ink: var(--encre-sombre);
+  --signal-width: 3px; /* le trait epais, quand il veut dire quelque chose */
+  /* Etats */
+  --success: var(--vert-succes);
+  --danger: var(--rouge-erreur);
+  /* Ombres. L'ambiante souleve, la signal designe : ne pas les confondre. */
+  --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-ambient-strong: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-signal: 0 6px 16px color-mix(in srgb, var(--accent) 50%, transparent);
+  /* ==========================================================
+     3. TYPOGRAPHIE  (hors theme)
+     ========================================================== */
   /* Chakra Petch remplace Space Grotesk, jugee trop convenue.
      ⚠️ Elle est STATIQUE, 5 graisses de 300 a 700 : pas de 100, 200, 800 ni 900.
      Toute graisse hors de cette plage sera fabriquee par le navigateur.
@@ -46,45 +133,183 @@
      Inutile dans un titre : Chakra Petch et Underdog ont les memes proportions
      (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
-  /* Tailles fixes : racine et cas UI spécifiques */
-  --font-size-base: 1rem;
-  --font-size-2xl: 1.5rem;
-  /* Échelle typographique fluide (principale) */
-  --fs-h1: clamp(3rem, 5vw + 1rem, 6rem);
-  --fs-h2: clamp(1.75rem, 3vw + 1rem, 3rem);
-  --fs-h3: clamp(1.5rem, 2vw + 1rem, 2.25rem);
-  --fs-h4: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
-  --fs-h5: clamp(1.125rem, 1vw + 1rem, 1.5rem);
-  --fs-p: clamp(1rem, 0.5vw + 1rem, 1.25rem);
-  --fs-text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.5rem);
-  --fs-small: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
-  --fs-xsmall: clamp(0.75rem, 0.5vw + 0.25rem, 0.875rem);
-  /* Espacement */
+  /* ── ECHELLE TYPOGRAPHIQUE ────────────────────────────────────────────
+     Six echelons, ratio 1,25 MINIMUM tenu aux DEUX bouts de la plage
+     (375 comme 1440), donc plus aucun token inerte.
+
+     Ce qui a ete mesure sur l'ancienne echelle, et corrige ici :
+     . `--fs-xsmall` valait 12 px fixe de 320 a 1600 px : son clamp ne
+       servait a rien. `--fs-small` etait plat de 320 a 1200 px.
+     . A 375 px, 7 intervalles sur 8 tombaient sous 1,25 : la hierarchie se
+       refermait exactement la ou l'ecran est le plus petit (jusqu'a 1,029
+       entre deux echelons, soit 28 et 28,8 px, indiscernables).
+     . `--fs-h5` et `--fs-text-lg` n'avaient AUCUN consommateur : ils ne
+       creusaient que des trous dans la rampe. Supprimes.
+     . Il n'existait rien entre le corps (20 px) et le CTA (48 px), d'ou six
+       `<h2>` composes a 12 px, plus petits que le texte qu'ils coiffent.
+       C'est `--text-subhead` qui comble ce trou.
+
+     Le corps reste FIXE : sur une page de contenu, l'ecart de taille entre
+     viewports ne justifie pas de le rendre fluide. */
+  --text-caption: 0.8rem; /* 12,8 px */
+  --text-meta: 1rem; /* 16 px   */
+  --text-body: 1.25rem; /* 20 px   */
+  --text-subhead: clamp(1.625rem, 0.56vw + 1.49rem, 2rem); /* 26 a 32 */
+  --text-title: clamp(2.125rem, 1.31vw + 1.82rem, 3rem); /* 34 a 48 */
+  --text-display: clamp(2.75rem, 4.88vw + 1.60rem, 6rem); /* 44 a 96 */
+  /* Rythme vertical et interlettrage.
+     `--leading-body` a 1,65 et non 1,6 : le texte clair sur fond sombre perd
+     du poids percu, et se compense sur TROIS axes (interlignage,
+     interlettrage, graisse), pas un seul.
+     `--track-caps` a 0,10em : les capitales courtes demandent 5 a 12 %.
+     L'ancienne valeur de 0,19em etait 60 % au-dessus du plafond, et c'est
+     elle qui faisait deborder les titres de section sur mobile (372 px de
+     texte pour 350 px disponibles a 390 px de large). */
+  --leading-body: 1.65;
+  --leading-meta: 1.5;
+  --leading-tight: 1.05;
+  --track-caps: 0.10em;
+  --track-display: -0.015em;
+  /* Mesures de ligne, en rem et NON en `ch` : le `ch` se resout sur la
+     police de l'element qui PORTE la declaration, pas sur celle du texte
+     qu'il contient. Un `56ch` pose sur un div a 16 px pour du texte a 20 px
+     rendait 44,8 caracteres. 40rem donne environ 66 caracteres en Manrope
+     20 px, au centre de la fenetre de confort 45-75. */
+  --measure-prose: 40rem;
+  --measure-lede: 30rem;
+  /* Les alias de transition (--fs-*, --font-size-base) ont ete retires le
+     27/07/2026 : plus aucun selecteur ne les consomme.
+
+  /* ==========================================================
+     4. ESPACEMENT  (hors theme)
+     ========================================================== */
+  /* Echelle courte : espacements internes. */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
-  /* Bordures */
-  --border-width: 3px;
-  --border-primary: var(--border-width) solid var(--primary-color);
-  --border-radius-sm: 1rem;
-  --border-radius-md: 1.5rem;
-  --border-radius-lg: 2rem;
-  --border-radius-xl: 6rem;
-  --border-radius-full: 9999px;
-  /* Bordures squircle */
-  --border-radius-squircle-small: 15%;
-  --border-radius-squircle-medium: 6rem;
-  --border-radius-squircle-full: 50%;
-  /* Ombres */
-  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 6px 16px color-mix(in srgb, var(--primary-color) 50%, transparent);
-  --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
-  /* Transitions */
-  --transition-base: 0.3s ease;
+  /* Gouttiere de page : la marge laterale du contenu. Fluide, donc elle
+     n'a plus besoin d'une media query pour retomber sur mobile.
+     Valeur reprise du prototype de page projet (docs/proto-page-projet.html).
+     Les bandes qui saignent (--pleine) sont celles qui ne la portent PAS :
+     c'est pour ca qu'elle vit sur les bandes et non sur <main>, ce qui evite
+     toute arithmetique de debordement par marges negatives. */
+  --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  /* Echelle de rythme : respirations verticales entre blocs et sections.
+     Elle existe pour absorber les valeurs magiques semees dans le SCSS
+     (4rem, 4.5rem, 5rem, 6rem, 10rem). Les consommateurs sont migres
+     phase par phase ; 4.5rem et 5rem sont des egares a normaliser sur
+     --rhythm-sm ou --rhythm-md au passage. */
+  --rhythm-sm: 4rem;
+  --rhythm-md: 6rem;
+  --rhythm-lg: 10rem;
+  /* ==========================================================
+     5. FORME  (hors theme)
+     ========================================================== */
+  /* Le rayon est un CHOIX, pas un reflexe. Regle : un media ne porte
+     jamais de rayon (l'oeuvre n'est pas dans une boite decorative). */
+  --radius-sm: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2rem;
+  --radius-xl: 6rem;
+  --radius-pill: 9999px;
+  --squircle-small: 15%;
+  --squircle-medium: 6rem;
+  --squircle-full: 50%;
+  /* ==========================================================
+     6. MOUVEMENT  (hors theme)
+     ========================================================== */
+  /* Durees. La grammaire vient de la veille (Lu Yu) :
+     revelation 0,6 s, micro-animation 0,2 s. */
+  --dur-quick: 0.2s;
+  --dur-base: 0.3s;
+  --dur-reveal: 0.6s;
+  /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
+     les micro-mouvements. Equivalents CSS des courbes GSAP citees dans
+     docs/VEILLE-PORTFOLIOS-2026-07.md. */
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-base: var(--dur-base) ease;
+  /* ==========================================================
+     7. ALIAS DE COMPATIBILITE  (deprecies)
+     ==========================================================
+     Ces noms sont ceux d'avant la refonte. Ils restent le temps que les
+     composants migrent vers la couche semantique. Ne PAS en ajouter.
+     A supprimer quand plus aucun fichier ne les reference. */
+  --primary-color: var(--accent);
+  --primary-color-alpha: var(--accent-soft);
+  --secondary-color: var(--surface-veil);
+  --white-color: var(--ink);
+  --gray-dark: var(--surface-placeholder);
+  --grey-light-400: var(--ink-muted);
+  --gray-light: var(--ink-soft);
+  /* Fusion des deux fonds sombres concurrents : l'ancien #0a0a0a etranger
+     au trio pointe desormais sur la vraie surface du site. */
+  --background-dark: var(--surface);
+  --background-light: var(--surface-subtle);
+  --color-success: var(--success);
+  --fond-profond: var(--vert-profond);
+  --fond-median: var(--vert-median);
+  --fond-releve: var(--vert-releve);
+  --border-subtle: var(--line);
+  --text-muted: var(--ink-subtle);
+  --border-width: var(--signal-width);
+  --border-primary: var(--signal-width) solid var(--accent);
+  --border-radius-sm: var(--radius-sm);
+  --border-radius-md: var(--radius-md);
+  --border-radius-lg: var(--radius-lg);
+  --border-radius-xl: var(--radius-xl);
+  --border-radius-full: var(--radius-pill);
+  --border-radius-squircle-small: var(--squircle-small);
+  --border-radius-squircle-medium: var(--squircle-medium);
+  --border-radius-squircle-full: var(--squircle-full);
+  --shadow-sm: var(--shadow-ambient);
+  --shadow-dark: var(--shadow-ambient-strong);
+  --shadow-md: var(--shadow-signal);
+}
+
+/* ============================================================
+   SKIN CLAIR
+   ============================================================
+   Ce n'est pas l'inverse du sombre, c'est un AUTRE motif de camouflage
+   (neige / lichen). Seuls les roles changent : aucune regle de composant
+   n'a a connaitre le theme.
+
+   ⚠️ Premiere passe, valeurs non encore mesurees a l'ecran. La matiere de
+   fond du skin clair (le dither est sombre par construction) et la
+   verification des contrastes sont des livrables de la Phase 3.
+
+   REGLE : sur fond clair, l'orange ne peut PAS porter de texte (il echoue
+   au 3:1 sur fond teinte). Il n'y est admis qu'en MASSE, en aplat.
+   ============================================================ */
+[data-theme=light] {
+  --surface: var(--neige-haute);
+  /* Meme role, meme direction : la plaque est plus SOMBRE que le sol clair.
+     C'est ce qui prouve que le nom `raised` etait faux dans les deux skins et
+     pas seulement dans le sombre. */
+  --surface-veil: var(--neige-mediane);
+  --surface-subtle: rgba(5, 16, 15, 0.06);
+  --surface-scrim: rgba(240, 244, 241, 0.98);
+  --surface-placeholder: var(--neige-basse);
+  --ink: var(--encre-sombre);
+  --ink-soft: #1B2B27;
+  --ink-muted: #46564F;
+  --ink-subtle: rgba(5, 16, 15, 0.62);
+  --line: rgba(5, 16, 15, 0.14);
+  /* #FF6B6B tient 7,26:1 sur le sol sombre mais tombe a 2,44:1 sur la neige :
+     une couleur d'etat ne traverse pas un changement de skin sans etre
+     reprise. #B3261E est mesure a 5,89:1 sur #F0F4F1.
+     Le vert de succes a le meme probleme et devra etre repris en Phase 3,
+     quand le skin clair recevra sa propre matiere et sera mesure pour de bon. */
+  --danger: #B3261E;
+  /* L'accent reste le meme orange : c'est un point fixe. Ce qui change,
+     c'est son emploi (masse, jamais texte). --accent-ink est deja sombre
+     dans les deux skins, il n'a donc rien a surcharger ici. */
+  --shadow-ambient: 0 4px 6px rgba(5, 16, 15, 0.08);
+  --shadow-ambient-strong: 0 4px 6px rgba(5, 16, 15, 0.18);
 }
 
 /* ============================================
@@ -103,7 +328,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   -webkit-text-size-adjust: 100%;
 }
 
@@ -126,17 +351,28 @@ html {
   will-change: transform;
 }
 
+/* Le dither est sombre par construction (trio vert profond). Sous le skin
+   clair il n'a rien a faire a l'ecran : on le retire, et la surface claire
+   reste un aplat. Sa matiere propre (neige / lichen) est un livrable de la
+   Phase 3 ; d'ici la, l'aplat est un etat correct, pas un etat casse. */
+[data-theme=light] #fond-dither {
+  display: none;
+}
+
 body {
   font-family: var(--font-body);
   /* Repli : si WebGL manque, le module rend null et c'est cette couleur qu'on
      voit. C'est le plancher du trio, donc la degradation est un aplat de la
      bonne couleur et non un noir etranger. */
-  background-color: var(--fond-profond);
-  color: var(--white-color);
+  background-color: var(--surface);
+  color: var(--ink);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  line-height: 1.2;
+  /* 1,65 et non 1,2 : 1,2 est une valeur de TITRE. Herite par tout texte
+     qui n'en declare pas, elle composait le labeur en interligne d'affiche
+     (mesure : .about-specialty-item, 86 caracteres en 1,2). */
+  line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -235,11 +471,11 @@ p:empty {
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: var(--track-caps);
 }
 
 .nav-links-header .nav-item a {
-  font-size: var(--font-size-2xl);
+  font-size: var(--text-subhead);
 }
 
 .orange {
@@ -252,7 +488,7 @@ p:empty {
 
 .text-h2 {
   font-family: var(--font-heading);
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
   font-weight: 700;
 }
 
@@ -377,7 +613,9 @@ p:empty {
   .service-card:hover,
   .btn:hover,
   .card:hover .btn--ghost,
-  .nav-link:hover {
+  .nav-link:hover,
+  .project-next-link:hover .project-next-arrow,
+  .project-next-link:focus-visible .project-next-arrow {
     transform: none !important;
   }
   .animate-fade-up,
@@ -390,13 +628,25 @@ p:empty {
 /* ================================
    FADE UP
    ================================ */
-.animate-fade-up {
+/* ⚠️ Le masquage est conditionne a `html.reveal-arme`, ajoute le 28/07/2026.
+   `.animate-fade-up { opacity: 0 }` etait l'etat par DEFAUT, en CSS, et seul
+   le JS le levait en posant `.is-visible`. Aucun repli. Consequence mesuree :
+   20 elements par page projet, dont TOUTE la planche, le colophon et le bloc
+   systeme, restaient invisibles si `script.js` ne s'executait pas. Sur un
+   portfolio, ou l'oeuvre EST le produit, la page se serait servie vide.
+   Ce n'est pas theorique : c'est arrive deux fois en capture pendant cette
+   passe, l'observateur n'ayant pas encore declenche.
+   Desormais le contenu est visible par defaut et ne se cache QUE si le JS a
+   pu s'armer. Le garde-fou du layout leve l'armement au bout de 2,5 s si
+   l'observateur n'a jamais confirme : une revelation ratee coute une
+   animation, plus une section blanche. */
+.reveal-arme .animate-fade-up {
   opacity: 0;
   transform: translate3d(0, 24px, 0);
   will-change: opacity, transform;
 }
 
-.animate-fade-up.is-visible {
+.reveal-arme .animate-fade-up.is-visible {
   animation: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--animate-delay, 0ms) forwards;
 }
 
@@ -521,16 +771,95 @@ header {
 }
 
 .logo path {
-  transition: fill-opacity 0.6s var(--ease-out);
+  transition: fill-opacity 0.6s var(--ease-out), fill 0.4s var(--ease-out);
 }
 
-.logo:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 8px 15px color-mix(in srgb, var(--primary-color) 30%, transparent));
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   CHROME AU-DESSUS D'UN MEDIA
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ REMPLACE `header[data-fond="clair"]`, retire le 27/07/2026 apres mesure.
 
-.logo:hover path {
-  fill-opacity: 1;
+   Ce bloc repeignait tout le chrome en --vert-profond des qu'une jauge
+   estimait le media « clair ». Deux erreurs, dont une fatale :
+     . --vert-profond vaut #030808, soit EXACTEMENT --surface. L'encre du mode
+       clair etait donc la couleur du sol : mesure sur Sipsmith, contour du
+       logo a 1:1, litteralement invisible, parce qu'il surplombait le sol et
+       non l'image.
+     . Un seul verdict pour une barre de 1440 px, alors que le logo et la nav
+       peuvent surplomber des contenus opposes (15,4:1 d'un cote, 1:1 de
+       l'autre, au meme instant).
+
+   Mais le vrai constat est plus dur, et il condamne toute la methode. Fond
+   reel mesure sous chaque controle, 19 projets, plusieurs positions de
+   defilement : la luminance va de 0,000 a 1,000 sous UN SEUL controle.
+   Une encre plate ne tient 3:1 partout que si Lmin >= 0,10 (encre sombre) ou
+   Lmax <= 0,30 (encre claire). Sur 16 projets sur 19, ni l'un ni l'autre.
+   Aucune couleur plate n'existe. Chercher la bonne teinte etait donc une
+   impasse, pas un reglage a affiner.
+
+   On arrete de DEDUIRE la couleur du fond, on la GARANTIT.
+
+   LE VOILE. Un degrade sombre, sans bord ni arete, pose au sommet de la page.
+   Ce n'est pas un fond de barre : il n'a pas de limite visible, il deborde
+   sous le header et s'eteint. Il appartient au traitement de l'image, comme
+   un vignettage, pas au chrome. La contrainte « ni fond ni bordure sur le
+   hero projet » reste donc tenue : la barre elle-meme n'a toujours ni aplat
+   ni filet.
+
+   LE CALCUL. Un voile noir a 58 % ramene n'importe quel fond, blanc pur
+   compris, a 255 x 0,42 = 107 en srgb, soit L = 0,147. Encre blanche dessus :
+   1,05 / 0,197 = 5,3:1. La garantie ne depend plus de l'image, donc plus du
+   projet, donc plus du defilement.
+   Il faut que le voile tienne 58 % sur TOUTE la hauteur de la barre, sinon la
+   garantie s'arrete au milieu des glyphes : il est plein jusqu'a 96 px, puis
+   seulement il s'eteint.
+
+   L'ENCRE. La nav et le burger sont deja blancs par defaut, ils n'ont donc
+   rien a changer : il suffisait d'arreter de les repeindre.
+   Le logo reste ORANGE, et c'est un choix documente : l'orange (L = 0,289)
+   ne tient 3:1 que sous L = 0,063, ce qui demanderait un voile a 73 %, soit
+   deux fois plus sombre sur l'oeuvre. Or WCAG 1.4.3 et 1.4.11 exemptent
+   explicitement les logotypes de tout minimum de contraste. On paye donc le
+   voile pour les controles qui l'exigent, pas pour la marque qui en est
+   dispensee. A rediscuter si le logo devient illisible a l'usage : c'est le
+   seul point du bloc qui repose sur un arbitrage et non sur une mesure. */
+header[data-sur-media]::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 180px;
+  pointer-events: none;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.62) 0, rgba(0, 0, 0, 0.58) 96px, rgba(0, 0, 0, 0.3) 132px, rgba(0, 0, 0, 0) 100%);
+}
+header[data-sur-media] {
+  /* Le bouton contact garde son orange, mais sur un aplat OPAQUE. Son texte
+     est du texte : il lui faut 4,5:1, que le voile seul ne donne pas a
+     l'orange (3,0:1 au mieux). Sur --surface plein, il tient 6,5:1.
+     Un bouton a le droit d'avoir un fond, c'est meme sa nature.
+     Mesure apres coup, 6 projets : 7,34:1 au pire. */
+}
+header[data-sur-media] .contact-link {
+  background: var(--surface);
+  box-shadow: none;
+}
+header[data-sur-media] {
+  /* LE LOGO, et le seul point de ce bloc qui repose sur un arbitrage.
+     Mesure apres voile, 6 projets : 1,85 a 2,82:1, sous les 3:1 d'un
+     composant d'interface. Ce n'est pas un reglage rate, c'est l'orange :
+     a L = 0,289 il ne tient 3:1 que sous un fond a L = 0,063, ce qui
+     imposerait un voile a 73 % au lieu de 58, donc un tiers de noir en plus
+     pose sur l'oeuvre. Or WCAG 1.4.3 et 1.4.11 exemptent explicitement les
+     logotypes de tout minimum de contraste : on ne paye pas ce prix-la sur
+     le travail du client pour une regle qui ne s'applique pas.
+     Le halo suit le TRACE et non une boite : il donne au contour orange un
+     voisinage quasi noir, donc une lisibilite reelle, sans rien assombrir
+     autour. ⚠️ Contrairement au reste de ce bloc, son gain n'est PAS mesure :
+     ma sonde masque le logo pour lire le fond, elle masque donc aussi son
+     halo. A confirmer a l'oeil. */
+}
+header[data-sur-media] .logo {
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.92));
 }
 
 /* ================================
@@ -691,9 +1020,13 @@ header {
 .section-title {
   width: 100%;
   font-family: var(--font-heading);
-  font-size: var(--fs-h3);
+  font-size: var(--text-title);
   font-weight: 700;
-  border-bottom: var(--border-primary);
+  /* Etait `--border-primary`, soit 3px d'orange sous CHAQUE titre de section.
+     C'est le cas d'ecole du signal devenu grammaire : repete a chaque section
+     de chaque page, il ne distingue plus rien. Le titre porte deja sa
+     hierarchie par sa taille et sa graisse ; le filet ne fait que separer. */
+  border-bottom: var(--hairline-width) solid var(--line);
   padding-bottom: var(--spacing-xs);
 }
 
@@ -728,7 +1061,8 @@ header {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h1);
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
 }
 
 .hero-title-span {
@@ -758,13 +1092,16 @@ header {
 }
 
 .hero-pitch {
+  /* 181 caracteres par ligne sans cette borne, sur le tout premier
+     paragraphe que lit un visiteur. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: var(--grey-light-400);
   /* 300 et non 100 : c'est deja ce que le navigateur affichait, la graisse la
      plus fine chargee. Manrope etant variable de 200 a 800, on pourrait
      descendre a 200 si on voulait reellement plus fin. */
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   text-align: center;
 }
@@ -799,12 +1136,12 @@ header {
 
 .hero-disponibilites {
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--grey-light-400);
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: var(--track-caps);
 }
 
 .hero-disponibilites-text-container {
@@ -815,7 +1152,7 @@ header {
 }
 
 .hero-disponibilites-text {
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   font-weight: 600;
   color: var(--color-success);
   line-height: 1;
@@ -833,14 +1170,20 @@ header {
   gap: 1rem;
 }
 
+/* ⚠️ Ce selecteur a ete signale comme du CSS mort lors de la passe typeset.
+   Il ne l'est pas : le balisage est bien emis par _includes/pages/index.html
+   et present sur 2 pages generees. Verifie avant de supprimer quoi que ce
+   soit. Il rejoint donc l'echelle au lieu de disparaitre.
+   `letter-spacing` etait en 3px absolus, soit 25 % a cette taille, bien
+   au-dela du plafond de 12 % pour des capitales. */
 .hero-theme {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--white-color);
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  color: var(--ink);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 3px;
-  line-height: 1.2;
+  letter-spacing: var(--track-caps);
+  line-height: var(--leading-tight);
 }
 
 .hero-theme-dot {
@@ -878,14 +1221,14 @@ header {
 
 .service-main-title {
   text-align: center;
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
 }
 
 .service-main-text-placeholder {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   max-width: 80%;
 }
 
@@ -902,17 +1245,19 @@ header {
 }
 
 .services-page-subtitle {
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
 }
 
 .services-page-description {
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   line-height: 1.6;
 }
 
 .service-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-p);
+  /* subhead et non le corps : un titre de carte a la taille du texte est
+     la raison pour laquelle la grille de projets se lit a plat. */
+  font-size: var(--text-subhead);
   font-weight: 700;
 }
 
@@ -939,7 +1284,7 @@ header {
   flex-direction: column;
   justify-content: flex-start;
   gap: var(--spacing-sm);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
 }
 
 .social-links li {
@@ -1029,7 +1374,7 @@ footer {
   justify-content: space-between;
   width: 100%;
   gap: var(--spacing-xl);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
 }
 
 .footer-left-section {
@@ -1040,7 +1385,7 @@ footer {
 
 .footer-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -1069,21 +1414,22 @@ footer {
 .footer-nav-title {
   padding: var(--spacing-xs) var(--spacing-sm);
   color: var(--primary-color);
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .footer-description {
-  font-size: var(--fs-p);
+  max-width: var(--measure-prose);
+  font-size: var(--text-body);
   color: var(--grey-light-400);
-  line-height: 1.75;
+  line-height: var(--leading-body);
   font-weight: 500;
 }
 
 .email {
   width: fit-content;
   font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  line-height: 1.75;
+  font-size: var(--text-subhead);
+  line-height: var(--leading-body);
   font-weight: 700;
   border-bottom: var(--border-primary);
 }
@@ -1099,8 +1445,8 @@ footer {
   color: var(--white-color);
   font-family: var(--font-heading);
   text-transform: uppercase;
-  font-weight: 300;
-  font-size: var(--fs-small);
+  font-weight: 600;
+  font-size: var(--text-caption);
 }
 
 .footer-container {
@@ -1197,7 +1543,10 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #0a0a0a;
+  /* Etait un #0a0a0a en dur, etranger au trio du fond : au moment ou le
+     loader s'effacait, la page changeait de noir. C'est la meme surface
+     que le site, desormais. */
+  background-color: var(--surface);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1225,8 +1574,8 @@ footer {
 }
 
 .loader-logo-text {
-  font-size: var(--fs-h2);
-  font-weight: 800;
+  font-size: var(--text-title);
+  font-weight: 700;
   color: var(--white-color);
   margin-bottom: var(--spacing-md);
   animation: pulse 2s ease-in-out infinite;
@@ -1235,8 +1584,10 @@ footer {
 .loader-bar {
   width: 200px;
   height: 4px;
-  background: var(--background-light);
-  border-radius: 2px;
+  background: var(--surface-subtle);
+  /* La gelule se clampe a la moitie de la hauteur : sur 4px de haut, le
+     rendu est identique a l'ancien 2px en dur, sans valeur magique. */
+  border-radius: var(--radius-pill);
   overflow: hidden;
   position: relative;
 }
@@ -1248,8 +1599,8 @@ footer {
   left: 0;
   width: 50%;
   height: 100%;
-  background: var(--primary-color);
-  border-radius: 2px;
+  background: var(--accent);
+  border-radius: var(--radius-pill);
   animation: loading 1.5s ease-in-out infinite;
 }
 
@@ -1270,7 +1621,7 @@ footer {
   }
 }
 /* ============================================
-   BOUTON — composant à propriétés
+   BOUTON : composant à propriétés
    ============================================
    .btn          base commune
    variantes :   .btn--solid (défaut) | .btn--ghost
@@ -1317,11 +1668,19 @@ footer {
   color: var(--white-color);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   font-weight: 600;
+  /* Le CTA GARDE son contour orange, et c'est le seul conteneur du site qui
+     y a droit apres la bascule de Phase 2 : ici l'orange signale l'action
+     principale, ce qui est exactement son role.
+     Au survol le fond devient orange PLEIN : le texte doit alors basculer sur
+     l'encre sombre. En blanc il tombait a 3,10:1, sous les 4,5:1 exiges pour
+     du texte ; `--accent-ink` tient 6,51:1. Le token existait deja pour ca et
+     la dette etait notee dans _variables.scss depuis la Phase 0. */
 }
 .btn--solid:hover {
   background-color: var(--primary-color);
+  color: var(--accent-ink);
   box-shadow: var(--shadow-md);
   transform: scale(1.05);
 }
@@ -1416,8 +1775,8 @@ footer {
 }
 
 .select span {
-  font-size: var(--fs-p);
-  font-weight: bold;
+  font-size: var(--text-body);
+  font-weight: 600;
 }
 
 /* État ouvert : porté par aria-expanded, posé par le contrôleur JS.
@@ -1474,7 +1833,7 @@ footer {
 }
 
 .menu .active {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* Le menu est le frère immédiat du déclencheur (cf. ui/dropdown.html) */
@@ -1485,161 +1844,17 @@ footer {
 }
 
 /* ============================================
-   GALLERY
-   ============================================ */
-/* Conteneur principal (pour aligner les deux blocs) */
-.project-gallery {
-  display: flex; /* Utiliser Flexbox */
-  flex-direction: column; /* Aligner les éléments en colonne */
-  gap: var(--spacing-sm);
-  width: 100%;
-}
-
-/* Zone des miniatures — ligne horizontale */
-/* Zone des miniatures — hauteur fixe, largeur répartie */
-.thumbnails-container {
-  display: flex;
-  flex-direction: row;
-  gap: var(--spacing-xs);
-  overflow: visible;
-  height: clamp(72px, 10vw, 110px);
-}
-
-/* ── Bouton wrapper ───────────────────────────────── */
-.thumbnail-btn {
-  /* Reset natif navigateur */
-  appearance: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  /* Layout : répartition égale de la largeur, hauteur = celle du container */
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  /* Visuel */
-  border: 3px solid transparent;
-  border-radius: var(--border-radius-sm);
-}
-@supports (corner-shape: squircle) {
-  .thumbnail-btn {
-    border-radius: var(--border-radius-lg);
-    corner-shape: squircle;
-  }
-}
-.thumbnail-btn {
-  opacity: 0.7;
-  overflow: hidden;
-  outline: none;
-  transition: border-color 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-.thumbnail-btn:hover {
-  border-color: var(--primary-color);
-  opacity: 1;
-  transform: scale(1.05);
-}
-.thumbnail-btn[data-active=true] {
-  border-color: var(--primary-color);
-  opacity: 1;
-  box-shadow: 0 0 8px color-mix(in srgb, var(--primary-color) 35%, transparent);
-}
-.thumbnail-btn {
-  /* Focus clavier accessible */
-}
-.thumbnail-btn:focus-visible {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
-}
-.thumbnail-btn {
-  /* Indicateur vidéo — triangle ▶ centré */
-}
-.thumbnail-btn[data-media-type=video] {
-  position: relative;
-}
-.thumbnail-btn[data-media-type=video]::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 7px 0 7px 14px;
-  border-color: transparent transparent transparent white;
-  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
-  pointer-events: none;
-}
-
-/* ── Image à l'intérieur du bouton ───────────────── */
-.thumbnail-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border: none;
-  outline: none;
-  pointer-events: none;
-}
-
-/* Zone de la grande image */
-.main-display {
-  display: flex;
-  gap: 0;
-  flex-grow: 0;
-  align-self: center; /* La bordure epouse le media : pas d'etirement, donc pas de vide interne (bug portrait sur viewport court). */
-  border: var(--border-primary);
-  border-radius: var(--spacing-xl);
-}
-@supports (corner-shape: squircle) {
-  .main-display {
-    border-radius: var(--border-radius-squircle-medium);
-    corner-shape: squircle;
-  }
-}
-.main-display {
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-
-#main-image {
-  width: auto;
-  max-width: 100%;
-  height: auto;
-  max-height: 80vh;
-  display: block;
-  object-fit: contain;
-  transition: opacity 0.3s ease-in-out;
-}
-
-#main-video {
-  max-height: 80vh;
-}
-
-/* Galerie AVEC vignettes : le media (image ou video) laisse la place sous lui
-   pour que la bande de vignettes reste visible dans l'ecran sans scroll.
-   275px = nav + hauteur des vignettes + marges. Scope via :has() : les projets
-   sans vignettes gardent 80vh. */
-.project-gallery:has(.thumbnails-container) #main-image,
-.project-gallery:has(.thumbnails-container) #main-video {
-  max-height: calc(100vh - 275px);
-}
-
-#main-video {
-  width: 100%;
-  height: auto;
-  max-height: 80vh;
-  display: block;
-  object-fit: contain;
-}
-
+   LIGHTBOX
+   ============================================
+   Ce fichier remplace _gallery.scss. Le widget de galerie (grande image +
+   bande de vignettes a permuter) a ete supprime avec la refonte de la page
+   projet : les medias forment desormais une sequence en flux. Seule la
+   lightbox survit, elle sert l'agrandissement des images de la sequence. */
 /* Image cliquable pour lightbox */
 .lightbox-trigger {
   cursor: zoom-in;
 }
 
-/* ============================================
-   LIGHTBOX
-   ============================================ */
 .lightbox {
   display: none;
   position: fixed;
@@ -1647,7 +1862,7 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.98);
+  background-color: var(--surface-scrim);
   z-index: 9999;
   justify-content: center;
   align-items: center;
@@ -1665,10 +1880,9 @@ footer {
   max-width: 90vw;
   max-height: 90vh;
   object-fit: contain;
-  border-radius: var(--border-radius-sm);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9);
-  transition: transform 0.3s ease-in-out;
+  /* L'oeuvre n'est pas dans une boite : ni rayon, ni ombre decorative. */
+  transform: scale(0.96);
+  transition: transform var(--dur-base) var(--ease-expo-out);
 }
 
 .lightbox.active .lightbox-image {
@@ -1680,8 +1894,7 @@ footer {
   top: var(--spacing-md);
   right: var(--spacing-md);
   background: transparent;
-  color: white;
-  font-size: 1.5rem;
+  color: var(--ink);
   cursor: pointer;
   line-height: 1;
   width: 3rem;
@@ -1689,27 +1902,18 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
-  border-radius: var(--border-radius-sm);
+  transition: transform var(--dur-quick) var(--ease-quad-out), color var(--dur-quick) var(--ease-quad-out);
   z-index: 10000;
 }
 
 .lightbox-close:hover {
-  color: var(--primary-color);
+  color: var(--accent);
   transform: scale(1.1);
 }
 
-.lightbox-close:focus {
-  outline: 2px solid var(--primary-color);
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-#mockup-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  transition: opacity 0.3s ease-in-out;
 }
 
 .scroll-overlay {
@@ -1737,21 +1941,34 @@ footer {
 }
 
 .bubble-container {
-  line-height: 1.625;
+  line-height: var(--leading-body);
   max-width: 42rem;
 }
 
 .bubble-container p {
   font-family: var(--font-body);
-  font-size: var(--fs-p);
-  color: var(--text-secondary-color);
+  font-size: var(--text-body);
+  /* Etait `--text-secondary-color`, un token FANTOME : utilise ici une seule
+     fois dans toute la feuille, et defini nulle part. La declaration etait
+     donc invalide et le paragraphe heritait d'une couleur au hasard. La
+     Phase 0 devait les supprimer, celui-ci avait survecu. */
+  color: var(--ink-soft);
   padding: 1.25rem 2rem;
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   background-color: var(--secondary-color);
+  /* La forme de bulle reste : elle est de la voix, c'est elle qui dit que ce
+     paragraphe s'adresse au visiteur. Ce qui tombe, c'est le LISERE LATERAL
+     orange de 4px (plus un filet de 2px en bas). Deux raisons :
+       . il ne signalait rien, comme les 20 autres bordures orange soldees
+         dans cette phase ;
+       . un `border-left` epais et colore en guise d'accent est un cas connu
+         de faux accent : la forme de la bulle porte deja l'intention, le
+         liseré ne fait que la repeter en criant.
+     Filet neutre sur les quatre cotes : la bulle garde son contour, sans
+     depenser du signal pour un paragraphe d'introduction. */
   border-radius: 0 2rem 2rem 2rem;
-  border-left: 0.25rem solid var(--primary-color);
-  border-bottom: 0.125rem solid var(--primary-color);
+  border: var(--hairline-width) solid var(--line);
 }
 
 .hero-title-container {
@@ -1818,8 +2035,8 @@ footer {
   color: var(--white-color);
   padding: 0.875rem 1.75rem;
   border-radius: var(--border-radius-full);
-  font-size: var(--fs-small);
-  font-weight: 800;
+  font-size: var(--text-caption);
+  font-weight: 600;
   transition: background-color var(--transition-base), transform var(--transition-base);
   box-shadow: var(--shadow-sm);
 }
@@ -1920,7 +2137,10 @@ footer {
 .partners-carousel {
   /* Configuration responsive du nombre d''items */
   container-type: inline-size;
-  --carousel-items-visible: 3;
+  /* 5 et non 3 : sans carte pour les structurer, trois logos sur toute la
+     largeur laissaient trop d'air entre eux. Une bande de confiance se lit
+     comme une SUITE, la densite fait partie de l'argument. */
+  --carousel-items-visible: 5;
   --carousel-gap: 2rem;
   /* Calcule la largeur d''un item pour que "X" items rentrent parfaitement (espacements inclus) */
   --carousel-item-width: calc((100cqw / var(--carousel-items-visible)) - (var(--carousel-gap) * (var(--carousel-items-visible) - 1) / var(--carousel-items-visible)));
@@ -1957,46 +2177,83 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 2.5rem 1.5rem;
-  background-color: var(--secondary-color);
-  border: 2px solid var(--primary-color);
-  border-radius: var(--border-radius-lg);
-}
-@supports (corner-shape: squircle) {
-  .partners-carousel .partner-logo-container {
-    border-radius: var(--border-radius-squircle-medium);
-    corner-shape: squircle;
-  }
-}
-.partners-carousel .partner-logo-container span {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #555;
-  text-align: center;
-  white-space: nowrap;
-  transition: color 0.3s ease;
-}
-.partners-carousel .partner-logo-container {
-  /* Effet global au survol du partenaire */
+  /* Le vertical passe de 2,5rem a 1rem : sans fond ni bordure, il ne
+     dessinait plus rien, il ne faisait qu'ajouter de la hauteur a une boite
+     invisible. L'horizontal se resserre aussi, la place par logo ayant ete
+     divisee par 5 au lieu de 3. */
+  padding: 1rem;
+  /* ── SANS CARTE, essai du 28/07/2026 ──────────────────────────────
+     Les logos sont poses directement sur le sol dither. Ce qu'il y avait
+     avant, et pourquoi ca tombe :
+       . un contour orange de 2px, qui revenait a signer chaque marque
+         tierce aux couleurs de Ropat et a repeter le signal une fois par
+         logo ;
+       . puis un filet neutre sur un voile noir a 50 %, soit une boite a
+         peine perceptible qui n'etait ni assez presente pour etre une
+         carte, ni assez absente pour laisser respirer.
+     Une bande de confiance n'a pas besoin de cadre : ce sont les marques
+     qu'on doit lire, pas les boites qui les contiennent. Le voile servait a
+     calmer le dither sous les logos, mais les logos sont en niveau de gris
+     a pleine opacite, donc clairs, et le sol est quasi noir : le contraste
+     ne depend pas de lui.
+     Reversible en une fois : reposer `background-color: var(--secondary-color)`
+     et un `border`. */
+  /* ⚠️ Les regles `span` sont SUPPRIMEES : elles etaient du CSS mort. Aucun
+     `<span>` n'existe dans `.partner-logo-container` (verifie au DOM), donc
+     elles n'ont jamais rien peint. Elles posaient un gris moyen au repos et
+     du noir pur au survol : ecrites pour un fond clair, elles auraient de
+     toute facon donne du noir sur du quasi-noir, le fond de carte calcule
+     valant rgb(1,4,4). Le survol y rendait le texte MOINS lisible. */
+  /* ── SURVOL : les deux couches de la charte ───────────────────────
+     Realtree, c'est un camouflage dense ET un blaze orange qui claque
+     CONTRE lui. Le carrousel avait deja la premiere couche sans le savoir :
+     le niveau de gris au repos, c'est le logo dissimule, et le survol le
+     fait sortir du camouflage en lui rendant ses couleurs.
+     Il manquait le blaze. Le halo orange suit le TRACE du logo et non une
+     boite, ce qui est la seule forme possible depuis qu'il n'y a plus de
+     carte. L'orange n'est pose nulle part au repos : il n'apparait qu'a
+     l'engagement, donc il signale encore quelque chose.
+     Les deux fonctions se composent dans un seul `filter`, dans cet ordre :
+     la desaturation d'abord, le halo ensuite, sinon le halo serait
+     desature avec le reste et virerait au gris. */
 }
 .partners-carousel .partner-logo-container:hover .partner-logo {
-  filter: grayscale(0%);
-  opacity: 1;
+  filter: grayscale(0%) drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 55%, transparent));
   transform: scale(1.05);
-}
-.partners-carousel .partner-logo-container:hover span {
-  color: #000;
 }
 .partners-carousel .partner-logo {
   width: auto;
   max-width: 180px;
   height: 80px;
   object-fit: contain;
+  /* `opacity: 0.6` est RETIRE. Cette section s'intitule « Ils m'ont fait
+     confiance » : c'est la preuve, et sa valeur tient entierement a ce que
+     les noms soient RECONNAISSABLES. Desaturer ET effacer a 60 % sur un
+     fond a rgb(1,4,4) rendait Vetoquinol, Juliette has a gun et Seiko
+     fantomatiques, donc la section se retournait contre son propre but.
+     Le niveau de gris reste, lui : il tient la coherence visuelle entre des
+     chartes tierces qui n'ont aucune raison de s'accorder, et il laisse au
+     survol quelque chose a reveler. */
   filter: grayscale(100%);
-  opacity: 0.6;
-  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
+/* Mouvement reduit : le defilement s'arrete. Une bande qui glisse en boucle
+   sans fin est exactement ce que ce reglage systeme demande de supprimer.
+   ⚠️ Ce n'est PAS suffisant au regard de WCAG 2.2.2 (niveau A), qui exige un
+   moyen de mettre en pause tout mouvement automatique de plus de 5 secondes.
+   La pause au survol existe mais ne compte pas : elle est inaccessible au
+   clavier et au tactile. Il manque un vrai bouton. */
+@media (prefers-reduced-motion: reduce) {
+  .partners-carousel .partners-carousel-track {
+    animation: none;
+    /* Sans l'animation, la piste en `width: max-content` deborderait : on la
+       ramene a une bande lisible et defilable a la main. */
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+}
 /* Keyframes pour le defilement infini */
 @keyframes scroll-carousel {
   0% {
@@ -2008,14 +2265,24 @@ footer {
   }
 }
 /* Responsive */
+/* Paliers reajustes avec le passage a 5 : tomber directement de 5 a 2 a
+   992px faisait doubler la taille des logos d'un coup. */
+@media (max-width: 1200px) {
+  .partners-carousel {
+    --carousel-items-visible: 4;
+  }
+}
 @media (max-width: 992px) {
   .partners-carousel {
-    --carousel-items-visible: 2;
+    --carousel-items-visible: 3;
   }
 }
 @media (max-width: 768px) {
   .partners-carousel {
-    --carousel-items-visible: 1;
+    /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
+       clients, donc la section perd son argument. Deux gardent la lecture de
+       bande, et les logos sont larges de 180px au plus, donc ils tiennent. */
+    --carousel-items-visible: 2;
     --carousel-speed: 20s;
   }
   .partners-carousel .partners-carousel-container {
@@ -2024,6 +2291,21 @@ footer {
     mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
   }
 }
+/* ⚠️ ETAT RESTAURE le 28/07/2026, sur decision de Ropat : « les cartes avaient
+   plus d'identite avant ».
+   J'avais passe le contour au filet neutre et supprime le squircle, au motif
+   que l'orange permanent ne signalait rien. C'etait la MOITIE du geste prevu :
+   le plan disait « l'image porte la carte, et la COMPOSITION DE LA GRILLE
+   devient le lieu d'expression (decalages, tailles inegales) plutot que le
+   liseré ». J'ai retire le liseré sans jamais composer la grille, donc j'ai
+   soustrait sans rien ajouter, et 21 cartes distinctives sont devenues une
+   grille de vignettes a filet gris, soit le gabarit par defaut.
+   C'est exactement le reflexe que la decision du 26/07 interdit : la cible est
+   un chrome RICHE ET ORCHESTRE, pas un chrome discret. Baisser le volume
+   partout est plus facile que composer un ecart.
+   Ne pas re-tenter cette bascule seule. Elle n'a de sens qu'accompagnee du
+   travail de composition, qui sera tranche en Phase 3 avec l'arbitrage
+   « grille de vignettes contre index typographique ». */
 .card {
   display: flex;
   flex-direction: column;
@@ -2074,7 +2356,7 @@ footer {
 
 /* description */
 .service-card-description {
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
 }
 
 .service-text-content {
@@ -2093,7 +2375,7 @@ footer {
   gap: var(--spacing-xs);
   flex-wrap: wrap;
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--primary-color);
 }
 
@@ -2106,8 +2388,8 @@ footer {
   text-transform: uppercase;
   /* 300 et non 100 : Chakra Petch n'a pas de graisse sous 300, le navigateur
      rendait deja 300. On declare ce qui est reellement affiche. */
-  font-weight: 300;
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: var(--text-caption);
   color: var(--grey-light-400);
   transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
 }
@@ -2168,6 +2450,8 @@ footer {
   color: var(--white-color);
   font-weight: 700;
   text-transform: uppercase;
+  /* Restaure avec le reste de l'habillage de carte le 28/07/2026 (cf. la note
+     en tete de _cards.scss). */
   border-bottom: 1px solid var(--primary-color);
   aspect-ratio: 1/1;
   width: 100%;
@@ -2201,7 +2485,9 @@ footer {
 .project-card-title {
   text-align: start;
   font-family: var(--font-heading);
-  font-size: var(--fs-p);
+  /* subhead et non le corps : un titre de carte a la taille du texte est
+     la raison pour laquelle la grille de projets se lit a plat. */
+  font-size: var(--text-subhead);
   font-weight: 700;
 }
 
@@ -2210,9 +2496,9 @@ footer {
 }
 
 .project-card-description {
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   color: var(--gray-light);
-  line-height: 1.4;
+  line-height: var(--leading-meta);
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -2236,6 +2522,8 @@ footer {
   padding: 2.5rem;
   gap: 1.5rem;
   background-color: var(--secondary-color);
+  /* Restaure le 28/07/2026 : les cartes gardent leur habillage d'origine
+     tant que la composition ne prend pas le relais (cf. _cards.scss). */
   border: 3px solid var(--primary-color);
   border-radius: var(--border-radius-squircle-medium);
 }
@@ -2254,12 +2542,12 @@ footer {
   flex-direction: row;
   align-items: center;
   gap: 1.5rem;
-  font-size: 2rem;
+  font-size: var(--text-subhead);
   font-weight: 400;
 }
 
 .experience-card-title {
-  font-size: 2.5rem;
+  font-size: var(--text-title);
   font-weight: 700;
 }
 
@@ -2269,14 +2557,14 @@ footer {
 }
 
 .experience-card-date {
-  font-size: 1.25rem;
+  font-size: var(--text-meta);
   font-weight: 400;
   text-transform: uppercase;
   color: var(--primary-color);
 }
 
 .experience-card-company {
-  font-size: 2rem;
+  font-size: var(--text-subhead);
   font-weight: 500;
   color: var(--grey-light-400);
 }
@@ -2288,8 +2576,8 @@ footer {
 }
 
 .experience-card-description {
-  font-size: 1.5rem;
-  line-height: 1.6;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: var(--text-main);
 }
 
@@ -2314,7 +2602,7 @@ footer {
   }
 }
 .experience-card-tag {
-  font-size: 1.25rem;
+  font-size: var(--text-meta);
   font-weight: 600;
   text-decoration: none;
 }
@@ -2334,14 +2622,14 @@ footer {
 
 .legal-content h2 {
   color: var(--primary-color);
-  font-size: var(--fs-h3);
+  font-size: var(--text-subhead);
   margin-bottom: var(--spacing-md);
   margin-top: var(--spacing-xl);
 }
 
 .legal-content h3 {
   color: var(--white-color);
-  font-size: var(--fs-h4);
+  font-size: var(--text-subhead);
   margin-bottom: var(--spacing-sm);
   margin-top: var(--spacing-lg);
 }
@@ -2380,376 +2668,608 @@ footer {
 
 .legal-meta {
   margin-top: 2rem;
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   opacity: 0.7;
 }
 
-.hero-project {
+/* ══════════════════════════════════════════════════════════════════════
+   PAGE PROJET
+   ══════════════════════════════════════════════════════════════════════
+   Grammaire reprise du prototype docs/proto-page-projet.html.
+
+   Le principe de mise en page : <main> ne porte AUCUNE gouttiere, ce sont
+   les bandes qui la portent. Une bande qui saigne est simplement une bande
+   sans padding. Aucune marge negative, aucun calcul de debordement, donc
+   rien qui derape quand la barre de defilement apparait.
+
+   L'orange n'encadre plus rien ici : il ne sert que la ou il signale
+   (pastille du theme, sous-titre, titre de note, survol du projet suivant).
+   ══════════════════════════════════════════════════════════════════════ */
+.project-page {
+  /* Neutralise la gouttiere et le rythme globaux de <main> : cette page
+     compose son propre rythme, bande par bande. */
+  padding: 0;
+  gap: 0;
+}
+
+/* La « bande morte » : <body> pose un `gap` entre le header et <main>, soit
+   48 px de vide sous la barre avant que l'oeuvre commence. Sur une page dont
+   le premier geste est une ouverture pleine hauteur, elle n'a aucune raison
+   d'exister, et elle repoussait l'ouverture de 48 px hors de l'ecran. */
+body:has(.project-page) {
+  gap: 0;
+}
+
+/* ── OUVERTURE ─────────────────────────────────────────────────────────
+   Un seul ecran porte l'oeuvre ET les mots. L'oeuvre est posee ENTIERE sur
+   le sol dither ; les mots occupent le sol a cote d'elle. Rien ne se pose
+   sur le travail du client, rien ne le voile.
+
+   `--chrome` : la hauteur du header sticky, a retirer partout ou l'on veut
+   « le reste de l'ecran ». Sans ca, un bloc en 100svh est toujours pousse
+   de 76 px sous la ligne de flottaison. */
+.project-open {
+  --chrome: 76px;
+  --air-haut: clamp(1.5rem, 4vw, 3rem);
+  --air-bas: clamp(2rem, 5vw, 4rem);
+  /* Le header est `sticky`, donc il OCCUPE deja sa hauteur dans le flux :
+     l'ouverture ne doit demander que le reste de l'ecran. Le lui ajouter en
+     padding le comptait deux fois et poussait l'oeuvre sous la ligne de
+     flottaison (mesure : 36 px de debordement a 1440 comme a 1280). */
+  /* On retire 3rem de plus que le plein ecran : la bande suivante AFFLEURE
+     sous la ligne de flottaison. C'est le signal de defilement le moins
+     cher et le seul qui n'a jamais besoin d'une icone. Sans lui, l'ouverture
+     remplissait l'ecran au pixel pres et rien n'indiquait une suite. */
+  min-height: calc(100svh - var(--chrome) - 3rem);
+  padding: var(--air-haut) var(--page-gutter) var(--air-bas);
+  /* Ancre l'indice de defilement DANS l'ouverture : `.scroll-overlay` est en
+     `position: absolute`, sans ancetre positionne il remonterait au bloc
+     conteneur initial et flotterait n'importe ou. */
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  border-bottom: var(--hairline-width) solid var(--line);
+  /* Deux colonnes des qu'il y a la place : l'oeuvre garde la hauteur, les
+     mots prennent ce qui reste. En dessous, on empile. */
+}
+@media (min-width: 900px) {
+  .project-open {
+    grid-template-columns: minmax(0, 1.25fr) minmax(17rem, 0.75fr);
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+}
+
+.project-open-media-wrap {
+  margin: 0;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+}
+
+.project-open-media {
+  /* `contain` et non `cover` : le format complet EST le livrable. Avec
+     `cover`, de 12 a 58 % de l'oeuvre etait masquee selon le ratio, et sur
+     8 projets sur 20 il n'existait aucun moyen de la voir entiere. */
+  max-height: calc(100svh - var(--chrome) - var(--air-haut) - var(--air-bas));
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.project-open-lede {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 2.5rem;
+  justify-content: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+/* ── OUVERTURE « CONTEXTE » : l'image passe EN FOND ──────────────────
+   Une mise en situation (mockup, photo de l'imprime posee sur une table)
+   n'est pas le livrable : c'est une photo du livrable. La mise en page a
+   donc le droit d'en faire un decor, de la faire saigner et d'ecrire
+   dessus. Le voile est legitime ICI et nulle part ailleurs : il n'altere
+   aucune couleur que le client a signee.
+
+   ⚠️ Ne jamais basculer une pochette, une affiche ou un logo en `contexte`.
+   Le defaut reste `livrable`, et c'est ce qui protege l'oeuvre. */
+.project-open--contexte {
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  /* L'image occupe TOUTE la hauteur de l'ecran, header compris. Le header
+     est `sticky`, donc il prend ses 76 px dans le flux et poussait l'image
+     d'autant : on les reprend par une marge negative, et la barre survole
+     l'image en z au lieu de la decaler. Pas de retrait de 3 rem non plus
+     ici : en mode `contexte` l'image saigne d'elle-meme sous la ligne de
+     flottaison, elle n'a pas besoin qu'on fasse affleurer la bande suivante. */
+  margin-top: calc(-1 * var(--chrome));
+  min-height: 100svh;
+}
+.project-open--contexte .project-open-media-wrap {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: block;
+}
+.project-open--contexte .project-open-media {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+.project-open--contexte {
+  /* Voile de lisibilite : dense la ou vivent les mots, leger en haut pour que
+     la mise en situation reste lisible comme image.
+     ⚠️ Les paliers sont cales sur la HAUTEUR DU BLOC DE TEXTE, pas au juge.
+     Premiere version : dense sur les 28 % du bas seulement. Le micro-libelle
+     du theme, qui coiffe le bloc, tombait alors sur le papier clair du
+     mockup et mesurait 1,04:1, tres loin des 4,5 exiges. Le bloc complet
+     (theme + titre + pitch) occupe environ la moitie basse de l'ecran : le
+     voile doit donc rester dense jusque vers 55 %. */
+}
+.project-open--contexte::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(3, 8, 8, 0.94) 0%, rgba(3, 8, 8, 0.9) 38%, rgba(3, 8, 8, 0.8) 55%, rgba(3, 8, 8, 0.42) 74%, rgba(3, 8, 8, 0.12) 100%);
+  pointer-events: none;
+}
+.project-open--contexte .project-open-lede {
+  position: relative;
+  z-index: 1;
+  max-width: 46rem;
+  min-height: 100svh;
+  /* Le padding haut reprend la hauteur du header : le texte est ancre en
+     bas, mais s'il devenait tres long il ne passerait pas sous la barre. */
+  padding: calc(var(--chrome) + var(--air-haut)) var(--page-gutter) clamp(3rem, 8vw, 6rem);
+  justify-content: flex-end;
+}
+.project-open--contexte {
+  /* Sur une image, le gris attenue ne tient pas : le micro-libelle coiffe le
+     bloc, donc il tombe la ou le voile est le plus mince. Mesure sur le
+     mockup Hors Champ : 2,22:1 en gris contre 4,5 exiges, alors que le blanc
+     passe largement. Densifier encore le voile aurait noirci l'image entiere
+     pour un seul mot. */
+}
+.project-open--contexte .project-theme {
+  color: var(--ink);
+}
+.project-open--contexte .project-pitch {
+  max-width: var(--measure-lede);
+}
+
+.project-theme {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.4rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  /* La pastille : premier des rares oranges de la page, il annonce le sujet. */
+}
+.project-theme::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
 }
 
 .project-title {
-  line-height: 1;
-}
-
-.hero-project-title-theme {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
-  letter-spacing: 0.25em;
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  /* Plafond a 6rem : la limite haute du systeme.
+     Le prototype montait a 6.5rem. */
+  font-size: var(--text-display);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
-  font-weight: 700;
+  text-wrap: balance;
+}
+.project-title em {
+  font-style: normal;
+  color: var(--accent);
+  display: block;
 }
 
-.hero-project-title-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.hero-image-container {
-  max-width: 40%;
-  overflow: visible;
-}
-
-@media (max-width: 639px) {
-  .hero-image-container {
-    max-width: 100%;
-  }
-}
-.case-study {
-  display: flex;
-  flex-direction: column;
-  gap: 10rem;
-  padding-top: var(--spacing-xl);
-}
-
-.cs-specs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0;
-  padding: var(--spacing-lg) 0;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.cs-spec {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  flex: 1;
-  min-width: 120px;
-  padding: 0 var(--spacing-lg);
-}
-.cs-spec:first-child {
-  padding-left: 0;
-}
-.cs-spec:last-child {
-  padding-right: 0;
-}
-.cs-spec:not(:first-child) {
-  border-left: 1px solid var(--border-subtle);
-}
-
-.cs-spec-label {
+.project-pitch {
+  margin: 0;
+  max-width: var(--measure-lede);
   font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
-  color: var(--text-muted);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--ink-muted);
+}
+.project-pitch strong {
+  color: var(--ink);
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
-.cs-spec-value {
-  font-family: var(--font-heading);
-  font-size: var(--fs-p);
-  color: var(--white-color);
-  font-weight: 600;
-  line-height: 1.3;
-}
+/* -- SEQUENCE : LA PLANCHE ------------------------------------------
+   Toutes les pieces visibles ENSEMBLE, en tailles inegales. Elle repond a
+   « combien y en a-t-il » par construction, sans compteur ni bande de
+   vignettes : c'est la fonction que la suppression du widget avait perdue,
+   et que deux critiques d'affilee ont pointee (heuristiques 6 et 7 a 1/4).
+   Modele McCandliss releve dans la veille.
 
-.cs-process {
+   Le RYTHME vient du FORMAT de l'oeuvre (calcule dans le gabarit), pas d'un
+   compteur : une image large prend de la largeur, une image haute est
+   retenue. Il ne force AUCUNE boite.
+
+   Deux versions ecartees, avec leur mesure :
+   . rythme en LARGEUR seule (v1) : ecart pleine/marge de 8,8 %, invisible.
+   . rythme en HAUTEUR avec `min-height` sur la piece (v2) : plafond sans
+     plancher. Sur stelya a 1440, la piece `etroite` (468 px) etait rendue
+     PLUS GRANDE que les `marge` qui l'encadraient (400 et 162 px), et il
+     restait 2 406 px de bande vide. */
+.project-sequence {
+  padding: clamp(2rem, 5vw, 4rem) var(--page-gutter);
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-  padding-top: var(--spacing-xl);
-}
-@media (min-width: 900px) {
-  .cs-process {
-    grid-template-columns: 260px 1fr;
-    gap: 5rem;
-  }
-}
-
-.cs-process-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-@media (min-width: 900px) {
-  .cs-process-header {
-    position: sticky;
-    top: 8rem;
-    align-self: start;
-  }
+  /* `minmax(0, 1fr)` et NON `1fr` : `1fr` vaut `minmax(auto, 1fr)`, et le
+     minimum `auto` prend la largeur INTRINSEQUE du media. Certains SVG font
+     1920 px de large, les pistes gonflaient donc au-dela de la place
+     disponible et la page debordait de 160 px. C'est la PISTE qu'il faut
+     autoriser a retrecir, `min-width: 0` sur la piece ne suffit pas. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  /* `start` : chaque piece EPOUSE la hauteur de son media. La rigueur vient
+     du systeme de COLONNES, pas d'une forme de case imposee. Avec `stretch`
+     ou une `aspect-ratio` fixe, une image paysage se retrouvait letterboxee
+     dans une case plus haute qu'elle. */
+  align-items: start;
+  gap: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 
-.cs-process-title {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h3);
-  font-weight: 700;
-  line-height: 1.15;
-  color: var(--white-color);
+.project-piece {
+  margin: 0;
+  min-width: 0;
+  grid-column: span 3;
+  display: block;
 }
 
-.cs-process-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+/* ⚠️ OBLIGATOIRE des lors qu'on pose `display` sur la piece : un selecteur
+   de classe l'emporte sur la regle navigateur `[hidden] { display: none }`.
+   Sans cette ligne, le bouton « voir plus » posait bien l'attribut, mes
+   mesures comptaient bien 3 pieces visibles, et pourtant les cases repliees
+   gardaient leur place : 749 px de grille vide entre la derniere image et
+   le bouton. Invisible a la mesure, evident a la capture. */
+.project-piece[hidden] {
+  display: none;
 }
 
-.cs-process-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-  padding-top: var(--spacing-lg);
-  margin-top: var(--spacing-sm);
-  border-top: 1px solid color-mix(in srgb, var(--primary-color) 25%, transparent);
-}
-.cs-process-section:first-of-type {
-  padding-top: 0;
-  margin-top: 0;
-  border-top: none;
-}
-.cs-process-section h3 {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h4);
-  font-weight: 700;
-  color: var(--primary-color);
-}
-.cs-process-section p {
-  font-family: var(--font-body);
-  font-size: var(--fs-p);
-  line-height: 1.85;
-  color: rgba(255, 255, 255, 0.75);
-}
-.cs-process-section strong {
-  color: var(--white-color);
-  font-weight: 700;
+/* Le RYTHME choisit le nombre de colonnes, rien d'autre. Il vient du FORMAT
+   de l'oeuvre (calcule dans le gabarit) : une image large prend de la
+   largeur, une image haute est retenue pour ne pas occuper deux ecrans. */
+.project-piece--pleine {
+  grid-column: span 6;
 }
 
-.cs-mockups {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
+.project-piece--marge {
+  grid-column: span 3;
 }
 
-.cs-mockups--grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
-}
-@media (min-width: 640px) {
-  .cs-mockups--grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .cs-mockups--grid .cs-mockup:first-child {
-    grid-column: 1/-1;
-  }
+.project-piece--etroite {
+  grid-column: span 2;
 }
 
-.cs-mockups--bento {
-  --grid-cols: 4;
-  display: grid;
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
-  gap: var(--spacing-sm);
-}
-.cs-mockups--bento .cs-mockup {
-  aspect-ratio: var(--aspect);
-  grid-column: span var(--cols, 1);
-  grid-row: span var(--rows, 1);
-  background: var(--bg, transparent);
-  min-height: 0;
-}
-.cs-mockups--bento .cs-mockup img,
-.cs-mockups--bento .cs-mockup video {
-  width: 100%;
-  height: 100%;
-  object-fit: var(--fit, cover);
-  padding: var(--fit-padding, 0);
-}
-.cs-mockups--bento .cs-mockup:not([style*="--aspect"]) {
-  position: relative;
-}
-.cs-mockups--bento .cs-mockup:not([style*="--aspect"]) img, .cs-mockups--bento .cs-mockup:not([style*="--aspect"]) video {
-  position: absolute;
-  inset: 0;
-}
-@media (max-width: 900px) {
-  .cs-mockups--bento {
-    --grid-cols: 2;
-  }
-}
-@media (max-width: 639px) {
-  .cs-mockups--bento {
-    --grid-cols: 1;
-  }
-  .cs-mockups--bento .cs-mockup {
-    aspect-ratio: 1;
-    grid-column: span 1;
-    grid-row: span 1;
-  }
-}
-
-.cs-mockup {
-  width: 100%;
-  border-radius: var(--border-radius-lg);
-}
-@supports (corner-shape: squircle) {
-  .cs-mockup {
-    border-radius: var(--border-radius-lg);
-    corner-shape: squircle;
-  }
-}
-.cs-mockup {
-  overflow: hidden;
-}
-.cs-mockup img,
-.cs-mockup video {
+.project-piece-media {
   width: 100%;
   height: auto;
+  max-width: 100%;
+  /* Garde-fou, pas une mise en forme : protege d'un `rythme` mal declare qui
+     mettrait un portrait en pleine largeur (mesure avant plafond : 2 138 px,
+     soit 2,4 ecrans, jamais visible en entier). Le rythme deduit du format
+     ne produit pas ce cas de lui-meme. */
+  max-height: 92svh;
+  object-fit: contain;
   display: block;
-  object-fit: cover;
 }
 
-.cs-design-system {
+@media (max-width: 767px) {
+  .project-sequence {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .project-piece,
+  .project-piece--pleine,
+  .project-piece--marge,
+  .project-piece--etroite {
+    grid-column: span 2;
+  }
+}
+/* -- GALERIE : bouton « voir plus » -----------------------------------
+   Composant de SERVICE, donc discret : un filet et un micro-libelle. Il n'a
+   aucune raison de crier, l'oeuvre est juste au-dessus. L'orange n'apparait
+   qu'au survol, la ou il signale une action. Cree par script.js : sans JS,
+   toutes les pieces restent visibles et le bouton n'existe pas. */
+/* ⚠️ MEME PIEGE que sur .project-piece, reproduit a l'identique sur ce
+   bouton cree apres coup : poser `display` sur un element fait gagner la
+   regle auteur (0,1,0) contre `[hidden] { display: none }` de la feuille
+   navigateur (0,0,1). Le bouton restait RENDU et FOCALISABLE sans nom
+   accessible, soit un arret de tabulation muet sur 12 pages sur 12.
+   Regle : tout `display` pose sur un element susceptible d'etre `hidden`
+   exige sa contrepartie explicite. */
+.galerie-plus[hidden] {
+  display: none;
+}
+
+.galerie-plus {
+  display: block;
+  width: calc(100% - 2 * var(--page-gutter));
+  margin: 0 auto clamp(2rem, 5vw, 4rem);
+  padding: 1.1rem 1.5rem;
+  min-height: 44px;
+  background: none;
+  border: none;
+  border-top: var(--hairline-width) solid var(--line);
+  border-bottom: var(--hairline-width) solid var(--line);
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: color var(--dur-quick) var(--ease-quad-out), border-color var(--dur-quick) var(--ease-quad-out);
+}
+.galerie-plus:hover, .galerie-plus:focus-visible {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+/* -- RECIT : une bande, pas une ponctuation -------------------------
+   Le texte formait des « notes » intercalees entre les pieces, ce qui
+   affirmait un lien image / paragraphe que le contenu n'a jamais eu (aucune
+   image n'est liee a une section, sur aucun projet). Il forme desormais son
+   propre mouvement.
+
+   PAS de fond assombri : le dither EST le sol, et le voiler tuerait la
+   texture la plus distinctive du site precisement la ou le visiteur lit le
+   plus longtemps. Le contraste corpus / recit est deja porte par le contenu
+   et par la structure ; les filets et la respiration suffisent a marquer la
+   bande. Le corps de texte mesure d'ailleurs 7,38:1 sur le dither, la
+   lisibilite n'a besoin d'aucun voile. */
+.project-recit {
+  padding: clamp(3rem, 8vw, 7rem) var(--page-gutter);
+  border-top: var(--hairline-width) solid var(--line);
+  border-bottom: var(--hairline-width) solid var(--line);
+}
+
+/* Largeur en `rem` et non en `ch` : le `ch` se resout sur la police de
+   l'element qui le porte (16 px ici) alors que le texte se compose a 20 px.
+   La mesure annoncee valait donc 20 % de moins que la mesure rendue. */
+.project-recit-corps {
+  /* 40rem et non 54 : le correctif precedent avait SURCORRIGE, de 44,8
+     caracteres par ligne a 92, traversant la fenetre de confort 45-75 sans
+     s'y arreter. 40rem donne environ 66 caracteres en Manrope 20 px. */
+  max-width: min(var(--measure-prose), 100%);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* Dans le recit, la note n'est plus une ponctuation posee en marge : c'est
+   un paragraphe d'un texte suivi. Elle perd donc sa grille a deux colonnes,
+   qui, dans une colonne deja etroite, ecrasait le texte dans un couloir. */
+.project-recit .project-note {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.project-recit .project-note-title {
+  margin: 0 0 0.9rem;
+}
+
+.project-recit .project-note-body {
+  max-width: none;
+}
+
+/* ── NOTE : le texte ponctue ─────────────────────────────────────────── */
+.project-note {
+  padding: 0 var(--page-gutter);
+  margin: 0 0 clamp(3rem, 7vw, 7rem);
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-xl);
-  padding-top: var(--spacing-xl);
-  border-top: 1px solid var(--border-subtle);
+  gap: 1rem;
 }
-@media (min-width: 768px) {
-  .cs-design-system {
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+@media (min-width: 900px) {
+  .project-note {
+    grid-template-columns: 0.85fr 1.15fr;
   }
 }
 
-.cs-design-block {
+/* C'est un <h2>. Il etait compose en micro-libelle de 12 px, donc PLUS
+   PETIT que le texte de 20 px qu'il coiffe, et il partageait son dessin
+   avec les etiquettes de metadonnees du colophon. Il reprend l'echelon
+   `subhead`, qui n'existait pas avant. */
+.project-note-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-subhead);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+.project-note-body p {
+  margin: 0 0 1em;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+.project-note-body p:last-child {
+  margin-bottom: 0;
+}
+.project-note-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ── COLOPHON : la meta en index typographique ───────────────────────── */
+.project-colophon {
+  margin: 0;
+  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter);
+  border-top: var(--hairline-width) solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 2.5rem clamp(2rem, 4vw, 4rem);
+}
+.project-colophon dt {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.project-colophon dd {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* ── DESIGN SYSTEM : couleurs + specimens ───────────────────────────── */
+.project-ds {
+  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter);
+  border-top: var(--hairline-width) solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  /* ⚠️ La regle `md: 1fr 1fr` a ete RETIREE le 28/07/2026.
+     Elle posait les deux blocs en pairs de meme largeur. Ils ne le sont
+     jamais : sur les 10 projets qui ont un bloc systeme, les couleurs vont de
+     2 a 8 et les polices de 1 a 3, avec **7 projets sur 10 a une seule
+     police**. Mesure sur aelio : deux colonnes de 630 px exactement, l'une
+     portant 8 elements et l'autre 1, donc une moitie de section vide a 70 %,
+     pendant que la palette etait comprimee sur 4 colonnes.
+     En pleine largeur, les 8 nuanciers d'aelio tiennent sur UNE rangee et
+     respirent, au lieu de deux rangees serrees. */
+}
+
+.project-ds-block {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
 }
 
-.cs-design-title {
-  font-family: var(--font-heading);
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+/* <h2> lui aussi : meme correction que .project-note-title. */
+.project-ds-title {
+  margin: 0;
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: var(--hairline-width) solid var(--line);
+  font-family: var(--font-heading);
+  font-size: var(--text-subhead);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--ink);
 }
 
-.cs-color-palette {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+/* Flex et non grid : une rangee de nuanciers est de la mise en page a UNE
+   dimension, ils s'alignent et passent a la ligne, rien de plus.
+   La grille `repeat(auto-fill, minmax(110px, 1fr))` a ete essayee en pleine
+   largeur et mesuree : elle cree des pistes VIDES, donc les 8 nuanciers
+   d'aelio tombaient a 111 px, plus petits qu'avant l'elargissement. `auto-fit`
+   aurait l'effet inverse et etirerait les 2 nuanciers de zylkene a 630 px
+   chacun. Aucune des deux ne convient a un nombre d'elements aussi variable.
+   Une base bornee resout les deux cas : la taille reste sensee de 2 a 8
+   nuanciers, et le bord droit reste franc. */
+.project-ds-palette {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-md);
 }
+.project-ds-palette .project-swatch {
+  flex: 0 1 clamp(110px, 13vw, 165px);
+}
 
-.cs-color-swatch {
+.project-swatch {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   gap: 0.25rem;
   aspect-ratio: 1/1;
   padding: var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-}
-@supports (corner-shape: squircle) {
-  .cs-color-swatch {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-}
-.cs-color-swatch {
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
-  cursor: default;
+  /* Contraste automatique : couleur claire -> texte noir, sinon blanc.
+     Repli blanc pour les navigateurs sans relative colors. */
   color: white;
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 }
-.cs-color-swatch:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-}
 
-.cs-color-name {
+.project-swatch-name {
   font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
+  font-size: var(--text-caption);
   font-weight: 600;
-  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0/0.85);
   line-height: 1.3;
+  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 }
 
-.cs-color-hex {
+.project-swatch-hex {
   font-family: var(--font-heading);
-  font-size: var(--fs-xsmall);
-  font-weight: 500;
-  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0/0.65);
+  font-size: var(--text-caption);
+  font-weight: 600;
   text-transform: uppercase;
+  /* Pleine opacite, sur les deux libelles.
+     Le basculement noir/blanc se fait a l = 0,5, et c'est le bon seuil : le
+     point ou noir et blanc se valent est L = 0,179, ou les DEUX ne donnent
+     que 4,58:1. La marge au-dessus de 4,5 est donc de 0,08. Toute opacite
+     retiree la mange : a 0,65 le nuancier Or Profond tombait a 4,03:1 et le
+     vert Sipsmith a 4,47:1.
+     La hierarchie entre le nom et le code hexadecimal se joue desormais sur
+     la graisse et la famille, pas sur un texte a demi efface. */
+  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 }
 
-.cs-font-stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
+/* Grille a remplissage automatique, et non colonne flex : en pleine largeur,
+   une colonne flex etirerait l'unique carte de police sur 1260 px. `auto-fill`
+   cree des pistes vides, donc une carte seule garde la largeur d'une piste et
+   s'aligne sur la palette au-dessus, au lieu de flotter dans le vide. */
+.project-ds-fonts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-md);
 }
 
-.cs-font-item {
+.project-font {
   /* Grille et non flex : la premiere colonne est tenue par la fente du
-     specimen, qui est emise meme quand la police n'a pas encore de trace.
-     Les cartes gardent ainsi le meme alignement de texte les unes sous les
-     autres, avec ou sans specimen. */
+     specimen, emise meme quand la police n'a pas de trace. Les cartes
+     gardent le meme alignement de texte, avec ou sans specimen. */
   display: grid;
   grid-template-columns: 5rem 1fr;
   align-items: center;
   gap: var(--spacing-lg);
-  padding: var(--spacing-md);
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md) 0;
+  border-top: var(--hairline-width) solid var(--line);
 }
-@supports (corner-shape: squircle) {
-  .cs-font-item {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-}
-.cs-font-item {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: border-color var(--transition-base), background var(--transition-base);
-}
-.cs-font-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: color-mix(in srgb, var(--primary-color) 30%, transparent);
+.project-font:first-child {
+  border-top: none;
+  padding-top: 0;
 }
 
-/* Le specimen est un trace SVG (cf. _data/typefaces.yml), plus du texte vivant.
-   C'est la HAUTEUR qui fixe l'echelle, et la largeur qui suit : les viewBox
-   partagent une fenetre verticale constante, donc une police a grande hauteur
-   de capitale se voit plus haute que sa voisine, comme elle le serait dans un
-   texte compose au meme corps. Contraindre la largeur casserait ce rapport.
-
-   La fente reste a 5rem, la largeur d'origine : un « Aa » de 4rem y tenait
-   deja tout juste, et les polices plus chassees debordaient. Le trace fait
-   pareil, centre et sans rognage, dans un ecart de 2rem qui l'absorbe. */
-.cs-font-sample-slot {
+/* Le specimen est un trace SVG (cf. _data/typefaces.yml), plus du texte
+   vivant. C'est la HAUTEUR qui fixe l'echelle et la largeur qui suit : les
+   viewBox partagent une fenetre verticale constante, donc une police a
+   grande hauteur de capitale se voit plus haute que sa voisine, comme dans
+   un texte compose au meme corps. Contraindre la largeur casserait ce
+   rapport. La fente reste a 5rem, la largeur d'origine. */
+.project-font-slot {
   width: 5rem;
   display: flex;
   align-items: center;
@@ -2757,55 +3277,198 @@ footer {
   overflow: visible;
 }
 
-.cs-font-sample {
+.project-font-sample {
   height: 4rem;
   width: auto;
   flex-shrink: 0;
-  fill: color-mix(in srgb, var(--primary-color) 20%, transparent);
-  stroke: var(--primary-color);
-  transition: fill var(--transition-base);
+  fill: none;
+  stroke: var(--ink-subtle);
+  transition: stroke var(--transition-base);
 }
-.cs-font-sample path {
-  /* Garde le contour a 1,5 px reels quelle que soit l'echelle du viewBox,
-     comme le faisait -webkit-text-stroke sur le texte. Sans cette ligne,
-     l'epaisseur serait multipliee par le facteur d'echelle (environ 0,064)
-     et le contour disparaitrait. */
+.project-font-sample path {
+  /* Garde le contour a 1,5 px reels quelle que soit l'echelle du viewBox.
+     Sans cette ligne, l'epaisseur serait multipliee par le facteur
+     d'echelle (environ 0,064) et le contour disparaitrait. */
   vector-effect: non-scaling-stroke;
   stroke-width: 1.5px;
 }
-.cs-font-item:hover .cs-font-sample {
-  fill: color-mix(in srgb, var(--primary-color) 50%, transparent);
+.project-font:hover .project-font-sample {
+  stroke: var(--accent);
 }
 
-.cs-font-info {
+.project-font-info {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.cs-font-name {
+.project-font-name {
   font-family: var(--font-heading);
-  font-size: var(--fs-h4);
+  font-size: var(--text-subhead);
   font-weight: 700;
-  color: var(--white-color);
   line-height: 1.2;
+  color: var(--ink);
 }
 
-.cs-font-usage {
+.project-font-usage {
   font-family: var(--font-body);
-  font-size: var(--fs-small);
-  color: rgba(255, 255, 255, 0.5);
+  font-size: var(--text-caption);
   line-height: 1.5;
+  color: var(--ink-muted);
 }
 
+/* ── SUITE : le passage au projet suivant ────────────────────────────
+   Moment d'expression : c'est le geste qui enchaine, pas une paire de
+   petites cartes. */
+.project-next {
+  padding: clamp(2.5rem, 6vw, 5rem) var(--page-gutter) clamp(3rem, 7vw, 5rem);
+  border-top: var(--hairline-width) solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+}
+
+.project-next-link {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--ink);
+  min-width: 0;
+}
+
+.project-next-label {
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.project-next-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-heading);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  transition: color var(--dur-quick) var(--ease-quad-out);
+}
+.project-next-link:hover .project-next-title, .project-next-link:focus-visible .project-next-title {
+  color: var(--accent);
+}
+
+.project-next-arrow {
+  flex: none;
+  transition: transform var(--dur-base) var(--ease-expo-out);
+}
+.project-next-link:hover .project-next-arrow, .project-next-link:focus-visible .project-next-arrow {
+  transform: translateX(0.5rem);
+}
+
+.project-next-all {
+  /* Cible tactile : le lien nu mesurait 146 x 14,4 px, sous les 24 px du
+     critere AA 2.5.8 et loin des 44 px confortables, alors que c'est la
+     SEULE sortie de la page, en bas de plusieurs ecrans. Le padding porte
+     la hauteur cliquable a 44 px sans changer le dessin du texte. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.75rem 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color var(--dur-quick) var(--ease-quad-out);
+}
+.project-next-all:hover {
+  color: var(--ink);
+}
+
+/* ── HEADER : ESCAMOTAGE AU DEFILEMENT ───────────────────────────────
+   Le header garde son habillage D'ORIGINE (noir semi-opaque et bordure
+   orange) : c'est un choix de Ropat, la barre assume sa presence.
+   Ce qui change ici, c'est seulement son COMPORTEMENT : elle s'efface quand
+   on lit et revient quand on la demande, pour ne pas rester posee en
+   permanence sur le travail du client. */
+body:has(.project-page) header {
+  transition: transform var(--dur-base) var(--ease-expo-out), background-color var(--dur-base) ease, border-bottom-color var(--dur-base) ease;
+}
+
+/* SUR L'OUVERTURE : ni fond ni bordure. La barre est alors posee sur
+   l'oeuvre elle-meme ; lui donner un aplat et un filet orange reviendrait a
+   l'encadrer. Des qu'on a depasse le hero, elle reprend son habillage
+   d'origine. L'etat est pose par script.js au defilement.
+   Place APRES la regle `pose` pour la neutraliser : sur l'ouverture, la
+   position prime sur le sens du defilement. */
+body:has(.project-page) header[data-zone=ouverture] {
+  background-color: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom-color: transparent;
+}
+
+/* On descend : le chrome se retire. */
+body:has(.project-page) header[data-chrome=retire] {
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(.project-page) header {
+    transition: none;
+  }
+  /* Pas d'escamotage si l'on demande moins de mouvement : le chrome reste,
+     ce qui vaut mieux qu'une barre qui saute. */
+  body:has(.project-page) header[data-chrome=retire] {
+    transform: none;
+  }
+}
+/* ── CTA ─────────────────────────────────────────────────────────────── */
+.project-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--spacing-lg);
+  padding: clamp(3rem, 7vw, 6rem) var(--page-gutter) clamp(4rem, 9vw, 7rem);
+  border-top: var(--hairline-width) solid var(--line);
+}
+
+.project-cta-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.project-cta-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* ── BACK LINK (conserve : utilise hors page projet) ─────────────────── */
 .project-back-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--ink-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   text-decoration: none;
@@ -2815,230 +3478,13 @@ footer {
   transition: transform var(--transition-base);
 }
 .project-back-link:hover {
-  color: var(--white-color);
+  color: var(--ink);
   gap: 0.6rem;
 }
 .project-back-link:hover svg {
   transform: translateX(-3px);
 }
 
-.project-cta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-xl) 0;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.project-cta-eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--fs-small);
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.project-cta-title {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h2);
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.project-nav {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-lg) 0;
-  border-top: 1px solid var(--border-subtle);
-}
-
-.project-nav-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  text-decoration: none;
-  color: var(--white-color);
-  border-radius: var(--border-radius-sm);
-}
-@supports (corner-shape: squircle) {
-  .project-nav-item {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-}
-.project-nav-item {
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
-  transition: background var(--transition-base), border-color var(--transition-base);
-}
-.project-nav-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
-}
-.project-nav-item:hover .project-nav-arrow {
-  color: var(--primary-color);
-}
-.project-nav-item:hover .project-nav-title {
-  color: var(--primary-color);
-}
-
-.project-nav-prev {
-  justify-content: flex-start;
-}
-
-.project-nav-next {
-  justify-content: flex-end;
-}
-
-.project-nav-arrow {
-  color: rgba(255, 255, 255, 0.3);
-  flex-shrink: 0;
-  transition: color var(--transition-base), transform var(--transition-base);
-}
-.project-nav-prev:hover .project-nav-arrow {
-  transform: translateX(-3px);
-}
-.project-nav-next:hover .project-nav-arrow {
-  transform: translateX(3px);
-}
-
-.project-nav-thumb {
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
-  border-radius: var(--border-radius-sm);
-}
-@supports (corner-shape: squircle) {
-  .project-nav-thumb {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-}
-.project-nav-thumb {
-  overflow: hidden;
-  opacity: 0.7;
-  transition: opacity var(--transition-base);
-}
-.project-nav-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.project-nav-item:hover .project-nav-thumb {
-  opacity: 1;
-}
-
-.project-nav-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  min-width: 0;
-}
-.project-nav-next .project-nav-info {
-  text-align: right;
-}
-
-.project-nav-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.project-nav-title {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-base);
-  font-weight: 700;
-  color: var(--white-color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: color var(--transition-base);
-}
-
-.project-nav-sub {
-  font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.project-nav-portfolio {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  padding: var(--spacing-sm) var(--spacing-md);
-  text-decoration: none;
-  color: var(--text-muted);
-  font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  border-radius: var(--border-radius-sm);
-}
-@supports (corner-shape: squircle) {
-  .project-nav-portfolio {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-}
-.project-nav-portfolio {
-  border: 1px solid var(--border-subtle);
-  transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
-}
-.project-nav-portfolio:hover {
-  color: var(--white-color);
-  border-color: color-mix(in srgb, var(--primary-color) 35%, transparent);
-  background: rgba(255, 255, 255, 0.03);
-}
-
-@media (max-width: 640px) {
-  .cs-specs {
-    flex-direction: column;
-    gap: 0;
-  }
-  .cs-spec {
-    padding: var(--spacing-md) 0;
-    border-top: 1px solid var(--border-subtle);
-    flex: none;
-  }
-  .cs-spec:first-child {
-    border-top: none;
-    padding-top: 0;
-  }
-  .cs-spec:not(:first-child) {
-    border-left: none;
-  }
-  .project-nav {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .project-nav-portfolio {
-    order: -1;
-    flex-direction: row;
-  }
-  .project-nav-prev,
-  .project-nav-next {
-    justify-content: flex-start;
-  }
-  .project-nav-next .project-nav-info {
-    text-align: left;
-  }
-  .project-nav-thumb {
-    width: 44px;
-    height: 44px;
-  }
-}
 .about-page {
   display: flex;
   flex-direction: column;
@@ -3110,15 +3556,17 @@ footer {
 
 .about-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h1);
+  font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.1;
 }
 
 .about-intro {
+  /* 140 caracteres par ligne sans cette borne. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
-  line-height: 1.75;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: rgba(255, 255, 255, 0.8);
 }
 .about-intro + .about-intro {
@@ -3129,7 +3577,7 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--color-success);
   font-weight: 600;
   margin-top: var(--spacing-xs);
@@ -3165,17 +3613,17 @@ footer {
 
 .about-stat-value {
   font-family: var(--font-heading);
-  font-size: var(--fs-h2);
+  font-size: var(--text-title);
   font-weight: 700;
   color: var(--primary-color);
   line-height: 1;
 }
 
 .about-stat-label {
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-caps);
 }
 
 .about-stat-divider {
@@ -3202,7 +3650,7 @@ footer {
 
 .about-section-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-h4);
+  font-size: var(--text-subhead);
   font-weight: 700;
   color: var(--white-color);
 }
@@ -3230,9 +3678,9 @@ footer {
   }
 }
 .about-tool-tag {
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.7);
   background: var(--secondary-color);
   transition: border-color var(--transition-base), color var(--transition-base);
@@ -3258,11 +3706,13 @@ footer {
 }
 
 .about-specialty-item {
+  max-width: var(--measure-prose);
+  line-height: var(--leading-body);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -3322,11 +3772,11 @@ footer {
 .about-timeline-period {
   position: relative;
   font-family: var(--font-heading);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-weight: 700;
   color: var(--primary-color);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--track-caps);
   line-height: 1.6;
 }
 .about-timeline-period::before {
@@ -3349,10 +3799,12 @@ footer {
 }
 
 .about-timeline-desc {
+  /* 156 caracteres par ligne sans cette borne. */
+  max-width: var(--measure-prose);
   font-family: var(--font-body);
-  font-size: var(--fs-p);
+  font-size: var(--text-body);
   color: rgba(255, 255, 255, 0.75);
-  line-height: 1.7;
+  line-height: var(--leading-body);
 }
 .about-timeline-desc em {
   font-style: italic;
@@ -3382,6 +3834,8 @@ footer {
     text-align: center;
   }
   .about-intro {
+    /* 140 caracteres par ligne sans cette borne. */
+    max-width: var(--measure-prose);
     text-align: start;
   }
   .about-availability {
@@ -3433,15 +3887,19 @@ main:has(.contact-hero) {
   }
 }
 
+/* C'est un <h2>, et c'etait la TROISIEME convention du site pour le meme
+   role : Manrope 700 en capitales a 12 px ici, Chakra 500 en capitales sur
+   la page projet, Chakra 700 sans capitales sur A propos. Les trois
+   rejoignent `subhead`. Un titre de section n'est pas une etiquette de
+   metadonnee. */
 .contact-section-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-family: var(--font-heading);
+  font-size: var(--text-subhead);
   font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  line-height: var(--leading-tight);
+  color: var(--ink);
   padding-bottom: var(--spacing-sm);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--line);
   margin-bottom: var(--spacing-lg);
 }
 
@@ -3476,14 +3934,14 @@ main:has(.contact-hero) {
 
 .contact-label {
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .contact-input {
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3503,16 +3961,50 @@ main:has(.contact-hero) {
   appearance: none;
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+  /* Le texte d'invite est du TEXTE : 4,5:1 comme le reste (WCAG 1.4.3).
+     A 0,25 d'opacite il tenait 2,2:1, et c'est lui qui porte le format
+     attendu (« votre@email.com »), donc l'information la plus utile du champ.
+     ⚠️ Un ::placeholder est un pseudo-element : il n'existe dans aucun noeud
+     du DOM. Une sonde de contraste qui parcourt les elements ne le voit pas
+     et le declare conforme par omission. Verifie a l'oeil sur capture, puis
+     mesure a part. */
 }
 .contact-input::placeholder {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--ink-muted);
+  opacity: 1; /* Firefox applique une opacite de 0,54 par defaut */
 }
 .contact-input:focus {
   border: 2px solid var(--primary-color);
   background: color-mix(in srgb, var(--primary-color) 4%, transparent);
 }
 .contact-form.was-validated .contact-input:invalid {
-  border-color: rgba(255, 80, 80, 0.5);
+  border-color: var(--danger);
+}
+
+/* Le message d'erreur, en TEXTE. C'est lui qui porte l'information ; la
+   bordure rouge ne fait que la repeter pour ceux qui la voient.
+   Pose par script.js et rattache au champ par aria-describedby, donc relu a
+   chaque prise de focus et pas seulement au moment de l'echec. */
+.contact-erreur {
+  font-family: var(--font-body);
+  font-size: var(--text-meta);
+  line-height: 1.4;
+  color: var(--danger);
+  margin-top: 0.4rem;
+  /* Vide, il ne doit occuper aucune place : sinon chaque champ traine une
+     ligne blanche sous lui en permanence. `:empty` et non une classe, l'etat
+     est deja porte par le contenu. */
+}
+.contact-erreur:empty {
+  display: none;
+}
+.contact-erreur {
+  /* Le signe ne peut pas etre la seule couleur (WCAG 1.4.1). */
+}
+.contact-erreur::before {
+  content: "×";
+  font-weight: 700;
+  margin-right: 0.4rem;
 }
 
 .contact-select {
@@ -3605,18 +4097,22 @@ main:has(.contact-hero) {
 .contact-info-label {
   display: block;
   font-family: var(--font-body);
-  font-size: var(--fs-xsmall);
+  font-size: var(--text-caption);
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.35);
+  /* Etait rgba(255,255,255,0.35), mesure a 3,09:1 sur le sol : sous les 4,5:1
+     qu'exige WCAG 1.4.3 pour du texte. Un libelle attenue reste attenue par
+     sa taille, sa graisse et ses capitales ; il n'a pas besoin d'etre en plus
+     a demi efface. `--ink-muted` tient 7,4:1 sur le meme fond. */
+  color: var(--ink-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-caps);
   margin-bottom: 0.15rem;
 }
 
 .contact-info-value {
   display: block;
   font-family: var(--font-heading);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   font-weight: 600;
   color: var(--white-color);
 }
@@ -3637,7 +4133,7 @@ main:has(.contact-hero) {
 .contact-dropdown {
   position: relative;
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3670,7 +4166,7 @@ main:has(.contact-hero) {
   background: color-mix(in srgb, var(--primary-color) 4%, transparent);
 }
 .contact-form.was-validated ~ * .contact-dropdown, .contact-form.was-validated .contact-dropdown.is-invalid {
-  border-color: rgba(255, 80, 80, 0.5);
+  border-color: var(--danger);
 }
 
 .contact-dropdown-selected {
@@ -3678,9 +4174,13 @@ main:has(.contact-hero) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  /* L'invite « Choisissez un sujet » est du TEXTE, pas une decoration : elle
+     est soumise aux 4,5:1 de WCAG 1.4.3 comme le reste. A 0,25 d'opacite elle
+     tombait a 2,22:1 sur le champ, soit le point le plus faible du site.
+     C'est aussi le seul endroit qui dit ce que le champ attend. */
 }
 .contact-dropdown-selected[data-empty=true], .contact-dropdown-selected:not([data-value]) {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--ink-muted);
 }
 
 .contact-dropdown-caret {
@@ -3736,7 +4236,7 @@ main:has(.contact-hero) {
   padding: 0.6rem 0.75rem;
   border-radius: calc(var(--border-radius-sm) - 4px);
   font-family: var(--font-body);
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.75);
   cursor: pointer;
@@ -3826,7 +4326,7 @@ main:has(.contact-hero) {
     transform: none;
   }
   .contact-link {
-    font-size: var(--font-size-base);
+    font-size: var(--text-meta);
   }
   .hero-title {
     max-width: 100%;
@@ -3945,7 +4445,7 @@ main:has(.contact-hero) {
   }
   /* Projects Section */
   .projects-title {
-    font-size: var(--font-size-2xl);
+    font-size: var(--text-subhead);
   }
   .card-grid {
     padding: 0;
@@ -3963,7 +4463,7 @@ main:has(.contact-hero) {
 /* Very Small Mobile - Max 360px */
 @media (max-width: 360px) {
   .footer-text {
-    font-size: var(--fs-xsmall);
+    font-size: var(--text-caption);
   }
   .footer-right-section {
     flex-direction: column;
@@ -3977,3 +4477,115 @@ main:has(.contact-hero) {
     padding: 0.5rem;
   }
 }
+/* ══════════════════════════════════════════════════════════════════════
+   ADAPTATION AU CONTEXTE  (passe /impeccable adapt, 27/07/2026)
+   ══════════════════════════════════════════════════════════════════════ */
+/* ── ZONES SURES ───────────────────────────────────────────────────────
+   Encoche, coins arrondis, barre d'accueil. Le site n'en tenait aucun
+   compte : le contenu pouvait passer sous l'encoche en paysage, et sous la
+   barre d'accueil en portrait. `max()` garde la gouttiere existante quand
+   l'appareil n'a pas d'encoche (l'inset vaut alors 0). */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+footer {
+  padding-bottom: max(var(--spacing-xl), env(safe-area-inset-bottom));
+}
+
+/* ── POINTEUR GROSSIER ─────────────────────────────────────────────────
+   La taille d'ecran ne dit RIEN de la methode de saisie : un portable peut
+   avoir un ecran tactile, une tablette un clavier. On elargit donc les
+   cibles selon le POINTEUR, pas selon la largeur.
+   Mesure avant : 9 liens de navigation a 37 px de haut, le burger a 40, et
+   trois liens de pied entre 17 et 21 px, soit sous le minimum de 24 px du
+   critere AA 2.5.8. */
+@media (pointer: coarse) {
+  /* ⚠️ `display: inline-flex` est INDISPENSABLE, pas cosmetique. Sur un
+     element `inline`, le padding vertical DEBORDE visuellement sans agrandir
+     la boite de mise en page : la cible reste a sa hauteur de ligne.
+     Mesure : padding de 12 px applique, hauteur toujours 37 px. Le padding
+     seul ne corrige donc jamais une cible tactile inline. */
+  .nav-element,
+  .nav-link,
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+  .burger-menu {
+    width: 44px;
+    height: 44px;
+  }
+  /* Les liens de contact : le lien e-mail mesurait 137x26. Au-dessus du
+     minimum AA de 24 px, mais loin du confort de 44. */
+  .contact-info-value,
+  .contact-email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  /* EXCEPTION ASSUMEE : `.contact-botcheck` fait 13x13 px et doit le rester.
+     C'est un piege a robots : un champ que l'utilisateur ne voit ni
+     n'atteint, et qu'un robot remplit. L'agrandir le rendrait detectable et
+     lui ferait perdre sa fonction. Il n'est ni focalisable ni annonce. */
+  /* Le lien du logo mesurait 123x43 : le SVG fait 36 px de haut et le lien
+     epouse son contenu. Il manquait 1 px, ce qui suffit a echouer. */
+  header > a:first-of-type {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+/* Les trois cibles sous 24 px echouent au critere AA quel que soit le
+   pointeur : elles sont corrigees SANS condition. */
+.lang-switch-link,
+.footer-link-small {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* ── PAYSAGE COURT ─────────────────────────────────────────────────────
+   Point de rupture pilote par le CONTENU, pas par un appareil : en dessous
+   de 520 px de haut, le bloc de texte de l'ouverture depasse la hauteur
+   disponible. Mesure sur un telephone en paysage (812x375) : l'ouverture
+   faisait 579 px, soit 1,54 ecran, et le titre 65 px.
+   Cause : les tailles fluides sont calculees sur la LARGEUR (`vw`), donc un
+   ecran large et court recoit un titre de pleine taille. On borne par la
+   hauteur, ce que `vw` ne sait pas faire. */
+@media (max-height: 520px) and (orientation: landscape) {
+  :root {
+    --text-display: clamp(1.75rem, 7svh, 2.75rem);
+    --text-title: clamp(1.5rem, 5.5svh, 2.125rem);
+    --text-subhead: clamp(1.125rem, 4svh, 1.625rem);
+  }
+  .project-open--contexte .project-open-lede {
+    padding-top: calc(var(--chrome) + 0.75rem);
+    padding-bottom: 1.5rem;
+    gap: 0.5rem;
+  }
+  .project-open {
+    --air-haut: 0.75rem;
+    --air-bas: 1rem;
+    /* Le header mesure 83 px, soit 22 % d'un ecran de 375 px de haut. */
+    --chrome: 56px;
+  }
+  /* Le chrome se resserre : en paysage la hauteur est la ressource rare. */
+  header {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+  .logo {
+    width: 92px;
+    height: auto;
+  }
+}
+/* ⚠️ Reserve assumee : meme resserre, une ouverture qui porte une oeuvre,
+   un titre ET un pitch ne tient pas dans un telephone couche (375 px de
+   haut). Mesure : 1,13 ecran contre 1,54 avant correctif. On a supprime le
+   debordement absurde, pas la necessite de faire defiler. Reduire davantage
+   passerait par tronquer le pitch, ce qui couterait plus que ca ne rapporte. */

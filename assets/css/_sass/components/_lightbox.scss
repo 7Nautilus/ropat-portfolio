@@ -1,0 +1,73 @@
+/* ============================================
+   LIGHTBOX
+   ============================================
+   Ce fichier remplace _gallery.scss. Le widget de galerie (grande image +
+   bande de vignettes a permuter) a ete supprime avec la refonte de la page
+   projet : les medias forment desormais une sequence en flux. Seule la
+   lightbox survit, elle sert l'agrandissement des images de la sequence. */
+
+/* Image cliquable pour lightbox */
+.lightbox-trigger {
+  cursor: zoom-in;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--surface-scrim);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+  animation: fadeIn var(--transition-base);
+}
+
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  /* L'oeuvre n'est pas dans une boite : ni rayon, ni ombre decorative. */
+  transform: scale(0.96);
+  transition: transform var(--dur-base) var(--ease-expo-out);
+}
+
+.lightbox.active .lightbox-image {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  line-height: 1;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-quick) var(--ease-quad-out), color var(--dur-quick) var(--ease-quad-out);
+  z-index: 10000;
+}
+
+.lightbox-close:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+}
+
+.lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

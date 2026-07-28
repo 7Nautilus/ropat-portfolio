@@ -48,7 +48,9 @@
 // Base typo partagee par .project-card-title et .service-title.
 @mixin card-title {
   font-family: var(--font-heading);
-  font-size: var(--fs-p);
+  /* subhead et non le corps : un titre de carte a la taille du texte est
+     la raison pour laquelle la grille de projets se lit a plat. */
+  font-size: var(--text-subhead);
   font-weight: 700;
 }
 

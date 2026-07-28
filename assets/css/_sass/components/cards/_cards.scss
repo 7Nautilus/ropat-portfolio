@@ -1,5 +1,20 @@
 @use "base/mixins" as *;
 
+/* ⚠️ ETAT RESTAURE le 28/07/2026, sur decision de Ropat : « les cartes avaient
+   plus d'identite avant ».
+   J'avais passe le contour au filet neutre et supprime le squircle, au motif
+   que l'orange permanent ne signalait rien. C'etait la MOITIE du geste prevu :
+   le plan disait « l'image porte la carte, et la COMPOSITION DE LA GRILLE
+   devient le lieu d'expression (decalages, tailles inegales) plutot que le
+   liseré ». J'ai retire le liseré sans jamais composer la grille, donc j'ai
+   soustrait sans rien ajouter, et 21 cartes distinctives sont devenues une
+   grille de vignettes a filet gris, soit le gabarit par defaut.
+   C'est exactement le reflexe que la decision du 26/07 interdit : la cible est
+   un chrome RICHE ET ORCHESTRE, pas un chrome discret. Baisser le volume
+   partout est plus facile que composer un ecart.
+   Ne pas re-tenter cette bascule seule. Elle n'a de sens qu'accompagnee du
+   travail de composition, qui sera tranche en Phase 3 avec l'arbitrage
+   « grille de vignettes contre index typographique ». */
 .card {
   display: flex;
   flex-direction: column;

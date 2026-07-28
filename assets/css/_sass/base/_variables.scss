@@ -1,36 +1,133 @@
-/* Variables CSS */
+/* ============================================================
+   TOKENS
+   ============================================================
+   Trois couches, dans cet ordre :
+
+   1. PRIMITIVES  les valeurs brutes. Ne dependent d'aucun theme.
+                  On ne les consomme PAS directement dans les composants.
+   2. SEMANTIQUE  les roles (surface, encre, filet, accent...). C'est la
+                  seule couche que les composants ont le droit d'utiliser.
+                  Elle est redefinie par skin : sombre par defaut,
+                  clair sous [data-theme="light"].
+   3. ALIAS       les anciens noms, conserves pour ne rien casser pendant
+                  la refonte. Chacun pointe vers un role. Ils disparaissent
+                  au fur et a mesure que les composants sont migres.
+
+   REGLE DE L'ORANGE (point fixe, filiation Realtree) : l'orange est un
+   SIGNAL, pas un motif. Il ne doit jamais devenir la bordure par defaut de
+   tout ce qui est une boite, sinon il ne signale plus rien. Il n'est jamais
+   du texte de labeur. Voir docs/CHANTIER-IDENTITE-2026-07.md.
+   ============================================================ */
+
 :root {
-  /* Couleurs */
-  --primary-color: #ff5c00;
-  --primary-color-alpha: color-mix(in srgb, var(--primary-color) 20%, transparent);
+  /* ==========================================================
+     1. PRIMITIVES
+     ========================================================== */
 
-  --secondary-color: rgba(0, 0, 0, 0.5);
-  --white-color: #ffffff;
-  --gray-dark: #2d3748;
-  --grey-light-400: #9CA3AF;
-  --gray-light: #e2e8f0;
-  --background-dark: #0a0a0a;
-  --background-light: rgba(255, 255, 255, 0.1);
-  --color-success: #34C759;
+  /* Orange de marque. Point fixe absolu. */
+  --orange-500: #ff5c00;
 
-  /* Trio du fond, TEL QUE RENDU A L'ECRAN.
+  /* Trio du fond sombre, TEL QUE RENDU A L'ECRAN.
      Le voile noir a 50 % de l'ancienne image y est deja integre : ce sont les
      valeurs finales, relevees a la pipette, pas les verts bruts de l'image.
-     Pas egaux corriges (mediane recentree) : dE 6,3 / 6,4 au lieu de 4,0 / 8,7.
-     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3. */
-  /* Trio abaisse le 21/07/2026 : le plancher est inchange, les deux autres
+     Trio abaisse le 21/07/2026 : le plancher est inchange, les deux autres
      descendent d'un cran pour retrouver la profondeur de l'ancienne image
      (L* moyen 3,10 contre 3,12). Prix : la separation passe de dE 6,3/6,4
-     a 3,1/3,2, la texture est donc deux fois plus discrete. */
-  --fond-profond: #030808;
-  --fond-median: #030F0C;
-  --fond-releve: #051510;
+     a 3,1/3,2, la texture est donc deux fois plus discrete.
+     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3. */
+  --vert-profond: #030808;
+  --vert-median: #030F0C;
+  --vert-releve: #051510;
 
-  /* Surfaces sur fond sombre : bordures discretes et texte secondaire */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --text-muted: rgba(255, 255, 255, 0.45);
+  /* Trio clair (camouflage neige / lichen). Valide dans le chantier identite,
+     pas encore eprouve a l'ecran : la matiere du skin clair est un livrable
+     de la Phase 3, et ces valeurs seront mesurees a ce moment-la. */
+  --neige-haute: #F0F4F1;
+  --neige-mediane: #DCE6E0;
+  --neige-basse: #BFD1C7;
+  --encre-sombre: #05100F;
 
-  /* Typographie */
+  --blanc: #ffffff;
+  --vert-succes: #34C759;
+  /* Il n'existait aucune couleur d'erreur : le formulaire de contact peignait
+     ses bordures fautives en rgba(255,80,80,0.5) en dur, et le vert de
+     disponibilite en rgba(74,222,128,...) alors que --vert-succes vaut
+     #34C759. Deux valeurs inventees sur place pour deux etats.
+     #FF6B6B est mesure a 7,26:1 sur le sol #030808 : un message d'erreur est
+     du texte courant, il lui faut donc 4,5:1, pas les 3:1 d'une bordure. */
+  --rouge-erreur: #FF6B6B;
+
+  /* ==========================================================
+     2. SEMANTIQUE  skin sombre (defaut)
+     ========================================================== */
+
+  /* Surfaces */
+  --surface: var(--vert-profond);          /* fond de page ; repli du dither */
+  /* LE VOILE : il ASSOMBRIT le sol sous le contenu, il ne le souleve pas.
+     Le dither est un motif vivant et charge ; poser un noir a 50 % dessus le
+     calme localement pour que le texte et les logos aient une base stable.
+     10 consommateurs, tous via l'alias --secondary-color : cartes, carrousel,
+     conteneurs, pied de page, blocs de la page A propos.
+
+     ⚠️ Renomme le 28/07/2026, apres une correction ratee le meme jour.
+     Le token s'appelait `--surface-raised` et rendait rgb(1,4,4) sur un sol a
+     rgb(3,8,8), donc plus sombre que ce sur quoi il repose. J'en ai conclu
+     que la VALEUR etait fausse et je l'ai passee a un vert plein plus clair.
+     C'etait l'inverse : Ropat, le 28/07, « la couleur portait mal son nom,
+     elle avait vraiment pour but d'assombrir le fond avec un noir 50 % ».
+     C'est le NOM qui mentait, pas la valeur. Le commentaire d'origine disait
+     d'ailleurs deja « voile ».
+     Regle a en tirer : quand un nom et une valeur se contredisent, demander
+     lequel des deux est faux. Changer la valeur est le geste qui se fait tout
+     seul, ce n'est pas pour autant le bon.
+
+     Le skin clair suit exactement la meme logique (--neige-mediane sur un sol
+     --neige-haute, donc plus sombre aussi) : les deux skins voilent, ce qui
+     confirme que le role est coherent et que seul le nom clochait. */
+  --surface-veil: rgba(0, 0, 0, 0.5);
+  --surface-subtle: rgba(255, 255, 255, 0.1);
+  --surface-scrim: rgba(0, 0, 0, 0.98);    /* lightbox, overlay de nav */
+  --surface-placeholder: #2d3748;
+
+  /* Encre. Quatre niveaux, du plus present au plus retire. */
+  --ink: var(--blanc);
+  --ink-soft: #e2e8f0;
+  --ink-muted: #9CA3AF;
+  /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
+     trio, sous le minimum AA de 4,5. Calcul WCAG sur les deux extremes du
+     fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore
+     verifie au navigateur sur le motif reel. */
+  --ink-subtle: rgba(255, 255, 255, 0.46);
+
+  /* Filets neutres. Le trait qui separe sans signaler. */
+  --line: rgba(255, 255, 255, 0.08);
+  --hairline-width: 1px;
+
+  /* Accent = signal. Volontairement rare. */
+  --accent: var(--orange-500);
+  --accent-soft: color-mix(in srgb, var(--accent) 20%, transparent);
+  /* Texte pose SUR un aplat d'orange : il doit etre SOMBRE.
+     Mesure : blanc sur #ff5c00 = 3,10:1, sous AA pour du texte courant.
+     Encre sombre sur #ff5c00 = 6,51:1. Vaut dans les deux skins, l'orange
+     ne changeant pas d'un theme a l'autre.
+     Dette soldee le 28/07/2026 : .btn--solid:hover bascule desormais sur ce
+     token au lieu de garder un texte blanc a 3,10:1. */
+  --accent-ink: var(--encre-sombre);
+  --signal-width: 3px;          /* le trait epais, quand il veut dire quelque chose */
+
+  /* Etats */
+  --success: var(--vert-succes);
+  --danger: var(--rouge-erreur);
+
+  /* Ombres. L'ambiante souleve, la signal designe : ne pas les confondre. */
+  --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-ambient-strong: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-signal: 0 6px 16px color-mix(in srgb, var(--accent) 50%, transparent);
+
+  /* ==========================================================
+     3. TYPOGRAPHIE  (hors theme)
+     ========================================================== */
+
   /* Chakra Petch remplace Space Grotesk, jugee trop convenue.
      ⚠️ Elle est STATIQUE, 5 graisses de 300 a 700 : pas de 100, 200, 800 ni 900.
      Toute graisse hors de cette plage sera fabriquee par le navigateur.
@@ -50,49 +147,206 @@
      (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
 
-  /* Tailles fixes : racine et cas UI spécifiques */
-  --font-size-base: 1rem;
-  --font-size-2xl: 1.5rem;
+  /* ── ECHELLE TYPOGRAPHIQUE ────────────────────────────────────────────
+     Six echelons, ratio 1,25 MINIMUM tenu aux DEUX bouts de la plage
+     (375 comme 1440), donc plus aucun token inerte.
 
-  /* Échelle typographique fluide (principale) */
-  --fs-h1: clamp(3rem, 5vw + 1rem, 6rem);
-  --fs-h2: clamp(1.75rem, 3vw + 1rem, 3rem);
-  --fs-h3: clamp(1.5rem, 2vw + 1rem, 2.25rem);
-  --fs-h4: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
-  --fs-h5: clamp(1.125rem, 1vw + 1rem, 1.5rem);
-  --fs-p: clamp(1rem, 0.5vw + 1rem, 1.25rem);
-  --fs-text-lg: clamp(1.125rem, 0.5vw + 1rem, 1.5rem);
-  --fs-small: clamp(0.875rem, 0.5vw + 0.5rem, 1rem);
-  --fs-xsmall: clamp(0.75rem, 0.5vw + 0.25rem, 0.875rem);
+     Ce qui a ete mesure sur l'ancienne echelle, et corrige ici :
+     . `--fs-xsmall` valait 12 px fixe de 320 a 1600 px : son clamp ne
+       servait a rien. `--fs-small` etait plat de 320 a 1200 px.
+     . A 375 px, 7 intervalles sur 8 tombaient sous 1,25 : la hierarchie se
+       refermait exactement la ou l'ecran est le plus petit (jusqu'a 1,029
+       entre deux echelons, soit 28 et 28,8 px, indiscernables).
+     . `--fs-h5` et `--fs-text-lg` n'avaient AUCUN consommateur : ils ne
+       creusaient que des trous dans la rampe. Supprimes.
+     . Il n'existait rien entre le corps (20 px) et le CTA (48 px), d'ou six
+       `<h2>` composes a 12 px, plus petits que le texte qu'ils coiffent.
+       C'est `--text-subhead` qui comble ce trou.
 
-  /* Espacement */
+     Le corps reste FIXE : sur une page de contenu, l'ecart de taille entre
+     viewports ne justifie pas de le rendre fluide. */
+  --text-caption:  0.8rem;                                    /* 12,8 px */
+  --text-meta:     1rem;                                      /* 16 px   */
+  --text-body:     1.25rem;                                   /* 20 px   */
+  --text-subhead:  clamp(1.625rem, 0.56vw + 1.49rem, 2rem);   /* 26 a 32 */
+  --text-title:    clamp(2.125rem, 1.31vw + 1.82rem, 3rem);   /* 34 a 48 */
+  --text-display:  clamp(2.75rem, 4.88vw + 1.60rem, 6rem);    /* 44 a 96 */
+
+  /* Rythme vertical et interlettrage.
+     `--leading-body` a 1,65 et non 1,6 : le texte clair sur fond sombre perd
+     du poids percu, et se compense sur TROIS axes (interlignage,
+     interlettrage, graisse), pas un seul.
+     `--track-caps` a 0,10em : les capitales courtes demandent 5 a 12 %.
+     L'ancienne valeur de 0,19em etait 60 % au-dessus du plafond, et c'est
+     elle qui faisait deborder les titres de section sur mobile (372 px de
+     texte pour 350 px disponibles a 390 px de large). */
+  --leading-body:  1.65;
+  --leading-meta:  1.5;
+  --leading-tight: 1.05;
+  --track-caps:    0.10em;
+  --track-display: -0.015em;
+
+  /* Mesures de ligne, en rem et NON en `ch` : le `ch` se resout sur la
+     police de l'element qui PORTE la declaration, pas sur celle du texte
+     qu'il contient. Un `56ch` pose sur un div a 16 px pour du texte a 20 px
+     rendait 44,8 caracteres. 40rem donne environ 66 caracteres en Manrope
+     20 px, au centre de la fenetre de confort 45-75. */
+  --measure-prose: 40rem;
+  --measure-lede:  30rem;
+
+  /* Les alias de transition (--fs-*, --font-size-base) ont ete retires le
+     27/07/2026 : plus aucun selecteur ne les consomme.
+
+  /* ==========================================================
+     4. ESPACEMENT  (hors theme)
+     ========================================================== */
+
+  /* Echelle courte : espacements internes. */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
 
-  /* Bordures */
-  --border-width: 3px;
-  --border-primary: var(--border-width) solid var(--primary-color);
-  --border-radius-sm: 1rem;
-  --border-radius-md: 1.5rem;
-  --border-radius-lg: 2rem;
-  --border-radius-xl: 6rem;
-  --border-radius-full: 9999px;
+  /* Gouttiere de page : la marge laterale du contenu. Fluide, donc elle
+     n'a plus besoin d'une media query pour retomber sur mobile.
+     Valeur reprise du prototype de page projet (docs/proto-page-projet.html).
+     Les bandes qui saignent (--pleine) sont celles qui ne la portent PAS :
+     c'est pour ca qu'elle vit sur les bandes et non sur <main>, ce qui evite
+     toute arithmetique de debordement par marges negatives. */
+  --page-gutter: clamp(1.25rem, 4vw, 4.5rem);
 
-  /* Bordures squircle */
-  --border-radius-squircle-small: 15%;
-  --border-radius-squircle-medium: 6rem;
-  --border-radius-squircle-full: 50%;
+  /* Echelle de rythme : respirations verticales entre blocs et sections.
+     Elle existe pour absorber les valeurs magiques semees dans le SCSS
+     (4rem, 4.5rem, 5rem, 6rem, 10rem). Les consommateurs sont migres
+     phase par phase ; 4.5rem et 5rem sont des egares a normaliser sur
+     --rhythm-sm ou --rhythm-md au passage. */
+  --rhythm-sm: 4rem;
+  --rhythm-md: 6rem;
+  --rhythm-lg: 10rem;
 
-  /* Ombres */
-  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 6px 16px color-mix(in srgb, var(--primary-color) 50%, transparent);
-  --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* ==========================================================
+     5. FORME  (hors theme)
+     ========================================================== */
 
-  /* Transitions */
-  --transition-base: 0.3s ease;
+  /* Le rayon est un CHOIX, pas un reflexe. Regle : un media ne porte
+     jamais de rayon (l'oeuvre n'est pas dans une boite decorative). */
+  --radius-sm: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2rem;
+  --radius-xl: 6rem;
+  --radius-pill: 9999px;
+
+  --squircle-small: 15%;
+  --squircle-medium: 6rem;
+  --squircle-full: 50%;
+
+  /* ==========================================================
+     6. MOUVEMENT  (hors theme)
+     ========================================================== */
+
+  /* Durees. La grammaire vient de la veille (Lu Yu) :
+     revelation 0,6 s, micro-animation 0,2 s. */
+  --dur-quick: 0.2s;
+  --dur-base: 0.3s;
+  --dur-reveal: 0.6s;
+
+  /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
+     les micro-mouvements. Equivalents CSS des courbes GSAP citees dans
+     docs/VEILLE-PORTFOLIOS-2026-07.md. */
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  --transition-base: var(--dur-base) ease;
+
+  /* ==========================================================
+     7. ALIAS DE COMPATIBILITE  (deprecies)
+     ==========================================================
+     Ces noms sont ceux d'avant la refonte. Ils restent le temps que les
+     composants migrent vers la couche semantique. Ne PAS en ajouter.
+     A supprimer quand plus aucun fichier ne les reference. */
+
+  --primary-color: var(--accent);
+  --primary-color-alpha: var(--accent-soft);
+  --secondary-color: var(--surface-veil);
+  --white-color: var(--ink);
+  --gray-dark: var(--surface-placeholder);
+  --grey-light-400: var(--ink-muted);
+  --gray-light: var(--ink-soft);
+  /* Fusion des deux fonds sombres concurrents : l'ancien #0a0a0a etranger
+     au trio pointe desormais sur la vraie surface du site. */
+  --background-dark: var(--surface);
+  --background-light: var(--surface-subtle);
+  --color-success: var(--success);
+
+  --fond-profond: var(--vert-profond);
+  --fond-median: var(--vert-median);
+  --fond-releve: var(--vert-releve);
+
+  --border-subtle: var(--line);
+  --text-muted: var(--ink-subtle);
+
+  --border-width: var(--signal-width);
+  --border-primary: var(--signal-width) solid var(--accent);
+  --border-radius-sm: var(--radius-sm);
+  --border-radius-md: var(--radius-md);
+  --border-radius-lg: var(--radius-lg);
+  --border-radius-xl: var(--radius-xl);
+  --border-radius-full: var(--radius-pill);
+  --border-radius-squircle-small: var(--squircle-small);
+  --border-radius-squircle-medium: var(--squircle-medium);
+  --border-radius-squircle-full: var(--squircle-full);
+
+  --shadow-sm: var(--shadow-ambient);
+  --shadow-dark: var(--shadow-ambient-strong);
+  --shadow-md: var(--shadow-signal);
+}
+
+/* ============================================================
+   SKIN CLAIR
+   ============================================================
+   Ce n'est pas l'inverse du sombre, c'est un AUTRE motif de camouflage
+   (neige / lichen). Seuls les roles changent : aucune regle de composant
+   n'a a connaitre le theme.
+
+   ⚠️ Premiere passe, valeurs non encore mesurees a l'ecran. La matiere de
+   fond du skin clair (le dither est sombre par construction) et la
+   verification des contrastes sont des livrables de la Phase 3.
+
+   REGLE : sur fond clair, l'orange ne peut PAS porter de texte (il echoue
+   au 3:1 sur fond teinte). Il n'y est admis qu'en MASSE, en aplat.
+   ============================================================ */
+
+[data-theme="light"] {
+  --surface: var(--neige-haute);
+  /* Meme role, meme direction : la plaque est plus SOMBRE que le sol clair.
+     C'est ce qui prouve que le nom `raised` etait faux dans les deux skins et
+     pas seulement dans le sombre. */
+  --surface-veil: var(--neige-mediane);
+  --surface-subtle: rgba(5, 16, 15, 0.06);
+  --surface-scrim: rgba(240, 244, 241, 0.98);
+  --surface-placeholder: var(--neige-basse);
+
+  --ink: var(--encre-sombre);
+  --ink-soft: #1B2B27;
+  --ink-muted: #46564F;
+  --ink-subtle: rgba(5, 16, 15, 0.62);
+
+  --line: rgba(5, 16, 15, 0.14);
+
+  /* #FF6B6B tient 7,26:1 sur le sol sombre mais tombe a 2,44:1 sur la neige :
+     une couleur d'etat ne traverse pas un changement de skin sans etre
+     reprise. #B3261E est mesure a 5,89:1 sur #F0F4F1.
+     Le vert de succes a le meme probleme et devra etre repris en Phase 3,
+     quand le skin clair recevra sa propre matiere et sera mesure pour de bon. */
+  --danger: #B3261E;
+
+  /* L'accent reste le meme orange : c'est un point fixe. Ce qui change,
+     c'est son emploi (masse, jamais texte). --accent-ink est deja sombre
+     dans les deux skins, il n'a donc rien a surcharger ici. */
+
+  --shadow-ambient: 0 4px 6px rgba(5, 16, 15, 0.08);
+  --shadow-ambient-strong: 0 4px 6px rgba(5, 16, 15, 0.18);
 }

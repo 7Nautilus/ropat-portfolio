@@ -20,7 +20,7 @@
 
 /* description */
 .service-card-description {
-  font-size: var(--font-size-base);
+  font-size: var(--text-meta);
 }
 
 .service-text-content {
@@ -39,7 +39,7 @@
   gap: var(--spacing-xs);
   flex-wrap: wrap;
   font-family: var(--font-body);
-  font-size: var(--fs-small);
+  font-size: var(--text-caption);
   color: var(--primary-color);
 }
 
@@ -53,8 +53,8 @@
   text-transform: uppercase;
   /* 300 et non 100 : Chakra Petch n'a pas de graisse sous 300, le navigateur
      rendait deja 300. On declare ce qui est reellement affiche. */
-  font-weight: 300;
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: var(--text-caption);
   color: var(--grey-light-400);
 
   transition:
