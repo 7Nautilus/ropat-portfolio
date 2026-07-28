@@ -592,6 +592,49 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       l'intérieur du menu, discutable si on compare menu et page.</span>
     </div>
 
+    <div class="regle">
+      <b style="color:#34C759">La forme · biseau, pas pilule ni squircle</b>
+      <span>Les coins coupés <strong>riment avec Chakra Petch</strong>, dont les terminaisons sont
+      elles-mêmes biseautées : compare le bouton au <code>G</code> de GRAPHIQUE du hero. C'est un
+      accord de marque, pas une mode. Le squircle avait été écarté pour la raison inverse : il
+      n'aurait rimé avec rien, et il aurait effacé la distinction de forme entre une
+      <em>surface</em> (la carte, en squircle) et une <em>action</em>.
+      Le support de <code>corner-shape</code> n'est pas un obstacle : sans lui on retombe sur la
+      pilule d'avant, qui est déjà en service. Amélioration progressive au sens strict, rien ne
+      peut régresser.</span>
+    </div>
+
+    <table class="jetons">
+      <thead><tr><th>Bouton</th><th>Police</th><th>Coupe</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td>nav contact</td><td>16px</td><td><code>0.6em</code> = 9,6px</td>
+            <td style="color:#9CA3AF">boîte de 48px de haut</td></tr>
+        <tr><td>page (<code>md</code> et <code>xl</code>)</td><td>20px</td><td><code>0.8em</code> = 16px</td>
+            <td style="color:#9CA3AF">boîte de 67 à 71px</td></tr>
+      </tbody>
+    </table>
+    <p>La coupe croît <strong>plus vite</strong> que le bouton, et ce n'est pas un caprice : à
+    échelle stricte (0,6em partout) les deux coupes étaient proportionnellement voisines, 20 % et
+    17 % de la hauteur, mais elles ne se lisaient pas pareil. Sur une grande boîte les arêtes
+    plates dominent et le biseau s'efface.
+    Le réglage passe par <code>--bevel-cut</code>, que le mixin lit : le header ajuste donc sa
+    coupe <strong>sans importer le mixin</strong>, comme il ajuste déjà son padding.</p>
+
+    <div class="regle" style="border-color:rgba(255,107,107,.35)">
+      <b style="color:#FF6B6B">Deux pièges, tous deux invisibles à la lecture</b>
+      <span><strong>Jamais de pourcentage pour la coupe.</strong> Un pourcentage sur
+      <code>border-radius</code> se résout sur la <em>largeur</em> pour l'axe horizontal et sur la
+      <em>hauteur</em> pour l'axe vertical. Sur une boîte de 308x71, un <code>8%</code> donne
+      24,6px d'un côté contre 5,7px de l'autre : l'angle à 45° est perdu et la forme devient
+      l'otage du format. À noter, <code>getComputedStyle</code> ne répond pas à cette question,
+      il conserve le pourcentage sans le résoudre. Il fallait regarder le rendu.<br>
+      <strong>La spécificité ne suffit pas, l'ordre des fichiers tranche.</strong>
+      <code>.nav-contact</code> a exactement la même spécificité que <code>.btn--solid</code>, et
+      dans l'ordre ITCSS <code>layout</code> est chargé <em>avant</em> <code>components</code> :
+      le composant gagnait, et le bouton de nav héritait de la coupe des grands boutons
+      (mesuré à 16px au lieu de 9,6). Le sélecteur a dû passer à <code>&amp;.btn--solid</code>.</span>
+    </div>
+
     <p>⚠️ Ce que cette page <strong>ne peut pas</strong> montrer : survol, focus et état actif.
     Ils demandent une interaction, or le labo rend des états au repos. Le focus en particulier
     doit se vérifier au clavier sur le vrai site.</p>
