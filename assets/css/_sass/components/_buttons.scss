@@ -130,6 +130,19 @@
 .btn--xl {
   gap: 1.5rem;
   padding: 1rem 2rem;
+
+  /* A 320 px, « Lançons votre projet » passait sur DEUX lignes : boite mesuree
+     a 272x104 contre 308x71 partout ailleurs, soit exactement une ligne de
+     20px en plus. Le CTA principal du site casse en deux sur les plus petits
+     telephones, et il n'en manquait pas beaucoup : 64px de padding horizontal
+     plus 24 de gouttiere sur une largeur utile de 272.
+     On rend l'espace au texte plutot que de reduire sa taille.
+     Le padding responsive vit ICI et non dans _media-queries.scss : ce dernier
+     est charge en dernier et ecraserait la regle. */
+  @media (max-width: 360px) {
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+  }
 }
 
 /* ── Icônes ─────────────────────────────── */
