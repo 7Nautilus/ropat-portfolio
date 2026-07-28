@@ -1038,22 +1038,27 @@ header[data-sur-media] {
        3. ASSUMER. C'est ce qui est en place.
      La sortie 1 reste la moins chere si le point revient : elle ne repasse ni
      par une ombre ni par un fond. */
-  /* Le bouton contact garde son orange sur un aplat OPAQUE, et il n'est PAS
-     concerne par la suppression : ce n'est pas un fond de barre, c'est le
-     remplissage d'un bouton, ce qui est sa nature meme. Son texte est du
-     texte, il lui faut 4,5:1, et l'orange seul ne les donne pas (3,0:1 au
-     mieux). Sur --surface plein il tient 6,5:1.
-     Mesure, 6 projets : 7,34:1 au pire. C'est desormais le seul controle du
-     header dont le contraste reste GARANTI. */
-  /* ⚠️ Le `box-shadow: none` qui vivait ici est RETIRE : il neutralisait
-     l'ombre au repos de `.btn--solid`, laquelle n'existe plus depuis le
-     28/07. Une regle qui annule quelque chose de disparu ne se voit pas, mais
-     elle ment sur ce que fait le composant. */
-}
-header[data-sur-media] .nav-contact {
-  background: var(--surface);
-}
-header[data-sur-media] {
+  /* ⚠️⚠️ CE BLOC EST VIDE, ET C'EST LE POINT D'ARRIVEE.
+     Le bouton contact ne recoit PLUS AUCUNE surcharge au-dessus d'un media :
+     il est exactement le meme bouton que partout ailleurs sur le site.
+
+     Ce qui vivait ici : `background: var(--surface)`, un aplat OPAQUE qui lui
+     donnait 7,34:1 au pire sur 6 projets, quand son remplissage normal est
+     `--primary-color-alpha`, un orange a 20 % donc TRANSPARENT.
+     C'etait le dernier controle du header dont le contraste fut garanti.
+
+     Ropat, le 28/07 : « le CTA contact doit etre le meme sur les pages projets
+     que sur les autres pages, c'est-a-dire avec le fond en signal alpha ».
+     L'arbitrage est celui de la COHERENCE du composant contre la garantie de
+     contraste, et il est cohérent avec les cinq precedents : plus rien du
+     chrome ne se peint en opaque par-dessus le travail du client.
+
+     ⚠️ Ce que ca laisse : plus AUCUN controle garanti dans le header au-dessus
+     d'une oeuvre. La regle 8 disait « un controle a le droit d'avoir son propre
+     remplissage » ; ce droit reste, mais le remplissage est desormais
+     transparent partout, donc il ne garantit plus rien.
+     Le detail chiffre est dans TODO.md. Ne pas « reparer » ce point : c'est
+     une decision, prise apres que le cout ait ete expose. */
   /* ⚠️ LE LOGO N'A PLUS DE HALO. Retire le 28/07 sur demande de Ropat.
      Il portait un `drop-shadow(0 0 2px)` qui lui donnait un voisinage quasi
      noir. Ce halo etait deja le seul element du bloc dont le gain n'avait

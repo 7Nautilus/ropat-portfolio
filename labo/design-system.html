@@ -338,8 +338,8 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 
 
 <div class="regle"><b>8 · L'œuvre ne paye jamais la lisibilité du chrome</b>
-  <span>Écrite le 28/07 après <strong>cinq arbitrages de Ropat dans le même sens en une
-  journée</strong>. Une règle qu'on découvre en répétant la même décision cinq fois aurait dû être
+  <span>Écrite le 28/07 après <strong>six arbitrages de Ropat dans le même sens en une
+  journée</strong>. Une règle qu'on découvre en répétant la même décision six fois aurait dû être
   écrite avant la première.<br>
   Sont tombés, dans l'ordre : le <em>voile en bande</em> de 180 px sur les pages projet (qui
   garantissait pourtant 7,43:1 à la nav), le <em>fond</em> de la barre, le <em>halo</em> du logo,
@@ -351,26 +351,32 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   à partir des quatre décisions de Ropat et je l'ai appliquée à tout <em>sauf</em> à ce que je
   venais de poser. Il a fallu qu'il le signale une cinquième fois.
   <em>Une règle qu'on écrit ne vaut que si on la retourne d'abord contre son propre travail.</em><br>
-  <strong>La frontière, et elle est nette :</strong> un contrôle a le droit d'avoir son
-  <em>propre remplissage</em>, parce que c'est sa nature — le bouton contact garde son aplat
-  opaque et reste le seul contrôle du header dont le contraste soit garanti (7,34:1). Ce qu'il
-  n'a pas le droit de faire, c'est <em>déborder</em> sur l'œuvre : voile, bande, ombre portée,
-  tout ce qui assombrit au-delà de sa propre boîte.<br>
+  <strong>⚠️ Un sixième est venu ensuite, et il déplace la frontière.</strong> Le bouton contact
+  gardait un aplat <em>opaque</em> au-dessus d'une œuvre, le seul contrôle du header dont le
+  contraste fût garanti (7,34:1). Ropat l'a ramené au remplissage normal du composant, un orange
+  à 20 % donc transparent : <em>« le CTA contact doit être le même sur les pages projets que sur
+  les autres pages »</em>. L'arbitrage est celui de la <strong>cohérence du composant</strong>
+  contre la garantie de contraste.<br>
+  <strong>La frontière telle qu'elle est aujourd'hui :</strong> un contrôle a le droit d'avoir son
+  <em>propre remplissage</em>, parce que c'est sa nature. Ce qu'il n'a pas le droit de faire, c'est
+  <em>déborder</em> : voile, bande, ombre portée, tout ce qui peint au-delà de sa propre boîte. La
+  nuance qui reste ouverte, et que le sixième arbitrage a tranchée sans la nommer : ce
+  remplissage a le droit d'être <em>opaque</em>, mais il ne l'est plus nulle part.<br>
   <strong>Le prix est connu, mesuré, et accepté.</strong> Mesures sur les pixels réellement
   peints, capture d'écran relue dans un canvas :</span>
   <table class="jetons" style="margin:.8rem 0">
-    <thead><tr><th>Projet</th><th>Fond sous le contrôle</th><th>Nav (seuil 4,5)</th><th>Burger (seuil 3)</th></tr></thead>
+    <thead><tr><th>Projet</th><th>Fond</th><th>Nav (4,5)</th><th>CTA (4,5)</th><th>Burger (3)</th></tr></thead>
     <tbody>
-      <tr><td>Sipsmith</td><td>L 0,49</td><td><span class="ratio ko">1,75:1</span></td><td><span class="ratio ko">1,76:1</span></td></tr>
-      <tr><td>Pinterest</td><td>L 0,44</td><td><span class="ratio ko">1,94:1</span></td><td><span class="ratio ko">1,88:1</span></td></tr>
-      <tr><td>Zylkene</td><td>L 0,39</td><td><span class="ratio ko">2,15:1</span></td><td><span class="ratio ko">2,15:1</span></td></tr>
-      <tr><td>Aélio</td><td>L 0,24</td><td><span class="ratio ko">3,26:1</span></td><td>·</td></tr>
-      <tr><td>Ottony</td><td>L 0,00</td><td><span class="ratio ok">18,25:1</span></td><td><span class="ratio ok">18,38:1</span></td></tr>
+      <tr><td>Sipsmith</td><td>L 0,49</td><td><span class="ratio ko">1,75:1</span></td><td><span class="ratio ko">1,96:1</span></td><td><span class="ratio ko">1,76:1</span></td></tr>
+      <tr><td>Pinterest</td><td>L 0,44</td><td><span class="ratio ko">1,94:1</span></td><td><span class="ratio ko">2,14:1</span></td><td><span class="ratio ko">1,88:1</span></td></tr>
+      <tr><td>Zylkene</td><td>L 0,39</td><td><span class="ratio ko">2,15:1</span></td><td><span class="ratio ko">2,31:1</span></td><td><span class="ratio ko">2,15:1</span></td></tr>
+      <tr><td>Aélio</td><td>L 0,24</td><td><span class="ratio ko">3,26:1</span></td><td><span class="ratio ok">4,74:1</span></td><td>·</td></tr>
+      <tr><td>Ottony</td><td>L 0,00</td><td><span class="ratio ok">18,25:1</span></td><td><span class="ratio ok">12,77:1</span></td><td><span class="ratio ok">18,38:1</span></td></tr>
     </tbody>
   </table>
   <span>Ce n'est pas un défaut à corriger, c'est le <strong>coût d'une règle</strong>. Trois
   sorties avaient été proposées pour le burger, Ropat a choisi d'assumer. Le logo reste orange nu,
-  et lui au moins est couvert par l'exemption des logotypes.<br>
+  et lui au moins est couvert par l'exemption des logotypes ; les trois autres ne le sont pas.<br>
   <em>Ce que la règle empêche de rejouer :</em> chercher « le bon réglage » du voile. Il n'y en a
   pas, la question n'est pas l'intensité mais <strong>qui paye</strong>.</span></div>
   <!-- ═══════════════════════════════════════════════════════════════ -->
