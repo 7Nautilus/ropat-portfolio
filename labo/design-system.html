@@ -1,0 +1,532 @@
+---
+layout: null
+robots: noindex, nofollow
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Chantier du design system · Ropat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Manrope:wght@200..800&family=Underdog&display=swap" rel="stylesheet">
+
+{%- comment -%}
+  La feuille de PRODUCTION est chargee telle quelle. C'est volontaire : les
+  composants montres plus bas doivent etre les VRAIS, avec leur CSS reel, sinon
+  on validerait une maquette et pas le site.
+{%- endcomment -%}
+<link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
+
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   LE CHANTIER
+   ══════════════════════════════════════════════════════════════════════════
+   Tout ce qui suit est porte par [data-ds="chantier"], donc par UN conteneur
+   de cette page. `:root` en production n'est pas touche, et main.css ne gagne
+   pas un octet. Le mecanisme est celui que le site utilise deja pour
+   [data-theme="light"].
+   Quand le systeme sera valide, la bascule est un changement de selecteur :
+   [data-ds="chantier"] devient :root, et les 113 alias meurent.
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-ds="chantier"] {
+
+  /* ── 1. PRIMITIVES ────────────────────────────────────────────────────
+     Les valeurs brutes. Aucune ne depend d'un theme, aucune ne se consomme
+     directement dans un composant. */
+  --p-vert-sol:      #030808;   /* plancher du trio dither */
+  --p-vert-median:   #030F0C;
+  --p-vert-releve:   #051510;   /* plafond du trio dither */
+  --p-blanc:         #ffffff;
+  --p-orange:        #ff5c00;
+  --p-neige-haute:   #F0F4F1;
+  --p-neige-mediane: #DCE6E0;
+  --p-encre-sombre:  #05100F;
+  --p-vert-succes:   #34C759;
+  --p-rouge-erreur:  #FF6B6B;
+
+  /* ── 2. SEMANTIQUE ────────────────────────────────────────────────────
+     Les ROLES. Seule couche que les composants ont le droit de lire.
+     Regle du chantier : un token nomme ce qu'il FAIT, jamais a quoi il
+     ressemble. C'est la lecon du 28/07 : `--border-primary` valait « 3px
+     d'orange » et faisait de l'orange le contour par defaut de tout ;
+     `--surface-raised` assombrissait. Un nom qui decrit une apparence finit
+     par imposer cette apparence. */
+
+  /* Surfaces */
+  --sol: var(--p-vert-sol);                  /* le fond, peint par le dither */
+  --voile: rgba(0, 0, 0, 0.5);               /* ASSOMBRIT le sol sous le contenu */
+  --rideau: rgba(0, 0, 0, 0.98);             /* lightbox, overlay de nav */
+
+  /* Encre, du plus present au plus retire. Trois niveaux, pas quatre :
+     l'ancien `--ink-subtle` a 4,63:1 a ete retire par `typeset` faute de
+     marge, il n'a pas a revenir. */
+  --encre: var(--p-blanc);
+  --encre-douce: #e2e8f0;
+  --encre-attenuee: #9CA3AF;                 /* mesure 7,4:1 sur le sol */
+
+  /* Le trait qui SEPARE, sans rien signaler. Toujours 1px. */
+  --filet: rgba(255, 255, 255, 0.08);
+  --filet-epaisseur: 1px;
+
+  /* Le SIGNAL. Rare par construction.
+     Il n'existe volontairement AUCUN token qui empaquette epaisseur + couleur
+     + style. C'est ce que faisait `--border-primary`, et c'est ce qui a
+     produit 36 bordures orange dont une vingtaine ne signalaient rien : le
+     token rendait le geste plus facile que de ne pas le faire. */
+  --signal: var(--p-orange);
+  --signal-voile: color-mix(in srgb, var(--signal) 20%, transparent);
+  --signal-encre: var(--p-encre-sombre);     /* texte SUR un aplat orange, 6,51:1 */
+  --signal-epaisseur: 3px;
+
+  /* Etats */
+  --succes: var(--p-vert-succes);
+  --danger: var(--p-rouge-erreur);
+
+  /* ── 3. PONT VERS LES COMPOSANTS EXISTANTS ────────────────────────────
+     Les composants reels montres plus bas lisent encore les anciens noms.
+     On les remappe ici, dans le chantier UNIQUEMENT, pour pouvoir les
+     regarder sous le nouveau systeme sans toucher une ligne de production.
+     Ce bloc est un echafaudage : il disparait le jour de la bascule. */
+  --surface: var(--sol);
+  --surface-veil: var(--voile);
+  --surface-scrim: var(--rideau);
+  --secondary-color: var(--voile);
+  --ink: var(--encre);
+  --ink-soft: var(--encre-douce);
+  --ink-muted: var(--encre-attenuee);
+  --white-color: var(--encre);
+  --line: var(--filet);
+  --hairline-width: var(--filet-epaisseur);
+  --accent: var(--signal);
+  --primary-color: var(--signal);
+  --primary-color-alpha: var(--signal-voile);
+  --accent-ink: var(--signal-encre);
+  --color-success: var(--succes);
+}
+
+/* ── Habillage de la page laboratoire elle-meme ──────────────────────────
+   ⚠️ Valeurs LITTERALES, deux raisons.
+   1. Volontaire : si l'instrument de mesure etait peint avec les jetons qu'il
+      mesure, changer un jeton changerait la page qui le juge.
+   2. Impossible autrement : les jetons vivent sur [data-ds="chantier"], qui
+      est un div DANS le body. Un ancetre ne peut pas lire les variables d'un
+      descendant. La premiere version faisait `background: var(--p-vert-sol)`
+      sur body : declaration invalide, fond blanc par defaut, et le `color:
+      #fff` pose dessus rendait titres et libelles invisibles. */
+body { background: #030808; color: #ffffff; font-family: 'Manrope', sans-serif;
+       margin: 0; line-height: 1.65; }
+.labo { max-width: 78rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 3.5rem); }
+.labo h1 { font-family: 'Chakra Petch', sans-serif; font-weight: 700; text-transform: uppercase;
+           font-size: clamp(2.125rem, 1.31vw + 1.82rem, 3rem); line-height: 1.05; margin: 0 0 .6rem; }
+.labo h2 { font-family: 'Chakra Petch', sans-serif; font-weight: 700; line-height: 1.05;
+           font-size: clamp(1.625rem, .56vw + 1.49rem, 2rem);
+           margin: 4rem 0 .3rem; padding-bottom: .6rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+.labo h3 { font-family: 'Chakra Petch', sans-serif; font-size: 1.25rem; font-weight: 600;
+           margin: 2.2rem 0 .5rem; }
+.labo p { max-width: 40rem; color: #9CA3AF; }
+.labo .chapeau { color: #e2e8f0; font-size: 1.25rem; }
+.sur-titre { font-family: 'Chakra Petch', sans-serif; font-size: .8rem; font-weight: 600;
+             text-transform: uppercase; letter-spacing: .10em; color: #ff5c00; margin: 0 0 .5rem; }
+
+.regle { border-left: 0; padding: 1.1rem 1.3rem; margin: .9rem 0;
+         background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.08); }
+.regle b { font-family: 'Chakra Petch', sans-serif; display: block; margin-bottom: .35rem;
+           text-transform: uppercase; letter-spacing: .06em; font-size: .9rem; }
+.regle span { color: #9CA3AF; font-size: 1rem; }
+.regle em { color: #e2e8f0; font-style: normal; }
+
+table.jetons { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; font-size: .95rem; }
+table.jetons th { text-align: left; font-family: 'Chakra Petch', sans-serif; font-size: .8rem;
+                  text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.46);
+                  border-bottom: 1px solid rgba(255,255,255,.12); padding: .5rem .7rem; }
+table.jetons td { padding: .55rem .7rem; border-bottom: 1px solid rgba(255,255,255,.06);
+                  vertical-align: middle; }
+table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font-size: .9rem; }
+.pastille { width: 2.6rem; height: 1.5rem; display: inline-block; border: 1px solid rgba(255,255,255,.15); }
+.ratio { font-variant-numeric: tabular-nums; font-weight: 700; }
+.ok { color: #34C759; } .ko { color: #FF6B6B; }
+
+.mort { color: rgba(255,255,255,.46); text-decoration: line-through; }
+.scene { padding: clamp(1.25rem, 3vw, 2.5rem); margin: 1rem 0 2rem;
+         border: 1px dashed rgba(255,255,255,.14); }
+.scene-titre { font-family: 'Chakra Petch', sans-serif; font-size: .75rem; font-weight: 600;
+               text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.46);
+               margin: 0 0 1.2rem; }
+.duo { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .duo { grid-template-columns: 1fr 1fr; } }
+.ouvert { color: #ff5c00; font-family: 'Chakra Petch', sans-serif; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="labo" data-ds="chantier">
+
+  <p class="sur-titre">Chantier, {{ site.time | date: "%d/%m/%Y" }}</p>
+  <h1>Design system</h1>
+  <p class="chapeau">Cette page ne touche pas au site. Les jetons vivent sur un conteneur
+  (<code>[data-ds="chantier"]</code>), <code>:root</code> en production est intact, et
+  <code>main.css</code> ne gagne pas un octet. La bascule finale sera un changement de sélecteur.</p>
+
+  <p>Les composants montrés plus bas sont les <strong>vrais</strong>, avec leur CSS de production,
+  posés sur les nouveaux jetons. C'est la seule façon de ne pas valider une maquette :
+  cette semaine, une carte allait très bien comme règle et perdait son identité dans la grille.</p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>La doctrine</h2>
+  <p>Six règles, écrites pour être <strong>opposables</strong>. Une règle qu'on ne peut pas
+  invoquer contre une décision n'est pas une règle, c'est une intention.</p>
+
+  <div class="regle"><b>1 · L'œuvre est le produit</b>
+  <span>Sur un <em>livrable</em> (pochette, affiche, logo), le format et la couleur SONT le
+  travail : on ne rogne pas, on ne voile pas, on n'écrit pas dessus. Sur un <em>contexte</em>
+  (mockup, mise en situation), c'est une photo de l'œuvre, la mise en page a le droit d'en faire
+  un décor. Le champ <code>nature</code> tranche, et son défaut est <code>livrable</code>.</span></div>
+
+  <div class="regle"><b>2 · Deux couches, jamais une</b>
+  <span>Realtree, c'est un camouflage dense <em>et</em> un blaze qui claque contre lui.
+  Le camouflage porte la surface : dither, gris, filets. Le signal est rare et il claque.
+  Un orange appliqué comme motif n'est plus un signal, c'est du papier peint.</span></div>
+
+  <div class="regle"><b>3 · Chaque orange doit pouvoir nommer ce qu'il signale</b>
+  <span>Le test d'acceptation : sur un écran donné, compter les oranges et dire, pour chacun,
+  ce qu'il signale. Un orange qui ne signale rien est une régression. Mesure du 28/07 :
+  36 bordures orange dans la feuille, dont une vingtaine ne signalaient rien.</span></div>
+
+  <div class="regle"><b>4 · Un jeton nomme un rôle, jamais une apparence</b>
+  <span>Corollaire direct : aucun jeton n'empaquette épaisseur + couleur + style.
+  <code>--border-primary</code> valait « 3px d'orange » et rendait le geste plus facile que de ne
+  pas le faire. <code>--surface-raised</code> assombrissait. Un nom qui décrit une apparence
+  finit par l'imposer.</span></div>
+
+  <div class="regle"><b>5 · L'intensité est composée, pas répartie</b>
+  <span>Le site est une pièce de démonstration : sa navigation doit être une preuve de
+  savoir-faire. Donc le chrome a le droit d'être riche. Ce qu'il n'a pas le droit d'être, c'est
+  <em>uniformément</em> riche : deux écrans successifs ne doivent pas avoir la même intensité.
+  Baisser le volume partout n'est pas une réponse, c'est l'aveu qu'on n'a pas composé.</span></div>
+
+  <div class="regle"><b>6 · Rien ne se décide sans mesure</b>
+  <span>Contraste, longueur de ligne, cible tactile, poids : des nombres, pris au navigateur, sur
+  la vraie page. Et un test qui ne peut pas échouer ne prouve rien : prévoir un témoin.</span></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Les couches</h2>
+  <p><strong>Primitives → sémantique.</strong> Deux couches, et c'est tout. La troisième couche
+  actuelle, 113 jetons d'alias posés « provisoirement pour ne rien casser », est ce qui a permis
+  aux noms de mentir pendant des mois. Le chantier n'en crée aucun : il ne garde qu'un pont
+  explicite et daté, qui meurt à la bascule.</p>
+
+  <h3>Sémantique</h3>
+  <table class="jetons" id="t-semantique">
+    <thead><tr><th></th><th>Jeton</th><th>Rôle</th><th>Valeur</th><th>Sur le sol</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Ce qui meurt à la bascule</h3>
+  <table class="jetons">
+    <thead><tr><th>Jeton</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td><code class="mort">--border-primary</code></td><td>Empaquette 3px + orange + solid. A produit 36 bordures dont une vingtaine muettes.</td></tr>
+      <tr><td><code class="mort">--surface-raised</code></td><td>Assombrissait. Renommé <code>--voile</code> le 28/07.</td></tr>
+      <tr><td><code class="mort">--secondary-color</code></td><td>Secondaire de rien. Alias du voile, utilisé par 10 surfaces.</td></tr>
+      <tr><td><code class="mort">--primary-color</code></td><td>« Primary » a fait de l'orange le défaut plutôt que le signal.</td></tr>
+      <tr><td><code class="mort">--text-secondary-color</code></td><td>Fantôme : utilisé une fois, défini nulle part.</td></tr>
+      <tr><td><code class="mort">--ink-subtle</code></td><td>4,63:1, sans marge. Retiré par <code>typeset</code>.</td></tr>
+      <tr><td><code class="mort">--white-color</code>, <code class="mort">--text-muted</code>, <code class="mort">--gray-light</code>…</td><td>Le reste des 113 alias.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Typographie</h2>
+  <p>Trois familles, et chacune a un <strong>emploi</strong>, pas un rang. Une famille sans
+  emploi défini finit par servir partout.</p>
+
+  <table class="jetons">
+    <thead><tr><th>Famille</th><th>Emploi</th><th>Ce qu'elle ne fait jamais</th></tr></thead>
+    <tbody>
+      <tr><td style="font-family:'Chakra Petch',sans-serif;font-weight:700">Chakra Petch</td>
+          <td>Titres, micro-libellés, boutons</td>
+          <td>Du texte de labeur : elle fatigue au-delà de deux lignes</td></tr>
+      <tr><td style="font-family:'Manrope',sans-serif;font-weight:600">Manrope</td>
+          <td>Tout le texte qui se lit vraiment</td>
+          <td>Les titres : elle n'a pas le caractère de la première</td></tr>
+      <tr><td style="font-family:'Underdog',sans-serif">Underdog</td>
+          <td>Accent, sur des <em>mots</em> seulement</td>
+          <td>Une phrase entière. Une seule graisse existe (400), tout gras est un faux</td></tr>
+    </tbody>
+  </table>
+
+  <h3>L'échelle</h3>
+  <p>Les tailles ci-dessous sont <strong>mesurées dans ce navigateur</strong>, pas déclarées.
+  Redimensionne la fenêtre : elles suivent. Le ratio est celui avec l'échelon du dessous, et le
+  seuil est <strong>1,25</strong> : sous ce rapport, deux échelons ne se distinguent plus et la
+  hiérarchie devient décorative.</p>
+  <table class="jetons" id="t-typo">
+    <thead><tr><th>Échelon</th><th>Mesure</th><th>Ratio</th><th>Aperçu</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>La mesure de ligne</h3>
+  <p>La fenêtre de confort est <strong>45 à 75 caractères</strong>. En dessous l'œil saute trop
+  souvent, au-dessus il perd la ligne suivante. <code>--measure-prose</code> borne la prose.</p>
+  <div class="scene">
+    <p class="scene-titre">Texte borné à <code>--measure-prose</code></p>
+    <p id="mesure-demo" style="max-width: var(--measure-prose); font-size: var(--text-body); color: var(--encre-douce)">
+      Je conçois des identités visuelles et des univers graphiques pour les artistes musicaux et
+      les marques qui veulent exister autrement, du logotype à la pochette jusqu'aux campagnes
+      sociales.</p>
+    <p id="mesure-compte" class="sur-titre" style="margin-top:.8rem"></p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Espacement</h2>
+  <p>Une échelle ne vaut que si on s'y tient. Relevé du 28/07 dans les composants, les mises en
+  page et les pages : <strong id="hors-echelle">32 valeurs hors échelle contre 23 dessus</strong>.
+  Plus de valeurs contournent l'échelle qu'elles ne l'utilisent, ce qui revient à ne pas en
+  avoir. Les fautives : <code>0.875</code>, <code>0.6</code>, <code>0.4</code>, <code>0.75</code>,
+  <code>0.25</code>, <code>1.25</code>, <code>2.5</code>, <code>4</code>, <code>5</code>,
+  <code>6rem</code>.</p>
+  <p>Deux causes distinctes, et deux remèdes distincts : les petites valeurs (0,25 à 0,875)
+  disent qu'il <strong>manque des échelons bas</strong> ; les grandes (4 à 6rem) disent qu'il
+  manque une échelle de <strong>respiration de section</strong>, différente de l'espacement
+  interne d'un composant. Les traiter comme un seul problème n'en réglerait aucun.</p>
+  <table class="jetons" id="t-espace">
+    <thead><tr><th>Jeton</th><th>Mesure</th><th>Ratio</th><th>À l'échelle</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Les composants réels</h2>
+  <p>Vrais composants, vrai CSS de production, posés sur les jetons du chantier.</p>
+
+  <div class="scene">
+    <p class="scene-titre">Boutons · via <code>ui/button.html</code></p>
+    {% include ui/button.html label="Prendre contact" href="#" icon="send" %}
+    {% include ui/button.html label="Voir le projet" href="#" icon="arrow" variant="ghost" %}
+  </div>
+
+  <div class="scene">
+    <p class="scene-titre">Carte projet · avec une vraie œuvre</p>
+    <div class="duo">
+      <article class="card project-card">
+        <div class="project-card-image">
+          {%- comment -%} Chemin lu dans _data/projects/aelio.yml, pas invente. {%- endcomment -%}
+          {%- assign _aelio = site.data.projects.aelio -%}
+          <img src="{{ _aelio.image_src }}" alt="{{ _aelio.locales.fr.image_alt | default: 'Identité visuelle Aélio' }}"
+               width="1" height="1" loading="lazy">
+        </div>
+        <div class="project-card-content">
+          <div class="project-card-header">
+            <h3 class="project-card-title">Aélio</h3>
+            <p class="project-card-client">Conseil en IA · 2025</p>
+          </div>
+        </div>
+      </article>
+      <div>
+        <p class="sur-titre" style="color:rgba(255,255,255,.46)">Ce qu'on regarde ici</p>
+        <p>Le contour orange et le squircle de 5rem sont l'identité de la carte, et
+        <strong>restaurés à ta demande</strong> le 28/07. La question ouverte n'est pas de les
+        retirer : c'est de savoir si la <em>composition de la grille</em> peut porter l'identité
+        à leur place, comme le prévoyait le plan. Tant que cette composition n'existe pas,
+        les retirer laisse un gabarit.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene">
+    <p class="scene-titre">Le voile · la plaque qui assombrit le sol sous le contenu</p>
+    <div style="background: var(--voile); padding: 1.5rem; max-width: 34rem;">
+      <p style="color: var(--encre); margin: 0 0 .4rem;">Encre pleine sur le voile</p>
+      <p style="color: var(--encre-attenuee); margin: 0;">Encre atténuée sur le voile</p>
+    </div>
+    <p style="margin-top:.9rem">Il <strong>assombrit</strong>, c'est son but : le dither est un
+    motif vivant, le voile le calme localement pour que le texte ait une base stable.
+    Ne pas le confondre avec une élévation.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Ce qui reste à trancher</h2>
+  <p>Les questions que le système ne peut pas décider seul, et qui te reviennent.</p>
+  <ul>
+    <li><span class="ouvert">La composition de la grille.</span> Si elle porte l'identité, les
+      cartes peuvent s'alléger. Sinon elles gardent leur contour. Lié à l'arbitrage
+      grille de vignettes contre index typographique.</li>
+    <li><span class="ouvert">Le curseur blob.</span> Gardé jusqu'à la Phase 4. Il masque le logo
+      qu'on survole dans le carrousel, ce qui est un argument de plus pour le rejuger.</li>
+    <li><span class="ouvert">Le H1 de l'accueil.</span> Deux mots sur quatre sous le seuil,
+      gardés tels quels pour l'instant.</li>
+    <li><span class="ouvert">Le skin clair.</span> Le dither est sombre par construction ; le
+      clair aura besoin de sa propre matière. Phase 3.</li>
+    <li><span class="ouvert">Underdog.</span> Une seule graisse, un seul glyphe en service.
+      Décider si l'accent existe vraiment ou s'il sort de la charte.</li>
+  </ul>
+
+</div>
+
+<script>
+/* Les ratios ne sont pas ecrits : ils sont MESURES dans ce navigateur, sur les
+   valeurs reellement calculees. Une doctrine qui pose « rien sans mesure » ne
+   peut pas afficher des nombres saisis a la main. */
+(function () {
+  var racine = document.querySelector('[data-ds="chantier"]');
+  var cv = document.createElement('canvas'); cv.width = cv.height = 1;
+  var cx = cv.getContext('2d', { willReadFrequently: true });
+
+  function resoudre(s) {
+    cx.clearRect(0, 0, 1, 1); cx.fillStyle = '#000'; cx.fillStyle = String(s);
+    cx.clearRect(0, 0, 1, 1); cx.fillRect(0, 0, 1, 1);
+    var d = cx.getImageData(0, 0, 1, 1).data;
+    return { c: [d[0], d[1], d[2]], a: d[3] / 255 };
+  }
+  function lin(c) { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); }
+  function lum(p) { return 0.2126 * lin(p[0]) + 0.7152 * lin(p[1]) + 0.0722 * lin(p[2]); }
+  function ratio(a, b) { var x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
+  function melange(f, a, b) { return f.map(function (v, i) { return v * a + b[i] * (1 - a); }); }
+  function val(n) { return getComputedStyle(racine).getPropertyValue(n).trim(); }
+
+  var SOL = resoudre(val('--sol')).c;
+
+  var lignes = [
+    ['--sol', 'le fond, peint par le dither', null],
+    ['--voile', 'assombrit le sol sous le contenu', null],
+    ['--rideau', 'lightbox, overlay de nav', null],
+    ['--encre', 'texte principal', 4.5],
+    ['--encre-douce', 'texte secondaire', 4.5],
+    ['--encre-attenuee', 'metadonnees, micro-libelles', 4.5],
+    ['--filet', 'separer, sans signaler', null],
+    ['--signal', 'orange : rare, et il claque', 3],
+    ['--signal-encre', 'texte SUR un aplat orange', null],
+    ['--succes', 'disponibilite', null],
+    ['--danger', 'erreur de formulaire', 4.5]
+  ];
+
+  var tb = document.querySelector('#t-semantique tbody');
+  lignes.forEach(function (l) {
+    var brut = val(l[0]);
+    var r = resoudre(brut);
+    var couleur = r.a < 1 ? melange(r.c, r.a, SOL) : r.c;
+    var tr = document.createElement('tr');
+    var mesure = '';
+    if (l[2]) {
+      var v = ratio(couleur, SOL);
+      mesure = '<span class="ratio ' + (v >= l[2] ? 'ok' : 'ko') + '">' + v.toFixed(2) + ':1</span>'
+             + ' <span style="color:rgba(255,255,255,.46);font-size:.85rem">seuil ' + l[2] + '</span>';
+    } else {
+      mesure = '<span style="color:rgba(255,255,255,.46)">·</span>';
+    }
+    tr.innerHTML =
+      '<td><span class="pastille" style="background:' + brut + '"></span></td>' +
+      '<td><code>' + l[0] + '</code></td>' +
+      '<td style="color:#9CA3AF">' + l[1] + '</td>' +
+      '<td><code style="color:rgba(255,255,255,.46)">' + brut + '</code></td>' +
+      '<td>' + mesure + '</td>';
+    tb.appendChild(tr);
+  });
+
+  /* ── Echelle typographique ──────────────────────────────────────────
+     Les px sont MESURES : on pose une sonde invisible avec la taille du
+     jeton et on lit ce que le navigateur a calcule. Ecrire « 20 px » a la
+     main serait affirmer, or la regle 6 dit le contraire, et les clamp()
+     changent avec la fenetre. */
+  function px(jeton) {
+    var s = document.createElement('span');
+    s.style.cssText = 'position:absolute;visibility:hidden;font-size:var(' + jeton + ')';
+    racine.appendChild(s);
+    var v = parseFloat(getComputedStyle(s).fontSize);
+    s.remove(); return v;
+  }
+
+  var ECHELONS = [
+    ['--text-display', 'Direction artistique', 'titre'],
+    ['--text-title', 'Direction artistique', 'titre'],
+    ['--text-subhead', 'Direction artistique', 'titre'],
+    ['--text-body', 'Le corps de texte, en Manrope', 'corps'],
+    ['--text-meta', 'Metadonnee secondaire', 'corps'],
+    ['--text-caption', 'Micro libelle', 'caps']
+  ];
+
+  function remplirTypo() {
+    var tb = document.querySelector('#t-typo tbody');
+    if (!tb) return;
+    tb.innerHTML = '';
+    var tailles = ECHELONS.map(function (e) { return px(e[0]); });
+    ECHELONS.forEach(function (e, i) {
+      var suiv = tailles[i + 1];
+      var r = suiv ? tailles[i] / suiv : null;
+      var faible = r && r < 1.25;
+      var style = 'font-size:var(' + e[0] + ');line-height:1.05;'
+        + (e[2] === 'corps'
+            ? "font-family:'Manrope',sans-serif;font-weight:400;line-height:1.4;"
+            : "font-family:'Chakra Petch',sans-serif;font-weight:700;")
+        + (e[2] === 'caps' ? 'text-transform:uppercase;letter-spacing:.10em;' : '')
+        + 'white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;';
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><code>' + e[0].replace('--text-', '') + '</code></td>' +
+        '<td><span class="ratio">' + tailles[i].toFixed(1) + ' px</span></td>' +
+        '<td>' + (r ? '<span class="ratio ' + (faible ? 'ko' : 'ok') + '">' + r.toFixed(2) + '</span>'
+                    : '<span style="color:rgba(255,255,255,.46)">·</span>') + '</td>' +
+        '<td style="max-width:26rem"><span style="' + style + '">' + e[1] + '</span></td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ── Mesure de ligne ────────────────────────────────────────────────
+     Comptee, pas estimee : largeur du bloc divisee par la largeur reelle
+     d'un caractere dans la fonte effectivement chargee. */
+  function compterMesure() {
+    var p = document.getElementById('mesure-demo');
+    var out = document.getElementById('mesure-compte');
+    if (!p || !out) return;
+    var c = document.createElement('canvas').getContext('2d');
+    c.font = getComputedStyle(p).font;
+    var n = Math.round(p.getBoundingClientRect().width / c.measureText('0').width);
+    var etat = n > 75 ? ' (au-dessus de 75)' : n < 45 ? ' (sous 45)' : ' (dans la fenetre 45 a 75)';
+    out.textContent = n + ' caracteres par ligne' + etat;
+    out.style.color = (n >= 45 && n <= 75) ? '#34C759' : '#FF6B6B';
+  }
+
+  /* ── Echelle d'espacement ───────────────────────────────────────────── */
+  function remplirEspace() {
+    var tb = document.querySelector('#t-espace tbody');
+    if (!tb) return;
+    var noms = ['--spacing-xs', '--spacing-sm', '--spacing-md', '--spacing-lg', '--spacing-xl'];
+    var sonde = document.createElement('div');
+    sonde.style.cssText = 'position:absolute;visibility:hidden';
+    racine.appendChild(sonde);
+    var vals = noms.map(function (n) {
+      sonde.style.width = 'var(' + n + ')';
+      return parseFloat(getComputedStyle(sonde).width);
+    });
+    sonde.remove();
+    tb.innerHTML = '';
+    noms.forEach(function (n, i) {
+      var prec = vals[i - 1];
+      var r = prec ? vals[i] / prec : null;
+      var tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td><code>' + n.replace('--spacing-', '') + '</code></td>' +
+        '<td><span class="ratio">' + vals[i] + ' px</span>' +
+          '<span style="display:inline-block;height:.7rem;margin-left:.7rem;vertical-align:middle;' +
+          'background:#ff5c00;width:' + vals[i] + 'px"></span></td>' +
+        '<td>' + (r ? '<span class="ratio">x' + r.toFixed(2) + '</span>'
+                    : '<span style="color:rgba(255,255,255,.46)">·</span>') + '</td>' +
+        '<td style="color:#9CA3AF">' + (r === null ? 'plancher'
+            : r === 2 ? 'double du precedent'
+            : 'rapport irregulier') + '</td>';
+      tb.appendChild(tr);
+    });
+  }
+
+  remplirTypo(); compterMesure(); remplirEspace();
+  /* Les clamp() suivent la fenetre : les mesures doivent suivre aussi, sinon
+     la page afficherait des chiffres faux des le premier redimensionnement. */
+  addEventListener('resize', function () { remplirTypo(); compterMesure(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(compterMesure);
+})();
+</script>
+</body>
+</html>
