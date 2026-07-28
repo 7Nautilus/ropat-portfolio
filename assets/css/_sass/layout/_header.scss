@@ -134,20 +134,33 @@ header[data-sur-media] {
        0    0   8px rgba(var(--scrim-canal), 0.9);
   }
 
-  /* ⚠️ LE BURGER N'A PLUS DE TRAITEMENT, et c'est le seul point de ce bloc qui
-     laisse quelque chose de moins bien qu'avant.
-     Il portait un `drop-shadow`, retire le 28/07 avec celui du logo sur demande
-     de Ropat. C'est un SVG et non du texte, donc le `text-shadow` ci-dessus ne
-     l'atteint pas : il ne reste rien.
-     Ce que ca coute : sur MOBILE, le burger est le seul controle visible du
-     header, les liens vivant dans l'overlay. Sur une oeuvre claire il devient
-     du blanc sur du blanc, et c'est un composant d'interface, donc soumis aux
-     3:1 de WCAG 1.4.11 dont aucune exemption ne le sort (contrairement au
-     logotype).
-     Si ca se voit a l'usage, la sortie qui ne repasse PAS par une ombre :
-     donner aux trois traits du SVG un `stroke` sombre sous leur trace, via
-     `paint-order: stroke` ou un second chemin dessine dessous. C'est plus de
-     travail, mais c'est un CONTOUR dessine et non un effet pose. */
+  /* ⚠️⚠️ LE BURGER N'A PLUS DE TRAITEMENT, ET C'EST UNE DECISION, PAS UN OUBLI.
+     Ne pas « corriger » ce point sans rouvrir l'arbitrage avec Ropat.
+
+     Il portait un `drop-shadow`, retire le 28/07 avec celui du logo. C'est un
+     SVG et non du texte, donc le `text-shadow` ci-dessus ne l'atteint pas : il
+     ne reste rien.
+
+     CE QUE CA COUTE, mesure et non estime. Sur MOBILE le burger est le SEUL
+     controle visible du header, les liens vivant dans l'overlay. Mesure sur
+     les pixels reellement peints, capture d'ecran relue dans un canvas :
+       Sipsmith    fond L 0,488    1,76:1
+       Pinterest   fond L 0,453    1,88:1
+       Zylkene     fond L 0,390    2,15:1
+       Ottony      fond L 0,001   18,38:1
+     pour un seuil de 3:1 (WCAG 1.4.11). Trois projets sur quatre echouent.
+     ⚠️ Ici la mesure EST valide, contrairement au cas du lisere juste au-
+     dessus : le trait du burger et son fond immediat sont deux aplats, ce que
+     WCAG sait comparer. Et aucune exemption ne couvre un controle d'interface,
+     contrairement au logotype.
+
+     TROIS SORTIES ONT ETE PROPOSEES, ROPAT A CHOISI LA TROISIEME :
+       1. un contour DESSINE dans le SVG (second trace sombre plus epais sous
+          les trois traits clairs) ; ce n'est pas une ombre, c'est un dessin ;
+       2. un aplat sous le burger, comme en a le bouton contact ;
+       3. ASSUMER. C'est ce qui est en place.
+     La sortie 1 reste la moins chere si le point revient : elle ne repasse ni
+     par une ombre ni par un fond. */
 
   /* Le bouton contact garde son orange sur un aplat OPAQUE, et il n'est PAS
      concerne par la suppression : ce n'est pas un fond de barre, c'est le
