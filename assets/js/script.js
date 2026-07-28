@@ -600,6 +600,12 @@ document.addEventListener('DOMContentLoaded', () => {
                bottom: b.top + (b.height + h) / 2 };
     };
 
+    // ⚠️ `manqueDonnees` distingue les deux facons dont une lecture peut rendre
+    // null : le point est HORS du contenu peint (bande letterbox, cas normal),
+    // ou le media n'est PAS ENCORE LISIBLE. Le second cas rend la mesure
+    // incomplete, et il faut donc la refaire ; le premier non.
+    let manqueDonnees = false;
+
     const pixelDe = (el, x, y) => {
       const r = rectContenu(el);
       if (x < r.left || x > r.right || y < r.top || y > r.bottom) return null;  // bande letterbox
@@ -607,7 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!v) {
         const nw = el.naturalWidth || el.videoWidth || el.width || 0;
         const nh = el.naturalHeight || el.videoHeight || el.height || 0;
-        if (!nw || !nh) return null;
+        if (!nw || !nh) { manqueDonnees = true; return null; }
         const c = document.createElement('canvas');
         c.width = LARGEUR_SONDE; c.height = Math.max(1, Math.round(LARGEUR_SONDE * nh / nw));
         v = { c: c, x: c.getContext('2d', { willReadFrequently: true }), frame: -1 };
@@ -616,11 +622,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Une image ne se redessine jamais ; une video a chaque frame.
       if (v.frame < 0 || (el.tagName === 'VIDEO' && v.frame !== compteurFrame)) {
         try { v.x.drawImage(el, 0, 0, v.c.width, v.c.height); v.frame = compteurFrame; }
-        catch (e) { return null; }               // pas encore decode, ou tainte
+        catch (e) { manqueDonnees = true; return null; }   // pas encore decode, ou tainte
       }
       const sx = Math.min(v.c.width - 1, Math.max(0, Math.floor((x - r.left) / r.width * v.c.width)));
       const sy = Math.min(v.c.height - 1, Math.max(0, Math.floor((y - r.top) / r.height * v.c.height)));
-      let d; try { d = v.x.getImageData(sx, sy, 1, 1).data; } catch (e) { return null; }
+      let d; try { d = v.x.getImageData(sx, sy, 1, 1).data; } catch (e) { manqueDonnees = true; return null; }
       return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
     };
 
@@ -686,8 +692,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const P_HAUT = 0.9, P_BAS = 0.1;
     const L_CLAIRE = LUM(resoudre('#F0F4F1'));
     const L_SOMBRE = LUM(resoudre('#05100F'));
-    const MARGE = 1.25;          // l'autre encre doit etre meilleure de 25 %
+    // ⚠️ UNE MARGE ADDITIVE, ET NON UN RAPPORT. Corrige le 28/07 apres releve
+    // sur les 20 pages projet.
+    // Un rapport de 1,25 semblait raisonnable, mais un ratio de contraste vit
+    // entre 1 et 21 : 25 % ne veut pas dire la meme chose a 1,1 qu'a 15. Or la
+    // decision se joue TOUJOURS en bas de cette echelle, la ou les deux encres
+    // sont mediocres. Consequence mesuree : a-lone (3,51 contre 4,09), jpeja
+    // (1,23 contre 1,39) et stelya (1,09 contre 1,36) gardaient l'encre claire
+    // alors que la sombre etait meilleure, faute d'atteindre le rapport.
+    // Une marge additive de 0,3 point est uniforme la ou ca compte.
+    const MARGE = 0.3;
     const MAINTIEN = 400;        // ms entre deux bascules
+    // ⚠️ AUCUNE MARGE SUR LE PREMIER CHOIX. L'hysteresis sert a resister a un
+    // CHANGEMENT ; au chargement il n'y a rien a quoi resister, et lui imposer
+    // une marge revient a privilegier arbitrairement l'encre claire.
+    let etabli = false;
     let encreSombre = false, dernierChangement = 0, rappel = 0;
 
     // ⚠️ LA BASCULE N'A PAS BESOIN DE 60 Hz, et la faire tourner a cette
@@ -708,6 +727,7 @@ document.addEventListener('DOMContentLoaded', () => {
       derniereMesure = maintenant;
       compteurFrame++;
       cacheStyles = new Map();          // une passe, un cache
+      manqueDonnees = false;
       const vals = [];
       barre.querySelectorAll('.logo, .nav-link, .nav-contact, .burger-menu').forEach(el => {
         const b = el.getBoundingClientRect();
@@ -725,6 +745,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
       if (!vals.length) return;
+      // ⚠️ NE PAS CONCLURE SUR UNE MESURE INCOMPLETE. Une image pas encore
+      // decodee ne contribue pas : les points qui la surplombent lisent le sol
+      // nu, donc quasi noir, ce qui EFFONDRE le pire cas de l'encre sombre et
+      // fait choisir le clair a tort.
+      // Symptome releve sur les 20 pages projet : `crow` rendait
+      // « sombre 4,83 » a un passage et « sombre 1,06 » au suivant, sur la
+      // meme page. Un etat correct qui depend du hasard du decodage n'est pas
+      // un etat correct.
+      if (manqueDonnees) { clearTimeout(rappel); rappel = setTimeout(() => majEncre(hauteurBarre(), true), 200); return; }
       vals.sort((a, b) => a - b);
       const q = (f) => vals[Math.min(vals.length - 1, Math.floor(f * (vals.length - 1)))];
       const haut = q(P_HAUT), basL = q(P_BAS);
@@ -740,9 +769,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.__debugEncre) {
         barre.setAttribute('data-dbg', 'clair ' + pireClair.toFixed(2) + ' / sombre ' + pireSombre.toFixed(2) + ' / n=' + vals.length);
       }
-      const veutSombre = encreSombre ? !(pireClair > pireSombre * MARGE)
-                                     : pireSombre > pireClair * MARGE;
-      if (veutSombre === encreSombre) return;
+      const veutSombre = !etabli
+        ? pireSombre > pireClair                          // premier choix : le meilleur, point
+        : (encreSombre ? !(pireClair > pireSombre + MARGE)
+                       : pireSombre > pireClair + MARGE);
+      if (veutSombre === encreSombre && etabli) return;
+      if (!etabli) {
+        etabli = true; dernierChangement = performance.now();
+        encreSombre = veutSombre;
+        if (encreSombre) barre.setAttribute('data-encre', 'sombre');
+        else barre.removeAttribute('data-encre');
+        return;
+      }
       const t = performance.now();
       const reste = MAINTIEN - (t - dernierChangement);
       if (reste > 0) {
@@ -798,7 +836,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // L'observateur est borne par les deux etranglements deja en place : une
     // frame d'animation, puis 100 ms. Une rafale de mutations coute donc une
     // seule mesure.
-    [300, 1200, 3000].forEach(d => setTimeout(planifier, d));
+    // ⚠️ TROIS RENDEZ-VOUS NE SUFFISAIENT PAS. Releve sur les 20 pages projet :
+    // hors-champ rendait `clair` a un passage et `sombre` au suivant, sur la
+    // meme page, parce que son image n'etait pas decodee a la derniere mesure.
+    // Un etat correct qui depend du hasard du decodage n'est pas un etat
+    // correct. On mesure donc a intervalle regulier pendant les premieres
+    // secondes, jusqu'a ce que deux mesures consecutives s'accordent.
+    // Quelques rendez-vous au chargement : le vrai filet est `manqueDonnees`
+    // ci-dessus, qui refait la mesure tant qu'un media n'est pas lisible. Ceux-ci
+    // couvrent le reste (polices, mise en page qui se pose, images differees).
+    [250, 700, 1600, 3200].forEach(d => setTimeout(planifier, d));
 
     if ('MutationObserver' in window) {
       const observateur = new MutationObserver(entrees => {
