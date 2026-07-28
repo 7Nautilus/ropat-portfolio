@@ -76,8 +76,12 @@
      Sur une grande boite, les aretes plates dominent et le biseau s'efface.
      Il doit donc croitre PLUS VITE que le bouton, pas au meme rythme.
      Le bouton de nav garde sa valeur d'origine, jugee bonne, via
-     `--bevel-cut` depuis layout/_header.scss. */
-  --bevel-cut: 1em;
+     `--bevel-cut` depuis layout/_header.scss.
+
+     0,8em et non 1em : la premiere valeur essayee (20px de coupe) etait trop
+     franche. On garde le principe, le biseau croit toujours plus vite que le
+     bouton (0,6em sur la nav, 0,8 ici), mais l'ecart se resserre. */
+  --bevel-cut: 0.8em;
   @include bevel;
   color: var(--white-color);
   box-shadow: var(--shadow-sm);
