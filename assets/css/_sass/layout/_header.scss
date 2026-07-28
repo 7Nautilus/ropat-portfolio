@@ -132,8 +132,9 @@ header {
    convergent dans la variante sombre. Une seule variable les aurait fusionnes
    partout, y compris la ou ils doivent differer. */
 header {
-  --encre-chrome: var(--ink);
-  --signal-chrome: var(--accent);
+  /* ⚠️ Les deux variables ne sont PLUS declarees ici, elles vivent au socle
+     (base/_variables.scss). Les garder ici les rendait invisibles au loader,
+     qui utilise le meme logo : il s'affichait en blanc. */
 
   /* La transition porte sur les DEUX proprietes que la bascule change, et sur
      elles seules. `all` aurait attrape le `transform` de l'escamotage, donc la

@@ -219,6 +219,20 @@
      valide pas l'ecart, ca le rend auditable. */
   --ink-decorative: rgba(255, 255, 255, 0.2);
 
+  /* ── L'ENCRE DU CHROME ─────────────────────────────────────────────────
+     Les deux roles que la bascule d'encre du header commute. Ils vivent ICI,
+     au socle, et non sur `header` : le LOGO n'est pas qu'un element de barre,
+     il sert aussi le loader de l'accueil.
+     ⚠️ C'est une correction du 28/07, et le defaut est instructif. En passant
+     le SVG du logo a `currentColor`, j'ai deplace sa couleur dans une variable
+     que je n'avais declaree que sur `header`. Hors du header la variable ne
+     resolvait pas, donc `color` retombait sur l'heritage : le logo du LOADER
+     est devenu BLANC, en silence.
+     Regle a en tirer : une variable qui habille un composant doit etre
+     declaree la ou vit le COMPOSANT, pas la ou vit son premier usage. */
+  --encre-chrome: var(--ink);
+  --signal-chrome: var(--accent);
+
   /* Filets neutres. Le trait qui SEPARE sans signaler. Aucun minimum de
      contraste ne s'y applique : il ne porte pas d'information, il aere. */
   --line: rgba(255, 255, 255, 0.08);

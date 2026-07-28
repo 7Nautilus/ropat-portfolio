@@ -208,6 +208,19 @@
      palette, une exception ecrite en litteral est invisible. Tokeniser ne
      valide pas l'ecart, ca le rend auditable. */
   --ink-decorative: rgba(255, 255, 255, 0.2);
+  /* ── L'ENCRE DU CHROME ─────────────────────────────────────────────────
+     Les deux roles que la bascule d'encre du header commute. Ils vivent ICI,
+     au socle, et non sur `header` : le LOGO n'est pas qu'un element de barre,
+     il sert aussi le loader de l'accueil.
+     ⚠️ C'est une correction du 28/07, et le defaut est instructif. En passant
+     le SVG du logo a `currentColor`, j'ai deplace sa couleur dans une variable
+     que je n'avais declaree que sur `header`. Hors du header la variable ne
+     resolvait pas, donc `color` retombait sur l'heritage : le logo du LOADER
+     est devenu BLANC, en silence.
+     Regle a en tirer : une variable qui habille un composant doit etre
+     declaree la ou vit le COMPOSANT, pas la ou vit son premier usage. */
+  --encre-chrome: var(--ink);
+  --signal-chrome: var(--accent);
   /* Filets neutres. Le trait qui SEPARE sans signaler. Aucun minimum de
      contraste ne s'y applique : il ne porte pas d'information, il aere. */
   --line: rgba(255, 255, 255, 0.08);
@@ -1004,8 +1017,9 @@ header {
    convergent dans la variante sombre. Une seule variable les aurait fusionnes
    partout, y compris la ou ils doivent differer. */
 header {
-  --encre-chrome: var(--ink);
-  --signal-chrome: var(--accent);
+  /* ⚠️ Les deux variables ne sont PLUS declarees ici, elles vivent au socle
+     (base/_variables.scss). Les garder ici les rendait invisibles au loader,
+     qui utilise le meme logo : il s'affichait en blanc. */
   /* La transition porte sur les DEUX proprietes que la bascule change, et sur
      elles seules. `all` aurait attrape le `transform` de l'escamotage, donc la
      barre se serait mise a glisser mollement au lieu de se retirer net. */
