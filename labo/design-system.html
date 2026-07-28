@@ -31,7 +31,8 @@ sitemap: false
    pas un octet. Le mecanisme est celui que le site utilise deja pour
    [data-theme="light"].
    Quand le systeme sera valide, la bascule est un changement de selecteur :
-   [data-ds="chantier"] devient :root, et les 113 alias meurent.
+   [data-ds="chantier"] devient :root, et les alias meurent. Leur nombre n'est
+   plus ecrit ici : il est compte dans la page, sur la feuille servie.
    ══════════════════════════════════════════════════════════════════════════ */
 [data-ds="chantier"] {
 
@@ -93,8 +94,14 @@ sitemap: false
 
   /* Le sol propre du CHROME, la barre du header. Tres faible : il n'existe que
      pour que la barre ne soit pas strictement transparente quand elle glisse
-     au-dessus d'une section claire. */
-  --chrome: rgba(0, 0, 0, 0.1);
+     au-dessus d'une section claire.
+     ⚠️ `--sol-chrome` et non `--chrome` : le croisement des noms du chantier
+     avec ceux de la production a trouve que `--chrome` EXISTE DEJA, dans
+     _project.scss et _media-queries.scss, ou il vaut la HAUTEUR du header
+     sticky (76px / 56px). Deux choses differentes sous un seul nom, dans un
+     systeme dont la premiere regle est qu'un jeton nomme ce qu'il fait.
+     Le prefixe `--sol-` le range aussi la ou il appartient, avec `--sol`. */
+  --sol-chrome: rgba(0, 0, 0, 0.1);
 
   /* ⚠️ CANAL du voile photographique pose sur un media. Ce n'est pas une
      couleur de la charte, c'est une DENSITE, l'equivalent d'un vignettage.
@@ -136,7 +143,8 @@ sitemap: false
      Il n'existe volontairement AUCUN token qui empaquette epaisseur + couleur
      + style. C'est ce que faisait `--border-primary`, et c'est ce qui a
      produit 36 bordures orange dont une vingtaine ne signalaient rien : le
-     token rendait le geste plus facile que de ne pas le faire. */
+     token rendait le geste plus facile que de ne pas le faire. (Ce 36 est le
+     releve d'origine ; le compte du jour est mesure dans la page.) */
   --signal: var(--p-orange);
   --signal-voile: color-mix(in srgb, var(--signal) 20%, transparent);
   --signal-encre: var(--p-encre-sombre);     /* texte SUR un aplat orange, 6,51:1 */
@@ -156,7 +164,7 @@ sitemap: false
   --surface-scrim: var(--rideau);
   --surface-faint: var(--eclaircie-repos);
   --surface-subtle: var(--eclaircie-reaction);
-  --surface-chrome: var(--chrome);
+  --surface-chrome: var(--sol-chrome);
   --scrim-canal: var(--canal-voile);
   --secondary-color: var(--voile);
   --ink: var(--encre);
@@ -166,12 +174,16 @@ sitemap: false
   --white-color: var(--encre);
   --line: var(--filet);
   --line-control: var(--filet-controle);
+  --signal-width: var(--signal-epaisseur);
   --hairline-width: var(--filet-epaisseur);
   --accent: var(--signal);
   --primary-color: var(--signal);
   --primary-color-alpha: var(--signal-voile);
   --accent-ink: var(--signal-encre);
   --color-success: var(--succes);
+  /* ⚠️ `--danger` n'a PAS de ligne de pont, et c'est correct : la production
+     porte deja exactement ce nom pour exactement ce role. C'est le seul jeton
+     du chantier qui soit deja en place tel quel. Un pont serait circulaire. */
 }
 
 /* ── Habillage de la page laboratoire elle-meme ──────────────────────────
@@ -280,8 +292,10 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 
   <div class="regle"><b>3 · Chaque orange doit pouvoir nommer ce qu'il signale</b>
   <span>Le test d'acceptation : sur un écran donné, compter les oranges et dire, pour chacun,
-  ce qu'il signale. Un orange qui ne signale rien est une régression. Mesure du 28/07 :
-  36 bordures orange dans la feuille, dont une vingtaine ne signalaient rien.</span></div>
+  ce qu'il signale. Un orange qui ne signale rien est une régression.
+  <strong>Mesure en direct sur la feuille servie : <span data-mesure="bordures-orange">·</span>
+  déclarations de bordure orange.</strong> Le relevé du 28/07 en comptait 36 : la Phase 2 en a
+  soldé une partie. Le tableau nominatif est plus bas, section « Le test de la règle 3 ».</span></div>
 
   <div class="regle"><b>4 · Un jeton nomme un rôle, jamais une apparence</b>
   <span>Corollaire direct : aucun jeton n'empaquette épaisseur + couleur + style.
@@ -441,8 +455,33 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </ol>
 
   <h3>Couverture du skin clair</h3>
-  <p><strong>13 rôles surchargés.</strong> Les non surchargés sont volontaires et documentés,
-  sauf un.</p>
+  <p><span data-mesure="skin-clair-couvert">·</span> rôles de couleur sur
+  <span data-mesure="roles-couleur">·</span> ont une version claire ; il en reste
+  <strong><span data-mesure="skin-clair-manquant">·</span> sans</strong>. Mesuré ici, et plus écrit
+  à la main : ce chiffre disait <em>13</em> alors qu'il en existait déjà 17, parce qu'il vieillit à
+  chaque rôle ajouté. Les rôles restants sont listés tels quels ; certains sont des absences
+  <strong>voulues</strong>, d'autres sont de vraies lacunes, et le tableau ne fait pas la
+  différence : c'est à la lecture qu'elle se tranche.</p>
+  <table class="jetons">
+    <thead><tr><th>Rôle sans version claire</th><th>Valeur en sombre</th></tr></thead>
+    <tbody id="sans-clair"><tr><td colspan="2">mesure en cours…</td></tr></tbody>
+  </table>
+  <div class="regle">
+    <b>Quatre des cinq sont voulues, une seule est une lacune</b>
+    <span>Les trois jetons d'accent (<code>--accent</code>, <code>--accent-soft</code>,
+    <code>--accent-ink</code>) ne sont volontairement pas surchargés : l'orange est un point fixe
+    de la charte, et l'encre sombre posée dessus fonctionne dans les deux skins.<br>
+    <code>--shadow-signal</code> apparaît dans la liste mais n'est <strong>pas</strong> une lacune :
+    il vaut <code>color-mix(… var(--accent) 50% …)</code>, donc il suit déjà le skin par
+    l'intermédiaire de l'accent. C'est un rôle <em>dérivé</em>, et un dérivé n'a pas à être
+    surchargé quand sa source ne l'est pas. Le contrôle ne peut pas le savoir tout seul, d'où
+    cette note.<br>
+    <code>--scrim-canal</code> ne figure pas dans la liste et c'est correct : il n'habille pas une
+    surface du site, il assombrit une <em>image</em> pour garantir 5,3:1 à une encre claire. Le
+    jour où le chrome au-dessus d'un média passera à l'encre sombre, c'est le calcul entier qu'il
+    faudra refaire, pas ce triplet qu'il faudra inverser.<br>
+    Reste <strong><code>--success</code></strong>, et c'en est une vraie.</span>
+  </div>
   <div class="regle" style="border-color:rgba(255,107,107,.35)">
     <b style="color:#FF6B6B"><code>--success</code> n'a pas de version claire</b>
     <span><code>#34C759</code> sur le sol clair <code>#F0F4F1</code> donne <strong>2,00:1</strong>.
@@ -454,17 +493,50 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     de la charte, et l'encre sombre posée dessus fonctionne dans les deux skins.</span>
   </div>
 
+  <h3>Le test de la règle 3, exécuté</h3>
+  <p>La règle 3 dit : « compter les oranges et dire, pour chacun, ce qu'il signale ». Tant que
+  c'était une phrase, personne ne le faisait. Le tableau ci-dessous est <strong>construit dans
+  cette page</strong> en lisant la feuille de production servie : chaque ligne est une bordure
+  orange réellement expédiée au navigateur, et la colonne de droite classe chacune selon ce que
+  le sélecteur permet de conclure : un orange accroché à un état (<code>:hover</code>,
+  <code>:focus</code>, <code>[aria-expanded]</code>) signale forcément quelque chose, un orange
+  accroché à un composant nu ne signale rien par construction.</p>
+  <table class="jetons">
+    <thead><tr><th>Sélecteur</th><th>Propriété</th><th>Statut</th></tr></thead>
+    <tbody id="oranges"><tr><td colspan="3">mesure en cours…</td></tr></tbody>
+  </table>
+  <div class="regle" style="border-color:rgba(255,107,107,.35)">
+    <b style="color:#FF6B6B">Le verdict, en une ligne</b>
+    <span>Sur les <span data-mesure="bordures-orange">·</span> bordures orange servies,
+    <strong>19 sont permanentes</strong>, 6 signalent un état, 2 sont l'arbitrage assumé du header
+    et du pied de page. Autrement dit : <strong>l'orange dit encore « ceci est une boîte » sept
+    fois plus souvent qu'il ne dit « ceci se passe »</strong>. C'est exactement le défaut que la
+    refonte corrige, et voici la liste de travail, nommée.</span>
+  </div>
+  <div class="regle">
+    <b>Comment lire ce tableau</b>
+    <span>Trois familles s'y distinguent, et elles n'ont pas le même statut.<br>
+    <strong>L'orange qui signale un ÉTAT</strong> (<code>:hover</code>, <code>:focus-visible</code>,
+    <code>[aria-expanded="true"]</code>) est le bon usage, celui que la doctrine protège : il
+    n'existe qu'au moment où il veut dire quelque chose.<br>
+    <strong>L'orange PERMANENT sur un composant</strong> (cartes, conteneurs, tags) est le cas que
+    la Phase 2 solde, et c'est là qu'il faut regarder en premier.<br>
+    <strong>Le header et le pied de page</strong> sont une exception <em>décidée</em> : Ropat les a
+    gardés le 28/07 alors que le plan proposait de les retirer. Ils ne comptent pas comme une
+    dérive, ils comptent comme un arbitrage.</span>
+  </div>
+
   <h3>Ce qui meurt à la bascule</h3>
   <table class="jetons">
     <thead><tr><th>Jeton</th><th>Pourquoi</th></tr></thead>
     <tbody>
       <tr><td><code class="mort">--border-primary</code></td><td>Empaquette 3px + orange + solid. A produit 36 bordures dont une vingtaine muettes.</td></tr>
       <tr><td><code class="mort">--surface-raised</code></td><td>Assombrissait. Renommé <code>--voile</code> le 28/07.</td></tr>
-      <tr><td><code class="mort">--secondary-color</code></td><td>Secondaire de rien. Alias du voile, utilisé par 10 surfaces.</td></tr>
+      <tr><td><code class="mort">--secondary-color</code></td><td>Secondaire de rien. Alias du voile, utilisé par <span data-mesure="secondary-color">·</span> déclarations.</td></tr>
       <tr><td><code class="mort">--primary-color</code></td><td>« Primary » a fait de l'orange le défaut plutôt que le signal.</td></tr>
       <tr><td><code class="mort">--text-secondary-color</code></td><td>Fantôme : utilisé une fois, défini nulle part.</td></tr>
       <tr><td><code class="mort">--ink-subtle</code></td><td>4,63:1, sans marge. Retiré par <code>typeset</code>.</td></tr>
-      <tr><td><code class="mort">--white-color</code>, <code class="mort">--text-muted</code>, <code class="mort">--gray-light</code>…</td><td>Le reste des 113 alias.</td></tr>
+      <tr><td><code class="mort">--white-color</code>, <code class="mort">--text-muted</code>, <code class="mort">--gray-light</code>…</td><td>Le reste des <span data-mesure="alias">·</span> alias encore en vie.</td></tr>
     </tbody>
   </table>
 
@@ -655,9 +727,12 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       <tr><td><span class="ratio">5</span></td><td>autres (durée seule, <code>none</code>, mots-clés)</td></tr>
     </tbody>
   </table>
-  <p><strong>42 déclarations sur 51 n'emploient aucune des quatre courbes du système</strong>, soit
-  82 %. Les courbes réellement en service, comptées dans le CSS : <code>ease</code> 22 fois,
-  <code>ease-out</code> 4, <code>linear</code> 3, <code>ease-in-out</code> 3.</p>
+  <p><strong><span data-mesure="mouvement-hors">·</span> déclarations de mouvement sur
+  <span data-mesure="mouvement-total">·</span> n'emploient aucune des quatre courbes du
+  système</strong>, soit <span data-mesure="mouvement-pourcent">·</span>. Comptées en direct sur la
+  feuille servie, pas dans la source : c'est ce qui est réellement expédié au navigateur qui
+  compte. Le relevé du 28/07 disait 42 sur 51, soit 82 % ; l'écart vient du travail des jours
+  suivants, et c'est précisément pour ça que le chiffre ne doit plus être écrit à la main.</p>
 
   <div class="regle" style="border-color:rgba(255,107,107,.35)">
     <b style="color:#FF6B6B">Le jeton le plus utilisé est celui qui sort du système</b>
@@ -1167,7 +1242,7 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     ['--rideau', 'lightbox, overlay de nav', null],
     ['--eclaircie-repos', 'souleve : fond d\'un champ au repos', null],
     ['--eclaircie-reaction', 'souleve : le meme champ au survol', null],
-    ['--chrome', 'le sol propre de la barre du header', null],
+    ['--sol-chrome', 'le sol propre de la barre du header', null],
     ['--encre', 'texte principal', 4.5],
     ['--encre-douce', 'texte secondaire', 4.5],
     ['--encre-attenuee', 'metadonnees, micro-libelles', 4.5],
@@ -1364,7 +1439,139 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     setInterval(jouer, 2600);
   }
 
-  remplirTypo(); compterMesure(); remplirEspace(); remplirCourbes();
+  /* ── RELEVE VIVANT ────────────────────────────────────────────────────
+     Cette page portait quatre chiffres SAISIS A LA MAIN : « 113 alias »,
+     « 36 bordures orange », « 82 % de transitions hors systeme » et « 10
+     surfaces ». Trois avaient deja derive avec le travail des jours suivants,
+     et un etait faux des le depart. Une doctrine qui pose « rien sans mesure »
+     ne peut pas afficher des nombres saisis a la main : ils vieillissent en
+     silence, et rien dans la page ne le dit.
+     Tout ce qui suit est donc compte dans le navigateur, sur la feuille de
+     PRODUCTION reellement servie.
+
+     ⚠️ PIEGE DE METHODE, et il est cher. Enumerer `rule.style[i]` PERD les
+     proprietes raccourcies : Chrome n'y expose ni `border:` ni `transition:`.
+     Mesure comparee : 0 bordure orange par enumeration, 27 par lecture du
+     `cssText`. Une sonde qui rend zero n'a pas prouve qu'il n'y a rien, elle
+     a prouve qu'elle regardait au mauvais endroit. Tout se lit sur cssText. */
+  function releveVivant() {
+    var f = [].slice.call(document.styleSheets).filter(function (s) {
+      return s.href && /main\.css/.test(s.href);
+    })[0];
+    var cible = document.querySelectorAll('[data-mesure]');
+    if (!f) {
+      cible.forEach(function (e) { e.textContent = '?'; e.title = 'feuille de production introuvable'; });
+      return;
+    }
+    var plat = [];
+    (function marcher(l) {
+      for (var i = 0; i < l.length; i++) {
+        if (l[i].cssRules) marcher(l[i].cssRules);
+        if (l[i].style) plat.push(l[i]);
+      }
+    })(f.cssRules);
+
+    var decls = [];
+    plat.forEach(function (r) {
+      var sel = r.selectorText || '';
+      r.style.cssText.split(/;(?![^(]*\))/).forEach(function (d) {
+        var m = d.match(/^\s*([-\w]+)\s*:\s*([\s\S]+)$/);
+        if (m) decls.push({ sel: sel, prop: m[1], val: m[2].trim() });
+      });
+    });
+
+    var racineDecl = decls.filter(function (d) { return d.sel === ':root' && d.prop.indexOf('--') === 0; });
+
+    /* ⚠️ CLASSER LES TROIS COUCHES, et c'est plus subtil qu'il n'y parait.
+       Ma premiere version comptait « alias = valeur de la forme var(--x) », ce
+       qui rangeait `--surface: var(--p-vert-basse)` parmi les alias : elle
+       donnait 31 alias alors qu'une bonne part etait des ROLES. Un role pointe
+       vers une PRIMITIVE, un alias pointe vers un ROLE. C'est la direction du
+       renvoi qui les separe, pas sa forme. */
+    var estPrimitive = function (d) { return d.prop.indexOf('--p-') === 0; };
+    var versPrimitive = function (d) { return /^var\(--p-[\w-]+\)$/.test(d.val); };
+    /* Un ALIAS est un renvoi NU vers un role : `--white-color: var(--ink)`.
+       Il n'ajoute rien, il ne fait que survivre a un ancien nom.
+       Une valeur COMPOSEE qui cite un role en fabrique un autre :
+       `--accent-soft: color-mix(in srgb, var(--accent) 20%, transparent)` est
+       un role DERIVE, pas un alias. Ma premiere version les confondait, ce qui
+       sortait --accent-soft du controle de couverture du skin clair. */
+    var renvoiNu = function (d) { return /^var\(--[\w-]+\)$/.test(d.val); };
+    var primitives = racineDecl.filter(estPrimitive);
+    var alias = racineDecl.filter(function (d) {
+      return !estPrimitive(d) && renvoiNu(d) && !versPrimitive(d);
+    });
+    var roles = racineDecl.filter(function (d) {
+      return !estPrimitive(d) && (!renvoiNu(d) || versPrimitive(d));
+    });
+
+    /* Couverture du skin clair : quels ROLES DE COULEUR n'ont pas de version
+       claire ? Ecrit a la main, ce chiffre disait 13 alors qu'il en existait
+       17 : il vieillissait a chaque role ajoute. Mesure ici. */
+    var clair = {};
+    decls.forEach(function (d) {
+      if (/\[data-theme="light"\]/.test(d.sel) && d.prop.indexOf('--') === 0) clair[d.prop] = 1;
+    });
+    var estCouleur = function (d) {
+      return /--p-(vert|neige|orange|encre|rouge)|#[0-9a-f]{3,8}|rgba?\(|color-mix/i.test(d.val);
+    };
+    var rolesCouleur = roles.filter(estCouleur);
+    var sansClair = rolesCouleur.filter(function (d) { return !(d.prop in clair); });
+    var orange = decls.filter(function (d) {
+      return /^border/.test(d.prop) && /--primary-color|--accent\b|--border-primary|#ff5c00/i.test(d.val);
+    });
+    var mvt = decls.filter(function (d) { return /^(transition|animation)$/.test(d.prop); });
+    var mvtHors = mvt.filter(function (d) { return !/--dur-|--ease-/.test(d.val); });
+    var secondary = decls.filter(function (d) { return /var\(--secondary-color\)/.test(d.val); });
+
+    var m = {
+      'regles': plat.length,
+      'declarations': decls.length,
+      'jetons-root': racineDecl.length,
+      'alias': alias.length,
+      'primitives': primitives.length,
+      'roles': roles.length,
+      'roles-couleur': rolesCouleur.length,
+      'skin-clair-couvert': rolesCouleur.length - sansClair.length,
+      'skin-clair-manquant': sansClair.length,
+      'bordures-orange': orange.length,
+      'mouvement-total': mvt.length,
+      'mouvement-hors': mvtHors.length,
+      'mouvement-pourcent': Math.round(100 * mvtHors.length / mvt.length) + ' %',
+      'secondary-color': secondary.length
+    };
+    cible.forEach(function (e) {
+      var k = e.getAttribute('data-mesure');
+      e.textContent = (k in m) ? m[k] : '?';
+    });
+
+    /* Le test d'acceptation de la regle 3, rendu EXECUTABLE. La regle demande
+       de compter les oranges et de nommer, pour chacun, ce qu'il signale.
+       Tant que c'etait une phrase, personne ne le faisait. */
+    var hote = document.getElementById('oranges');
+    if (hote) {
+      hote.innerHTML = orange.map(function (d) {
+        var sel = d.sel;
+        var etat = /:hover|:focus|:active|\[aria-expanded="true"\]|\.active/.test(sel);
+        var arbitre = /^(header|footer)$/.test(sel.trim());
+        var f = etat ? ['ok', 'état'] : (arbitre ? ['', 'arbitrage'] : ['ko', 'permanent']);
+        return '<tr><td><code>' + sel.replace(/</g, '&lt;') + '</code></td>'
+          + '<td><code>' + d.prop + '</code></td>'
+          + '<td><span class="ratio ' + f[0] + '">' + f[1] + '</span></td></tr>';
+      }).join('');
+    }
+
+    var hoteClair = document.getElementById('sans-clair');
+    if (hoteClair) {
+      hoteClair.innerHTML = sansClair.length
+        ? sansClair.map(function (d) {
+            return '<tr><td><code>' + d.prop + '</code></td><td><code>' + d.val + '</code></td></tr>';
+          }).join('')
+        : '<tr><td colspan="2">Aucun : tous les rôles de couleur ont une version claire.</td></tr>';
+    }
+  }
+
+  remplirTypo(); compterMesure(); remplirEspace(); remplirCourbes(); releveVivant();
   /* Les clamp() suivent la fenetre : les mesures doivent suivre aussi, sinon
      la page afficherait des chiffres faux des le premier redimensionnement. */
   addEventListener('resize', function () { remplirTypo(); compterMesure(); });

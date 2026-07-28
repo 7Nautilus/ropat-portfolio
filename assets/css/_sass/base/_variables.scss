@@ -24,8 +24,24 @@
      1. PRIMITIVES
      ========================================================== */
 
+  /* ⚠️ NOMENCLATURE, option A, tranchee par Ropat le 28/07 dans le chantier
+     et portee ici le meme jour.
+     Deux choses en une :
+       . le prefixe `--p-` rend la COUCHE visible dans le nom. Une primitive ne
+         se consomme jamais dans un composant, et le prefixe fait que la faute
+         se voit a la lecture au lieu de se decouvrir a l'audit.
+       . `basse / mediane / haute` designe la VALEUR et jamais un rang ni un
+         role, et `haute` veut dire « la plus claire » dans les DEUX camouflages.
+         L'ancien trio sombre disait `profond / median / releve` pendant que le
+         trio clair disait deja `basse / mediane / haute` : deux conventions
+         opposees dans le meme bloc. Et `--p-vert-sol`, propose un moment,
+         violait la regle : « sol » est un role, pas une valeur.
+     Le renommage n'a coute que 10 lignes, toutes dans ce fichier : aucun
+     composant ne lisait de primitive. La discipline de couche etait donc deja
+     tenue, c'est ce qui rend l'operation gratuite. */
+
   /* Orange de marque. Point fixe absolu. */
-  --orange-500: #ff5c00;
+  --p-orange: #ff5c00;
 
   /* Trio du fond sombre, TEL QUE RENDU A L'ECRAN.
      Le voile noir a 50 % de l'ancienne image y est deja integre : ce sont les
@@ -34,35 +50,54 @@
      descendent d'un cran pour retrouver la profondeur de l'ancienne image
      (L* moyen 3,10 contre 3,12). Prix : la separation passe de dE 6,3/6,4
      a 3,1/3,2, la texture est donc deux fois plus discrete.
-     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3. */
-  --vert-profond: #030808;
-  --vert-median: #030F0C;
-  --vert-releve: #051510;
+     Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3.
+
+     ⚠️ Ces trois valeurs existent AUSSI dans assets/js/dither.js (ligne 43), qui
+     les code en dur pour le shader. Les deux doivent rester d'accord : ici
+     c'est la palette documentee et le repli CSS, la-bas c'est ce qui est
+     reellement peint. Les deux dernieres n'ont aucun consommateur CSS, et
+     c'est normal : elles documentent la palette du shader, elles ne peignent
+     rien elles-memes. */
+  --p-vert-basse:   #030808;
+  --p-vert-mediane: #030F0C;
+  --p-vert-haute:   #051510;
 
   /* Trio clair (camouflage neige / lichen). Valide dans le chantier identite,
      pas encore eprouve a l'ecran : la matiere du skin clair est un livrable
      de la Phase 3, et ces valeurs seront mesurees a ce moment-la. */
-  --neige-haute: #F0F4F1;
-  --neige-mediane: #DCE6E0;
-  --neige-basse: #BFD1C7;
-  --encre-sombre: #05100F;
+  --p-neige-haute:   #F0F4F1;
+  --p-neige-mediane: #DCE6E0;
+  --p-neige-basse:   #BFD1C7;
+  --p-encre-sombre:  #05100F;
 
-  --blanc: #ffffff;
-  --vert-succes: #34C759;
+  /* ⚠️ `--blanc: #ffffff` est SUPPRIME. Un blanc pur etait le seul corps
+     etranger d'une palette entierement teintee : il n'appartenait a aucun des
+     deux camouflages. L'encre prend desormais le haut du camouflage neige.
+     Mesure sur le sol : 18,16:1 au lieu de 20,15:1, perte sans consequence
+     quand le minimum exige est 4,5.
+     Le noir pur, lui, RESTE, mais uniquement en TRANSPARENCE (voile, rideau,
+     degrade du header, curseur). Arbitrage de Ropat, formule ainsi : « pour le
+     noir a opacite reduite je suis tout a fait d'accord, je ne parlais que des
+     aplats ». Un voile doit pouvoir etre plus sombre que le plancher de la
+     palette, ce qu'aucun membre de la palette ne peut etre par definition. Le
+     blanc a opacite reduite suit la meme logique en sens inverse
+     (--surface-subtle, --surface-faint, --line) : c'est un outil
+     d'eclaircissement, pas un aplat. */
+  --p-vert-succes: #34C759;
   /* Il n'existait aucune couleur d'erreur : le formulaire de contact peignait
      ses bordures fautives en rgba(255,80,80,0.5) en dur, et le vert de
      disponibilite en rgba(74,222,128,...) alors que --vert-succes vaut
      #34C759. Deux valeurs inventees sur place pour deux etats.
      #FF6B6B est mesure a 7,26:1 sur le sol #030808 : un message d'erreur est
      du texte courant, il lui faut donc 4,5:1, pas les 3:1 d'une bordure. */
-  --rouge-erreur: #FF6B6B;
+  --p-rouge-erreur: #FF6B6B;
 
   /* ==========================================================
      2. SEMANTIQUE  skin sombre (defaut)
      ========================================================== */
 
   /* Surfaces */
-  --surface: var(--vert-profond);          /* fond de page ; repli du dither */
+  --surface: var(--p-vert-basse);          /* fond de page ; repli du dither */
   /* LE VOILE : il ASSOMBRIT le sol sous le contenu, il ne le souleve pas.
      Le dither est un motif vivant et charge ; poser un noir a 50 % dessus le
      calme localement pour que le texte et les logos aient une base stable.
@@ -115,7 +150,7 @@
   --scrim-canal: 0, 0, 0;
 
   /* Encre. Quatre niveaux, du plus present au plus retire. */
-  --ink: var(--blanc);
+  --ink: var(--p-neige-haute);
   --ink-soft: #e2e8f0;
   --ink-muted: #9CA3AF;
   /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
@@ -152,7 +187,7 @@
   --line-control: rgba(255, 255, 255, 0.38);
 
   /* Accent = signal. Volontairement rare. */
-  --accent: var(--orange-500);
+  --accent: var(--p-orange);
   --accent-soft: color-mix(in srgb, var(--accent) 20%, transparent);
   /* Texte pose SUR un aplat d'orange : il doit etre SOMBRE.
      Mesure : blanc sur #ff5c00 = 3,10:1, sous AA pour du texte courant.
@@ -160,12 +195,12 @@
      ne changeant pas d'un theme a l'autre.
      Dette soldee le 28/07/2026 : .btn--solid:hover bascule desormais sur ce
      token au lieu de garder un texte blanc a 3,10:1. */
-  --accent-ink: var(--encre-sombre);
+  --accent-ink: var(--p-encre-sombre);
   --signal-width: 3px;          /* le trait epais, quand il veut dire quelque chose */
 
   /* Etats */
-  --success: var(--vert-succes);
-  --danger: var(--rouge-erreur);
+  --success: var(--p-vert-succes);
+  --danger: var(--p-rouge-erreur);
 
   /* Ombres. L'ambiante souleve, la signal designe : ne pas les confondre. */
   --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -232,6 +267,10 @@
   --leading-meta:  1.5;
   --leading-tight: 1.05;
   --track-caps:    0.10em;
+  /* ⚠️ DECLARE, JAMAIS ADOPTE (releve du 28/07 : 0 usage). Ce n'est pas un
+     alias mort, c'est un reglage typographique qui attend son consommateur :
+     le resserrement d'un titre display. Garde pour cette raison, mais s'il
+     n'a toujours aucun usage a la fin de la refonte, il n'en aura jamais. */
   --track-display: -0.015em;
 
   /* Mesures de ligne, en rem et NON en `ch` : le `ch` se resout sur la
@@ -268,7 +307,13 @@
      Elle existe pour absorber les valeurs magiques semees dans le SCSS
      (4rem, 4.5rem, 5rem, 6rem, 10rem). Les consommateurs sont migres
      phase par phase ; 4.5rem et 5rem sont des egares a normaliser sur
-     --rhythm-sm ou --rhythm-md au passage. */
+     --rhythm-sm ou --rhythm-md au passage.
+     ⚠️ ETAT AU 28/07 : les trois sont DECLARES et a ZERO usage. Aucun
+     consommateur n'a jamais ete migre. Et le systeme de cadrage qu'ils
+     devaient servir (pleine / marge / etroite) a ete juge sans interet par
+     Ropat, donc il sera entierement revu. Ne pas migrer de consommateurs vers
+     cette echelle avant que ce chantier soit retranche : on migrerait vers
+     une grammaire qu'on sait deja fausse. */
   --rhythm-sm: 4rem;
   --rhythm-md: 6rem;
   --rhythm-lg: 10rem;
@@ -297,6 +342,8 @@
      revelation 0,6 s, micro-animation 0,2 s. */
   --dur-quick: 0.2s;
   --dur-base: 0.3s;
+  /* ⚠️ DECLARE, JAMAIS ADOPTE (0 usage). Attendu : c'est la duree de la
+     grammaire de revelation, qui est un livrable de la PHASE 4. */
   --dur-reveal: 0.6s;
 
   /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
@@ -329,26 +376,29 @@
   --background-light: var(--surface-subtle);
   --color-success: var(--success);
 
-  --fond-profond: var(--vert-profond);
-  --fond-median: var(--vert-median);
-  --fond-releve: var(--vert-releve);
+  /* ⚠️ SIX ALIAS MORTS RETIRES le 28/07 : --fond-profond, --fond-median et
+     --fond-releve (simples doublons de --vert-*), plus --border-width,
+     --border-radius-squircle-small et --shadow-dark.
+     Critere de suppression, et il est net : un alias ENCORE CONSOMME ne peut
+     pas mourir avant la bascule (--primary-color a 72 usages, on ne le touche
+     pas). Un alias a ZERO usage se retire aujourd'hui, sans risque, et c'est
+     autant de moins a migrer le jour venu. Verifie avant coup : rien dans le
+     SCSS, rien dans les includes, rien dans le JS, rien dans DESIGN.md ; et
+     dither.js ne lit aucune variable CSS. */
 
   --border-subtle: var(--line);
   --text-muted: var(--ink-subtle);
 
-  --border-width: var(--signal-width);
   --border-primary: var(--signal-width) solid var(--accent);
   --border-radius-sm: var(--radius-sm);
   --border-radius-md: var(--radius-md);
   --border-radius-lg: var(--radius-lg);
   --border-radius-xl: var(--radius-xl);
   --border-radius-full: var(--radius-pill);
-  --border-radius-squircle-small: var(--squircle-small);
   --border-radius-squircle-medium: var(--squircle-medium);
   --border-radius-squircle-full: var(--squircle-full);
 
   --shadow-sm: var(--shadow-ambient);
-  --shadow-dark: var(--shadow-ambient-strong);
   --shadow-md: var(--shadow-signal);
 }
 
@@ -368,17 +418,17 @@
    ============================================================ */
 
 [data-theme="light"] {
-  --surface: var(--neige-haute);
+  --surface: var(--p-neige-haute);
   /* Meme role, meme direction : la plaque est plus SOMBRE que le sol clair.
      C'est ce qui prouve que le nom `raised` etait faux dans les deux skins et
      pas seulement dans le sombre. */
-  --surface-veil: var(--neige-mediane);
+  --surface-veil: var(--p-neige-mediane);
   --surface-subtle: rgba(5, 16, 15, 0.06);
   --surface-faint: rgba(5, 16, 15, 0.025);
   /* Meme role, meme absence de seuil : c'est une texture, pas un texte. */
   --ink-decorative: rgba(5, 16, 15, 0.2);
   --surface-scrim: rgba(240, 244, 241, 0.98);
-  --surface-placeholder: var(--neige-basse);
+  --surface-placeholder: var(--p-neige-basse);
   /* Direction inversee : sur un sol clair, une barre legerement plus SOMBRE
      ne se detache pas, c'est un blanc leger qui la souleve. Ce jeton est
      exactement la raison pour laquelle le rgba en dur devait mourir : ecrit
@@ -391,7 +441,7 @@
      au-dessus d'un media passera a l'encre sombre (Phase 3), c'est le calcul
      entier qu'il faudra refaire, pas ce triplet qu'il faudra inverser. */
 
-  --ink: var(--encre-sombre);
+  --ink: var(--p-encre-sombre);
   --ink-soft: #1B2B27;
   --ink-muted: #46564F;
   --ink-subtle: rgba(5, 16, 15, 0.62);

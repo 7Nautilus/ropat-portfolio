@@ -437,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //  1. UN verdict pour une barre de 1440 px. Le logo et la nav peuvent
   //     surplomber des contenus opposes. Sur Sipsmith, le meme verdict donnait
   //     15,4:1 sur la nav et 1:1 sur le logo.
-  //  2. --vert-profond vaut #030808, c'est-a-dire EXACTEMENT --surface. L'encre
+  //  2. --p-vert-basse vaut #030808, c'est-a-dire EXACTEMENT --surface. L'encre
   //     du mode clair etait donc la couleur du sol : tout controle qui ne
   //     surplombait pas l'image mais le sol disparaissait purement et
   //     simplement.

@@ -67,7 +67,16 @@
 .experience-card-description {
   font-size: var(--text-body);
   line-height: var(--leading-body);
-  color: var(--text-main);
+  /* Etait `--text-main`, le DERNIER token FANTOME du site : utilise ici une
+     seule fois, defini nulle part. La declaration etait donc invalide, et le
+     paragraphe heritait du blanc plein de son parent (mesure 20,57:1 sur
+     rgb(1,4,4)). L'apparence d'aujourd'hui n'a donc ete choisie par personne,
+     c'est le resultat d'une declaration morte.
+     `--ink-soft` et pas `--ink` : c'est le meme role que la description d'une
+     carte de projet (`--gray-light`, alias de `--ink-soft`) et que le
+     paragraphe de `.bubble-container`. Un texte de description ne se lit pas a
+     la meme intensite qu'un titre. */
+  color: var(--ink-soft);
 }
 
 .experience-card-tags {

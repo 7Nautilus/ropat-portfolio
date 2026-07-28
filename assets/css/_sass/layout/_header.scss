@@ -61,9 +61,9 @@ header {
    ══════════════════════════════════════════════════════════════════════════
    ⚠️ REMPLACE `header[data-fond="clair"]`, retire le 27/07/2026 apres mesure.
 
-   Ce bloc repeignait tout le chrome en --vert-profond des qu'une jauge
+   Ce bloc repeignait tout le chrome en --p-vert-basse des qu'une jauge
    estimait le media « clair ». Deux erreurs, dont une fatale :
-     . --vert-profond vaut #030808, soit EXACTEMENT --surface. L'encre du mode
+     . --p-vert-basse vaut #030808, soit EXACTEMENT --surface. L'encre du mode
        clair etait donc la couleur du sol : mesure sur Sipsmith, contour du
        logo a 1:1, litteralement invisible, parce qu'il surplombait le sol et
        non l'image.
