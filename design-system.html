@@ -324,7 +324,7 @@ robots: noindex, nofollow
   <!-- En-tête -->
   <div class="ds-internal-badge">Usage interne uniquement</div>
   <h1 class="hero-title">Design <span class="orange">System</span></h1>
-  <p class="hero-pitch" style="text-align: left; margin-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 2rem;">Référence complète des tokens, composants et patterns de ropat.art</p>
+  <p class="hero-pitch" style="text-align: left; margin-bottom: 4rem; border-bottom: 1px solid var(--line); padding-bottom: 2rem;">Référence complète des tokens, composants et patterns de ropat.art</p>
 
   <!-- ============================
        1. COULEURS
@@ -334,66 +334,66 @@ robots: noindex, nofollow
 
     <div class="ds-color-grid">
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #ff5c00;"></div>
+        <div class="ds-color-preview" style="background: var(--primary-color);"></div>
         <div class="ds-color-info">
           <strong>Primary</strong>
-          <code>--primary-color · #ff5c00</code>
+          <code data-jeton="--primary-color">--primary-color</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: rgba(255,92,0,0.2); border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-preview" style="background: var(--primary-color-alpha); border-bottom: 1px solid var(--line);"></div>
         <div class="ds-color-info">
           <strong>Primary Alpha</strong>
-          <code>--primary-color-alpha · rgba(255,92,0,.2)</code>
+          <code data-jeton="--primary-color-alpha">--primary-color-alpha</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #0a0a0a; border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-preview" style="background: var(--background-dark); border-bottom: 1px solid var(--line);"></div>
         <div class="ds-color-info">
           <strong>Background Dark</strong>
-          <code>--background-dark · #0a0a0a</code>
+          <code data-jeton="--background-dark">--background-dark</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: rgba(0,0,0,0.5); border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
+        <div class="ds-color-preview" style="background: var(--secondary-color); border-bottom: 1px solid var(--line);"></div>
         <div class="ds-color-info">
           <strong>Secondary</strong>
-          <code>--secondary-color · rgba(0,0,0,.5)</code>
+          <code data-jeton="--secondary-color">--secondary-color</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.08);"></div>
-        <div class="ds-color-info" style="background: #111;">
+        <div class="ds-color-preview" style="background: var(--white-color); border-bottom: 1px solid var(--line);"></div>
+        <div class="ds-color-info" style="background: var(--surface);">
           <strong>White</strong>
-          <code>--white-color · #ffffff</code>
+          <code data-jeton="--white-color">--white-color</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #2d3748;"></div>
+        <div class="ds-color-preview" style="background: var(--gray-dark);"></div>
         <div class="ds-color-info">
           <strong>Gray Dark</strong>
-          <code>--gray-dark · #2d3748</code>
+          <code data-jeton="--gray-dark">--gray-dark</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #9CA3AF;"></div>
+        <div class="ds-color-preview" style="background: var(--grey-light-400);"></div>
         <div class="ds-color-info">
           <strong>Gray 400</strong>
-          <code>--grey-light-400 · #9CA3AF</code>
+          <code data-jeton="--grey-light-400">--grey-light-400</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #e2e8f0;"></div>
-        <div class="ds-color-info" style="background: #111;">
+        <div class="ds-color-preview" style="background: var(--gray-light);"></div>
+        <div class="ds-color-info" style="background: var(--surface);">
           <strong>Gray Light</strong>
-          <code>--gray-light · #e2e8f0</code>
+          <code data-jeton="--gray-light">--gray-light</code>
         </div>
       </div>
       <div class="ds-color-swatch">
-        <div class="ds-color-preview" style="background: #34C759;"></div>
+        <div class="ds-color-preview" style="background: var(--success);"></div>
         <div class="ds-color-info">
           <strong>Availability</strong>
-          <code>#34C759 (disponibilité)</code>
+          <code data-jeton="--success">--success</code>
         </div>
       </div>
     </div>
@@ -571,17 +571,17 @@ robots: noindex, nofollow
 
     <div class="ds-shadow-grid">
       <div class="ds-shadow-item">
-        <div class="ds-shadow-preview" style="box-shadow: 0 4px 6px rgba(0,0,0,0.1);"></div>
+        <div class="ds-shadow-preview" style="box-shadow: var(--shadow-sm);"></div>
         <div class="ds-shadow-name">--shadow-sm</div>
         <div class="ds-shadow-value">0 4px 6px rgba(0,0,0,.1)</div>
       </div>
       <div class="ds-shadow-item">
-        <div class="ds-shadow-preview" style="box-shadow: 0 6px 16px rgba(255,92,0,0.5); background-color: #ff5c0022; border: 1px solid var(--primary-color);"></div>
+        <div class="ds-shadow-preview" style="box-shadow: var(--shadow-md); background-color: var(--primary-color-alpha); border: 1px solid var(--primary-color);"></div>
         <div class="ds-shadow-name">--shadow-md</div>
         <div class="ds-shadow-value">0 6px 16px rgba(255,92,0,.5) · glow orange</div>
       </div>
       <div class="ds-shadow-item">
-        <div class="ds-shadow-preview" style="box-shadow: 0 4px 6px rgba(0,0,0,0.3);"></div>
+        <div class="ds-shadow-preview" style="box-shadow: var(--shadow-ambient-strong);"></div>
         <div class="ds-shadow-name">--shadow-dark</div>
         <div class="ds-shadow-value">0 4px 6px rgba(0,0,0,.3)</div>
       </div>
@@ -737,3 +737,20 @@ robots: noindex, nofollow
   </section>
 
 </div>
+
+<script>
+/* ⚠️ LES VALEURS NE SONT PLUS ECRITES DANS CETTE PAGE, elles sont LUES sur les
+   jetons reellement servis. Motif : le 28/07 cette page publique annoncait
+   encore `--background-dark · #0a0a0a`, un fond que le site n'a plus depuis la
+   Phase 0, plus un blanc pur et un gris bleute tous deux remplaces depuis.
+   Une reference de design qui recopie des valeurs a la main devient fausse
+   sans que rien ne le signale, et celle-ci est PUBLIQUE. */
+(function () {
+  var rs = getComputedStyle(document.documentElement);
+  document.querySelectorAll('[data-jeton]').forEach(function (e) {
+    var n = e.getAttribute('data-jeton');
+    var v = rs.getPropertyValue(n).trim();
+    e.textContent = v ? n + ' · ' + v : n + ' · (non defini)';
+  });
+})();
+</script>

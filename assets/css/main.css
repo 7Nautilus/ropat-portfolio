@@ -932,6 +932,14 @@ header {
    Logo
    ================================ */
 .logo {
+  /* ⚠️ LA COULEUR DU LOGO VIT ICI DEPUIS LE 28/07, et plus dans le SVG.
+     Le trace portait `#FF5C00` en dur dix fois (cinq chemins x fill + stroke).
+     Il est passe a `currentColor`, donc c'est ce `color` qui le peint, dans le
+     header comme dans le loader.
+     Deux consequences : la couleur redevient visible dans la palette, et une
+     variante du chrome n'a plus qu'a changer cette valeur, sans toucher au
+     dessin. */
+  color: var(--accent);
   display: inline-block;
   backface-visibility: hidden;
   perspective: 1000px;

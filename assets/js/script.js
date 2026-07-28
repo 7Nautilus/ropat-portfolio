@@ -828,7 +828,7 @@ document.addEventListener('DOMContentLoaded', () => {
   btn.innerHTML = `
     <svg width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}"
       style="position:absolute;top:-2px;left:-2px;pointer-events:none;" aria-hidden="true">
-      <path class="stt-track" d="${sp}" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0"/>
+      <path class="stt-track" d="${sp}" fill="none" stroke="var(--surface-subtle)" stroke-width="0"/>
       <path class="stt-progress" d="${sp}" fill="none"
         stroke="var(--primary-color)" stroke-width="2"
         stroke-dasharray="${circumference}"
@@ -858,7 +858,9 @@ document.addEventListener('DOMContentLoaded', () => {
     display:         'flex',
     alignItems:      'center',
     justifyContent:  'center',
-    color:           'white',
+    // ⚠️ Etait 'white' en dur. Une couleur posee depuis le JS echappe a tout
+    // balayage du CSS : c'est le pire endroit ou en cacher une.
+    color:           'var(--ink)',
   });
 
   document.body.appendChild(btn);
