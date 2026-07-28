@@ -40,6 +40,9 @@ window.RopatDither = (function () {
     // la texture est deux fois plus discrete. Elle reste perceptible (au-dela
     // de 3, on voit d'un coup d'oeil) mais c'est un fond qui murmure.
     // L'orange tient partout : 6,51 / 6,29 / 6,05.
+    // ⚠️ REPLIS, et non plus la source. Depuis le 28/07 le shader lit les
+    // jetons `--p-vert-*` et `--p-orange` du CSS ; ces valeurs ne servent plus
+    // que si le jeton manque ou n'est pas un hexa. Voir `init`.
     couleurs: ['#030808', '#030F0C', '#051510'],
     blaze: '#FF5C00',
 
@@ -354,6 +357,32 @@ window.RopatDither = (function () {
   function init(canvas, options) {
     if (!canvas) return null;
     const o = Object.assign({}, DEFAUTS, options || {});
+
+    /* ── LA PALETTE VIENT DU CSS, PLUS DES LITTERAUX ────────────────────────
+       Le trio et le blaze existaient ici ET dans _variables.scss : deux
+       sources pour une seule verite, qu'il fallait tenir d'accord a la main.
+       Le fichier le disait deja (« les deux doivent rester d'accord »), ce qui
+       est le signe qu'on savait que ca deriverait.
+       Desormais le shader LIT les jetons. Les valeurs ci-dessus restent, mais
+       comme REPLI, pour deux cas reels : un appelant qui passe ses propres
+       couleurs (le bac a sable), et l'instant ou le CSS ne serait pas encore
+       applique.
+       ⚠️ Le repli se declenche aussi si le jeton n'est pas un hexa a six
+       chiffres : `hexToRgb` ne sait pas lire un `color-mix()` ni un `rgba()`,
+       et un shader nourri de NaN rend un ecran noir sans lever d'erreur. On
+       verifie donc la FORME avant d'accepter la valeur. */
+    const HEXA = /^#[0-9a-f]{6}$/i;
+    const jetonCss = (nom, repli) => {
+      try {
+        const v = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+        return HEXA.test(v) ? v : repli;
+      } catch (e) { return repli; }
+    };
+    if (!options || !options.couleurs) {
+      const noms = ['--p-vert-basse', '--p-vert-mediane', '--p-vert-haute'];
+      o.couleurs = noms.map((n, i) => jetonCss(n, DEFAUTS.couleurs[i]));
+    }
+    if (!options || !options.blaze) o.blaze = jetonCss('--p-orange', DEFAUTS.blaze);
     const reduit = matchMedia('(prefers-reduced-motion: reduce)');
 
     let gl;
@@ -462,7 +491,18 @@ window.RopatDither = (function () {
 
         // Contour : on garde le fill-opacity d'origine, seul le trait blanchit.
         // Plein : les lettres deviennent des masses.
-        let src = trouve[0].replace(/(fill|stroke)="#FF5C00"/g, '$1="#FFFFFF"');
+        //
+        // ⚠️ DEUX FORMES A COUVRIR, ET LA SECONDE EST RECENTE. Le logo du DOM
+        // est passe a `currentColor` le 28/07 (sa couleur vient desormais du
+        // CSS) ; le fichier de secours, lui, porte toujours `#FF5C00` en dur.
+        // Ne traiter que le second aurait rendu le masque NOIR SUR NOIR des que
+        // le logo du DOM est disponible, c'est-a-dire dans le cas normal : le
+        // revele serait devenu inerte sans qu'aucune erreur ne soit levee.
+        // C'est une regression que j'ai introduite en tokenisant le logo et que
+        // seule la lecture de ce fichier a rattrapee.
+        let src = trouve[0]
+          .replace(/(fill|stroke)="#FF5C00"/g, '$1="#FFFFFF"')
+          .replace(/(fill|stroke)="currentColor"/g, '$1="#FFFFFF"');
         if (state.logoPlein) src = src.replace(/fill-opacity="[^"]*"/g, 'fill-opacity="1"');
 
         const img = new Image();
