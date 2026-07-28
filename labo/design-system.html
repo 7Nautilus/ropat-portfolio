@@ -506,6 +506,50 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </div>
 
   <div class="scene">
+    <p class="scene-titre">Dropdown · via <code>ui/dropdown.html</code>, variante filtre</p>
+    {%- comment -%}
+      Le vrai composant, avec les vraies options lues dans les donnees. Son
+      comportement vient d'un controleur unique de script.js branche sur
+      [data-dropdown-trigger] : ici il n'est PAS charge, donc le dropdown est
+      inerte. C'est volontaire et c'est une limite a connaitre du labo : il
+      montre les etats au repos, jamais l'interaction.
+    {%- endcomment -%}
+    {% include ui/dropdown.html id="labo-filtre" variant="filter" lang="fr"
+       options=site.data.projects.categories.options label="Filtrer" placeholder="Tous" %}
+  </div>
+
+  <div class="scene">
+    <p class="scene-titre">Champ de formulaire · au repos, puis en erreur</p>
+    <div class="duo">
+      <div class="contact-field">
+        <label for="labo-a" class="contact-label">Nom</label>
+        <input type="text" id="labo-a" class="contact-input" placeholder="Votre nom">
+      </div>
+      <div class="contact-field">
+        <label for="labo-b" class="contact-label">Email</label>
+        <input type="text" id="labo-b" class="contact-input" placeholder="votre@email.com"
+               aria-invalid="true" aria-describedby="labo-b-err" style="border-color:var(--danger)">
+        <p class="contact-erreur" id="labo-b-err">L'adresse email est obligatoire.</p>
+      </div>
+    </div>
+    <p style="margin-top:1rem">L'erreur est portée par du <strong>texte</strong>, pas par la
+    bordure. Avant le 27/07 elle n'existait qu'en couleur, ce qui échouait WCAG 3.3.1 et 1.4.1,
+    tous deux de niveau A : le bouton ne faisait rien, sans dire pourquoi.</p>
+  </div>
+
+  <div class="scene">
+    <p class="scene-titre">Pastille d'état · via <code>ui/status-dot.html</code></p>
+    <span style="display:inline-flex;align-items:center;gap:.6rem">
+      {% include ui/status-dot.html %}
+      <span style="color:var(--succes);font-family:'Chakra Petch',sans-serif;font-weight:600">Ouvert aux projets</span>
+    </span>
+    <p style="margin-top:.9rem">⚠️ Le vert du libellé et celui de la pastille ne sont pas le même
+    jeton en production : la page contact peint son fond en <code>rgba(74,222,128,…)</code> alors
+    que <code>--succes</code> vaut <code>#34C759</code>. Deux verts inventés pour un seul état,
+    à unifier.</p>
+  </div>
+
+  <div class="scene">
     <p class="scene-titre">Le voile · la plaque qui assombrit le sol sous le contenu</p>
     <div style="background: var(--voile); padding: 1.5rem; max-width: 34rem;">
       <p style="color: var(--encre); margin: 0 0 .4rem;">Encre pleine sur le voile</p>
