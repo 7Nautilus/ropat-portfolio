@@ -86,7 +86,7 @@
   --p-vert-succes: #34C759;
   /* Il n'existait aucune couleur d'erreur : le formulaire de contact peignait
      ses bordures fautives en rgba(255,80,80,0.5) en dur, et le vert de
-     disponibilite en rgba(74,222,128,...) alors que --vert-succes vaut
+     disponibilite en rgba(74,222,128,...) alors que --p-vert-succes vaut
      #34C759. Deux valeurs inventees sur place pour deux etats.
      #FF6B6B est mesure a 7,26:1 sur le sol #030808 : un message d'erreur est
      du texte courant, il lui faut donc 4,5:1, pas les 3:1 d'une bordure. */
@@ -128,7 +128,8 @@
      ne se voit plus. `faint` est le repos, `subtle` la reaction. */
   --surface-faint: rgba(255, 255, 255, 0.04);
   --surface-scrim: rgba(0, 0, 0, 0.98);    /* lightbox, overlay de nav */
-  --surface-placeholder: #2d3748;
+  /* Meme rapatriement : etait #2d3748, un gris bleute a 218 degres. */
+  --surface-placeholder: #2D4836;
   /* Le sol propre du chrome (barre du header). Tres faible : sur le sol sombre
      il ne fait presque rien, il n'existe que pour que la barre ne soit pas
      STRICTEMENT transparente quand elle glisse au-dessus d'une section claire.
@@ -149,10 +150,31 @@
      est exactement la propriete sur laquelle repose le calcul du voile. */
   --scrim-canal: 0, 0, 0;
 
-  /* Encre. Quatre niveaux, du plus present au plus retire. */
+  /* Encre. Quatre niveaux, du plus present au plus retire.
+
+     ⚠️ RAPATRIEMENT CHROMATIQUE, 28/07, arbitrage de Ropat. Ces deux valeurs
+     etaient #e2e8f0 et #9CA3AF, des gris BLEUTES a 214 et 218 degres, quand
+     tout le camouflage tient entre 135 et 180. Elles venaient d'une palette
+     tierce (la famille slate de Tailwind) et n'appartenaient a aucun des deux
+     trios : exactement le meme corps etranger que le blanc pur retire le meme
+     jour, simplement moins visible parce que gris.
+     Corrigees a luminosite et saturation CONSTANTES, teinte ramenee a 140
+     degres, sur l'axe du camouflage neige. Le contraste MONTE dans les deux
+     cas, donc il n'y avait rien a defendre de ce cote : c'etait une decision
+     purement esthetique, et elle appartenait a Ropat.
+       --ink-soft   16,35:1 -> 17,13:1
+       --ink-muted   7,94:1 ->  8,70:1
+     Le skin clair n'avait PAS le defaut : ses encres etaient deja entre 147 et
+     175 degres. Le probleme etait donc confine au bloc sombre.
+     ⚠️ Question laissee ouverte : ces deux valeurs sont maintenant de la
+     famille neige mais restent ecrites en dur au niveau des ROLES, la ou les
+     autres roles pointent vers une primitive. Elles se glissent entre les
+     paliers du trio (91 % et 65 % de luminosite, contre 78 / 88 / 95). En
+     faire des primitives elargirait le trio a cinq paliers, ce qui n'est pas
+     une decision a prendre en passant. */
   --ink: var(--p-neige-haute);
-  --ink-soft: #e2e8f0;
-  --ink-muted: #9CA3AF;
+  --ink-soft: #E2F0E7;
+  --ink-muted: #9CAFA2;
   /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
      trio, sous le minimum AA de 4,5. Calcul WCAG sur les deux extremes du
      fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore

@@ -116,8 +116,21 @@ sitemap: false
      l'ancien `--ink-subtle` a 4,63:1 a ete retire par `typeset` faute de
      marge, il n'a pas a revenir. */
   --encre: var(--p-neige-haute);
-  --encre-douce: #e2e8f0;
-  --encre-attenuee: #9CA3AF;                 /* mesure 7,4:1 sur le sol */
+  /* ⚠️ RAPATRIEMENT CHROMATIQUE, arbitrage de Ropat le 28/07. Ces deux valeurs
+     etaient #e2e8f0 et #9CA3AF, des gris BLEUTES a 214 et 218 degres, quand
+     tout le camouflage tient entre 135 et 180. Elles venaient d'une palette
+     tierce (famille slate de Tailwind) : le meme corps etranger que le blanc
+     pur retire le meme jour, simplement moins visible parce que gris.
+     Corrigees a luminosite et saturation CONSTANTES, teinte ramenee a 140
+     degres. Le contraste MONTE dans les deux cas, il n'y avait donc rien a
+     defendre de ce cote : c'etait une decision purement esthetique.
+     ⚠️ Question ouverte : elles sont maintenant de la famille neige mais
+     restent ecrites en dur au niveau des ROLES, la ou les autres pointent vers
+     une primitive. Elles se glissent ENTRE les paliers du trio (91 % et 65 %
+     de luminosite, contre 78 / 88 / 95). En faire des primitives elargirait le
+     trio a cinq paliers, ce qui ne se decide pas en passant. */
+  --encre-douce: #E2F0E7;
+  --encre-attenuee: #9CAFA2;
 
   /* ⚠️ ENCRE DECORATIVE. Elle ne tient AUCUN seuil, 1,72:1 sur le sol, et
      c'est voulu : elle sert a un glyphe present comme TEXTURE et non comme
