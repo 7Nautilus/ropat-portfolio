@@ -1715,8 +1715,9 @@ footer {
 }
 
 .btn--xl {
+  font-size: var(--text-subhead);
   gap: 1.5rem;
-  padding: 1rem 2rem;
+  padding: 0.55em 1.1em;
 }
 
 /* ── Icônes ─────────────────────────────── */
