@@ -687,7 +687,22 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </div>
 
   <div class="scene">
-    <p class="scene-titre">Carte projet · avec une vraie œuvre</p>
+    <p class="scene-titre">Carte projet · par axes</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 1 · ce qui fait son identité</p>
+    <table class="jetons" style="margin-bottom:1.6rem">
+      <thead><tr><th>Élément</th><th>Valeur</th><th>Statut</th></tr></thead>
+      <tbody>
+        <tr><td>contour</td><td><code>2px solid</code> orange</td>
+            <td style="color:#34C759">restauré le 28/07 à ta demande</td></tr>
+        <tr><td>forme</td><td><code>squircle(5rem)</code></td>
+            <td style="color:#34C759">restaurée avec lui</td></tr>
+        <tr><td>survol</td><td>translation de 4px, ombre</td>
+            <td style="color:#9CA3AF">non montrable ici, demande une interaction</td></tr>
+      </tbody>
+    </table>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · le cadrage de l'œuvre</p>
     <div class="duo">
       <article class="card project-card">
         <div class="project-card-image">
@@ -704,14 +719,30 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
         </div>
       </article>
       <div>
-        <p class="sur-titre" style="color:rgba(255,255,255,.46)">Ce qu'on regarde ici</p>
-        <p>Le contour orange et le squircle de 5rem sont l'identité de la carte, et
-        <strong>restaurés à ta demande</strong> le 28/07. La question ouverte n'est pas de les
-        retirer : c'est de savoir si la <em>composition de la grille</em> peut porter l'identité
-        à leur place, comme le prévoyait le plan. Tant que cette composition n'existe pas,
-        les retirer laisse un gabarit.</p>
+        <p style="margin-top:0">La vignette est en <code>aspect-ratio: 1/1</code> avec
+        <code>object-fit: cover</code>. Toute œuvre qui n'est pas carrée est donc
+        <strong>rognée</strong> pour entrer dans la case, quel que soit son format d'origine.
+        Ici le monogramme d'Aélio est carré, donc rien ne se perd : c'est le cas favorable.</p>
+
+        <div class="regle" style="border-color:rgba(255,107,107,.35)">
+          <b style="color:#FF6B6B">Point ouvert · la carte contredit la règle 1</b>
+          <span>« Sur un <em>livrable</em>, le format et la couleur SONT le travail : on ne
+          rogne pas. » Or la grille du portfolio rogne, systématiquement, et c'est la première
+          chose qu'un visiteur voit du travail. La règle vaut aujourd'hui pour la page projet et
+          pas pour la carte.
+          Deux issues, aucune tranchée : accepter que la vignette soit un <em>index</em> et non
+          l'œuvre, ce qui la sortirait du champ de la règle ; ou laisser l'œuvre imposer son
+          format à la carte, ce qui rejoint le chantier de la composition de grille.</span>
+        </div>
       </div>
     </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 3 · ce qui reste ouvert</p>
+    <p>Le contour et le squircle ne sont pas en question : ils font l'identité de la carte. La
+    question est de savoir si la <strong>composition de la grille</strong> peut porter cette
+    identité à leur place, comme le prévoyait le plan. Tant que cette composition n'existe pas,
+    les retirer ne donne pas un état neutre, ça donne un gabarit. C'est la leçon du 28/07,
+    apprise en le faisant.</p>
   </div>
 
   <div class="scene">
@@ -834,14 +865,45 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </div>
 
   <div class="scene">
-    <p class="scene-titre">Le voile · la plaque qui assombrit le sol sous le contenu</p>
-    <div style="background: var(--voile); padding: 1.5rem; max-width: 34rem;">
-      <p style="color: var(--encre); margin: 0 0 .4rem;">Encre pleine sur le voile</p>
-      <p style="color: var(--encre-attenuee); margin: 0;">Encre atténuée sur le voile</p>
+    <p class="scene-titre">Le voile · par axes</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 1 · sa direction</p>
+    <div class="duo" style="margin-bottom:1.6rem">
+      <div style="padding:1.5rem;border:1px dashed rgba(255,255,255,.14)">
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .8rem">le sol nu</p>
+        <div style="background:var(--sol);padding:1.2rem">
+          <p style="color:var(--encre);margin:0">rgb(3,8,8)</p>
+        </div>
+      </div>
+      <div style="padding:1.5rem;border:1px dashed rgba(255,255,255,.14)">
+        <p style="font-size:.85rem;color:rgba(255,255,255,.46);margin:0 0 .8rem">le voile par-dessus</p>
+        <div style="background:var(--voile);padding:1.2rem">
+          <p style="color:var(--encre);margin:0">rgb(1,4,4)</p>
+        </div>
+      </div>
     </div>
-    <p style="margin-top:.9rem">Il <strong>assombrit</strong>, c'est son but : le dither est un
-    motif vivant, le voile le calme localement pour que le texte ait une base stable.
-    Ne pas le confondre avec une élévation.</p>
+    <p style="margin:-.6rem 0 1.6rem">Il <strong>assombrit</strong>, et c'est son but : le dither
+    est un motif vivant, le voile le calme localement pour que le texte ait une base stable.
+    ⚠️ Il s'appelait <code>--surface-raised</code> jusqu'au 28/07, ce qui décrivait exactement
+    l'inverse de ce qu'il fait. J'ai d'abord corrigé la <em>valeur</em> pour qu'elle obéisse au
+    nom, ce qui propageait l'erreur à ses dix consommateurs. C'était le <strong>nom</strong> qui
+    mentait, et le commentaire d'origine disait déjà « voile ».</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · ce qu'il porte</p>
+    <div style="background:var(--voile);padding:1.5rem;max-width:34rem;margin-bottom:1.6rem">
+      <p style="color:var(--encre);margin:0 0 .4rem">Encre pleine sur le voile</p>
+      <p style="color:var(--encre-douce);margin:0 0 .4rem">Encre douce sur le voile</p>
+      <p style="color:var(--encre-attenuee);margin:0">Encre atténuée sur le voile</p>
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 3 · ses dix consommateurs</p>
+    <p>Tous passent par l'alias <code>--secondary-color</code> : les cartes, le carrousel, quatre
+    conteneurs, le pied de page et deux blocs de la page À propos. C'est ce qui rend une erreur
+    de valeur si coûteuse ici, et une erreur de nom si peu : renommer touche trois lignes,
+    changer la valeur en touche dix surfaces.</p>
+    <p>⚠️ Le skin clair fait <strong>exactement la même chose</strong> : <code>--neige-mediane</code>
+    sur un sol <code>--neige-haute</code>, donc une plaque plus sombre que son sol. Deux skins
+    d'accord contre un nom : c'est le nom qui perd. C'est la règle de diagnostic à garder.</p>
   </div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
