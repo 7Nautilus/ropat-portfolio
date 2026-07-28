@@ -460,32 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // etat a calculer devient binaire et sans echantillonnage : la barre
   // surplombe-t-elle un media, oui ou non.
   const barre = document.querySelector('header');
-  const mediasPage = [...document.querySelectorAll('.project-open-media, .project-piece-media')];
-  if (barre && mediasPage.length) {
-    const hauteurBarre = () => barre.getBoundingClientRect().height || 76;
+  if (barre) {
+    const hauteurBarre = () => barre.getBoundingClientRect().height || 78;
     const ouverture = document.querySelector('.project-open');
-
-    const majFond = () => {
-      const bas = hauteurBarre();
-
-      // La barre surplombe-t-elle encore l'ouverture ? Tant que oui, elle se
-      // pose sur l'oeuvre : ni fond ni bordure, sinon elle l'encadre.
-      if (ouverture) {
-        const o = ouverture.getBoundingClientRect();
-        if (o.bottom > 0 && o.top < bas) barre.setAttribute('data-zone', 'ouverture');
-        else barre.removeAttribute('data-zone');
-      }
-
-      const surMedia = mediasPage.some(el => {
-        if (el.offsetParent === null && el.tagName !== 'VIDEO') return false;
-        const r = el.getBoundingClientRect();
-        return Math.min(r.bottom, bas) - Math.max(r.top, 0) > 0;
-      });
-      if (surMedia) barre.setAttribute('data-sur-media', '');
-      else barre.removeAttribute('data-sur-media');
-
-      majEncre(surMedia, bas);
-    };
 
     // ══════════════════════════════════════════════════════════════════════
     //  LA BASCULE D'ENCRE
@@ -493,292 +470,303 @@ document.addEventListener('DOMContentLoaded', () => {
     //  Le chrome passe en encre sombre quand le blanc n'est plus lisible sur
     //  ce qu'il surplombe, et revient au blanc sinon.
     //
-    //  ⚠️ LE CRITERE EST UN CONTRASTE, PAS UNE LUMINANCE, et c'est ce qui rend
-    //  le seuil non arbitraire. Cadrage de Ropat le 28/07 : « si le contraste
-    //  est assez bon pour que le texte des boutons de la nav soit lisible il
-    //  reste en blanc, sinon le header change de variante ». On bascule donc
-    //  exactement quand le texte cesse d'etre lisible, c'est-a-dire a 4,5:1,
-    //  le seuil WCAG du texte courant. Il n'y a aucune valeur a regler a la
-    //  main, contrairement a un seuil de luminance.
+    //  ⚠️ AUCUNE LISTE, AUCUNE CLASSE A POSER. Refonte du 28/07 sur demande de
+    //  Ropat : « si j'ajoute un element clair sur une page il faut que le
+    //  script s'applique directement a lui, sans qu'on ait a faire quoi que ce
+    //  soit ». La version precedente enumerait deux classes de media, donc elle
+    //  ignorait tout le reste : une section au fond clair, une image ajoutee
+    //  plus tard, un bloc injecte par du JS. Une liste blanche est un reglage
+    //  deguise, et il fallait la supprimer.
     //
-    //  ⚠️ POURQUOI ON NE PEUT PAS SIMPLEMENT « LIRE CE QU'IL Y A DESSOUS » :
-    //  aucune API n'expose l'arriere-plan composite d'une page. `backdrop-
-    //  filter` le TRANSFORME sans jamais le rendre. On le RECONSTRUIT donc a
-    //  partir de ses sources, qui sont toutes connues :
-    //    . les medias, dessines dans un canvas hors ecran de 96 px de large ;
-    //    . tout le reste, qui est le sol dither, quasi noir par construction,
-    //      donc jamais un probleme pour une encre claire.
-    //  Le canvas n'entre pas dans le DOM : il ne peint rien, ne declenche
-    //  aucun layout, et ne telecharge rien. C'est un tampon memoire.
+    //  On INTERROGE donc la page au lieu de la decrire : `elementsFromPoint`
+    //  rend la pile REELLE des elements sous un point, dans l'ordre de
+    //  peinture, et elle inclut tout ce qui existe a cet instant. Un element
+    //  ajoute une seconde plus tot y est. Il n'y a rien a declarer.
+    //
+    //  ⚠️ Ce n'est toujours PAS une lecture de l'arriere-plan composite :
+    //  aucune API n'expose ca. On refait la PILE, couche par couche, du bas
+    //  vers le haut : sol, fonds, degrades, pseudo-elements, images. La
+    //  difference avec la version d'avant est qu'on ne choisit plus QUELLES
+    //  couches comptent, on les prend toutes.
+    //
+    //  Le critere est un CONTRASTE et non une luminance, cadrage de Ropat : on
+    //  bascule quand le texte cesse d'etre lisible, donc a 4,5:1, seuil WCAG.
+    //  Rien a regler a la main.
 
+    const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+    const LUM = (c) => 0.2126 * lin(c.r) + 0.7152 * lin(c.g) + 0.0722 * lin(c.b);
+    const CONTRASTE = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+
+    // Resolution de couleur par le canvas : une expression reguliere ne sait
+    // lire ni `color(srgb ...)` ni `oklch(...)`, et les navigateurs rendent
+    // desormais ces formes-la.
+    const cvC = document.createElement('canvas'); cvC.width = cvC.height = 1;
+    const cxC = cvC.getContext('2d', { willReadFrequently: true });
+    const cacheCouleur = new Map();
+    const resoudre = (txt) => {
+      if (cacheCouleur.has(txt)) return cacheCouleur.get(txt);
+      cxC.clearRect(0, 0, 1, 1); cxC.fillStyle = '#000'; cxC.fillStyle = txt;
+      cxC.clearRect(0, 0, 1, 1); cxC.fillRect(0, 0, 1, 1);
+      const d = cxC.getImageData(0, 0, 1, 1).data;
+      const out = { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+      cacheCouleur.set(txt, out); return out;
+    };
+
+    const composer = (fond, dessus) => {
+      if (!dessus || dessus.a <= 0.003) return fond;
+      const a = dessus.a;
+      return { r: dessus.r * a + fond.r * (1 - a),
+               g: dessus.g * a + fond.g * (1 - a),
+               b: dessus.b * a + fond.b * (1 - a) };
+    };
+
+    // ── DEGRADES ────────────────────────────────────────────────────────
+    // Seuls les degrades VERTICAUX sont evalues. Un oblique demanderait de
+    // projeter le point sur l'axe du degrade : faisable, mais aucun n'existe
+    // sur le site, et une implementation jamais exercee est une implementation
+    // fausse qui s'ignore.
+    const RE_COULEUR = /(?:rgba?|color|oklch|hsla?)\([^)]*\)|#[0-9a-fA-F]{3,8}/g;
+    const cacheDegrade = new Map();
+    const lireDegrade = (img) => {
+      if (cacheDegrade.has(img)) return cacheDegrade.get(img);
+      let out = null;
+      if (img && img !== 'none' && /linear-gradient/.test(img)) {
+        const dedans = img.slice(img.indexOf('(') + 1, img.lastIndexOf(')'));
+        const parts = dedans.split(/,(?![^(]*\))/);
+        // ⚠️ LA DIRECTION PEUT ETRE ABSENTE, et c'est le cas le plus COURANT.
+        // Chrome omet `to bottom` de la valeur calculee, puisque c'est la
+        // valeur par defaut de CSS. Ma premiere version exigeait le mot-cle,
+        // donc elle ignorait silencieusement tout degre descendant ecrit sans
+        // direction, c'est-a-dire la facon normale de les ecrire.
+        // Trouve par un test d'injection : un voile noir a 95 % pose sur une
+        // image ne changeait RIEN au verdict, au pixel pres.
+        const tete = parts[0].trim();
+        const aUneDirection = /^(to\s|[-\d.]+deg|[-\d.]+turn|[-\d.]+rad)/.test(tete);
+        let versLeHaut = false, connu = true;
+        if (!aUneDirection) versLeHaut = false;                 // defaut CSS : to bottom
+        else if (/to top$/.test(tete)) versLeHaut = true;
+        else if (/to bottom$/.test(tete)) versLeHaut = false;
+        else if (/^0deg$|^360deg$/.test(tete)) versLeHaut = true;
+        else if (/^180deg$/.test(tete)) versLeHaut = false;
+        else connu = false;                                     // oblique : non traite
+        if (connu) {
+          const morceaux = aUneDirection ? parts.slice(1) : parts;
+          const arrets = [];
+          morceaux.forEach((m, i) => {
+            const c = m.match(RE_COULEUR); if (!c) return;
+            const pc = m.match(/(-?[\d.]+)%/);
+            const p = pc ? parseFloat(pc[1]) / 100 : i / Math.max(1, morceaux.length - 1);
+            arrets.push(Object.assign({ p: p }, resoudre(c[0])));
+          });
+          if (arrets.length >= 2) out = { arrets: arrets, versLeHaut: versLeHaut };
+        }
+      }
+      cacheDegrade.set(img, out); return out;
+    };
+    const evaluerDegrade = (g, rect, y) => {
+      if (rect.height < 1) return null;
+      const t = g.versLeHaut ? (rect.bottom - y) / rect.height : (y - rect.top) / rect.height;
+      const a = g.arrets;
+      let i = 0; while (i < a.length - 2 && a[i + 1].p < t) i++;
+      const d0 = a[i], d1 = a[i + 1];
+      const k = d1.p === d0.p ? 0 : Math.min(1, Math.max(0, (t - d0.p) / (d1.p - d0.p)));
+      return { r: d0.r + (d1.r - d0.r) * k, g: d0.g + (d1.g - d0.g) * k,
+               b: d0.b + (d1.b - d0.b) * k, a: d0.a + (d1.a - d0.a) * k };
+    };
+
+    // ── IMAGES ET VIDEOS ────────────────────────────────────────────────
+    // Une vignette de 96 px suffit pour une luminance : l'oeil ne juge pas la
+    // lisibilite sur un pixel isole. Le canvas n'entre jamais dans le DOM.
     const LARGEUR_SONDE = 96;
     const vignettes = new WeakMap();
+    const estPeinture = (el) => el.tagName === 'IMG' || el.tagName === 'VIDEO' || el.tagName === 'CANVAS';
+    let compteurFrame = 0;
 
-    // ⚠️ LE PIEGE D'`object-fit`, et il m'a eu deux fois en mesurant. Le
-    // contenu peint ne remplit PAS la boite de l'element : avec `contain` il y
-    // est centre et borde de vide. Projeter des coordonnees d'ecran a travers
-    // `getBoundingClientRect` sans en tenir compte fait echantillonner a cote.
+    // ⚠️ `object-fit` : le contenu peint ne remplit PAS la boite de l'element.
+    // Projeter des coordonnees d'ecran sans en tenir compte fait echantillonner
+    // a cote, et ca m'a eu deux fois en mesurant.
     const rectContenu = (el) => {
       const b = el.getBoundingClientRect();
-      const nw = el.naturalWidth || el.videoWidth || 0;
-      const nh = el.naturalHeight || el.videoHeight || 0;
+      const nw = el.naturalWidth || el.videoWidth || el.width || 0;
+      const nh = el.naturalHeight || el.videoHeight || el.height || 0;
       const fit = getComputedStyle(el).objectFit;
       if (!nw || !nh || fit === 'fill' || fit === 'none') return b;
       const rb = b.width / b.height, rn = nw / nh;
       let w, h;
-      if (fit === 'cover') {
-        if (rn > rb) { h = b.height; w = h * rn; } else { w = b.width; h = w / rn; }
-      } else {                                   // contain, scale-down
-        if (rn > rb) { w = b.width; h = w / rn; } else { h = b.height; w = h * rn; }
-      }
+      if (fit === 'cover') { if (rn > rb) { h = b.height; w = h * rn; } else { w = b.width; h = w / rn; } }
+      else { if (rn > rb) { w = b.width; h = w / rn; } else { h = b.height; w = h * rn; } }
       return { left: b.left + (b.width - w) / 2, top: b.top + (b.height - h) / 2,
                width: w, height: h, right: b.left + (b.width + w) / 2,
                bottom: b.top + (b.height + h) / 2 };
     };
 
-    const vignette = (el) => {
-      const estVideo = el.tagName === 'VIDEO';
+    const pixelDe = (el, x, y) => {
+      const r = rectContenu(el);
+      if (x < r.left || x > r.right || y < r.top || y > r.bottom) return null;  // bande letterbox
       let v = vignettes.get(el);
       if (!v) {
-        const nw = el.naturalWidth || el.videoWidth || 0;
-        const nh = el.naturalHeight || el.videoHeight || 0;
+        const nw = el.naturalWidth || el.videoWidth || el.width || 0;
+        const nh = el.naturalHeight || el.videoHeight || el.height || 0;
         if (!nw || !nh) return null;
         const c = document.createElement('canvas');
-        c.width = LARGEUR_SONDE;
-        c.height = Math.max(1, Math.round(LARGEUR_SONDE * nh / nw));
-        v = { c: c, x: c.getContext('2d', { willReadFrequently: true }), dessine: false };
+        c.width = LARGEUR_SONDE; c.height = Math.max(1, Math.round(LARGEUR_SONDE * nh / nw));
+        v = { c: c, x: c.getContext('2d', { willReadFrequently: true }), frame: -1 };
         vignettes.set(el, v);
       }
-      // Une image ne se dessine qu'une fois ; une video a chaque passage.
-      if (!v.dessine || estVideo) {
-        try {
-          v.x.drawImage(el, 0, 0, v.c.width, v.c.height);
-          v.dessine = true;
-        } catch (e) { return null; }        // media pas encore decode
+      // Une image ne se redessine jamais ; une video a chaque frame.
+      if (v.frame < 0 || (el.tagName === 'VIDEO' && v.frame !== compteurFrame)) {
+        try { v.x.drawImage(el, 0, 0, v.c.width, v.c.height); v.frame = compteurFrame; }
+        catch (e) { return null; }               // pas encore decode, ou tainte
       }
-      return v;
-    };
-
-    const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
-    const CONTRASTE = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
-    const L_CLAIRE = 0.2126 * lin(240) + 0.7152 * lin(244) + 0.0722 * lin(241);   // --ink
-    const L_SOMBRE = 0.2126 * lin(5) + 0.7152 * lin(16) + 0.0722 * lin(15);      // --p-encre-sombre
-
-    // ⚠️ LES VOILES POSES PAR-DESSUS L'OEUVRE, ajoutes le 28/07.
-    //
-    // Defaut signale par Ropat : « le header ne revient pas a la normale quand
-    // il survole la base du hero, qui est assombrie par le degrade ».
-    // Cause exacte : je reconstruisais le fond a partir du MEDIA SEUL. Or la
-    // page projet pose un `::after` plein cadre sur l'ouverture, un degrade
-    // vertical qui monte jusqu'a 94 % du sol en bas. Visuellement cette zone
-    // est presque noire ; ma sonde, elle, continuait de lire les pixels clairs
-    // du mockup et gardait donc l'encre sombre.
-    // Reconstruire un fond, ce n'est pas lire la source, c'est refaire la PILE.
-    //
-    // ⚠️ PORTEE ASSUMEE : on ne traite que les degrades VERTICAUX et les aplats
-    // translucides poses sur un ancetre du media (ou sur son ::before/::after).
-    // Un degrade oblique, une image de fond ou un `mix-blend-mode` ne seraient
-    // pas vus. C'est suffisant pour ce que la page contient aujourd'hui, et le
-    // jour ou ca ne l'est plus, ca se verra ici.
-    const RE_COULEUR = /(?:rgba?|color)\([^)]*\)/g;
-
-    // Resolution par canvas, comme ailleurs : une expression reguliere ne sait
-    // lire ni `color(srgb ...)` ni `oklch(...)`.
-    const cvCouleur = document.createElement('canvas');
-    cvCouleur.width = cvCouleur.height = 1;
-    const cxCouleur = cvCouleur.getContext('2d', { willReadFrequently: true });
-    const resoudre = (txt) => {
-      cxCouleur.clearRect(0, 0, 1, 1);
-      cxCouleur.fillStyle = '#000';
-      cxCouleur.fillStyle = txt;
-      cxCouleur.clearRect(0, 0, 1, 1);
-      cxCouleur.fillRect(0, 0, 1, 1);
-      const d = cxCouleur.getImageData(0, 0, 1, 1).data;
+      const sx = Math.min(v.c.width - 1, Math.max(0, Math.floor((x - r.left) / r.width * v.c.width)));
+      const sy = Math.min(v.c.height - 1, Math.max(0, Math.floor((y - r.top) / r.height * v.c.height)));
+      let d; try { d = v.x.getImageData(sx, sy, 1, 1).data; } catch (e) { return null; }
       return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
     };
 
-    const lireVoile = (cs) => {
-      const img = cs.backgroundImage;
-      if (img && img !== 'none' && /linear-gradient/.test(img)) {
-        const versLeHaut = /to top/.test(img);
-        if (!versLeHaut && !/to bottom/.test(img)) return null;   // pas vertical
-        const dedans = img.slice(img.indexOf('(') + 1, img.lastIndexOf(')'));
-        const morceaux = dedans.split(/,(?![^(]*\))/).slice(1);
-        const arrets = [];
-        morceaux.forEach((m, i) => {
-          const c = m.match(RE_COULEUR);
-          if (!c) return;
-          const pc = m.match(/(-?[\d.]+)%/);
-          const p = pc ? parseFloat(pc[1]) / 100 : i / Math.max(1, morceaux.length - 1);
-          arrets.push(Object.assign({ p: p }, resoudre(c[0])));
-        });
-        if (arrets.length < 2) return null;
-        return { arrets: arrets, versLeHaut: versLeHaut };
+    // ── LA PILE REELLE SOUS UN POINT ────────────────────────────────────
+    const SOL = () => resoudre(getComputedStyle(document.documentElement).getPropertyValue('--surface').trim() || '#030808');
+
+    // ⚠️ CACHE DE STYLES, PAR FRAME. Sans lui, les 40 points relisaient les
+    // memes elements encore et encore : la pile sous un point contient html,
+    // body, la section, le conteneur... et ces elements sont les MEMES pour
+    // presque tous les points. Mesure avant : 5,9 ms par frame sur une page
+    // projet, soit 35 % du budget de 16,7 ms a 60 images par seconde. C'est du
+    // gaspillage pur, pas le prix de la methode.
+    // Le cache est vide a chaque frame : rien ne peut donc se peremer, et un
+    // element qui change de style entre deux frames est vu.
+    let cacheStyles = new Map();
+    const style = (el, pseudo) => {
+      const cle = pseudo ? pseudo : '';
+      let m = cacheStyles.get(el);
+      if (!m) { m = {}; cacheStyles.set(el, m); }
+      if (m[cle] === undefined) {
+        const cs = pseudo ? getComputedStyle(el, pseudo) : getComputedStyle(el);
+        m[cle] = { fond: cs.backgroundColor, image: cs.backgroundImage,
+                   contenu: pseudo ? cs.content : null,
+                   position: cs.position, visibilite: cs.visibility, opacite: cs.opacity };
       }
-      const f = resoudre(cs.backgroundColor);
-      if (f.a > 0.01) return { arrets: [{ p: 0, r: f.r, g: f.g, b: f.b, a: f.a },
-                                        { p: 1, r: f.r, g: f.g, b: f.b, a: f.a }], versLeHaut: true };
-      return null;
+      return m[cle];
     };
 
-    let voilesCache = null;
-    const voiles = () => {
-      if (voilesCache) return voilesCache;
-      const out = [];
-      const vus = new Set();
-      mediasPage.forEach(m => {
-        let n = m.parentElement, prof = 0;
-        while (n && prof < 4) {
-          if (!vus.has(n)) {
-            vus.add(n);
-            ['::after', '::before'].forEach(pseudo => {
-              const cs = getComputedStyle(n, pseudo);
-              if (cs.content === 'none' || cs.position === 'static') return;
-              const v = lireVoile(cs);
-              if (v) out.push({ el: n, v: v });
-            });
-          }
-          n = n.parentElement; prof++;
+    const couleurEn = (x, y) => {
+      const pile = document.elementsFromPoint(x, y);
+      if (!pile.length) return null;
+      let c = SOL();
+      // `elementsFromPoint` rend du plus HAUT au plus BAS. On peint a l'envers,
+      // donc du bas vers le haut.
+      for (let i = pile.length - 1; i >= 0; i--) {
+        const el = pile[i];
+        if (el === barre || barre.contains(el)) continue;   // ne pas se mesurer soi-meme
+        const cs = style(el, null);
+        if (cs.visibilite === 'hidden' || cs.opacite === '0') continue;
+        c = composer(c, resoudre(cs.fond));
+        const g = lireDegrade(cs.image);
+        if (g) c = composer(c, evaluerDegrade(g, el.getBoundingClientRect(), y));
+        if (estPeinture(el)) {
+          const p = pixelDe(el, x, y);
+          if (p) c = composer(c, p);
         }
-      });
-      voilesCache = out;
-      return out;
+        // Les pseudo-elements ne sont pas dans la pile mais ils peignent.
+        for (const pseudo of ['::before', '::after']) {
+          const ps = style(el, pseudo);
+          if (ps.contenu === 'none' || ps.position === 'static') continue;
+          c = composer(c, resoudre(ps.fond));
+          const gp = lireDegrade(ps.image);
+          if (gp) c = composer(c, evaluerDegrade(gp, el.getBoundingClientRect(), y));
+        }
+      }
+      return c;
     };
 
-    // Alpha et couleur du voile a une hauteur d'ecran donnee.
-    const voileA = (y) => {
-      let R = 0, G = 0, B = 0, A = 0;
-      voiles().forEach(({ el, v }) => {
-        const b = el.getBoundingClientRect();
-        if (y < b.top || y > b.bottom || b.height < 1) return;
-        // `to top` : la position 0 est en BAS.
-        const t = v.versLeHaut ? (b.bottom - y) / b.height : (y - b.top) / b.height;
-        const a = v.arrets;
-        let i = 0;
-        while (i < a.length - 2 && a[i + 1].p < t) i++;
-        const d0 = a[i], d1 = a[i + 1];
-        const k = d1.p === d0.p ? 0 : Math.min(1, Math.max(0, (t - d0.p) / (d1.p - d0.p)));
-        const al = d0.a + (d1.a - d0.a) * k;
-        const r = d0.r + (d1.r - d0.r) * k, g = d0.g + (d1.g - d0.g) * k, bb = d0.b + (d1.b - d0.b) * k;
-        // Empilement de plusieurs voiles, dans l'ordre du DOM.
-        R = r * al + R * (1 - al); G = g * al + G * (1 - al); B = bb * al + B * (1 - al);
-        A = al + A * (1 - al);
-      });
-      return A > 0.001 ? { r: R / A, g: G / A, b: B / A, a: A } : null;
-    };
-
-    // ⚠️ DEUX BORNES ET NON UNE, et c'est la correction du 28/07.
-    //
-    // Ma premiere version ne mesurait QUE le pire cas de l'encre claire (le
-    // pixel le plus clair), puis comparait a un seuil de retour. Le defaut
-    // saute aux yeux une fois ecrit : je jugeais le blanc sans jamais juger le
-    // sombre. Sur aelio, la mesure plafonnait a 4,32 pour un seuil de retour a
-    // 7, donc la barre ne revenait JAMAIS au blanc tant qu'elle survolait
-    // l'oeuvre, meme la ou le blanc aurait ete meilleur. C'est le defaut que
-    // Ropat a vu : « le header ne revient pas a la normale quand il passe sur
-    // un fond plus sombre ».
-    //
-    // La bonne question n'est pas « le blanc tient-il ? » mais « LAQUELLE DES
-    // DEUX ENCRES tient le mieux ICI ? ». Elle est symetrique, donc elle a une
-    // reponse partout, y compris la ou aucune des deux n'atteint 4,5.
-    // Chaque encre a son pire cas, et ce n'est pas le meme pixel :
-    //   . l'encre CLAIRE souffre du pixel le plus CLAIR   -> percentile 90
-    //   . l'encre SOMBRE souffre du pixel le plus SOMBRE  -> percentile 10
-    // Les extremes absolus seraient trop sensibles : un pixel isole suffirait.
+    // ── LA DECISION ─────────────────────────────────────────────────────
+    // Chaque encre a son pire cas, et ce n'est pas le meme point : la claire
+    // souffre du plus CLAIR, la sombre du plus SOMBRE. On ne prend pas les
+    // extremes absolus, un point isole ne doit pas decider.
     const P_HAUT = 0.9, P_BAS = 0.1;
+    const L_CLAIRE = LUM(resoudre('#F0F4F1'));
+    const L_SOMBRE = LUM(resoudre('#05100F'));
+    const MARGE = 1.25;          // l'autre encre doit etre meilleure de 25 %
+    const MAINTIEN = 400;        // ms entre deux bascules
+    let encreSombre = false, dernierChangement = 0, rappel = 0;
 
-    const bornesSous = (boite) => {
-      let vals = null;
-      for (const el of mediasPage) {
-        if (el.offsetParent === null && el.tagName !== 'VIDEO') continue;
-        const r = rectContenu(el);
-        const gx = Math.max(boite.left, r.left), dx = Math.min(boite.right, r.right);
-        const hy = Math.max(boite.top, r.top), by = Math.min(boite.bottom, r.bottom);
-        if (dx - gx <= 0 || by - hy <= 0) continue;
-        const v = vignette(el);
-        if (!v) continue;
-        const kx = v.c.width / r.width, ky = v.c.height / r.height;
-        const sx = Math.floor((gx - r.left) * kx), sy = Math.floor((hy - r.top) * ky);
-        const sw = Math.max(1, Math.round((dx - gx) * kx)), sh = Math.max(1, Math.round((by - hy) * ky));
-        let d;
-        try { d = v.x.getImageData(sx, sy, sw, sh).data; } catch (e) { continue; }
-        if (!vals) vals = [];
-        // Le voile est evalue au CENTRE de la zone lue : une boite de controle
-        // fait une quarantaine de pixels de haut, l'alpha y varie peu, et
-        // l'evaluer par pixel couterait sans rien changer au verdict.
-        const V = voileA((hy + by) / 2);
-        for (let i = 0; i < d.length; i += 4) {
-          let R = d[i], G = d[i + 1], B = d[i + 2];
-          if (V) { R = V.r * V.a + R * (1 - V.a); G = V.g * V.a + G * (1 - V.a); B = V.b * V.a + B * (1 - V.a); }
-          vals.push(0.2126 * lin(R) + 0.7152 * lin(G) + 0.0722 * lin(B));
-        }
-      }
-      if (!vals || !vals.length) return null;    // rien d'autre que le sol dither
-      vals.sort((a, b) => a - b);
-      const q = (f) => vals[Math.min(vals.length - 1, Math.floor(f * (vals.length - 1)))];
-      return { bas: q(P_BAS), haut: q(P_HAUT) };
-    };
+    // ⚠️ LA BASCULE N'A PAS BESOIN DE 60 Hz, et la faire tourner a cette
+    // cadence etait le vrai cout. Mesure sur une page projet : 5,9 ms par
+    // frame avant le cache de styles, 3,6 ms apres, soit encore 22 % du budget
+    // de 16,7 ms. Le reste est le hit-test lui-meme, incompressible.
+    // Plutot que d'echantillonner moins bien, on echantillonne moins SOUVENT :
+    // 10 fois par seconde. La duree de maintien etant de 400 ms, ca laisse
+    // quatre mesures par bascule, et l'oeil ne peut pas voir la difference.
+    // Cout amorti : environ 36 ms par seconde de defilement, soit 3,6 % du
+    // temps, contre 22 % a chaque frame.
+    const PERIODE_MESURE = 100;
+    let derniereMesure = 0;
 
-    // ⚠️ UNE MARGE, ET NON DEUX SEUILS. Puisque la decision compare les deux
-    // encres entre elles, l'hysteresis devient un simple RAPPORT : on ne change
-    // que si l'autre encre est meilleure d'au moins 25 %. Une bascule ne se
-    // declenche donc pas sur un ecart insignifiant.
-    const MARGE = 1.25;
-    // ⚠️ DUREE DE MAINTIEN. La marge seule ne suffit pas : un test de
-    // defilement fin sur Ottony, oeuvre sombre mais brodee de fil clair,
-    // donnait un aller-retour de deux positions, donc un clignotement. A ces
-    // instants la mesure est JUSTE, le defaut est temporel, la reponse doit
-    // l'etre aussi.
-    const MAINTIEN = 400;
-    let encreSombre = false;
-    let dernierChangement = 0;
-    let rappel = 0;
-
-    const majEncre = (surMedia, bas) => {
-      if (!surMedia) {
-        if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
-        return;
-      }
-      // Le pire cas de CHAQUE encre, sur l'ensemble des controles : la barre
-      // n'a qu'une variante, elle doit servir celui qui est le plus en peine.
-      let pireClair = Infinity, pireSombre = Infinity, vu = false;
+    const majEncre = (bas, force) => {
+      const maintenant = performance.now();
+      if (!force && maintenant - derniereMesure < PERIODE_MESURE) return;
+      derniereMesure = maintenant;
+      compteurFrame++;
+      cacheStyles = new Map();          // une passe, un cache
+      const vals = [];
       barre.querySelectorAll('.logo, .nav-link, .nav-contact, .burger-menu').forEach(el => {
         const b = el.getBoundingClientRect();
-        if (b.width < 1 || b.height < 1 || b.top > bas) return;
-        const q = bornesSous(b);
-        if (!q) return;
-        vu = true;
-        pireClair = Math.min(pireClair, CONTRASTE(L_CLAIRE, q.haut));
-        pireSombre = Math.min(pireSombre, CONTRASTE(L_SOMBRE, q.bas));
+        if (b.width < 1 || b.height < 1 || b.top > bas || b.bottom < 0) return;
+        // Une grille grossiere par controle : ce qui decide, c'est la
+        // distribution sous les glyphes, pas chaque pixel.
+        for (let ix = 0; ix < 4; ix++) {
+          for (let iy = 0; iy < 2; iy++) {
+            const x = b.left + b.width * (ix + 0.5) / 4;
+            const y = b.top + b.height * (iy + 0.5) / 2;
+            if (x < 0 || y < 0 || x > innerWidth || y > innerHeight) continue;
+            const c = couleurEn(x, y);
+            if (c) vals.push(LUM(c));
+          }
+        }
       });
-      if (!vu) {                                   // que du sol dither, quasi noir
-        if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
-        return;
-      }
-      if (window.__debugEncre) {
-        barre.setAttribute('data-dbg', 'clair ' + pireClair.toFixed(2) + ' / sombre ' + pireSombre.toFixed(2));
-      }
-      const veutSombre = encreSombre
-        ? !(pireClair > pireSombre * MARGE)        // on ne revient au clair que s'il est NETTEMENT meilleur
-        : pireSombre > pireClair * MARGE;          // on ne part au sombre que s'il est NETTEMENT meilleur
-      if (veutSombre === encreSombre) return;
+      if (!vals.length) return;
+      vals.sort((a, b) => a - b);
+      const q = (f) => vals[Math.min(vals.length - 1, Math.floor(f * (vals.length - 1)))];
+      const haut = q(P_HAUT), basL = q(P_BAS);
 
+      // Le garde-fou CSS : la variante sombre n'existe que sous cet attribut.
+      // Il ne depend plus d'une classe de media mais du fond RECONSTRUIT, donc
+      // il se pose des que le fond s'ecarte vraiment du sol.
+      if (haut > 0.05) barre.setAttribute('data-sur-media', '');
+      else barre.removeAttribute('data-sur-media');
+
+      const pireClair = CONTRASTE(L_CLAIRE, haut);
+      const pireSombre = CONTRASTE(L_SOMBRE, basL);
+      if (window.__debugEncre) {
+        barre.setAttribute('data-dbg', 'clair ' + pireClair.toFixed(2) + ' / sombre ' + pireSombre.toFixed(2) + ' / n=' + vals.length);
+      }
+      const veutSombre = encreSombre ? !(pireClair > pireSombre * MARGE)
+                                     : pireSombre > pireClair * MARGE;
+      if (veutSombre === encreSombre) return;
       const t = performance.now();
       const reste = MAINTIEN - (t - dernierChangement);
       if (reste > 0) {
-        // ⚠️ SANS CE RAPPEL, l'etat pouvait rester FAUX indefiniment : la
-        // bascule n'est recalculee que sur `scroll` et `resize`. Si la derniere
-        // frame d'un geste tombait dans la duree de maintien, plus rien ne
-        // repassait, et le chrome gardait une encre qui n'etait plus la bonne
-        // jusqu'au prochain mouvement.
-        clearTimeout(rappel);
-        rappel = setTimeout(planifier, reste + 20);
-        return;
+        // Sans ce rappel l'etat pouvait rester FAUX indefiniment : la bascule
+        // n'est recalculee que sur scroll et resize, donc si la derniere frame
+        // d'un geste tombait dans la duree de maintien, plus rien ne repassait.
+        clearTimeout(rappel); rappel = setTimeout(() => majEncre(hauteurBarre(), true), reste + 20); return;
       }
       dernierChangement = t;
       encreSombre = veutSombre;
       if (encreSombre) barre.setAttribute('data-encre', 'sombre');
       else barre.removeAttribute('data-encre');
+    };
+
+    const majFond = () => {
+      const bas = hauteurBarre();
+      // La barre surplombe-t-elle encore l'ouverture ? Tant que oui, elle se
+      // pose sur l'oeuvre : ni fond ni bordure, sinon elle l'encadre.
+      if (ouverture) {
+        const o = ouverture.getBoundingClientRect();
+        if (o.bottom > 0 && o.top < bas) barre.setAttribute('data-zone', 'ouverture');
+        else barre.removeAttribute('data-zone');
+      }
+      majEncre(bas, false);
     };
 
     let enAttenteFond = false;
@@ -788,9 +776,51 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => { enAttenteFond = false; majFond(); });
     };
     window.addEventListener('scroll', planifier, { passive: true });
-    window.addEventListener('resize', () => { voilesCache = null; planifier(); }, { passive: true });
+    window.addEventListener('resize', planifier, { passive: true });
     window.addEventListener('load', planifier);
     planifier();
+
+    // ⚠️ SANS CE QUI SUIT, RIEN NE RECALCULE TANT QU'ON NE DEFILE PAS, et deux
+    // cas reels tombent alors a cote.
+    //
+    // 1. AU CHARGEMENT. Si une image n'est pas encore decodee a la premiere
+    //    mesure, elle ne contribue pas : le fond est lu comme le sol nu et
+    //    l'encre reste claire a tort. Trouve en comparant deux sondes, l'une
+    //    qui defilait et l'autre non : sipsmith rendait `sombre` avec la
+    //    premiere et `clair` avec la seconde, sur la meme page.
+    //    `load` couvre les images normales, pas les images differees.
+    //
+    // 2. QUAND LA PAGE CHANGE. C'est la demande de Ropat : « si j'ajoute un
+    //    element clair sur une page il faut que le script s'applique
+    //    directement a lui ». Un element ajoute sans que l'utilisateur defile
+    //    n'aurait jamais ete vu.
+    //
+    // L'observateur est borne par les deux etranglements deja en place : une
+    // frame d'animation, puis 100 ms. Une rafale de mutations coute donc une
+    // seule mesure.
+    [300, 1200, 3000].forEach(d => setTimeout(planifier, d));
+
+    if ('MutationObserver' in window) {
+      const observateur = new MutationObserver(entrees => {
+        // ⚠️ Ignorer nos PROPRES ecritures, sinon poser `data-encre` declenche
+        // une mesure qui repose `data-encre` : la boucle serait bornee par les
+        // etranglements, mais elle tournerait pour rien en permanence.
+        for (const e of entrees) {
+          const c = e.target;
+          if (c === barre || (barre.contains && barre.contains(c))) continue;
+          planifier();
+          return;
+        }
+      });
+      observateur.observe(document.body, {
+        childList: true, subtree: true,
+        attributes: true, attributeFilter: ['style', 'class', 'src', 'hidden']
+      });
+    }
+
+    // Une image qui finit de charger APRES tout le reste (chargement differe,
+    // lightbox, carrousel) doit elle aussi declencher une mesure.
+    document.addEventListener('load', planifier, true);
   }
 
   // ================================
