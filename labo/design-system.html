@@ -329,6 +329,62 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   </table>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Grammaire de composition</h2>
+  <p>La séquence d'une page projet est une <strong>planche</strong> : une grille de 6 colonnes,
+  en flux dense, où chaque pièce épouse la hauteur de son média. Deux axes la gouvernent, et ils
+  sont <strong>indépendants</strong>.</p>
+
+  <h3>Axe 1 · La nature, ce que la pièce EST</h3>
+  <table class="jetons">
+    <thead><tr><th>Valeur</th><th>Ce que c'est</th><th>Ce que la mise en page a le droit de faire</th></tr></thead>
+    <tbody>
+      <tr><td><code>livrable</code> <span style="color:#34C759">défaut</span></td>
+          <td>Pochette, affiche, logo</td>
+          <td>Rien. Le format et la couleur SONT le travail : ni rognage, ni voile, ni typo dessus</td></tr>
+      <tr><td><code>contexte</code></td>
+          <td>Mockup, mise en situation</td>
+          <td>Tout. C'est une photo de l'œuvre, pas l'œuvre : elle peut devenir un décor plein cadre</td></tr>
+    </tbody>
+  </table>
+  <p>Le défaut est le protecteur. Un champ oublié ne peut donc jamais trahir une œuvre.</p>
+
+  <h3>Axe 2 · Le rythme, combien d'écran la pièce occupe</h3>
+  <p>Il vient du <strong>format de l'œuvre</strong>, jamais d'un compteur. La version précédente
+  cyclait sur <code>index modulo 4</code> et produisait donc la même suite sur les 11 projets à
+  médias : une pièce étroite ne pouvait structurellement jamais toucher une pleine, et le rythme
+  excluait sa propre variation. Pire, il ne savait rien de ce qu'il cadrait.</p>
+  <table class="jetons">
+    <thead><tr><th>Rythme</th><th>Déclenché par</th><th>Occupe</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td><code>pleine</code></td><td>ratio L/H <strong>≥ 1,40</strong></td><td>6 colonnes sur 6</td>
+          <td style="color:#9CA3AF">Une image large a besoin de largeur</td></tr>
+      <tr><td><code>marge</code></td><td>entre <strong>0,80 et 1,40</strong></td><td>3 sur 6</td>
+          <td style="color:#9CA3AF">Le carré et ses voisins respirent à mi-largeur</td></tr>
+      <tr><td><code>etroite</code></td><td>ratio <strong>&lt; 0,80</strong></td><td>2 sur 6</td>
+          <td style="color:#9CA3AF">Une image haute doit être retenue, sinon elle mange deux écrans</td></tr>
+    </tbody>
+  </table>
+
+  <h3>⚠️ La grammaire est saine, et inerte</h3>
+  <p>Relevé du 28/07 sur les 11 projets qui ont des médias, en comptant les classes réellement
+  émises dans le HTML :</p>
+  <table class="jetons">
+    <thead><tr><th>Rythme</th><th>Pièces</th><th>Part</th></tr></thead>
+    <tbody>
+      <tr><td><code>marge</code></td><td><span class="ratio ko">28</span></td><td>87,5 %</td></tr>
+      <tr><td><code>etroite</code></td><td><span class="ratio">3</span></td><td>9,4 % (toutes sur jhag-pinterest)</td></tr>
+      <tr><td><code>pleine</code></td><td><span class="ratio">1</span></td><td>3,1 % (stelya)</td></tr>
+    </tbody>
+  </table>
+  <p>La cause n'est pas dans le code, elle est dans les <strong>données</strong> : 9 projets sur 20
+  déclarent un <code>aspect</code>, et <strong>une seule pièce</strong> déclare le sien. Tout le
+  reste retombe sur le ratio du projet ou sur le défaut carré, donc sur <code>marge</code>.
+  Le système sait exprimer trois rythmes ; on ne lui en donne qu'un.</p>
+  <p>Le remède est mécanique et ne touche pas au design : lire les dimensions réelles de chaque
+  image et écrire son <code>aspect</code>. C'est automatisable. Tant que ce n'est pas fait, juger
+  la planche revient à juger une grammaire qu'on n'a jamais laissée parler.</p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>Les composants réels</h2>
   <p>Vrais composants, vrai CSS de production, posés sur les jetons du chantier.</p>
 
