@@ -1,5 +1,10 @@
+{%- comment -%}
+  `target` est optionnel : sans lui, on garde l'ancre historique
+  #second-section, utilisee par l'accueil et la page A propos.
+{%- endcomment -%}
+{% assign _cible = include.target | default: "#second-section" %}
 <div class="scroll-overlay">
-  <a href="#second-section" class="scroll-down-link" aria-label="{% if page.lang == 'fr' %}Aller à la section suivante{% else %}Skip to next section{% endif %}">
+  <a href="{{ _cible }}" class="scroll-down-link" aria-label="{% if page.lang == 'fr' %}Aller à la section suivante{% else %}Skip to next section{% endif %}">
     <div class="big-icon-placeholder big-icon" aria-hidden="true">
       {{ site.data.design-system.navigation-arrow-icon }}
     </div>

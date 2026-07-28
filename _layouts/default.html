@@ -10,7 +10,13 @@
     })(window,document,'script','dataLayer','GTM-KN22K5FS');</script>
     <!-- End Google Tag Manager -->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%- comment -%}
+      `viewport-fit=cover` est OBLIGATOIRE pour que env(safe-area-inset-*)
+      renvoie autre chose que 0. Sans lui, aucune gestion d'encoche n'est
+      possible : le site s'arretait au bord logique de l'ecran, pas au bord
+      physique.
+    {%- endcomment -%}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="language" content="{{ page.lang | default: 'en' }}"> 
 
   {% comment %} Si c'est une page de projet, charger les métadonnées depuis _data/projects/<slug>.yml {% endcomment %}
@@ -95,6 +101,25 @@
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
+    {%- comment -%}
+      ARMEMENT DES REVELATIONS. En ligne et dans le <head>, donc execute AVANT
+      le premier rendu : dans script.js (differe) le contenu serait peint a sa
+      place finale puis masque d'un coup, ce qui clignote.
+      Le masquage de `.animate-fade-up` est desormais conditionne a cette
+      classe (cf. base/_animations.scss). Sans elle, le contenu est visible :
+      c'est le bon defaut. Avant, `opacity: 0` etait l'etat par defaut en CSS
+      et seul le JS le levait, donc 20 elements par page projet, planche
+      comprise, disparaissaient si script.js ne s'executait pas.
+      Le garde-fou desarme au bout de 2,5 s si script.js n'a jamais confirme :
+      une revelation perdue coute une animation, une page blanche coute tout.
+    {%- endcomment -%}
+    <script>
+      document.documentElement.classList.add('reveal-arme');
+      setTimeout(function () {
+        if (!window.__revelationPrete) document.documentElement.classList.remove('reveal-arme');
+      }, 2500);
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
 
@@ -112,8 +137,15 @@
     <!-- JS -->
     <!-- Le fond n'est plus une image mais un shader : plus rien à précharger,
          et main-bg.webp (453 Ko) n'est plus demandé du tout. -->
-    <script src="/assets/js/dither.js" defer></script>
-    <script src="/assets/js/script.js" defer></script>
+    {%- comment -%}
+      Jeton de version, comme sur main.css ligne 99. Sans lui, le navigateur
+      resservait l'ANCIEN script avec le NOUVEAU CSS : tout comportement pose
+      par le JS (etat du chrome, bascule sur fond clair, voir plus) restait
+      invisible alors que la feuille de style etait bien a jour. Pire qu'un
+      simple retard : les deux moities se desynchronisent.
+    {%- endcomment -%}
+    <script src="/assets/js/dither.js?v={{ site.time | date: '%s' }}" defer></script>
+    <script src="/assets/js/script.js?v={{ site.time | date: '%s' }}" defer></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JDE6T1D92Q"></script>
@@ -164,6 +196,14 @@
       {% endif %}
     </a>
     
+    {%- comment -%}
+      Region d'annonce partagee. Elle doit exister des le rendu initial : une
+      region aria-live creee en meme temps que son contenu n'est PAS annoncee,
+      les lecteurs d'ecran n'observent que les regions deja presentes au
+      moment ou elles changent. Alimentee par annoncer() dans script.js.
+    {%- endcomment -%}
+    <div id="annonces" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <!-- Language Detection Script -->
     {% include lang-detector.html %}
     

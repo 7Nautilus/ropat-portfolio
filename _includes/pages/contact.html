@@ -19,7 +19,7 @@
       <h2 class="contact-section-label">{% if current_lang == 'fr' %}Envoyer un message{% else %}Send a message{% endif %}</h2>
 
       <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-        <!-- Clé Web3Forms — à remplacer par votre clé sur https://web3forms.com -->
+        <!-- Clé Web3Forms, à remplacer par votre clé sur https://web3forms.com -->
         <input type="hidden" name="access_key" value="2b45f76c-e061-4ec8-8072-3850bc235515">
         <input type="hidden" name="redirect" value="{{ site.url | default: 'http://localhost:4000' }}/{% if current_lang == 'fr' %}fr{% else %}en{% endif %}/contact.html?success=true">
         <input type="checkbox" name="botcheck" class="contact-botcheck" tabindex="-1" aria-hidden="true">

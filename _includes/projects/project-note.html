@@ -1,0 +1,23 @@
+{% comment %}
+  Note : le texte PONCTUE la sequence, il ne la structure pas.
+  Le titre est un micro-libelle (pas un <h2> de section bavard), le corps
+  reste court et cale a 56ch. Appele par projects/project-main.html.
+  Parametres : note (un element de context_sections), lang.
+{% endcomment %}
+{% assign _lang = include.lang | default: "en" %}
+{% assign _title = include.note.title[_lang] | default: include.note.title.en | default: include.note.title.fr %}
+{% assign _content = include.note.content[_lang] | default: include.note.content.en | default: include.note.content.fr %}
+{%- comment -%}
+  On exige le CORPS, pas seulement le titre : un titre seul produit un
+  micro-libelle orange qui ne ponctue rien. Cas reel, chat-noir.yml a ses
+  quatre context_sections au contenu vide dans les deux langues ; la page
+  affichait donc quatre etiquettes suspendues dans le vide. Mieux vaut ne
+  rien afficher et que le trou de contenu reste visible cote donnees.
+{%- endcomment -%}
+{% assign _trimmed = _content | strip %}
+{% if _trimmed != "" %}
+<div class="project-note animate-fade-up">
+  {% if _title %}<h2 class="project-note-title">{{ _title }}</h2>{% endif %}
+  <div class="project-note-body">{{ _content | markdownify }}</div>
+</div>
+{% endif %}

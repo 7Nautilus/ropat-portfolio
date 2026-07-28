@@ -3,10 +3,43 @@
 {% if project %}
   {% assign project_locale = project.locales[lang] | default: project.locales.en %}
 {% endif %}
-{% if project and project.thumbnails and project.thumbnails.size > 0 %}
-  {% assign primary_thumbnail = project.thumbnails[0] %}
-  {% assign primary_thumbnail_alt = primary_thumbnail.alt[lang] | default: primary_thumbnail.alt.en %}
-{% endif %}
+
+{% comment %}
+  ══════════════════════════════════════════════════════════════════════════
+  PAGE PROJET : grammaire de composition
+  ══════════════════════════════════════════════════════════════════════════
+  Quatre principes :
+
+  1. L'OEUVRE OUVRE la page, ENTIERE, posee sur le sol dither. Les mots
+     occupent le sol a cote d'elle : un seul ecran porte les deux.
+  2. Les medias forment UNE SEQUENCE en flux, pas un widget de vignettes a
+     permuter.
+  3. Deux axes INDEPENDANTS par piece :
+       . NATURE  : `livrable` (intouchable) ou `contexte` (mise en scene).
+       . RYTHME  : combien d'ECRAN la piece occupe (pleine / marge / etroite).
+     Le rythme vient du FORMAT DE L'OEUVRE et non d'un compteur, et il ne
+     force aucune boite : une piece fait exactement la taille de son media.
+  4. DEUX MOUVEMENTS SEPARES : le corpus d'images, puis le recit d'un bloc.
+     ⚠️ Revise le 27/07/2026. Le texte etait entrelace avec les images, une
+     note apres chaque piece, ce qui AFFIRMAIT une relation entre une image
+     et une section de recit. Ropat : « les images ne sont liees a aucune
+     section de texte en particulier, et ce sur aucun projet ». La mise en
+     page mentait donc, et le lecteur cherchait un lien inexistant. Le recit
+     forme desormais sa propre bande, pleine largeur sur le sol dither.
+     La meta descend en colophon typographique, plus en fiche technique.
+
+  ⚠️ LA REGLE, revisee le 26/07/2026. L'ancienne formulation etait « jamais de
+  typographie par-dessus l'oeuvre du client », generalisee a partir d'un seul
+  echec (le contre-projet B, ou un titre traversait le flacon, reproduisant la
+  faute Sarah Lawrence). Elle etait trop large. La bonne question n'est pas
+  « y a-t-il du texte sur l'image » mais CE QUE L'IMAGE EST a cet instant :
+    . LIVRABLE (pochette, affiche, logo) : le format et la couleur SONT le
+      travail. On ne rogne pas, on ne voile pas, on n'ecrit pas dessus.
+    . CONTEXTE (mockup, mise en situation) : c'est une photo de l'oeuvre, pas
+      l'oeuvre. La mise en page a le droit d'en faire un decor.
+  C'est le champ `nature`, et son defaut est `livrable`, donc sur.
+  ══════════════════════════════════════════════════════════════════════════
+{% endcomment %}
 
 <!-- Prev / Next : parcourt l'ordre sans break -->
 {% assign project_order = site.data.projects.index.order %}
@@ -18,251 +51,361 @@
   {% if slug == include.project_id %}{% assign found_current = true %}{% endif %}
   {% unless found_current %}{% assign prev_slug = slug %}{% endunless %}
 {% endfor %}
-{% if prev_slug %}
-  {% assign prev_project = site.data.projects[prev_slug] %}
-  {% assign prev_locale  = prev_project.locales[lang] | default: prev_project.locales.en %}
-{% endif %}
+{% if next_slug == nil %}{% assign next_slug = project_order[0] %}{% endif %}
 {% if next_slug %}
   {% assign next_project = site.data.projects[next_slug] %}
   {% assign next_locale  = next_project.locales[lang] | default: next_project.locales.en %}
 {% endif %}
 
-<!-- Main Content -->
 {% if project and project_locale %}
-<main id="main-content" class="hero-project-section">
 
-  <!-- ── HERO ──────────────────────────────── -->
-  <section class="hero hero-project">
-    <!-- Description -->
-    <div class="hero-container hero-project-container">
+{% comment %}
+  ── CONSTRUCTION DE LA SEQUENCE ─────────────────────────────────────────
+  Source unique, dans l'ordre de priorite :
+    1. `project.sequence` (nouveau schema explicite, le « kit arrangeable »)
+    2. sinon, on reconstitue depuis l'ancien schema : thumbnails + mockups.
+  L'ouverture (main_image) est retiree de la sequence pour ne pas paraitre
+  deux fois : dans les 8 projets a vignettes, thumbnails[0].src EGALE
+  main_image (verifie sur les 20 fichiers).
+{% endcomment %}
+{% comment %}
+  ⚠️ Ne JAMAIS fabriquer un tableau avec `unTruc | split: ""`. Sur un hash,
+  Liquid convertit d'abord en chaine puis decoupe caractere par caractere :
+  une sequence de 5 pieces est devenue 922 elements vides. On ne concatene
+  donc que de vrais tableaux, et la deduplication se fait au rendu avec
+  `continue`, sans reconstruire quoi que ce soit.
+{% endcomment %}
+{% assign pieces = "" | split: "" %}
+{% if project.sequence %}
+  {% assign pieces = project.sequence %}
+{% else %}
+  {% if project.thumbnails %}{% assign pieces = pieces | concat: project.thumbnails %}{% endif %}
+  {% if project.case_study.mockups %}{% assign pieces = pieces | concat: project.case_study.mockups %}{% endif %}
+{% endif %}
+{% comment %} Le mockup unique (ottony, zylkene) n'est pas un tableau : il est rendu a part. {% endcomment %}
+{% assign lone_mockup = nil %}
+{% unless project.sequence %}
+  {% if project.case_study.mockup %}{% assign lone_mockup = project.case_study.mockup %}{% endif %}
+{% endunless %}
 
-      <!-- Fil d'ariane retour portfolio -->
-      <a href="/{{ lang }}/portfolio.html" class="project-back-link" aria-label="{% if lang == 'fr' %}Retour au portfolio{% else %}Back to portfolio{% endif %}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-        Portfolio
-      </a>
+{% assign notes = project.context_sections %}
+{% assign notes_count = notes | size %}
 
-      <div class="hero-project-title-container">
-        <div class="hero-project-title-theme">
-          <span class="hero-theme-dot" aria-hidden="true"></span>
-          <span>{{ project.theme[lang] | default: project.theme.en }}</span>
-        </div>
-        <h1 class="hero-title project-title uppercase">{{ project.project_title }}<br><span class="orange">{{ project.subtitle[lang] | default: project.subtitle.en | default: project.subtitle }}</span></h1>
-      </div>
-      <div class="bubble-container">
-        <p>{{ project_locale.description | markdownify | remove: '<p>' | remove: '</p>' }}</p>
-      </div>
+{% comment %} Comptage apres deduplication, en entiers, sans tableau. {% endcomment %}
+{% assign seq_count = 0 %}
+{% for p in pieces %}
+  {% unless p.src == project.main_image %}{% assign seq_count = seq_count | plus: 1 %}{% endunless %}
+{% endfor %}
+{% if lone_mockup %}{% assign seq_count = seq_count | plus: 1 %}{% endif %}
+
+{% comment %}
+  Pas des notes dans la sequence : une note toutes les `note_step` pieces,
+  le reliquat tombe apres la sequence. Garde-fous : jamais de division par
+  zero, jamais de pas nul.
+{% endcomment %}
+{% assign note_step = 1 %}
+{% if notes_count > 0 and seq_count > 0 %}
+  {% assign note_step = seq_count | divided_by: notes_count %}
+  {% if note_step < 1 %}{% assign note_step = 1 %}{% endif %}
+{% endif %}
+
+{%- comment -%}
+  Defini UNE SEULE FOIS, hors de toute boucle. Il etait assigne A L'INTERIEUR
+  de la boucle sur les pieces : sur ottony et zylkene, qui n'ont qu'un
+  case_study.mockup et donc aucune iteration, la variable restait nulle et le
+  filtre default codait « Agrandir » en dur, y compris sur les pages EN.
+  Pas d'espace avant le deux-points en anglais (convention en_US du projet).
+
+  ⚠️ Ne jamais ecrire de balise Liquid litterale dans un bloc comment : le
+  parseur les tokenise quand meme, une boucle citee en exemple s'y ouvre sans
+  jamais se refermer, et tout le site cesse de se regenerer.
+{%- endcomment -%}
+{% if lang == 'fr' %}
+  {% assign zoom_label = "Agrandir : " %}
+{% else %}
+  {% assign zoom_label = "Enlarge: " %}
+{% endif %}
+
+<main id="main-content" class="project-page">
+
+  {%- comment -%}
+    ── OUVERTURE ────────────────────────────────────────────────────────
+    Un seul ecran : l'oeuvre ET les mots. L'oeuvre est posee ENTIERE sur le
+    sol dither, elle n'est ni recadree ni voilee ; les mots occupent le sol
+    a cote d'elle. Le visiteur voit donc du premier coup ce qu'il regarde et
+    de quoi il s'agit, sans que rien ne se pose sur le travail du client.
+
+    NATURE (nouveau) : `livrable` par defaut. Une pochette, une affiche, un
+    logo sont le livrable : on ne les rogne pas, on ne les assombrit pas, on
+    n'ecrit pas dessus. `contexte` designe une mise en situation (un mockup,
+    une photo de l'imprime pose sur une table) : ce n'est pas l'oeuvre, c'est
+    une photo de l'oeuvre, donc la mise en page a le droit d'en faire un
+    decor. Le defaut ne peut jamais trahir une oeuvre.
+
+    <section> et non <header> : le site style l'element `header` NU
+    (layout/_header.scss), donc un <header> ici heriterait de la barre de
+    navigation, sticky et bordure orange comprises.
+  {%- endcomment -%}
+  {% assign open_alt = project_locale.image_alt | default: project_locale.title %}
+  {% assign open_nature = project.nature | default: "livrable" %}
+  <section class="project-open project-open--{{ open_nature }}">
+    <figure class="project-open-media-wrap">
+      {% if project.media_type == "video" %}
+      <video class="project-open-media" src="{{ project.main_image }}"
+             {% if project.preview %}poster="{{ project.preview }}"{% endif %}
+             autoplay loop muted playsinline aria-label="{{ open_alt }}"></video>
+      {% else %}
+      {% comment %} Ratio du projet : reserve la place avant chargement (anti-CLS). Defaut carre. {% endcomment %}
+      {%- comment -%}
+        `lightbox-trigger` sur L'OUVERTURE, ajoute le 28/07/2026.
+        C'etait le defaut le plus fonctionnel de la page, et sur un portfolio
+        le plus couteux : en mode `contexte` l'ouverture saigne plein cadre et
+        se fait rogner de 37 a 58 % selon le format. Le visiteur ne pouvait
+        voir l'oeuvre entiere NULLE PART sur les 19 pages, et le rognage etait
+        sans recours. Or l'oeuvre est le produit.
+        Les pieces de la sequence etaient agrandissables depuis le debut ;
+        seule celle qui ouvre la page, donc la plus regardee, ne l'etait pas.
+        Rien a construire : la lightbox existe, avec son piege de focus deja
+        verifie (focus dedans, fond `inert`, Echap, focus rendu a l'origine).
+        Elle lit `src` et `alt` du declencheur, il suffisait de la classe.
+        Pas sur les videos : la lightbox n'affiche que des images.
+      {%- endcomment -%}
+      {% assign _ar = project.aspect | default: "1/1" | split: "/" %}
+      <img class="project-open-media lightbox-trigger" src="{{ project.main_image }}" alt="{{ open_alt }}"
+           width="{{ _ar[0] | strip }}" height="{{ _ar[1] | strip }}" fetchpriority="high"
+           role="button" tabindex="0"
+           aria-label="{{ zoom_label }}{{ open_alt }}">
+      {% endif %}
+    </figure>
+
+    <div class="project-open-lede">
+      {% assign _theme = project.theme[lang] | default: project.theme.en %}
+      {% if _theme %}<p class="project-theme">{{ _theme }}</p>{% endif %}
+      <h1 class="project-title">
+        {{ project.project_title }}
+        {% assign _sub = project.subtitle[lang] | default: project.subtitle.en | default: project.subtitle %}
+        {% if _sub %}<em>{{ _sub }}</em>{% endif %}
+      </h1>
+      <p class="project-pitch">
+        {{ project_locale.description | markdownify | remove: '<p>' | remove: '</p>' }}
+      </p>
     </div>
 
-    <!-- Gallery -->
-    <div class="hero-image-container">
-      <div class="project-gallery">
-        <div class="main-display blur-bg">
-          {% assign img_alt = primary_thumbnail_alt | default: project_locale.image_alt %}
-          {% if lang == 'fr' %}{% assign img_action = "— Cliquez pour agrandir" %}{% else %}{% assign img_action = "— Click to enlarge" %}{% endif %}
-          {% comment %} Vignettes video detectees par extension (.mp4), plus besoin du champ type: {% endcomment %}
-          {% assign _has_video_thumbs = false %}
-          {% if project.thumbnails %}
-            {% for _t in project.thumbnails %}
-              {% if _t.src contains ".mp4" %}{% assign _has_video_thumbs = true %}{% break %}{% endif %}
-            {% endfor %}
-          {% endif %}
-          {% comment %} Ratio du hero (W/H) : reserve la bonne place avant chargement (anti-CLS). Defaut carre. {% endcomment %}
-          {% assign _ar = project.aspect | default: "1/1" | split: "/" %}
-          {% assign _aw = _ar[0] | strip %}
-          {% assign _ah = _ar[1] | strip %}
-          {% comment %} Source initiale : premier thumbnail sinon main_image {% endcomment %}
-          {% assign _init_src = project.main_image %}
-          {% if project.thumbnails and project.thumbnails.size > 0 %}
-            {% assign _init_src = project.thumbnails[0].src %}
-          {% endif %}
-          {% if project.media_type == "video" and project.thumbnails == nil %}
-          <video src="{{ project.main_image }}" id="main-image" aria-label="{{ img_alt }}" autoplay loop muted width="{{ _aw }}" height="{{ _ah }}"></video>
-          {% else %}
-          <img src="{{ _init_src }}" id="main-image" alt="{{ img_alt }}" aria-label="{{ img_alt }} {{ img_action }}" width="{{ _aw }}" height="{{ _ah }}" loading="lazy" class="lightbox-trigger" role="button" tabindex="0">
-          {% if _has_video_thumbs %}
-          <video id="main-video" src="" autoplay loop muted aria-label="{{ img_alt }}" style="display:none;width:auto;max-width:100%;height:auto;object-fit:contain" aria-hidden="true"></video>
-          {% endif %}
-          {% endif %}
-        </div>
-        {% if project.thumbnails and project.thumbnails.size > 0 %}
-        <div class="thumbnails-container" id="thumbnails">
-          {% for thumbnail in project.thumbnails %}
-          {% comment %} alt optionnel : retombe sur l'alt du projet. type deduit de l'extension. {% endcomment %}
-          {% assign thumbnail_alt = thumbnail.alt[lang] | default: thumbnail.alt.en | default: project_locale.image_alt %}
-          {% assign thumb_type = thumbnail.type %}
-          {% unless thumb_type %}{% if thumbnail.src contains ".mp4" %}{% assign thumb_type = "video" %}{% else %}{% assign thumb_type = "image" %}{% endif %}{% endunless %}
-          {% assign thumb_preview = thumbnail.preview | default: thumbnail.src %}
-          <button class="thumbnail-btn"
-            aria-label="{{ thumbnail_alt }}"
-            data-media-type="{{ thumb_type }}"
-            data-full-src="{{ thumbnail.src }}"
-            {% if forloop.first %} data-active="true"{% endif %}>
-            <img src="{{ thumb_preview }}" class="thumbnail-image" alt="{{ thumbnail_alt }}" width="200" height="200" loading="lazy"{% if forloop.first %} data-active="true"{% endif %}>
-          </button>
-          {% endfor %}
-        </div>
-        {% endif %}
-      </div>
-    </div>
+    {%- comment -%}
+      Indice de defilement, uniquement en mode `livrable`. La : l'oeuvre est
+      posee entiere et l'ouverture se cale au pixel pres (mesure a 430x900 :
+      bas a 898 pour un viewport de 900), donc rien n'indiquerait une suite.
+      En mode `contexte` l'image saigne sur toute la hauteur et deborde
+      d'elle-meme sous la ligne de flottaison : l'indice serait redondant.
+      On reutilise le composant deja en service sur l'accueil et A propos.
+    {%- endcomment -%}
+    {% if open_nature != "contexte" %}
+      {% include scroll-down-link.html target="#project-suite" %}
+    {% endif %}
   </section>
 
-  <!-- ── CASE STUDY ───────────────────────── -->
-  {% if project.case_study or project.context_sections or project.client or project.tools %}
-  <section class="case-study" aria-label="{% if lang == 'fr' %}Étude de cas{% else %}Case Study{% endif %}">
+  <!-- ── SEQUENCE : un flux, plus un widget de vignettes ──────── -->
+  {% if seq_count > 0 %}
+  <div class="project-sequence" id="project-suite" data-seuil="{{ project.galerie_seuil | default: 8 }}" data-seuil-mobile="{{ project.galerie_seuil_mobile | default: 3 }}">
+    {% assign idx = 0 %}
+    {% for piece in pieces %}
+      {% comment %} L'ouverture ne reparait pas dans la sequence. {% endcomment %}
+      {% if piece.src == project.main_image %}{% continue %}{% endif %}
+      {% assign idx = idx | plus: 1 %}
 
-    <!-- 1. Specs ── Client · Année · Services · Outils -->
-    <div class="cs-specs">
-      {% if project.client %}
-      <div class="cs-spec animate-fade-up" style="--animate-delay: 0ms">
-        <span class="cs-spec-label">{% if lang == 'fr' %}Client{% else %}Client{% endif %}</span>
-        <span class="cs-spec-value">{{ project.client[lang] | default: project.client.fr }}</span>
-      </div>
-      {% endif %}
-      {% if project.year %}
-      <div class="cs-spec animate-fade-up" style="--animate-delay: 80ms">
-        <span class="cs-spec-label">{% if lang == 'fr' %}Année{% else %}Year{% endif %}</span>
-        <span class="cs-spec-value">{{ project.year }}</span>
-      </div>
-      {% endif %}
-      {% if project_locale.services %}
-      <div class="cs-spec animate-fade-up" style="--animate-delay: 160ms">
-        <span class="cs-spec-label">Services</span>
-        <span class="cs-spec-value">{{ project_locale.services }}</span>
-      </div>
-      {% endif %}
-      {% if project.tools %}
-      <div class="cs-spec animate-fade-up" style="--animate-delay: 240ms">
-        <span class="cs-spec-label">{% if lang == 'fr' %}Outils{% else %}Tools{% endif %}</span>
-        <span class="cs-spec-value">{{ project.tools }}</span>
-      </div>
-      {% endif %}
+      {% assign p_alt = piece.alt[lang] | default: piece.alt.en | default: project_locale.image_alt %}
+      {% assign p_ar = piece.aspect | default: project.aspect | default: "1/1" | split: "/" %}
+      {% assign p_nature = piece.nature | default: "livrable" %}
+
+      {% comment %}
+        RYTHME : il vient du FORMAT DE L'OEUVRE, plus d'un compteur.
+        L'ancien cycle `index modulo 4` produisait toujours la meme suite
+        M P M E sur les 11 projets a medias : une piece `etroite` ne pouvait
+        structurellement jamais toucher une `pleine`, donc le rythme excluait
+        sa propre variation. Et il ne savait rien de ce qu'il cadrait, d'ou
+        des images larges et courtes noyees dans une bande vide.
+        Regle : une image large a besoin de largeur, une image haute a besoin
+        qu'on la retienne sinon elle occupe deux ecrans et demi.
+      {% endcomment %}
+      {% assign rythme = piece.rythme %}
+      {% unless rythme %}
+        {% assign _w = p_ar[0] | strip | times: 1 %}
+        {% assign _h = p_ar[1] | strip | times: 1 %}
+        {% assign _r100 = 100 %}
+        {% if _h > 0 %}{% assign _r100 = _w | times: 100 | divided_by: _h %}{% endif %}
+        {% if _r100 >= 140 %}{% assign rythme = "pleine" %}
+        {% elsif _r100 >= 80 %}{% assign rythme = "marge" %}
+        {% else %}{% assign rythme = "etroite" %}
+        {% endif %}
+      {% endunless %}
+
+      <figure class="project-piece project-piece--{{ rythme }} project-piece--{{ p_nature }} animate-fade-up">
+        {% if piece.src contains ".mp4" or piece.media_type == "video" %}
+        {%- comment -%}
+          `data-src` et non `src`, plus `preload="none"` : avec `autoplay`, le
+          navigateur telecharge la video ENTIERE des le chargement de la page,
+          meme hors ecran. Mesure sur jhag-banana-rush : 51,2 Mo de video sous
+          la ligne de flottaison, integralement descendus. Le controleur de
+          script.js pose la source et lance la lecture a l'approche, et
+          respecte prefers-reduced-motion (pas de lecture auto, controles
+          affiches a la place).
+        {%- endcomment -%}
+        <video class="project-piece-media" data-src="{{ piece.src }}" preload="none"
+               {% if piece.preview %}poster="{{ piece.preview }}"{% endif %}
+               loop muted playsinline aria-label="{{ p_alt }}"></video>
+        {% else %}
+        <img class="project-piece-media lightbox-trigger" src="{{ piece.src }}" alt="{{ p_alt }}"
+             width="{{ p_ar[0] | strip }}" height="{{ p_ar[1] | strip }}" loading="lazy"
+             role="button" tabindex="0"
+             aria-label="{{ zoom_label }}{{ p_alt }}">
+        {% endif %}
+      </figure>
+
+    {% endfor %}
+
+    {% comment %} Mockup unique de l'ancien schema : il ferme la sequence. {% endcomment %}
+    {% if lone_mockup %}
+      {% assign m_alt = lone_mockup.alt[lang] | default: lone_mockup.alt.en | default: project_locale.image_alt %}
+      {% assign m_ar = lone_mockup.aspect | default: project.aspect | default: "1/1" | split: "/" %}
+      {% assign m_nature = lone_mockup.nature | default: "livrable" %}
+      <figure class="project-piece project-piece--marge project-piece--{{ m_nature }} animate-fade-up">
+        {% if lone_mockup.src contains ".mp4" or lone_mockup.media_type == "video" %}
+        <video class="project-piece-media" data-src="{{ lone_mockup.src }}" preload="none"
+               {% if lone_mockup.preview %}poster="{{ lone_mockup.preview }}"{% endif %}
+               loop muted playsinline aria-label="{{ m_alt }}"></video>
+        {% else %}
+        <img class="project-piece-media lightbox-trigger" src="{{ lone_mockup.src }}" alt="{{ m_alt }}"
+             width="{{ m_ar[0] | strip }}" height="{{ m_ar[1] | strip }}" loading="lazy"
+             role="button" tabindex="0"
+             aria-label="{{ zoom_label }}{{ m_alt }}">
+        {% endif %}
+      </figure>
+    {% endif %}
+
+  </div>
+  {% endif %}
+
+  {%- comment -%}
+    ── RECIT ────────────────────────────────────────────────────────────
+    Un seul bloc, en bande pleine largeur sur le sol dither. Le contraste
+    d'aplat fait le rythme entre le corpus et le texte (modele Emilie Druss
+    releve dans la veille), au lieu d'un entrelacement qui suggerait un lien
+    image / paragraphe que le contenu n'a jamais eu.
+  {%- endcomment -%}
+  {% assign notes_pleines = 0 %}
+  {% for _n in notes %}
+    {% assign _c = _n.content[lang] | default: _n.content.en | default: _n.content.fr | strip %}
+    {% if _c != "" %}{% assign notes_pleines = notes_pleines | plus: 1 %}{% endif %}
+  {% endfor %}
+  {% if notes_pleines > 0 %}
+  <section class="project-recit"{% if seq_count == 0 %} id="project-suite"{% endif %}
+           aria-label="{% if lang == 'fr' %}Le projet{% else %}The project{% endif %}">
+    <div class="project-recit-corps">
+      {% for _note in notes %}
+        {% include projects/project-note.html note=_note lang=lang %}
+      {% endfor %}
     </div>
+  </section>
+  {% endif %}
 
-    <!-- 2. Processus / Context narrative -->
-    {% if project.context_sections %}
-    <div class="cs-process">
-      {% comment %} Titre de section centralise ici : les projets n'ont plus de context_title. Le champ reste lu (voir ligne suivante) pour un titre sur mesure ponctuel. {% endcomment %}
-      {% if lang == 'fr' %}{% assign context_title_default = "Coulisses du projet" %}{% else %}{% assign context_title_default = "Behind the scenes" %}{% endif %}
-      <h2 class="cs-process-title animate-fade-up">{{ project_locale.context_title | default: context_title_default }}</h2>
+  <!-- ── COLOPHON : la meta en index, plus en fiche technique ─── -->
+  <dl class="project-colophon animate-fade-up"{% if seq_count == 0 and notes_pleines == 0 %} id="project-suite"{% endif %}>
+    {% assign _client = project.client[lang] | default: project.client.fr %}
+    {% if _client %}
+    <div><dt>{% if lang == 'fr' %}Client{% else %}Client{% endif %}</dt><dd>{{ _client }}</dd></div>
+    {% endif %}
+    {% if project.year %}
+    <div><dt>{% if lang == 'fr' %}Année{% else %}Year{% endif %}</dt><dd>{{ project.year }}</dd></div>
+    {% endif %}
+    {% assign _secteur = project.secteur[lang] | default: project.secteur.en %}
+    {% if _secteur %}
+    <div><dt>{% if lang == 'fr' %}Secteur{% else %}Sector{% endif %}</dt><dd>{{ _secteur }}</dd></div>
+    {% endif %}
+    {% assign _contexte = project.context[lang] | default: project.context.en %}
+    {% if _contexte %}
+    <div><dt>{% if lang == 'fr' %}Contexte{% else %}Context{% endif %}</dt><dd>{{ _contexte }}</dd></div>
+    {% endif %}
+    {% if project_locale.services %}
+    <div><dt>Services</dt><dd>{{ project_locale.services }}</dd></div>
+    {% endif %}
+    {% if project.tools %}
+    <div><dt>{% if lang == 'fr' %}Outils{% else %}Tools{% endif %}</dt><dd>{{ project.tools }}</dd></div>
+    {% endif %}
+  </dl>
 
-      <div class="cs-process-sections">
-        {% for section in project.context_sections %}
-        {% assign delay = forloop.index0 | times: 120 | plus: 80 %}
-        <div class="cs-process-section animate-fade-up" style="--animate-delay: {{ delay }}ms">
-          <h3>{{ section.title[lang] | default: section.title.fr }}</h3>
-          {{ section.content[lang] | default: section.content.fr | markdownify }}
+  <!-- ── DESIGN SYSTEM : couleurs + specimens typographiques ──── -->
+  {% if project.case_study.colors or project.case_study.typography %}
+  <section class="project-ds" aria-label="{% if lang == 'fr' %}Système de design{% else %}Design system{% endif %}">
+
+    {% if project.case_study.colors %}
+    <div class="project-ds-block">
+      <h2 class="project-ds-title animate-fade-up">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h2>
+      <div class="project-ds-palette">
+        {% for color in project.case_study.colors %}
+        {% assign delay = forloop.index0 | times: 60 %}
+        <div class="project-swatch animate-fade-up" style="--animate-delay: {{ delay }}ms; --swatch-color: {{ color.hex }}; background-color: {{ color.hex }};">
+          <span class="project-swatch-name">{{ color.name[lang] | default: color.name.en }}</span>
+          <span class="project-swatch-hex">{{ color.hex }}</span>
         </div>
         {% endfor %}
       </div>
-
     </div>
     {% endif %}
 
-    <!-- 3. Mockup(s) visuel(s) -->
-    {% if project.case_study.mockups %}
-    {% assign _is_bento = false %}
-    {% for mockup in project.case_study.mockups %}
-      {% if mockup.cols or mockup.rows %}{% assign _is_bento = true %}{% endif %}
-    {% endfor %}
-    {% assign _bento_cols = project.case_study.mockups_grid_cols | default: 4 %}
-    <div class="cs-mockups{% if project.case_study.mockups.size > 1 %}{% if _is_bento %} cs-mockups--bento{% else %} cs-mockups--grid{% endif %}{% endif %}"{% if _is_bento %} style="--grid-cols: {{ _bento_cols }}"{% endif %}>
-      {% for mockup in project.case_study.mockups %}
-      {% assign mockup_alt = mockup.alt[lang] | default: mockup.alt.en | default: project_locale.image_alt %}
-      {% assign mockup_cols = mockup.cols | default: 1 %}
-      {% assign mockup_rows = mockup.rows | default: 1 %}
-      {% if mockup.aspect %}
-        {% assign mockup_aspect = mockup.aspect %}
-      {% elsif mockup_cols == 1 and mockup_rows == 1 %}
-        {% assign mockup_aspect = "1" %}
-      {% else %}
-        {% assign mockup_aspect = "" %}
-      {% endif %}
-      <div class="cs-mockup animate-fade-up" style="--animate-delay: {{ forloop.index0 | times: 100 }}ms; --cols: {{ mockup_cols }}; --rows: {{ mockup_rows }}{% if mockup_aspect != "" %}; --aspect: {{ mockup_aspect }}{% endif %}{% if mockup.fit %}; --fit: {{ mockup.fit }}{% endif %}{% if mockup.bg %}; --bg: {{ mockup.bg }}{% endif %}">
-        {% if mockup.media_type == "video" %}
-        <video src="{{ mockup.src }}" autoplay loop muted playsinline aria-label="{{ mockup_alt }}"></video>
-        {% else %}
-        <img src="{{ mockup.src }}" loading="lazy" alt="{{ mockup_alt }}" aria-label="{{ mockup_alt }} {{ img_action }}" class="lightbox-trigger" role="button" tabindex="0">
-        {% endif %}
-      </div>
-      {% endfor %}
-    </div>
-    {% elsif project.case_study.mockup %}
-    <div class="cs-mockups">
-      <div class="cs-mockup animate-fade-up">
-        {% if project.case_study.mockup.media_type == "video" %}
-        <video src="{{ project.case_study.mockup.src }}" autoplay loop muted playsinline
-          aria-label="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
-        </video>
-        {% else %}
-        <img src="{{ project.case_study.mockup.src }}" loading="lazy"
-          alt="{% if project.case_study.mockup.alt %}{{ project.case_study.mockup.alt[lang] | default: project.case_study.mockup.alt.en }}{% else %}{{ project_locale.image_alt }}{% endif %}">
-        {% endif %}
-      </div>
-    </div>
-    {% endif %}
-
-    <!-- 4. Design System ── Couleurs + Typographie -->
-    {% if project.case_study.colors or project.case_study.typography %}
-    <div class="cs-design-system">
-
-      {% if project.case_study.colors %}
-      <div class="cs-design-block">
-        <h3 class="cs-design-title animate-fade-up">{% if lang == 'fr' %}Couleurs{% else %}Colors{% endif %}</h3>
-        <div class="cs-color-palette">
-          {% for color in project.case_study.colors %}
-          {% assign delay = forloop.index0 | times: 80 %}
-          <div class="cs-color-swatch animate-fade-up" style="--animate-delay: {{ delay }}ms; --swatch-color: {{ color.hex }}; background-color: {{ color.hex }};"
-            aria-label="{{ color.name[lang] | default: color.name.en }} — {{ color.hex }}">
-            <span class="cs-color-name">{{ color.name[lang] | default: color.name.en }}</span>
-            <span class="cs-color-hex">{{ color.hex }}</span>
+    {% if project.case_study.typography %}
+    <div class="project-ds-block">
+      <h2 class="project-ds-title animate-fade-up">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h2>
+      <div class="project-ds-fonts">
+        {% comment %}
+          Le specimen sert le DESSIN des deux lettres, pas la fonte. Il
+          declarait avant `font-family: '<nom>'` sur du texte vivant, donc il
+          pariait sur le fait que le visiteur ait la police du client
+          installee : sur 12 specimens, 8 affichaient un Arial de repli sous
+          le nom d'une autre police. Les contours vivent dans
+          _data/typefaces.yml, indexes sur `name` a la lettre pres.
+          Sans contour, la carte se replie sur son seul nom : muette, jamais
+          fausse.
+        {% endcomment %}
+        {% for font in project.case_study.typography %}
+        {% assign delay = forloop.index0 | times: 60 %}
+        {% assign contour = site.data.typefaces[font.name] %}
+        <div class="project-font animate-fade-up" style="--animate-delay: {{ delay }}ms">
+          {%- comment -%}
+            La fente est toujours emise, meme vide : elle tient la premiere
+            colonne de la grille, donc une carte sans trace garde son texte
+            aligne sur les autres au lieu de revenir a ras du bord.
+          {%- endcomment -%}
+          <span class="project-font-slot">{% if contour %}<svg class="project-font-sample" viewBox="{{ contour.viewBox }}" aria-hidden="true" focusable="false"><path d="{{ contour.path }}" /></svg>{% endif %}</span>
+          <div class="project-font-info">
+            <span class="project-font-name">{{ font.name }}</span>
+            <span class="project-font-usage">{{ font.usage[lang] | default: font.usage.en }}</span>
           </div>
-          {% endfor %}
         </div>
+        {% endfor %}
       </div>
-      {% endif %}
-
-      {% if project.case_study.typography %}
-      <div class="cs-design-block">
-        <h3 class="cs-design-title animate-fade-up">{% if lang == 'fr' %}Typographie{% else %}Typography{% endif %}</h3>
-        <div class="cs-font-stack">
-          {% comment %}
-            Le specimen sert le DESSIN des deux lettres, pas la fonte. Il
-            declarait avant `font-family: '<nom>'` sur du texte vivant, donc il
-            pariait sur le fait que le visiteur ait la police du client
-            installee : sur 12 specimens, 8 affichaient un Arial de repli sous
-            le nom d'une autre police. Les contours vivent dans
-            _data/typefaces.yml, indexes sur `name` a la lettre pres.
-            Sans contour, la carte se replie sur son seul nom : muette, jamais
-            fausse.
-          {% endcomment %}
-          {% for font in project.case_study.typography %}
-          {% assign delay = forloop.index0 | times: 80 %}
-          {% assign contour = site.data.typefaces[font.name] %}
-          <div class="cs-font-item animate-fade-up" style="--animate-delay: {{ delay }}ms">
-            {%- comment -%}
-              La fente est toujours emise, meme vide : elle tient la premiere
-              colonne de la grille, donc une carte sans trace garde son texte
-              aligne sur les autres au lieu de revenir a ras du bord.
-            {%- endcomment -%}
-            <span class="cs-font-sample-slot">{% if contour %}<svg class="cs-font-sample" viewBox="{{ contour.viewBox }}" aria-hidden="true" focusable="false"><path d="{{ contour.path }}" /></svg>{% endif %}</span>
-            <div class="cs-font-info">
-              <span class="cs-font-name">{{ font.name }}</span>
-              <span class="cs-font-usage">{{ font.usage[lang] | default: font.usage.en }}</span>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-
     </div>
     {% endif %}
 
   </section>
   {% endif %}
 
-  <!-- ── CTA ──────────────────────────────── -->
+  <!-- ── SUITE : le passage au projet suivant ─────────────────── -->
+  {% if next_project %}
+  <nav class="project-next" aria-label="{% if lang == 'fr' %}Navigation entre projets{% else %}Project navigation{% endif %}">
+    <a href="{{ next_locale.url }}" class="project-next-link">
+      <span class="project-next-label">{% if lang == 'fr' %}Projet suivant{% else %}Next project{% endif %}</span>
+      <span class="project-next-title">
+        {{ next_project.project_title }}
+        <svg class="project-next-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </span>
+    </a>
+    <a href="/{{ lang }}/portfolio.html" class="project-next-all">
+      {% if lang == 'fr' %}Tous les projets{% else %}All projects{% endif %}
+    </a>
+  </nav>
+  {% endif %}
+
+  <!-- ── CTA ─────────────────────────────────────────────────── -->
   <section class="project-cta" aria-labelledby="project-cta-title">
     <p class="project-cta-eyebrow">
       {% if lang == 'fr' %}Un projet similaire en tête ?{% else %}Got a similar project in mind?{% endif %}
@@ -275,51 +418,6 @@
     {% include ui/button.html href=project_contact_url label=cta_label icon="send" %}
   </section>
 
-  <!-- ── NAVIGATION PROJETS ───────────────── -->
-  <nav class="project-nav" aria-label="{% if lang == 'fr' %}Navigation entre projets{% else %}Project navigation{% endif %}">
-
-    <!-- Précédent -->
-    {% if prev_project %}
-    <a href="{{ prev_locale.url }}" class="project-nav-item project-nav-prev">
-      <svg class="project-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-      <div class="project-nav-info">
-        <span class="project-nav-label">{% if lang == 'fr' %}Précédent{% else %}Previous{% endif %}</span>
-        <span class="project-nav-title">{{ prev_project.project_title }}</span>
-        <span class="project-nav-sub">{{ prev_project.subtitle[lang] | default: prev_project.subtitle.en | default: prev_project.subtitle }}</span>
-      </div>
-      <div class="project-nav-thumb" aria-hidden="true">
-        <img src="{{ prev_project.image_src }}" alt="" loading="lazy">
-      </div>
-    </a>
-    {% else %}
-    <div class="project-nav-item project-nav-empty"></div>
-    {% endif %}
-
-    <!-- Retour portfolio -->
-    <a href="/{{ lang }}/portfolio.html" class="project-nav-portfolio" aria-label="{% if lang == 'fr' %}Retour au portfolio{% else %}Back to portfolio{% endif %}">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/></svg>
-      <span>Portfolio</span>
-    </a>
-
-    <!-- Suivant -->
-    {% if next_project %}
-    <a href="{{ next_locale.url }}" class="project-nav-item project-nav-next">
-      <div class="project-nav-thumb" aria-hidden="true">
-        <img src="{{ next_project.image_src }}" alt="" loading="lazy">
-      </div>
-      <div class="project-nav-info">
-        <span class="project-nav-label">{% if lang == 'fr' %}Suivant{% else %}Next{% endif %}</span>
-        <span class="project-nav-title">{{ next_project.project_title }}</span>
-        <span class="project-nav-sub">{{ next_project.subtitle[lang] | default: next_project.subtitle.en | default: next_project.subtitle }}</span>
-      </div>
-      <svg class="project-nav-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-    </a>
-    {% else %}
-    <div class="project-nav-item project-nav-empty"></div>
-    {% endif %}
-
-  </nav>
-
 </main>
 
 <!-- Lightbox -->
@@ -327,6 +425,10 @@
   <button class="lightbox-close" aria-label="{% if lang == 'fr' %}Fermer{% else %}Close{% endif %}">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
   </button>
-  <img class="lightbox-image" src="" alt="">
+  {%- comment -%}
+    Pas de <img> vide ici : l'element est cree par script.js a la premiere
+    ouverture. Un <img src=""> expedie une boite d'image cassee dans le DOM
+    de chaque page projet, meme masquee.
+  {%- endcomment -%}
 </div>
 {% endif %}
