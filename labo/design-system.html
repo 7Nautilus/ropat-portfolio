@@ -365,9 +365,21 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     </tbody>
   </table>
 
-  <h3>⚠️ La grammaire est saine, et inerte</h3>
+  <h3 style="color:#FF6B6B">⚠️ À REVOIR ENTIÈREMENT · verdict de Ropat, 28/07/2026</h3>
+  <div class="regle" style="border-color:rgba(255,107,107,.35)">
+    <b style="color:#FF6B6B">Le système pleine / marge / étroite est écarté</b>
+    <span>« Cela doit être complètement revu plus tard, le système <em>pleine, marge et
+    étroite</em> ne donnait pas un résultat intéressant du tout. » Ce n'est pas un réglage à
+    affiner ni un manque de données : c'est <em>l'approche</em> qui est écartée. Ce qui suit
+    documente donc un état de fait à remplacer, pas une cible.</span>
+  </div>
+  <p>Ma lecture était plus indulgente et elle était fausse. J'avais conclu « saine mais inerte »
+  d'un simple comptage, donc en supposant qu'il suffisait de la nourrir. Une mesure de
+  distribution dit ce qui est <strong>émis</strong> ; elle ne dit rien de ce que ça <strong>donne
+  à voir</strong>. Seul un regard sur les pages tranche ça, et il a tranché contre.</p>
   <p>Relevé du 28/07 sur les 11 projets qui ont des médias, en comptant les classes réellement
-  émises dans le HTML :</p>
+  émises dans le HTML. Il garde une valeur de diagnostic : il montre qu'une règle de cadrage
+  déduite d'un seul nombre, le ratio, ne produit pas de composition.</p>
   <table class="jetons">
     <thead><tr><th>Rythme</th><th>Pièces</th><th>Part</th></tr></thead>
     <tbody>
@@ -380,9 +392,13 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   déclarent un <code>aspect</code>, et <strong>une seule pièce</strong> déclare le sien. Tout le
   reste retombe sur le ratio du projet ou sur le défaut carré, donc sur <code>marge</code>.
   Le système sait exprimer trois rythmes ; on ne lui en donne qu'un.</p>
-  <p>Le remède est mécanique et ne touche pas au design : lire les dimensions réelles de chaque
-  image et écrire son <code>aspect</code>. C'est automatisable. Tant que ce n'est pas fait, juger
-  la planche revient à juger une grammaire qu'on n'a jamais laissée parler.</p>
+  <p><strong>Ce qui reste vrai après le verdict.</strong> Déclarer l'<code>aspect</code> de chaque
+  pièce garde toute sa valeur, mais pour une <em>autre</em> raison : ce champ a deux
+  consommateurs, la dérivation du rythme (écartée) et la <strong>réservation anti-CLS</strong> du
+  média, qui elle est indépendante et utile quoi qu'il arrive. Le travail n'est donc pas perdu,
+  il change seulement de justification.</p>
+  <p><strong>Ce qui n'est plus vrai.</strong> Ce n'est plus un préalable à quoi que ce soit :
+  la planche n'attend pas ses données, elle attend une autre idée.</p>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>Les composants réels</h2>
