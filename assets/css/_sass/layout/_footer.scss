@@ -88,7 +88,7 @@ footer {
   align-items: center;
   width: 100%;
   padding: var(--spacing-md) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: var(--hairline-width) solid var(--line);
   color: var(--white-color);
 
   font-family: var(--font-heading);

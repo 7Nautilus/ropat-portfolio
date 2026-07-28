@@ -95,7 +95,7 @@ main:has(.contact-hero) {
   font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--hairline-width) solid var(--line-control);
   @include squircle(var(--border-radius-sm));
   padding: 0.75rem 1rem;
   width: 100%;
@@ -276,7 +276,7 @@ main:has(.contact-hero) {
   font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--hairline-width) solid var(--line-control);
   @include squircle(var(--border-radius-sm));
   padding: 0.75rem 1rem;
   width: 100%;

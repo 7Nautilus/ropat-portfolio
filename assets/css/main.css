@@ -91,9 +91,20 @@
      fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore
      verifie au navigateur sur le motif reel. */
   --ink-subtle: rgba(255, 255, 255, 0.46);
-  /* Filets neutres. Le trait qui separe sans signaler. */
+  /* Filets neutres. Le trait qui SEPARE sans signaler. Aucun minimum de
+     contraste ne s'y applique : il ne porte pas d'information, il aere. */
   --line: rgba(255, 255, 255, 0.08);
   --hairline-width: 1px;
+  /* ⚠️ Le trait qui DELIMITE UN CONTROLE est un autre role, ajoute le
+     28/07/2026. La bordure d'un champ de formulaire dit ou commence la zone
+     cliquable : c'est la seule chose qui la designe, donc WCAG 1.4.11 lui
+     impose 3:1 comme a n'importe quel composant d'interface.
+     Les champs utilisaient rgba(255,255,255,0.1), mesure a 1,23:1. Et `--line`
+     n'aurait pas corrige, il est a 1,17:1 : c'est un filet de separation, il
+     n'a jamais eu a tenir un seuil.
+     0,38 mesure a 3,47:1 sur le sol. Le calcul donne 0,36 pour atteindre 3:1
+     tout juste, on garde de la marge. */
+  --line-control: rgba(255, 255, 255, 0.38);
   /* Accent = signal. Volontairement rare. */
   --accent: var(--orange-500);
   --accent-soft: color-mix(in srgb, var(--accent) 20%, transparent);
@@ -299,6 +310,10 @@
   --ink-muted: #46564F;
   --ink-subtle: rgba(5, 16, 15, 0.62);
   --line: rgba(5, 16, 15, 0.14);
+  /* Meme role, meme exigence, direction inversee. ⚠️ Calcule (0,45 donne
+     environ 3,4:1 sur #F0F4F1), pas encore mesure au navigateur : le skin
+     clair n'a pas de surface reelle avant la Phase 3. */
+  --line-control: rgba(5, 16, 15, 0.45);
   /* #FF6B6B tient 7,26:1 sur le sol sombre mais tombe a 2,44:1 sur la neige :
      une couleur d'etat ne traverse pas un changement de skin sans etre
      reprise. #B3261E est mesure a 5,89:1 sur #F0F4F1.
@@ -1458,7 +1473,7 @@ footer {
   align-items: center;
   width: 100%;
   padding: var(--spacing-md) 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: var(--hairline-width) solid var(--line);
   color: var(--white-color);
   font-family: var(--font-heading);
   text-transform: uppercase;
@@ -3820,7 +3835,9 @@ body:has(.project-page) header[data-chrome=retire] {
   list-style: none;
   padding: 0;
   margin: 0;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  /* Rail de frise, pas un liseré d'accent : il structure une liste
+     chronologique. Le 2px est donc un choix, seule la couleur se tokenise. */
+  border-left: 2px solid var(--line);
   padding-left: var(--spacing-lg);
 }
 
@@ -3832,7 +3849,7 @@ body:has(.project-page) header[data-chrome=retire] {
   padding: var(--spacing-md) 0;
 }
 .about-timeline-item:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: var(--hairline-width) solid var(--line);
 }
 .about-timeline-item:focus-visible .about-timeline-period {
   text-decoration: underline;
@@ -4014,7 +4031,7 @@ main:has(.contact-hero) {
   font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--hairline-width) solid var(--line-control);
   border-radius: var(--border-radius-sm);
 }
 @supports (corner-shape: squircle) {
@@ -4206,7 +4223,7 @@ main:has(.contact-hero) {
   font-size: var(--text-meta);
   color: var(--white-color);
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: var(--hairline-width) solid var(--line-control);
   border-radius: var(--border-radius-sm);
 }
 @supports (corner-shape: squircle) {
