@@ -278,7 +278,7 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>La doctrine</h2>
-  <p>Six règles, écrites pour être <strong>opposables</strong>. Une règle qu'on ne peut pas
+  <p>Sept règles, écrites pour être <strong>opposables</strong>. Une règle qu'on ne peut pas
   invoquer contre une décision n'est pas une règle, c'est une intention.</p>
 
   <div class="regle"><b>1 · L'œuvre est le produit</b>
@@ -293,8 +293,9 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 
   <div class="regle"><b>2 · Deux couches, jamais une</b>
   <span>Realtree, c'est un camouflage dense <em>et</em> un blaze qui claque contre lui.
-  Le camouflage porte la surface : dither, gris, filets. Le signal est rare et il claque.
-  Un orange appliqué comme motif n'est plus un signal, c'est du papier peint.</span></div>
+  Le camouflage porte la surface : dither, aplats, filets. Le signal est rare et il claque.
+  Un orange appliqué comme motif n'est plus un signal, c'est du papier peint.<br>
+  <em>Où s'arrête le camouflage :</em> voir la règle 7.</span></div>
 
   <div class="regle"><b>3 · Chaque orange doit pouvoir nommer ce qu'il signale</b>
   <span>Le test d'acceptation : sur un écran donné, compter les oranges et dire, pour chacun,
@@ -318,6 +319,21 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   <div class="regle"><b>6 · Rien ne se décide sans mesure</b>
   <span>Contraste, longueur de ligne, cible tactile, poids : des nombres, pris au navigateur, sur
   la vraie page. Et un test qui ne peut pas échouer ne prouve rien : prévoir un témoin.</span></div>
+
+  <div class="regle"><b>7 · Le camouflage habille les surfaces, pas les encres</b>
+  <span>Posée par Ropat le 28/07, après avoir vu le rendu d'un essai qui ramenait les deux gris de
+  texte sur l'axe vert. Ses deux raisons, et elles sont distinctes :
+  <strong>le texte vert ne fait pas assez sérieux</strong> pour l'ensemble, et il
+  <strong>ajoute une couleur de plus</strong> à une page qui en a déjà. Les aplats, eux, doivent
+  être du camouflage : c'est là qu'il fait son travail.<br>
+  <em>Ce que la règle évite de refaire :</em> l'argument qui a retiré le blanc pur des aplats ne
+  se transporte pas aux encres. La mesure disait « aucun coût » (le contraste montait même,
+  16,35&nbsp;→&nbsp;17,13 et 7,94&nbsp;→&nbsp;8,70), mais elle ne pouvait pas dire « même effet ».
+  Un raisonnement de palette valide sur une surface isolée devient une <em>ambiance</em> quand on
+  l'applique à tout le texte secondaire du site.<br>
+  <em>Corollaire opposable :</em> ne pas rouvrir <code>--ink-soft</code> et
+  <code>--ink-muted</code> avec des arguments chiffrés. Ils ont été produits, ils ne répondent pas
+  à la question posée.</span></div>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>Les couches</h2>
