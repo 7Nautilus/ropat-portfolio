@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
       body.style.overflow = isActive ? 'hidden' : '';
     });
 
-    const navInteractiveSelectors = ['.nav-link', '.contact-link'];
+    const navInteractiveSelectors = ['.nav-link', '.nav-contact'];
     navInteractiveSelectors.forEach(selector => {
       document.querySelectorAll(selector).forEach(link => {
         link.addEventListener('click', closeMenu);

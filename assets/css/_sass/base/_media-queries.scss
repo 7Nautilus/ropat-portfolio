@@ -73,7 +73,7 @@
     transform: none;
   }
 
-  .contact-link {
+  .nav-contact {
     font-size: var(--text-meta);
   }
 
@@ -137,7 +137,7 @@
    les liens de l'overlay perdent leur padding entre 640 et 767. */
 @media (max-width: 767px) {
   .nav-links-header .nav-item a,
-  .contact-link {
+  .nav-contact {
     padding: 0.75rem var(--spacing-md);
   }
 }

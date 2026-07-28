@@ -23,6 +23,8 @@
                        Une valeur inconnue ne rend AUCUNE icône, silencieusement
                        (le `case` ci-dessous n'a pas de branche par défaut).
     aria               valeur de aria-label
+    current            "page" pour poser aria-current sur le lien de la page
+                       courante (nécessaire depuis que la nav passe par ici)
     class              classes additionnelles (positionnement, marges…)
 
   Exemples :
@@ -56,7 +58,7 @@
 
 {% capture classes %}btn btn--{{ variant }}{% unless variant == "ghost" %} btn--{{ size }}{% endunless %}{% if include.class %} {{ include.class }}{% endif %}{% endcapture %}
 
-<{{ tag }} class="{{ classes }}"{% if include.href %} href="{{ include.href }}"{% endif %}{% if tag == "button" %} type="{{ include.type | default: 'submit' }}"{% endif %}{% if include.aria %} aria-label="{{ include.aria }}"{% endif %}>
+<{{ tag }} class="{{ classes }}"{% if include.href %} href="{{ include.href }}"{% endif %}{% if tag == "button" %} type="{{ include.type | default: 'submit' }}"{% endif %}{% if include.aria %} aria-label="{{ include.aria }}"{% endif %}{% if include.current %} aria-current="{{ include.current }}"{% endif %}>
   <span>{{ include.label }}</span>
   {% case icon %}
     {% when "arrow" %}{% include ui/icon-arrow.html %}

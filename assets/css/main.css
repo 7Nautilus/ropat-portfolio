@@ -839,7 +839,7 @@ header[data-sur-media] {
      Un bouton a le droit d'avoir un fond, c'est meme sa nature.
      Mesure apres coup, 6 projets : 7,34:1 au pire. */
 }
-header[data-sur-media] .contact-link {
+header[data-sur-media] .nav-contact {
   background: var(--surface);
   box-shadow: none;
 }
@@ -943,23 +943,25 @@ header[data-sur-media] .logo {
   outline: none;
 }
 
-/* Contact Button */
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-  background: var(--primary-color-alpha);
-  border: var(--border-primary);
-  border-radius: var(--border-radius-full);
-  text-decoration: none;
-  box-shadow: var(--shadow-sm);
-}
+/* ══════════════════════════════════════════════════════════════════════════
+   BOUTON CONTACT DE LA NAV
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ Ce bloc declarait AUTREFOIS tout l'habillage : fond, bordure, rayon,
+   ombre, et un survol complet. C'etait un `.btn--solid` reecrit a la main sous
+   un autre nom, et la duplication a coute un defaut reel : le correctif de
+   contraste pose sur `.btn--solid:hover` pendant la passe `include` (texte
+   blanc sur aplat orange plein, 3,10:1, corrige a 6,51:1 via `--accent-ink`)
+   n'a jamais atteint ce bouton, reste a 3,10:1 sur toutes les pages.
 
-.contact-link:hover {
-  background: var(--primary-color);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-md);
+   Depuis le 28/07/2026, il passe par `ui/button.html` et herite de
+   `.btn--solid`. Il ne reste ici que ce qui releve du CONTEXTE nav, c'est-a-
+   dire ce que le composant ne peut pas savoir : la barre est haute de 83 px,
+   le padding de `.btn--md` (14/32) l'aurait fait grossir.
+   `em` et non `rem` : le padding suit la police du bouton, qui est reduite
+   dans la barre. */
+.nav-contact {
+  font-size: var(--text-meta);
+  padding: 0.5em 1.1em;
 }
 
 /* ================================
@@ -4326,7 +4328,7 @@ main:has(.contact-hero) {
   .nav-link:hover {
     transform: none;
   }
-  .contact-link {
+  .nav-contact {
     font-size: var(--text-meta);
   }
   .hero-title {
@@ -4377,7 +4379,7 @@ main:has(.contact-hero) {
    les liens de l'overlay perdent leur padding entre 640 et 767. */
 @media (max-width: 767px) {
   .nav-links-header .nav-item a,
-  .contact-link {
+  .nav-contact {
     padding: 0.75rem var(--spacing-md);
   }
 }

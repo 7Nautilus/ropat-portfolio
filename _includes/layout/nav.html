@@ -21,12 +21,34 @@
         {% assign is_current = true %}
       {% endif %}
 
+      {%- comment -%}
+        Le lien Contact passe par ui/button.html depuis le 28/07/2026.
+        Ce n'etait pas un lien de nav mais un BOUTON ecrit a la main : il
+        redeclarait le fond, la bordure, le rayon, l'ombre et le survol de
+        .btn--solid sous un autre nom. La duplication avait deja coute un
+        defaut reel : le correctif de contraste pose sur .btn--solid:hover
+        (texte blanc sur aplat orange, 3,10:1, corrige a 6,51:1) n'avait
+        jamais atteint .contact-link, reste a 3,10:1 sur tout le site.
+        Les autres liens ne passent PAS par l'include : ce sont de vrais
+        liens de navigation avec un souligne qui se revele, pas des boutons.
+      {%- endcomment -%}
+      {% assign item_classes = item.class | join: ' ' %}
       <li class="nav-item">
+        {% if item_classes contains 'contact-link' %}
+          {% if is_current %}{% assign nav_current = "page" %}{% else %}{% assign nav_current = nil %}{% endif %}
+          {% include ui/button.html
+             href=final_url
+             label=link_name
+             icon="none"
+             class="nav-element nav-contact"
+             current=nav_current %}
+        {% else %}
         <a href="{{ final_url | relative_url }}"
-           class="{{ item.class | join: ' ' }}"
+           class="{{ item_classes }}"
            {% if is_current %}aria-current="page"{% endif %}>
            {{ link_name }}
         </a>
+        {% endif %}
       </li>
     {% endif %}
   {% endfor %}
