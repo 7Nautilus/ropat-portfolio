@@ -1,5 +1,21 @@
 {% comment %}
   Icône d'envoi. Utilisée par les CTA de contact.
-  alt vide car aria-hidden : l'icône est décorative, le libellé du bouton porte le sens.
+  Décorative : `aria-hidden`, le libellé du bouton porte le sens.
+
+  ⚠️ SVG EN LIGNE depuis le 28/07/2026. C'était une image externe pointant sur
+  /assets/images/icons/send.svg, dont le tracé est noir, redressé par un
+  `filter: invert(1)` en CSS pour paraître blanc.
+  Une image externe ne peut pas lire `currentColor` : l'icône restait donc
+  blanche quand le texte du bouton passait à l'encre sombre au survol
+  (`.btn--solid:hover { color: var(--accent-ink) }`). Le libellé changeait de
+  couleur, l'icône non.
+  En ligne avec `stroke="currentColor"`, elle suit le texte dans tous les
+  états, et le `filter: invert(1)` disparaît avec elle.
+
+  `1em` comme la flèche : l'icône suit la taille du texte au lieu de la fixer.
 {% endcomment %}
-<img class="btn-icon-send" width="18" height="18" src="/assets/images/icons/send.svg" alt="" aria-hidden="true">
+<svg class="btn-icon-send" width="1em" height="1em" viewBox="0 0 160 160"
+     fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <path d="M152,26c0,1.99-.32,3.91-.92,5.7l-36,108c-2.39,7.15-9.13,12.3-17.08,12.3-8.39,0-15.44-5.74-17.43-13.5h0l-10.23-36.38h-.01c-1.72-6.15-6.62-10.96-12.82-12.55h0s-36.39-10.24-36.39-10.24h0c-7.57-2.13-13.11-9.09-13.11-17.33s5.32-14.91,12.65-17.19L127.81,9.09l.49-.17c1.79-.59,3.71-.92,5.7-.92,9.94,0,18,8.06,18,18Z"
+        stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

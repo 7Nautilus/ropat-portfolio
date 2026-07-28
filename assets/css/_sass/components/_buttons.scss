@@ -140,6 +140,18 @@
      Le padding responsive vit ICI et non dans _media-queries.scss : ce dernier
      est charge en dernier et ecraserait la regle. */
   @media (max-width: 360px) {
+    // ⚠️ COMPROMIS ASSUMÉ, et la seule combinaison mesurée qui tienne.
+    // Sous 360px, la gouttière du `xl` (0.75rem) devient plus SERRÉE que celle
+    // du `md` (0.875rem, héritée de `.btn`) : le bouton « extra large » est
+    // donc le plus compact des deux sur les plus petits téléphones. C'est une
+    // incohérence, et elle est volontaire.
+    // Trois combinaisons ont été mesurées : rendre les 2px de gouttière
+    // ramène la boîte à 104px (le libellé casse en deux), et les reprendre sur
+    // le padding ne suffit pas non plus, la boîte restant plafonnée à 272px
+    // par son conteneur. Seule celle-ci donne 272x71, une ligne.
+    // Le vrai levier n'est donc pas ici mais dans la LONGUEUR DU LIBELLÉ :
+    // « Lançons votre projet » est long pour 320px. Une variante courte en
+    // données réglerait le sujet mieux que n'importe quel réglage de padding.
     gap: 0.75rem;
     padding: 1rem 1.25rem;
   }
@@ -147,9 +159,14 @@
 
 /* ── Icônes ─────────────────────────────── */
 
-.btn-icon-send {
-  filter: invert(1);
-}
+/* ⚠️ `filter: invert(1)` RETIRÉ le 28/07/2026 avec l'image externe qu'il
+   redressait. L'icône est désormais un SVG en ligne en `currentColor` : elle
+   suit le texte du bouton dans tous les états, ce qu'une image ne pouvait pas
+   faire. Au survol d'un `.btn--solid`, le libellé passait à l'encre sombre et
+   l'icône restait blanche.
+   Plus aucune règle n'est nécessaire ici : la classe reste seulement comme
+   point d'accroche si un jour l'icône d'envoi doit se distinguer de la
+   flèche. */
 
 /* ============================================
    Scroll Down Button

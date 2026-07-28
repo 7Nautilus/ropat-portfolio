@@ -1736,10 +1736,14 @@ footer {
 }
 
 /* ── Icônes ─────────────────────────────── */
-.btn-icon-send {
-  filter: invert(1);
-}
-
+/* ⚠️ `filter: invert(1)` RETIRÉ le 28/07/2026 avec l'image externe qu'il
+   redressait. L'icône est désormais un SVG en ligne en `currentColor` : elle
+   suit le texte du bouton dans tous les états, ce qu'une image ne pouvait pas
+   faire. Au survol d'un `.btn--solid`, le libellé passait à l'encre sombre et
+   l'icône restait blanche.
+   Plus aucune règle n'est nécessaire ici : la classe reste seulement comme
+   point d'accroche si un jour l'icône d'envoi doit se distinguer de la
+   flèche. */
 /* ============================================
    Scroll Down Button
    ============================================ */
