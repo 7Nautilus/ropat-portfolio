@@ -46,14 +46,25 @@ sitemap: false
      Le trio clair est un camouflage NEIGE / LICHEN, valide dans le chantier
      identite mais explicitement « pas encore eprouve a l'ecran » : c'est un
      livrable de la Phase 3, et ses valeurs seront mesurees a ce moment-la. */
-  --p-vert-sol:      #030808;
-  --p-vert-median:   #030F0C;
-  --p-vert-releve:   #051510;
-  --p-neige-haute:   #F0F4F1;
-  --p-neige-mediane: #DCE6E0;
+  /* Option A, tranchee le 28/07 : `haute` designe TOUJOURS la plus claire du
+     trio, dans les deux camouflages. Le nom decrit donc la VALEUR et non un
+     rang, ce qui est la regle des primitives. L'ancien `--p-vert-sol` la
+     violait : « sol » est un role. */
+  --p-vert-basse:    #030808;
+  --p-vert-mediane:  #030F0C;
+  --p-vert-haute:    #051510;
   --p-neige-basse:   #BFD1C7;
+  --p-neige-mediane: #DCE6E0;
+  --p-neige-haute:   #F0F4F1;
 
-  --p-blanc:         #ffffff;
+  /* ⚠️ `--p-blanc: #ffffff` est SUPPRIME. Un blanc pur etait un corps etranger
+     dans une palette entierement teintee : l'encre prend desormais le haut du
+     camouflage neige. Mesure : 18,16:1 sur le sol contre 20,15 pour le blanc
+     pur, perte negligeable.
+     Le noir pur, lui, RESTE, mais uniquement en transparence (voile, rideau,
+     degrade du header). Il n'est pas une couleur de la charte, c'est un outil
+     d'assombrissement : un voile doit etre plus fonce que le plancher de la
+     palette, ce qu'aucun membre de la palette ne peut etre. */
   --p-orange:        #ff5c00;
   --p-encre-sombre:  #05100F;
   --p-vert-succes:   #34C759;
@@ -68,14 +79,14 @@ sitemap: false
      par imposer cette apparence. */
 
   /* Surfaces */
-  --sol: var(--p-vert-sol);                  /* le fond, peint par le dither */
+  --sol: var(--p-vert-basse);                  /* le fond, peint par le dither */
   --voile: rgba(0, 0, 0, 0.5);               /* ASSOMBRIT le sol sous le contenu */
   --rideau: rgba(0, 0, 0, 0.98);             /* lightbox, overlay de nav */
 
   /* Encre, du plus present au plus retire. Trois niveaux, pas quatre :
      l'ancien `--ink-subtle` a 4,63:1 a ete retire par `typeset` faute de
      marge, il n'a pas a revenir. */
-  --encre: var(--p-blanc);
+  --encre: var(--p-neige-haute);
   --encre-douce: #e2e8f0;
   --encre-attenuee: #9CA3AF;                 /* mesure 7,4:1 sur le sol */
 
@@ -1019,13 +1030,12 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
      une encre et un fond, donc entre deux ROLES. La question n'existe pas a ce
      niveau. */
   var PRIMITIVES = [
-    ['--p-vert-sol', 'camouflage sombre &middot; le plus fonce'],
-    ['--p-vert-median', 'camouflage sombre &middot; median'],
-    ['--p-vert-releve', 'camouflage sombre &middot; le plus clair'],
-    ['--p-neige-haute', 'camouflage neige &middot; le plus clair'],
-    ['--p-neige-mediane', 'camouflage neige &middot; median'],
-    ['--p-neige-basse', 'camouflage neige &middot; le plus fonce'],
-    ['--p-blanc', 'blanc pur'],
+    ['--p-vert-basse', 'camouflage sombre &middot; la plus foncee'],
+    ['--p-vert-mediane', 'camouflage sombre &middot; mediane'],
+    ['--p-vert-haute', 'camouflage sombre &middot; la plus claire'],
+    ['--p-neige-basse', 'camouflage neige &middot; la plus foncee'],
+    ['--p-neige-mediane', 'camouflage neige &middot; mediane'],
+    ['--p-neige-haute', 'camouflage neige &middot; la plus claire'],
     ['--p-orange', "l'orange de la marque"],
     ['--p-encre-sombre', 'vert-noir, pour ecrire SUR une couleur'],
     ['--p-vert-succes', 'vert de disponibilite'],
