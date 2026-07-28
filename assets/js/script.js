@@ -483,6 +483,165 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (surMedia) barre.setAttribute('data-sur-media', '');
       else barre.removeAttribute('data-sur-media');
+
+      majEncre(surMedia, bas);
+    };
+
+    // ══════════════════════════════════════════════════════════════════════
+    //  LA BASCULE D'ENCRE
+    // ══════════════════════════════════════════════════════════════════════
+    //  Le chrome passe en encre sombre quand le blanc n'est plus lisible sur
+    //  ce qu'il surplombe, et revient au blanc sinon.
+    //
+    //  ⚠️ LE CRITERE EST UN CONTRASTE, PAS UNE LUMINANCE, et c'est ce qui rend
+    //  le seuil non arbitraire. Cadrage de Ropat le 28/07 : « si le contraste
+    //  est assez bon pour que le texte des boutons de la nav soit lisible il
+    //  reste en blanc, sinon le header change de variante ». On bascule donc
+    //  exactement quand le texte cesse d'etre lisible, c'est-a-dire a 4,5:1,
+    //  le seuil WCAG du texte courant. Il n'y a aucune valeur a regler a la
+    //  main, contrairement a un seuil de luminance.
+    //
+    //  ⚠️ POURQUOI ON NE PEUT PAS SIMPLEMENT « LIRE CE QU'IL Y A DESSOUS » :
+    //  aucune API n'expose l'arriere-plan composite d'une page. `backdrop-
+    //  filter` le TRANSFORME sans jamais le rendre. On le RECONSTRUIT donc a
+    //  partir de ses sources, qui sont toutes connues :
+    //    . les medias, dessines dans un canvas hors ecran de 96 px de large ;
+    //    . tout le reste, qui est le sol dither, quasi noir par construction,
+    //      donc jamais un probleme pour une encre claire.
+    //  Le canvas n'entre pas dans le DOM : il ne peint rien, ne declenche
+    //  aucun layout, et ne telecharge rien. C'est un tampon memoire.
+
+    const LARGEUR_SONDE = 96;
+    const vignettes = new WeakMap();
+
+    // ⚠️ LE PIEGE D'`object-fit`, et il m'a eu deux fois en mesurant. Le
+    // contenu peint ne remplit PAS la boite de l'element : avec `contain` il y
+    // est centre et borde de vide. Projeter des coordonnees d'ecran a travers
+    // `getBoundingClientRect` sans en tenir compte fait echantillonner a cote.
+    const rectContenu = (el) => {
+      const b = el.getBoundingClientRect();
+      const nw = el.naturalWidth || el.videoWidth || 0;
+      const nh = el.naturalHeight || el.videoHeight || 0;
+      const fit = getComputedStyle(el).objectFit;
+      if (!nw || !nh || fit === 'fill' || fit === 'none') return b;
+      const rb = b.width / b.height, rn = nw / nh;
+      let w, h;
+      if (fit === 'cover') {
+        if (rn > rb) { h = b.height; w = h * rn; } else { w = b.width; h = w / rn; }
+      } else {                                   // contain, scale-down
+        if (rn > rb) { w = b.width; h = w / rn; } else { h = b.height; w = h * rn; }
+      }
+      return { left: b.left + (b.width - w) / 2, top: b.top + (b.height - h) / 2,
+               width: w, height: h, right: b.left + (b.width + w) / 2,
+               bottom: b.top + (b.height + h) / 2 };
+    };
+
+    const vignette = (el) => {
+      const estVideo = el.tagName === 'VIDEO';
+      let v = vignettes.get(el);
+      if (!v) {
+        const nw = el.naturalWidth || el.videoWidth || 0;
+        const nh = el.naturalHeight || el.videoHeight || 0;
+        if (!nw || !nh) return null;
+        const c = document.createElement('canvas');
+        c.width = LARGEUR_SONDE;
+        c.height = Math.max(1, Math.round(LARGEUR_SONDE * nh / nw));
+        v = { c: c, x: c.getContext('2d', { willReadFrequently: true }), dessine: false };
+        vignettes.set(el, v);
+      }
+      // Une image ne se dessine qu'une fois ; une video a chaque passage.
+      if (!v.dessine || estVideo) {
+        try {
+          v.x.drawImage(el, 0, 0, v.c.width, v.c.height);
+          v.dessine = true;
+        } catch (e) { return null; }        // media pas encore decode
+      }
+      return v;
+    };
+
+    const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+    const CONTRASTE = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    const L_CLAIRE = 0.2126 * lin(240) + 0.7152 * lin(244) + 0.0722 * lin(241);   // --ink
+
+    // Luminance REPRESENTATIVE sous une boite : un percentile haut, pas le
+    // maximum. Un seul pixel clair perdu dans une oeuvre sombre ne doit pas
+    // faire basculer toute la barre ; il en existe sur presque chaque image.
+    const PERCENTILE = 0.9;
+
+    const luminanceSous = (boite) => {
+      let vals = null;
+      for (const el of mediasPage) {
+        if (el.offsetParent === null && el.tagName !== 'VIDEO') continue;
+        const r = rectContenu(el);
+        const gx = Math.max(boite.left, r.left), dx = Math.min(boite.right, r.right);
+        const hy = Math.max(boite.top, r.top), by = Math.min(boite.bottom, r.bottom);
+        if (dx - gx <= 0 || by - hy <= 0) continue;
+        const v = vignette(el);
+        if (!v) continue;
+        const kx = v.c.width / r.width, ky = v.c.height / r.height;
+        const sx = Math.floor((gx - r.left) * kx), sy = Math.floor((hy - r.top) * ky);
+        const sw = Math.max(1, Math.round((dx - gx) * kx)), sh = Math.max(1, Math.round((by - hy) * ky));
+        let d;
+        try { d = v.x.getImageData(sx, sy, sw, sh).data; } catch (e) { continue; }
+        if (!vals) vals = [];
+        for (let i = 0; i < d.length; i += 4) {
+          vals.push(0.2126 * lin(d[i]) + 0.7152 * lin(d[i + 1]) + 0.0722 * lin(d[i + 2]));
+        }
+      }
+      if (!vals || !vals.length) return null;    // rien d'autre que le sol
+      vals.sort((a, b) => a - b);
+      return vals[Math.min(vals.length - 1, Math.floor(PERCENTILE * (vals.length - 1)))];
+    };
+
+    // ⚠️ DEUX GARDE-FOUS, ET IL EN FALLAIT DEUX. Mesure a l'appui.
+    //
+    // 1. HYSTERESIS. On sort du blanc sous 4,5 et on n'y revient qu'au-dessus
+    //    de 7. Sans bande morte, un controle pose pile au seuil basculerait a
+    //    chaque pixel de defilement.
+    //
+    // 2. DUREE DE MAINTIEN. L'hysteresis seule ne suffisait pas, et c'est un
+    //    test de defilement fin qui l'a montre : sur Ottony, une oeuvre pourtant
+    //    SOMBRE mais brodee de fil clair, la sequence relevee tous les 10 px
+    //    donnait `CCCCCCCCCCCCSSCCCCCCSSSS...`, soit un aller-retour de deux
+    //    positions, donc un clignotement.
+    //    La cause n'est pas un seuil mal choisi : a ces instants la barre
+    //    surplombe VRAIMENT une zone claire, la mesure est juste. Le defaut est
+    //    TEMPOREL, il fallait donc une reponse temporelle. On interdit deux
+    //    bascules a moins de 400 ms : le chrome reste au pire un instant de
+    //    retard sur le fond, ce qui se voit infiniment moins qu'un clignotement.
+    const SEUIL_SORTIE = 4.5, SEUIL_RETOUR = 7;
+    const MAINTIEN = 400;
+    let encreSombre = false;
+    let dernierChangement = 0;
+
+    const majEncre = (surMedia, bas) => {
+      if (!surMedia) {
+        if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
+        return;
+      }
+      // Tous les controles, et c'est le PIRE qui decide : la barre n'a qu'une
+      // variante, elle doit donc servir celui qui est le plus en peine.
+      let pire = null;
+      barre.querySelectorAll('.logo, .nav-link, .nav-contact, .burger-menu').forEach(el => {
+        const b = el.getBoundingClientRect();
+        if (b.width < 1 || b.height < 1 || b.top > bas) return;
+        const L = luminanceSous(b);
+        if (L === null) return;
+        if (pire === null || L > pire) pire = L;      // le plus CLAIR est le pire pour une encre claire
+      });
+      if (pire === null) {                             // que du sol dither
+        if (encreSombre) { encreSombre = false; barre.removeAttribute('data-encre'); }
+        return;
+      }
+      const c = CONTRASTE(L_CLAIRE, pire);
+      const veutSombre = encreSombre ? c <= SEUIL_RETOUR : c < SEUIL_SORTIE;
+      if (veutSombre === encreSombre) return;
+      const t = performance.now();
+      if (t - dernierChangement < MAINTIEN) return;
+      dernierChangement = t;
+      encreSombre = veutSombre;
+      if (encreSombre) barre.setAttribute('data-encre', 'sombre');
+      else barre.removeAttribute('data-encre');
     };
 
     let enAttenteFond = false;

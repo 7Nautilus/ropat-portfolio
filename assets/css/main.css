@@ -939,7 +939,7 @@ header {
      Deux consequences : la couleur redevient visible dans la palette, et une
      variante du chrome n'a plus qu'a changer cette valeur, sans toucher au
      dessin. */
-  color: var(--accent);
+  color: var(--signal-chrome);
   display: inline-block;
   backface-visibility: hidden;
   perspective: 1000px;
@@ -991,6 +991,56 @@ header {
    ⚠️ La sonde a11y-audit.mjs ne couvre pas ce cas et ne l'a jamais couvert :
    au-dessus d'un media elle marque `surImage` et son ratio ne veut rien dire.
    Un « 0 echec » de sa part ne valide rien ici. */
+/* ══════════════════════════════════════════════════════════════════════════
+   LA BASCULE D'ENCRE
+   ══════════════════════════════════════════════════════════════════════════
+   Deux variables locales, et TOUT le chrome les lit. C'est ce qui permet a la
+   bascule d'etre UNE ligne au lieu d'une reecriture de chaque regle : le JS ne
+   pose qu'un attribut, `data-encre="sombre"`, et la cascade fait le reste.
+
+   Pourquoi deux et pas une : le chrome porte deux roles distincts, l'ENCRE
+   (nav, burger, libelle du bouton) et le SIGNAL (logo, contour du bouton,
+   souligne). Ils sont differents au repos, l'un blanc et l'autre orange, et ils
+   convergent dans la variante sombre. Une seule variable les aurait fusionnes
+   partout, y compris la ou ils doivent differer. */
+header {
+  --encre-chrome: var(--ink);
+  --signal-chrome: var(--accent);
+  /* La transition porte sur les DEUX proprietes que la bascule change, et sur
+     elles seules. `all` aurait attrape le `transform` de l'escamotage, donc la
+     barre se serait mise a glisser mollement au lieu de se retirer net. */
+}
+header .logo, header .nav-link, header .nav-item a, header .burger-menu, header .nav-contact {
+  transition: color var(--dur-base) var(--ease-quad-out), border-color var(--dur-base) var(--ease-quad-out), background-color var(--dur-base) var(--ease-quad-out);
+}
+
+/* ⚠️ LA VARIANTE SOMBRE. Elle n'existe QUE sous `[data-sur-media]` : ailleurs
+   le chrome surplombe le sol dither, qui est quasi noir par construction, et
+   une encre sombre y serait invisible. Le JS ne pose donc `data-encre` que
+   dans ce cas, mais le selecteur le redit, pour qu'un bug du JS ne puisse pas
+   rendre le header illisible sur une page normale.
+
+   « La meme logique qu'en orange mais en vert » (Ropat, 28/07) : le logo garde
+   son dessin, contour plus fond a 20 %, et change seulement de teinte. C'est
+   possible depuis que son SVG est passe a `currentColor` ; tant qu'il portait
+   `#FF5C00` en dur, cette variante etait inatteignable. */
+header[data-sur-media][data-encre=sombre] {
+  --encre-chrome: var(--p-encre-sombre);
+  --signal-chrome: var(--p-encre-sombre);
+}
+
+/* Mouvement reduit : la bascule reste, seule sa DUREE tombe. Supprimer la
+   bascule rendrait le chrome illisible ; supprimer la transition ne coute
+   qu'un fondu. */
+@media (prefers-reduced-motion: reduce) {
+  header .logo,
+  header .nav-link,
+  header .nav-item a,
+  header .burger-menu,
+  header .nav-contact {
+    transition: none;
+  }
+}
 header[data-sur-media] {
   /* ⚠️⚠️ AUCUN TRAITEMENT SUR LA NAV NON PLUS, et c'est le point d'arrivee de
      toute cette histoire. Ne rien remettre ici sans rouvrir l'arbitrage.
@@ -1134,6 +1184,9 @@ header[data-sur-media] {
 }
 
 .nav-item a {
+  /* L'encre du chrome, et non `--ink` en dur : c'est ce que la bascule
+     change. Au repos `--encre-chrome` vaut `--ink`, donc rien ne bouge. */
+  color: var(--encre-chrome);
   transition: all var(--transition-base);
   padding: var(--spacing-xs) var(--spacing-sm);
   position: relative;
@@ -1151,7 +1204,7 @@ header[data-sur-media] {
   bottom: 0;
   width: 0;
   height: 2px;
-  background: var(--primary-color);
+  background: var(--signal-chrome);
   transition: width var(--transition-base);
 }
 
@@ -1162,7 +1215,7 @@ header[data-sur-media] {
 
 .nav-link:hover,
 .nav-link:focus {
-  color: var(--primary-color);
+  color: var(--signal-chrome);
   transform: translateX(10px);
   outline: none;
 }
@@ -1201,6 +1254,18 @@ header[data-sur-media] {
 }
 .nav-contact.btn--solid {
   --bevel-cut: 0.6em;
+  /* Le CTA suit la bascule comme le reste, avec sa construction propre :
+     un contour plein plus un fond a 20 % de la meme teinte. C'est
+     exactement le dessin du logo, transpose sur une boite. */
+  color: var(--encre-chrome);
+  border-color: var(--signal-chrome);
+  background-color: color-mix(in srgb, var(--signal-chrome) 20%, transparent);
+}
+.nav-contact.btn--solid:hover {
+  background-color: var(--signal-chrome);
+  /* Sur un aplat PLEIN, l'encre doit repasser de l'autre cote : claire sur
+     l'orange, claire aussi sur le vert sombre. Les deux tiennent. */
+  color: var(--ink);
 }
 
 /* ================================
@@ -1210,7 +1275,7 @@ header[data-sur-media] {
   display: block;
   background: none;
   border: none;
-  color: var(--white-color);
+  color: var(--encre-chrome);
   cursor: pointer;
   padding: var(--spacing-xs);
   z-index: 110;
@@ -1224,7 +1289,7 @@ header[data-sur-media] {
 
 .burger-menu:focus {
   border-radius: 5px;
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--signal-chrome);
   outline-offset: 4px;
 }
 
