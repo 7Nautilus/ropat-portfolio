@@ -362,6 +362,25 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   <em>déborder</em> : voile, bande, ombre portée, tout ce qui peint au-delà de sa propre boîte. La
   nuance qui reste ouverte, et que le sixième arbitrage a tranchée sans la nommer : ce
   remplissage a le droit d'être <em>opaque</em>, mais il ne l'est plus nulle part.<br>
+  <strong>⚠️ Précision du 29/07, et elle vient d'un aller-retour à ma charge.</strong> La règle
+  interdit d'<em>assombrir</em> l'œuvre pour se rendre lisible. Elle n'interdit pas de
+  <em>signaler</em> dessus. J'avais restauré le survol du logo <em>sans</em> sa lueur orange en
+  invoquant cette règle ; Ropat : <em>« remets la lueur orange sur le logo »</em>. Son arbitrage
+  se tient et il se vérifie : une lueur orange n'assombrit rien, elle n'existe qu'à
+  l'<strong>engagement</strong> (donc elle signale, ce que la règle 3 demande à un orange), et le
+  bouton contact avait gardé exactement la sienne. <strong>Deux éléments du même chrome ne peuvent
+  pas suivre deux règles opposées</strong> : c'est cette incohérence qui aurait dû m'alerter, pas
+  la règle.<br>
+  <strong>Le test qui tranche : l'effet existe-t-il au repos ?</strong> Un voile, un fond de barre,
+  un halo permanent sont posés en permanence sur le travail du client, donc ils tombent. Un effet
+  qui n'apparaît qu'au survol ne concurrence jamais l'œuvre pendant qu'on la regarde. Les six
+  arbitrages de Ropat portaient tous sur des effets <em>permanents</em>, et j'avais généralisé à
+  partir d'eux sans voir ce qu'ils avaient en commun.<br>
+  La lueur est revenue par le <strong>jeton du bouton</strong> (<code>--shadow-signal</code>) et
+  non par sa valeur d'origine recopiée : les deux lueurs sont désormais la même déclaration et
+  bougeront ensemble. Mesure : le logo rend
+  <code>drop-shadow(color(srgb 1 0.360784 0 / 0.5) 0px 6px 16px)</code>, le bouton
+  <code>box-shadow: color(srgb 1 0.360784 0 / 0.5) 0px 6px 16px 0px</code>.<br>
   <strong>Le prix est connu, mesuré, et accepté.</strong> Mesures sur les pixels réellement
   peints, capture d'écran relue dans un canvas :</span>
   <table class="jetons" style="margin:.8rem 0">
