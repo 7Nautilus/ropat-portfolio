@@ -116,22 +116,20 @@
 
 // CTA principal : hero de la home et clôture de la page À propos.
 //
-// ⚠️ `font-size` ajouté le 28/07/2026. Mesuré avant : xl et md avaient
-// EXACTEMENT la même police, 20px, le même padding horizontal et le même
-// rayon. Ils ne différaient que par 2px de padding vertical, soit 4px de
-// hauteur de boîte. Une variante nommée « xl » qui ne change pas la taille du
-// texte n'est pas un échelon, c'est du bruit.
-// La valeur n'est pas inventée : c'est l'échelon au-dessus de `--text-body`
-// dans l'échelle typographique, donc un rapport de 1,3 à 1,6 selon la largeur.
-// L'icône suit toute seule, elle est dimensionnée en `1em` depuis la
-// consolidation des flèches.
+// ⚠️ Le `font-size: var(--text-subhead)` essayé le 28/07/2026 a été RETIRÉ le
+// même jour, sur décision de Ropat après avoir vu le rendu : il portait le CTA
+// à 31,9px contre 20, un rapport de 1,60, et c'était trop.
+// Le constat qui l'avait motivé reste vrai et n'est pas résolu : xl et md ont
+// la même police (20px), le même padding horizontal et le même rayon. Ils ne
+// diffèrent que par 2px de padding vertical, soit 4px de hauteur de boîte.
+// Une variante nommée « xl » qui ne change pas la taille du texte n'est pas un
+// échelon. Si le sujet revient, l'écart devra se jouer ailleurs que sur la
+// police : plus de padding, une autre présence, un autre traitement.
+// L'icône, elle, reste en `1em` depuis la consolidation des flèches : elle
+// suivra automatiquement si la police change un jour.
 .btn--xl {
-  font-size: var(--text-subhead);
   gap: 1.5rem;
-  // Padding en `em` et non en rem : il suit désormais la police au lieu de la
-  // contredire. En valeurs fixes, un texte de 32px dans 16px de padding aurait
-  // paru à l'étroit.
-  padding: 0.55em 1.1em;
+  padding: 1rem 2rem;
 }
 
 /* ── Icônes ─────────────────────────────── */
