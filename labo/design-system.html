@@ -487,29 +487,75 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       </tbody>
     </table>
 
-    <p class="sur-titre" style="color:rgba(255,255,255,.46)">solid · md · les trois icônes</p>
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.6rem">
+    {%- comment -%}
+      Un AXE PAR GROUPE. Chaque bloc ne fait varier qu'une chose, le reste
+      etant tenu constant : c'est la seule facon de voir ce que le parametre
+      fait vraiment. Un nuancier ou tout varie a la fois ne montre rien.
+    {%- endcomment -%}
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 1 · la variante</p>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;margin-bottom:1.8rem">
+      {% include ui/button.html label="solid" href="#" %}
+      {% include ui/button.html label="ghost" href="#" variant="ghost" %}
+    </div>
+    <p style="margin:-.9rem 0 1.8rem">Le <code>ghost</code> n'a ni fond, ni bordure, ni padding, ni
+    rayon : c'est du texte cliquable. Il vit dans une carte, et c'est le survol de la carte qui
+    l'anime, pas le sien.</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · la taille</p>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;margin-bottom:1.8rem">
+      {% include ui/button.html label="md" href="#" %}
+      {% include ui/button.html label="xl" href="#" size="xl" %}
+      {% include ui/button.html label="ghost + xl" href="#" variant="ghost" size="xl" %}
+    </div>
+    <p style="margin:-.9rem 0 1.8rem">⚠️ Les deux premiers ont la <strong>même police</strong>,
+    le même padding horizontal et le même rayon : ils ne diffèrent que par 2px de padding
+    vertical et 10px de gouttière. Et le troisième est identique au <code>ghost</code>
+    ci-dessus : <code>size</code> est <strong>avalé en silence</strong> sur un ghost, l'API
+    l'accepte et ne fait rien.</p>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 3 · l'icône</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-bottom:1.8rem">
       {% include ui/button.html label="arrow (défaut)" href="#" %}
       {% include ui/button.html label="send" href="#" icon="send" %}
       {% include ui/button.html label="none" href="#" icon="none" %}
     </div>
+    <p style="margin:-.9rem 0 1.8rem">Les deux icônes sont en <code>currentColor</code> et en
+    <code>1em</code> : elles suivent la couleur <em>et</em> la taille du texte, dans tous les
+    états. Au survol, seule la flèche pivote de -45° ; l'icône d'envoi en est exclue, elle est
+    déjà dessinée penchée.</p>
 
-    <p class="sur-titre" style="color:rgba(255,255,255,.46)">solid · xl · le CTA principal</p>
-    <div style="margin-bottom:1.6rem">
-      {% include ui/button.html label="Prendre contact" href="#" size="xl" %}
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 4 · la balise</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-bottom:1.8rem">
+      {% include ui/button.html label="a (défaut si href)" href="#" %}
+      {% include ui/button.html label="button" tag="button" icon="send" %}
+      {% include ui/button.html label="div" tag="div" %}
     </div>
+    <p style="margin:-.9rem 0 1.8rem">Le <code>div</code> sert quand le bouton vit <em>dans</em>
+    un lien : imbriquer deux <code>&lt;a&gt;</code> est invalide. Correctif de sémantique, pas
+    choix de style.</p>
 
-    <p class="sur-titre" style="color:rgba(255,255,255,.46)">ghost · sans fond ni padding</p>
-    <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;margin-bottom:1.6rem">
-      {% include ui/button.html label="Voir le projet" href="#" variant="ghost" %}
-      {% include ui/button.html label="ghost + size=xl" href="#" variant="ghost" size="xl" %}
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 5 · les versions de nav</p>
+    <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;margin-bottom:1rem">
+      {% include ui/button.html label="Contact" href="#" icon="none" class="nav-element nav-contact" %}
+      {% include ui/button.html label="Contact" href="#" icon="none" class="nav-element nav-contact" current="page" %}
     </div>
+    <p style="margin:0 0 1.2rem">Le second porte <code>aria-current="page"</code>. Ce paramètre a
+    dû être ajouté à l'include le 28/07 : sans lui, la nav aurait perdu l'indication de page
+    courante en passant par le composant, sans que rien ne le signale.</p>
 
-    <p class="sur-titre" style="color:rgba(255,255,255,.46)">autres balises</p>
-    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
-      {% include ui/button.html label="tag=button" tag="button" icon="send" %}
-      {% include ui/button.html label="tag=div" tag="div" %}
+    <div style="background:rgba(0,0,0,.98);padding:1.5rem;margin-bottom:1rem">
+      <p class="scene-titre" style="margin-bottom:1rem">Le même, dans l'overlay du burger</p>
+      <ul class="nav-links nav-links-header" style="position:static;display:flex;height:auto;width:auto;opacity:1;flex-direction:row;gap:1.5rem;background:none;padding:0;list-style:none">
+        <li class="nav-item"><a href="#" class="nav-element nav-link">Portfolio</a></li>
+        <li class="nav-item">{% include ui/button.html label="Contact" href="#" icon="none" class="nav-element nav-contact" %}</li>
+      </ul>
     </div>
+    <p style="margin:0 0 1.6rem">⚠️ Sous 768px, il passe à <strong>26px</strong> contre 16 dans la
+    barre : il hérite de <code>.nav-links-header .nav-item a</code>, qui met tous les liens du
+    menu plein écran à <code>--text-subhead</code>. Cohérent <em>à l'intérieur</em> du menu, où
+    les autres liens ont la même taille. Discutable seulement si on compare le menu et la page,
+    ce que personne ne fait puisque l'overlay couvre tout.</p>
   </div>
 
   <div class="scene">
