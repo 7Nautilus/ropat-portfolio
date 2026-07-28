@@ -15,13 +15,19 @@
     size               "md" (défaut) | "xl"
                        xl = CTA principal (hero de la home, clôture de À propos)
                        ignoré pour ghost, qui n'a ni fond ni padding
-    icon               "arrow" (défaut) | "arrow-long" | "send" | "none"
+    icon               "arrow" (défaut) | "send" | "none"
+                       ⚠️ "arrow-long" a été SUPPRIMÉ le 28/07/2026 : il rendait
+                       une flèche de même proportion que "arrow", seul le
+                       traitement des angles changeait. Le dessin au trait a été
+                       retenu et vit désormais dans ui/icon-arrow.html.
+                       Une valeur inconnue ne rend AUCUNE icône, silencieusement
+                       (le `case` ci-dessous n'a pas de branche par défaut).
     aria               valeur de aria-label
     class              classes additionnelles (positionnement, marges…)
 
   Exemples :
     {% include ui/button.html href="/fr/contact.html" label="Me contacter" %}
-    {% include ui/button.html href=url label=txt size="xl" icon="arrow-long" %}
+    {% include ui/button.html href=url label=txt size="xl" %}
     {% include ui/button.html label=txt tag="button" icon="send" class="contact-submit" %}
     {% include ui/button.html label=txt tag="div" variant="ghost" %}
   ============================================================
@@ -54,7 +60,6 @@
   <span>{{ include.label }}</span>
   {% case icon %}
     {% when "arrow" %}{% include ui/icon-arrow.html %}
-    {% when "arrow-long" %}{% include ui/icon-arrow-long.html %}
     {% when "send" %}{% include ui/icon-send.html %}
   {% endcase %}
 </{{ tag }}>
