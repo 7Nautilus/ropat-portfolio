@@ -283,16 +283,46 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <h2>Espacement</h2>
-  <p>Une échelle ne vaut que si on s'y tient. Relevé du 28/07 dans les composants, les mises en
-  page et les pages : <strong id="hors-echelle">32 valeurs hors échelle contre 23 dessus</strong>.
-  Plus de valeurs contournent l'échelle qu'elles ne l'utilisent, ce qui revient à ne pas en
-  avoir. Les fautives : <code>0.875</code>, <code>0.6</code>, <code>0.4</code>, <code>0.75</code>,
-  <code>0.25</code>, <code>1.25</code>, <code>2.5</code>, <code>4</code>, <code>5</code>,
-  <code>6rem</code>.</p>
-  <p>Deux causes distinctes, et deux remèdes distincts : les petites valeurs (0,25 à 0,875)
-  disent qu'il <strong>manque des échelons bas</strong> ; les grandes (4 à 6rem) disent qu'il
-  manque une échelle de <strong>respiration de section</strong>, différente de l'espacement
-  interne d'un composant. Les traiter comme un seul problème n'en réglerait aucun.</p>
+  <p>Une échelle ne vaut que si on s'y tient. Relevé du 28/07 sur les déclarations d'espacement
+  (<code>padding</code>, <code>margin</code>, <code>gap</code>) de <code>_sass/</code> :</p>
+
+  <table class="jetons">
+    <thead><tr><th>Occurrences</th><th>Ce que c'est</th><th>Remède</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ratio ok">123</span></td>
+          <td>utilisent <code>var(--spacing-*)</code></td>
+          <td style="color:#9CA3AF">rien à faire</td></tr>
+      <tr><td><span class="ratio">38</span></td>
+          <td>littéral <strong>égal</strong> à un échelon (<code>1</code>, <code>2</code>,
+              <code>1.5</code>, <code>0.5rem</code>)</td>
+          <td style="color:#9CA3AF">bonne valeur, mauvais mécanisme : substitution mécanique</td></tr>
+      <tr><td><span class="ratio ko">42</span></td>
+          <td>sous le plancher ou entre les échelons (<code>0.15</code> à <code>1.75rem</code>)</td>
+          <td style="color:#9CA3AF">il manque des <strong>échelons bas</strong></td></tr>
+      <tr><td><span class="ratio ko">10</span></td>
+          <td>au-dessus du dernier échelon (<code>2.5</code> à <code>10rem</code>)</td>
+          <td style="color:#9CA3AF">il manque une échelle de <strong>respiration de section</strong></td></tr>
+      <tr><td><span class="ratio">16</span></td>
+          <td>en <code>clamp()</code>, donc fluides</td>
+          <td style="color:#9CA3AF">catégorie à part, pas une dérive</td></tr>
+    </tbody>
+  </table>
+
+  <p>L'échelle est donc <strong>plus utilisée que contournée</strong>. Les 52 valeurs réellement
+  hors échelle se rangent en deux familles qui demandent deux remèdes différents : les traiter
+  comme un seul problème n'en réglerait aucun. L'échelle commence à 0,5rem et saute ensuite de
+  0,5 en 0,5, donc rien de plus fin n'a où aller ; elle s'arrête à 3rem, donc la respiration
+  entre sections n'a pas d'échelon non plus.</p>
+
+  {%- comment -%}
+    ⚠️ Ces chiffres CORRIGENT ceux du 28/07, qui annonçaient « 32 hors échelle contre 23
+    dessus » et concluaient que l'échelle était plus contournée qu'utilisée. Trois erreurs de
+    mesure : la liste était tronquée par un `head -14` ; le motif attrapait `border-top` et
+    `border-left`, donc des épaisseurs de trait comptées comme des espacements ; et surtout un
+    littéral `1rem` était compté « sur l'échelle » alors qu'il n'utilise aucun jeton.
+    La conclusion sur les deux familles, elle, a survécu à la correction. Le message du commit
+    d392a41 porte encore l'ancien chiffre.
+  {%- endcomment -%}
   <table class="jetons" id="t-espace">
     <thead><tr><th>Jeton</th><th>Mesure</th><th>Ratio</th><th>À l'échelle</th></tr></thead>
     <tbody></tbody>
