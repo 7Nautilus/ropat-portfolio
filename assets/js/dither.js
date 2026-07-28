@@ -1,5 +1,5 @@
 // ============================================================================
-//  FOND DITHER TRICOLORE — moteur
+//  FOND DITHER TRICOLORE : moteur
 //
 //  Remplace l'image de fond du site (main-bg.webp, 453 Ko) par un rendu
 //  procedural en shader. Le fond DEFILE avec le document, se REFERME sur
@@ -87,7 +87,7 @@ window.RopatDither = (function () {
     curseur: 1.2,      // force du halo et de la derive au repos
 
     // ⏸ EN STAND BY (21/07/2026) : le revele au clic ne rendait pas bien.
-    // Rien n'est supprime — mecanisme, courbes, chargement du logo et filtre
+    // Rien n'est supprime : mecanisme, courbes, chargement du logo et filtre
     // du clic restent en place. `revele: true` le rallume, c'est tout.
     // Le bac a sable l'active explicitement, il est fait pour l'essayer.
     revele: false,

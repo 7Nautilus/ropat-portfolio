@@ -1,5 +1,27 @@
 // ================================
-// CURSEUR BLOB — Desktop uniquement
+// ANNONCES : region vivante partagee
+// ================================
+// Le site changeait le contenu de la page sans jamais le dire. Un lecteur
+// d'ecran qui filtrait le portfolio passait de 21 cartes a 4 dans le silence
+// complet : rien n'indiquait que le choix avait ete pris en compte, ni combien
+// de projets restaient.
+// La region vit dans le layout, donc elle existe AVANT toute injection : une
+// region creee en meme temps que son texte n'est pas annoncee, le lecteur ne
+// surveille que les regions deja presentes quand elles changent.
+// `polite` et non `assertive` : ces messages accompagnent une action de
+// l'utilisateur, ils n'ont pas a couper la parole.
+function annoncer(texte) {
+  const region = document.getElementById('annonces');
+  if (!region) return;
+  // Vider puis reposer au tour suivant : reecrire le MEME texte ne declenche
+  // aucune annonce, or filtrer deux fois de suite sur la meme categorie doit
+  // bien confirmer deux fois.
+  region.textContent = '';
+  requestAnimationFrame(() => { region.textContent = texte; });
+}
+
+// ================================
+// CURSEUR BLOB : Desktop uniquement
 // ================================
 (function () {
   // Activer uniquement sur appareil avec souris précise
@@ -78,7 +100,7 @@ window.addEventListener('load', () => {
 });
 
 // ================================
-// DROPDOWN — controleur unique
+// DROPDOWN : controleur unique
 // ================================
 // Un seul comportement pour tous les dropdowns du site (filtre du portfolio,
 // sujet du formulaire de contact). Les elements sont trouves par
@@ -251,91 +273,90 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    filterTrigger.addEventListener('dropdown:change', e => filterProjects(e.detail.value));
+    filterTrigger.addEventListener('dropdown:change', e => {
+      filterProjects(e.detail.value);
+      // Le resultat du filtre doit se DIRE, pas seulement se voir.
+      const lang = document.documentElement.lang === 'fr' ? 'fr' : 'en';
+      let n = 0;
+      projectCards.forEach(card => {
+        const cats = (card.getAttribute('data-category') || '').split(' ');
+        if (e.detail.value === 'all' || cats.includes(e.detail.value)) n++;
+      });
+      annoncer(lang === 'fr'
+        ? `${e.detail.label} : ${n} projet${n > 1 ? 's' : ''} affiché${n > 1 ? 's' : ''}.`
+        : `${e.detail.label}: ${n} project${n > 1 ? 's' : ''} shown.`);
+    });
   }
 
   initDropdowns();
 
-  const mainImage = document.getElementById('main-image');
-  const mainVideo = document.getElementById('main-video');
-  // Supporte les <button class="thumbnail-btn"> (nouveau) et les <img class="thumbnail-image"> (legacy)
-  const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
-  const thumbnailImgs = document.querySelectorAll('.thumbnail-image');
-  const thumbnails = thumbnailBtns.length ? thumbnailBtns : thumbnailImgs;
-
-  if (mainImage && thumbnails.length) {
-    const changeMedia = btn => {
-      const mediaType = btn.getAttribute('data-media-type') || 'image';
-      const fullSrc = btn.getAttribute('data-full-src');
-      const previewImg = btn.querySelector('img');
-      const src = fullSrc || (previewImg ? previewImg.getAttribute('src') : null);
-      if (!src) return;
-
-      if (mediaType === 'video' && mainVideo) {
-        // Médias mixtes : afficher la vidéo, masquer l'image
-        mainImage.style.display = 'none';
-        mainImage.setAttribute('aria-hidden', 'true');
-        mainVideo.src = src;
-        mainVideo.load();
-        mainVideo.style.display = '';
-        mainVideo.removeAttribute('aria-hidden');
-      } else if (mediaType === 'image' && mainVideo) {
-        // Médias mixtes : afficher l'image, masquer la vidéo
-        mainVideo.style.display = 'none';
-        mainVideo.setAttribute('aria-hidden', 'true');
-        mainImage.src = src;
-        mainImage.style.display = '';
-        mainImage.removeAttribute('aria-hidden');
-      } else {
-        // Comportement legacy (projet tout-image ou tout-vidéo)
-        if (mainImage.tagName.toLowerCase() === 'video') {
-          mainImage.src = src;
-          mainImage.load();
-        } else {
-          mainImage.src = src;
-        }
-      }
-    };
-
-    thumbnails.forEach(thumb => {
-      thumb.addEventListener('click', event => {
-        const btn = event.currentTarget;
-        changeMedia(btn);
-
-        thumbnails.forEach(t => {
-          t.removeAttribute('data-active');
-          const tImg = t.querySelector('img');
-          if (tImg) tImg.removeAttribute('data-active');
-        });
-        btn.setAttribute('data-active', 'true');
-        const btnImg = btn.querySelector('img');
-        if (btnImg) btnImg.setAttribute('data-active', 'true');
-      });
-    });
-  }
+  // Le permutateur de vignettes a ete retire : la page projet n'a plus de
+  // widget de galerie, les medias forment une sequence en flux (cf.
+  // _includes/projects/project-main.html). C'etait la racine des bugs de
+  // galerie. Les images de la sequence restent agrandissables par la
+  // lightbox ci-dessous, via .lightbox-trigger.
 
   // ================================
   // LIGHTBOX - Image plein écran
   // ================================
   const lightbox = document.getElementById('lightbox');
-  const lightboxImage = lightbox ? lightbox.querySelector('.lightbox-image') : null;
   const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
   const lightboxTriggers = lightbox ? document.querySelectorAll('.lightbox-trigger') : [];
   let activeLightboxTrigger = null;
+  // Cree a la premiere ouverture. Le gabarit n'expedie plus d'image vide a
+  // source nulle, qui serait une image cassee dans le DOM de chaque page
+  // projet, meme masquee.
+  let lightboxImage = null;
 
-  if (lightbox && lightboxImage && lightboxTriggers.length > 0) {
+  if (lightbox && lightboxTriggers.length > 0) {
+    // Confinement du Tab : sans lui, une tabulation depuis la lightbox
+    // ouverte envoyait le focus derriere l'overlay (mesure : sur un lien du
+    // pied de page a 9586 px), et `overflow: hidden` empechait la page de
+    // defiler jusqu'a lui. L'utilisateur clavier perdait son curseur.
+    const piegerTab = event => {
+      if (event.key !== 'Tab' || !lightbox.classList.contains('active')) return;
+      const focusables = lightbox.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+      if (!focusables.length) return;
+      const premier = focusables[0];
+      const dernier = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === premier) {
+        event.preventDefault();
+        dernier.focus();
+      } else if (!event.shiftKey && document.activeElement === dernier) {
+        event.preventDefault();
+        premier.focus();
+      }
+    };
+
     const openLightbox = (trigger) => {
       activeLightboxTrigger = trigger;
+      if (!lightboxImage) {
+        lightboxImage = document.createElement('img');
+        lightboxImage.className = 'lightbox-image';
+        // Source posee AVANT l'insertion : le noeud n'est jamais dans le
+        // document sans image a afficher.
+        lightboxImage.src = trigger.src;
+        lightboxImage.alt = trigger.alt;
+        lightbox.appendChild(lightboxImage);
+      }
       lightboxImage.src = trigger.src;
       lightboxImage.alt = trigger.alt;
       lightbox.classList.add('active');
       body.style.overflow = 'hidden';
+      // `aria-modal` seul ne promet rien : sans `inert`, le reste de la page
+      // reste atteignable au clavier et annonce par les lecteurs d'ecran.
+      const principal = document.getElementById('main-content');
+      if (principal) principal.inert = true;
+      document.addEventListener('keydown', piegerTab, true);
       lightboxClose.focus();
     };
 
     const closeLightbox = () => {
       lightbox.classList.remove('active');
       body.style.overflow = '';
+      const principal = document.getElementById('main-content');
+      if (principal) principal.inert = false;
+      document.removeEventListener('keydown', piegerTab, true);
       if (activeLightboxTrigger) activeLightboxTrigger.focus();
     };
 
@@ -361,6 +382,267 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================
+  // CHROME ESCAMOTABLE : pages projet
+  // ================================
+  // Le header ne doit jamais concurrencer l'oeuvre. Il se retire quand on
+  // descend (on lit, on regarde) et revient quand on remonte (on cherche a
+  // naviguer). En haut de page il reste transparent : il est alors pose sur
+  // le sol dither, pas sur le travail du client.
+  const pageProjet = document.querySelector('.project-page');
+  const chrome = document.querySelector('header');
+  if (pageProjet && chrome) {
+    const SEUIL = 8;        // px de mouvement avant de reagir, evite le tremblement
+    const HAUT = 120;       // en deca, on est encore dans l'ouverture
+    let dernierY = window.scrollY;
+    let enAttente = false;
+
+    const majChrome = () => {
+      // Libere le drapeau EN PREMIER : s'il restait arme, le moindre incident
+      // gelait definitivement l'ecoute du defilement.
+      enAttente = false;
+
+      const y = window.scrollY;
+      const delta = y - dernierY;
+
+      if (y <= HAUT) {
+        chrome.removeAttribute('data-chrome');
+        dernierY = y;
+        return;
+      }
+      if (delta > SEUIL) {
+        chrome.setAttribute('data-chrome', 'retire');
+        dernierY = y;
+      } else if (delta < -SEUIL) {
+        chrome.setAttribute('data-chrome', 'pose');
+        dernierY = y;
+      }
+    };
+
+    window.addEventListener('scroll', () => {
+      if (enAttente) return;
+      enAttente = true;
+      requestAnimationFrame(majChrome);
+    }, { passive: true });
+  }
+
+  // ================================
+  // CHROME AU-DESSUS D'UN MEDIA
+  // ================================
+  // ⚠️ REMPLACE la jauge de luminance du 27/07/2026, retiree apres mesure.
+  //
+  // Cette jauge echantillonnait le quart superieur de chaque media, en
+  // deduisait « fond clair » ou « fond sombre », et repeignait TOUTE la barre
+  // en consequence. Trois defauts, tous mesures au navigateur :
+  //
+  //  1. UN verdict pour une barre de 1440 px. Le logo et la nav peuvent
+  //     surplomber des contenus opposes. Sur Sipsmith, le meme verdict donnait
+  //     15,4:1 sur la nav et 1:1 sur le logo.
+  //  2. --vert-profond vaut #030808, c'est-a-dire EXACTEMENT --surface. L'encre
+  //     du mode clair etait donc la couleur du sol : tout controle qui ne
+  //     surplombait pas l'image mais le sol disparaissait purement et
+  //     simplement.
+  //  3. L'echantillon etait pris une fois, en haut du media, alors que la
+  //     bande reellement sous la barre se deplace a chaque pixel de scroll.
+  //
+  // Mais le defaut de fond n'est aucun des trois : c'est que la question
+  // n'a pas de reponse. Mesure du fond REEL sous chaque controle, 19 projets,
+  // plusieurs positions de defilement : la luminance va de 0,000 a 1,000 sous
+  // un meme controle (aelio, hdd-defrag, stelya, moon-vtc, jhag-*...).
+  // Or une encre plate ne tient 3:1 partout que si Lmin >= 0,10 (encre sombre)
+  // ou Lmax <= 0,30 (encre claire). Sur 16 projets sur 19, ni l'un ni l'autre :
+  // AUCUNE couleur plate n'existe. Le probleme n'etait pas mal regle, il
+  // etait insoluble sous cette forme.
+  // (mix-blend-mode: difference echoue pour la meme raison : sur un fond a
+  // 127,5 il renvoie 127,5, donc 1:1 pile au gris moyen.)
+  //
+  // On cesse donc de DEDUIRE la couleur du fond, et on la GARANTIT : chaque
+  // controle porte son propre voile sombre local (cf. _project.scss). Le seul
+  // etat a calculer devient binaire et sans echantillonnage : la barre
+  // surplombe-t-elle un media, oui ou non.
+  const barre = document.querySelector('header');
+  const mediasPage = [...document.querySelectorAll('.project-open-media, .project-piece-media')];
+  if (barre && mediasPage.length) {
+    const hauteurBarre = () => barre.getBoundingClientRect().height || 76;
+    const ouverture = document.querySelector('.project-open');
+
+    const majFond = () => {
+      const bas = hauteurBarre();
+
+      // La barre surplombe-t-elle encore l'ouverture ? Tant que oui, elle se
+      // pose sur l'oeuvre : ni fond ni bordure, sinon elle l'encadre.
+      if (ouverture) {
+        const o = ouverture.getBoundingClientRect();
+        if (o.bottom > 0 && o.top < bas) barre.setAttribute('data-zone', 'ouverture');
+        else barre.removeAttribute('data-zone');
+      }
+
+      const surMedia = mediasPage.some(el => {
+        if (el.offsetParent === null && el.tagName !== 'VIDEO') return false;
+        const r = el.getBoundingClientRect();
+        return Math.min(r.bottom, bas) - Math.max(r.top, 0) > 0;
+      });
+      if (surMedia) barre.setAttribute('data-sur-media', '');
+      else barre.removeAttribute('data-sur-media');
+    };
+
+    let enAttenteFond = false;
+    const planifier = () => {
+      if (enAttenteFond) return;
+      enAttenteFond = true;
+      requestAnimationFrame(() => { enAttenteFond = false; majFond(); });
+    };
+    window.addEventListener('scroll', planifier, { passive: true });
+    window.addEventListener('resize', planifier, { passive: true });
+    window.addEventListener('load', planifier);
+    planifier();
+  }
+
+  // ================================
+  // GALERIE : voir plus
+  // ================================
+  // REGLE : des que la grille tombe a UNE COLONNE (une piece par rangee),
+  // on n'en montre que trois. C'est la que le repli sert : chaque piece y
+  // occupe toute la largeur, donc un projet a 6 pieces impose 6 images
+  // plein ecran avant d'atteindre le recit. Sur une grille a plusieurs
+  // colonnes, les memes 6 tiennent en 3 rangees et le repli n'a pas lieu.
+  //
+  // La condition est DEDUITE DE LA MISE EN PAGE REELLE, pas d'une media
+  // query en dur : on compte les rangees occupees. Une valeur de rupture
+  // recopiee dans le JS finit toujours par diverger du CSS.
+  //
+  // Rendu progressif : le gabarit emet TOUTES les pieces. Sans JS, tout
+  // reste visible et le bouton n'existe pas. L'etat vit dans
+  // `aria-expanded`, jamais dans une classe (convention du site).
+  const galerie = document.querySelector('.project-sequence');
+  if (galerie) {
+    const piecesGalerie = [...galerie.querySelectorAll('.project-piece')];
+    const seuilColonneUnique = parseInt(galerie.dataset.seuilMobile, 10) || 3;
+    const seuilLarge = parseInt(galerie.dataset.seuil, 10) || 8;
+    const fr = document.documentElement.lang === 'fr';
+
+    const bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'galerie-plus';
+    bouton.setAttribute('aria-expanded', 'false');
+    galerie.insertAdjacentElement('afterend', bouton);
+
+    let deplie = false;
+
+    // Une seule colonne ? On le mesure toutes pieces affichees, sinon les
+    // pieces repliees n'ont plus de geometrie et le compte est faux.
+    const estColonneUnique = () => {
+      piecesGalerie.forEach(p => { p.hidden = false; });
+      const rangees = new Set(piecesGalerie.map(p => Math.round(p.getBoundingClientRect().top)));
+      return rangees.size === piecesGalerie.length;
+    };
+
+    const appliquer = () => {
+      const seuil = estColonneUnique() ? seuilColonneUnique : seuilLarge;
+      const caches = piecesGalerie.slice(seuil);
+
+      // Un bouton pour une seule piece cachee ne vaut pas le clic.
+      if (caches.length < 2) {
+        bouton.hidden = true;
+        // On vide le libelle : sinon, apres un passage mobile vers desktop,
+        // le bouton conservait « Voir les N autres pieces » alors que tout
+        // etait deja visible.
+        bouton.textContent = '';
+        piecesGalerie.forEach(p => { p.hidden = false; });
+        return;
+      }
+      bouton.hidden = false;
+      // Si le visiteur a deja deplie, on ne lui replie pas la galerie sous
+      // les yeux parce qu'il a tourne son telephone.
+      caches.forEach(p => { p.hidden = !deplie; });
+      bouton.textContent = deplie
+        ? (fr ? 'Voir moins' : 'See less')
+        : (fr ? 'Voir les ' + caches.length + ' autres pièces'
+              : 'See ' + caches.length + ' more pieces');
+    };
+
+    bouton.addEventListener('click', () => {
+      deplie = !deplie;
+      bouton.setAttribute('aria-expanded', String(deplie));
+      appliquer();
+      if (!deplie) {
+        // Au repli, on ramene le regard en haut de la galerie : sinon le
+        // visiteur reste suspendu dans le vide qu'il vient de creer.
+        const doux = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+        galerie.scrollIntoView({ behavior: doux, block: 'start' });
+      }
+    });
+
+    // Le nombre de colonnes change avec la largeur : on reevalue au
+    // redimensionnement, en throttlant sur la frame.
+    let enAttenteGalerie = false;
+    window.addEventListener('resize', () => {
+      if (enAttenteGalerie) return;
+      enAttenteGalerie = true;
+      requestAnimationFrame(() => { enAttenteGalerie = false; appliquer(); });
+    }, { passive: true });
+
+    appliquer();
+  }
+
+  // ================================
+  // VIDEOS DE SEQUENCE : chargement a l'approche
+  // ================================
+  // Le gabarit emet `data-src` + `preload="none"` et AUCUN `autoplay`.
+  // Raison mesuree : avec `autoplay`, le navigateur telecharge la video
+  // entiere des le chargement, meme tres loin sous la ligne de flottaison.
+  // Sur jhag-banana-rush, 3 videos hors ecran totalisaient 51,2 Mo, toutes
+  // integralement descendues. Ici la source n'est posee qu'a l'approche, et
+  // la lecture s'arrete des que la piece sort de l'ecran.
+  const videosSequence = document.querySelectorAll('video.project-piece-media[data-src]');
+  if (videosSequence.length) {
+    const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const poserSource = video => {
+      if (video.dataset.chargee) return;
+      video.dataset.chargee = '1';
+      video.src = video.dataset.src;
+      // `load()` est OBLIGATOIRE ici : un <video> rendu sans source a deja
+      // execute son algorithme de selection et se trouve en
+      // NETWORK_NO_SOURCE. Poser `src` ensuite ne le relance pas tout seul,
+      // et `play()` echoue sur « The element has no supported sources »
+      // alors que l'URL est parfaitement valide.
+      video.load();
+    };
+
+    if (mouvementReduit || !('IntersectionObserver' in window)) {
+      // Mouvement reduit : aucune lecture automatique, et on rend les
+      // controles pour que la video reste consultable (WCAG 2.2.2).
+      videosSequence.forEach(video => {
+        video.controls = true;
+        video.removeAttribute('loop');
+        poserSource(video);
+      });
+    } else {
+      const observateur = new IntersectionObserver(entrees => {
+        entrees.forEach(entree => {
+          const video = entree.target;
+          if (entree.isIntersecting) {
+            poserSource(video);
+            const lecture = video.play();
+            if (lecture && lecture.catch) lecture.catch(() => { video.controls = true; });
+          } else if (!video.paused) {
+            video.pause();
+          }
+        });
+      }, {
+        // AUCUNE marge de prechargement : ces vidéos pesent 15 a 18 Mo piece.
+        // Avec 200 px de marge, la planche etant compacte, la premiere se
+        // trouvait a 89 px sous la ligne de flottaison et se telechargeait
+        // AU CHARGEMENT : 19 Mo au lieu de 1. Le `poster` couvre l'attente,
+        // donc le prechargement n'achete rien qu'on ne paie trop cher.
+        rootMargin: '0px'
+      });
+
+      videosSequence.forEach(video => observateur.observe(video));
+    }
+  }
+
+  // ================================
   // SÉLECTEUR DE LANGUE
   // ================================
   document.addEventListener('click', event => {
@@ -372,6 +654,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.cookie = `lang_choice=${lang};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
     }
   });
+
+  // Confirme au garde-fou du layout que les revelations sont prises en charge.
+  // Sans ce drapeau, il desarme au bout de 2,5 s et tout redevient visible.
+  window.__revelationPrete = true;
 
   const animatedBlocks = document.querySelectorAll('.animate-fade-up');
   if (animatedBlocks.length) {
@@ -397,7 +683,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================
-  // DROPDOWN CONTACT — sujet
+  // DROPDOWN CONTACT : sujet
   // ================================
   // Le comportement vient du controleur unique (initDropdowns).
   // Ici on ne fait que reporter la valeur choisie dans le champ cache soumis.
@@ -410,37 +696,124 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================
-  // FORMULAIRE CONTACT — validation
+  // FORMULAIRE CONTACT : validation
   // ================================
+  // Le formulaire portait `novalidate` ET n'appelait que `checkValidity()`,
+  // jamais `reportValidity()`. Resultat : sur une soumission invalide, le
+  // navigateur n'affichait AUCUN message et le code se contentait d'ajouter
+  // une classe qui rougit une bordure. L'erreur n'existait donc que sous
+  // forme de couleur, sans texte nulle part :
+  //   . WCAG 3.3.1 (niveau A) : l'erreur doit etre DECRITE en texte.
+  //   . WCAG 1.4.1 (niveau A) : la couleur ne peut pas etre le seul vecteur.
+  // Un daltonien, un lecteur d'ecran et un ecran en plein soleil echouaient
+  // tous les trois de la meme facon : le bouton ne fait rien, sans dire
+  // pourquoi.
   const contactForm = document.querySelector('.contact-form');
   if (contactForm) {
+    const fr = document.documentElement.lang === 'fr';
+    const MSG = {
+      valueMissing: {
+        'contact-name':    fr ? 'Le nom est obligatoire.' : 'Name is required.',
+        'contact-email':   fr ? "L'adresse email est obligatoire." : 'Email address is required.',
+        'contact-message': fr ? 'Le message est obligatoire.' : 'A message is required.'
+      },
+      typeMismatch: fr
+        ? "Cette adresse email n'est pas valide. Exemple : nom@domaine.fr"
+        : "This email address isn't valid. Example: name@domain.com"
+    };
+
+    // Le bloc d'erreur est cree a cote du champ et rattache par
+    // aria-describedby : le lecteur d'ecran lit alors le libelle, puis le
+    // message, a chaque fois que le champ reprend le focus.
+    const zoneErreur = champ => {
+      let z = document.getElementById(champ.id + '-erreur');
+      if (!z) {
+        z = document.createElement('p');
+        z.id = champ.id + '-erreur';
+        z.className = 'contact-erreur';
+        (champ.closest('.contact-field') || champ.parentNode).appendChild(z);
+      }
+      return z;
+    };
+
+    const poser = (champ, texte) => {
+      const z = zoneErreur(champ);
+      z.textContent = texte;
+      champ.setAttribute('aria-invalid', 'true');
+      const d = (champ.getAttribute('aria-describedby') || '').split(' ').filter(Boolean);
+      if (!d.includes(z.id)) champ.setAttribute('aria-describedby', [...d, z.id].join(' '));
+    };
+
+    const lever = champ => {
+      const z = document.getElementById(champ.id + '-erreur');
+      if (z) z.textContent = '';
+      champ.removeAttribute('aria-invalid');
+    };
+
     contactForm.addEventListener('submit', event => {
-      if (!contactForm.checkValidity()) {
-        event.preventDefault();
-        contactForm.classList.add('was-validated');
+      const fautifs = [];
+
+      contactForm.querySelectorAll('input:not([type="hidden"]):not(.contact-botcheck), textarea')
+        .forEach(champ => {
+          if (champ.validity.valid) { lever(champ); return; }
+          const texte = champ.validity.typeMismatch
+            ? MSG.typeMismatch
+            : (MSG.valueMissing[champ.id] || (fr ? 'Ce champ est obligatoire.' : 'This field is required.'));
+          poser(champ, texte);
+          fautifs.push(champ);
+        });
+
+      // Le sujet est un dropdown maison sur un input cache : le navigateur ne
+      // sait pas le valider, et un input cache ne peut pas recevoir le focus.
+      // On rattache donc l'erreur au bouton, seul element atteignable.
+      const sujet = document.getElementById('contact-subject-value');
+      const bouton = document.getElementById('contact-subject-btn');
+      if (sujet && bouton) {
+        if (!sujet.value) {
+          poser(bouton, fr ? 'Choisissez un sujet.' : 'Choose a subject.');
+          bouton.classList.add('is-invalid');
+          fautifs.push(bouton);
+        } else {
+          lever(bouton);
+          bouton.classList.remove('is-invalid');
+        }
       }
-      // Validation manuelle du dropdown (hidden input)
-      const subjectInput = document.getElementById('contact-subject-value');
-      if (subjectInput && !subjectInput.value) {
-        event.preventDefault();
-        contactForm.classList.add('was-validated');
-        const dropdown = document.getElementById('contact-subject-btn');
-        if (dropdown) dropdown.classList.add('is-invalid');
-      }
+
+      if (!fautifs.length) return;
+
+      event.preventDefault();
+      contactForm.classList.add('was-validated');
+      annoncer(fr
+        ? `Le message n'a pas été envoyé : ${fautifs.length} champ${fautifs.length > 1 ? 's sont' : ' est'} à corriger.`
+        : `Message not sent: ${fautifs.length} field${fautifs.length > 1 ? 's need' : ' needs'} fixing.`);
+      // Le focus part sur la premiere erreur, sinon l'utilisateur doit
+      // remonter le formulaire a l'aveugle pour trouver ce qui cloche.
+      fautifs[0].focus({ preventScroll: false });
+    });
+
+    // Correction en cours de frappe : l'erreur se leve des que le champ
+    // redevient valide, plutot que d'attendre une nouvelle soumission.
+    contactForm.addEventListener('input', e => {
+      if (e.target.validity && e.target.validity.valid) lever(e.target);
+    });
+    const boutonSujet = document.getElementById('contact-subject-btn');
+    if (boutonSujet) boutonSujet.addEventListener('dropdown:change', () => {
+      lever(boutonSujet);
+      boutonSujet.classList.remove('is-invalid');
     });
   }
 });
 
 // ================================
-// SCROLL PROGRESS BAR — Pages projet
+// SCROLL PROGRESS BAR : Pages projet
 // ================================
 (function () {
-  if (!document.querySelector('.hero-project')) return;
+  if (!document.querySelector('.project-page')) return;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
   const size = 44;
-  const svgSize = size + 4;   // 48px — 2px de débordement de chaque côté pour bordure centrée
+  const svgSize = size + 4;   // 48px : 2px de débordement de chaque côté pour bordure centrée
   const r = 12;               // border-radius du squircle (28% de 44 ≈ 12px)
 
   // Périmètre du squircle : 4 côtés droits + 4 quarts de cercle
@@ -518,13 +891,17 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ================================
-// PARALLAX HERO IMAGE — Fade + Scale (Desktop uniquement)
+// PARALLAX HERO IMAGE : Fade + Scale (Desktop uniquement)
 // ================================
 (function () {
   if (!window.matchMedia('(pointer: fine)').matches) return;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReducedMotion) return;
 
+  // ⚠️ Le hero projet en deux colonnes n'existe plus : la page ouvre sur un
+  // media bord a bord (.project-open). Ce parallax visait des couches
+  // supprimees, il est donc inerte ici. Il sera re-cible sur l'ouverture en
+  // Phase 4, avec le reste de la grammaire de mouvement.
   const heroSection = document.querySelector('.hero-project');
   if (!heroSection) return;
 
