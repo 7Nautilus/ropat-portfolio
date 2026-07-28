@@ -535,6 +535,21 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       cliquable), imbriquer deux liens est invalide. Le <code>div</code> garde l'apparence sans
       créer le lien. C'est un correctif de sémantique, pas un choix de style.</span>
     </div>
+    <div class="regle" style="border-color:rgba(255,107,107,.35)">
+      <b style="color:#FF6B6B"><code>arrow</code> et <code>arrow-long</code> ne diffèrent pas par
+      la longueur</b>
+      <span>Vérifié au rendu, grossies 8 fois : les deux ont la <strong>même proportion</strong>,
+      malgré le nom. Ce qui les sépare est le <em>traitement des angles</em> :
+      <code>arrow</code> est <strong>pleine</strong> (un chemin, <code>fill:currentColor</code>),
+      donc pointe vive et hampe à bout carré ; <code>arrow-long</code> est <strong>au
+      trait</strong> (<code>fill:none</code>, <code>stroke-width:2</code>,
+      <code>linecap:round</code>), donc terminaisons arrondies.
+      Deux icônes qui ne diffèrent que par l'arrondi, exposées au choix par un paramètre d'API,
+      mélangent deux grammaires dans le même système. À trancher : soit <code>arrow-long</code>
+      gagne une hampe réellement plus longue, ce que son nom promet, soit l'une des deux
+      disparaît. Le commentaire de l'include décrivait en plus <code>icon-arrow</code> comme
+      « un chevron », ce qu'il n'est pas ; corrigé le 28/07.</span>
+    </div>
     <p>⚠️ Ce que cette page <strong>ne peut pas</strong> montrer : survol, focus et état actif.
     Ils demandent une interaction, or le labo rend des états au repos. Le focus en particulier
     doit se vérifier au clavier sur le vrai site.</p>
