@@ -1673,7 +1673,7 @@ footer {
 }
 @supports (corner-shape: bevel) {
   .btn--solid {
-    border-radius: 0.75rem;
+    border-radius: 0.6em;
     corner-shape: bevel;
   }
 }

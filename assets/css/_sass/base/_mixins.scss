@@ -37,7 +37,16 @@
 // Le repli n'est pas une degradation : sans support, on obtient exactement le
 // bouton d'aujourd'hui, qui est deja en service. Amelioration progressive au
 // sens strict.
-@mixin bevel($cut: 0.75rem, $fallback: var(--border-radius-full)) {
+// ⚠️ La coupe est en `em`, JAMAIS en pourcentage. Verifie au rendu :
+// un pourcentage se resout sur la LARGEUR pour l'axe horizontal et sur la
+// HAUTEUR pour l'axe vertical. Sur une boite de 308x71, un `8%` donne 24,6px
+// d'un cote contre 5,7px de l'autre : l'angle a 45 degres est perdu, la coupe
+// s'aplatit, et deux boutons de formats differents n'ont plus la meme forme.
+// L'`em` garde le 45 degres et fait suivre la coupe a l'echelle du bouton,
+// comme l'icone et le padding qui sont deja dans cette unite. Le bouton de nav
+// (16px) recoit donc une coupe plus petite que le CTA (20px), ce qui est le
+// comportement voulu.
+@mixin bevel($cut: 0.6em, $fallback: var(--border-radius-full)) {
   border-radius: $fallback;
 
   @supports (corner-shape: bevel) {
