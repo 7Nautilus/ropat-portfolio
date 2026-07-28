@@ -889,8 +889,15 @@ header {
      Le `backdrop-filter: blur(12px)` de `.blur-bg` suffit a decoller le chrome
      du contenu, sans rien assombrir.
      (Le voile en bande des pages projet a suivi le meme sort quelques heures
-     plus tard ; voir le bloc CHROME AU-DESSUS D'UN MEDIA.) */
-  box-shadow: var(--shadow-sm);
+     plus tard ; voir le bloc CHROME AU-DESSUS D'UN MEDIA.)
+
+     ⚠️ ET PLUS D'OMBRE PORTEE NON PLUS. La barre trainait un
+     `box-shadow: var(--shadow-sm)`, soit un noir a 10 % sur 6 px sous elle,
+     visible sur TOUTES les pages et pas seulement au-dessus d'une oeuvre.
+     C'etait la derniere trace du chrome qui se detache par l'ombre plutot que
+     par sa forme, et c'etait de la profondeur empruntee : une barre collee en
+     haut de l'ecran ne flotte pas, elle est la. Le `backdrop-filter` fait le
+     travail, et lui ne pose rien, il transforme ce qui passe dessous. */
   position: sticky;
   width: 100%;
   top: 0;
@@ -1038,10 +1045,13 @@ header[data-sur-media] {
      mieux). Sur --surface plein il tient 6,5:1.
      Mesure, 6 projets : 7,34:1 au pire. C'est desormais le seul controle du
      header dont le contraste reste GARANTI. */
+  /* ⚠️ Le `box-shadow: none` qui vivait ici est RETIRE : il neutralisait
+     l'ombre au repos de `.btn--solid`, laquelle n'existe plus depuis le
+     28/07. Une regle qui annule quelque chose de disparu ne se voit pas, mais
+     elle ment sur ce que fait le composant. */
 }
 header[data-sur-media] .nav-contact {
   background: var(--surface);
-  box-shadow: none;
 }
 header[data-sur-media] {
   /* ⚠️ LE LOGO N'A PLUS DE HALO. Retire le 28/07 sur demande de Ropat.
@@ -1929,7 +1939,16 @@ footer {
 }
 .btn--solid {
   color: var(--white-color);
-  box-shadow: var(--shadow-sm);
+  /* ⚠️ PAS D'OMBRE AU REPOS. Le bouton portait un `box-shadow: var(--shadow-sm)`,
+     un noir a 10 % sur 6 px, retire le 28/07 avec celui de la barre.
+     Un bouton qui a deja un aplat plein, un contour orange et un biseau n'a pas
+     besoin d'une ombre pour se lire comme cliquable : elle n'ajoutait pas de
+     l'affordance, elle ajoutait de la profondeur empruntee.
+     ⚠️ Le survol GARDE la sienne, et ce n'est pas une inconsequence : c'est
+     `--shadow-signal`, une lueur ORANGE et non un noir. Elle n'existe qu'a
+     l'engagement, donc elle signale quelque chose, ce qui est exactement ce que
+     la regle 3 demande a un orange. La transition `box-shadow` juste au-dessus
+     va donc de rien vers cette lueur. */
   cursor: pointer;
   font-size: var(--text-body);
   font-weight: 600;
