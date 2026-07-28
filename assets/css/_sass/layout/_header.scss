@@ -71,6 +71,7 @@ header {
   
   transition:
     transform 0.5s var(--ease-out),
+    filter 0.5s var(--ease-out),
     /* La teinte suit la bascule d'encre, sur SA duree a elle. */
     color var(--dur-base) var(--ease-quad-out);
   cursor: pointer;
@@ -83,12 +84,23 @@ header {
    dessine en contour avec un fond a 20 % ; au survol il se remplit tout a fait,
    donc la marque passe du contour au plein. C'est le meme geste que le bouton
    contact, qui passe lui aussi de 20 % a l'aplat.
-   ⚠️ Ce qui NE revient PAS : le `drop-shadow` orange qui l'accompagnait. Sur une
-   page projet le logo surplombe l'oeuvre, et une lueur deborderait de son
-   trace : regle 8. Le remplissage, lui, ne peint rien au-dela du glyphe. */
+   ⚠️ LA LUEUR ORANGE EST LA AUSSI, remise sur demande de Ropat le 29/07 apres
+   que je l'aie ecartee au nom de la regle 8. Il tranche, et l'arbitrage se
+   tient : la regle 8 interdit d'ASSOMBRIR l'oeuvre pour se rendre lisible.
+   Une lueur orange n'assombrit pas, elle n'existe qu'a l'engagement, et le
+   bouton contact a garde exactement la sienne. Deux elements du meme chrome ne
+   pouvaient pas suivre deux regles opposees.
+
+   ⚠️ C'EST LE JETON DU BOUTON, et non la valeur d'origine recopiee. Le
+   `drop-shadow` d'avant portait `0 8px 15px` avec un orange a 30 % ecrit sur
+   place ; `--shadow-signal` vaut `0 6px 16px` a 50 %. On prend le jeton : la
+   lueur du logo et celle du bouton deviennent litteralement la meme, et elles
+   bougeront ensemble. Il passe tel quel dans `drop-shadow()` parce qu'il n'a
+   pas de rayon d'etalement, que la fonction n'accepte pas. */
 .logo:hover,
 .logo:focus-visible {
   transform: scale(1.05);
+  filter: drop-shadow(var(--shadow-signal));
 }
 
 .logo:hover path,
@@ -232,6 +244,7 @@ header[data-sur-media][data-encre="sombre"] {
   header .nav-contact { transition: none; }
 
   .logo:hover, .logo:focus-visible { transform: none; }
+  /* La lueur reste : c'est une couleur, pas un mouvement. */
 }
 
 header[data-sur-media] {
@@ -381,20 +394,30 @@ header[data-sur-media] {
   margin: 0;
 }
 
-/* ⚠️ `:not(.btn)` : le bouton contact est lui aussi un `<a>` dans un
-   `.nav-item`, donc ce selecteur l'attrapait et son `all` ECRASAIT la
-   transition du composant bouton, exactement comme le bloc groupe retire plus
-   haut. Mesure apres correction du bloc : le contact transitionnait encore
-   `all` au lieu de ses cinq proprietes nommees. Ici l'effet etait benin
-   (`all` est un sur-ensemble), mais la regle de cascade est la meme et elle
-   remordra ailleurs. Un bouton dans une nav reste un bouton. */
-.nav-item a:not(.btn) {
+.nav-item a {
   /* L'encre du chrome, et non `--ink` en dur : c'est ce que la bascule
      change. Au repos `--encre-chrome` vaut `--ink`, donc rien ne bouge. */
   color: var(--encre-chrome);
-  transition: all var(--transition-base);
   padding: var(--spacing-xs) var(--spacing-sm);
   position: relative;
+}
+
+/* ⚠️ `:not(.btn)` NE PORTE QUE SUR LA TRANSITION, et la portee est le sujet.
+   J'avais d'abord pose l'exclusion sur la regle entiere, ce qui retirait aussi
+   le `padding` au bouton contact : ce selecteur, plus specifique que
+   `.nav-contact` comme que `.btn--md`, etait celui qui le dimensionnait.
+   Ropat : « il fallait seulement toucher a la transition, rien d'autre ».
+   Regle a en tirer : une exclusion se pose sur la DECLARATION fautive, jamais
+   sur la regle qui la contient. Un selecteur qui gagne sur une propriete gagne
+   sur toutes, donc l'en exclure les emporte toutes.
+
+   Ce qu'elle repare : le bouton contact est lui aussi un `<a>` dans un
+   `.nav-item`, donc `all` ECRASAIT la liste nommee du composant bouton, comme
+   le faisait le bloc groupe retire plus haut. L'effet etait benin ici (`all`
+   est un sur-ensemble), mais c'est la meme faute de cascade et elle remordra
+   ailleurs. Un bouton dans une nav reste un bouton. */
+.nav-item a:not(.btn) {
+  transition: all var(--transition-base);
 }
 
 /* Navigation Link Hover Effects */
