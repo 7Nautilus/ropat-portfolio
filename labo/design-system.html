@@ -472,9 +472,72 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   <p>Vrais composants, vrai CSS de production, posés sur les jetons du chantier.</p>
 
   <div class="scene">
-    <p class="scene-titre">Boutons · via <code>ui/button.html</code></p>
-    {% include ui/button.html label="Prendre contact" href="#" icon="send" %}
-    {% include ui/button.html label="Voir le projet" href="#" icon="arrow" variant="ghost" %}
+    <p class="scene-titre">Boutons · <code>ui/button.html</code>, toutes les combinaisons</p>
+
+    <table class="jetons" style="margin-bottom:1.5rem">
+      <thead><tr><th>Propriété</th><th>Valeurs</th><th>Défaut</th></tr></thead>
+      <tbody>
+        <tr><td><code>label</code></td><td>texte</td><td><span style="color:#FF6B6B">requis</span></td></tr>
+        <tr><td><code>variant</code></td><td><code>solid</code>, <code>ghost</code></td><td><code>solid</code></td></tr>
+        <tr><td><code>size</code></td><td><code>md</code>, <code>xl</code></td><td><code>md</code>, et <strong>ignoré pour ghost</strong></td></tr>
+        <tr><td><code>icon</code></td><td><code>arrow</code>, <code>arrow-long</code>, <code>send</code>, <code>none</code></td><td><code>arrow</code></td></tr>
+        <tr><td><code>tag</code></td><td><code>a</code>, <code>button</code>, <code>div</code>, <code>span</code></td><td><code>a</code> si <code>href</code>, sinon <code>button</code></td></tr>
+        <tr><td><code>href</code> · <code>type</code> · <code>aria</code> · <code>class</code></td><td>passe-plats</td><td><code>type</code> vaut <code>submit</code></td></tr>
+      </tbody>
+    </table>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">solid · md · les quatre icônes</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.6rem">
+      {% include ui/button.html label="arrow" href="#" %}
+      {% include ui/button.html label="arrow-long" href="#" icon="arrow-long" %}
+      {% include ui/button.html label="send" href="#" icon="send" %}
+      {% include ui/button.html label="none" href="#" icon="none" %}
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">solid · xl · le CTA principal</p>
+    <div style="margin-bottom:1.6rem">
+      {% include ui/button.html label="Prendre contact" href="#" size="xl" icon="arrow-long" %}
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">ghost · sans fond ni padding</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;margin-bottom:1.6rem">
+      {% include ui/button.html label="Voir le projet" href="#" variant="ghost" %}
+      {% include ui/button.html label="ghost + size=xl" href="#" variant="ghost" size="xl" %}
+    </div>
+
+    <p class="sur-titre" style="color:rgba(255,255,255,.46)">autres balises</p>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center">
+      {% include ui/button.html label="tag=button" tag="button" icon="send" %}
+      {% include ui/button.html label="tag=div" tag="div" %}
+    </div>
+  </div>
+
+  <div class="scene">
+    <p class="scene-titre">Boutons · les deux pièges de l'include</p>
+    <div class="regle" style="border-color:rgba(255,107,107,.35)">
+      <b style="color:#FF6B6B"><code>size</code> est un mot réservé de Liquid</b>
+      <span>Sans le paramètre, <code>include.size</code> ne vaut <strong>pas</strong> nil : il
+      retourne le <em>nombre de paramètres</em> de l'include, d'où des classes absurdes comme
+      <code>btn--3</code>. L'include neutralise le piège par une liste blanche
+      (<code>md,xl</code>) au lieu d'un <code>| default:</code>.
+      <em>Ne jamais écrire <code>include.size | default:</code>.</em></span>
+    </div>
+    <div class="regle">
+      <b><code>size</code> est silencieusement ignoré sur ghost</b>
+      <span>Les deux boutons ghost ci-dessus sont identiques bien que l'un déclare
+      <code>size="xl"</code>. C'est cohérent, un ghost n'ayant ni fond ni padding à agrandir,
+      mais l'API ne le dit pas : elle accepte le paramètre et ne fait rien. Le seul endroit où
+      c'est écrit est le commentaire de l'include.</span>
+    </div>
+    <div class="regle">
+      <b><code>tag="div"</code> existe pour une raison précise</b>
+      <span>Quand le bouton vit <em>dans</em> un <code>&lt;a&gt;</code> (une carte entièrement
+      cliquable), imbriquer deux liens est invalide. Le <code>div</code> garde l'apparence sans
+      créer le lien. C'est un correctif de sémantique, pas un choix de style.</span>
+    </div>
+    <p>⚠️ Ce que cette page <strong>ne peut pas</strong> montrer : survol, focus et état actif.
+    Ils demandent une interaction, or le labo rend des états au repos. Le focus en particulier
+    doit se vérifier au clavier sur le vrai site.</p>
   </div>
 
   <div class="scene">
