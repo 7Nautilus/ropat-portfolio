@@ -152,29 +152,32 @@
 
   /* Encre. Quatre niveaux, du plus present au plus retire.
 
-     ⚠️ RAPATRIEMENT CHROMATIQUE, 28/07, arbitrage de Ropat. Ces deux valeurs
-     etaient #e2e8f0 et #9CA3AF, des gris BLEUTES a 214 et 218 degres, quand
-     tout le camouflage tient entre 135 et 180. Elles venaient d'une palette
-     tierce (la famille slate de Tailwind) et n'appartenaient a aucun des deux
-     trios : exactement le meme corps etranger que le blanc pur retire le meme
-     jour, simplement moins visible parce que gris.
-     Corrigees a luminosite et saturation CONSTANTES, teinte ramenee a 140
-     degres, sur l'axe du camouflage neige. Le contraste MONTE dans les deux
-     cas, donc il n'y avait rien a defendre de ce cote : c'etait une decision
-     purement esthetique, et elle appartenait a Ropat.
-       --ink-soft   16,35:1 -> 17,13:1
-       --ink-muted   7,94:1 ->  8,70:1
-     Le skin clair n'avait PAS le defaut : ses encres etaient deja entre 147 et
-     175 degres. Le probleme etait donc confine au bloc sombre.
-     ⚠️ Question laissee ouverte : ces deux valeurs sont maintenant de la
-     famille neige mais restent ecrites en dur au niveau des ROLES, la ou les
-     autres roles pointent vers une primitive. Elles se glissent entre les
-     paliers du trio (91 % et 65 % de luminosite, contre 78 / 88 / 95). En
-     faire des primitives elargirait le trio a cinq paliers, ce qui n'est pas
-     une decision a prendre en passant. */
+     ⚠️ CES DEUX GRIS SONT HORS DE LA FAMILLE, ET C'EST ASSUME.
+     Ils sont a 214 et 218 degres quand tout le camouflage tient entre 135 et
+     180 : ils viennent d'une palette tierce (la famille slate de Tailwind).
+     L'ecart est donc reel, et il est ecrit ici pour rester visible.
+
+     Essai du 28/07 : je les ai ramenes sur l'axe du camouflage a luminosite et
+     saturation constantes (#E2F0E7 et #9CAFA2, teinte 140 degres), en portant
+     l'argument qui avait fait retirer le blanc pur le meme jour. Le contraste
+     y gagnait meme un peu (16,35 -> 17,13 et 7,94 -> 8,70).
+     Ropat a fait machine arriere le jour meme, apres avoir vu le rendu. C'est
+     son arbitrage et il est definitif tant qu'il ne le rouvre pas.
+
+     Ce que l'essai a appris, et qui vaut d'etre garde : un raisonnement de
+     palette qui se verifie sur un APLAT ne se transporte pas tel quel sur du
+     TEXTE. Le blanc pur etait un aplat isole, une teinte parmi d'autres ; ces
+     deux gris sont l'encre de tout le texte secondaire du site, et une teinte
+     verte y devient une ambiance, pas une nuance. La mesure disait « aucun
+     cout », elle ne pouvait pas dire « meme effet ».
+     Corollaire : ne pas rouvrir ce point avec les memes arguments chiffres,
+     ils ont deja ete produits et ils ne repondent pas a la question posee.
+
+     Le skin clair, lui, est deja sur l'axe (147 a 175 degres) et n'a jamais eu
+     ce defaut : l'ecart est confine au bloc sombre. */
   --ink: var(--p-neige-haute);
-  --ink-soft: #E2F0E7;
-  --ink-muted: #9CAFA2;
+  --ink-soft: #e2e8f0;
+  --ink-muted: #9CA3AF;
   /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
      trio, sous le minimum AA de 4,5. Calcul WCAG sur les deux extremes du
      fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore
