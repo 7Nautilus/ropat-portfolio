@@ -304,6 +304,49 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     <tbody></tbody>
   </table>
 
+  <h3>Passe de vérification · 28/07/2026</h3>
+  <p>Balayage de tout <code>_sass/</code>, <code>_variables.scss</code> exclu, commentaires
+  écartés. La question n'est pas « combien de valeurs en dur » mais <strong>combien de valeurs
+  circulent là où un jeton existe déjà</strong>.</p>
+
+  <table class="jetons">
+    <thead><tr><th>Rôle</th><th>Jetons</th><th>Valeurs en circulation</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>encre</td><td><strong>3</strong></td>
+          <td><span class="ratio ko">10</span> <span style="color:rgba(255,255,255,.46)">0,2 · 0,35 · 0,4 · 0,5 · 0,6 · 0,7 · 0,75 · 0,8 · 0,85 · 0,9</span></td>
+          <td style="color:#9CA3AF">une échelle à 3 échelons, 10 valeurs en service</td></tr>
+      <tr><td>filet</td><td><strong>1</strong> <span style="color:rgba(255,255,255,.46)">(0,08)</span></td>
+          <td><span class="ratio ko">2</span> <span style="color:rgba(255,255,255,.46)">0,05 · 0,1</span></td>
+          <td style="color:#9CA3AF"><strong>aucune</strong> des 5 déclarations n'utilise la valeur du jeton</td></tr>
+      <tr><td>surface subtile</td><td><strong>1</strong> <span style="color:rgba(255,255,255,.46)">(0,1)</span></td>
+          <td><span class="ratio ko">4</span> <span style="color:rgba(255,255,255,.46)">0,04 · 0,05 · 0,06 · 0,1</span></td>
+          <td style="color:#9CA3AF">1 déclaration sur 5 tombe juste</td></tr>
+      <tr><td>sol</td><td><strong>1</strong> <span style="color:rgba(255,255,255,.46)">(#030808)</span></td>
+          <td><span class="ratio ko">3 concurrents</span> <span style="color:rgba(255,255,255,.46)">#0a0a0a · #1a1a1a · #1c1c1e</span></td>
+          <td style="color:#9CA3AF">le plan n'en annonçait qu'un</td></tr>
+      <tr><td>voiles noirs</td><td>·</td><td>9 <code>rgba(0,0,0,α)</code></td>
+          <td style="color:#34C759">légitimes : outil d'assombrissement, pas couleur de charte</td></tr>
+    </tbody>
+  </table>
+
+  <p>Le point le plus parlant est le <strong>filet</strong>. Le jeton vaut 0,08 et les cinq traits
+  du site valent 0,05 ou 0,1 : le jeton existe, il est documenté, et <em>personne ne s'en sert</em>.
+  Ce n'est pas de la dérive lente, c'est un jeton qui n'a jamais été adopté.</p>
+
+  <h3>Couverture du skin clair</h3>
+  <p><strong>13 rôles surchargés.</strong> Les non surchargés sont volontaires et documentés,
+  sauf un.</p>
+  <div class="regle" style="border-color:rgba(255,107,107,.35)">
+    <b style="color:#FF6B6B"><code>--success</code> n'a pas de version claire</b>
+    <span><code>#34C759</code> sur le sol clair <code>#F0F4F1</code> donne <strong>2,00:1</strong>.
+    C'est exactement le défaut corrigé sur <code>--danger</code> le 28/07 (7,26:1 en sombre,
+    2,44 en clair, d'où une valeur dédiée). Le commentaire de <code>--danger</code> annonçait
+    déjà que le vert aurait le même problème ; il l'a.
+    Les trois jetons d'accent (<code>--accent</code>, <code>--accent-soft</code>,
+    <code>--accent-ink</code>) ne sont volontairement pas surchargés : l'orange est un point fixe
+    de la charte, et l'encre sombre posée dessus fonctionne dans les deux skins.</span>
+  </div>
+
   <h3>Ce qui meurt à la bascule</h3>
   <table class="jetons">
     <thead><tr><th>Jeton</th><th>Pourquoi</th></tr></thead>
