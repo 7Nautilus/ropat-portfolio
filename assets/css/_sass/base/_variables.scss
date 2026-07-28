@@ -144,17 +144,24 @@
      La barre n'a donc plus de fond du tout : le `backdrop-filter` de
      `.blur-bg` suffit a la decoller du contenu. */
 
-  /* ⚠️ CANAL DU VOILE PHOTOGRAPHIQUE, pas une couleur de la charte.
+  /* ⚠️ CANAL DES LISERES POSES SUR UNE OEUVRE, pas une couleur de la charte.
      Un triplet et non une couleur complete, parce que ses consommateurs ont
-     besoin d'opacites DIFFERENTES du meme noir : 0,62 / 0,58 / 0,30 / 0 pour
-     le degrade du header au-dessus d'un media, 0,92 pour le halo du logo.
-     Un jeton par palier aurait fait cinq jetons pour une seule intention.
-     S'utilise en `rgba(var(--scrim-canal), 0.58)`.
-     Le noir pur y est VOLONTAIRE et n'est pas soumis a la regle « plus de
-     noir pur dans les aplats » : ce n'est pas un aplat, c'est une densite,
-     l'equivalent d'un vignettage photo. C'est aussi le seul canal qui
-     garantisse la chute de luminance quelle que soit l'image dessous, ce qui
-     est exactement la propriete sur laquelle repose le calcul du voile. */
+     besoin d'opacites DIFFERENTES du meme noir : 0,9 pour les quatre ombres
+     nettes et la lueur du liseré de la nav, 0,92 pour le halo du logo.
+     Un jeton par palier aurait fait sept jetons pour une seule intention.
+     S'utilise en `rgba(var(--scrim-canal), 0.9)`.
+     Le noir pur y est VOLONTAIRE et n'est pas soumis a la regle « plus de noir
+     pur dans les aplats » : ce n'est pas un aplat, c'est une DENSITE. Et c'est
+     le seul canal qui fasse chuter la luminance quelle que soit l'image
+     dessous, ce qui est exactement ce qu'on lui demande.
+
+     ⚠️ Il a change d'emploi le 28/07. Il servait d'abord un degrade de 180 px
+     pose en bande au sommet des pages projet (0,62 / 0,58 / 0,30 / 0), qui
+     garantissait 7,43:1 a la nav sans dependre de l'image. Ropat a fait
+     retirer cette bande : elle se lisait comme un fond de header. Le meme noir
+     travaille desormais au TRACE des glyphes au lieu d'une surface. Il a donc
+     survecu a la disparition de son premier usage, ce qui est plutot bon
+     signe pour son nom : il designait deja une matiere, pas une forme. */
   --scrim-canal: 0, 0, 0;
 
   /* Encre. Quatre niveaux, du plus present au plus retire.

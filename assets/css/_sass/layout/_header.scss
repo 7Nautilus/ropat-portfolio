@@ -116,28 +116,80 @@ header {
    voile pour les controles qui l'exigent, pas pour la marque qui en est
    dispensee. A rediscuter si le logo devient illisible a l'usage : c'est le
    seul point du bloc qui repose sur un arbitrage et non sur une mesure. */
+/* ══════════════════════════════════════════════════════════════════════════
+   ⚠️ LE VOILE EN BANDE EST SUPPRIME, 28/07, sur demande de Ropat repetee.
+   ══════════════════════════════════════════════════════════════════════════
+   Ce qui vivait ici : un `::before` de 180 px de haut, degrade noir 0,62 ->
+   0,58 -> 0,30 -> 0. Il garantissait 7,43:1 a la nav au-dessus de n'importe
+   quelle oeuvre, sans dependre de l'image ni du defilement. C'etait une
+   GARANTIE, pas un reglage, et le tout ce bloc de commentaire ci-dessus
+   explique pourquoi la deduction de couleur ne pouvait pas la remplacer.
+
+   Ropat le voit comme « un fond de header » et le veut parti. C'est son
+   arbitrage, et il est pris en connaissance du cout.
+
+   CE QUI LE REMPLACE, et pourquoi ce n'est pas rien. Le halo suit le TRACE
+   des glyphes au lieu de peindre une bande : c'est exactement la technique
+   deja retenue et validee pour le logo juste en dessous. Chaque lettre porte
+   son propre voisinage sombre, sur environ 2 px, donc l'oeil garde un bord
+   franc quel que soit le pixel de l'image derriere, et l'oeuvre n'est pas
+   assombrie sur 180 px de haut.
+
+   ⚠️ CE QUI EST PERDU, ET IL FAUT LE DIRE : ce halo n'est PAS mesurable au
+   sens de WCAG 1.4.3. Le critere compare deux aplats ; il n'a pas de modele
+   pour un contour. La garantie chiffree de 7,43:1 n'existe donc plus, elle est
+   remplacee par une technique standard du texte sur photographie, dont
+   l'efficacite se juge a l'oeil. Sur une oeuvre tres claire ET tres detaillee,
+   la nav restera plus dure a lire qu'avec la bande.
+   Si le point revient : la seule solution mesurable connue est de redonner un
+   aplat, sous une forme ou une autre. */
 header[data-sur-media] {
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 180px;
-    pointer-events: none;
-    z-index: -1;
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--scrim-canal), 0.62) 0,
-      rgba(var(--scrim-canal), 0.58) 96px,
-      rgba(var(--scrim-canal), 0.30) 132px,
-      rgba(var(--scrim-canal), 0) 100%
-    );
+  /* LE LISERE. `text-shadow` et non `filter` : sur du texte, l'ombre portee du
+     filtre s'applique a la boite entiere, alors que text-shadow suit chaque
+     glyphe.
+     Quatre ombres a 1 px dans les quatre diagonales, puis une cinquieme large
+     et floue. Les quatre premieres dessinent un CONTOUR net, la cinquieme pose
+     un fond diffus derriere. C'est la construction d'un sous-titre incruste,
+     et c'est le seul dessin qui tienne sur les deux extremes.
+
+     ⚠️ Choisi APRES avoir regarde, pas avant. Trois variantes essayees sur les
+     deux cas qui decident, l'oeuvre la plus claire (Zylkene, un packaging
+     quasi blanc) et la plus sombre (Ottony) :
+       . un halo flou seul (2px + 6px) : lisible sur le sombre, faible sur le
+         clair, les lettres blanches se diluaient dans le packaging ;
+       . un halo flou plus dense : mieux, sans etre franc ;
+       . ce liseré : net sur le clair, et INVISIBLE sur le sombre, ou il se
+         confond avec le fond. C'est ce qu'on demande a un liseré, ne se voir
+         que quand il sert.
+     Une mesure de contraste n'aurait pas pu trancher entre les trois : WCAG
+     compare deux aplats et n'a pas de modele pour un contour. */
+  .nav-link,
+  .nav-item a,
+  .burger-menu {
+    text-shadow:
+      -1px -1px 0 rgba(var(--scrim-canal), 0.9),
+       1px -1px 0 rgba(var(--scrim-canal), 0.9),
+      -1px  1px 0 rgba(var(--scrim-canal), 0.9),
+       1px  1px 0 rgba(var(--scrim-canal), 0.9),
+       0    0   8px rgba(var(--scrim-canal), 0.9);
   }
 
-  /* Le bouton contact garde son orange, mais sur un aplat OPAQUE. Son texte
-     est du texte : il lui faut 4,5:1, que le voile seul ne donne pas a
-     l'orange (3,0:1 au mieux). Sur --surface plein, il tient 6,5:1.
-     Un bouton a le droit d'avoir un fond, c'est meme sa nature.
-     Mesure apres coup, 6 projets : 7,34:1 au pire. */
+  /* Le burger est un SVG, pas du texte : text-shadow ne le touche pas. Le
+     drop-shadow du filtre suit le trace d'un SVG, donc il fait le meme travail
+     ici que text-shadow sur les glyphes. */
+  .burger-icon {
+    filter:
+      drop-shadow(0 0 1px rgba(var(--scrim-canal), 0.9))
+      drop-shadow(0 0 4px rgba(var(--scrim-canal), 0.9));
+  }
+
+  /* Le bouton contact garde son orange sur un aplat OPAQUE, et il n'est PAS
+     concerne par la suppression : ce n'est pas un fond de barre, c'est le
+     remplissage d'un bouton, ce qui est sa nature meme. Son texte est du
+     texte, il lui faut 4,5:1, et l'orange seul ne les donne pas (3,0:1 au
+     mieux). Sur --surface plein il tient 6,5:1.
+     Mesure, 6 projets : 7,34:1 au pire. C'est desormais le seul controle du
+     header dont le contraste reste GARANTI. */
   .nav-contact {
     background: var(--surface);
     box-shadow: none;
