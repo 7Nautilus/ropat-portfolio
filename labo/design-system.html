@@ -241,7 +241,23 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   aux noms de mentir pendant des mois. Le chantier n'en crée aucun : il ne garde qu'un pont
   explicite et daté, qui meurt à la bascule.</p>
 
-  <h3>Sémantique</h3>
+  <h3>Couche 1 · les primitives</h3>
+  <p>Des <strong>valeurs</strong>, rien d'autre. Elles ne dépendent d'aucun thème, elles ne
+  disent pas à quoi elles servent, et <strong>aucun composant n'a le droit de les lire</strong>.
+  Leur nom décrit ce qu'elles <em>sont</em>, jamais ce qu'elles font : c'est pour ça qu'il est
+  impossible de faire mentir une primitive.</p>
+  <p>Elles n'ont volontairement <strong>pas de colonne de contraste</strong>. Un ratio se mesure
+  entre une encre et un fond, donc entre deux <em>rôles</em> : la question n'a pas de sens à ce
+  niveau. C'est la couche suivante qui l'engage.</p>
+  <table class="jetons" id="t-primitives">
+    <thead><tr><th></th><th>Jeton</th><th>Valeur</th><th>Ce que c'est</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <h3>Couche 2 · la sémantique</h3>
+  <p>Les <strong>rôles</strong>. Seule couche que les composants ont le droit de lire. Un jeton y
+  nomme ce qu'il <em>fait</em>, et c'est là que le contraste devient une question, parce qu'un
+  rôle en engage un autre.</p>
   <table class="jetons" id="t-semantique">
     <thead><tr><th></th><th>Jeton</th><th>Rôle</th><th>Valeur</th><th>Sur le sol</th></tr></thead>
     <tbody></tbody>
@@ -967,6 +983,34 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     ['--succes', 'disponibilite', null],
     ['--danger', 'erreur de formulaire', 4.5]
   ];
+
+  /* ── Couche 1 · primitives ──────────────────────────────────────────
+     Pas de colonne de contraste, et c'est deliberé : un ratio se mesure entre
+     une encre et un fond, donc entre deux ROLES. La question n'existe pas a ce
+     niveau. */
+  var PRIMITIVES = [
+    ['--p-vert-sol', 'plancher du trio dither'],
+    ['--p-vert-median', 'membre median du trio'],
+    ['--p-vert-releve', 'plafond du trio'],
+    ['--p-blanc', 'blanc pur'],
+    ['--p-orange', "l'orange de la marque"],
+    ['--p-encre-sombre', 'vert-noir, pour ecrire SUR une couleur'],
+    ['--p-neige-haute', 'plancher du skin clair'],
+    ['--p-neige-mediane', 'son membre median'],
+    ['--p-vert-succes', 'vert de disponibilite'],
+    ['--p-rouge-erreur', "rouge d'erreur"]
+  ];
+  var tp = document.querySelector('#t-primitives tbody');
+  if (tp) PRIMITIVES.forEach(function (p) {
+    var brut = val(p[0]);
+    var tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><span class="pastille" style="background:' + brut + '"></span></td>' +
+      '<td><code>' + p[0] + '</code></td>' +
+      '<td><code style="color:rgba(255,255,255,.46)">' + brut + '</code></td>' +
+      '<td style="color:#9CA3AF">' + p[1] + '</td>';
+    tp.appendChild(tr);
+  });
 
   var tb = document.querySelector('#t-semantique tbody');
   lignes.forEach(function (l) {
