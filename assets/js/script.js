@@ -564,6 +564,109 @@ document.addEventListener('DOMContentLoaded', () => {
     const L_CLAIRE = 0.2126 * lin(240) + 0.7152 * lin(244) + 0.0722 * lin(241);   // --ink
     const L_SOMBRE = 0.2126 * lin(5) + 0.7152 * lin(16) + 0.0722 * lin(15);      // --p-encre-sombre
 
+    // ⚠️ LES VOILES POSES PAR-DESSUS L'OEUVRE, ajoutes le 28/07.
+    //
+    // Defaut signale par Ropat : « le header ne revient pas a la normale quand
+    // il survole la base du hero, qui est assombrie par le degrade ».
+    // Cause exacte : je reconstruisais le fond a partir du MEDIA SEUL. Or la
+    // page projet pose un `::after` plein cadre sur l'ouverture, un degrade
+    // vertical qui monte jusqu'a 94 % du sol en bas. Visuellement cette zone
+    // est presque noire ; ma sonde, elle, continuait de lire les pixels clairs
+    // du mockup et gardait donc l'encre sombre.
+    // Reconstruire un fond, ce n'est pas lire la source, c'est refaire la PILE.
+    //
+    // ⚠️ PORTEE ASSUMEE : on ne traite que les degrades VERTICAUX et les aplats
+    // translucides poses sur un ancetre du media (ou sur son ::before/::after).
+    // Un degrade oblique, une image de fond ou un `mix-blend-mode` ne seraient
+    // pas vus. C'est suffisant pour ce que la page contient aujourd'hui, et le
+    // jour ou ca ne l'est plus, ca se verra ici.
+    const RE_COULEUR = /(?:rgba?|color)\([^)]*\)/g;
+
+    // Resolution par canvas, comme ailleurs : une expression reguliere ne sait
+    // lire ni `color(srgb ...)` ni `oklch(...)`.
+    const cvCouleur = document.createElement('canvas');
+    cvCouleur.width = cvCouleur.height = 1;
+    const cxCouleur = cvCouleur.getContext('2d', { willReadFrequently: true });
+    const resoudre = (txt) => {
+      cxCouleur.clearRect(0, 0, 1, 1);
+      cxCouleur.fillStyle = '#000';
+      cxCouleur.fillStyle = txt;
+      cxCouleur.clearRect(0, 0, 1, 1);
+      cxCouleur.fillRect(0, 0, 1, 1);
+      const d = cxCouleur.getImageData(0, 0, 1, 1).data;
+      return { r: d[0], g: d[1], b: d[2], a: d[3] / 255 };
+    };
+
+    const lireVoile = (cs) => {
+      const img = cs.backgroundImage;
+      if (img && img !== 'none' && /linear-gradient/.test(img)) {
+        const versLeHaut = /to top/.test(img);
+        if (!versLeHaut && !/to bottom/.test(img)) return null;   // pas vertical
+        const dedans = img.slice(img.indexOf('(') + 1, img.lastIndexOf(')'));
+        const morceaux = dedans.split(/,(?![^(]*\))/).slice(1);
+        const arrets = [];
+        morceaux.forEach((m, i) => {
+          const c = m.match(RE_COULEUR);
+          if (!c) return;
+          const pc = m.match(/(-?[\d.]+)%/);
+          const p = pc ? parseFloat(pc[1]) / 100 : i / Math.max(1, morceaux.length - 1);
+          arrets.push(Object.assign({ p: p }, resoudre(c[0])));
+        });
+        if (arrets.length < 2) return null;
+        return { arrets: arrets, versLeHaut: versLeHaut };
+      }
+      const f = resoudre(cs.backgroundColor);
+      if (f.a > 0.01) return { arrets: [{ p: 0, r: f.r, g: f.g, b: f.b, a: f.a },
+                                        { p: 1, r: f.r, g: f.g, b: f.b, a: f.a }], versLeHaut: true };
+      return null;
+    };
+
+    let voilesCache = null;
+    const voiles = () => {
+      if (voilesCache) return voilesCache;
+      const out = [];
+      const vus = new Set();
+      mediasPage.forEach(m => {
+        let n = m.parentElement, prof = 0;
+        while (n && prof < 4) {
+          if (!vus.has(n)) {
+            vus.add(n);
+            ['::after', '::before'].forEach(pseudo => {
+              const cs = getComputedStyle(n, pseudo);
+              if (cs.content === 'none' || cs.position === 'static') return;
+              const v = lireVoile(cs);
+              if (v) out.push({ el: n, v: v });
+            });
+          }
+          n = n.parentElement; prof++;
+        }
+      });
+      voilesCache = out;
+      return out;
+    };
+
+    // Alpha et couleur du voile a une hauteur d'ecran donnee.
+    const voileA = (y) => {
+      let R = 0, G = 0, B = 0, A = 0;
+      voiles().forEach(({ el, v }) => {
+        const b = el.getBoundingClientRect();
+        if (y < b.top || y > b.bottom || b.height < 1) return;
+        // `to top` : la position 0 est en BAS.
+        const t = v.versLeHaut ? (b.bottom - y) / b.height : (y - b.top) / b.height;
+        const a = v.arrets;
+        let i = 0;
+        while (i < a.length - 2 && a[i + 1].p < t) i++;
+        const d0 = a[i], d1 = a[i + 1];
+        const k = d1.p === d0.p ? 0 : Math.min(1, Math.max(0, (t - d0.p) / (d1.p - d0.p)));
+        const al = d0.a + (d1.a - d0.a) * k;
+        const r = d0.r + (d1.r - d0.r) * k, g = d0.g + (d1.g - d0.g) * k, bb = d0.b + (d1.b - d0.b) * k;
+        // Empilement de plusieurs voiles, dans l'ordre du DOM.
+        R = r * al + R * (1 - al); G = g * al + G * (1 - al); B = bb * al + B * (1 - al);
+        A = al + A * (1 - al);
+      });
+      return A > 0.001 ? { r: R / A, g: G / A, b: B / A, a: A } : null;
+    };
+
     // ⚠️ DEUX BORNES ET NON UNE, et c'est la correction du 28/07.
     //
     // Ma premiere version ne mesurait QUE le pire cas de l'encre claire (le
@@ -600,8 +703,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let d;
         try { d = v.x.getImageData(sx, sy, sw, sh).data; } catch (e) { continue; }
         if (!vals) vals = [];
+        // Le voile est evalue au CENTRE de la zone lue : une boite de controle
+        // fait une quarantaine de pixels de haut, l'alpha y varie peu, et
+        // l'evaluer par pixel couterait sans rien changer au verdict.
+        const V = voileA((hy + by) / 2);
         for (let i = 0; i < d.length; i += 4) {
-          vals.push(0.2126 * lin(d[i]) + 0.7152 * lin(d[i + 1]) + 0.0722 * lin(d[i + 2]));
+          let R = d[i], G = d[i + 1], B = d[i + 2];
+          if (V) { R = V.r * V.a + R * (1 - V.a); G = V.g * V.a + G * (1 - V.a); B = V.b * V.a + B * (1 - V.a); }
+          vals.push(0.2126 * lin(R) + 0.7152 * lin(G) + 0.0722 * lin(B));
         }
       }
       if (!vals || !vals.length) return null;    // rien d'autre que le sol dither
@@ -679,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => { enAttenteFond = false; majFond(); });
     };
     window.addEventListener('scroll', planifier, { passive: true });
-    window.addEventListener('resize', planifier, { passive: true });
+    window.addEventListener('resize', () => { voilesCache = null; planifier(); }, { passive: true });
     window.addEventListener('load', planifier);
     planifier();
   }
