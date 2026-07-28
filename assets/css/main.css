@@ -734,6 +734,12 @@ p:empty {
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   font-weight: 600;
+  /* Il n'avait AUCUN rayon : c'etait le dernier rectangle a angles vifs du
+     site, et il ne se voyait pas parce qu'il n'apparait qu'au clavier.
+     `sm` et pas plus : la pastille mesure 241x50, donc tout rayon au-dela de
+     25 px serait ECRETE et la donnerait pour une gelule. */
+  border-radius: var(--border-radius-sm);
+  corner-shape: squircle;
   z-index: 9999;
 }
 
@@ -2223,7 +2229,7 @@ footer {
   align-items: center;
   background-color: var(--primary-color-alpha);
   color: var(--white-color);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
   corner-shape: squircle;
   border: var(--border-primary);
   padding: var(--spacing-sm);
@@ -2268,7 +2274,7 @@ footer {
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
   box-shadow: var(--shadow-md);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
   corner-shape: squircle;
   position: absolute;
   top: 110%;
@@ -2425,7 +2431,14 @@ footer {
          liseré ne fait que la repeter en criant.
      Filet neutre sur les quatre cotes : la bulle garde son contour, sans
      depenser du signal pour un paragraphe d'introduction. */
-  border-radius: 0 2rem 2rem 2rem;
+  /* ⚠️ Le coin haut-gauche reste VIF, c'est lui qui fait la bulle : trois coins
+     ronds et un angle, c'est la forme d'une prise de parole. Les trois autres
+     passent de 2rem a `xl`.
+     Sur une boite de 672x108 le rayon est ECRETE a 54 px, donc `xl` (6rem) ne
+     rend pas 96 mais le maximum possible : le cote droit devient une demi-
+     capsule. C'est voulu, c'est ce qui « renforce ». Une valeur intermediaire
+     aurait demande un palier hors echelle. */
+  border-radius: 0 var(--radius-xl) var(--radius-xl) var(--radius-xl);
   corner-shape: squircle;
   border: var(--hairline-width) solid var(--line);
 }
@@ -4639,11 +4652,14 @@ main:has(.contact-hero) {
   color: var(--white-color);
   background: var(--surface-faint);
   border: var(--hairline-width) solid var(--line-control);
-  border-radius: var(--border-radius-sm);
+  /* `md` et non `sm` : le declencheur s'aligne ainsi sur son propre MENU,
+     qui etait deja en `md`. Les deux moities du meme composant n'avaient
+     pas la meme forme. */
+  border-radius: var(--border-radius-md);
 }
 @supports (corner-shape: squircle) {
   .contact-dropdown {
-    border-radius: var(--border-radius-sm);
+    border-radius: var(--border-radius-md);
     corner-shape: squircle;
   }
 }

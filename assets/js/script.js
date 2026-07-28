@@ -34,10 +34,29 @@ function annoncer(texte) {
   let blobX = 0, blobY = 0;
   const LERP = 0.12; // Facteur de lissage (trailing)
 
+  /* ⚠️ INVISIBLE TANT QUE LA SOURIS N'A PAS BOUGE. Au chargement, le blob est
+     a (0, 0) et son `translate(-50%, -50%)` le centre sur ce point : son quart
+     inferieur droit depasse donc dans le coin haut-gauche de la page, soit un
+     eclat orange de 10x10 visible sur CHAQUE page jusqu'au premier mouvement.
+     Il ne se voyait pas au DOM : `pointer-events: none` le rend invisible a
+     `elementsFromPoint`, donc la sonde ne le trouvait pas et le rapportait
+     absent. C'est une capture d'ecran zoomee sur le coin qui l'a montre.
+     On ne peut pas connaitre la position du pointeur avant qu'il bouge, donc
+     la seule reponse juste est de ne rien peindre avant. */
+  blob.style.opacity = '0';
+  let jamaisBouge = true;
+
   // Suivi de la position souris
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    if (jamaisBouge) {
+      jamaisBouge = false;
+      // Se poser sans glisser depuis le coin : sinon le premier mouvement
+      // ferait traverser tout l'ecran au blob.
+      blobX = mouseX; blobY = mouseY;
+      blob.style.opacity = '1';
+    }
   });
 
   // Boucle d'animation fluide (trailing)

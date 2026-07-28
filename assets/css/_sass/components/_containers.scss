@@ -27,7 +27,14 @@
          liseré ne fait que la repeter en criant.
      Filet neutre sur les quatre cotes : la bulle garde son contour, sans
      depenser du signal pour un paragraphe d'introduction. */
-  border-radius: 0 2rem 2rem 2rem;
+  /* ⚠️ Le coin haut-gauche reste VIF, c'est lui qui fait la bulle : trois coins
+     ronds et un angle, c'est la forme d'une prise de parole. Les trois autres
+     passent de 2rem a `xl`.
+     Sur une boite de 672x108 le rayon est ECRETE a 54 px, donc `xl` (6rem) ne
+     rend pas 96 mais le maximum possible : le cote droit devient une demi-
+     capsule. C'est voulu, c'est ce qui « renforce ». Une valeur intermediaire
+     aurait demande un palier hors echelle. */
+  border-radius: 0 var(--radius-xl) var(--radius-xl) var(--radius-xl);
   corner-shape: squircle;
   border: var(--hairline-width) solid var(--line);
 }

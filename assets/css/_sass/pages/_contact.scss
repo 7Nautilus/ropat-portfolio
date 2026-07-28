@@ -286,7 +286,10 @@ main:has(.contact-hero) {
   color: var(--white-color);
   background: var(--surface-faint);
   border: var(--hairline-width) solid var(--line-control);
-  @include squircle(var(--border-radius-sm));
+  /* `md` et non `sm` : le declencheur s'aligne ainsi sur son propre MENU,
+     qui etait deja en `md`. Les deux moities du meme composant n'avaient
+     pas la meme forme. */
+  @include squircle(var(--border-radius-md));
   padding: 0.75rem 1rem;
   width: 100%;
   display: flex;
