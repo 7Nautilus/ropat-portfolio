@@ -14,6 +14,14 @@ tools: "Photoshop"
 image_src: /assets/images/projects/outlast-trials.png
 main_image: /assets/images/projects/outlast-trials.png
 media_type: image
+# ⚠️ PROVISOIRE, chantier du 27/07/2026. L'image d'ouverture est ENCORE LE
+# LIVRABLE BRUT (pochette, affiche, visuel publicitaire), pas une mise en
+# situation : le voile du hero contexte falsifie donc la couleur que le
+# client a signee. Uniformisation temporaire, en attendant un vrai mockup.
+# NE PAS POUSSER EN L'ETAT : soit produire le mockup, soit repasser en
+# livrable (il suffit de retirer les deux lignes ci-dessous).
+mockup_a_produire: true
+nature: contexte
 aspect: "808/1206"
 context:
   fr: "Projet personnel"

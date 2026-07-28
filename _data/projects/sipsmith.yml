@@ -14,6 +14,11 @@ tools: "Figma, Affinity"
 image_src: /assets/images/projects/sipsmith/sipsmith.avif
 main_image: /assets/images/projects/sipsmith/sipsmith.avif
 media_type: image
+# L'image d'ouverture est une MISE EN SITUATION, pas le livrable : elle peut
+# donc passer en fond, saigner et porter le titre. A ne jamais poser sur une
+# pochette, une affiche ou un logo, ou le voile falsifierait la couleur que
+# le client a signee. Defaut si absent : livrable.
+nature: contexte
 aspect: "4/3"
 # WebP dedie : les crawlers sociaux ne lisent pas l'AVIF
 og_image: /assets/images/projects/sipsmith/sipsmith-og.webp
