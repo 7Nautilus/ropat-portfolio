@@ -962,9 +962,28 @@ header {
   display: inline-block;
   backface-visibility: hidden;
   perspective: 1000px;
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: filter 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+  transition: transform 0.5s var(--ease-out), color var(--dur-base) var(--ease-quad-out);
   cursor: pointer;
+}
+
+/* ⚠️ LE SURVOL DU LOGO EST RESTAURE. Il avait disparu dans une passe anterieure
+   sans que rien ne le signale : la transition restait declaree au-dessus, mais
+   plus aucune regle ne la declenchait. Ropat : « le logo n'a plus de hover ».
+   Ce qui revient : l'agrandissement, et surtout le REMPLISSAGE. Le trace est
+   dessine en contour avec un fond a 20 % ; au survol il se remplit tout a fait,
+   donc la marque passe du contour au plein. C'est le meme geste que le bouton
+   contact, qui passe lui aussi de 20 % a l'aplat.
+   ⚠️ Ce qui NE revient PAS : le `drop-shadow` orange qui l'accompagnait. Sur une
+   page projet le logo surplombe l'oeuvre, et une lueur deborderait de son
+   trace : regle 8. Le remplissage, lui, ne peint rien au-dela du glyphe. */
+.logo:hover,
+.logo:focus-visible {
+  transform: scale(1.05);
+}
+
+.logo:hover path,
+.logo:focus-visible path {
+  fill-opacity: 1;
 }
 
 .logo path {
@@ -1060,12 +1079,20 @@ header {
   /* ⚠️ Les deux variables ne sont PLUS declarees ici, elles vivent au socle
      (base/_variables.scss). Les garder ici les rendait invisibles au loader,
      qui utilise le meme logo : il s'affichait en blanc. */
-  /* La transition porte sur les DEUX proprietes que la bascule change, et sur
-     elles seules. `all` aurait attrape le `transform` de l'escamotage, donc la
-     barre se serait mise a glisser mollement au lieu de se retirer net. */
-}
-header .logo, header .nav-link, header .nav-item a, header .burger-menu, header .nav-contact {
-  transition: color var(--dur-base) var(--ease-quad-out), border-color var(--dur-base) var(--ease-quad-out), background-color var(--dur-base) var(--ease-quad-out);
+  /* ⚠️ IL N'Y A PLUS DE TRANSITION GROUPEE ICI, ET C'EST LA CORRECTION.
+     Ce bloc listait `color`, `border-color` et `background-color` sur les cinq
+     controles a la fois. Or `transition` n'est pas additive : elle ne s'ajoute
+     pas a celle du composant, elle la REMPLACE. Et `header .nav-contact` pese
+     plus lourd que `.btn`, donc c'est ce bloc qui gagnait.
+     Mesure : le bouton contact DANS le header ne transitionnait que
+     `color, background-color`, la ou le meme bouton hors du header en avait
+     quatre, `transform` et `box-shadow` compris. Son `scale(1.05)` de survol
+     s'appliquait donc d'un coup pendant que les couleurs fondaient sur 0,3 s.
+     Ropat : « l'animation du hover du contact est trop seche ». Deux victimes
+     collaterales du meme bloc : le `translateX(10px)` des liens de nav, et les
+     0,5 s de `transform` du logo.
+     Les proprietes de la bascule sont donc ajoutees LA OU chaque composant
+     declare deja la sienne, jamais par-dessus. */
 }
 
 /* ⚠️ LA VARIANTE SOMBRE. Elle n'existe QUE sous `[data-sur-media]` : ailleurs
@@ -1087,12 +1114,15 @@ header[data-sur-media][data-encre=sombre] {
    bascule rendrait le chrome illisible ; supprimer la transition ne coute
    qu'un fondu. */
 @media (prefers-reduced-motion: reduce) {
-  header .logo,
+  .logo,
   header .nav-link,
   header .nav-item a,
   header .burger-menu,
   header .nav-contact {
     transition: none;
+  }
+  .logo:hover, .logo:focus-visible {
+    transform: none;
   }
 }
 header[data-sur-media] {
@@ -1237,7 +1267,14 @@ header[data-sur-media] {
   margin: 0;
 }
 
-.nav-item a {
+/* ⚠️ `:not(.btn)` : le bouton contact est lui aussi un `<a>` dans un
+   `.nav-item`, donc ce selecteur l'attrapait et son `all` ECRASAIT la
+   transition du composant bouton, exactement comme le bloc groupe retire plus
+   haut. Mesure apres correction du bloc : le contact transitionnait encore
+   `all` au lieu de ses cinq proprietes nommees. Ici l'effet etait benin
+   (`all` est un sur-ensemble), mais la regle de cascade est la meme et elle
+   remordra ailleurs. Un bouton dans une nav reste un bouton. */
+.nav-item a:not(.btn) {
   /* L'encre du chrome, et non `--ink` en dur : c'est ce que la bascule
      change. Au repos `--encre-chrome` vaut `--ink`, donc rien ne bouge. */
   color: var(--encre-chrome);
@@ -1333,7 +1370,7 @@ header[data-sur-media] {
   cursor: pointer;
   padding: var(--spacing-xs);
   z-index: 110;
-  transition: transform var(--transition-base);
+  transition: transform var(--transition-base), color var(--transition-base);
   position: relative;
 }
 
@@ -2053,7 +2090,7 @@ footer {
      une divergence sans intention, laissee en suspens dans le TODO. La
      decision typographique la tranche, les boutons vont avec les titres. */
   font-family: var(--font-heading);
-  transition: color var(--transition-base), background-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+  transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
 }
 .btn svg {
   transition: transform var(--transition-base);
@@ -2117,15 +2154,24 @@ footer {
   transform: scale(1.05);
 }
 .btn--solid {
-  /* ⚠️ `:not(.btn-icon-send)`. La rotation de -45° fait décoller la FLÈCHE,
-     qui pointe à l'horizontale au repos. L'icône d'envoi, elle, est déjà
-     dessinée penchée à 45° : la faire tourner encore la couchait à plat.
-     La règle visait « la flèche » et attrapait tous les svg, ce qui n'était
-     visible que depuis que l'icône d'envoi est en ligne et non plus une
-     image. */
+  /* ⚠️ TRANSLATION ET NON PLUS ROTATION. Arbitrage de Ropat le 28/07, apres
+     avoir vu les deux gestes cote a cote sur les mêmes boutons.
+     Ce qui a change et pourquoi : la fleche pointe a l'horizontale au repos,
+     donc elle DIT deja « ca va par la ». La faire pivoter de -45° la faisait
+     pointer en haut a droite, c'est-a-dire ailleurs que la ou le bouton mene :
+     le geste contredisait le dessin. Elle avance maintenant dans le sens
+     qu'elle indique, ce qui n'ajoute pas une information, ca confirme celle
+     qui est deja la.
+     6px : assez pour se lire, trop peu pour desaligner le libelle. La
+     gouttiere du bouton fait 14px, donc la fleche ne sort jamais de sa boite.
+     ⚠️ `:not(.btn-icon-send)` A DISPARU, et c'est une consequence directe.
+     L'exception existait parce que l'icone d'envoi est dessinee penchee a 45° :
+     la faire pivoter encore la couchait a plat. Une translation, elle, ne
+     touche pas a son orientation. L'avion part donc vers la droite comme la
+     fleche, et les deux icones suivent enfin la même regle. */
 }
-.btn--solid:hover svg:not(.btn-icon-send) {
-  transform: rotate(-45deg);
+.btn--solid:hover svg {
+  transform: translateX(6px);
 }
 
 .btn--ghost {
@@ -2136,10 +2182,11 @@ footer {
   transform: scale(1.05);
 }
 .btn--ghost {
-  /* Même exclusion que sur le solide, pour la même raison. */
+  /* Même geste que sur le solide, et plus aucune exclusion : voir la note
+     ci-dessus, une translation vaut pour toutes les icones. */
 }
-.card:hover .btn--ghost svg:not(.btn-icon-send) {
-  transform: rotate(-45deg);
+.card:hover .btn--ghost svg {
+  transform: translateX(6px);
 }
 
 /* ── Tailles ────────────────────────────── */

@@ -69,11 +69,31 @@ header {
   backface-visibility: hidden;
   perspective: 1000px;
   
-  /* Transition spécifique pour le filtre d'ombre */
-  transition: 
-    filter 0.5s var(--ease-out), 
-    transform 0.5s var(--ease-out);
+  transition:
+    transform 0.5s var(--ease-out),
+    /* La teinte suit la bascule d'encre, sur SA duree a elle. */
+    color var(--dur-base) var(--ease-quad-out);
   cursor: pointer;
+}
+
+/* ⚠️ LE SURVOL DU LOGO EST RESTAURE. Il avait disparu dans une passe anterieure
+   sans que rien ne le signale : la transition restait declaree au-dessus, mais
+   plus aucune regle ne la declenchait. Ropat : « le logo n'a plus de hover ».
+   Ce qui revient : l'agrandissement, et surtout le REMPLISSAGE. Le trace est
+   dessine en contour avec un fond a 20 % ; au survol il se remplit tout a fait,
+   donc la marque passe du contour au plein. C'est le meme geste que le bouton
+   contact, qui passe lui aussi de 20 % a l'aplat.
+   ⚠️ Ce qui NE revient PAS : le `drop-shadow` orange qui l'accompagnait. Sur une
+   page projet le logo surplombe l'oeuvre, et une lueur deborderait de son
+   trace : regle 8. Le remplissage, lui, ne peint rien au-dela du glyphe. */
+.logo:hover,
+.logo:focus-visible {
+  transform: scale(1.05);
+}
+
+.logo:hover path,
+.logo:focus-visible path {
+  fill-opacity: 1;
 }
 
 .logo path {
@@ -170,15 +190,20 @@ header {
      (base/_variables.scss). Les garder ici les rendait invisibles au loader,
      qui utilise le meme logo : il s'affichait en blanc. */
 
-  /* La transition porte sur les DEUX proprietes que la bascule change, et sur
-     elles seules. `all` aurait attrape le `transform` de l'escamotage, donc la
-     barre se serait mise a glisser mollement au lieu de se retirer net. */
-  .logo, .nav-link, .nav-item a, .burger-menu, .nav-contact {
-    transition:
-      color var(--dur-base) var(--ease-quad-out),
-      border-color var(--dur-base) var(--ease-quad-out),
-      background-color var(--dur-base) var(--ease-quad-out);
-  }
+  /* ⚠️ IL N'Y A PLUS DE TRANSITION GROUPEE ICI, ET C'EST LA CORRECTION.
+     Ce bloc listait `color`, `border-color` et `background-color` sur les cinq
+     controles a la fois. Or `transition` n'est pas additive : elle ne s'ajoute
+     pas a celle du composant, elle la REMPLACE. Et `header .nav-contact` pese
+     plus lourd que `.btn`, donc c'est ce bloc qui gagnait.
+     Mesure : le bouton contact DANS le header ne transitionnait que
+     `color, background-color`, la ou le meme bouton hors du header en avait
+     quatre, `transform` et `box-shadow` compris. Son `scale(1.05)` de survol
+     s'appliquait donc d'un coup pendant que les couleurs fondaient sur 0,3 s.
+     Ropat : « l'animation du hover du contact est trop seche ». Deux victimes
+     collaterales du meme bloc : le `translateX(10px)` des liens de nav, et les
+     0,5 s de `transform` du logo.
+     Les proprietes de la bascule sont donc ajoutees LA OU chaque composant
+     declare deja la sienne, jamais par-dessus. */
 }
 
 /* ⚠️ LA VARIANTE SOMBRE. Elle n'existe QUE sous `[data-sur-media]` : ailleurs
@@ -200,11 +225,13 @@ header[data-sur-media][data-encre="sombre"] {
    bascule rendrait le chrome illisible ; supprimer la transition ne coute
    qu'un fondu. */
 @media (prefers-reduced-motion: reduce) {
-  header .logo,
+  .logo,
   header .nav-link,
   header .nav-item a,
   header .burger-menu,
   header .nav-contact { transition: none; }
+
+  .logo:hover, .logo:focus-visible { transform: none; }
 }
 
 header[data-sur-media] {
@@ -354,7 +381,14 @@ header[data-sur-media] {
   margin: 0;
 }
 
-.nav-item a {
+/* ⚠️ `:not(.btn)` : le bouton contact est lui aussi un `<a>` dans un
+   `.nav-item`, donc ce selecteur l'attrapait et son `all` ECRASAIT la
+   transition du composant bouton, exactement comme le bloc groupe retire plus
+   haut. Mesure apres correction du bloc : le contact transitionnait encore
+   `all` au lieu de ses cinq proprietes nommees. Ici l'effet etait benin
+   (`all` est un sur-ensemble), mais la regle de cascade est la meme et elle
+   remordra ailleurs. Un bouton dans une nav reste un bouton. */
+.nav-item a:not(.btn) {
   /* L'encre du chrome, et non `--ink` en dur : c'est ce que la bascule
      change. Au repos `--encre-chrome` vaut `--ink`, donc rien ne bouge. */
   color: var(--encre-chrome);
@@ -455,7 +489,11 @@ header[data-sur-media] {
   cursor: pointer;
   padding: var(--spacing-xs);
   z-index: 110;
-  transition: transform var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    /* Ajoute ici depuis le retrait du bloc groupe : c'est `--encre-chrome` qui
+       peint ce bouton, donc la bascule le concerne. */
+    color var(--transition-base);
   position: relative;
 }
 

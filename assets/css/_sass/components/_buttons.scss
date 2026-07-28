@@ -50,10 +50,17 @@
   transition:
     color var(--transition-base),
     background-color var(--transition-base),
+    /* ⚠️ `border-color` a ete AJOUTE ici, et ce n'est pas cosmetique : le bouton
+       contact de la nav change de contour avec la bascule d'encre du header
+       (`border-color: var(--signal-chrome)`). Tant que cette ligne manquait,
+       la seule facon de faire fondre ce contour etait de redeclarer une
+       transition dans le header, ce qui ECRASAIT celle-ci. La propriete
+       appartient au bouton, elle est donc declaree sur le bouton. */
+    border-color var(--transition-base),
     transform var(--transition-base),
     box-shadow var(--transition-base);
 
-  // Flèche : rotation -45° au survol
+  // La flèche avance au survol. Voir plus bas pourquoi elle n'y tourne plus.
   svg {
     transition: transform var(--transition-base);
   }
@@ -112,14 +119,23 @@
     transform: scale(1.05);
   }
 
-  /* ⚠️ `:not(.btn-icon-send)`. La rotation de -45° fait décoller la FLÈCHE,
-     qui pointe à l'horizontale au repos. L'icône d'envoi, elle, est déjà
-     dessinée penchée à 45° : la faire tourner encore la couchait à plat.
-     La règle visait « la flèche » et attrapait tous les svg, ce qui n'était
-     visible que depuis que l'icône d'envoi est en ligne et non plus une
-     image. */
-  &:hover svg:not(.btn-icon-send) {
-    transform: rotate(-45deg);
+  /* ⚠️ TRANSLATION ET NON PLUS ROTATION. Arbitrage de Ropat le 28/07, apres
+     avoir vu les deux gestes cote a cote sur les mêmes boutons.
+     Ce qui a change et pourquoi : la fleche pointe a l'horizontale au repos,
+     donc elle DIT deja « ca va par la ». La faire pivoter de -45° la faisait
+     pointer en haut a droite, c'est-a-dire ailleurs que la ou le bouton mene :
+     le geste contredisait le dessin. Elle avance maintenant dans le sens
+     qu'elle indique, ce qui n'ajoute pas une information, ca confirme celle
+     qui est deja la.
+     6px : assez pour se lire, trop peu pour desaligner le libelle. La
+     gouttiere du bouton fait 14px, donc la fleche ne sort jamais de sa boite.
+     ⚠️ `:not(.btn-icon-send)` A DISPARU, et c'est une consequence directe.
+     L'exception existait parce que l'icone d'envoi est dessinee penchee a 45° :
+     la faire pivoter encore la couchait a plat. Une translation, elle, ne
+     touche pas a son orientation. L'avion part donc vers la droite comme la
+     fleche, et les deux icones suivent enfin la même regle. */
+  &:hover svg {
+    transform: translateX(6px);
   }
 }
 
@@ -134,9 +150,10 @@
     transform: scale(1.05);
   }
 
-  /* Même exclusion que sur le solide, pour la même raison. */
-  .card:hover & svg:not(.btn-icon-send) {
-    transform: rotate(-45deg);
+  /* Même geste que sur le solide, et plus aucune exclusion : voir la note
+     ci-dessus, une translation vaut pour toutes les icones. */
+  .card:hover & svg {
+    transform: translateX(6px);
   }
 }
 
