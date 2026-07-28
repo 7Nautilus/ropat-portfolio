@@ -5,7 +5,7 @@
 {% assign _cible = include.target | default: "#second-section" %}
 <div class="scroll-overlay">
   <a href="{{ _cible }}" class="scroll-down-link" aria-label="{% if page.lang == 'fr' %}Aller à la section suivante{% else %}Skip to next section{% endif %}">
-    <div class="big-icon-placeholder big-icon" aria-hidden="true">
+    <div class="scroll-down-pastille" aria-hidden="true">
       {{ site.data.design-system.navigation-arrow-icon }}
     </div>
   </a>

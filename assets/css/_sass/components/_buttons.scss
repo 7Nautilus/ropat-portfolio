@@ -204,26 +204,7 @@
    Scroll Down Button
    ============================================ */
 
-.big-icon-placeholder {
-  background-color: var(--primary-color-alpha);
-  border: var(--border-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white-color);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.big-icon {
-  width: fit-content;
-  height: fit-content;
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-lg);
-  corner-shape: squircle;
-}
-
-.big-icon svg {
-  width: 4rem;
-  height: 4rem;
-}
+/* ⚠️ `.big-icon-placeholder` et `.big-icon` ne vivent plus ici : ce n'etait pas
+   un bouton, c'etait la pastille de l'indice de defilement. Les deux classes
+   n'en font plus qu'une, `.scroll-down-pastille`, dans components/_scroll-down.scss
+   avec le reste du composant. */

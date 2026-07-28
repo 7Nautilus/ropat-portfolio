@@ -2188,30 +2188,10 @@ footer {
 /* ============================================
    Scroll Down Button
    ============================================ */
-.big-icon-placeholder {
-  background-color: var(--primary-color-alpha);
-  border: var(--border-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white-color);
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.big-icon {
-  width: fit-content;
-  height: fit-content;
-  padding: var(--spacing-sm);
-  border-radius: var(--border-radius-lg);
-  corner-shape: squircle;
-}
-
-.big-icon svg {
-  width: 4rem;
-  height: 4rem;
-}
-
+/* ⚠️ `.big-icon-placeholder` et `.big-icon` ne vivent plus ici : ce n'etait pas
+   un bouton, c'etait la pastille de l'indice de defilement. Les deux classes
+   n'en font plus qu'une, `.scroll-down-pastille`, dans components/_scroll-down.scss
+   avec le reste du composant. */
 .dropdown {
   display: flex;
   flex-direction: column;
@@ -2402,6 +2382,41 @@ footer {
 
 .scroll-down-link:hover {
   transform: translateX(-50%) translateY(5px);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LA PASTILLE
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ RENOMMEE le 28/07. Elle s'appelait `.big-icon-placeholder .big-icon`,
+   DEUX classes posees ensemble sur le meme et unique element, et elles
+   decrivaient une APPARENCE (« grande icone ») au lieu d'un role. Ropat :
+   « ce composant est mal nomme ». L'`aria-label` du lien, lui, disait deja
+   « Skip to next section » : le composant se savait indice de defilement,
+   seule sa classe l'ignorait.
+   Elle vivait aussi dans components/_buttons.scss, alors que ce n'est pas un
+   bouton : elle rejoint le reste de son composant.
+
+   Le rayon passe de 2rem a 50 %. Sur une boite carree de 102x102 c'est le
+   maximum utile : au-dela, tout rayon serait ecrete a la meme valeur. Combine
+   au squircle, ca donne une pastille pleine et non un cercle, ce qui la
+   distingue des pastilles d'etat du site, qui sont de vrais ronds. */
+.scroll-down-pastille {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  padding: var(--spacing-sm);
+  background-color: var(--primary-color-alpha);
+  border: var(--border-primary);
+  border-radius: var(--border-radius-squircle-full);
+  corner-shape: squircle;
+  color: var(--white-color);
+}
+
+.scroll-down-pastille svg {
+  width: 4rem;
+  height: 4rem;
 }
 
 .bubble-container {
@@ -4922,7 +4937,7 @@ main:has(.contact-hero) {
     border-radius: var(--border-radius-sm);
     corner-shape: squircle;
   }
-  .big-icon svg {
+  .scroll-down-pastille svg {
     width: 3rem;
     height: 3rem;
   }
