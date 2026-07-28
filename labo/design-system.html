@@ -38,15 +38,20 @@ sitemap: false
   /* ── 1. PRIMITIVES ────────────────────────────────────────────────────
      Les valeurs brutes. Aucune ne depend d'un theme, aucune ne se consomme
      directement dans un composant. */
-  /* Le trio dither, et son INVERSE. Deux triades symetriques : chaque skin a
-     ses trois valeurs de sol, du plancher au plafond. C'est cette symetrie qui
-     rend le bi-registre possible sans re-coder. */
-  --p-vert-sol:      #030808;   /* plancher du trio dither */
+  /* Deux camouflages, un par skin. ⚠️ Le second n'est PAS l'inverse du premier,
+     contrairement a ce que j'ai ecrit ici le 28/07 : les teintes du trio sombre
+     tournent entre 161 et 180 degres, celles du trio clair entre 135 et 147, et
+     l'inverse RGB strict du dither donnerait du ROSE (#FCF7F7). Ce sont deux
+     palettes distinctes de la meme famille verte, pas une paire miroir.
+     Le trio clair est un camouflage NEIGE / LICHEN, valide dans le chantier
+     identite mais explicitement « pas encore eprouve a l'ecran » : c'est un
+     livrable de la Phase 3, et ses valeurs seront mesurees a ce moment-la. */
+  --p-vert-sol:      #030808;
   --p-vert-median:   #030F0C;
-  --p-vert-releve:   #051510;   /* plafond du trio dither */
-  --p-neige-haute:   #F0F4F1;   /* plancher du trio inverse */
+  --p-vert-releve:   #051510;
+  --p-neige-haute:   #F0F4F1;
   --p-neige-mediane: #DCE6E0;
-  --p-neige-basse:   #BFD1C7;   /* plafond du trio inverse */
+  --p-neige-basse:   #BFD1C7;
 
   --p-blanc:         #ffffff;
   --p-orange:        #ff5c00;
@@ -254,11 +259,26 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   <p>Elles n'ont volontairement <strong>pas de colonne de contraste</strong>. Un ratio se mesure
   entre une encre et un fond, donc entre deux <em>rôles</em> : la question n'a pas de sens à ce
   niveau. C'est la couche suivante qui l'engage.</p>
-  <p>Les six premières forment <strong>deux triades symétriques</strong> : le trio dither et son
-  inverse. Chaque skin a ses trois valeurs de sol, du plancher au plafond. C'est cette symétrie
-  qui rend le bi-registre possible <em>sans re-coder</em> : basculer le thème revient à changer
-  de triade, pas à réécrire des règles. Les cinq suivantes ne sont pas des sols et ne changent
-  pas d'un skin à l'autre, à commencer par l'orange, qui est un point fixe de la charte.</p>
+  <p>Les six premières sont <strong>deux camouflages</strong>, un par skin. Chacun a trois
+  valeurs, du plus foncé au plus clair, et c'est cette symétrie de structure qui rend le
+  bi-registre possible <em>sans re-coder</em> : basculer le thème revient à changer de trio, pas
+  à réécrire des règles.</p>
+
+  <div class="regle" style="border-color:rgba(255,107,107,.35)">
+    <b style="color:#FF6B6B">Correction · le trio clair n'est PAS l'inverse du sombre</b>
+    <span>Je l'avais écrit ici le 28/07, et c'est faux. Les teintes du trio sombre tournent entre
+    <strong>161 et 180°</strong>, celles du trio clair entre <strong>135 et 147°</strong> : même
+    famille verte, pas la même teinte. Et l'inverse RGB strict de <code>#030808</code> donnerait
+    <code>#FCF7F7</code>, un blanc <em>rosé</em>. Ce sont deux palettes distinctes, pas une paire
+    miroir.<br>
+    Le trio clair est un camouflage <strong>neige / lichen</strong>, issu du chantier identité,
+    et son commentaire d'origine le dit : « validé dans le chantier identité, <em>pas encore
+    éprouvé à l'écran</em> ». C'est un livrable de la <strong>Phase 3</strong>, ses valeurs
+    seront mesurées à ce moment-là. Ne pas les traiter comme acquises.</span>
+  </div>
+
+  <p>Les cinq suivantes ne sont pas des camouflages et ne changent pas d'un skin à l'autre, à
+  commencer par l'orange, qui est un point fixe de la charte.</p>
   <table class="jetons" id="t-primitives">
     <thead><tr><th></th><th>Jeton</th><th>Valeur</th><th>Ce que c'est</th></tr></thead>
     <tbody></tbody>
@@ -999,12 +1019,12 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
      une encre et un fond, donc entre deux ROLES. La question n'existe pas a ce
      niveau. */
   var PRIMITIVES = [
-    ['--p-vert-sol', 'trio dither &middot; plancher'],
-    ['--p-vert-median', 'trio dither &middot; median'],
-    ['--p-vert-releve', 'trio dither &middot; plafond'],
-    ['--p-neige-haute', 'trio inverse &middot; plancher'],
-    ['--p-neige-mediane', 'trio inverse &middot; median'],
-    ['--p-neige-basse', 'trio inverse &middot; plafond'],
+    ['--p-vert-sol', 'camouflage sombre &middot; le plus fonce'],
+    ['--p-vert-median', 'camouflage sombre &middot; median'],
+    ['--p-vert-releve', 'camouflage sombre &middot; le plus clair'],
+    ['--p-neige-haute', 'camouflage neige &middot; le plus clair'],
+    ['--p-neige-mediane', 'camouflage neige &middot; median'],
+    ['--p-neige-basse', 'camouflage neige &middot; le plus fonce'],
     ['--p-blanc', 'blanc pur'],
     ['--p-orange', "l'orange de la marque"],
     ['--p-encre-sombre', 'vert-noir, pour ecrire SUR une couleur'],
