@@ -68,7 +68,16 @@
   border: var(--border-primary);
   /* Biseau la ou le navigateur le sait, pilule ailleurs. Voir le mixin :
      les coins coupes riment avec les terminaisons de Chakra Petch, et le
-     repli est le bouton d'aujourd'hui, donc rien ne peut regresser. */
+     repli est le bouton d'aujourd'hui, donc rien ne peut regresser.
+
+     ⚠️ 1em, et non l'echelle stricte de la police. A 0,6em, la coupe faisait
+     9,6px sur le bouton de nav (haut de 48px) et 12px sur le CTA (haut de 71) :
+     proportionnellement voisin, mais Ropat a vu juste, ca se LIT differemment.
+     Sur une grande boite, les aretes plates dominent et le biseau s'efface.
+     Il doit donc croitre PLUS VITE que le bouton, pas au meme rythme.
+     Le bouton de nav garde sa valeur d'origine, jugee bonne, via
+     `--bevel-cut` depuis layout/_header.scss. */
+  --bevel-cut: 1em;
   @include bevel;
   color: var(--white-color);
   box-shadow: var(--shadow-sm);

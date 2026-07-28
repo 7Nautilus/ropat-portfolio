@@ -249,6 +249,22 @@ header[data-sur-media] {
 .nav-contact {
   font-size: var(--text-meta);
   padding: 0.5em 1.1em;
+
+  /* Le biseau du bouton de nav est celui d'origine, juge bon a l'oeil : 0,6em
+     sur une police de 16px, soit 9,6px de coupe sur une boite haute de 48.
+     Les boutons de page montent a 1em parce qu'ils sont bien plus grands et
+     que le biseau doit croitre plus vite qu'eux pour rester lisible (cf.
+     components/_buttons.scss). On regle ici par la variable, sans importer le
+     mixin : c'est un reglage de CONTEXTE, comme le padding juste au-dessus.
+
+     ⚠️ `&.btn--solid` est NECESSAIRE, pas decoratif. `.nav-contact` seul a la
+     meme specificite que `.btn--solid`, et dans l'ordre ITCSS `layout` est
+     charge AVANT `components` : c'est donc le composant qui gagnait, et le
+     bouton de nav heritait de la coupe des grands boutons (mesure a 16px au
+     lieu de 9,6). Le selecteur double le fait passer devant. */
+  &.btn--solid {
+    --bevel-cut: 0.6em;
+  }
 }
 
 

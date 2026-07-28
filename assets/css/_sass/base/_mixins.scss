@@ -46,11 +46,14 @@
 // comme l'icone et le padding qui sont deja dans cette unite. Le bouton de nav
 // (16px) recoit donc une coupe plus petite que le CTA (20px), ce qui est le
 // comportement voulu.
+// La coupe est lue depuis `--bevel-cut`, ce qui permet a n'importe quel
+// consommateur de la regler SANS importer ce mixin. Le bouton de nav ajuste
+// ainsi la sienne depuis layout/_header.scss.
 @mixin bevel($cut: 0.6em, $fallback: var(--border-radius-full)) {
   border-radius: $fallback;
 
   @supports (corner-shape: bevel) {
-    border-radius: $cut;
+    border-radius: var(--bevel-cut, #{$cut});
     corner-shape: bevel;
   }
 }
