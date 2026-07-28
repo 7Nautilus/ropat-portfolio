@@ -104,42 +104,40 @@ header {
    au-dessus d'un media elle marque `surImage` et son ratio ne veut rien dire.
    Un « 0 echec » de sa part ne valide rien ici. */
 header[data-sur-media] {
-  /* LE LISERE. `text-shadow` et non `filter` : sur du texte, l'ombre portee du
-     filtre s'applique a la boite entiere, alors que text-shadow suit chaque
-     glyphe.
-     Quatre ombres a 1 px dans les quatre diagonales, puis une cinquieme large
-     et floue. Les quatre premieres dessinent un CONTOUR net, la cinquieme pose
-     un fond diffus derriere. C'est la construction d'un sous-titre incruste,
-     et c'est le seul dessin qui tienne sur les deux extremes.
+  /* ⚠️⚠️ AUCUN TRAITEMENT SUR LA NAV NON PLUS, et c'est le point d'arrivee de
+     toute cette histoire. Ne rien remettre ici sans rouvrir l'arbitrage.
 
-     ⚠️ Choisi APRES avoir regarde, pas avant. Trois variantes essayees sur les
-     deux cas qui decident, l'oeuvre la plus claire (Zylkene, un packaging
-     quasi blanc) et la plus sombre (Ottony) :
-       . un halo flou seul (2px + 6px) : lisible sur le sombre, faible sur le
-         clair, les lettres blanches se diluaient dans le packaging ;
-       . un halo flou plus dense : mieux, sans etre franc ;
-       . ce liseré : net sur le clair, et INVISIBLE sur le sombre, ou il se
-         confond avec le fond. C'est ce qu'on demande a un liseré, ne se voir
-         que quand il sert.
-     Une mesure de contraste n'aurait pas pu trancher entre les trois : WCAG
-     compare deux aplats et n'a pas de modele pour un contour. */
-  .nav-link,
-  .nav-item a,
-  .burger-menu {
-    text-shadow:
-      -1px -1px 0 rgba(var(--scrim-canal), 0.9),
-       1px -1px 0 rgba(var(--scrim-canal), 0.9),
-      -1px  1px 0 rgba(var(--scrim-canal), 0.9),
-       1px  1px 0 rgba(var(--scrim-canal), 0.9),
-       0    0   8px rgba(var(--scrim-canal), 0.9);
-  }
+     Ce qui vivait la : un LISERE, quatre `text-shadow` a 1 px dans les
+     diagonales pour un contour net, plus une lueur floue a 8 px. Il avait ete
+     pose le jour meme en remplacement du voile en bande, et il tenait a l'oeil
+     sur les deux extremes (Zylkene, packaging quasi blanc, et Ottony, tres
+     sombre).
+
+     ⚠️ CE QUI L'A CONDAMNE : la regle 8, que je venais d'ecrire une heure plus
+     tot, l'excluait deja et je ne l'avais pas vu. « L'oeuvre ne paye jamais la
+     lisibilite du chrome : un controle peut avoir son propre remplissage, il
+     n'a pas le droit de DEBORDER. » Or une lueur a 8 px deborde de 8 px sur
+     l'oeuvre, autour de chaque glyphe. J'avais formule la regle a partir de
+     quatre decisions de Ropat et je l'appliquais a tout sauf a ce que je venais
+     de poser moi-meme.
+     Lecon : une regle qu'on ecrit ne vaut que si on la retourne d'abord contre
+     son propre travail. Il a fallu que Ropat le signale une cinquieme fois.
+
+     CE QUE CA COUTE : le probleme est le meme que pour le burger, chiffre juste
+     en dessous, mais il touche desormais TOUS les controles du header, texte
+     compris, donc au seuil de 4,5:1 et non 3.
+
+     CE QUI RESTE GARANTI : le bouton contact, seul controle a porter un aplat
+     opaque. C'est exactement la frontiere que pose la regle 8. Un bouton a le
+     droit d'avoir un fond, c'est sa nature ; il n'a pas le droit de peindre
+     autour de lui. */
 
   /* ⚠️⚠️ LE BURGER N'A PLUS DE TRAITEMENT, ET C'EST UNE DECISION, PAS UN OUBLI.
      Ne pas « corriger » ce point sans rouvrir l'arbitrage avec Ropat.
 
-     Il portait un `drop-shadow`, retire le 28/07 avec celui du logo. C'est un
-     SVG et non du texte, donc le `text-shadow` ci-dessus ne l'atteint pas : il
-     ne reste rien.
+     Il portait un `drop-shadow`, retire le 28/07 avec celui du logo, puis le
+     lisere de la nav est tombe a son tour. Il ne reste donc rien, et c'est vrai
+     de tous les controles du header sauf le bouton contact.
 
      CE QUE CA COUTE, mesure et non estime. Sur MOBILE le burger est le SEUL
      controle visible du header, les liens vivant dans l'overlay. Mesure sur
