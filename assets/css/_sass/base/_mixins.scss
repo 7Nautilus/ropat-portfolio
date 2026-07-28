@@ -21,6 +21,31 @@
   }
 }
 
+// ── BISEAU ────────────────────────────────────────────
+// Coins coupes a 45 degres. Fait RIMER les boutons avec Chakra Petch, dont les
+// terminaisons sont elles-memes coupees (le G de GRAPHIQUE, le S de STRATEGIE
+// du hero). C'est un accord de marque, pas une mode : le squircle, lui,
+// n'aurait rime avec rien et aurait en plus efface la distinction de forme
+// entre une surface (carte, en squircle) et une action.
+//
+// ⚠️ `corner-shape` consomme le `border-radius` comme TAILLE DE COUPE. On ne
+// peut donc pas le poser par-dessus un `border-radius: 9999px` : le biseau
+// mangerait la moitie de la boite et rendrait un losange. La valeur de coupe
+// est donc declaree DANS le @supports, et le rayon d'origine reste intact en
+// dehors.
+//
+// Le repli n'est pas une degradation : sans support, on obtient exactement le
+// bouton d'aujourd'hui, qui est deja en service. Amelioration progressive au
+// sens strict.
+@mixin bevel($cut: 0.75rem, $fallback: var(--border-radius-full)) {
+  border-radius: $fallback;
+
+  @supports (corner-shape: bevel) {
+    border-radius: $cut;
+    corner-shape: bevel;
+  }
+}
+
 // ── CONTOUR + RELIEF AU SURVOL ────────────────────────
 // Contour orange, relief 3D leger et zoom au survol.
 // Utilise par .hero-title-span.

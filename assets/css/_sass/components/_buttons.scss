@@ -66,7 +66,10 @@
 .btn--solid {
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  border-radius: var(--border-radius-full);
+  /* Biseau la ou le navigateur le sait, pilule ailleurs. Voir le mixin :
+     les coins coupes riment avec les terminaisons de Chakra Petch, et le
+     repli est le bouton d'aujourd'hui, donc rien ne peut regresser. */
+  @include bevel;
   color: var(--white-color);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
