@@ -721,6 +721,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const PERIODE_MESURE = 100;
     let derniereMesure = 0;
 
+    // ══════════════════════════════════════════════════════════════════
+    //  ⚠️ CE QUE CETTE BASCULE NE RESOUT PAS, releve du 28/07 sur les 20
+    //  pages projet. 17 sur 20 sont justes. Les trois autres sont CONNUS et
+    //  laisses tels quels par Ropat : ce ne sont pas des regressions, et
+    //  aucun reglage ne les corrige.
+    //
+    //  1. STELYA, le seul vrai defaut. Son fond est COUPE EN DEUX : sombre a
+    //     gauche sous le logo, clair a droite sous la nav. Une barre qui n'a
+    //     qu'une variante ne peut pas servir les deux, donc en `sombre` le
+    //     logo devient sombre-sur-sombre et disparait presque.
+    //     C'est exactement le cas qui avait tue la tentative du 27/07.
+    //     La sortie EXISTE et elle est mesuree : un verdict par CONTROLE au
+    //     lieu d'un pour la barre, le logo gardant l'orange et la nav passant
+    //     au sombre. Ce desaccord entre controles est rare, 1 position sur 24
+    //     dans les releves, mais il existe.
+    //     ⚠️ Ce n'est pas une question technique : elle demande d'accepter
+    //     qu'un header porte DEUX encres a la fois. Arbitrage de Ropat, en
+    //     attente. Ne pas l'implementer sans le lui demander.
+    //
+    //  2. AELIO (clair 1,86 / sombre 1,30) et EXIT (1,96 / 1,04). Les deux
+    //     encres sont mauvaises, le systeme prend le moindre mal, et c'est la
+    //     politique documentee. Aucun reglage ne les sauve : il faudrait une
+    //     COMPOSITION differente, un autre cadrage du hero ou une zone calme
+    //     reservee en haut de l'oeuvre.
+    //
+    //  Ne pas « ameliorer » les seuils en visant ces trois pages : on
+    //  degraderait les dix-sept autres pour rien.
+    // ══════════════════════════════════════════════════════════════════
     const majEncre = (bas, force) => {
       const maintenant = performance.now();
       if (!force && maintenant - derniereMesure < PERIODE_MESURE) return;
