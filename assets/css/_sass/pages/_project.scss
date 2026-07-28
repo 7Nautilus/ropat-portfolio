@@ -150,11 +150,11 @@ body:has(.project-page) {
     background:
       linear-gradient(
         to top,
-        rgb(3 8 8 / 0.94) 0%,
-        rgb(3 8 8 / 0.90) 38%,
-        rgb(3 8 8 / 0.80) 55%,
-        rgb(3 8 8 / 0.42) 74%,
-        rgb(3 8 8 / 0.12) 100%
+        color-mix(in srgb, var(--surface) 94%, transparent) 0%,
+        color-mix(in srgb, var(--surface) 90%, transparent) 38%,
+        color-mix(in srgb, var(--surface) 80%, transparent) 55%,
+        color-mix(in srgb, var(--surface) 42%, transparent) 74%,
+        color-mix(in srgb, var(--surface) 12%, transparent) 100%
       );
     pointer-events: none;
   }
@@ -543,7 +543,8 @@ body:has(.project-page) {
 
   /* Contraste automatique : couleur claire -> texte noir, sinon blanc.
      Repli blanc pour les navigateurs sans relative colors. */
-  color: white;
+  /* Repli pour les navigateurs sans relative colors. */
+  color: var(--ink);
   color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 }
 

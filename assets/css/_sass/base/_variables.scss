@@ -86,8 +86,33 @@
      confirme que le role est coherent et que seul le nom clochait. */
   --surface-veil: rgba(0, 0, 0, 0.5);
   --surface-subtle: rgba(255, 255, 255, 0.1);
+  /* Deux echelons et non un seul : le releve du 28/07 trouvait 4 valeurs
+     (0,04 / 0,05 / 0,06 / 0,1) pour un unique jeton. Les ecraser toutes sur
+     0,1 aurait supprime une distinction reelle : le fond d'un CHAMP au repos
+     et son etat de survol ne peuvent pas etre la meme valeur, sinon le survol
+     ne se voit plus. `faint` est le repos, `subtle` la reaction. */
+  --surface-faint: rgba(255, 255, 255, 0.04);
   --surface-scrim: rgba(0, 0, 0, 0.98);    /* lightbox, overlay de nav */
   --surface-placeholder: #2d3748;
+  /* Le sol propre du chrome (barre du header). Tres faible : sur le sol sombre
+     il ne fait presque rien, il n'existe que pour que la barre ne soit pas
+     STRICTEMENT transparente quand elle glisse au-dessus d'une section claire.
+     Il etait ecrit en dur, donc invisible dans la palette et impossible a
+     re-teinter avec le skin. */
+  --surface-chrome: rgba(0, 0, 0, 0.1);
+
+  /* ⚠️ CANAL DU VOILE PHOTOGRAPHIQUE, pas une couleur de la charte.
+     Un triplet et non une couleur complete, parce que ses consommateurs ont
+     besoin d'opacites DIFFERENTES du meme noir : 0,62 / 0,58 / 0,30 / 0 pour
+     le degrade du header au-dessus d'un media, 0,92 pour le halo du logo.
+     Un jeton par palier aurait fait cinq jetons pour une seule intention.
+     S'utilise en `rgba(var(--scrim-canal), 0.58)`.
+     Le noir pur y est VOLONTAIRE et n'est pas soumis a la regle « plus de
+     noir pur dans les aplats » : ce n'est pas un aplat, c'est une densite,
+     l'equivalent d'un vignettage photo. C'est aussi le seul canal qui
+     garantisse la chute de luminance quelle que soit l'image dessous, ce qui
+     est exactement la propriete sur laquelle repose le calcul du voile. */
+  --scrim-canal: 0, 0, 0;
 
   /* Encre. Quatre niveaux, du plus present au plus retire. */
   --ink: var(--blanc);
@@ -98,6 +123,17 @@
      fond : 4,63:1 sur #030808 et 4,66:1 sur #051510. Calcule, pas encore
      verifie au navigateur sur le motif reel. */
   --ink-subtle: rgba(255, 255, 255, 0.46);
+
+  /* ⚠️ ENCRE DECORATIVE. Elle ne tient AUCUN seuil de contraste, 1,72:1 sur le
+     sol, et c'est voulu : elle sert a un glyphe present comme TEXTURE, pas
+     comme texte. Aujourd'hui la seule esperluette du H1 de l'accueil.
+     Elle ne doit jamais porter d'information : si un mot pose dessus doit etre
+     lu, ce n'est pas le bon jeton.
+     Elle existe en tant que jeton, et non en dur, pour la raison posee par
+     Ropat le 28/07 : une exception ecrite en variable reste VISIBLE dans la
+     palette, une exception ecrite en litteral est invisible. Tokeniser ne
+     valide pas l'ecart, ca le rend auditable. */
+  --ink-decorative: rgba(255, 255, 255, 0.2);
 
   /* Filets neutres. Le trait qui SEPARE sans signaler. Aucun minimum de
      contraste ne s'y applique : il ne porte pas d'information, il aere. */
@@ -338,8 +374,22 @@
      pas seulement dans le sombre. */
   --surface-veil: var(--neige-mediane);
   --surface-subtle: rgba(5, 16, 15, 0.06);
+  --surface-faint: rgba(5, 16, 15, 0.025);
+  /* Meme role, meme absence de seuil : c'est une texture, pas un texte. */
+  --ink-decorative: rgba(5, 16, 15, 0.2);
   --surface-scrim: rgba(240, 244, 241, 0.98);
   --surface-placeholder: var(--neige-basse);
+  /* Direction inversee : sur un sol clair, une barre legerement plus SOMBRE
+     ne se detache pas, c'est un blanc leger qui la souleve. Ce jeton est
+     exactement la raison pour laquelle le rgba en dur devait mourir : ecrit
+     en litteral, il posait du noir a 10 % sur un sol neige. */
+  --surface-chrome: rgba(255, 255, 255, 0.35);
+
+  /* ⚠️ Le canal du voile reste NOIR dans le skin clair, et ce n'est pas un
+     oubli : il ne teinte pas une surface du site, il assombrit une image pour
+     garantir 5,3:1 a une encre CLAIRE posee dessus. Le jour ou le chrome
+     au-dessus d'un media passera a l'encre sombre (Phase 3), c'est le calcul
+     entier qu'il faudra refaire, pas ce triplet qu'il faudra inverser. */
 
   --ink: var(--encre-sombre);
   --ink-soft: #1B2B27;

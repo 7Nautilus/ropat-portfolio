@@ -83,6 +83,28 @@ sitemap: false
   --voile: rgba(0, 0, 0, 0.5);               /* ASSOMBRIT le sol sous le contenu */
   --rideau: rgba(0, 0, 0, 0.98);             /* lightbox, overlay de nav */
 
+  /* L'ECLAIRCIE, direction inverse du voile : elle SOULEVE une zone au lieu de
+     l'enfoncer. Deux echelons et non un, parce que le fond d'un champ au repos
+     et sa reaction au survol ne peuvent pas etre la meme valeur, sinon le
+     survol ne se voit plus. Le releve du 28/07 trouvait quatre valeurs pour
+     zero jeton (0,04 / 0,05 / 0,06 / 0,1). */
+  --eclaircie-repos: rgba(255, 255, 255, 0.04);
+  --eclaircie-reaction: rgba(255, 255, 255, 0.1);
+
+  /* Le sol propre du CHROME, la barre du header. Tres faible : il n'existe que
+     pour que la barre ne soit pas strictement transparente quand elle glisse
+     au-dessus d'une section claire. */
+  --chrome: rgba(0, 0, 0, 0.1);
+
+  /* ⚠️ CANAL du voile photographique pose sur un media. Ce n'est pas une
+     couleur de la charte, c'est une DENSITE, l'equivalent d'un vignettage.
+     Un triplet et non une couleur, parce que ses cinq consommateurs ont besoin
+     d'opacites differentes du meme noir : `rgba(var(--canal-voile), 0.58)`.
+     Le noir pur y est volontaire et echappe a la regle « plus de noir pur dans
+     les aplats » : ce n'est pas un aplat, et c'est le seul canal qui garantisse
+     la chute de luminance quelle que soit l'image dessous. */
+  --canal-voile: 0, 0, 0;
+
   /* Encre, du plus present au plus retire. Trois niveaux, pas quatre :
      l'ancien `--ink-subtle` a 4,63:1 a ete retire par `typeset` faute de
      marge, il n'a pas a revenir. */
@@ -90,9 +112,25 @@ sitemap: false
   --encre-douce: #e2e8f0;
   --encre-attenuee: #9CA3AF;                 /* mesure 7,4:1 sur le sol */
 
+  /* ⚠️ ENCRE DECORATIVE. Elle ne tient AUCUN seuil, 1,72:1 sur le sol, et
+     c'est voulu : elle sert a un glyphe present comme TEXTURE et non comme
+     texte. Aujourd'hui la seule esperluette du H1 de l'accueil.
+     Elle existe en tant que jeton, et non en dur, pour la raison posee par
+     Ropat le 28/07 : une exception ecrite en variable reste VISIBLE dans la
+     palette, une exception ecrite en litteral est invisible. Tokeniser ne
+     valide pas l'ecart, ca le rend auditable. */
+  --encre-decorative: rgba(255, 255, 255, 0.2);
+
   /* Le trait qui SEPARE, sans rien signaler. Toujours 1px. */
   --filet: rgba(255, 255, 255, 0.08);
   --filet-epaisseur: 1px;
+
+  /* ⚠️ Le trait qui DELIMITE UN CONTROLE est un AUTRE role, meme s'il se
+     ressemble a l'oeil. Un champ de saisie et un dropdown doivent 3:1 au titre
+     de WCAG 1.4.11 : leur bord porte l'information « ici, on peut agir ».
+     Mesures : les bordures reelles etaient a 1,23:1, et `--filet` ne les
+     aurait pas sauvees (1,17:1). Ce jeton est mesure a 3,47:1. */
+  --filet-controle: rgba(255, 255, 255, 0.38);
 
   /* Le SIGNAL. Rare par construction.
      Il n'existe volontairement AUCUN token qui empaquette epaisseur + couleur
@@ -116,12 +154,18 @@ sitemap: false
   --surface: var(--sol);
   --surface-veil: var(--voile);
   --surface-scrim: var(--rideau);
+  --surface-faint: var(--eclaircie-repos);
+  --surface-subtle: var(--eclaircie-reaction);
+  --surface-chrome: var(--chrome);
+  --scrim-canal: var(--canal-voile);
   --secondary-color: var(--voile);
   --ink: var(--encre);
   --ink-soft: var(--encre-douce);
   --ink-muted: var(--encre-attenuee);
+  --ink-decorative: var(--encre-decorative);
   --white-color: var(--encre);
   --line: var(--filet);
+  --line-control: var(--filet-controle);
   --hairline-width: var(--filet-epaisseur);
   --accent: var(--signal);
   --primary-color: var(--signal);
@@ -332,6 +376,69 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
   <p>Le point le plus parlant est le <strong>filet</strong>. Le jeton vaut 0,08 et les cinq traits
   du site valent 0,05 ou 0,1 : le jeton existe, il est documenté, et <em>personne ne s'en sert</em>.
   Ce n'est pas de la dérive lente, c'est un jeton qui n'a jamais été adopté.</p>
+
+  <h3>Ce que la correction a donné, et ce que le relevé avait faux</h3>
+  <p>Les quatre lignes ci-dessus sont corrigées. Deux d'entre elles ne disaient pas ce que je
+  croyais, et c'est le plus utile à retenir.</p>
+
+  <table class="jetons">
+    <thead><tr><th>Ligne</th><th>Ce que j'avais annoncé</th><th>Ce qui était vrai</th></tr></thead>
+    <tbody>
+      <tr><td>encre</td><td>10 valeurs pour 3 jetons</td>
+          <td>Exact, mais la correction a fait apparaître une <strong>troisième famille</strong> :
+          trois de ces « encres » étaient des <em>icônes</em>, donc des composants soumis aux 3:1
+          de WCAG 1.4.11 et non aux 4,5:1 d'un texte. Mapper par rôle, jamais par proximité
+          numérique.</td></tr>
+      <tr><td>filet</td><td>1 jeton, 2 valeurs, zéro adoption</td>
+          <td>Le relevé confondait <strong>deux rôles</strong>. Trois vrais séparateurs passent à
+          <code>--filet</code> ; les deux autres délimitaient des <em>contrôles</em>, mesurés à
+          1,23:1, et <code>--filet</code> ne les aurait pas sauvés (1,17:1). D'où
+          <code>--filet-controle</code>, mesuré à 3,47:1.</td></tr>
+      <tr><td>sol</td><td><span class="ratio ko">3 concurrents</span></td>
+          <td><span class="ratio ok">1 seul</span>. <code>#0a0a0a</code> était <strong>déjà
+          corrigé</strong> (mon motif attrapait le commentaire qui racontait la correction) et
+          <code>#1c1c1e</code> était du <strong>code commenté</strong>, donc mort.</td></tr>
+      <tr><td>voiles noirs</td><td>« légitimes, à ne pas corriger »</td>
+          <td>Ropat a tranché l'inverse. Le noir reste un outil d'assombrissement et non une
+          couleur de la charte, mais il doit quand même <strong>porter un nom</strong> : sinon il
+          n'apparaît nulle part quand on regarde la palette.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="regle">
+    <b>La règle que Ropat en a tirée, le 28/07</b>
+    <span>Une exception écrite en <strong>variable</strong> reste visible dans la palette ; une
+    exception écrite en <strong>littéral</strong> est invisible. Tokeniser ne valide pas l'écart,
+    <em>ça le rend auditable</em>. C'est pourquoi <code>--encre-decorative</code> existe alors
+    qu'elle échoue à 1,72:1, et pourquoi <code>--canal-voile</code> existe alors que ce n'est même
+    pas une couleur.</span>
+  </div>
+
+  <div class="regle">
+    <b>Et une leçon d'outillage</b>
+    <span>Un relevé qui lit les commentaires compte <strong>les cicatrices comme des blessures</strong>.
+    Sur quatre lignes, deux constats étaient des artefacts de comptage. Compter n'est pas
+    constater : il faut ouvrir chaque ligne.<br>
+    Même piège du côté de la sonde d'accessibilité, qui signalait un échec de contraste sur le mot
+    « GRAPHIQUE » du H1 : elle ne lisait que <code>color</code> (un orange à 20 %, 1,24:1) et
+    ignorait <code>-webkit-text-stroke</code>, qui porte toute la lisibilité du mot
+    (<strong>6,51:1</strong> à 94 px, pour un seuil de 3:1). Une sonde qui ne connaît qu'une des
+    deux couches d'un glyphe ne mesure pas ce glyphe.</span>
+  </div>
+
+  <p><strong>État après la passe :</strong> <span class="ratio ok">0 littéral</span> dans tout
+  <code>_sass/</code> hors <code>_variables.scss</code>, et <span class="ratio ok">0 échec de
+  contraste</span> mesuré sur 7 pages. Restent <strong>deux exceptions techniques</strong>, qui
+  sont documentées à l'endroit exact où elles vivent :</p>
+  <ol>
+    <li>Le <code>black</code> des <code>mask-image</code> du carrousel n'est <strong>pas une
+    couleur</strong> : dans un masque, seul le canal alpha compte, et noir veut dire « opaque ».
+    Y poser un jeton serait trompeur.</li>
+    <li>Le chevron du <code>&lt;select&gt;</code> vit dans un <strong>data-URI</strong>, et une
+    <code>url()</code> n'interpole aucune custom property. Sorties possibles le jour où ça gêne :
+    passer le chevron en <code>&lt;svg&gt;</code> inline dans l'include, ou le remplacer par un
+    <code>mask-image</code> coloré en <code>background-color</code>.</li>
+  </ol>
 
   <h3>Couverture du skin clair</h3>
   <p><strong>13 rôles surchargés.</strong> Les non surchargés sont volontaires et documentés,
@@ -1058,10 +1165,15 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     ['--sol', 'le fond, peint par le dither', null],
     ['--voile', 'assombrit le sol sous le contenu', null],
     ['--rideau', 'lightbox, overlay de nav', null],
+    ['--eclaircie-repos', 'souleve : fond d\'un champ au repos', null],
+    ['--eclaircie-reaction', 'souleve : le meme champ au survol', null],
+    ['--chrome', 'le sol propre de la barre du header', null],
     ['--encre', 'texte principal', 4.5],
     ['--encre-douce', 'texte secondaire', 4.5],
     ['--encre-attenuee', 'metadonnees, micro-libelles', 4.5],
+    ['--encre-decorative', 'TEXTURE, jamais un mot a lire', null],
     ['--filet', 'separer, sans signaler', null],
+    ['--filet-controle', 'delimiter un controle (WCAG 1.4.11)', 3],
     ['--signal', 'orange : rare, et il claque', 3],
     ['--signal-encre', 'texte SUR un aplat orange', null],
     ['--succes', 'disponibilite', null],

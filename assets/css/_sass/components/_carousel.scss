@@ -19,7 +19,10 @@
     padding: 20px 0;
     overflow: hidden;
 
-    /* Effet de fondu transparent sur les bords */
+    /* Effet de fondu transparent sur les bords.
+       ⚠️ Le `black` ici n'est PAS une couleur : dans un masque, le canal alpha
+       seul compte, noir voulant dire « opaque ». Aucune variable de la charte
+       n'a de sens a cet endroit, et en poser une serait trompeur. */
     -webkit-mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
     mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
 

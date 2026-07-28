@@ -23,7 +23,10 @@
     left: 0;
     width: 20px;
     height: 20px;
-    background: rgba(0, 0, 0, 0.5);
+    /* Etait `rgba(0, 0, 0, 0.5)`, la valeur de --surface-veil recopiee. Le
+       curseur au repos EST un voile : un disque qui assombrit ce qu'il
+       survole sans le masquer. */
+    background: var(--surface-veil);
     border: 3px solid var(--primary-color);
     border-radius: 50%;
     corner-shape: squircle;

@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-chrome);
   box-shadow: var(--shadow-sm);
   position: sticky;
   width: 100%;
@@ -115,10 +115,10 @@ header[data-sur-media] {
     z-index: -1;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.62) 0,
-      rgba(0, 0, 0, 0.58) 96px,
-      rgba(0, 0, 0, 0.30) 132px,
-      rgba(0, 0, 0, 0) 100%
+      rgba(var(--scrim-canal), 0.62) 0,
+      rgba(var(--scrim-canal), 0.58) 96px,
+      rgba(var(--scrim-canal), 0.30) 132px,
+      rgba(var(--scrim-canal), 0) 100%
     );
   }
 
@@ -145,7 +145,7 @@ header[data-sur-media] {
      autour. ⚠️ Contrairement au reste de ce bloc, son gain n'est PAS mesure :
      ma sonde masque le logo pour lire le fond, elle masque donc aussi son
      halo. A confirmer a l'oeil. */
-  .logo { filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.92)); }
+  .logo { filter: drop-shadow(0 0 2px rgba(var(--scrim-canal), 0.92)); }
 }
 
 /* ================================
@@ -176,7 +176,10 @@ header[data-sur-media] {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.98);
+  /* Etait `rgba(0, 0, 0, 0.98)`, soit la valeur EXACTE de --surface-scrim
+     recopiee a la main. Le meme role, l'overlay plein ecran, existait donc en
+     deux exemplaires dont un seul suivait le skin. */
+  background-color: var(--surface-scrim);
   justify-content: center;
   align-items: center;
   z-index: 100;
