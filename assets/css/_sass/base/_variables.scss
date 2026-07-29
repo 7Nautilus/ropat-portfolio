@@ -477,6 +477,16 @@
      comme une bande qui traverse.
      C'est le seul chiffre a bouger pour changer le caractere du geste : monte-le
      vers un rideau, baisse-le vers un liseré. */
+  /* L'arrivee du hero d'une page projet, en trois echelons : le theme, le
+     titre, le pitch. Le retard les fait entrer APRES que le voile a decouvert
+     la page, l'echelon les separe.
+     ⚠️ Ce ne sont PAS des jetons de transition : l'animation est une animation
+     CSS ordinaire, portee par le DOM vivant et non par la couche
+     `::view-transition`. Voir la note dans pages/_project.scss. */
+  --dur-hero-arrivee: 0.55s;
+  --dur-hero-retard: 0.3s;
+  --dur-hero-echelon: 0.09s;
+
   --voile-transition: var(--accent);   /* l'aplat. Un mot a changer. */
   --dur-voile-couvre: 0.5s;            /* la page quittee est mangee */
   --dur-voile-retard: 0.22s;           /* l'ecart, donc la largeur de la bande */

@@ -827,3 +827,58 @@ body:has(.project-page) header[data-zone="ouverture"] {
     svg { transform: translateX(-3px); }
   }
 }
+
+
+/* ================================
+   L'ARRIVEE DU HERO
+   ================================ */
+
+/* Les trois lignes de l'ouverture entrent en echelons, apres que le voile a
+   decouvert la page. Elles arrivaient d'un bloc, a plat : « le contenu arrive
+   encore de maniere trop seche », Ropat, 29/07/2026.
+
+   ⚠️ C'EST UNE ANIMATION CSS ORDINAIRE, PAS UNE PARTICIPANTE DE LA TRANSITION,
+   ET LE CHOIX EST DELIBERE. Nommer ces elements pour les animer avec la
+   transition paraissait plus direct, mais un element nomme est RETIRE de
+   l'instantane de page : en quittant une page projet, son texte laisserait un
+   TROU dans l'image sortante, et son calque flotterait au-dessus de l'aplat au
+   lieu d'etre balaye avec le reste.
+
+   Le mecanisme est plus simple et sans effet de bord. L'instantane de la page
+   atteinte est pris AU DEBUT du geste, donc a l'etat initial de l'animation,
+   c'est-a-dire texte invisible. Le voile decouvre une page dont le texte
+   n'est pas encore la, puis le DOM vivant reprend la main et l'animation le
+   fait entrer. Le retard est cale pour que ca tombe apres la decouverte.
+
+   Corollaire : sur une arrivee FROIDE, sans transition, l'animation joue quand
+   meme et vaut entree de page. C'est voulu, pas un effet de bord.
+
+   ⚠️ Le `both` masque le texte pendant le retard, ce qui est exactement ce que
+   ce depot s'interdit d'ordinaire (cf. la note en tete de base/_animations.scss).
+   La difference tient en un point : ici RIEN N'EST CONDITIONNE A DU JS. Une
+   animation CSS se termine toujours, donc le pire cas est un texte en retard de
+   300 ms, jamais une page vide. */
+
+.project-open-lede > * {
+  animation: hero-arrive var(--dur-hero-arrivee) var(--ease-out-quart) both;
+  animation-delay: calc(var(--dur-hero-retard) + var(--echelon, 0) * var(--dur-hero-echelon));
+}
+
+.project-open-lede > *:nth-child(2) { --echelon: 1; }
+.project-open-lede > *:nth-child(3) { --echelon: 2; }
+
+@keyframes hero-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+}
+
+/* Le reglage systeme supprime le retard AUSSI, pas seulement la duree : le bloc
+   global de base/_bases.scss ramene les durees a 0,01 ms mais ne touche pas aux
+   delais, donc le texte attendrait encore 300 ms avant d'apparaitre d'un coup. */
+@media (prefers-reduced-motion: reduce) {
+  .project-open-lede > * {
+    animation-delay: 0s !important;
+  }
+}
