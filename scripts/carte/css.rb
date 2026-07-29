@@ -136,12 +136,30 @@ module Carte
     # ── Confrontations ───────────────────────────────────────────────────────
 
     def confronter_jetons
-      sans_consommateur = @jetons.keys.reject { |n| @consommations.key?(n) }.sort
+      # ⚠️ UN LECTEUR EN JAVASCRIPT EST UN CONSOMMATEUR. Sans ce filtre,
+      # `--dur-loader-hold`, que seul script.js lit pour savoir combien de temps
+      # tenir le voile, atterrit dans la liste des jetons a supprimer. Meme
+      # angle mort que les selecteurs poses par le JS, une couche plus bas.
+      lus_par_js = @js ? @js.jetons_lus : {}
+
+      sans_consommateur = @jetons.keys
+                                 .reject { |n| @consommations.key?(n) || lus_par_js.key?(n) }
+                                 .sort
       unless sans_consommateur.empty?
         @anomalies << {
           titre: "Jetons definis, aucun `var()` ne les lit",
           detail: "Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.",
           cas: sans_consommateur.map { |n| "#{n} = #{@jetons[n][:valeur]}   (#{@jetons[n][:ou].first})" }
+        }
+      end
+
+      lus_seulement_en_js = @jetons.keys.select { |n| !@consommations.key?(n) && lus_par_js.key?(n) }.sort
+      unless lus_seulement_en_js.empty?
+        @anomalies << {
+          titre: "Jetons lus UNIQUEMENT depuis le JavaScript",
+          detail: "Aucun `var()` ne les lit, mais ils ont un consommateur. A ne PAS ranger avec " \
+                  "les jetons sans emploi : les supprimer casserait un comportement.",
+          cas: lus_seulement_en_js.map { |n| "#{n} = #{@jetons[n][:valeur]}   lu par #{lus_par_js[n].uniq.join(', ')}" }
         }
       end
 

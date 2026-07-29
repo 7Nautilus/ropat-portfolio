@@ -116,17 +116,38 @@ function annoncer(texte) {
 // ================================
 // PAGE LOADER
 // ================================
+//
+// Le composant est decompose en trois roles dans `_includes/ui/loader.html` et
+// `components/_loader.scss` : la surface, la marque, l'indice. Ce module ne
+// connait que la surface, et c'est voulu : changer l'indice ne doit rien lui
+// demander.
+//
+// ⚠️ LES DEUX DUREES SONT LUES, PAS RECOPIEES. Elles etaient ecrites trois
+// fois : `0.5s` dans la transition du voile, `800` et `500` ici. Le fondu du
+// CSS et l'attente du JS devaient s'accorder et rien ne le verifiait. La meme
+// faute, entre le radar de favicon et ce loader, a coute une desynchronisation
+// le 29/07/2026. La source unique est maintenant `base/_variables.scss`.
+function dureeJeton(nom, repli) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(nom).trim();
+  // ⚠️ TESTER `ms` AVANT `s` : toute valeur en millisecondes se termine aussi
+  // par « s », donc l'ordre inverse lirait 800ms comme 800 secondes.
+  if (v.endsWith('ms')) return parseFloat(v) || repli;
+  if (v.endsWith('s')) return (parseFloat(v) * 1000) || repli;
+  // Jeton absent : la feuille de style n'est pas chargee. On garde les valeurs
+  // historiques plutot que de tomber a zero et de faire disparaitre le voile
+  // d'un coup.
+  return repli;
+}
+
 window.addEventListener('load', () => {
   const loader = document.getElementById('pageLoader');
-  if (loader) {
-    setTimeout(() => {
-      loader.classList.add('loaded');
-      // Retirer du DOM après la transition
-      setTimeout(() => {
-        loader.remove();
-      }, 500);
-    }, 800);
-  }
+  if (!loader) return;
+
+  setTimeout(() => {
+    loader.classList.add('loaded');
+    // Retirer du DOM une fois le fondu termine.
+    setTimeout(() => loader.remove(), dureeJeton('--dur-loader-fade', 500));
+  }, dureeJeton('--dur-loader-hold', 800));
 });
 
 // ================================

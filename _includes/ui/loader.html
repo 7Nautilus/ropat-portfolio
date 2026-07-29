@@ -1,0 +1,47 @@
+{% comment %}
+  ============================================================
+  LOADER DE PAGE : composant à propriétés
+  ============================================================
+
+  Propriétés :
+    indice   forme de l'indicateur : "bar" (défaut)
+             c'est le SEUL rôle destiné à changer ; la surface et la marque
+             lui survivent (voir components/_loader.scss)
+    marque   "logo" (défaut) | "none"
+
+  Trois rôles, et c'est le point de la décomposition :
+    la SURFACE  le voile plein écran, qui couvre puis s'efface
+    la MARQUE   ce qui identifie pendant l'attente
+    l'INDICE    ce qui dit que quelque chose travaille
+
+  ⚠️ Deux choses dépendent de ce gabarit et cassent en silence si on y touche :
+    - `id="pageLoader"` est lu par script.js, section PAGE LOADER, qui pose la
+      classe `loaded` puis retire l'élément ;
+    - le radar de favicon ne tourne QUE si cet élément existe, et lit la même
+      classe `loaded` pour savoir quand rendre l'onglet. Pas de loader, pas de
+      radar : voir la section RADAR DE CHARGEMENT DANS LE FAVICON.
+
+  Les durées ne sont pas ici : `--dur-loader-hold` et `--dur-loader-fade`
+  vivent dans base/_variables.scss et sont lues par le CSS comme par le JS.
+
+  ⚠️ Ce gabarit rend EXACTEMENT le HTML qu'il remplace, à l'octet près. Un
+  `aria-hidden="true"` sur le voile serait justifié (il ne porte aucune
+  information, il cache le contenu le temps qu'il se pose) mais ce serait un
+  changement de comportement glissé dans une décomposition : il se décide à
+  part, pas ici.
+{% endcomment %}
+
+{% assign indice = include.indice | default: "bar" %}
+{% assign marque = include.marque | default: "logo" %}
+
+<div class="page-loader" id="pageLoader">
+  <div class="loader-content">
+    {% if marque == "logo" %}
+      <div class="loader-logo">{% include ui/logo.html %}</div>
+    {% endif %}
+
+    {% if indice == "bar" %}
+      <div class="loader-bar"></div>
+    {% endif %}
+  </div>
+</div>

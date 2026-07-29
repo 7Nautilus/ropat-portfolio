@@ -424,6 +424,16 @@
      grammaire de revelation, qui est un livrable de la PHASE 4. */
   --dur-reveal: 0.6s;
 
+  /* Le loader d'accueil. Ces deux durees sont lues par le CSS ET par le JS
+     (`assets/js/script.js`, sections PAGE LOADER et RADAR), c'est pourquoi
+     elles vivent ici et nulle part ailleurs.
+     ⚠️ ELLES ETAIENT ECRITES TROIS FOIS : `0.5s` dans la transition du voile,
+     `800` et `500` en dur dans le JS. Les deux valeurs de fondu devaient
+     s'accorder et rien ne le verifiait. Le meme defaut, entre le radar de
+     favicon et ce loader, a coute une desynchronisation le 29/07/2026. */
+  --dur-loader-hold: 800ms;   /* le voile tient, une fois la page chargee */
+  --dur-loader-fade: 500ms;   /* puis il s'efface */
+
   /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
      les micro-mouvements. Equivalents CSS des courbes GSAP citees dans
      docs/VEILLE-PORTFOLIOS-2026-07.md. */

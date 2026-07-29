@@ -42,7 +42,8 @@ module Carte
     COULEUR_HEX     = /\A#[0-9a-fA-F]{3,8}\z/
     LITTERAL        = /(["'])((?:[^"'\\\n]|\\.)*)\1/
 
-    attr_reader :selecteurs, :classes_posees, :attributs, :ecouteurs, :anomalies, :boucles
+    attr_reader :selecteurs, :classes_posees, :attributs, :ecouteurs, :anomalies, :boucles,
+                :jetons_lus
 
     def initialize(couverture, emis)
       @couverture     = couverture
@@ -50,6 +51,7 @@ module Carte
       @selecteurs     = Hash.new { |h, k| h[k] = [] }  # selecteur simple => [fichier:ligne]
       @classes_posees = Hash.new { |h, k| h[k] = [] }
       @attributs      = Hash.new { |h, k| h[k] = [] }
+      @jetons_lus     = Hash.new { |h, k| h[k] = [] }  # jeton CSS lu depuis le JS
       @ecouteurs      = []
       @boucles        = []
       @anomalies      = []
@@ -124,6 +126,32 @@ module Carte
           ligne = Carte.numero_ligne(propre, Regexp.last_match.begin(0))
           valeur.split(/\s+/).reject { |c| c.empty? || c.include?("{") }
                 .each { |c| @classes_posees[c] << "#{rel}:#{ligne}" }
+        end
+
+        # ⚠️ UN JETON PEUT N'AVOIR QUE DES LECTEURS EN JAVASCRIPT. Le CSS n'y
+        # pose alors aucun `var()`, donc la passe CSS le range parmi les jetons
+        # sans consommateur, c'est-a-dire dans la liste qui sert a en supprimer.
+        # Constate le 29/07/2026 sur `--dur-loader-hold`, que seul script.js lit
+        # pour savoir combien de temps tenir le voile. C'est le meme angle mort
+        # que pour les selecteurs poses par le JS, sur une autre couche.
+        #
+        # ⚠️ ET ON BALAYE TOUS LES LITTERAUX, PAS LES APPELS. Le premier jet
+        # cherchait `getPropertyValue("--x")` et ne trouvait RIEN : dans
+        # script.js le nom du jeton est passe a une fonction d'aide, qui le
+        # transmet ensuite dans une variable. Chercher l'appel, c'est supposer
+        # comment le code est ecrit. C'est la meme lecon que la sonde de
+        # selecteurs, qui exigeait `querySelectorAll` et n'avait vu qu'un tiers
+        # des cas.
+        propre.scan(LITTERAL) do |_q, contenu|
+          # ⚠️ LIRE LA POSITION AVANT TOUTE AUTRE COMPARAISON. `Regexp.last_match`
+          # appartient au DERNIER filtrage effectue : le `=~` de garde ci-dessous
+          # l'ecrase, et la position lue apres lui est celle de la garde, pas
+          # celle du littéral. Toutes les lignes sortaient a 1. Piege deja paye
+          # ailleurs dans cette carte, et refait ici.
+          position = Regexp.last_match.begin(0)
+          next unless contenu.match?(/\A--[a-zA-Z][\w-]*\z/)
+
+          @jetons_lus[contenu] << "#{rel}:#{Carte.numero_ligne(propre, position)}"
         end
 
         propre.scan(/(?:set|get|remove|has)Attribute\s*\(\s*(["'`])(.*?)\1/) do |_q, nom|

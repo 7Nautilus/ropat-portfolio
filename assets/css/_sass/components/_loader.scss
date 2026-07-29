@@ -1,6 +1,23 @@
 /* ================================
-   PAGE LOADER
+   LOADER DE PAGE
    ================================ */
+
+/* Decompose en TROIS ROLES, et pas en trois morceaux de decor. Chacun peut
+   etre remplace sans toucher aux deux autres :
+     la SURFACE  le voile plein ecran, qui couvre puis s'efface
+     la MARQUE   ce qui identifie pendant l'attente
+     l'INDICE    ce qui dit que quelque chose travaille
+   C'est cette separation qui permettra a la Phase 2 de remplacer l'indice par
+   le radar sans rien reconstruire autour : le voile et la marque ne savent
+   rien de la forme de l'indice.
+
+   Le gabarit vit dans `_includes/ui/loader.html`, avec un parametre `indice`.
+   Il n'est PAS eclate en trois includes : la maison range ses briques
+   d'interface en UN fichier a parametres (voir `ui/button.html` et
+   `ui/dropdown.html`), et trois fichiers pour dix lignes iraient contre. */
+
+
+/* ── 1. LA SURFACE ────────────────────────────────────────────────────── */
 
 .page-loader {
   position: fixed;
@@ -16,7 +33,11 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  transition: opacity 0.5s, visibility 0.5s;
+  /* ⚠️ CETTE DUREE EST LUE AUSSI PAR LE JS, qui attend la fin du fondu pour
+     retirer le voile du DOM. Elle est donc un jeton et non un nombre : ecrite
+     ici en dur, elle devait s'accorder avec un `500` cache dans script.js, et
+     rien ne le verifiait. */
+  transition: opacity var(--dur-loader-fade), visibility var(--dur-loader-fade);
 }
 
 .page-loader.loaded {
@@ -28,6 +49,9 @@
   text-align: center;
 }
 
+
+/* ── 2. LA MARQUE ─────────────────────────────────────────────────────── */
+
 .loader-logo {
   margin-bottom: var(--spacing-md);
   animation: pulse 2s ease-in-out infinite;
@@ -38,13 +62,10 @@
   height: auto;
 }
 
-.loader-logo-text {
-  font-size: var(--text-title);
-  font-weight: 700;
-  color: var(--white-color);
-  margin-bottom: var(--spacing-md);
-  animation: pulse 2s ease-in-out infinite;
-}
+
+/* ── 3. L'INDICE ──────────────────────────────────────────────────────── */
+/* La seule partie que la Phase 2 a vocation a remplacer. Tout ce qui est
+   au-dessus doit lui survivre. */
 
 .loader-bar {
   width: 200px;
@@ -76,7 +97,8 @@
   100% { transform: translateX(300%); }
 }
 
-@-webkit-keyframes loading {
-  0% { -webkit-transform: translateX(-100%); }
-  100% { -webkit-transform: translateX(300%); }
-}
+/* Retire le 29/07/2026 : `.loader-logo-text`, huit lignes que la carte
+   confirmait absentes des 63 pages construites, et le doublon
+   `@-webkit-keyframes loading`, qu'aucun navigateur ne reclame depuis dix ans.
+   Le jumeau prefixe de `pulse` vit encore dans base/_animations.scss ; il
+   part avec le reste de l'hygiene, pas ici. */

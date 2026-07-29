@@ -4,15 +4,14 @@
 {% assign services_url = "/" | append: current_lang | append: "/services.html" %}
 {% assign portfolio_url = "/" | append: current_lang | append: "/portfolio.html" %}
 
+{% comment %}
+  Trois roles decomposes dans `ui/loader.html` : la surface, la marque,
+  l'indice. Seul l'indice a vocation a changer.
+  Ce commentaire est en Liquid et non en HTML : il n'est pas emis, donc la
+  decomposition ne change pas un octet des pages produites.
+{% endcomment %}
 <!-- Loader de page -->
-<div class="page-loader" id="pageLoader">
-  <div class="loader-content">
-    <div class="loader-logo">
-      {% include ui/logo.html %}
-    </div>
-    <div class="loader-bar"></div>
-  </div>
-</div>
+{% include ui/loader.html %}
 
 <main id="main-content">
   <section class="hero">

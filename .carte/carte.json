@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T15:53:14Z",
-  "commit": "668d2df",
+  "genere_le": "2026-07-29T17:12:17Z",
+  "commit": "91ba6ca",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -361,7 +361,7 @@
     "pages/index.html -> projects/project-card.html",
     "pages/index.html -> services/service-card.html",
     "pages/index.html -> ui/button.html",
-    "pages/index.html -> ui/logo.html",
+    "pages/index.html -> ui/loader.html",
     "pages/index.html -> ui/status-dot.html",
     "pages/portfolio.html -> portfolio-filters.html",
     "pages/portfolio.html -> projects/project-card.html",
@@ -378,7 +378,8 @@
     "services/service-main.html -> services/subservices-card.html",
     "services/service-main.html -> ui/button.html",
     "ui/button.html -> ui/icon-arrow.html",
-    "ui/button.html -> ui/icon-send.html"
+    "ui/button.html -> ui/icon-send.html",
+    "ui/loader.html -> ui/logo.html"
   ],
   "jetons": [
     "--accent",
@@ -405,6 +406,8 @@
     "--color-success",
     "--danger",
     "--dur-base",
+    "--dur-loader-fade",
+    "--dur-loader-hold",
     "--dur-quick",
     "--dur-reveal",
     "--ease-expo-out",
@@ -490,6 +493,7 @@
     "--white-color"
   ],
   "jetons_sans_consommateur": [
+    "--dur-loader-hold",
     "--dur-reveal",
     "--p-vert-haute",
     "--p-vert-mediane",
@@ -511,7 +515,6 @@
     ".service-main-container-text",
     ".services-page-subtitle",
     ".services-page-description",
-    ".loader-logo-text",
     ".service-card-big",
     ".hero-theme-container",
     ".hero-theme",
@@ -548,10 +551,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 188191,
-    "gzip": 55503,
-    "sans_commentaires": 78141,
-    "gzip_sans": 12737
+    "brut": 190611,
+    "gzip": 56407,
+    "sans_commentaires": 77982,
+    "gzip_sans": 12739
   },
   "ratios_faux": []
 }
