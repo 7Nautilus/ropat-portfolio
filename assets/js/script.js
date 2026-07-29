@@ -133,9 +133,10 @@ window.addEventListener('load', () => {
 // RADAR DE CHARGEMENT DANS LE FAVICON
 // ================================
 //
-// Un balayage de radar dans l'onglet pendant que la page charge. Motif dessine
-// par Ropat le 29/07/2026 : grille de 5x5 points, un rayon de trois points du
-// centre vers le bord, huit directions, sens horaire, depart a midi.
+// Un balayage de radar dans l'onglet, le temps que le loader de page acheve
+// son travail. Motif dessine par Ropat le 29/07/2026 : grille de 5x5 points,
+// un rayon de trois points du centre vers le bord, huit directions, sens
+// horaire, depart a midi.
 //
 // ── LA GEOMETRIE EST CHOISIE POUR SURVIVRE A 16 PIXELS ────────────────────
 // Toutes les mesures sont PAIRES : premier point a 2, cote 4, pas 6, donc les
@@ -150,11 +151,12 @@ window.addEventListener('load', () => {
 // lire. En carres, les quatre sortent exacts aux deux tailles.
 //
 // ── CE QU'IL RACONTE ──────────────────────────────────────────────────────
-// Rien de mesurable, et c'est assume : le radar tourne tant que la page
-// charge. Le loader de page, lui, se declenche sur `window.load` puis attend
-// 800 ms fixes, donc il n'a AUCUNE progression a rapporter ; inventer une
-// barre qui se remplit aurait ete du theatre. Un radar balaie, il ne promet
-// pas d'arriver quelque part.
+// Rien de mesurable, et c'est l'arbitrage de Ropat. Le loader de page se
+// declenche sur `window.load` puis tient 800 ms fixes : il n'a AUCUNE
+// progression a rapporter, donc inventer une barre qui se remplit aurait ete
+// du theatre. Un radar balaie, il ne promet pas d'arriver quelque part.
+// Ce qu'il dit de vrai est la seule chose qu'il puisse dire : le loader est
+// encore la, la page n'a pas fini de se poser.
 (function () {
   const lien = document.getElementById('favicon');
   if (!lien) return;
@@ -170,7 +172,6 @@ window.addEventListener('load', () => {
   const PAS_MS = 100;                // huit images, un tour en 800 ms
   // Mesure du 29/07 : le navigateur relit le favicon environ quinze fois par
   // seconde. Dix reste dessous, donc aucune image n'est sautee.
-  const DELAI = 250;                 // anti-clignotement, voir plus bas
 
   const DIRS = [[0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1]];
 
@@ -206,31 +207,88 @@ window.addEventListener('load', () => {
     return;   // canvas indisponible : l'icone d'origine reste, rien ne casse
   }
 
-  let image = 0, minuterie = null, amorce = null;
+  let image = 0, minuterie = null, courant = lien, depart = 0;
+
+  // ⚠️ ON REMPLACE L'ELEMENT, ON NE MODIFIE PAS `href`.
+  // Premiere version : `lien.setAttribute('href', ...)`. Le navigateur ALLAIT
+  // BIEN CHERCHER la nouvelle icone, prouve par le journal du serveur, mais il
+  // ne repeignait pas l'onglet : Ropat n'a rien vu. Aller chercher et peindre
+  // sont deux choses, et ma mesure d'hier ne portait que sur la premiere.
+  // Retirer le noeud et en poser un neuf force Chrome a reconsiderer l'icone
+  // du document. C'est la seule forme qui marche de facon fiable.
+  function poser(href) {
+    const neuf = document.createElement('link');
+    neuf.id = 'favicon';
+    neuf.rel = 'icon';
+    neuf.type = 'image/png';
+    neuf.href = href;
+    courant.replaceWith(neuf);
+    courant = neuf;
+  }
 
   function tourner() {
-    lien.setAttribute('href', images[image]);
+    poser(images[image]);
     image = (image + 1) % 8;
   }
 
   function arreter() {
-    clearTimeout(amorce);
-    clearInterval(minuterie);
-    // Remettre l'icone du site, et seulement si on l'avait remplacee.
-    if (minuterie !== null) lien.setAttribute('href', ORIGINE);
-    minuterie = null;
+    if (minuterie === null) return;   // deja arrete, ou jamais parti
+
+    // ⚠️ UN TOUR COMMENCE VA JUSQU'AU BOUT. Sans cela le radar s'arreterait a
+    // la troisieme image sur une page rapide, ce qui se lit comme un defaut
+    // d'affichage et non comme une intention. C'est deja la regle du loader de
+    // page, qui se maintient 800 ms apres `load` au lieu de disparaitre net.
+    const reste = Math.max(0, PAS_MS * 8 - (performance.now() - depart));
+    setTimeout(function () {
+      clearInterval(minuterie);
+      minuterie = null;
+      poser(ORIGINE);
+    }, reste);
   }
 
-  // ⚠️ LE DELAI EST LE POINT QUI DECIDE SI C'EST UTILE OU PENIBLE. Sur une
-  // connexion rapide cette page se charge en moins d'une seconde : demarrer
-  // tout de suite ferait clignoter l'onglet pour rien. Si `load` arrive avant
-  // l'amorce, le radar n'apparait jamais.
-  amorce = setTimeout(function () {
+  // ── QUAND IL TOURNE, ET POURQUOI PAS PENDANT LE CHARGEMENT ──────────────
+  //
+  // ⚠️ PENDANT LE CHARGEMENT, L'ONGLET NE NOUS APPARTIENT PAS. Chrome y dessine
+  // son propre indicateur, un anneau bleu tournant autour du favicon EN CACHE
+  // pour cette URL. Releve par Ropat le 29/07/2026 : la premiere version de ce
+  // module echangeait les images exactement dans cette fenetre, donc elle ne
+  // pouvait rien montrer, quelle que soit la methode d'echange. Ni le
+  // remplacement de noeud ni de vrais fichiers PNG n'y changent quoi que ce
+  // soit : ce n'est pas une question de repeindre, c'est que la place est
+  // prise. J'ai mesure si le navigateur ALLAIT CHERCHER l'icone, puis s'il la
+  // REPEIGNAIT, sans jamais me demander s'il l'AFFICHAIT a ce moment-la.
+  //
+  // La fenetre utile est APRES `load` : Chrome rend l'onglet, et le loader de
+  // page, lui, est encore a l'ecran. Il ne part pas a `load`, il attend 800 ms
+  // puis s'efface sur 500 ms de plus. Le radar vit donc exactement le temps que
+  // le loader est plein, et les deux disent la meme chose au meme instant.
+  //
+  // Consequence assumee : pas de loader, pas de radar. Le loader n'existe que
+  // sur l'accueil (`_includes/pages/index.html`), donc le radar aussi. Le faire
+  // tourner ailleurs serait de la decoration sans rien a accompagner.
+  const loader = document.getElementById('pageLoader');
+  if (!loader) return;
+
+  window.addEventListener('load', function () {
+    depart = performance.now();
     tourner();
     minuterie = setInterval(tourner, PAS_MS);
-  }, DELAI);
 
-  window.addEventListener('load', arreter);
+    // ⚠️ LA FIN EST LUE SUR LE LOADER, PAS RECOPIEE DE LUI. Le module de loader
+    // pose la classe `loaded` quand il commence a s'effacer : on l'observe au
+    // lieu de reecrire son 800 ms ici. Sinon les deux durees derivent le jour
+    // ou l'une des deux change, et rien ne le signale.
+    const obs = new MutationObserver(function () {
+      if (!loader.classList.contains('loaded')) return;
+      obs.disconnect();
+      arreter();
+    });
+    obs.observe(loader, { attributes: true, attributeFilter: ['class'] });
+
+    // Filet : si le loader disparaissait sans passer par `loaded`, le radar
+    // tournerait indefiniment dans l'onglet. Trois tours et il rend la main.
+    setTimeout(function () { obs.disconnect(); arreter(); }, PAS_MS * 24);
+  });
 })();
 
 // ================================
