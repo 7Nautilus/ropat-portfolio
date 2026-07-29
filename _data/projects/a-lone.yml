@@ -13,6 +13,22 @@ year: "2024"
 tools: "Photoshop, Illustrator"
 image_src: /assets/images/projects/a-lone-cover.webp
 main_image: /assets/images/projects/a-lone-mockup.webp
+# ⚠️ AJOUTE LE 29/07/2026. Le champ manquait alors que l'image mesure 1080x810,
+# donc le defaut 1/1 la decrivait faux. Mesure recoupee par deux decodeurs
+# independants.
+#
+# ⚠️ ET CE N'EST PAS UN CORRECTIF DE CLS, contrairement a ce que j'ai d'abord
+# ecrit ici. Mesure faite : sous `nature: contexte`, que portent les 20 projets,
+# l'ouverture est en `position: absolute; inset: 0` (pages/_project.scss:149),
+# donc sa taille ne depend PAS de l'image et les attributs `width`/`height` ne
+# reservent rien. CLS releve au navigateur : 0,0011, et les decalages viennent
+# des revelations au defilement, pas du media.
+# Ce que la correction change vraiment : `aspect` est la valeur par defaut de
+# chaque piece de sequence sans ratio propre (project-main.html:232) et il
+# pilote le calcul de rythme. Aucune piece n'herite de ces valeurs aujourd'hui,
+# donc rien ne bouge a l'ecran. Le champ redevient simplement VRAI, et il le
+# sera le jour ou il portera.
+aspect: "4/3"
 media_type: image
 # L'image d'ouverture est une MISE EN SITUATION, pas le livrable : elle peut
 # donc passer en fond, saigner et porter le titre. A ne jamais poser sur une

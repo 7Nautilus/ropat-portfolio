@@ -30,7 +30,16 @@
         {% assign page_og_image = site.url | append: og_image_path %}
         {% if project_locale.seo %}
           {% assign page_title = project_locale.seo.title %}
-          {% assign page_meta_description = project_locale.seo.meta_description | default: project_locale.seo.description %}
+          {%- comment -%}
+            ⚠️ `seo.meta_description` A ETE RETIRE DE CETTE LIGNE le 29/07/2026 :
+            cette cle n'existe dans AUCUN des 20 fichiers projet. La premiere
+            branche du `default:` ne pouvait donc jamais se declencher, et c'est
+            toujours `seo.description` qui servait.
+            Une branche qui ne peut pas s'executer ne se contente pas d'etre
+            inutile : elle fait croire a un champ qui existerait, et le prochain
+            qui voudra changer la description SEO le cherchera la.
+          {%- endcomment -%}
+          {% assign page_meta_description = project_locale.seo.description %}
           {% assign page_og_title = project_locale.seo.og_title %}
           {% assign page_og_description = project_locale.seo.og_description %}
         {% endif %}

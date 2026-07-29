@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 03:53 sur de18c24.
+> Generee le 29/07/2026 a 04:05 sur e56de80.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 03:53 |
+| Date du build lu | 29/07/2026 04:05 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -204,9 +204,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 - **og_image** : 7/20
 - **thumbnails** : 8/20
 - **discipline** : 8/20
-- **aspect** : 9/20
 - **secteur** : 12/20   absent de chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials
 - **mockup_a_produire** : 12/20   absent de a-lone, aelio, chat-noir, hors-champ, ottony, sipsmith, stelya, zylkene
+- **aspect** : 14/20   absent de btr, cheetah, crow, jhag-banana-rush, logo-process, moon-vtc
 - **case_study** : 19/20   absent de hors-champ
 
 ### Couverture des cles de premier niveau dans `_data/services/` (4 fichiers)  (1)
@@ -419,7 +419,7 @@ Rien a signaler.
 - `assets/js/script.js:1184` : champ.id + '-erreur'
 - `assets/js/script.js:1203` : champ.id + '-erreur'
 
-**Noms de variable liees a plusieurs sources** (52). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
+**Noms de variable liees a plusieurs sources** (51). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
 - _includes/lang-selector.html : `switch_url` a 3 liaisons
 - _includes/layout/footer.html : `item` a 2 liaisons
@@ -433,7 +433,7 @@ Rien a signaler.
 - _includes/meta/schema-org.html : `schema_image` a 2 liaisons
 - _includes/pages/about.html : `item` a 2 liaisons
 - _includes/pages/index.html : `id` a 2 liaisons
-- ... et 40 autres
+- ... et 39 autres
 
 ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 
