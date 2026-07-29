@@ -207,7 +207,7 @@ window.addEventListener('load', () => {
     return;   // canvas indisponible : l'icone d'origine reste, rien ne casse
   }
 
-  let image = 0, minuterie = null, courant = lien, depart = 0;
+  let image = 0, minuterie = null, courant = lien, finir = false;
 
   // ⚠️ ON REMPLACE L'ELEMENT, ON NE MODIFIE PAS `href`.
   // Premiere version : `lien.setAttribute('href', ...)`. Le navigateur ALLAIT
@@ -227,23 +227,33 @@ window.addEventListener('load', () => {
   }
 
   function tourner() {
+    // ⚠️ LA SORTIE SE PREND ICI, PAS AILLEURS, et elle se compte en IMAGES.
+    // `image` revient a zero quand la huitieme vient d'etre affichee : c'est le
+    // seul instant ou le tour est entier. Attendre celui-la, plutot que de
+    // calculer un reste au chronometre, rend l'arret exact quoi qu'il arrive au
+    // loader. La version precedente soustrayait le temps ecoule d'un tour et
+    // bornait a zero : des que le loader s'attardait au-dela de 800 ms, le
+    // reste valait zero et le radar se coupait en pleine image.
+    if (finir && image === 0) {
+      clearInterval(minuterie);
+      minuterie = null;
+      poser(ORIGINE);
+      return;
+    }
     poser(images[image]);
     image = (image + 1) % 8;
   }
 
+  // ⚠️ NE COUPE PAS, DEMANDE LA SORTIE. Un tour commence va jusqu'au bout :
+  // s'arreter a la troisieme image se lit comme un defaut d'affichage, pas
+  // comme une intention. Le radar est de la decoration, arbitrage de Ropat du
+  // 29/07/2026 ; une decoration qui s'interrompt en plein geste rate ce pour
+  // quoi elle existe.
+  // C'est deja la regle du loader de page, qui tient 800 ms apres `load` au
+  // lieu de disparaitre net.
   function arreter() {
     if (minuterie === null) return;   // deja arrete, ou jamais parti
-
-    // ⚠️ UN TOUR COMMENCE VA JUSQU'AU BOUT. Sans cela le radar s'arreterait a
-    // la troisieme image sur une page rapide, ce qui se lit comme un defaut
-    // d'affichage et non comme une intention. C'est deja la regle du loader de
-    // page, qui se maintient 800 ms apres `load` au lieu de disparaitre net.
-    const reste = Math.max(0, PAS_MS * 8 - (performance.now() - depart));
-    setTimeout(function () {
-      clearInterval(minuterie);
-      minuterie = null;
-      poser(ORIGINE);
-    }, reste);
+    finir = true;
   }
 
   // ── QUAND IL TOURNE, ET POURQUOI PAS PENDANT LE CHARGEMENT ──────────────
@@ -270,7 +280,10 @@ window.addEventListener('load', () => {
   if (!loader) return;
 
   window.addEventListener('load', function () {
-    depart = performance.now();
+    // `load` ne devrait se produire qu'une fois, mais un second passage
+    // relancerait une minuterie par-dessus la premiere, et si le tour est deja
+    // conclu elle reposerait l'icone d'origine toutes les 100 ms sans fin.
+    if (minuterie !== null || finir) return;
     tourner();
     minuterie = setInterval(tourner, PAS_MS);
 
