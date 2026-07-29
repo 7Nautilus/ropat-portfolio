@@ -867,6 +867,17 @@ body:has(.project-page) header[data-zone="ouverture"] {
 .project-open-lede > *:nth-child(2) { --echelon: 1; }
 .project-open-lede > *:nth-child(3) { --echelon: 2; }
 
+/* ⚠️ SUSPENDUE PENDANT LE VOILE. Une animation CSS de la page atteinte demarre
+   des le rendu et court PENDANT la transition, cachee par l'instantane : au
+   retrait du voile elle avait deja consomme les deux tiers de sa course, donc
+   on n'en voyait que la fin. La classe est posee et retiree par le script en
+   ligne du layout, section du sens de navigation.
+   `paused` pendant la phase de retard maintient l'animation a son etat de
+   depart : le retard fait partie de la frise, il se met en pause avec elle. */
+html.voile-en-cours .project-open-lede > * {
+  animation-play-state: paused;
+}
+
 /* ⚠️ LE FLOU EST LA PIECE QUI ENLEVE LA BRUSQUERIE, pas la duree ni le retard.
    Ropat, 29/07/2026 : « ce n'est pas une question de retard mais d'animation,
    le contenu arrive trop brusquement. » Diagnostic : `opacity: 0 -> 1` est un

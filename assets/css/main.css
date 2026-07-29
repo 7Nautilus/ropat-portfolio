@@ -453,7 +453,12 @@
      qu'un FLOU a besoin de temps pour se lire. Trop court, il ne se voit pas
      comme une mise au point, il se voit comme un scintillement. */
   --dur-hero-arrivee: 0.8s;
-  --dur-hero-retard: 0.3s;
+  /* ⚠️ Ramene de 0,3 a 0,15 s. Le retard servait a attendre que le voile ait
+     decouvert la page. Depuis que l'animation est SUSPENDUE pendant le voile,
+     il se consomme APRES lui et n'est plus une attente utile mais une
+     hesitation. Il ne garde de role que sur une arrivee froide, sans
+     transition, ou il vaut une respiration avant l'entree. */
+  --dur-hero-retard: 0.15s;
   /* ⚠️ Ramene de 0,09 a 0,07 s : l'echelon doit rester entre 30 et 80 ms. Au-dela
      la cascade se lit comme une lenteur au lieu d'un enchainement. */
   --dur-hero-echelon: 0.07s;
@@ -4757,6 +4762,17 @@ body:has(.project-page) header[data-zone=ouverture] {
 
 .project-open-lede > *:nth-child(3) {
   --echelon: 2;
+}
+
+/* ⚠️ SUSPENDUE PENDANT LE VOILE. Une animation CSS de la page atteinte demarre
+   des le rendu et court PENDANT la transition, cachee par l'instantane : au
+   retrait du voile elle avait deja consomme les deux tiers de sa course, donc
+   on n'en voyait que la fin. La classe est posee et retiree par le script en
+   ligne du layout, section du sens de navigation.
+   `paused` pendant la phase de retard maintient l'animation a son etat de
+   depart : le retard fait partie de la frise, il se met en pause avec elle. */
+html.voile-en-cours .project-open-lede > * {
+  animation-play-state: paused;
 }
 
 /* ⚠️ LE FLOU EST LA PIECE QUI ENLEVE LA BRUSQUERIE, pas la duree ni le retard.

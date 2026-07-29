@@ -487,7 +487,12 @@
      qu'un FLOU a besoin de temps pour se lire. Trop court, il ne se voit pas
      comme une mise au point, il se voit comme un scintillement. */
   --dur-hero-arrivee: 0.8s;
-  --dur-hero-retard: 0.3s;
+  /* ⚠️ Ramene de 0,3 a 0,15 s. Le retard servait a attendre que le voile ait
+     decouvert la page. Depuis que l'animation est SUSPENDUE pendant le voile,
+     il se consomme APRES lui et n'est plus une attente utile mais une
+     hesitation. Il ne garde de role que sur une arrivee froide, sans
+     transition, ou il vaut une respiration avant l'entree. */
+  --dur-hero-retard: 0.15s;
   /* ⚠️ Ramene de 0,09 a 0,07 s : l'echelon doit rester entre 30 et 80 ms. Au-dela
      la cascade se lit comme une lenteur au lieu d'un enchainement. */
   --dur-hero-echelon: 0.07s;

@@ -185,6 +185,23 @@
           return;
         }
 
+        /* ⚠️ SUSPENDRE L'ARRIVEE DU HERO PENDANT LE VOILE, SANS QUOI ELLE JOUE
+           DERRIERE LUI. Une animation CSS de la page atteinte demarre des le
+           rendu et court PENDANT la transition, cachee par l'instantane : au
+           retrait du voile a 0,82 s elle avait deja consomme 65 % de sa course,
+           donc on n'en voyait que la fin. Ropat : « l'animation se lance bien
+           quand je refresh, mais pas quand je clique sur une carte. »
+           J'avais cru l'inverse, que l'instantane figeait l'etat initial et que
+           le DOM vivant prenait la main ensuite. L'instantane est bien pris a
+           l'etat initial, mais l'animation ne l'attend pas.
+           La classe la met en pause, la fin du geste la libere. Sur une arrivee
+           froide, sans transition, la classe n'est jamais posee et l'animation
+           part tout de suite. */
+        document.documentElement.classList.add('voile-en-cours');
+        e.viewTransition.finished.finally(function () {
+          document.documentElement.classList.remove('voile-en-cours');
+        });
+
         if (!e.viewTransition.types) return;
         var a = window.navigation && window.navigation.activation;
         if (!a || a.navigationType !== 'traverse') return;
