@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 04:05 sur e56de80.
+> Generee le 29/07/2026 a 04:13 sur 1cec8b0.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 04:05 |
+| Date du build lu | 29/07/2026 04:13 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -173,7 +173,7 @@ Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni viv
 - site.data.services.web-design.seo.en
 - site.data.services.web-design.seo.fr
 
-### Cles de donnees definies, aucun gabarit ne les lit  (16)
+### Cles de donnees definies, aucun gabarit ne les lit  (10)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
@@ -184,12 +184,6 @@ Aucun chemin resolu ne les atteint, propagation a travers les parametres d'inclu
 - site.data.projects.*.case_study.mockups.*.fit   (1 : stelya)
 - site.data.projects.*.case_study.mockups.*.rows   (2 : aelio, stelya)
 - site.data.projects.*.case_study.mockups_grid_cols   (2 : aelio, stelya)
-- site.data.projects.*.discipline.en   (8 : chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials)
-- site.data.projects.*.discipline.fr   (8 : chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials)
-- site.data.projects.*.formats.en   (4 : jhag-banana-rush, jhag-discovery-set, jhag-pinterest, sipsmith)
-- site.data.projects.*.formats.fr   (4 : jhag-banana-rush, jhag-discovery-set, jhag-pinterest, sipsmith)
-- site.data.projects.*.livrables.en   (1 : moon-vtc)
-- site.data.projects.*.livrables.fr   (1 : moon-vtc)
 - site.data.services.*.services.*   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.en   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.fr   (4 : branding-strategy, graphic-design, music-design, web-design)
@@ -419,7 +413,7 @@ Rien a signaler.
 - `assets/js/script.js:1184` : champ.id + '-erreur'
 - `assets/js/script.js:1203` : champ.id + '-erreur'
 
-**Noms de variable liees a plusieurs sources** (51). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
+**Noms de variable liees a plusieurs sources** (54). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
 - _includes/lang-selector.html : `switch_url` a 3 liaisons
 - _includes/layout/footer.html : `item` a 2 liaisons
@@ -433,7 +427,7 @@ Rien a signaler.
 - _includes/meta/schema-org.html : `schema_image` a 2 liaisons
 - _includes/pages/about.html : `item` a 2 liaisons
 - _includes/pages/index.html : `id` a 2 liaisons
-- ... et 39 autres
+- ... et 42 autres
 
 ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 

@@ -336,6 +336,25 @@
     {% if _secteur %}
     <div><dt>{% if lang == 'fr' %}Secteur{% else %}Sector{% endif %}</dt><dd>{{ _secteur }}</dd></div>
     {% endif %}
+
+    {%- comment -%}
+      ⚠️ `discipline` BRANCHE LE 29/07/2026, ET CE N'EST PAS UN DOUBLON DE
+      `secteur`. Le premier releve l'avait range parmi les cles mortes, en le
+      prenant pour une redite. Les deux champs sont en fait parfaitement
+      COMPLEMENTAIRES : 8 projets portent `discipline`, 12 portent `secteur`,
+      et aucun ne porte les deux.
+      La raison est dans le schema : `secteur` decrit l'ACTIVITE DU CLIENT et
+      n'a pas de sens pour un projet personnel, qui n'en a pas. Les huit projets
+      concernes sont donc exactement les projets perso, et leur colophon
+      n'affichait RIEN a cette ligne, alors que la reponse etait ecrite dans
+      leurs donnees depuis le debut : « Design graphique », « Motion Design ».
+      Meme emplacement que `secteur`, puisqu'ils s'excluent : chaque projet
+      garde une seule ligne a cette place.
+    {%- endcomment -%}
+    {% assign _discipline = project.discipline[lang] | default: project.discipline.en %}
+    {% if _discipline %}
+    <div><dt>Discipline</dt><dd>{{ _discipline }}</dd></div>
+    {% endif %}
     {% assign _contexte = project.context[lang] | default: project.context.en %}
     {% if _contexte %}
     <div><dt>{% if lang == 'fr' %}Contexte{% else %}Context{% endif %}</dt><dd>{{ _contexte }}</dd></div>
@@ -343,6 +362,28 @@
     {% if project_locale.services %}
     <div><dt>Services</dt><dd>{{ project_locale.services }}</dd></div>
     {% endif %}
+
+    {%- comment -%}
+      `livrables` et `formats`, branches le 29/07/2026. Tous deux etaient ecrits
+      et jamais affiches, comme `discipline`.
+      L'ORDRE N'EST PAS ARBITRAIRE : `Services` dit ce que j'ai fait, `Livrables`
+      ce que le client a recu, `Formats` les dimensions de ces livrables, et
+      `Outils` avec quoi. On va du travail vers sa matiere, ce qui est la lecture
+      naturelle d'un colophon.
+      Le colophon est en `repeat(auto-fit, minmax(160px, 1fr))`, donc ces lignes
+      se reflechissent d'elles-memes sans reglage : trois colonnes deviennent
+      quatre quand il y a de quoi.
+    {%- endcomment -%}
+    {% assign _livrables = project.livrables[lang] | default: project.livrables.en %}
+    {% if _livrables %}
+    <div><dt>{% if lang == 'fr' %}Livrables{% else %}Deliverables{% endif %}</dt><dd>{{ _livrables }}</dd></div>
+    {% endif %}
+
+    {% assign _formats = project.formats[lang] | default: project.formats.en %}
+    {% if _formats %}
+    <div><dt>Formats</dt><dd>{{ _formats }}</dd></div>
+    {% endif %}
+
     {% if project.tools %}
     <div><dt>{% if lang == 'fr' %}Outils{% else %}Tools{% endif %}</dt><dd>{{ project.tools }}</dd></div>
     {% endif %}
