@@ -488,7 +488,19 @@
      comme une mise au point, il se voit comme un scintillement. */
   --dur-hero-arrivee: 0.8s;
   --dur-hero-retard: 0.3s;
-  --dur-hero-echelon: 0.09s;
+  /* ⚠️ Ramene de 0,09 a 0,07 s : l'echelon doit rester entre 30 et 80 ms. Au-dela
+     la cascade se lit comme une lenteur au lieu d'un enchainement. */
+  --dur-hero-echelon: 0.07s;
+  /* La course, en `em` et non en pixels : elle suit donc le CORPS de caractere,
+     donc la hierarchie. Mesure a 1280 px de large, le titre remonte de 44 px,
+     l'accroche de 10, le sur-titre de 6 ; a 430 px le titre tombe a 23 px, la
+     typo fluide reduisant la course toute seule.
+     ⚠️ Ni en pixels, ni en pourcentage. Les pixels donnent la meme course a
+     tout le monde, ce que Ropat a juge « trop peu ample » : 10 px sur un titre
+     de 88 px ne se voit pas. Le pourcentage se rapporte a la HAUTEUR DU BLOC,
+     donc l'accroche, simple paragraphe mais haute de 198 px, voyageait plus que
+     le titre : la hierarchie s'inversait. */
+  --course-hero: 0.5em;
 
   --voile-transition: var(--accent);   /* l'aplat. Un mot a changer. */
   --dur-voile-couvre: 0.5s;            /* la page quittee est mangee */
@@ -531,6 +543,13 @@
      plus tranchee. Toutes trois sont des ease-OUT : le geste part vite et se
      pose, il ne retient jamais. */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* ⚠️ PLUS FORTE QUE `quart`, ET C'EST LE POINT. Les courbes toutes faites du
+     CSS manquent de nerf : elles n'ont pas l'attaque qui fait lire une animation
+     comme intentionnelle. Celle-ci part plus vite et se pose plus longtemps, ce
+     qui rend une remontee ample sans la rendre lente.
+     Valeur de reference du metier, pas une invention maison. */
+  --ease-out-fort: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);

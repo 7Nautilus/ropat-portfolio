@@ -454,7 +454,19 @@
      comme une mise au point, il se voit comme un scintillement. */
   --dur-hero-arrivee: 0.8s;
   --dur-hero-retard: 0.3s;
-  --dur-hero-echelon: 0.09s;
+  /* ⚠️ Ramene de 0,09 a 0,07 s : l'echelon doit rester entre 30 et 80 ms. Au-dela
+     la cascade se lit comme une lenteur au lieu d'un enchainement. */
+  --dur-hero-echelon: 0.07s;
+  /* La course, en `em` et non en pixels : elle suit donc le CORPS de caractere,
+     donc la hierarchie. Mesure a 1280 px de large, le titre remonte de 44 px,
+     l'accroche de 10, le sur-titre de 6 ; a 430 px le titre tombe a 23 px, la
+     typo fluide reduisant la course toute seule.
+     ⚠️ Ni en pixels, ni en pourcentage. Les pixels donnent la meme course a
+     tout le monde, ce que Ropat a juge « trop peu ample » : 10 px sur un titre
+     de 88 px ne se voit pas. Le pourcentage se rapporte a la HAUTEUR DU BLOC,
+     donc l'accroche, simple paragraphe mais haute de 198 px, voyageait plus que
+     le titre : la hierarchie s'inversait. */
+  --course-hero: 0.5em;
   --voile-transition: var(--accent); /* l'aplat. Un mot a changer. */
   --dur-voile-couvre: 0.5s; /* la page quittee est mangee */
   --dur-voile-retard: 0.22s; /* l'ecart, donc la largeur de la bande */
@@ -492,6 +504,12 @@
      plus tranchee. Toutes trois sont des ease-OUT : le geste part vite et se
      pose, il ne retient jamais. */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  /* ⚠️ PLUS FORTE QUE `quart`, ET C'EST LE POINT. Les courbes toutes faites du
+     CSS manquent de nerf : elles n'ont pas l'attaque qui fait lire une animation
+     comme intentionnelle. Celle-ci part plus vite et se pose plus longtemps, ce
+     qui rend une remontee ample sans la rendre lente.
+     Valeur de reference du metier, pas une invention maison. */
+  --ease-out-fort: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -4729,7 +4747,7 @@ body:has(.project-page) header[data-zone=ouverture] {
    animation CSS se termine toujours, donc le pire cas est un texte en retard de
    300 ms, jamais une page vide. */
 .project-open-lede > * {
-  animation: hero-arrive var(--dur-hero-arrivee) var(--ease-out-quart) both;
+  animation: hero-arrive var(--dur-hero-arrivee) var(--ease-out-fort) both;
   animation-delay: calc(var(--dur-hero-retard) + var(--echelon, 0) * var(--dur-hero-echelon));
 }
 
@@ -4755,7 +4773,7 @@ body:has(.project-page) header[data-zone=ouverture] {
   from {
     opacity: 0;
     filter: blur(10px);
-    transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, var(--course-hero), 0);
   }
   to {
     opacity: 1;
@@ -4763,12 +4781,26 @@ body:has(.project-page) header[data-zone=ouverture] {
     transform: translate3d(0, 0, 0);
   }
 }
-/* Le reglage systeme supprime le retard AUSSI, pas seulement la duree : le bloc
-   global de base/_bases.scss ramene les durees a 0,01 ms mais ne touche pas aux
-   delais, donc le texte attendrait encore 300 ms avant d'apparaitre d'un coup. */
+/* ⚠️ MOUVEMENT REDUIT NE VEUT PAS DIRE AUCUNE ANIMATION, mais moins et plus
+   douce. On garde donc le FONDU, qui aide a comprendre que quelque chose
+   arrive, et on retire ce qui deplace : la course et le flou. Le retard part
+   aussi, le bloc global de base/_bases.scss ramenant les durees a 0,01 ms sans
+   toucher aux delais, donc le texte aurait attendu 300 ms avant de surgir sous
+   un reglage qui demande precisement l'inverse.
+   ⚠️ `animation` en entier, et pas seulement `animation-name` : il faut ecraser
+   la course heritee de la regle ci-dessus, et une image-cle propre est le seul
+   moyen sur de le faire. */
 @media (prefers-reduced-motion: reduce) {
   .project-open-lede > * {
-    animation-delay: 0s !important;
+    animation: hero-arrive-sobre 0.25s ease both !important;
+  }
+}
+@keyframes hero-arrive-sobre {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 .about-page {

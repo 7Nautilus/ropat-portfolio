@@ -860,7 +860,7 @@ body:has(.project-page) header[data-zone="ouverture"] {
    300 ms, jamais une page vide. */
 
 .project-open-lede > * {
-  animation: hero-arrive var(--dur-hero-arrivee) var(--ease-out-quart) both;
+  animation: hero-arrive var(--dur-hero-arrivee) var(--ease-out-fort) both;
   animation-delay: calc(var(--dur-hero-retard) + var(--echelon, 0) * var(--dur-hero-echelon));
 }
 
@@ -881,7 +881,7 @@ body:has(.project-page) header[data-zone="ouverture"] {
   from {
     opacity: 0;
     filter: blur(10px);
-    transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, var(--course-hero), 0);
   }
   to {
     opacity: 1;
@@ -890,11 +890,22 @@ body:has(.project-page) header[data-zone="ouverture"] {
   }
 }
 
-/* Le reglage systeme supprime le retard AUSSI, pas seulement la duree : le bloc
-   global de base/_bases.scss ramene les durees a 0,01 ms mais ne touche pas aux
-   delais, donc le texte attendrait encore 300 ms avant d'apparaitre d'un coup. */
+/* ⚠️ MOUVEMENT REDUIT NE VEUT PAS DIRE AUCUNE ANIMATION, mais moins et plus
+   douce. On garde donc le FONDU, qui aide a comprendre que quelque chose
+   arrive, et on retire ce qui deplace : la course et le flou. Le retard part
+   aussi, le bloc global de base/_bases.scss ramenant les durees a 0,01 ms sans
+   toucher aux delais, donc le texte aurait attendu 300 ms avant de surgir sous
+   un reglage qui demande precisement l'inverse.
+   ⚠️ `animation` en entier, et pas seulement `animation-name` : il faut ecraser
+   la course heritee de la regle ci-dessus, et une image-cle propre est le seul
+   moyen sur de le faire. */
 @media (prefers-reduced-motion: reduce) {
   .project-open-lede > * {
-    animation-delay: 0s !important;
+    animation: hero-arrive-sobre 0.25s ease both !important;
   }
+}
+
+@keyframes hero-arrive-sobre {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
