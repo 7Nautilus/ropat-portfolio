@@ -187,13 +187,19 @@ module Carte
     def section_routes
       r = @p[:routes]
       s = +"## 1. Routes\n\n"
-      s << "#{r.routes.size} sources a front matter, dont #{r.routes.count { |x| x.lang == 'fr' }} en FR et " \
+      engendrees = r.routes.count { |x| x.source == "(engendree)" }
+      ecrites    = r.routes.size - engendrees
+      s << "#{r.routes.size} routes, dont **#{engendrees} engendrees** par `_plugins/` et #{ecrites} portees " \
+           "par un fichier source. #{r.routes.count { |x| x.lang == 'fr' }} en FR, " \
            "#{r.routes.count { |x| x.lang == 'en' }} en EN.\n\n"
 
-      derivables = r.routes.select { |x| x.front.keys.sort == %w[layout lang project_id].sort || x.front["service_id"] }
+      derivables = r.routes.select do |x|
+        x.source != "(engendree)" &&
+          (x.front.keys.sort == %w[layout lang project_id].sort || x.front["service_id"])
+      end
       unless derivables.empty?
-        s << "**#{derivables.size} pages ne portent qu'un identifiant** et un include d'une ligne : elles sont " \
-             "integralement derivables de leurs donnees.\n\n"
+        s << "⚠️ **#{derivables.size} fichiers sources ne portent qu'un identifiant** et un include d'une ligne : " \
+             "ils sont derivables de leurs donnees et devraient rejoindre le generateur.\n\n"
       end
 
       s << "<details><summary>Table complete des routes</summary>\n\n"

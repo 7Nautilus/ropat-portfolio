@@ -76,9 +76,14 @@
     {
       // Ce qui a bouge depuis la derniere carte commitee. A lancer avant de
       // commiter un changement structurel.
+      // ⚠️ UNE SEULE INVOCATION, `--diff --build`. La forme enchainee
+      // `--build && --diff` etait INUTILE : le premier appel reecrit
+      // `.carte/carte.json`, donc le second comparait la carte a elle-meme et
+      // annoncait toujours « aucun changement ». En mode `--diff`, le script
+      // construit mais n'ecrit PAS la reference.
       "label": "Carte: ce qui a bouge",
       "type": "shell",
-      "command": "bundle exec ruby scripts/carte.rb --build && bundle exec ruby scripts/carte.rb --diff",
+      "command": "bundle exec ruby scripts/carte.rb --diff --build",
       "presentation": { "reveal": "always", "panel": "dedicated" },
       "problemMatcher": []
     }

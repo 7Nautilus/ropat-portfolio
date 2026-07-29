@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 02:06 sur 8d2f579.
+> Generee le 29/07/2026 a 02:34 sur be747aa.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 02:06 |
+| Date du build lu | 29/07/2026 02:34 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -31,9 +31,7 @@ qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
 
 ## 1. Routes
 
-64 sources a front matter, dont 32 en FR et 31 en EN.
-
-**48 pages ne portent qu'un identifiant** et un include d'une ligne : elles sont integralement derivables de leurs donnees.
+64 routes, dont **48 engendrees** par `_plugins/` et 16 portees par un fichier source. 32 en FR, 31 en EN.
 
 <details><summary>Table complete des routes</summary>
 
@@ -46,62 +44,62 @@ qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
 | `/en/legal-notice.html` | `en/legal-notice.html` | en |
 | `/en/portfolio.html` | `en/portfolio.html` | en |
 | `/en/privacy.html` | `en/privacy.html` | en |
-| `/en/projects/a-lone.html` | `en/projects/a-lone.html` | en |
-| `/en/projects/aelio.html` | `en/projects/aelio.html` | en |
-| `/en/projects/btr.html` | `en/projects/btr.html` | en |
-| `/en/projects/chat-noir.html` | `en/projects/chat-noir.html` | en |
-| `/en/projects/cheetah.html` | `en/projects/cheetah.html` | en |
-| `/en/projects/crow.html` | `en/projects/crow.html` | en |
-| `/en/projects/exit.html` | `en/projects/exit.html` | en |
-| `/en/projects/hdd-defrag.html` | `en/projects/hdd-defrag.html` | en |
-| `/en/projects/hors-champ.html` | `en/projects/hors-champ.html` | en |
-| `/en/projects/jhag-banana-rush.html` | `en/projects/jhag-banana-rush.html` | en |
-| `/en/projects/jhag-discovery-set.html` | `en/projects/jhag-discovery-set.html` | en |
-| `/en/projects/jhag-pinterest.html` | `en/projects/jhag-pinterest.html` | en |
-| `/en/projects/jpeja.html` | `en/projects/jpeja.html` | en |
-| `/en/projects/logo-process.html` | `en/projects/logo-process.html` | en |
-| `/en/projects/moon-vtc.html` | `en/projects/moon-vtc.html` | en |
-| `/en/projects/ottony-paris.html` | `en/projects/ottony-paris.html` | en |
-| `/en/projects/outlast-trials.html` | `en/projects/outlast-trials.html` | en |
-| `/en/projects/sipsmith.html` | `en/projects/sipsmith.html` | en |
-| `/en/projects/stelya.html` | `en/projects/stelya.html` | en |
-| `/en/projects/zylkene.html` | `en/projects/zylkene.html` | en |
+| `/en/projects/a-lone.html` | `(engendree)` | en |
+| `/en/projects/aelio.html` | `(engendree)` | en |
+| `/en/projects/btr.html` | `(engendree)` | en |
+| `/en/projects/chat-noir.html` | `(engendree)` | en |
+| `/en/projects/cheetah.html` | `(engendree)` | en |
+| `/en/projects/crow.html` | `(engendree)` | en |
+| `/en/projects/exit.html` | `(engendree)` | en |
+| `/en/projects/hdd-defrag.html` | `(engendree)` | en |
+| `/en/projects/hors-champ.html` | `(engendree)` | en |
+| `/en/projects/jhag-banana-rush.html` | `(engendree)` | en |
+| `/en/projects/jhag-discovery-set.html` | `(engendree)` | en |
+| `/en/projects/jhag-pinterest.html` | `(engendree)` | en |
+| `/en/projects/jpeja.html` | `(engendree)` | en |
+| `/en/projects/logo-process.html` | `(engendree)` | en |
+| `/en/projects/moon-vtc.html` | `(engendree)` | en |
+| `/en/projects/ottony-paris.html` | `(engendree)` | en |
+| `/en/projects/outlast-trials.html` | `(engendree)` | en |
+| `/en/projects/sipsmith.html` | `(engendree)` | en |
+| `/en/projects/stelya.html` | `(engendree)` | en |
+| `/en/projects/zylkene.html` | `(engendree)` | en |
 | `/en/services.html` | `en/services.html` | en |
-| `/en/services/branding-strategy.html` | `en/services/branding-strategy.html` | en |
-| `/en/services/graphic-design.html` | `en/services/graphic-design.html` | en |
-| `/en/services/music-design.html` | `en/services/music-design.html` | en |
-| `/en/services/web-design.html` | `en/services/web-design.html` | en |
+| `/en/services/branding-strategy.html` | `(engendree)` | en |
+| `/en/services/graphic-design.html` | `(engendree)` | en |
+| `/en/services/music-design.html` | `(engendree)` | en |
+| `/en/services/web-design.html` | `(engendree)` | en |
 | `/fr/about.html` | `fr/about.html` | fr |
 | `/fr/confidentialite.html` | `fr/confidentialite.html` | fr |
 | `/fr/contact.html` | `fr/contact.html` | fr |
 | `/fr/experiences.html` | `fr/experiences.html` | fr |
 | `/fr/mentions-legales.html` | `fr/mentions-legales.html` | fr |
 | `/fr/portfolio.html` | `fr/portfolio.html` | fr |
-| `/fr/projects/a-lone.html` | `fr/projects/a-lone.html` | fr |
-| `/fr/projects/aelio.html` | `fr/projects/aelio.html` | fr |
-| `/fr/projects/btr.html` | `fr/projects/btr.html` | fr |
-| `/fr/projects/chat-noir.html` | `fr/projects/chat-noir.html` | fr |
-| `/fr/projects/cheetah.html` | `fr/projects/cheetah.html` | fr |
-| `/fr/projects/crow.html` | `fr/projects/crow.html` | fr |
-| `/fr/projects/exit.html` | `fr/projects/exit.html` | fr |
-| `/fr/projects/hdd-defrag.html` | `fr/projects/hdd-defrag.html` | fr |
-| `/fr/projects/hors-champ.html` | `fr/projects/hors-champ.html` | fr |
-| `/fr/projects/jhag-banana-rush.html` | `fr/projects/jhag-banana-rush.html` | fr |
-| `/fr/projects/jhag-discovery-set.html` | `fr/projects/jhag-discovery-set.html` | fr |
-| `/fr/projects/jhag-pinterest.html` | `fr/projects/jhag-pinterest.html` | fr |
-| `/fr/projects/jpeja.html` | `fr/projects/jpeja.html` | fr |
-| `/fr/projects/logo-process.html` | `fr/projects/logo-process.html` | fr |
-| `/fr/projects/moon-vtc.html` | `fr/projects/moon-vtc.html` | fr |
-| `/fr/projects/ottony-paris.html` | `fr/projects/ottony-paris.html` | fr |
-| `/fr/projects/outlast-trials.html` | `fr/projects/outlast-trials.html` | fr |
-| `/fr/projects/sipsmith.html` | `fr/projects/sipsmith.html` | fr |
-| `/fr/projects/stelya.html` | `fr/projects/stelya.html` | fr |
-| `/fr/projects/zylkene.html` | `fr/projects/zylkene.html` | fr |
+| `/fr/projects/a-lone.html` | `(engendree)` | fr |
+| `/fr/projects/aelio.html` | `(engendree)` | fr |
+| `/fr/projects/btr.html` | `(engendree)` | fr |
+| `/fr/projects/chat-noir.html` | `(engendree)` | fr |
+| `/fr/projects/cheetah.html` | `(engendree)` | fr |
+| `/fr/projects/crow.html` | `(engendree)` | fr |
+| `/fr/projects/exit.html` | `(engendree)` | fr |
+| `/fr/projects/hdd-defrag.html` | `(engendree)` | fr |
+| `/fr/projects/hors-champ.html` | `(engendree)` | fr |
+| `/fr/projects/jhag-banana-rush.html` | `(engendree)` | fr |
+| `/fr/projects/jhag-discovery-set.html` | `(engendree)` | fr |
+| `/fr/projects/jhag-pinterest.html` | `(engendree)` | fr |
+| `/fr/projects/jpeja.html` | `(engendree)` | fr |
+| `/fr/projects/logo-process.html` | `(engendree)` | fr |
+| `/fr/projects/moon-vtc.html` | `(engendree)` | fr |
+| `/fr/projects/ottony-paris.html` | `(engendree)` | fr |
+| `/fr/projects/outlast-trials.html` | `(engendree)` | fr |
+| `/fr/projects/sipsmith.html` | `(engendree)` | fr |
+| `/fr/projects/stelya.html` | `(engendree)` | fr |
+| `/fr/projects/zylkene.html` | `(engendree)` | fr |
 | `/fr/services.html` | `fr/services.html` | fr |
-| `/fr/services/branding-strategie.html` | `fr/services/branding-strategie.html` | fr |
-| `/fr/services/conception-graphique.html` | `fr/services/conception-graphique.html` | fr |
-| `/fr/services/design-musique.html` | `fr/services/design-musique.html` | fr |
-| `/fr/services/web-design.html` | `fr/services/web-design.html` | fr |
+| `/fr/services/branding-strategie.html` | `(engendree)` | fr |
+| `/fr/services/conception-graphique.html` | `(engendree)` | fr |
+| `/fr/services/design-musique.html` | `(engendree)` | fr |
+| `/fr/services/web-design.html` | `(engendree)` | fr |
 | `/sitemap.xml` | `sitemap.xml` | - |
 
 </details>
@@ -134,9 +132,9 @@ Mesure sur `_site`, pas sur les sources. Attendu apres correction : 0.
 
 ## 2. Graphe des includes
 
-30 includes, 119 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+30 includes, 71 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
-Aucun include orphelin.
+**Orphelins** : projects/project-main.html, services/service-main.html.
 
 <details><summary>Qui inclut qui</summary>
 
@@ -157,11 +155,9 @@ Aucun include orphelin.
 - `pages/services.html` <- en/services.html, fr/services.html
 - `portfolio-filters.html` <- pages/portfolio.html
 - `projects/project-card.html` <- pages/index.html, pages/portfolio.html, services/service-main.html
-- `projects/project-main.html` <- en/projects/a-lone.html, en/projects/aelio.html, en/projects/btr.html, en/projects/chat-noir.html, en/projects/cheetah.html, en/projects/crow.html, en/projects/exit.html, en/projects/hdd-defrag.html, en/projects/hors-champ.html, en/projects/jhag-banana-rush.html, en/projects/jhag-discovery-set.html, en/projects/jhag-pinterest.html, en/projects/jpeja.html, en/projects/logo-process.html, en/projects/moon-vtc.html, en/projects/ottony-paris.html, en/projects/outlast-trials.html, en/projects/sipsmith.html, en/projects/stelya.html, en/projects/zylkene.html, fr/projects/a-lone.html, fr/projects/aelio.html, fr/projects/btr.html, fr/projects/chat-noir.html, fr/projects/cheetah.html, fr/projects/crow.html, fr/projects/exit.html, fr/projects/hdd-defrag.html, fr/projects/hors-champ.html, fr/projects/jhag-banana-rush.html, fr/projects/jhag-discovery-set.html, fr/projects/jhag-pinterest.html, fr/projects/jpeja.html, fr/projects/logo-process.html, fr/projects/moon-vtc.html, fr/projects/ottony-paris.html, fr/projects/outlast-trials.html, fr/projects/sipsmith.html, fr/projects/stelya.html, fr/projects/zylkene.html
 - `projects/project-note.html` <- projects/project-main.html
 - `scroll-down-link.html` <- pages/experiences.html, pages/portfolio.html, pages/services.html, projects/project-main.html
 - `services/service-card.html` <- pages/index.html, pages/services.html
-- `services/service-main.html` <- en/services/branding-strategy.html, en/services/graphic-design.html, en/services/music-design.html, en/services/web-design.html, fr/services/branding-strategie.html, fr/services/conception-graphique.html, fr/services/design-musique.html, fr/services/web-design.html
 - `services/subservices-card.html` <- services/service-main.html
 - `social-media-icons.html` <- pages/contact.html
 - `ui/button.html` <- labo/design-system.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
@@ -188,7 +184,7 @@ Chacun rend nil. Legitime s'il a une valeur par defaut, a verifier sinon.
 
 ## 3. Donnees
 
-### Cles de donnees definies, aucun gabarit ne les lit  (16)
+### Cles de donnees definies, aucun gabarit ne les lit  (18)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
@@ -205,6 +201,8 @@ Aucun chemin resolu ne les atteint, propagation a travers les parametres d'inclu
 - site.data.projects.*.formats.fr   (4 : jhag-banana-rush, jhag-discovery-set, jhag-pinterest, sipsmith)
 - site.data.projects.*.livrables.en   (1 : moon-vtc)
 - site.data.projects.*.livrables.fr   (1 : moon-vtc)
+- site.data.services.*.seo.en   (4 : branding-strategy, graphic-design, music-design, web-design)
+- site.data.services.*.seo.fr   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.services.*   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.en   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.fr   (4 : branding-strategy, graphic-design, music-design, web-design)

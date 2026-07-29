@@ -98,3 +98,29 @@ main-page:
   intro2:
     fr: "Chaque projet est une nouvelle opportunité de fusionner l'art visuel avec la musique, créant ainsi une expérience mémorable pour votre public."
     en: "Each project is a new opportunity to merge visual art with music, creating a memorable experience for your audience."
+# ══════════════════════════════════════════════════════════════════════════
+#  SEO : rapatrie du front matter des pages, le 29/07/2026
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Ces quatre champs vivaient dans `fr/services/*.html` et `en/services/*.html`,
+# qui n'existaient QUE pour les porter. Les pages sont desormais engendrees par
+# `_plugins/pages_generees.rb` a partir de ce fichier.
+#
+# ⚠️ NE PAS Y AJOUTER `canonical_url` NI `hreflang_alternate` : le plugin les
+# DERIVE de `detail_url`, et c'est un choix. Verifie sur les 8 pages,
+# `canonical_url` valait exactement `site.url + detail_url[lang]`. Les recopier
+# ici, ce serait accepter qu'ils divergent un jour de l'URL reelle, ce qui est
+# precisement le defaut que ce lot corrige.
+# Le titre, lui, n'est PAS derivable : il ajoute un suffixe et reformule parfois
+# le nom du service. Il est donc recopie au caractere pres.
+seo:
+  fr:
+    title: Design pour la musique - Ropat
+    meta_description: Pochettes, visualizers et supports promotionnels taillés pour vos sorties musicales.
+    og_title: Design pour la musique - Ropat
+    og_description: Pochettes, visualizers et supports promotionnels taillés pour vos sorties musicales.
+  en:
+    title: Music Design Services - Ropat
+    meta_description: Album artwork, visualizers and tour assets crafted for artists, labels and events.
+    og_title: Music Design Services - Ropat
+    og_description: Album artwork, visualizers and tour assets crafted for artists, labels and events.

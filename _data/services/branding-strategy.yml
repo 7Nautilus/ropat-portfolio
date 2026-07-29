@@ -89,3 +89,30 @@ main-page:
   intro2:
     fr: "<strong>L'objectif :</strong> vous équiper d’outils visuels et stratégiques pour communiquer avec assurance et de construire une relation durable avec votre audience.</p>"
     en: "<strong>The goal:</strong> to equip you with visual and strategic tools to communicate with confidence and build a lasting relationship with your audience.</p>"
+
+# ══════════════════════════════════════════════════════════════════════════
+#  SEO : rapatrie du front matter des pages, le 29/07/2026
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Ces quatre champs vivaient dans `fr/services/*.html` et `en/services/*.html`,
+# qui n'existaient QUE pour les porter. Les pages sont desormais engendrees par
+# `_plugins/pages_generees.rb` a partir de ce fichier.
+#
+# ⚠️ NE PAS Y AJOUTER `canonical_url` NI `hreflang_alternate` : le plugin les
+# DERIVE de `detail_url`, et c'est un choix. Verifie sur les 8 pages,
+# `canonical_url` valait exactement `site.url + detail_url[lang]`. Les recopier
+# ici, ce serait accepter qu'ils divergent un jour de l'URL reelle, ce qui est
+# precisement le defaut que ce lot corrige.
+# Le titre, lui, n'est PAS derivable : il ajoute un suffixe et reformule parfois
+# le nom du service. Il est donc recopie au caractere pres.
+seo:
+  fr:
+    title: Branding & Stratégie Visuelle - Ropat
+    meta_description: Ateliers stratégiques, systèmes visuels et guidelines pour clarifier et déployer votre marque.
+    og_title: Branding & Stratégie Visuelle - Ropat
+    og_description: Ateliers stratégiques, systèmes visuels et guidelines pour clarifier et déployer votre marque.
+  en:
+    title: Branding & Visual Strategy - Ropat
+    meta_description: Brand strategy workshops, visual systems and guidelines to align your team and strengthen your positioning.
+    og_title: Branding & Visual Strategy - Ropat
+    og_description: Brand strategy workshops, visual systems and guidelines to align your team and strengthen your positioning.

@@ -70,7 +70,12 @@ function Add-Block {
         [string]$Key,
         [string]$Content
     )
-    Add-Line -Builder $Builder -IndentLevel $IndentLevel -Text "$Key: |"
+    # ⚠️ `${Key}` ET NON `$Key`. PowerShell lit `$Key:` comme une variable
+    # QUALIFIEE (la forme de `$env:PATH`), donc le nom devient invalide et le
+    # fichier ne PARSE PAS. Ce script ne pouvait donc pas s'executer du tout,
+    # ce qui explique qu'on cree les projets a la main depuis des mois.
+    # Trouve le 29/07 en validant la syntaxe apres l'elagage.
+    Add-Line -Builder $Builder -IndentLevel $IndentLevel -Text "${Key}: |"
     if ([string]::IsNullOrWhiteSpace($Content)) {
         Add-Line -Builder $Builder -IndentLevel ($IndentLevel + 1) -Text "TODO: add content"
         return
@@ -154,8 +159,18 @@ foreach ($lang in $locales) {
     $ogImageDefault = "https://ropat.art" + $imageSrc
     $ogImage = Prompt-WithDefault -Message "[$lang] Open Graph image" -Default $ogImageDefault
 
+    # ⚠️ L'URL EST DEMANDEE, PLUS DEDUITE DU SLUG, et c'est le champ le plus
+    # important du fichier depuis que les pages sont engendrees : c'est LUI qui
+    # decide de l'adresse publique.
+    # La deduction automatique n'etait pas theoriquement fausse, elle etait
+    # DEJA fausse : `_data/projects/ottony.yml` porte `slug: ottony` pour les
+    # URLs `/fr/projects/ottony-paris.html`. Le script aurait donc propose
+    # `/fr/projects/ottony.html`, et personne ne l'aurait vu passer.
+    $urlDefault = if ($lang -eq 'fr') { "/fr/projects/$slug.html" } else { "/en/projects/$slug.html" }
+    $localeUrl = Prompt-WithDefault -Message "[$lang] URL publique de la page" -Default $urlDefault
+
     $localeData[$lang] = [ordered]@{
-        url = if ($lang -eq 'fr') { "/fr/projects/$slug.html" } else { "/en/projects/$slug.html" }
+        url = $localeUrl
         aria_label = $ariaLabel
         image_alt = $imageAlt
         title = $title
@@ -195,7 +210,8 @@ Add-Line -Builder $builder -IndentLevel 0 -Text "locales:"
 
 foreach ($lang in $locales) {
     $locale = $localeData[$lang]
-    Add-Line -Builder $builder -IndentLevel 1 -Text "$lang:"
+    # Meme piege que dans `Add-Block` ci-dessus : `$lang:` est invalide.
+    Add-Line -Builder $builder -IndentLevel 1 -Text "${lang}:"
     Add-Line -Builder $builder -IndentLevel 2 -Text ("url: " + (To-YamlString $locale.url))
     Add-Line -Builder $builder -IndentLevel 2 -Text ("aria_label: " + (To-YamlString $locale.aria_label))
     Add-Line -Builder $builder -IndentLevel 2 -Text ("image_alt: " + (To-YamlString $locale.image_alt))
@@ -223,33 +239,19 @@ Set-Content -Path $projectFile -Value $projectYaml -Encoding utf8NoBOM
 
 $newFiles = @($projectFile)
 
-function Write-ProjectPage {
-    param(
-        [string]$Directory,
-        [string]$Lang
-    )
-    $path = Join-Path $Directory "$slug.html"
-    if (Test-Path $path) {
-        throw "Project page '$path' already exists."
-    }
-    $content = @"
----
-layout: default
-lang: "$Lang"
-project_id: "$slug"
----
-
-{% include projects/project-main.html project_id=page.project_id %}
-"@
-    Set-Content -Path $path -Value $content -Encoding utf8NoBOM
-    return $path
-}
-
-New-Item -ItemType Directory -Path $frProjectDir -Force | Out-Null
-New-Item -ItemType Directory -Path $enProjectDir -Force | Out-Null
-
-$newFiles += Write-ProjectPage -Directory $frProjectDir -Lang 'fr'
-$newFiles += Write-ProjectPage -Directory $enProjectDir -Lang 'en'
+# ⚠️ `Write-ProjectPage` A ETE SUPPRIMEE LE 29/07/2026, ET IL LE FALLAIT.
+# Elle ecrivait `fr/projects/<slug>.html` et `en/projects/<slug>.html`. Ces pages
+# sont desormais ENGENDREES par `_plugins/pages_generees.rb` a partir de
+# `locales.<lang>.url`. La laisser en place aurait recree, au prochain projet
+# ajoute, exactement la collision que le plugin refuse : un fichier source et une
+# page engendree visant la meme sortie, Jekyll ecrivant les deux, le gagnant
+# dependant de l'ordre.
+# Le plugin leve d'ailleurs une erreur explicite dans ce cas, donc le prochain
+# `new-project.ps1` non elague aurait casse le build. C'est le bon comportement,
+# mais autant ne pas en arriver la.
+#
+# Il ne reste donc a ce script qu'a ecrire le YAML et a inscrire le slug dans
+# `index.yml` : cette liste est desormais la liste d'EXISTENCE des pages.
 
 $indexPath = Join-Path $projectDataDir "index.yml"
 if (-not (Test-Path $indexPath)) {

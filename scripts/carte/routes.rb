@@ -72,6 +72,24 @@ module Carte
           produite: @emis.pages.key?(sortie)
         )
       end
+      # ⚠️ LES PAGES ENGENDREES N'ONT PAS DE SOURCE, ET LES OUBLIER REND LA
+      # SECTION AVEUGLE. Depuis que `_plugins/pages_generees.rb` produit les 48
+      # pages projet et service, une table de routes batie sur les seuls fichiers
+      # sources n'en connait plus que 15 sur 63. La carte affichait donc une
+      # table qui avait l'air complete et qui ignorait les trois quarts du site.
+      # On complete depuis l'oracle : toute page emise qu'aucune source ne
+      # revendique est une page engendree.
+      revendiquees = @routes.map(&:sortie).to_set
+      @emis.pages.each_key do |sortie|
+        next if revendiquees.include?(sortie)
+
+        front = front_matter_emis(sortie)
+        @routes << Route.new(
+          source: "(engendree)", url: url_depuis_sortie(sortie), sortie: sortie,
+          lang: front[:lang], layout: nil, front: front[:front], produite: true
+        )
+      end
+
       @routes.sort_by!(&:url)
 
       # ⚠️ LE CONTROLE QUI VALIDE LA REGLE PLUTOT QUE DE LA SUPPOSER. Au lieu de
@@ -94,6 +112,25 @@ module Carte
         detail: "Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est fausse.",
         cas: manquantes.map { |r| "#{r.source} -> #{r.sortie}" }
       }
+    end
+
+    # Une page engendree n'a pas de front matter a lire : on retrouve dans le
+    # HTML produit les deux seules choses dont la passe a besoin, la langue et
+    # l'URL jumelle declaree.
+    def front_matter_emis(sortie)
+      html = Carte.lire(File.join(Carte.dossier_build, sortie))
+      lang = html[/<html[^>]*\blang\s*=\s*["']([a-z-]+)["']/i, 1]
+      alt  = html.scan(/<link\b[^>]*rel\s*=\s*["']alternate["'][^>]*>/i)
+                 .map { |b| [b[/hreflang\s*=\s*["']([\w-]+)["']/i, 1], b[/href\s*=\s*["']([^"']+)["']/i, 1]] }
+                 .to_h
+      autre = lang == "fr" ? "en" : "fr"
+      { lang: lang, front: alt[autre] ? { "hreflang_alternate" => alt[autre] } : {} }
+    end
+
+    def url_depuis_sortie(sortie)
+      return "/#{sortie.delete_suffix('index.html')}" if sortie.end_with?("index.html")
+
+      "/#{sortie}"
     end
 
     def front_matter(f)

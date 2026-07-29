@@ -99,3 +99,29 @@ main-page:
   intro2:
     fr: "Que vous ayez besoin d'une identité visuelle complète, de supports imprimés ou de visuels pour les réseaux sociaux, je suis là pour transformer vos idées en créations percutantes."
     en: "Whether you need a complete visual identity, print materials, or social media visuals, I'm here to transform your ideas into impactful creations."
+# ══════════════════════════════════════════════════════════════════════════
+#  SEO : rapatrie du front matter des pages, le 29/07/2026
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Ces quatre champs vivaient dans `fr/services/*.html` et `en/services/*.html`,
+# qui n'existaient QUE pour les porter. Les pages sont desormais engendrees par
+# `_plugins/pages_generees.rb` a partir de ce fichier.
+#
+# ⚠️ NE PAS Y AJOUTER `canonical_url` NI `hreflang_alternate` : le plugin les
+# DERIVE de `detail_url`, et c'est un choix. Verifie sur les 8 pages,
+# `canonical_url` valait exactement `site.url + detail_url[lang]`. Les recopier
+# ici, ce serait accepter qu'ils divergent un jour de l'URL reelle, ce qui est
+# precisement le defaut que ce lot corrige.
+# Le titre, lui, n'est PAS derivable : il ajoute un suffixe et reformule parfois
+# le nom du service. Il est donc recopie au caractere pres.
+seo:
+  fr:
+    title: Conception graphique - Ropat
+    meta_description: Identités visuelles, supports print et assets digitaux pour une communication cohérente et expressive.
+    og_title: Conception graphique - Ropat
+    og_description: Identités visuelles, supports print et assets digitaux pour une communication cohérente et expressive.
+  en:
+    title: Graphic Design Services - Ropat
+    meta_description: Visual identities, print collateral and digital assets crafted to keep your brand cohesive and expressive.
+    og_title: Graphic Design Services - Ropat
+    og_description: Visual identities, print collateral and digital assets crafted to keep your brand cohesive and expressive.
