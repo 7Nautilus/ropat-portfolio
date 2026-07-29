@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 03:35 sur 623776f.
+> Generee le 29/07/2026 a 03:53 sur de18c24.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 03:35 |
+| Date du build lu | 29/07/2026 03:53 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -160,7 +160,20 @@ Chacun rend nil. Legitime s'il a une valeur par defaut, a verifier sinon.
 
 ## 3. Donnees
 
-### Cles de donnees definies, aucun gabarit ne les lit  (18)
+### Cles qu'aucun gabarit ne lit, mais qu'un plugin cite  (8)
+
+Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni vivantes ni mortes du point de vue de cette passe. NE PAS SUPPRIMER sans avoir relu le plugin.
+
+- site.data.services.branding-strategy.seo.en
+- site.data.services.branding-strategy.seo.fr
+- site.data.services.graphic-design.seo.en
+- site.data.services.graphic-design.seo.fr
+- site.data.services.music-design.seo.en
+- site.data.services.music-design.seo.fr
+- site.data.services.web-design.seo.en
+- site.data.services.web-design.seo.fr
+
+### Cles de donnees definies, aucun gabarit ne les lit  (16)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
@@ -177,8 +190,6 @@ Aucun chemin resolu ne les atteint, propagation a travers les parametres d'inclu
 - site.data.projects.*.formats.fr   (4 : jhag-banana-rush, jhag-discovery-set, jhag-pinterest, sipsmith)
 - site.data.projects.*.livrables.en   (1 : moon-vtc)
 - site.data.projects.*.livrables.fr   (1 : moon-vtc)
-- site.data.services.*.seo.en   (4 : branding-strategy, graphic-design, music-design, web-design)
-- site.data.services.*.seo.fr   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.services.*   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.en   (4 : branding-strategy, graphic-design, music-design, web-design)
 - site.data.services.*.slug.fr   (4 : branding-strategy, graphic-design, music-design, web-design)

@@ -214,6 +214,41 @@ module Carte
       true
     end
 
+    # ⚠️ LES PLUGINS LISENT LES DONNEES EN RUBY, HORS DE PORTEE DE CETTE PASSE.
+    # `_plugins/pages_generees.rb` lit `service.dig("seo", lang)` pour fabriquer
+    # les 8 pages service. Aucun gabarit Liquid ne touche ce bloc, donc la passe
+    # le declarait MORT et invitait a le supprimer : c'est le SEO de huit pages.
+    # C'est le meme piege que les images Open Graph declarees orphelines, et il
+    # coute aussi cher : la carte est consultee POUR decider quoi supprimer.
+    #
+    # On ne fait pas d'analyse de flot en Ruby, ce serait disproportionne. On
+    # releve les LITTERAUX de chaine des plugins, et toute cle dont un segment
+    # figure parmi eux quitte la liste des mortes pour une liste a part.
+    # Le biais est du bon cote : la carte peut declarer vivante une cle qui ne
+    # l'est pas, jamais l'inverse.
+    # ⚠️ DEUX FILTRES, ET SANS EUX LA REGLE AVALE TOUT. Premier jet : la liste des
+    # cles mortes s'est videe d'un coup, les 18 passant du cote plugin. Cause :
+    # `projects`, `services`, `fr` et `en` sont des litteraux du plugin, donc
+    # CHAQUE chemin de donnees contenait un segment correspondant.
+    #   1. On ignore les noms de collection et les codes de langue, qui ne
+    #      designent jamais un CHAMP.
+    #   2. On ne regarde que les segments a partir du quatrieme
+    #      (`site.data.<collection>.<enregistrement>.<champ>...`), les trois
+    #      premiers etant structurels.
+    # Une regle trop permissive ne protege plus rien : elle rend juste la carte
+    # muette, ce qui est la meme chose qu'une carte fausse.
+    GENERIQUES = %w[fr en projects services index pages default lang layout].freeze
+
+    def litteraux_des_plugins
+      @litteraux_des_plugins ||= begin
+        mots = Carte.fichiers("_plugins/**/*.rb").flat_map do |f|
+          # Les commentaires d'abord, comme partout ailleurs.
+          Carte.lire(f).gsub(/^\s*#.*$/, "").scan(/(["'])([a-z_][\w-]*)\1/).map { |(_q, m)| m }
+        end
+        (mots.uniq - GENERIQUES).to_set
+      end
+    end
+
     def confronter
       lues = @lues.keys.map { |l| l.split(".") }
 
@@ -223,6 +258,22 @@ module Carte
       end
       ensemble = mortes.to_set
       mortes = mortes.reject { |c| c.include?(".") && ensemble.include?(c[0...c.rindex('.')]) }
+
+      plugins = litteraux_des_plugins
+      cotes_plugin, mortes = mortes.partition do |c|
+        # Segments a partir du quatrieme : `site.data.<collection>.<enreg>.<champ>`
+        c.split(".").drop(4).any? { |seg| seg != "*" && plugins.include?(seg) }
+      end
+
+      unless cotes_plugin.empty?
+        @anomalies << {
+          titre: "Cles qu'aucun gabarit ne lit, mais qu'un plugin cite",
+          detail: "Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. " \
+                  "Ni vivantes ni mortes du point de vue de cette passe. NE PAS SUPPRIMER sans " \
+                  "avoir relu le plugin.",
+          cas: cotes_plugin.sort
+        }
+      end
 
       unless mortes.empty?
         # On regroupe les cles qui ne different que par le fichier de donnees :
