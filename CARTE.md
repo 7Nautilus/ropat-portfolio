@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 03:18 sur 165bd14.
+> Generee le 29/07/2026 a 03:35 sur 623776f.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 03:18 |
+| Date du build lu | 29/07/2026 03:35 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -240,7 +240,7 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 - .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
 - .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
 
-### Selecteurs absents des 63 pages construites  (30)
+### Selecteurs absents des 63 pages construites  (33)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
@@ -264,6 +264,9 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .loaded  assets/css/_sass/components/_loader.scss:22
 - .loader-logo-text  assets/css/_sass/components/_loader.scss:41
 - .service-card-big  assets/css/_sass/components/cards/_service-cards.scss:71
+- .hero-theme-container  assets/css/_sass/layout/_sections.scss:161
+- .hero-theme  assets/css/_sass/layout/_sections.scss:176
+- .hero-theme-dot  assets/css/_sass/layout/_sections.scss:186
 - .subservice-section  assets/css/_sass/layout/_sections.scss:201
 - #contact-social-links  assets/css/_sass/layout/_sections.scss:272 assets/css/_sass/layout/_sections.scss:322
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
@@ -353,43 +356,32 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 
 ## 7. Assets
 
-80 fichiers, 156.0 Mo au total.
+76 fichiers, 84.7 Mo au total.
 
-### Assets qu'aucune page construite ne reference (73.0 Mo)  (16)
+### Assets qu'aucune page construite ne reference (1.2 Mo)  (5)
 
 Detection par nom de fichier : un chemin construit dynamiquement y echapperait. Verifier avant de supprimer.
 
--   18.5 Mo  /assets/videos/crow-noir-fluo.mp4
--   18.0 Mo  /assets/videos/jhag/jhag-br-p3-anim-pile.mp4
--   17.5 Mo  /assets/videos/crow-ascii.mp4
--   16.6 Mo  /assets/videos/cheetah-noir-fluo.mp4
--  487.4 Ko  /assets/images/projects/chatnoir.jpg
 -  442.8 Ko  /assets/images/backgrounds/main-bg.webp
--  286.9 Ko  /assets/images/projects/jhag/jhag-br-p1-kv.webp
 -  273.5 Ko  /assets/images/projects/JPeJA-thumbnail2.jpg
 -  259.4 Ko  /assets/images/projects/aelio/aelio-app-mockup-alone.avif
 -  218.9 Ko  /assets/images/projects/jhag/jhag-br-p3-flambe.webp
--  161.7 Ko  /assets/images/projects/Stelya/stelya-og.webp
--  141.8 Ko  /assets/images/projects/hors-champ/hors-champ-og.webp
--   78.6 Ko  /assets/images/projects/sipsmith/sipsmith-og.webp
--   40.0 Ko  /assets/images/projects/aelio/aelio-og.webp
--   34.1 Ko  /assets/images/projects/jhag/jhag-pinterest-og.webp
 -    1.7 Ko  /assets/images/partners/ottony-paris.svg
 
 ### Pages les plus lourdes au chargement (medias non differes)  (10)
 
 Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices ne sont pas comptes.
 
--    9.5 Mo  fr/projects/jpeja.html   JPeJA.mp4
 -    9.5 Mo  en/projects/jpeja.html   JPeJA.mp4
+-    9.5 Mo  fr/projects/jpeja.html   JPeJA.mp4
 -    1.1 Mo  fr/projects/cheetah.html   CHEETAH.mp4
 -    1.1 Mo  en/projects/cheetah.html   CHEETAH.mp4
--  751.3 Ko  fr/about.html   about-photo.jpg
--  751.3 Ko  en/about.html   about-photo.jpg
--  547.8 Ko  en/projects/exit.html   exit.webp
 -  547.8 Ko  fr/projects/exit.html   exit.webp
--  501.4 Ko  fr/projects/zylkene.html   zylkene-mockup.webp
+-  547.8 Ko  en/projects/exit.html   exit.webp
 -  501.4 Ko  en/projects/zylkene.html   zylkene-mockup.webp
+-  501.4 Ko  fr/projects/zylkene.html   zylkene-mockup.webp
+-  462.2 Ko  fr/projects/outlast-trials.html   outlast-trials.png
+-  462.2 Ko  en/projects/outlast-trials.html   outlast-trials.png
 
 ## 8. Build et CI
 

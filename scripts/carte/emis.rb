@@ -102,6 +102,15 @@ module Carte
     end
 
     def depouiller(page, html)
+      # ⚠️ DEPOUILLER LES COMMENTAIRES HTML, MEME ICI. Le layout porte un
+      # commentaire expliquant que le fond dither a remplace `main-bg.webp` : ce
+      # nom de fichier apparait donc dans les 63 pages construites sans etre
+      # reference nulle part. Une verification faite au grep concluait que
+      # l'image servait encore, alors qu'elle est bien orpheline.
+      # C'est la meme regle que pour le SCSS et pour la passe build. Troisieme
+      # fois qu'elle se paye.
+      html = Carte.sans_commentaires_html(html)
+
       infos = { classes: Set.new, ids: Set.new, attrs: Set.new, refs: Set.new,
                 titres: [], aria: Set.new }
 
@@ -128,6 +137,16 @@ module Carte
         v.split(",").each { |b| infos[:refs] << b.strip.split(/\s+/).first.to_s }
       end
       html.scan(/url\((["']?)([^)"']+)\1\)/) { |_q, v| infos[:refs] << v.strip }
+
+      # ⚠️ LES `<meta content=>` SONT DE VRAIES REFERENCES, et les oublier a
+      # failli faire supprimer SEPT images vivantes. Les images Open Graph et
+      # Twitter ne sont citees nulle part ailleurs : elles n'apparaissent ni en
+      # `src` ni en `href`, seulement en `content`. La carte les rangeait donc
+      # parmi les orphelines, avec une taille et une invitation a les supprimer.
+      # Ce sont pourtant les images que voit quiconque partage un lien du site.
+      html.scan(/<meta\b[^>]*\bcontent\s*=\s*(["'])(.*?)\1/im) do |_q, v|
+        infos[:refs] << v.strip if v =~ %r{/assets/|\.(?:avif|webp|jpe?g|png|svg|mp4)\z}i
+      end
 
       # ⚠️ LES PROPRIETES PERSONNALISEES POSEES EN LIGNE. Sans cette lecture, la
       # carte annonce `--animate-delay` et `--swatch-color` comme consommes en

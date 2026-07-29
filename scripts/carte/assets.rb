@@ -49,9 +49,28 @@ module Carte
       end
     end
 
+    # L'origine du site, pour reconnaitre ses propres URLs absolues.
+    def origine
+      @origine ||= begin
+        cfg = Carte.chemin("_config.yml")
+        File.exist?(cfg) ? Carte.lire(cfg)[/^url:\s*["']?([^"'\s]+)/, 1].to_s : ""
+      end
+    end
+
     def normaliser(ref)
       r = ref.to_s.strip
-      return nil if r.empty? || r.start_with?("http", "//", "mailto:", "tel:", "data:", "#")
+      return nil if r.empty?
+
+      # ⚠️ UNE URL ABSOLUE VERS LE SITE LUI-MEME EST UNE REFERENCE, et la
+      # rejeter a failli faire supprimer SEPT images vivantes. Les images Open
+      # Graph et Twitter ne sont citees nulle part ailleurs que dans un
+      # `<meta content="https://ropat.art/assets/...">` : absolues par
+      # obligation, puisqu'un reseau social ne resout pas un chemin relatif.
+      # La carte les rangeait donc parmi les orphelines, avec leur taille et une
+      # invitation a les supprimer. Ce sont pourtant les images que voit
+      # quiconque partage un lien du site.
+      r = r.delete_prefix(origine) if !origine.empty? && r.start_with?(origine)
+      return nil if r.start_with?("http", "//", "mailto:", "tel:", "data:", "#")
 
       r = r.split("#").first.to_s.split("?").first.to_s
       r = "/#{r}" unless r.start_with?("/")

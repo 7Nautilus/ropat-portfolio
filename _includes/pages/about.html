@@ -8,11 +8,25 @@
   <section class="about-hero" aria-labelledby="about-title">
     <div class="about-hero-photo">
       <div class="about-photo-placeholder" aria-hidden="true"></div>
+      {%- comment -%}
+        ⚠️ 751 Ko POUR UNE VIGNETTE DE 260 px, jusqu'au 29/07/2026. Le fichier
+        servi faisait 2250x2250 alors que l'affichage plafonne a 260 px de large
+        (`_about.scss:358`, grille une colonne) : 41 fois trop de pixels en
+        surface, telecharges d'emblee sur les deux pages A propos.
+        Desormais 700x700 en AVIF, 92 Ko. Le 700 n'est pas le strict necessaire :
+        il couvre 260 px a une densite de 2,7, donc les ecrans a forte densite
+        et une eventuelle mise en page plus large.
+        L'original pleine resolution vit dans `_archives/originaux/`, hors du
+        site et hors de git.
+        ⚠️ `width` et `height` decrivent le FICHIER, pas l'affichage : ils
+        servent au navigateur a reserver la place avant le chargement (anti-CLS).
+        Le CSS decide de la taille reelle.
+      {%- endcomment -%}
       <img
-        src="/assets/images/branding/about-photo.jpg"
+        src="/assets/images/branding/about-photo.avif"
         alt="Portrait de Ropat, graphiste et directeur artistique"
-        width="400"
-        height="400"
+        width="700"
+        height="700"
         class="about-photo-img"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
       >

@@ -46,3 +46,7 @@ docs/
 TESTS/
 # Le build prive de `scripts/carte.rb`. Le JSON de la carte, lui, EST versionne.
 .carte/site/
+
+# Archives locales : rushes abandonnes et originaux avant traitement.
+# Jekyll les ignore deja (prefixe underscore) ; git les ignore ici.
+_archives/
