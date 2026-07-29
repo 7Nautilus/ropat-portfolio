@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Labo : le devoilement, deux courbes</title>
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+   BANC DE COMPARAISON DE COURBES, POUR LA TRANSITION INTER-PAGES
+  ══════════════════════════════════════════════════════════════════════════
+
+   Ouvrir en local : http://localhost:4000/labo/comparer-courbes.html
+   `labo/` est exclu de la production et reintroduit par `_config.dev.yml`.
+
+   ⚠️ POURQUOI CETTE PAGE NE CONSOMME PAS LE CSS DU SITE, alors que le depot
+   l'exige partout ailleurs. Elle SIMULE `::view-transition` avec des animations
+   DOM ordinaires. Charger `main.css` y importerait les vraies regles de
+   `base/_view-transitions.scss`, donc l'objet meme qu'on cherche a isoler, et
+   la page se mettrait a mesurer autre chose qu'elle-meme. Les jetons sont donc
+   recopies a la main ici, en connaissance de cause. C'est aussi ce qui la rend
+   ouvrable seule, sans serveur Jekyll.
+
+   ⚠️ CE QU'ELLE PERMET, ET QU'AUCUNE CAPTURE NE PERMET : la couche
+   `::view-transition` du vrai site est INVISIBLE aux captures d'ecran, donc un
+   geste inter-pages ne peut pas etre relu image par image. Ici tout est du DOM
+   normal : ca se gele, ca se ralentit, ca se mesure.
+
+   Ajouter une courbe = une entree dans le tableau `variantes` du script.
+   Les quatre chiffres par variante sont MESURES, pas estimes : voir la fonction
+   `bez()` du meme script pour les reproduire.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+
+<style>
+  :root {
+    --surface: #030808;
+    --surface-raised: #0b1211;
+    --accent: #ff5c00;
+    --ink: #f2f0ec;
+    --ink-muted: #8b918d;
+    --line: rgba(242, 240, 236, 0.13);
+
+    --ease-fort: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 0.35rem;
+  }
+
+  .chapeau {
+    color: var(--ink-muted);
+    max-width: 62ch;
+    margin: 0 0 1rem;
+    font-size: 14px;
+  }
+
+  .verdict {
+    border-left: 2px solid var(--accent);
+    padding: 0.6rem 0 0.6rem 0.9rem;
+    margin: 0 0 1.6rem;
+    max-width: 72ch;
+    font-size: 14px;
+  }
+  .verdict b { color: var(--accent); font-weight: 600; }
+
+  .barre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 1rem;
+    margin-bottom: 1.4rem;
+  }
+
+  button {
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 0.55em 1.1em;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease, transform 0.16s var(--ease-fort);
+  }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button:active { transform: scale(0.97); }
+  button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+  button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .horloge {
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-left: auto;
+  }
+  .horloge b { color: var(--ink); font-weight: 500; }
+
+  .frise {
+    position: relative;
+    height: 3px;
+    background: var(--line);
+    margin-bottom: 2rem;
+  }
+  .frise .curseur {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 2px;
+    height: 9px;
+    background: var(--accent);
+  }
+  .frise .jalon {
+    position: absolute;
+    top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+  /* Pose a 100 %, un jalon centre laisse fuir sa moitie droite hors du cadre des
+     que le padding du body se resserre. Mesure : 7 px de debordement a 844 px de
+     large. Le dernier s'aligne donc par sa droite. */
+  .frise .jalon--fin { transform: translateX(-100%); }
+  .frise .jalon::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 1px;
+    height: 7px;
+    background: var(--line);
+  }
+
+  .duo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+  }
+
+  .colonne > h2 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.15rem;
+  }
+  .colonne .etat {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    padding: 0.15em 0.5em;
+    border: 1px solid var(--line);
+    margin-left: 0.5em;
+    vertical-align: 0.15em;
+  }
+  .colonne[data-role="retenue"] .etat { border-color: var(--accent); color: var(--accent); }
+  .colonne .courbe-nom {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin: 0 0 0.7rem;
+  }
+  .colonne[data-role="retenue"] > h2 { color: var(--accent); }
+  .colonne[data-role="ecartee"] .scene { opacity: 0.94; }
+
+  .scene {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--accent);
+    border: 1px solid var(--line);
+  }
+
+  .calque { position: absolute; inset: 0; }
+
+  .depart {
+    background: var(--surface);
+    padding: 34px 14px 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 8px;
+  }
+  .tuile {
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+  }
+  .tuile:nth-child(2) {
+    background: repeating-linear-gradient(135deg, #16201d 0 6px, #0d1513 6px 12px);
+  }
+  .tuile:nth-child(4) {
+    background: repeating-linear-gradient(45deg, #1b1512 0 5px, #0f0c0a 5px 10px);
+  }
+
+  .arrivee { background: var(--surface); }
+
+  .oeuvre {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(120% 90% at 70% 20%, rgba(255, 92, 0, 0.16), transparent 60%),
+      repeating-linear-gradient(112deg, #1d2523 0 9px, #101614 9px 18px);
+  }
+
+  .scrim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 62%;
+    background: linear-gradient(to top, rgba(3, 8, 8, 0.96) 0%, rgba(3, 8, 8, 0.72) 42%, rgba(3, 8, 8, 0) 100%);
+  }
+
+  .lede {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
+  }
+  .lede .l1 {
+    font-size: clamp(1.1rem, 3.4vw, 1.7rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+  .lede .l2 {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 0.3em;
+  }
+  .lede .l3 {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--ink-muted);
+    margin-top: 0.35em;
+  }
+
+  .entete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    background: rgba(3, 8, 8, 0.86);
+    border-bottom: 2px solid var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+  .entete .marque { color: var(--ink); font-weight: 600; letter-spacing: 0.2em; }
+  .entete .liens { margin-left: auto; display: flex; gap: 9px; }
+
+  .bas {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-top: 0.85rem;
+  }
+
+  .trace {
+    position: relative;
+    width: 108px;
+    height: 108px;
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+  }
+  .trace svg { display: block; width: 100%; height: 100%; }
+  .trace .pastille {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    border-radius: 50%;
+    background: var(--accent);
+    left: 0;
+    bottom: 0;
+  }
+  .trace .seuil {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 90%;
+    border-top: 1px dashed rgba(242, 240, 236, 0.22);
+  }
+
+  dl {
+    margin: 0;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.3em 0.8em;
+    align-content: start;
+  }
+  dt { color: var(--ink-muted); }
+  dd {
+    margin: 0;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+
+  .note {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+    font-size: 13px;
+    max-width: 78ch;
+  }
+  .note b { color: var(--ink); font-weight: 500; }
+  .note code { font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Le devoilement, deux courbes</h1>
+<p class="chapeau">
+  Meme mecanisme que le site : deux calques empiles, le conteneur peint en orange, l'ancien mange
+  par <code>voile-couvre</code> (0,5 s), le nouveau decouvert avec 0,22 s de retard (0,6 s). Le hero
+  demarre quand le voile a fini, parce que la page vivante est invisible avant. Une seule variable
+  change entre les deux panneaux : la courbe du devoilement.
+</p>
+
+<p class="verdict">
+  <b>Arbitrage du 30/07/2026 : l'originale est conservee.</b>
+  La candidate a elan reduisait le rampement final de 336 a 140 ms et faisait franchir la ligne a
+  0,39 au lieu de 0. Elle a ete montree sur ce banc, puis ecartee. La page reste ici pour comparer
+  la PROCHAINE proposition a la reference, pas pour rejouer celle-ci.
+</p>
+
+<div class="barre">
+  <button id="rejouer" type="button">Rejouer</button>
+  <button id="boucle" type="button" aria-pressed="true">Boucle</button>
+  <button id="ralenti" type="button" aria-pressed="false">Ralenti 4x</button>
+  <span class="horloge"><b id="ms">0</b> ms depuis le clic</span>
+</div>
+
+<div class="frise" aria-hidden="true">
+  <div class="curseur" id="curseur"></div>
+  <span class="jalon" style="left: 13.3%">0,22 s retard</span>
+  <span class="jalon" style="left: 49.4%">0,82 s fin du voile</span>
+  <span class="jalon jalon--fin" style="left: 100%">1,66 s repos</span>
+</div>
+
+<div class="duo" id="duo"></div>
+
+<p class="note">
+  <b>Ce que la reproduction ne contient pas :</b> le morphing de la vignette vers l'oeuvre, qui court
+  pendant les 0,82 s du voile. Il est volontairement absent, parce qu'il occupe l'oeil au moment meme
+  ou se joue la question posee, celle de la jonction entre la fin du voile et le depart du texte.
+  L'entete ne bouge pas, comme sur le site, ou elle porte son propre nom de transition.
+</p>
+<p class="note" style="border: 0; padding-top: 0;">
+  <b>Largeur de l'aplat, mesuree le 30/07/2026 :</b> 90 % du viewport au sommet, atteint a 0,22 s, et
+  au-dela de 50 % pendant 229 ms. Ce n'est PAS <code>retard / duree de couverture</code> (44 %) :
+  cette formule suppose une progression lineaire, alors que les deux calques sont en
+  <code>--ease-out-quart</code>, tres chargee a l'avant. Pour une vraie bande etroite il faut baisser
+  <code>--dur-voile-retard</code> bien plus que la formule ne le suggere.
+</p>
+
+<script>
+(() => {
+  const COUVRE = 500, RETARD = 220, DECOUVRE = 600;
+  const FIN_VOILE = RETARD + DECOUVRE;
+  const HERO_RETARD = 50, ECHELON = 70, HERO_DUR = 650, SCRIM_DUR = 300;
+  const CYCLE = FIN_VOILE + HERO_RETARD + 2 * ECHELON + HERO_DUR;
+  const PAUSE = 700;
+
+  const QUART = 'cubic-bezier(0.25, 1, 0.5, 1)';
+  const FORT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+
+  const variantes = [
+    {
+      role: 'retenue',
+      titre: 'La reference',
+      etat: 'en production',
+      bezier: [0.25, 1, 0.5, 1],
+      queue: 336,
+      vFinale: '0',
+      vInitiale: '4,00',
+      miCourse: '0,93'
+    },
+    {
+      role: 'ecartee',
+      titre: 'Avec de l’elan',
+      etat: 'ecartee',
+      bezier: [0.12, 0.44, 0.24, 0.7],
+      queue: 140,
+      vFinale: '0,39',
+      vInitiale: '3,67',
+      miCourse: '0,75'
+    }
+  ];
+
+  const css = b => `cubic-bezier(${b[0]}, ${b[1]}, ${b[2]}, ${b[3]})`;
+  const chemin = b => `M 0 108 C ${b[0] * 108} ${108 - b[1] * 108} ${b[2] * 108} ${108 - b[3] * 108} 108 0`;
+
+  const duo = document.getElementById('duo');
+
+  duo.innerHTML = variantes.map(v => `
+    <section class="colonne" data-role="${v.role}">
+      <h2>${v.titre}<span class="etat">${v.etat}</span></h2>
+      <p class="courbe-nom">cubic-bezier(${v.bezier.join(', ')})</p>
+      <div class="scene">
+        <div class="calque depart" data-r="depart">
+          ${'<div class="tuile"></div>'.repeat(6)}
+        </div>
+        <div class="calque arrivee" data-r="arrivee">
+          <div class="oeuvre"></div>
+          <div class="scrim" data-r="scrim"></div>
+          <div class="lede">
+            <div class="l1" data-r="ligne">Hors champ</div>
+            <div class="l2" data-r="ligne">Pochette</div>
+            <div class="l3" data-r="ligne">2026 / Photoshop, Illustrator</div>
+          </div>
+        </div>
+        <div class="entete">
+          <span class="marque">Ropat</span>
+          <span class="liens"><span>Projets</span><span>Services</span><span>Contact</span></span>
+        </div>
+      </div>
+      <div class="bas">
+        <div class="trace">
+          <svg viewBox="0 0 108 108" aria-hidden="true">
+            <path d="M 0 108 L 108 108 M 0 108 L 0 0" stroke="rgba(242,240,236,0.18)" stroke-width="1" fill="none"/>
+            <path d="M 0 108 L 108 0" stroke="rgba(242,240,236,0.09)" stroke-width="1" fill="none"/>
+            <path d="${chemin(v.bezier)}" stroke="#ff5c00" stroke-width="2" fill="none"/>
+          </svg>
+          <div class="seuil"></div>
+          <div class="pastille" data-r="pastille"></div>
+        </div>
+        <dl>
+          <dt>Queue sous les 10 % restants</dt><dd>${v.queue} ms</dd>
+          <dt>Vitesse au franchissement</dt><dd>${v.vFinale}</dd>
+          <dt>Vitesse a l’attaque</dt><dd>${v.vInitiale}</dd>
+          <dt>Avancement a mi‑course</dt><dd>${v.miCourse}</dd>
+        </dl>
+      </div>
+    </section>`).join('');
+
+  const anims = [];
+  const pousser = (el, frames, options) => {
+    if (!el) return;
+    const a = el.animate(frames, Object.assign({ fill: 'both', easing: 'linear' }, options));
+    a.pause();
+    anims.push(a);
+    return a;
+  };
+
+  duo.querySelectorAll('.colonne').forEach((col, i) => {
+    const courbe = css(variantes[i].bezier);
+    const q = s => col.querySelector(`[data-r="${s}"]`);
+
+    pousser(q('depart'), [
+      { clipPath: 'inset(0 0 0 0)' },
+      { clipPath: 'inset(0 0 0 100%)' }
+    ], { duration: COUVRE, easing: QUART });
+
+    pousser(q('arrivee'), [
+      { clipPath: 'inset(0 100% 0 0)', transform: 'translateY(8px)' },
+      { clipPath: 'inset(0 0 0 0)', transform: 'translateY(0)' }
+    ], { duration: DECOUVRE, delay: RETARD, easing: courbe });
+
+    pousser(q('scrim'), [
+      { opacity: 0, transform: 'translateY(11px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: SCRIM_DUR, delay: FIN_VOILE, easing: FORT });
+
+    col.querySelectorAll('[data-r="ligne"]').forEach((ligne, j) => {
+      pousser(ligne, [
+        { opacity: 0, filter: 'blur(10px)', transform: 'translateY(0.5em)' },
+        { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0)' }
+      ], { duration: HERO_DUR, delay: FIN_VOILE + HERO_RETARD + j * ECHELON, easing: FORT });
+    });
+
+    const p = q('pastille');
+    pousser(p, [{ left: '0%' }, { left: '100%' }], { duration: DECOUVRE, delay: RETARD });
+    pousser(p, [{ bottom: '0%' }, { bottom: '100%' }], { duration: DECOUVRE, delay: RETARD, easing: courbe });
+  });
+
+  const curseur = pousser(document.getElementById('curseur'),
+    [{ left: '0%' }, { left: '100%' }], { duration: CYCLE });
+
+  const bRejouer = document.getElementById('rejouer');
+  const bBoucle = document.getElementById('boucle');
+  const bRalenti = document.getElementById('ralenti');
+  const sortieMs = document.getElementById('ms');
+
+  const sobre = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let enBoucle = !sobre;
+  let ralenti = false;
+  let generation = 0;
+
+  bBoucle.setAttribute('aria-pressed', String(enBoucle));
+
+  const vitesse = () => (ralenti ? 0.25 : 1);
+
+  function lancer() {
+    const mien = ++generation;
+    anims.forEach(a => {
+      a.currentTime = 0;
+      a.playbackRate = vitesse();
+      a.play();
+    });
+    curseur.finished.then(() => {
+      if (mien !== generation || !enBoucle) return;
+      setTimeout(() => { if (mien === generation && enBoucle) lancer(); }, PAUSE / vitesse());
+    }).catch(() => {});
+  }
+
+  bRejouer.addEventListener('click', lancer);
+
+  bBoucle.addEventListener('click', () => {
+    enBoucle = !enBoucle;
+    bBoucle.setAttribute('aria-pressed', String(enBoucle));
+    if (enBoucle) lancer(); else generation++;
+  });
+
+  bRalenti.addEventListener('click', () => {
+    ralenti = !ralenti;
+    bRalenti.setAttribute('aria-pressed', String(ralenti));
+    anims.forEach(a => { a.playbackRate = vitesse(); });
+  });
+
+  (function battre() {
+    const t = curseur.currentTime;
+    sortieMs.textContent = Math.round(typeof t === 'number' ? t : 0);
+    requestAnimationFrame(battre);
+  })();
+
+  if (enBoucle) lancer();
+  else anims.forEach(a => { a.currentTime = 0; });
+})();
+</script>
+</body>
+</html>
