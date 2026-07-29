@@ -389,12 +389,39 @@
      revelation 0,6 s, micro-animation 0,2 s. */
   --dur-quick: 0.2s;
   --dur-base: 0.3s;
-  /* La duree de la grammaire de revelation.
-     ⚠️ CORRIGE DE 0,6 A 0,8 LE 29/07/2026, APRES RELEVE AU MOTEUR. La valeur
-     de 0,6 s venait de `docs/VEILLE-PORTFOLIOS-2026-07.md`, qui l'avait
-     estimee. Les tweens lus dans GSAP sur luyu.co donnent 0,8 s sur `x`, `y`
-     et `opacity`, onze fois, et c'est la famille dominante du site. */
+  /* ══════════════════════════════════════════════════════════════════════
+     DEUX GRAMMAIRES DE MOUVEMENT, ET ELLES NE SE MELANGENT PAS.
+     ══════════════════════════════════════════════════════════════════════
+     Releve au moteur sur luyu.co le 29/07/2026, en deux passages.
+
+     DANS une page : tout est en `Power1.easeOut`, un quadratique sortant,
+     donc `--ease-quad-out`. Soixante-trois animations, aucune exception.
+     0,2 s le micro-geste, 0,4 s la bordure, 0,8 s la revelation, 1,6 s le
+     texte par masque.
+
+     ENTRE deux pages : tout est en `Expo`. 1 s le glissement a l'aller,
+     0,4 s le fondu au retour, 1,1 s la re-entree du contenu.
+
+     ⚠️ LE PREMIER RELEVE N'AVAIT VU QUE LA PREMIERE GRAMMAIRE, et j'en ai
+     conclu « une seule courbe pour tout le site ». La grammaire inter-pages
+     est FABRIQUEE AU MOMENT DU CLIC : un inventaire pris a l'arret ne peut
+     pas la voir. D'ou des jetons separes : un seul ne peut pas porter les
+     deux sans en trahir une. */
+  /* La duree de la grammaire de revelation, DANS une page.
+     ⚠️ Corrigee de 0,6 a 0,8 s : la valeur de 0,6 venait de la veille, qui
+     l'avait estimee. Sans consommateur aujourd'hui, et c'est normal : les
+     revelations au defilement sont un livrable de la Phase 4. */
   --dur-reveal: 0.8s;
+  /* Le passage d'une page a l'autre. Valeurs mesurees, pas transposees de la
+     grammaire de revelation : c'est precisement l'erreur qu'on vient de
+     corriger. La courbe est `--ease-expo-out`, la famille de Lu Yu pour ce
+     geste-la.
+     ⚠️ Sa sortie exacte est `expo.OutIn`, une courbe COMPOSITE de GSAP (sortie
+     puis entree). Une `cubic-bezier` unique ne peut pas la reproduire : on
+     approche par l'exponentielle sortante, et on le dit plutot que de laisser
+     croire a une equivalence. */
+  --dur-page-out: 0.4s; /* le fondu de la page quittee */
+  --dur-page-in: 1.1s; /* l'arrivee du contenu */
   /* Le loader d'accueil. Ces deux durees sont lues par le CSS ET par le JS
      (`assets/js/script.js`, sections PAGE LOADER et RADAR), c'est pourquoi
      elles vivent ici et nulle part ailleurs.
@@ -407,15 +434,12 @@
   /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
      les micro-mouvements. Equivalents CSS des courbes GSAP citees dans
      docs/VEILLE-PORTFOLIOS-2026-07.md. */
-  /* ⚠️ CETTE COURBE N'A PLUS DE FONDEMENT DANS LA VEILLE, et elle a encore
-     trois consommateurs : la lightbox, l'entete et la page projet.
-     Elle avait ete introduite sur la foi d'un `expo.outIn` ESTIME chez Lu Yu.
-     Releve au moteur le 29/07/2026 : les soixante-trois animations du site sont
-     TOUTES en `Power1.easeOut`, un quadratique sortant. Pas une seule
-     exponentielle. La qualite ne vient pas d'une palette de courbes, elle vient
-     d'une seule courbe declinee en durees (0,2 / 0,4 / 0,8 / 1,6 s).
-     Aligner tout le site sur `--ease-quad-out` est un arbitrage a part, pas un
-     correctif : c'est le sujet de la Phase 4. */
+  /* La courbe du passage ENTRE deux pages. Equivalent CSS de `Expo.easeOut`,
+     la famille employee par Lu Yu pour ce geste-la, et pour lui seul.
+     ⚠️ Elle a aussi trois consommateurs herites, la lightbox, l'entete et la
+     page projet, poses en Phase 0 quand on croyait cette courbe universelle.
+     Ils relevent en fait de la grammaire INTRA-page, donc de `--ease-quad-out`.
+     Les migrer est un arbitrage a part, pas un correctif : sujet de la Phase 4. */
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -843,21 +867,33 @@ header[role=banner] {
 }
 
 /* ── Le geste ─────────────────────────────────────────────────────────────
-   Sortie rapide, entree sur la courbe de revelation : on quitte sans trainer,
-   on arrive avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la
-   barre de defilement.
+   Sortie rapide, entree avec de l'elan : on quitte sans trainer, on arrive en
+   prenant son temps. L'asymetrie est le sujet, comme pour le pouce de la barre
+   de defilement.
 
-   ⚠️ COURBE ET DUREE CORRIGEES LE 29/07/2026, APRES RELEVE AU MOTEUR.
-   La premiere version employait `--ease-expo-out` sur 0,6 s, valeurs prises de
-   la veille, qui les avait ESTIMEES. Les tweens lus dans GSAP sur luyu.co
-   donnent `Power1.easeOut` sur 0,8 s, et TOUTES les courbes du site sont cette
-   meme courbe, sur les soixante-trois animations. La qualite ne vient pas d'une
-   palette de courbes : elle vient d'une seule courbe declinee en durees.
-   `Power1.easeOut` est un quadratique sortant, donc `--ease-quad-out`. Verifie
-   numeriquement : ecart maximal de 0,2 % contre la formule, la ou
-   `--ease-expo-out` s'en ecarte de 39 %. A un quart du geste l'expo est deja a
-   83 % quand le quadratique est a 44 % : ce n'etait pas un reglage voisin,
-   c'etait une autre intention. */
+   ⚠️ CES VALEURS ONT ETE CORRIGEES DEUX FOIS DANS LA MEME JOURNEE, et la
+   seconde correction a defait la premiere. L'histoire vaut d'etre gardee, parce
+   que l'erreur est reproductible :
+
+     1. version initiale, `--ease-expo-out` sur 0,6 s, valeurs ESTIMEES par la
+        veille ;
+     2. premier releve au moteur : les 63 animations de luyu.co sont toutes en
+        `Power1.easeOut`. Conclusion « une seule courbe pour tout le site »,
+        donc passage au quadratique sur 0,8 s ;
+     3. second releve, en instrumentant une NAVIGATION : le site a une SECONDE
+        grammaire, entierement en `Expo`, qui n'apparaissait pas au premier
+        releve parce qu'elle est FABRIQUEE AU MOMENT DU CLIC. Un inventaire pris
+        a l'arret ne montre que les animations deja creees.
+
+   La mesure de l'etape 2 etait juste ; c'est sa PORTEE qui etait fausse. Elle
+   decrivait ce qui se passe DANS une page, et je l'ai appliquee a ce qui se
+   passe ENTRE deux.
+
+   Valeurs mesurees pour ce geste-ci : 1 s de glissement a l'aller en
+   `Expo.easeInOut`, 0,4 s de fondu au retour en `expo.OutIn`, 1,1 s de
+   re-entree du contenu en `Expo.easeOut`. D'ou `--dur-page-out` et
+   `--dur-page-in`, distincts de `--dur-reveal` : un seul jeton ne peut pas
+   porter deux grammaires sans en trahir une. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   /* ⚠️ Le navigateur pose `plus-lighter` par defaut, qui rend un fondu croise
@@ -867,11 +903,11 @@ header[role=banner] {
 }
 
 ::view-transition-old(root) {
-  animation: page-sortie var(--dur-quick) var(--ease-quad-out) both;
+  animation: page-sortie var(--dur-page-out) var(--ease-expo-out) both;
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-reveal) var(--ease-quad-out) both;
+  animation: page-entree var(--dur-page-in) var(--ease-expo-out) both;
 }
 
 @keyframes page-sortie {
@@ -889,8 +925,8 @@ header[role=banner] {
    Elle se deplace et change de taille, de la grille vers la page. Meme duree
    et meme courbe que le contenu, sinon les deux gestes se contredisent. */
 ::view-transition-group(oeuvre) {
-  animation-duration: var(--dur-reveal);
-  animation-timing-function: var(--ease-quad-out);
+  animation-duration: var(--dur-page-in);
+  animation-timing-function: var(--ease-expo-out);
 }
 
 ::view-transition-old(oeuvre),

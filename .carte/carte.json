@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T17:12:17Z",
-  "commit": "91ba6ca",
+  "genere_le": "2026-07-29T18:48:20Z",
+  "commit": "e0a1007",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -408,6 +408,8 @@
     "--dur-base",
     "--dur-loader-fade",
     "--dur-loader-hold",
+    "--dur-page-in",
+    "--dur-page-out",
     "--dur-quick",
     "--dur-reveal",
     "--ease-expo-out",
@@ -551,10 +553,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 190611,
-    "gzip": 56407,
-    "sans_commentaires": 77982,
-    "gzip_sans": 12739
+    "brut": 200488,
+    "gzip": 59554,
+    "sans_commentaires": 79065,
+    "gzip_sans": 12989
   },
   "ratios_faux": []
 }

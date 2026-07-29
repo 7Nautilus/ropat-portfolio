@@ -80,21 +80,33 @@ header[role="banner"] {
 
 
 /* ── Le geste ─────────────────────────────────────────────────────────────
-   Sortie rapide, entree sur la courbe de revelation : on quitte sans trainer,
-   on arrive avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la
-   barre de defilement.
+   Sortie rapide, entree avec de l'elan : on quitte sans trainer, on arrive en
+   prenant son temps. L'asymetrie est le sujet, comme pour le pouce de la barre
+   de defilement.
 
-   ⚠️ COURBE ET DUREE CORRIGEES LE 29/07/2026, APRES RELEVE AU MOTEUR.
-   La premiere version employait `--ease-expo-out` sur 0,6 s, valeurs prises de
-   la veille, qui les avait ESTIMEES. Les tweens lus dans GSAP sur luyu.co
-   donnent `Power1.easeOut` sur 0,8 s, et TOUTES les courbes du site sont cette
-   meme courbe, sur les soixante-trois animations. La qualite ne vient pas d'une
-   palette de courbes : elle vient d'une seule courbe declinee en durees.
-   `Power1.easeOut` est un quadratique sortant, donc `--ease-quad-out`. Verifie
-   numeriquement : ecart maximal de 0,2 % contre la formule, la ou
-   `--ease-expo-out` s'en ecarte de 39 %. A un quart du geste l'expo est deja a
-   83 % quand le quadratique est a 44 % : ce n'etait pas un reglage voisin,
-   c'etait une autre intention. */
+   ⚠️ CES VALEURS ONT ETE CORRIGEES DEUX FOIS DANS LA MEME JOURNEE, et la
+   seconde correction a defait la premiere. L'histoire vaut d'etre gardee, parce
+   que l'erreur est reproductible :
+
+     1. version initiale, `--ease-expo-out` sur 0,6 s, valeurs ESTIMEES par la
+        veille ;
+     2. premier releve au moteur : les 63 animations de luyu.co sont toutes en
+        `Power1.easeOut`. Conclusion « une seule courbe pour tout le site »,
+        donc passage au quadratique sur 0,8 s ;
+     3. second releve, en instrumentant une NAVIGATION : le site a une SECONDE
+        grammaire, entierement en `Expo`, qui n'apparaissait pas au premier
+        releve parce qu'elle est FABRIQUEE AU MOMENT DU CLIC. Un inventaire pris
+        a l'arret ne montre que les animations deja creees.
+
+   La mesure de l'etape 2 etait juste ; c'est sa PORTEE qui etait fausse. Elle
+   decrivait ce qui se passe DANS une page, et je l'ai appliquee a ce qui se
+   passe ENTRE deux.
+
+   Valeurs mesurees pour ce geste-ci : 1 s de glissement a l'aller en
+   `Expo.easeInOut`, 0,4 s de fondu au retour en `expo.OutIn`, 1,1 s de
+   re-entree du contenu en `Expo.easeOut`. D'ou `--dur-page-out` et
+   `--dur-page-in`, distincts de `--dur-reveal` : un seul jeton ne peut pas
+   porter deux grammaires sans en trahir une. */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -105,11 +117,11 @@ header[role="banner"] {
 }
 
 ::view-transition-old(root) {
-  animation: page-sortie var(--dur-quick) var(--ease-quad-out) both;
+  animation: page-sortie var(--dur-page-out) var(--ease-expo-out) both;
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-reveal) var(--ease-quad-out) both;
+  animation: page-entree var(--dur-page-in) var(--ease-expo-out) both;
 }
 
 @keyframes page-sortie {
@@ -129,8 +141,8 @@ header[role="banner"] {
    et meme courbe que le contenu, sinon les deux gestes se contredisent. */
 
 ::view-transition-group(oeuvre) {
-  animation-duration: var(--dur-reveal);
-  animation-timing-function: var(--ease-quad-out);
+  animation-duration: var(--dur-page-in);
+  animation-timing-function: var(--ease-expo-out);
 }
 
 ::view-transition-old(oeuvre),
