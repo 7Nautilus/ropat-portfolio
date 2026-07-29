@@ -792,6 +792,101 @@ html.custom-scrollbar {
     navigation: none;
   }
 }
+/* ══════════════════════════════════════════════════════════════════════════
+   LE CADRE TIENT, LE CONTENU CHANGE
+   ══════════════════════════════════════════════════════════════════════════
+
+   Nommer un element le SORT de l'instantane de page : il est capture a part et
+   traverse la navigation pour son propre compte. Sans nom, tout se fond en
+   bloc, ce qui est un rideau tire sur l'ensemble, precisement ce que la veille
+   note que Lu Yu evite.
+
+   ⚠️ CES SELECTEURS SONT DES COMPOSANTS, ET ILS VIVENT POURTANT DANS LA COUCHE
+   DE BASE. C'est delibere : ce ne sont pas des styles de composant mais une
+   liste de PARTICIPANTS a la transition, et les eparpiller dans leurs fichiers
+   respectifs rendrait impossible de savoir qui participe. Le risque de cascade
+   est nul, `view-transition-name` n'etant pose nulle part ailleurs.
+
+   ⚠️ UN NOM DOIT ETRE UNIQUE DANS LE DOCUMENT. Deux elements portant le meme
+   nom font ABANDONNER la transition entiere, en silence. C'est pourquoi le nom
+   de l'oeuvre est pose au clic par le JS cote grille, jamais en dur. */
+/* L'entete est `sticky`, donc capturee DANS l'instantane de page : sans nom,
+   elle fantome a chaque passage. Nommee, elle ne bouge plus, et le bord orange
+   permanent gagne enfin sa permanence : il devient ce qui tient quand tout
+   change. */
+header[role=banner] {
+  view-transition-name: entete;
+}
+
+/* Le sol de camouflage ne clignote pas entre deux pages. */
+#fond-dither {
+  view-transition-name: sol;
+}
+
+/* L'oeuvre. Cote page projet le nom est permanent, il n'y a qu'une ouverture ;
+   cote grille il est pose au clic. Deux pages projet enchainees se repondent
+   donc aussi, par le lien « projet suivant ». */
+.project-open-media {
+  view-transition-name: oeuvre;
+}
+
+/* ── Le geste ─────────────────────────────────────────────────────────────
+   Sortie rapide, entree sur la courbe expo : on quitte sans trainer, on arrive
+   avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la barre de
+   defilement.
+   `--dur-reveal` et `--ease-expo-out` sont declares depuis la Phase 0 et
+   reserves a la Phase 4 sans jamais avoir servi. C'est leur emploi prevu : la
+   signature relevee chez Lu Yu, 0,6 s en sortie exponentielle sur opacite et
+   translation. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  /* ⚠️ Le navigateur pose `plus-lighter` par defaut, qui rend un fondu croise
+     agreable mais ECLAIRCIT tout ce qui se superpose. Des qu'on anime les deux
+     couches soi-meme, la page passe par un blanchiment au milieu du geste. */
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  animation: page-sortie var(--dur-quick) var(--ease-quad-out) both;
+}
+
+::view-transition-new(root) {
+  animation: page-entree var(--dur-reveal) var(--ease-expo-out) both;
+}
+
+@keyframes page-sortie {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes page-entree {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+/* ── L'oeuvre qui mene ────────────────────────────────────────────────────
+   Elle se deplace et change de taille, de la grille vers la page. Meme duree
+   et meme courbe que le contenu, sinon les deux gestes se contredisent. */
+::view-transition-group(oeuvre) {
+  animation-duration: var(--dur-reveal);
+  animation-timing-function: var(--ease-expo-out);
+}
+
+::view-transition-old(oeuvre),
+::view-transition-new(oeuvre) {
+  /* ⚠️ `contain` ET PAS `cover`, ET C'EST LA REGLE DU LIVRABLE QUI TRANCHE.
+     La vignette est carree, l'ouverture ne l'est pas : sans consigne, les deux
+     instantanes sont etires l'un vers l'autre. `cover` reglerait la
+     deformation en ROGNANT, donc en montrant une pochette amputee pendant six
+     dixiemes de seconde. On ne rogne pas l'oeuvre d'un client, meme le temps
+     d'un geste. `contain` laisse un peu de vide au milieu du mouvement, ce qui
+     est le prix honnete. */
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
 /* ============================================
    FONTS
    ============================================
