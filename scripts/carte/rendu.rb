@@ -352,12 +352,27 @@ module Carte
       s << <<~MD
         ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 
+        - **Les lectures des plugins ne sont pas suivies.** `_plugins/` lit les donnees en
+          Ruby, hors de portee d'une analyse Liquid. La carte se rabat sur une heuristique :
+          toute cle dont un segment figure parmi les litteraux de chaine d'un plugin quitte
+          la liste des mortes pour la section « qu'un plugin cite ». C'est volontairement
+          grossier, et le biais est du bon cote : la carte peut declarer vivante une cle qui
+          ne l'est pas, jamais l'inverse. ⚠️ **Corollaire : cette section-la n'est PAS une
+          liste de choses a supprimer.** Sans cette heuristique, le bloc `seo` des huit pages
+          service etait annonce mort, avec une invitation a l'effacer.
         - **Les orphelins d'assets sont detectes par nom de fichier.** Un chemin construit
           dynamiquement echapperait au filet. Verifier avant de supprimer.
         - **`_site` est l'oracle**, donc la carte ne connait que ce que le dernier build a
           produit. Une page exclue de la construction est invisible pour elle.
+        - **Une branche jamais rendue passe pour saine.** La carte voit ce que le build
+          produit, donc un chemin de code qu'aucune donnee ne declenche ne peut pas etre
+          juge. La branche `livrable` de `pages/_project.scss` en est l'exemple : ecrite,
+          commentee, coherente, et en collision avec l'indice de defilement, ce qui n'a pu
+          se voir qu'en la declenchant.
         - **Le rendu n'est pas mesure.** Aucune section ne dit si une page est belle, lisible
           ou utilisable au clavier. La carte dit ce qui est branche, pas ce qui est bon.
+          Pour prouver qu'un changement n'a fait que ce qu'il annonce, l'outil est
+          `scripts/comparer-builds.rb`.
       MD
       s
     end
