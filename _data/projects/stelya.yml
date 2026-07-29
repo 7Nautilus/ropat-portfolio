@@ -112,7 +112,11 @@ locales:
 case_study:
   mockups:
     - src: /assets/images/projects/Stelya/stelya-logo-vector-construction.avif
-      aspect: "12/5"
+      # ⚠️ Corrige le 29/07/2026, trouve par la passe medias de `scripts/carte.rb`
+      # le jour meme ou elle a ete ecrite. L'image mesure 3000x1143, soit 2,62 ;
+      # `12/5` annoncait 2,40, un ecart de 9 %. Le rythme ne bascule pas, les deux
+      # valeurs tombant en `pleine`, mais le champ decrivait l'image faux.
+      aspect: "1000/381"
       alt:
         fr: "Construction vectorielle du logo Stelya"
         en: "Stelya logo vector construction"

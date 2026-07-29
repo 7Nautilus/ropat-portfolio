@@ -30,6 +30,7 @@ module Carte
       s << section_js
       s << section_contrat
       s << section_assets
+      s << section_medias
       s << section_build
       s << section_inconnues
       s
@@ -49,7 +50,8 @@ module Carte
         selecteurs_absents: selecteurs_absents,
         assets_orphelins: @p[:assets].orphelins,
         assets_manquants: @p[:assets].manquants,
-        css_octets: @p[:build].faits[:css]
+        css_octets: @p[:build].faits[:css],
+        ratios_faux: (@p[:medias].anomalies.find { |a| a[:titre].start_with?("Ratios DECLARES") } || { cas: [] })[:cas]
       }
     end
 
@@ -111,7 +113,7 @@ module Carte
         > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
         > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
-        Cette carte repond a une seule question, sous sept angles : **qu'est-ce qui est branche
+        Cette carte repond a une seule question, sous plusieurs angles : **qu'est-ce qui est branche
         a quoi**. Elle est generee parce qu'un document redige se perime au premier commit
         suivant. Demonstration mesuree pendant sa conception : entre deux relevés a quelques
         jours d'ecart, les `corner-shape` ecrits a la main sont passes de 21 a 32 sans que rien
@@ -306,9 +308,27 @@ module Carte
       s
     end
 
+    # ⚠️ SECTION A PART, ET NON FONDUE DANS « DONNEES ». Un ratio faux n'est pas
+    # une cle morte : c'est une cle VIVANTE qui dit faux, ce qui demande un
+    # geste oppose. Les melanger reviendrait a proposer de supprimer ce qu'il
+    # faut corriger.
+    def section_medias
+      m = @p[:medias]
+      s = +"## 8. Ratios declares contre dimensions reelles
+
+"
+      s << "#{m.mesures.size} medias mesures. Le ratio pilote la place reservee, le ratio par "            "defaut des pieces de sequence, et le RYTHME de cadrage.
+
+"
+      s << anomalies("", [m]).sub(/\A## 
+
+/, "")
+      s
+    end
+
     def section_build
       b = @p[:build]
-      s = +"## 8. Build et CI\n\n"
+      s = +"## 9. Build et CI\n\n"
       if (css = b.faits[:css])
         s << "**CSS servi** : #{css[:brut]} o brut, #{css[:gzip]} o gzip. " \
              "Sans les commentaires : #{css[:sans_commentaires]} o, #{css[:gzip_sans]} o gzip, " \
@@ -322,7 +342,7 @@ module Carte
     end
 
     def section_inconnues
-      s = +"## 9. Ce que la carte ne sait pas\n\n"
+      s = +"## 10. Ce que la carte ne sait pas\n\n"
       if @c.total.zero?
         s << "Rien n'a resiste a l'analyse sur ce build.\n\n"
       else

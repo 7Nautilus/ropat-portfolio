@@ -1,10 +1,10 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 10:16 sur 5874f18.
+> Generee le 29/07/2026 a 10:48 sur cdc8300.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
-Cette carte repond a une seule question, sous sept angles : **qu'est-ce qui est branche
+Cette carte repond a une seule question, sous plusieurs angles : **qu'est-ce qui est branche
 a quoi**. Elle est generee parce qu'un document redige se perime au premier commit
 suivant. Demonstration mesuree pendant sa conception : entre deux relevés a quelques
 jours d'ecart, les `corner-shape` ecrits a la main sont passes de 21 a 32 sans que rien
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 10:16 |
+| Date du build lu | 29/07/2026 10:48 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -373,7 +373,13 @@ Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices
 -  462.2 Ko  fr/projects/outlast-trials.html   outlast-trials.png
 -  462.2 Ko  en/projects/outlast-trials.html   outlast-trials.png
 
-## 8. Build et CI
+## 8. Ratios declares contre dimensions reelles
+
+59 medias mesures. Le ratio pilote la place reservee, le ratio par defaut des pieces de sequence, et le RYTHME de cadrage.
+
+Rien a signaler.
+
+## 9. Build et CI
 
 **CSS servi** : 175369 o brut, 51094 o gzip. Sans les commentaires : 76084 o, 12406 o gzip, soit **76 % de moins** sur le fil.
 
@@ -381,7 +387,7 @@ Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
 Rien a signaler.
 
-## 9. Ce que la carte ne sait pas
+## 10. Ce que la carte ne sait pas
 
 7 cas n'ont pas pu etre tranches. Ils sont listes ici plutot que passes sous silence : une carte qui cache ses angles morts parait meilleure qu'elle n'est.
 

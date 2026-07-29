@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T08:16:12Z",
-  "commit": "5874f18",
+  "genere_le": "2026-07-29T08:48:49Z",
+  "commit": "cdc8300",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -542,5 +542,6 @@
     "gzip": 51094,
     "sans_commentaires": 76084,
     "gzip_sans": 12406
-  }
+  },
+  "ratios_faux": []
 }

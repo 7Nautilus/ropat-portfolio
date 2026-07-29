@@ -33,6 +33,7 @@ require "carte/donnees"
 require "carte/css"
 require "carte/js"
 require "carte/assets"
+require "carte/medias"
 require "carte/build"
 require "carte/rendu"
 
@@ -57,6 +58,7 @@ module Carte
     passes[:css]      = Css.new(couverture, emis)
     passes[:js]       = Js.new(couverture, emis)
     passes[:assets]   = Assets.new(couverture, emis)
+    passes[:medias]   = Medias.new(couverture)
     passes[:build]    = Build.new(couverture)
 
     rendu = Rendu.new(passes, couverture)
