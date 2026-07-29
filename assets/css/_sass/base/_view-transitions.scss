@@ -80,13 +80,21 @@ header[role="banner"] {
 
 
 /* ── Le geste ─────────────────────────────────────────────────────────────
-   Sortie rapide, entree sur la courbe expo : on quitte sans trainer, on arrive
-   avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la barre de
-   defilement.
-   `--dur-reveal` et `--ease-expo-out` sont declares depuis la Phase 0 et
-   reserves a la Phase 4 sans jamais avoir servi. C'est leur emploi prevu : la
-   signature relevee chez Lu Yu, 0,6 s en sortie exponentielle sur opacite et
-   translation. */
+   Sortie rapide, entree sur la courbe de revelation : on quitte sans trainer,
+   on arrive avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la
+   barre de defilement.
+
+   ⚠️ COURBE ET DUREE CORRIGEES LE 29/07/2026, APRES RELEVE AU MOTEUR.
+   La premiere version employait `--ease-expo-out` sur 0,6 s, valeurs prises de
+   la veille, qui les avait ESTIMEES. Les tweens lus dans GSAP sur luyu.co
+   donnent `Power1.easeOut` sur 0,8 s, et TOUTES les courbes du site sont cette
+   meme courbe, sur les soixante-trois animations. La qualite ne vient pas d'une
+   palette de courbes : elle vient d'une seule courbe declinee en durees.
+   `Power1.easeOut` est un quadratique sortant, donc `--ease-quad-out`. Verifie
+   numeriquement : ecart maximal de 0,2 % contre la formule, la ou
+   `--ease-expo-out` s'en ecarte de 39 %. A un quart du geste l'expo est deja a
+   83 % quand le quadratique est a 44 % : ce n'etait pas un reglage voisin,
+   c'etait une autre intention. */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -101,7 +109,7 @@ header[role="banner"] {
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-reveal) var(--ease-expo-out) both;
+  animation: page-entree var(--dur-reveal) var(--ease-quad-out) both;
 }
 
 @keyframes page-sortie {
@@ -122,7 +130,7 @@ header[role="banner"] {
 
 ::view-transition-group(oeuvre) {
   animation-duration: var(--dur-reveal);
-  animation-timing-function: var(--ease-expo-out);
+  animation-timing-function: var(--ease-quad-out);
 }
 
 ::view-transition-old(oeuvre),

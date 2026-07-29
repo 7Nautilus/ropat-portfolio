@@ -389,9 +389,12 @@
      revelation 0,6 s, micro-animation 0,2 s. */
   --dur-quick: 0.2s;
   --dur-base: 0.3s;
-  /* ⚠️ DECLARE, JAMAIS ADOPTE (0 usage). Attendu : c'est la duree de la
-     grammaire de revelation, qui est un livrable de la PHASE 4. */
-  --dur-reveal: 0.6s;
+  /* La duree de la grammaire de revelation.
+     ⚠️ CORRIGE DE 0,6 A 0,8 LE 29/07/2026, APRES RELEVE AU MOTEUR. La valeur
+     de 0,6 s venait de `docs/VEILLE-PORTFOLIOS-2026-07.md`, qui l'avait
+     estimee. Les tweens lus dans GSAP sur luyu.co donnent 0,8 s sur `x`, `y`
+     et `opacity`, onze fois, et c'est la famille dominante du site. */
+  --dur-reveal: 0.8s;
   /* Le loader d'accueil. Ces deux durees sont lues par le CSS ET par le JS
      (`assets/js/script.js`, sections PAGE LOADER et RADAR), c'est pourquoi
      elles vivent ici et nulle part ailleurs.
@@ -404,6 +407,15 @@
   /* Courbes. Sortie exponentielle pour les revelations, quadratique pour
      les micro-mouvements. Equivalents CSS des courbes GSAP citees dans
      docs/VEILLE-PORTFOLIOS-2026-07.md. */
+  /* ⚠️ CETTE COURBE N'A PLUS DE FONDEMENT DANS LA VEILLE, et elle a encore
+     trois consommateurs : la lightbox, l'entete et la page projet.
+     Elle avait ete introduite sur la foi d'un `expo.outIn` ESTIME chez Lu Yu.
+     Releve au moteur le 29/07/2026 : les soixante-trois animations du site sont
+     TOUTES en `Power1.easeOut`, un quadratique sortant. Pas une seule
+     exponentielle. La qualite ne vient pas d'une palette de courbes, elle vient
+     d'une seule courbe declinee en durees (0,2 / 0,4 / 0,8 / 1,6 s).
+     Aligner tout le site sur `--ease-quad-out` est un arbitrage a part, pas un
+     correctif : c'est le sujet de la Phase 4. */
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -831,13 +843,21 @@ header[role=banner] {
 }
 
 /* ── Le geste ─────────────────────────────────────────────────────────────
-   Sortie rapide, entree sur la courbe expo : on quitte sans trainer, on arrive
-   avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la barre de
-   defilement.
-   `--dur-reveal` et `--ease-expo-out` sont declares depuis la Phase 0 et
-   reserves a la Phase 4 sans jamais avoir servi. C'est leur emploi prevu : la
-   signature relevee chez Lu Yu, 0,6 s en sortie exponentielle sur opacite et
-   translation. */
+   Sortie rapide, entree sur la courbe de revelation : on quitte sans trainer,
+   on arrive avec de l'elan. L'asymetrie est le sujet, comme pour le pouce de la
+   barre de defilement.
+
+   ⚠️ COURBE ET DUREE CORRIGEES LE 29/07/2026, APRES RELEVE AU MOTEUR.
+   La premiere version employait `--ease-expo-out` sur 0,6 s, valeurs prises de
+   la veille, qui les avait ESTIMEES. Les tweens lus dans GSAP sur luyu.co
+   donnent `Power1.easeOut` sur 0,8 s, et TOUTES les courbes du site sont cette
+   meme courbe, sur les soixante-trois animations. La qualite ne vient pas d'une
+   palette de courbes : elle vient d'une seule courbe declinee en durees.
+   `Power1.easeOut` est un quadratique sortant, donc `--ease-quad-out`. Verifie
+   numeriquement : ecart maximal de 0,2 % contre la formule, la ou
+   `--ease-expo-out` s'en ecarte de 39 %. A un quart du geste l'expo est deja a
+   83 % quand le quadratique est a 44 % : ce n'etait pas un reglage voisin,
+   c'etait une autre intention. */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   /* ⚠️ Le navigateur pose `plus-lighter` par defaut, qui rend un fondu croise
@@ -851,7 +871,7 @@ header[role=banner] {
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-reveal) var(--ease-expo-out) both;
+  animation: page-entree var(--dur-reveal) var(--ease-quad-out) both;
 }
 
 @keyframes page-sortie {
@@ -870,7 +890,7 @@ header[role=banner] {
    et meme courbe que le contenu, sinon les deux gestes se contredisent. */
 ::view-transition-group(oeuvre) {
   animation-duration: var(--dur-reveal);
-  animation-timing-function: var(--ease-expo-out);
+  animation-timing-function: var(--ease-quad-out);
 }
 
 ::view-transition-old(oeuvre),
