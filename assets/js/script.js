@@ -1388,6 +1388,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (gouttiere === 0) return;
 
   const TAILLE_MIN = 44;   // en dessous, le pouce n'est plus une prise
+  const DELAI = 900;       // ms d'immobilite avant que le pouce s'efface
+  const ZONE_BORD = 28;    // px depuis le bord droit qui le font reapparaitre
 
   const barre = document.createElement('div');
   barre.className = 'scrollbar';
@@ -1403,6 +1405,29 @@ document.addEventListener('DOMContentLoaded', () => {
   let position = 0;        // derniere ordonnee peinte, en px depuis le haut
   let saisie = null;
   let enAttente = false;
+  let utilisable = false;  // la page defile-t-elle, et n'est-elle pas verrouillee
+  let auBord = false;      // le pointeur est-il dans la zone du bord droit
+  let minuterie = null;
+
+  // ── Apparition et effacement ────────────────────────────────────────────
+  // Deux etats distincts, et les confondre serait faux : `utilisable` dit s'il
+  // y a quelque chose a montrer, `data-actif` dit si on le montre maintenant.
+  function effacer() {
+    clearTimeout(minuterie);
+    if (barre.dataset.actif !== 'false') barre.dataset.actif = 'false';
+  }
+
+  function montrer() {
+    if (!utilisable) return;
+    // Ecrire un attribut a la valeur qu'il a deja reste une mutation, et le
+    // defilement passe ici a chaque evenement.
+    if (barre.dataset.actif !== 'true') barre.dataset.actif = 'true';
+    clearTimeout(minuterie);
+    // Tant que le pointeur est au bord ou que le pouce est saisi, rien ne
+    // s'efface : on ne retire pas une prise sous la main de quelqu'un.
+    if (auBord || saisie) return;
+    minuterie = setTimeout(effacer, DELAI);
+  }
 
   function peindre() {
     const hauteurDoc = doc.scrollHeight;
@@ -1415,11 +1440,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // image forcerait un recalcul de disposition pour rien.
     const verrouille = document.body.style.overflow === 'hidden';
 
-    if (course <= 0 || verrouille) {
-      barre.dataset.actif = 'false';
+    utilisable = course > 0 && !verrouille;
+    if (!utilisable) {
+      effacer();
       return;
     }
-    barre.dataset.actif = 'true';
 
     const piste = barre.clientHeight;
     const hauteur = Math.max(TAILLE_MIN, Math.round(piste * vue / hauteurDoc));
@@ -1466,12 +1491,28 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!saisie) return;
     saisie = null;
     barre.dataset.saisi = 'false';
+    montrer();   // relance la minuterie, que la saisie tenait suspendue
   }
   pouce.addEventListener('pointerup', relacher);
   pouce.addEventListener('pointercancel', relacher);
 
-  window.addEventListener('scroll', demander, { passive: true });
+  window.addEventListener('scroll', function () {
+    demander();
+    montrer();
+  }, { passive: true });
   window.addEventListener('resize', demander, { passive: true });
+
+  // Le pouce reapparait quand le pointeur approche du bord droit, sans quoi il
+  // faudrait viser un element invisible pour le saisir a l'arret.
+  // On ne fait rien tant que l'etat ne CHANGE pas : cet evenement se declenche
+  // des centaines de fois par seconde, et la comparaison est tout ce qu'il
+  // paie dans l'immense majorite des cas.
+  window.addEventListener('pointermove', function (e) {
+    const bord = e.clientX >= doc.clientWidth - ZONE_BORD;
+    if (bord === auBord) return;
+    auBord = bord;
+    montrer();
+  }, { passive: true });
 
   // La hauteur du document bouge sans qu'on defile : images qui arrivent,
   // revelations, filtre du portfolio qui recompose la grille. Sans cette

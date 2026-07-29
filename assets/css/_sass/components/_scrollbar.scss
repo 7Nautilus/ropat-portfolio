@@ -29,8 +29,18 @@
      clic sur la piste, on garde la molette, le clavier et le glisser du pouce,
      qui est la vraie prise a la souris. */
   pointer-events: none;
+  /* ⚠️ ELLE PART INVISIBLE ET Y RETOURNE. Sans gouttiere, cette bande n'est plus
+     A COTE du contenu, elle est DESSUS, y compris sur les images a fond perdu
+     des pages projet. Une barre permanente serait donc du chrome pose sur
+     l'oeuvre du client, ce que la regle 8 interdit. Elle n'apparait que pendant
+     le geste : au defilement, quand le pointeur approche du bord, et tant que
+     le pouce est saisi. Arbitrage de Ropat, 29/07/2026.
+     ⚠️ `opacity` et pas `visibility` : un element a `opacity: 0` recoit
+     toujours le pointeur, donc le pouce reste saisissable au moment meme ou il
+     reapparait sous la main. Avec `visibility` il faudrait viser un element qui
+     n'existe pas encore pour le faire exister. */
   opacity: 0;
-  transition: opacity var(--dur-quick) var(--ease-out);
+  transition: opacity var(--dur-base) var(--ease-out);
 }
 
 /* L'etat vit dans un attribut, pas dans une classe : c'est la meme discipline
@@ -38,6 +48,12 @@
    par une classe ajoutee a cote. */
 .scrollbar[data-actif="true"] {
   opacity: 1;
+  /* Entree rapide, sortie lente, et l'asymetrie est le sujet : la duree de la
+     regle de base gouverne l'EFFACEMENT, celle-ci l'APPARITION. Symetriques,
+     le pouce mettait 0,3 s a arriver alors qu'on defile deja, ce qui le fait
+     paraitre en retard sur le geste. Il doit repondre vite et s'en aller sans
+     qu'on le remarque. */
+  transition-duration: var(--dur-quick);
 }
 
 .scrollbar-thumb {
