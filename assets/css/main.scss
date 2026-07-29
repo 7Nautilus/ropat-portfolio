@@ -2,6 +2,7 @@
 @use "base/variables";
 @use "base/mixins" as *; // Mixins globaux (squircle, etc.)
 @use "base/reset";
+@use "base/scrollbar";
 @use "base/typography";
 @use "base/generic";
 @use "base/bases";

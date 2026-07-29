@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 10:48 sur cdc8300.
+> Generee le 29/07/2026 a 17:00 sur 4db68ec.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,11 +15,11 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 10:48 |
+| Date du build lu | 29/07/2026 17:00 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
-| Partiels SCSS | 31 |
+| Partiels SCSS | 32 |
 | Cas **INDETERMINES** | **7** |
 
 Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
@@ -196,7 +196,7 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-103 jetons definis, 98 consommes, 280 noms de selecteur, 11 `!important`.
+107 jetons definis, 102 consommes, 280 noms de selecteur, 11 `!important`.
 
 `!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`
 
@@ -206,13 +206,13 @@ Points de rupture ecrits en dur : 360px (3x), 520px (1x), 639px (2x), 767px (2x)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
-- --dur-reveal = 0.6s   (assets/css/_sass/base/_variables.scss:404)
+- --dur-reveal = 0.6s   (assets/css/_sass/base/_variables.scss:425)
 - --p-vert-haute = #051510   (assets/css/_sass/base/_variables.scss:63)
 - --p-vert-mediane = #030F0C   (assets/css/_sass/base/_variables.scss:62)
-- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:375)
-- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:374)
-- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:373)
-- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:330)
+- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:396)
+- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:395)
+- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:394)
+- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:351)
 
 ### Jetons poses en ligne et consommes SANS valeur de repli  (3)
 
@@ -381,7 +381,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 175369 o brut, 51094 o gzip. Sans les commentaires : 76084 o, 12406 o gzip, soit **76 % de moins** sur le fil.
+**CSS servi** : 181484 o brut, 53103 o gzip. Sans les commentaires : 77203 o, 12604 o gzip, soit **76 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

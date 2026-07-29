@@ -1,0 +1,84 @@
+/* ============================================
+   BARRE DE DEFILEMENT
+   ============================================ */
+
+/* ⚠️ LES DEUX MECANISMES S'EXCLUENT, ILS NE SE COMPLETENT PAS.
+   Mesure du 29/07/2026 sur Chrome 148 : une sonde en `overflow-y: scroll`
+   portant `::-webkit-scrollbar { width: 30px }` mesure bien 30 px de barre ;
+   la MEME sonde avec `scrollbar-color` en plus retombe a 15 px, la largeur
+   par defaut. Depuis Chrome 121, poser une propriete standard sur un element
+   desactive tout le pseudo-element sur cet element.
+   D'ou la separation stricte ci-dessous : le pseudo-element pour Blink et
+   WebKit, les proprietes standard UNIQUEMENT la ou il n'existe pas.
+   Les melanger dans la meme regle rendrait le reglage fin silencieusement
+   inerte : la barre garderait son apparence systeme et rien ne le dirait. */
+
+
+/* ── Blink et WebKit ─────────────────────────────────────────────────────
+   Regles non prefixees par un selecteur : elles portent sur TOUTE zone
+   defilable, pas seulement la page. La seule autre aujourd'hui est la piste
+   de partenaires, qui passe en `overflow-x: auto` sous `prefers-reduced-motion`
+   (components/_carousel.scss:132), d'ou le `height` autant que le `width`. */
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+/* La piste reste TRANSPARENTE, et ce n'est pas un raccourci : elle laisse
+   voir le fond propage du `body`, donc elle suit le skin sans etre repeinte.
+   Un aplat pose ici serait une bande verticale a repeindre a chaque theme. */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Les fleches d'extremite. Chrome ne les dessine pas par defaut, mais il les
+   fait apparaitre des qu'on prend la main sur la barre : sans cette ligne, on
+   gagne deux boutons carres que personne n'a demandes. */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* L'angle ou une barre horizontale croise une verticale. */
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  /* La bordure transparente est ce qui separe la ZONE SAISISSABLE de la zone
+     PEINTE : 12 px de prise a la souris, 6 px visibles. Amincir la piste elle-
+     meme aurait retreci la cible en meme temps que le trait, ce qui penalise
+     precisement les utilisateurs a motricite reduite. */
+  border: var(--scrollbar-inset) solid transparent;
+  background-clip: padding-box;
+  border-radius: var(--radius-pill);
+  transition: background-color var(--dur-quick) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active);
+  background-clip: padding-box;
+}
+
+
+/* ── Firefox ─────────────────────────────────────────────────────────────
+   Deux leviers, pas trois : ni rayon, ni transition, ni largeur exacte.
+   `thin` vaut environ 11 px sur Windows, assez proche des 12 px demandes
+   plus haut pour que les deux moteurs se ressemblent.
+   Le `@supports` est ce qui garantit qu'aucun navigateur ne recoit les deux
+   mecanismes a la fois, donc que la mesure d'exclusion ci-dessus ne peut pas
+   se retourner contre nous. */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+}
+
+
+/* ⚠️ La transition du pouce SURVIT a `prefers-reduced-motion`, et c'est
+   voulu. Le bloc global de base/_bases.scss:58 vise `*, *::before, *::after` :
+   `::-webkit-scrollbar-thumb` n'est aucun des trois, il n'est donc pas
+   atteint. Un fondu de couleur de 0,2 s ne deplace rien a l'ecran et ne
+   releve pas de ce que ce reglage systeme demande de supprimer. */

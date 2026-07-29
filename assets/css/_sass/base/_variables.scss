@@ -253,6 +253,27 @@
   --accent-ink: var(--p-encre-sombre);
   --signal-width: 3px;          /* le trait epais, quand il veut dire quelque chose */
 
+  /* ── Barre de defilement ───────────────────────────────────────────────
+     Le pouce est un COMPOSANT D'INTERFACE : WCAG 1.4.11 lui impose 3:1
+     contre ce qu'il recouvre, comme a n'importe quel controle.
+     Ce qu'il recouvre a ete mesure, et ce n'est pas le dither : le canvas
+     est `position: fixed`, donc pose dans le bloc conteneur initial, qui
+     EXCLUT la gouttiere d'une barre classique. La barre laisse voir le fond
+     propage du `body`, releve a #030808.
+     Contrastes mesures sur ce fond le 29/07/2026 :
+       --line-control    3,48:1   passe, et c'est deja son role
+       --accent          6,51:1   passe largement
+       --ink-decorative  1,72:1   echoue
+       --line            1,17:1   echoue, c'est un filet, pas un controle
+     Au repos le pouce est donc neutre ; l'orange est garde pour la SAISIE,
+     ou il signale quelque chose. Un pouce orange en permanence serait une
+     barre orange sur toute la hauteur de chaque page, c'est-a-dire du signal
+     redevenu papier peint. */
+  --scrollbar-size: 12px;              /* la piste : la zone reellement saisissable */
+  --scrollbar-inset: 3px;              /* retrait transparent, laisse 6 px peints */
+  --scrollbar-thumb: var(--line-control);
+  --scrollbar-thumb-active: var(--accent);
+
   /* Etats */
   --success: var(--p-vert-succes);
   --danger: var(--p-rouge-erreur);
@@ -500,9 +521,12 @@
   --ink-subtle: rgba(5, 16, 15, 0.62);
 
   --line: rgba(5, 16, 15, 0.14);
-  /* Meme role, meme exigence, direction inversee. ⚠️ Calcule (0,45 donne
-     environ 3,4:1 sur #F0F4F1), pas encore mesure au navigateur : le skin
-     clair n'a pas de surface reelle avant la Phase 3. */
+  /* Meme role, meme exigence, direction inversee.
+     ⚠️ Mesure le 29/07/2026 en forcant `[data-theme="light"]` au navigateur :
+     3,05:1, et non « environ 3,4:1 » comme l'annoncait le calcul ecrit ici.
+     Le seuil de 3:1 tient toujours, mais sans la marge annoncee. Quand la
+     Phase 3 donnera sa vraie matiere au skin clair, ce nombre est a reprendre
+     en premier : il n'a plus qu'un point cinq de reserve. */
   --line-control: rgba(5, 16, 15, 0.45);
 
   /* #FF6B6B tient 7,26:1 sur le sol sombre mais tombe a 2,44:1 sur la neige :
@@ -515,6 +539,16 @@
   /* L'accent reste le meme orange : c'est un point fixe. Ce qui change,
      c'est son emploi (masse, jamais texte). --accent-ink est deja sombre
      dans les deux skins, il n'a donc rien a surcharger ici. */
+
+  /* ⚠️ SEUL ENDROIT OU L'ORANGE NE PEUT PAS TRAVERSER LE SKIN TEL QUEL.
+     Mesure : #FF5C00 sur la neige #F0F4F1 ne donne que 2,79:1, sous le seuil
+     de 3:1 des composants d'interface. Le pouce saisi echouerait donc sur le
+     skin clair alors qu'il tient 6,51:1 sur le sombre.
+     On ne renonce pas a l'orange pour autant, on l'assombrit du minimum qui
+     le fait passer : 90 % d'orange et 10 % d'encre donnent 3,35:1 mesure.
+     La teinte reste lue comme l'orange de la marque, elle cesse d'etre
+     illisible sur fond clair. */
+  --scrollbar-thumb-active: color-mix(in srgb, var(--accent) 90%, var(--p-encre-sombre));
 
   --shadow-ambient: 0 4px 6px rgba(5, 16, 15, 0.08);
 }
