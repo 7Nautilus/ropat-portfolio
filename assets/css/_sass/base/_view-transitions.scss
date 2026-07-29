@@ -168,6 +168,40 @@ header[role="banner"] {
 }
 
 
+/* ── Le retour ────────────────────────────────────────────────────────────
+   ⚠️ SANS CES QUATRE REGLES, REVENIR EN ARRIERE REJOUE EXACTEMENT L'ALLER.
+   Le CSS ne sait rien du sens d'une navigation : les regles ci-dessus
+   s'appliquent dans les deux cas, donc le retour ferait sortir la page a
+   gauche et entrer la precedente par la droite, c'est-a-dire le geste d'un pas
+   en AVANT. On avancerait en reculant, et rien ne le signalerait.
+
+   L'etiquette `retour` est posee sur la transition par `script.js`, section
+   LE SENS DE LA NAVIGATION, a partir des index de l'API Navigation. Seule la
+   GEOMETRIE est retournee : durees et courbes restent les memes, parce que
+   c'est le meme geste, pas un autre.
+
+   Lu Yu, lui, traite le retour comme un geste DIFFERENT : un fondu d'opacite
+   de 0,4 s en `expo.OutIn`, puis une re-revelation de sa grille en 1,1 s
+   `Expo.easeOut`. C'est une autre reponse au meme probleme, plus riche et plus
+   couteuse ; celle-ci suffit a lever la contradiction. */
+
+:root:active-view-transition-type(retour)::view-transition-old(root) {
+  animation-name: page-sortie-retour;
+}
+
+:root:active-view-transition-type(retour)::view-transition-new(root) {
+  animation-name: page-entree-retour;
+}
+
+@keyframes page-sortie-retour {
+  to { transform: translateX(100%); }
+}
+
+@keyframes page-entree-retour {
+  from { transform: translateX(-100%); }
+}
+
+
 /* ── L'oeuvre qui mene ────────────────────────────────────────────────────
    Elle se deplace et change de taille, de la grille vers la page. Meme duree
    et meme courbe que le contenu, sinon les deux gestes se contredisent. */

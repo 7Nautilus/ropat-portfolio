@@ -148,6 +148,36 @@
       }, 2500);
     </script>
 
+    {%- comment -%}
+      LE SENS DE LA NAVIGATION.
+
+      ⚠️ EN LIGNE ET DANS LE <head>, PARCE QUE `pagereveal` SE DECLENCHE AVANT
+      LES SCRIPTS DIFFERES. La meme logique a d'abord ete ecrite dans
+      script.js : mesure a l'iframe, l'etiquette n'etait JAMAIS posee alors que
+      toutes ses conditions etaient reunies, l'ecouteur n'existant pas encore au
+      moment de l'evenement. Un `defer` ne rate pas cet evenement bruyamment, il
+      le rate en silence.
+
+      Sans cette etiquette, revenir en arriere rejoue exactement l'aller : le
+      CSS ne sait rien du sens d'une navigation, donc le retour ferait sortir la
+      page a gauche et entrer la precedente par la droite, c'est-a-dire le geste
+      d'un pas en AVANT. Le CSS qui s'y accroche est dans
+      base/_view-transitions.scss, section « Le retour ».
+
+      ⚠️ `traverse` couvre le retour ET l'avance : c'est la comparaison des
+      INDEX d'entree qui distingue les deux, rien d'autre.
+    {%- endcomment -%}
+    <script>
+      window.addEventListener('pagereveal', function (e) {
+        if (!e.viewTransition || !e.viewTransition.types) return;
+        var a = window.navigation && window.navigation.activation;
+        if (!a || a.navigationType !== 'traverse') return;
+        var de = a.from, vers = a.entry;
+        if (!de || !vers || typeof de.index !== 'number' || typeof vers.index !== 'number') return;
+        if (vers.index < de.index) e.viewTransition.types.add('retour');
+      });
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
 
