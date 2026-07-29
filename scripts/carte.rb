@@ -55,8 +55,12 @@ module Carte
     passes[:routes]   = Routes.new(couverture, emis)
     passes[:includes] = Includes.new(couverture)
     passes[:donnees]  = Donnees.new(couverture)
-    passes[:css]      = Css.new(couverture, emis)
+    # ⚠️ LE JS PASSE AVANT LE CSS, ET CE N'EST PAS ARBITRAIRE. La passe CSS a
+    # besoin de savoir quelles classes le JS POSE lui-meme avant de declarer un
+    # selecteur absent du HTML : sinon toute regle dont l'element est cree a
+    # l'execution atterrit dans la liste du CSS mort.
     passes[:js]       = Js.new(couverture, emis)
+    passes[:css]      = Css.new(couverture, emis, passes[:js])
     passes[:assets]   = Assets.new(couverture, emis)
     passes[:medias]   = Medias.new(couverture)
     passes[:build]    = Build.new(couverture)

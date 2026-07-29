@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T15:00:23Z",
-  "commit": "4db68ec",
+  "genere_le": "2026-07-29T15:33:28Z",
+  "commit": "66ffb21",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -499,39 +499,19 @@
     "--track-display"
   ],
   "selecteurs_absents": [
-    ".reveal-arme",
     ".is-visible",
-    ".transparent-orange-bg",
-    ".card-grid",
-    ".service-main-container",
-    ".hero-project",
-    ".hero-project-container",
-    ".hero-image-container",
-    ".hero-intro",
-    ".hero-image",
-    ".service-main-container-text",
-    ".services-page-subtitle",
-    ".services-page-description",
+    ".custom-scrollbar",
     ".cursor-hover",
     ".cursor-text",
     ".cursor-zoom",
     ".lightbox-image",
     ".loaded",
-    ".loader-logo-text",
-    ".service-card-big",
-    ".hero-theme-container",
-    ".hero-theme",
-    ".hero-theme-dot",
-    ".subservice-section",
-    "#contact-social-links",
-    ".social-links",
-    ".social-icon",
+    ".scrollbar",
+    ".scrollbar-thumb",
     ".was-validated",
     ".contact-erreur",
-    ".contact-select",
     ".is-invalid",
-    ".galerie-plus",
-    ".project-back-link"
+    ".galerie-plus"
   ],
   "assets_orphelins": [
     "/assets/images/backgrounds/main-bg.webp",
@@ -542,10 +522,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 181484,
-    "gzip": 53103,
-    "sans_commentaires": 77203,
-    "gzip_sans": 12604
+    "brut": 186637,
+    "gzip": 54905,
+    "sans_commentaires": 78088,
+    "gzip_sans": 12719
   },
   "ratios_faux": []
 }

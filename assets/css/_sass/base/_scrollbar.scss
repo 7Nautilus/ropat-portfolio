@@ -24,6 +24,41 @@
   height: var(--scrollbar-size);
 }
 
+/* ⚠️ LA BARRE DE PAGE S'EFFACE, LES BARRES INTERNES RESTENT.
+   Une barre classique occupe une gouttiere HORS de la zone de contenu, et
+   Chrome ecrete les elements `position: fixed` a cette zone : le canvas du
+   dither mesure pourtant bien `innerWidth` et COUVRE la gouttiere, mais ses
+   douze derniers pixels ne sont jamais peints. La gouttiere laissait donc voir
+   le fond propage du `body`, une bande plate et non eclairee le long d'un fond
+   qui, lui, est texture. C'est le « fond noir » releve par Ropat le 29/07/2026,
+   et aucune valeur de `background` ne pouvait le corriger : le probleme n'etait
+   pas la couleur de la piste, c'etait que le shader n'a pas le droit d'y aller.
+   La gouttiere est donc supprimee et le pouce redessine dans le DOM, par-dessus
+   le shader. Voir components/_scrollbar.scss.
+   ⚠️ La classe est posee PAR LE JS, et seulement s'il a reussi a poser sa
+   barre. Sans JS, ou si le module jette, la barre native stylee ci-dessus
+   reste en place : on ne retire jamais un moyen de defiler sur une promesse.
+
+   ⚠️ ET C'EST LA PROPRIETE STANDARD QUI EFFACE, PAS LE PSEUDO-ELEMENT.
+   Mon premier jet ecrivait `.custom-scrollbar::-webkit-scrollbar { width: 0 }`
+   et ne faisait RIEN : la gouttiere restait a 12 px. Les six formes ont ete
+   essayees une par une au navigateur, et elles ne se valent pas :
+     html::-webkit-scrollbar          12 px, inerte
+     .custom-scrollbar::-webkit-...   12 px, inerte (la classe est sur `html`)
+     body::-webkit-scrollbar           0 px, efface
+     ::-webkit-scrollbar               0 px, efface (il atteint `body`)
+     html { scrollbar-width: none }    0 px, efface
+   La barre de viewport tire ses styles de pseudo-element de `body`, pas de
+   `html`, exactement comme le fond se propage. Viser `html` avec le pseudo est
+   donc un coup dans le vide, et un coup SILENCIEUX.
+   La propriete standard, elle, porte bien sur `html` et vaut pour Blink comme
+   pour Firefox, d'ou une seule regle au lieu de deux.
+   Elle n'est pas heritee, verifie : sous `none`, la barre du viewport tombe a
+   zero pendant qu'une zone defilable interne garde ses 12 px stylees. */
+html.custom-scrollbar {
+  scrollbar-width: none;
+}
+
 /* La piste reste TRANSPARENTE, et ce n'est pas un raccourci : elle laisse
    voir le fond propage du `body`, donc elle suit le skin sans etre repeinte.
    Un aplat pose ici serait une bande verticale a repeindre a chaque theme. */
@@ -74,6 +109,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb) transparent;
   }
+
 }
 
 

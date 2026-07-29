@@ -24,6 +24,10 @@
 @use "components/dropdown";
 @use "components/lightbox";
 @use "components/scroll-down";
+// Alias obligatoire : Sass tire le namespace du nom de fichier, et `base/scrollbar`
+// le prend deja. Les deux fichiers sont les deux moitiees d'un meme mecanisme,
+// l'un efface la barre native, l'autre pose celle qui la remplace.
+@use "components/scrollbar" as scrollbar-dom;
 @use "components/containers";
 @use "components/carousel";
 

@@ -27,9 +27,10 @@ module Carte
 
     attr_reader :jetons, :consommations, :selecteurs, :importants, :anomalies, :breakpoints
 
-    def initialize(couverture, emis)
+    def initialize(couverture, emis, js = nil)
       @couverture    = couverture
       @emis          = emis
+      @js            = js
       @jetons        = {}   # nom => { valeur:, ou: [fichier:ligne] }
       @consommations = Hash.new { |h, k| h[k] = [] }
       @selecteurs    = {}   # nom (".x" ou "#x") => [fichier:ligne]
@@ -189,6 +190,7 @@ module Carte
       absents = []
       internes = []
       desaccords = []
+      par_le_js = []
 
       @selecteurs.each do |nom, ou|
         genre = nom[0]
@@ -201,9 +203,23 @@ module Carte
           # c'est un bug, du style qui devrait s'appliquer et ne s'applique pas.
           # Les ranger ensemble ferait supprimer une regle qu'il fallait reparer.
           autre = genre == "." ? @emis.ids[cle] : @emis.classes[cle]
+          # ⚠️ TROISIEME VERDICT AVANT « ABSENT », AJOUTE LE 29/07/2026.
+          # Un element cree a l'execution n'apparait dans AUCUNE page construite,
+          # exactement comme du CSS mort. Les confondre ferait supprimer une
+          # regle vivante, et c'est la barre de defilement sur mesure qui l'a
+          # revele : `.scrollbar` et `.scrollbar-thumb` sont les premiers
+          # selecteurs de ce depot ecrits en SCSS et poses par le JS.
+          # ⚠️ `key?` ET PAS `[]`. `classes_posees` est un Hash a bloc par
+          # defaut : y lire une cle absente la CREERAIT avec un tableau vide,
+          # donc interroger la passe JS suffirait a modifier ses donnees.
+          pose_js = @js && @js.classes_posees.key?(cle) ? @js.classes_posees[cle] : nil
+          pose_js = nil if pose_js&.empty?
+
           if autre
             desaccords << { nom: nom, ou: ou.uniq, pages: autre.size,
                             genre_emis: genre == "." ? "id" : "class" }
+          elsif genre == "." && pose_js
+            par_le_js << { nom: nom, ou: ou.uniq, js: pose_js.uniq }
           else
             absents << { nom: nom, ou: ou.uniq }
           end
@@ -217,6 +233,15 @@ module Carte
           titre: "DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre",
           detail: "Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, pas a supprimer.",
           cas: desaccords.map { |d| "#{d[:nom]} style en #{d[:ou].first}, mais le HTML emet #{d[:genre_emis]}=\"#{d[:nom][1..]}\" sur #{d[:pages]} page(s)" }
+        }
+      end
+
+      unless par_le_js.empty?
+        @anomalies << {
+          titre: "Selecteurs absents du HTML mais POSES PAR LE JS",
+          detail: "Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : " \
+                  "les supprimer casserait un composant qui fonctionne.",
+          cas: par_le_js.map { |c| "#{c[:nom]}  style en #{c[:ou].first}, pose par #{c[:js].join(', ')}" }
         }
       end
 

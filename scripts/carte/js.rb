@@ -107,6 +107,25 @@ module Carte
           end
         end
 
+        # ⚠️ `classList.add` N'EST PAS LE SEUL MOYEN DE POSER UNE CLASSE, et
+        # l'oublier a un cout precis : une regle SCSS dont l'element est cree
+        # par le JS se retrouve dans la liste des selecteurs absents, c'est-a-dire
+        # dans celle qui sert a supprimer du CSS mort. Constate le 29/07/2026 sur
+        # `.scrollbar` et `.scrollbar-thumb`, poses par `className =`.
+        # Un attribut peut porter PLUSIEURS classes, d'ou le decoupage.
+        propre.scan(/\.className\s*=\s*(["'`])([^"'`]*)\1/) do |_q, valeur|
+          ligne = Carte.numero_ligne(propre, Regexp.last_match.begin(0))
+          valeur.split(/\s+/).reject(&:empty?).each { |c| @classes_posees[c] << "#{rel}:#{ligne}" }
+        end
+
+        # Les gabarits de chaine qui construisent du HTML : `class="stt-track"`
+        # dans un `innerHTML` pose une classe aussi surement qu'un appel.
+        propre.scan(/class\s*=\s*\\?["']([^"'<>]*)\\?["']/) do |(valeur)|
+          ligne = Carte.numero_ligne(propre, Regexp.last_match.begin(0))
+          valeur.split(/\s+/).reject { |c| c.empty? || c.include?("{") }
+                .each { |c| @classes_posees[c] << "#{rel}:#{ligne}" }
+        end
+
         propre.scan(/(?:set|get|remove|has)Attribute\s*\(\s*(["'`])(.*?)\1/) do |_q, nom|
           @attributs[nom] << "#{rel}:#{Carte.numero_ligne(propre, Regexp.last_match.begin(0))}"
         end

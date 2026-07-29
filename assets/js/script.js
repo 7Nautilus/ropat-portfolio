@@ -1354,6 +1354,140 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ================================
+// BARRE DE DEFILEMENT SUR MESURE
+// ================================
+//
+// ⚠️ AMELIORATION PROGRESSIVE, PAS UN REMPLACEMENT SEC. La barre native n'est
+// masquee qu'a la DERNIERE ligne de ce module, une fois la sienne posee et
+// branchee. Sans JS, ou si ce bloc jette avant la fin, la barre native stylee
+// de base/_scrollbar.scss reste en place : on ne retire jamais un moyen de
+// defiler sur une promesse.
+//
+// Elle existe pour une raison mesuree et une seule : une gouttiere native est
+// HORS de la zone de contenu, Chrome y ecrete les elements `position: fixed`,
+// donc le dither ne peut pas y peindre et la bande restait plate le long d'un
+// fond texture. Le detail est dans base/_scrollbar.scss.
+(function () {
+  const doc = document.documentElement;
+
+  // Elle ne sert que la ou la barre native VOLE de la place. Sur les systemes
+  // a barre flottante (tactile) la gouttiere vaut zero, le dither atteint deja
+  // le bord, et il n'y a rien a corriger.
+  //
+  // ⚠️ LA QUESTION SE POSE A UNE SONDE, PAS AU DOCUMENT. Mesurer
+  // `innerWidth - clientWidth` aurait rendu zero sur une page qui ne defile pas
+  // ENCORE au chargement, images non arrivees : le module se serait tu, et la
+  // barre native serait reapparue quand la page a grandi. La sonde repond a la
+  // vraie question, « une barre prend-elle de la place sur cette plateforme »,
+  // et elle y repond meme sur une page courte.
+  const sonde = document.createElement('div');
+  sonde.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll';
+  document.body.appendChild(sonde);
+  const gouttiere = sonde.offsetWidth - sonde.clientWidth;
+  sonde.remove();
+  if (gouttiere === 0) return;
+
+  const TAILLE_MIN = 44;   // en dessous, le pouce n'est plus une prise
+
+  const barre = document.createElement('div');
+  barre.className = 'scrollbar';
+  // Purement une prise a la souris : le clavier et les lecteurs d'ecran
+  // defilent par leurs propres moyens, que masquer la barre native ne touche
+  // pas. L'annoncer serait du bruit.
+  barre.setAttribute('aria-hidden', 'true');
+  const pouce = document.createElement('div');
+  pouce.className = 'scrollbar-thumb';
+  barre.appendChild(pouce);
+  document.body.appendChild(barre);
+
+  let position = 0;        // derniere ordonnee peinte, en px depuis le haut
+  let saisie = null;
+  let enAttente = false;
+
+  function peindre() {
+    const hauteurDoc = doc.scrollHeight;
+    const vue = window.innerHeight;
+    const course = hauteurDoc - vue;
+
+    // Lecture d'un style EN LIGNE, pas de `getComputedStyle` : c'est
+    // exactement ce que pose le verrouillage de la lightbox et de la nav
+    // (`body.style.overflow = 'hidden'`), et une lecture calculee a chaque
+    // image forcerait un recalcul de disposition pour rien.
+    const verrouille = document.body.style.overflow === 'hidden';
+
+    if (course <= 0 || verrouille) {
+      barre.dataset.actif = 'false';
+      return;
+    }
+    barre.dataset.actif = 'true';
+
+    const piste = barre.clientHeight;
+    const hauteur = Math.max(TAILLE_MIN, Math.round(piste * vue / hauteurDoc));
+    const libre = piste - hauteur;
+    position = libre > 0 ? (window.scrollY / course) * libre : 0;
+
+    pouce.style.height = hauteur + 'px';
+    pouce.style.transform = 'translateY(' + position + 'px)';
+  }
+
+  // Toutes les entrees passent par une seule image : molette, redimensionnement
+  // et changement de hauteur du document ne peuvent pas se peindre trois fois.
+  function demander() {
+    if (enAttente) return;
+    enAttente = true;
+    requestAnimationFrame(function () {
+      enAttente = false;
+      peindre();
+    });
+  }
+
+  pouce.addEventListener('pointerdown', function (e) {
+    e.preventDefault();
+    pouce.setPointerCapture(e.pointerId);
+    saisie = { depart: e.clientY, origine: position };
+    barre.dataset.saisi = 'true';
+  });
+
+  pouce.addEventListener('pointermove', function (e) {
+    if (!saisie) return;
+    const libre = barre.clientHeight - pouce.offsetHeight;
+    if (libre <= 0) return;
+    const course = doc.scrollHeight - window.innerHeight;
+    const y = Math.min(libre, Math.max(0, saisie.origine + (e.clientY - saisie.depart)));
+
+    // ⚠️ `instant` EST OBLIGATOIRE ICI. `html` porte `scroll-behavior: smooth`
+    // (base/_reset.scss:16), donc un `scrollTo` par defaut lancerait une
+    // animation a chaque mouvement du pointeur : le pouce trainerait derriere
+    // la souris et le glisser deviendrait inutilisable.
+    window.scrollTo({ top: (y / libre) * course, behavior: 'instant' });
+  });
+
+  function relacher() {
+    if (!saisie) return;
+    saisie = null;
+    barre.dataset.saisi = 'false';
+  }
+  pouce.addEventListener('pointerup', relacher);
+  pouce.addEventListener('pointercancel', relacher);
+
+  window.addEventListener('scroll', demander, { passive: true });
+  window.addEventListener('resize', demander, { passive: true });
+
+  // La hauteur du document bouge sans qu'on defile : images qui arrivent,
+  // revelations, filtre du portfolio qui recompose la grille. Sans cette
+  // observation le pouce garderait la taille d'une page qui n'existe plus.
+  if (window.ResizeObserver) new ResizeObserver(demander).observe(document.body);
+
+  peindre();
+
+  // Dernier geste, et seulement maintenant : la gouttiere native disparait.
+  doc.classList.add('custom-scrollbar');
+  // La zone de contenu vient de gagner la largeur de la gouttiere, donc les
+  // hauteurs calculees juste au-dessus sont perimees d'une image.
+  demander();
+})();
+
+// ================================
 // PARALLAX HERO IMAGE : RETIRE LE 29/07/2026
 // ================================
 //

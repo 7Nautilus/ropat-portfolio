@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 17:00 sur 4db68ec.
+> Generee le 29/07/2026 a 17:33 sur 66ffb21.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,11 +15,11 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 17:00 |
+| Date du build lu | 29/07/2026 17:33 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
-| Partiels SCSS | 32 |
+| Partiels SCSS | 33 |
 | Cas **INDETERMINES** | **7** |
 
 Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
@@ -196,7 +196,7 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-107 jetons definis, 102 consommes, 280 noms de selecteur, 11 `!important`.
+107 jetons definis, 102 consommes, 283 noms de selecteur, 11 `!important`.
 
 `!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`
 
@@ -230,12 +230,29 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 - .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
 - .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
 
-### Selecteurs absents des 63 pages construites  (33)
+### Selecteurs absents du HTML mais POSES PAR LE JS  (13)
+
+Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : les supprimer casserait un composant qui fonctionne.
+
+- .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1122, assets/js/script.js:1127
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1484
+- .cursor-hover  style en assets/css/_sass/components/_cursor.scss:58, pose par assets/js/script.js:81
+- .cursor-text  style en assets/css/_sass/components/_cursor.scss:66, pose par assets/js/script.js:81
+- .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:76, pose par assets/js/script.js:81
+- .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:365
+- .loaded  style en assets/css/_sass/components/_loader.scss:22, pose par assets/js/script.js:123
+- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1393
+- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:43, pose par assets/js/script.js:1399
+- .was-validated  style en assets/css/_sass/pages/_contact.scss:126, pose par assets/js/script.js:1240
+- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1188
+- .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:182, assets/js/script.js:1229, assets/js/script.js:1233, assets/js/script.js:1257
+- .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:980
+
+### Selecteurs absents des 63 pages construites  (23)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
 - .reveal-arme  assets/css/_sass/base/_animations.scss:17 assets/css/_sass/base/_animations.scss:23
-- .is-visible  assets/css/_sass/base/_animations.scss:23 assets/css/_sass/base/_bases.scss:81
 - .transparent-orange-bg  assets/css/_sass/base/_generic.scss:20
 - .card-grid  assets/css/_sass/base/_media-queries.scss:17 assets/css/_sass/base/_media-queries.scss:126 assets/css/_sass/base/_media-queries.scss:240 assets/css/_sass/layout/_grids.scss:1
 - .service-main-container  assets/css/_sass/base/_media-queries.scss:40 assets/css/_sass/base/_media-queries.scss:219 assets/css/_sass/layout/_sections.scss:208
@@ -247,11 +264,6 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .service-main-container-text  assets/css/_sass/base/_media-queries.scss:223 assets/css/_sass/layout/_sections.scss:215
 - .services-page-subtitle  assets/css/_sass/base/_media-queries.scss:227 assets/css/_sass/layout/_sections.scss:247
 - .services-page-description  assets/css/_sass/base/_media-queries.scss:231 assets/css/_sass/layout/_sections.scss:251
-- .cursor-hover  assets/css/_sass/components/_cursor.scss:58
-- .cursor-text  assets/css/_sass/components/_cursor.scss:66
-- .cursor-zoom  assets/css/_sass/components/_cursor.scss:76 assets/css/_sass/components/_cursor.scss:84 assets/css/_sass/components/_cursor.scss:92 assets/css/_sass/components/_cursor.scss:98
-- .lightbox-image  assets/css/_sass/components/_lightbox.scss:35 assets/css/_sass/components/_lightbox.scss:44
-- .loaded  assets/css/_sass/components/_loader.scss:22
 - .loader-logo-text  assets/css/_sass/components/_loader.scss:41
 - .service-card-big  assets/css/_sass/components/cards/_service-cards.scss:71
 - .hero-theme-container  assets/css/_sass/layout/_sections.scss:161
@@ -261,11 +273,7 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - #contact-social-links  assets/css/_sass/layout/_sections.scss:272 assets/css/_sass/layout/_sections.scss:322
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
-- .was-validated  assets/css/_sass/pages/_contact.scss:126 assets/css/_sass/pages/_contact.scss:316
-- .contact-erreur  assets/css/_sass/pages/_contact.scss:135 assets/css/_sass/pages/_contact.scss:145 assets/css/_sass/pages/_contact.scss:148
 - .contact-select  assets/css/_sass/pages/_contact.scss:155 assets/css/_sass/pages/_contact.scss:171
-- .is-invalid  assets/css/_sass/pages/_contact.scss:316
-- .galerie-plus  assets/css/_sass/pages/_project.scss:355 assets/css/_sass/pages/_project.scss:357 assets/css/_sass/pages/_project.scss:378
 - .project-back-link  assets/css/_sass/pages/_project.scss:809 assets/css/_sass/pages/_project.scss:822 assets/css/_sass/pages/_project.scss:824 assets/css/_sass/pages/_project.scss:827
 
 ### Valeurs ecrites en dur alors qu'un jeton porte la meme  (8)
@@ -283,23 +291,25 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 
 ## 5. JS
 
-2 fichiers, 39 selecteurs litteraux, 38 ecouteurs.
+2 fichiers, 39 selecteurs litteraux, 44 ecouteurs.
 
 **Fonctions qui se relancent elles-memes en rAF** : `animer` (assets/js/dither.js:635), `animateBlob` (assets/js/script.js:65). Une fois demarrees elles ne s'arretent plus, mais leur MISE EN ROUTE depend d'une garde que la carte ne suit pas : elle rapporte la forme, pas le fait.
 
-### Selecteurs JS qui ne trouvent rien dans les 63 pages construites  (1)
+### Classes posees par le JS qu'aucune regle CSS ne lit  (2)
 
-Un selecteur qui ne matche rien n'echoue pas : il rend null et le code s'arrete en silence.
+Legitime si le JS s'en sert comme verrou interne, a verifier sinon.
 
-- .stt-progress  (assets/js/script.js:1329)
+- stt-progress   (assets/js/script.js:1287)
+- stt-track   (assets/js/script.js:1286)
 
-### Ecouteurs `scroll` recenses  (3)
+### Ecouteurs `scroll` recenses  (4)
 
 A confronter au throttle : un handler sans rAF qui lit une metrique de layout force un reflow a chaque evenement.
 
 - assets/js/script.js:455
 - assets/js/script.js:898  (passive)
 - assets/js/script.js:1352  (passive)
+- assets/js/script.js:1473  (passive)
 
 ## 6. Contrat des trois couches
 
@@ -313,13 +323,14 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `aria-describedby` | - | - | assets/js/script.js:1198 |
 | `aria-expanded` | 63 page(s) | oui | assets/js/script.js:153 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 63 page(s) | - | - **personne ne le lit** |
+| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1397 |
 | `aria-invalid` | - | - | assets/js/script.js:1197 |
 | `aria-label` | 63 page(s) | - | assets/js/script.js:1282 |
 | `aria-labelledby` | 51 page(s) | - | - **personne ne le lit** |
 | `aria-live` | 63 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:163 |
+| `data-actif` | - | oui | assets/js/script.js:1419 |
 | `data-category` | 10 page(s) | - | assets/js/script.js:279 |
 | `data-chargee` | - | - | assets/js/script.js:1056 |
 | `data-chrome` | - | oui | assets/js/script.js:442 |
@@ -335,6 +346,7 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-encre` | - | oui | assets/js/script.js:862 |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
+| `data-saisi` | - | oui | assets/js/script.js:1448 |
 | `data-set-lang` | 62 page(s) | - | assets/js/script.js:1106 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:975 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:974 |
@@ -381,7 +393,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 181484 o brut, 53103 o gzip. Sans les commentaires : 77203 o, 12604 o gzip, soit **76 % de moins** sur le fil.
+**CSS servi** : 186637 o brut, 54905 o gzip. Sans les commentaires : 78088 o, 12719 o gzip, soit **77 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
