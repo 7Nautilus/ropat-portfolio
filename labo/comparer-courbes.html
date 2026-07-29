@@ -26,6 +26,12 @@
    geste inter-pages ne peut pas etre relu image par image. Ici tout est du DOM
    normal : ca se gele, ca se ralentit, ca se mesure.
 
+   ⚠️ POUR LA MEME RAISON, `labo/**` EST DANS `detector.ignoreFiles` de
+   `.impeccable/config.json` (arbitrage de Ropat, 30/07/2026). Sans cette ligne le
+   hook signale ici 39 valeurs hors de `DESIGN.md`, toutes attendues : un banc de
+   mesure n'a pas a suivre la rampe typographique du site. Ne pas la retirer en
+   croyant nettoyer.
+
    Ajouter une courbe = une entree dans le tableau `variantes` du script.
    Les quatre chiffres par variante sont MESURES, pas estimes : voir la fonction
    `bez()` du meme script pour les reproduire.

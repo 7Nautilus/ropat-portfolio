@@ -1,0 +1,9 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      "labo/**"
+    ],
+    "ignoreValues": []
+  }
+}
