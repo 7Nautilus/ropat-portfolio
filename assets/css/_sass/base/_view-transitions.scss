@@ -148,23 +148,38 @@ header[role="banner"] {
    entrante est en `--ease-expo-in-out`. */
 
 ::view-transition-old(root) {
-  animation: page-sortie var(--dur-page-in) var(--ease-quad-out) both;
+  animation: page-sortie var(--dur-page-out) var(--ease-out-quart) both;
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-page-in) var(--ease-expo-in-out) both;
+  animation: page-entree var(--dur-page-in) var(--ease-out-quart) both;
 }
 
 /* ⚠️ `100%` SE RAPPORTE ICI A LA LARGEUR DE L'INSTANTANE, qui est celle du
    viewport : les deux pseudo-elements sont dimensionnes par le navigateur. Pas
    besoin de `100vw`, qui inclurait une gouttiere de barre de defilement que ce
    site n'a plus de toute facon. */
+/* ⚠️ LA COURSE EST RACCOURCIE ET UN FONDU S'Y AJOUTE, ADOUCISSEMENT DU
+   29/07/2026. Le glissement d'un viewport entier est ce que fait Lu Yu, mais
+   chez lui TOUTE la page part : l'arete franche ne coupe rien, elle borde
+   l'objet qui bouge. Ici le cadre tient, donc cette meme arete balaie en
+   travers d'une entete immobile, et elle se lit comme un couperet.
+   Deux corrections, pas une : la course tombe a 35 % de la largeur, ce qui
+   fait un DEPLACEMENT et non un balayage, et l'opacite dissout l'arete au lieu
+   de la promener. Le caractere du geste tient a sa direction et a sa courbe,
+   pas a la distance parcourue. */
 @keyframes page-sortie {
-  to { transform: translateX(-100%); }
+  to {
+    opacity: 0;
+    transform: translateX(-20%);
+  }
 }
 
 @keyframes page-entree {
-  from { transform: translateX(100%); }
+  from {
+    opacity: 0;
+    transform: translateX(35%);
+  }
 }
 
 
@@ -206,9 +221,14 @@ header[role="banner"] {
    Elle se deplace et change de taille, de la grille vers la page. Meme duree
    et meme courbe que le contenu, sinon les deux gestes se contredisent. */
 
+/* ⚠️ MEME DUREE ET MEME COURBE QUE LA PAGE. Elles ne l'etaient pas : l'oeuvre
+   morphait en `--ease-expo-out` pendant que la page glissait en
+   `--ease-expo-in-out`. Deux courbes differentes dans un meme geste se
+   contredisent, et c'est l'oeuvre qu'on remarque, donc c'est elle qui paraissait
+   brutale. Un seul geste, une seule courbe. */
 ::view-transition-group(oeuvre) {
   animation-duration: var(--dur-page-in);
-  animation-timing-function: var(--ease-expo-out);
+  animation-timing-function: var(--ease-out-quart);
 }
 
 ::view-transition-old(oeuvre),
