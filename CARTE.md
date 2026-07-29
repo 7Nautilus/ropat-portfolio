@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 04:13 sur 1cec8b0.
+> Generee le 29/07/2026 a 04:20 sur 20a211b.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 04:13 |
+| Date du build lu | 29/07/2026 04:19 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -173,20 +173,13 @@ Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni viv
 - site.data.services.web-design.seo.en
 - site.data.services.web-design.seo.fr
 
-### Cles de donnees definies, aucun gabarit ne les lit  (10)
+### Cles de donnees definies, aucun gabarit ne les lit  (3)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
 - site.data.pages.contact.en.cta
 - site.data.pages.contact.fr.cta
-- site.data.projects.*.case_study.mockups.*.bg   (1 : stelya)
-- site.data.projects.*.case_study.mockups.*.cols   (2 : aelio, stelya)
-- site.data.projects.*.case_study.mockups.*.fit   (1 : stelya)
-- site.data.projects.*.case_study.mockups.*.rows   (2 : aelio, stelya)
-- site.data.projects.*.case_study.mockups_grid_cols   (2 : aelio, stelya)
 - site.data.services.*.services.*   (4 : branding-strategy, graphic-design, music-design, web-design)
-- site.data.services.*.slug.en   (4 : branding-strategy, graphic-design, music-design, web-design)
-- site.data.services.*.slug.fr   (4 : branding-strategy, graphic-design, music-design, web-design)
 
 ### Couverture des cles de premier niveau dans `_data/projects/` (20 fichiers)  (10)
 

@@ -131,35 +131,24 @@ locales:
       og_description: "Visual identity for Aélio, an AI consulting firm: logotype, graphic charter, design system and LinkedIn assets, with an innovative positioning rooted in Réunion Island."
 
 case_study:
-  mockups_grid_cols: 3
   mockups:
     - src: /assets/images/projects/aelio/icon-white-on-black.svg
-      cols: 1
-      rows: 1
       alt:
         fr: "Icône Aélio, blanc sur noir"
         en: "Aélio icon, white on black"
     - src: /assets/images/projects/aelio/aelio-business-card-mockup.avif
-      cols: 1
-      rows: 1
       alt:
         fr: "Mockup carte de visite Aélio"
         en: "Aélio business card mockup"
     - src: /assets/images/projects/aelio/aelio-app-mockup.avif
-      cols: 1
-      rows: 1
       alt:
         fr: "Mockup application mobile Aélio"
         en: "Aélio mobile app mockup"
     - src: /assets/images/projects/aelio/icon-gold-on-navy.svg
-      cols: 1
-      rows: 1
       alt:
         fr: "Icône Aélio, orange sur navy"
         en: "Aélio icon, orange on navy"
     - src: /assets/images/projects/aelio/logo.svg
-      cols: 2
-      rows: 1
       alt:
         fr: "Logo Aélio complet avec icône et logotype"
         en: "Full Aélio logo with icon and logotype"
