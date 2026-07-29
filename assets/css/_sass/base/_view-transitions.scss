@@ -66,10 +66,21 @@ header[role="banner"] {
   view-transition-name: entete;
 }
 
-/* Le sol de camouflage ne clignote pas entre deux pages. */
-#fond-dither {
-  view-transition-name: sol;
-}
+/* ⚠️ LE DITHER N'EST PLUS NOMME, ET C'EST LE BALAYAGE QUI L'IMPOSE.
+   Il l'etait pour que le sol de camouflage ne clignote pas entre deux pages.
+   Mais un element nomme sort de l'instantane de page et devient un CALQUE
+   FRERE, peint APRES le groupe racine : de la taille du viewport, il masquait
+   donc tout ce que le balayage decouvre. Constate par Ropat (« je ne vois pas
+   le voile ») puis par capture, ou l'on ne voyait QUE le dither.
+
+   J'ai d'abord cru l'inverse, en lisant l'ordre rendu par `getAnimations()`
+   comme un ordre de peinture. Il ne l'est pas. Seule la capture a tranche.
+
+   La raison de le nommer a disparu avec le glissement : un balayage MASQUE
+   l'echange, donc le sol n'a plus l'occasion de clignoter. Sans nom, le dither
+   est capture DANS l'instantane de page et se fait balayer avec le contenu, ce
+   qui est exactement ce qu'on veut : la bande de couleur passe devant tout.
+   Le remettre reintroduirait le masquage sans qu'aucune erreur ne le dise. */
 
 /* L'oeuvre. Cote page projet le nom est permanent, il n'y a qu'une ouverture ;
    cote grille il est pose au clic. Deux pages projet enchainees se repondent
@@ -185,7 +196,13 @@ header[role="banner"] {
    vers la droite. `inset(0 100% 0 0)` fait l'inverse et ne laisse rien voir,
    d'ou le point de depart de la page qui arrive. Les deux balaient dans le
    MEME sens, sinon la bande ne se deplace pas, elle s'ouvre en deux. */
+/* ⚠️ LES DEUX BOUTS DOIVENT ETRE DES `inset()`, PAS UN SEUL.
+   Sans image-cle de depart, la valeur implicite est `clip-path: none`, et `none`
+   n'est PAS interpolable avec une forme : le navigateur ne balaie pas, il saute
+   d'un etat a l'autre a mi-parcours. Le voile ne se voyait donc jamais, ce que
+   Ropat a constate avant moi. */
 @keyframes voile-couvre {
+  from { clip-path: inset(0 0 0 0); }
   to { clip-path: inset(0 0 0 100%); }
 }
 
@@ -234,6 +251,7 @@ header[role="banner"] {
 /* Le balayage vient de la droite : c'est le bord DROIT qui avance, donc le
    quatrieme terme de `inset()` cede la place au second. */
 @keyframes voile-couvre-retour {
+  from { clip-path: inset(0 0 0 0); }
   to { clip-path: inset(0 100% 0 0); }
 }
 
