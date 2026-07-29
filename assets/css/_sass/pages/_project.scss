@@ -874,21 +874,40 @@ body:has(.project-page) header[data-zone="ouverture"] {
    ligne du layout, section du sens de navigation.
    `paused` pendant la phase de retard maintient l'animation a son etat de
    depart : le retard fait partie de la frise, il se met en pause avec elle. */
-/* Le voile de lisibilite entre lui aussi, mais SANS remonter : c'est un aplat a
-   fond perdu, le translater montrerait le bord de l'image. Il se contente donc
-   d'apparaitre, et il le fait AVANT le texte.
-   ⚠️ CET ORDRE EST UNE CONTRAINTE DE LISIBILITE, PAS UN GOUT. Ce voile existe
-   pour donner 4,5:1 aux mots poses sur l'oeuvre : le micro-libelle du theme a
-   ete mesure a 1,04:1 sans lui, sur un mockup clair. S'il arrivait en meme temps
-   que le texte, il y aurait une fenetre ou les mots sont lisibles et pas encore
-   proteges. Il part donc sans retard et va deux fois plus vite qu'eux. */
+/* Le voile de lisibilite remonte lui aussi, et il le fait AVANT le texte.
+
+   ⚠️ IL A FALLU LE FAIRE DEPASSER VERS LE BAS POUR QU'IL PUISSE MONTER.
+   J'avais affirme la veille qu'un aplat a fond perdu ne peut pas se translater
+   sans decouvrir le bord de l'image. C'est vrai a `inset: 0`, et faux si on lui
+   donne exactement sa course en rab par le bas : au depart, decale vers le bas
+   de cette course, son bord inferieur tombe PILE sur celui du conteneur ; a
+   l'arrivee, le surplus passe dessous. Aucun bord n'est donc jamais decouvert,
+   en haut parce que le degrade y est deja transparent, en bas parce qu'il y a
+   toujours de la matiere.
+   Le surplus est ecrete par le `overflow: hidden` de `.project-open--contexte`,
+   verifie : sans lui la bande dense morderait sur la section suivante.
+
+   ⚠️ ET IL ENTRE AVANT LE TEXTE, CE QUI EST UNE CONTRAINTE ET PAS UN GOUT. Ce
+   voile existe pour donner 4,5:1 aux mots poses sur l'oeuvre : le micro-libelle
+   du theme a ete mesure a 1,04:1 sans lui, sur un mockup clair. S'il arrivait en
+   meme temps que le texte, il y aurait une fenetre ou les mots sont lisibles et
+   pas encore proteges. Il part donc sans retard et va deux fois plus vite
+   qu'eux, ce qui interdit d'allonger sa duree pour rendre la montee plus ample :
+   c'est la course qu'il faut bouger, pas le temps. */
 .project-open--contexte::after {
+  bottom: calc(-1 * var(--course-hero-scrim));
   animation: hero-scrim var(--dur-hero-scrim) var(--ease-out-fort) both;
 }
 
 @keyframes hero-scrim {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateY(var(--course-hero-scrim));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 html.voile-en-cours .project-open-lede > *,

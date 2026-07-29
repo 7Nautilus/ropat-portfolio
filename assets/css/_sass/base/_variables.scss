@@ -514,6 +514,12 @@
      0,35 s pour un retard de texte de 0,15 s : le voile est en place bien avant
      que le texte devienne lisible. */
   --dur-hero-scrim: 0.35s;
+  /* La course du voile de lisibilite, en `vh` et non en `em` : ce n'est pas du
+     texte, c'est une surface a l'echelle de l'ecran. 3 vh valent environ 24 px
+     sur un ecran de 800, ce qui suffit a lire une remontee sur un aplat de cette
+     taille : plus la surface est grande, moins il faut de course pour la voir
+     bouger. */
+  --course-hero-scrim: 3vh;
 
   --voile-transition: var(--accent);   /* l'aplat. Un mot a changer. */
   --dur-voile-couvre: 0.5s;            /* la page quittee est mangee */
