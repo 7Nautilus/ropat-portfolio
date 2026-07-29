@@ -130,6 +130,110 @@ window.addEventListener('load', () => {
 });
 
 // ================================
+// RADAR DE CHARGEMENT DANS LE FAVICON
+// ================================
+//
+// Un balayage de radar dans l'onglet pendant que la page charge. Motif dessine
+// par Ropat le 29/07/2026 : grille de 5x5 points, un rayon de trois points du
+// centre vers le bord, huit directions, sens horaire, depart a midi.
+//
+// ── LA GEOMETRIE EST CHOISIE POUR SURVIVRE A 16 PIXELS ────────────────────
+// Toutes les mesures sont PAIRES : premier point a 2, cote 4, pas 6, donc les
+// points occupent 2-6, 8-12, 14-18, 20-24, 26-30. Reduites de moitie elles
+// tombent sur 1-3, 4-6, 7-9, 10-12, 13-15, toutes entieres. Une seule image de
+// 32 px suffit donc pour les deux tailles d'affichage.
+//
+// ⚠️ DES CARRES, PAS DES CERCLES, ET C'EST MESURE. A 16 px un point rond de
+// 2 px de diametre n'est fait que d'anti-crenelage : l'alpha reellement peint
+// tombe a 0,79 pour le 100 %, 0,48 pour le 60 %, 0,32 pour le 40 % et 0,16
+// pour le 20 %. Les quatre niveaux se resserrent, donc la trainee cesse de se
+// lire. En carres, les quatre sortent exacts aux deux tailles.
+//
+// ── CE QU'IL RACONTE ──────────────────────────────────────────────────────
+// Rien de mesurable, et c'est assume : le radar tourne tant que la page
+// charge. Le loader de page, lui, se declenche sur `window.load` puis attend
+// 800 ms fixes, donc il n'a AUCUNE progression a rapporter ; inventer une
+// barre qui se remplit aurait ete du theatre. Un radar balaie, il ne promet
+// pas d'arriver quelque part.
+(function () {
+  const lien = document.getElementById('favicon');
+  if (!lien) return;
+  // Un favicon anime EST du mouvement. Le reglage systeme s'applique ici comme
+  // au reste, et il n'y a pas de repli a inventer : l'icone reste l'icone.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (document.readyState === 'complete') return;
+
+  const ORIGINE = lien.getAttribute('href');
+  const T = 32, PREMIER = 2, COTE = 4, PAS = 6;
+  const REPOS = 0.2;                 // toute la grille au repos
+  const TRAINE = [1, 0.6, 0.4];      // image courante, la precedente, l'avant
+  const PAS_MS = 100;                // huit images, un tour en 800 ms
+  // Mesure du 29/07 : le navigateur relit le favicon environ quinze fois par
+  // seconde. Dix reste dessous, donc aucune image n'est sautee.
+  const DELAI = 250;                 // anti-clignotement, voir plus bas
+
+  const DIRS = [[0, -1], [1, -1], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1]];
+
+  // ── Pre-rendu ───────────────────────────────────────────────────────────
+  // Les huit images sont encodees UNE fois, au demarrage. L'animation n'est
+  // ensuite qu'un changement d'attribut : redessiner soixante fois par seconde
+  // pendant le chargement aurait charge le fil principal au pire moment,
+  // c'est-a-dire pendant ce qu'on pretend accompagner.
+  const images = [];
+  try {
+    for (let f = 0; f < 8; f++) {
+      const c = document.createElement('canvas');
+      c.width = c.height = T;
+      const g = c.getContext('2d');
+
+      // La trainee se pose de la plus PALE a la plus vive, pour que le centre,
+      // qui appartient aux trois rayons, garde le niveau le plus fort.
+      const niveau = {};
+      for (let t = TRAINE.length - 1; t >= 0; t--) {
+        const [dx, dy] = DIRS[(f - t + 8) % 8];
+        for (let i = 0; i < 3; i++) niveau[(2 + dx * i) + ',' + (2 + dy * i)] = TRAINE[t];
+      }
+
+      for (let col = 0; col < 5; col++) {
+        for (let lig = 0; lig < 5; lig++) {
+          g.fillStyle = 'rgba(255, 92, 0, ' + (niveau[col + ',' + lig] || REPOS) + ')';
+          g.fillRect(PREMIER + col * PAS, PREMIER + lig * PAS, COTE, COTE);
+        }
+      }
+      images.push(c.toDataURL('image/png'));
+    }
+  } catch (e) {
+    return;   // canvas indisponible : l'icone d'origine reste, rien ne casse
+  }
+
+  let image = 0, minuterie = null, amorce = null;
+
+  function tourner() {
+    lien.setAttribute('href', images[image]);
+    image = (image + 1) % 8;
+  }
+
+  function arreter() {
+    clearTimeout(amorce);
+    clearInterval(minuterie);
+    // Remettre l'icone du site, et seulement si on l'avait remplacee.
+    if (minuterie !== null) lien.setAttribute('href', ORIGINE);
+    minuterie = null;
+  }
+
+  // ⚠️ LE DELAI EST LE POINT QUI DECIDE SI C'EST UTILE OU PENIBLE. Sur une
+  // connexion rapide cette page se charge en moins d'une seconde : demarrer
+  // tout de suite ferait clignoter l'onglet pour rien. Si `load` arrive avant
+  // l'amorce, le radar n'apparait jamais.
+  amorce = setTimeout(function () {
+    tourner();
+    minuterie = setInterval(tourner, PAS_MS);
+  }, DELAI);
+
+  window.addEventListener('load', arreter);
+})();
+
+// ================================
 // DROPDOWN : controleur unique
 // ================================
 // Un seul comportement pour tous les dropdowns du site (filtre du portfolio,

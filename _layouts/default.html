@@ -187,8 +187,11 @@
       });
     </script>
 
-    <!-- Icon -->
-    <link rel="icon" href="/assets/images/branding/icon.png" type="image/png">
+    <!-- Icon.
+         ⚠️ L'attribut `id` est lu par le module de radar de chargement dans
+         script.js, qui remplace `href` pendant le chargement puis le remet.
+         Le retirer n'a l'air de rien et desactive le radar en silence. -->
+    <link id="favicon" rel="icon" href="/assets/images/branding/icon.png" type="image/png">
 
     <!-- Open Graph -->
     {% include meta/open-graph.html 
