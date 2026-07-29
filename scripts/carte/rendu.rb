@@ -256,8 +256,16 @@ module Carte
       s << "#{j.fichiers.size} fichiers, #{j.selecteurs.size} selecteurs litteraux, " \
            "#{j.ecouteurs.size} ecouteurs.\n\n"
       unless j.boucles.empty?
-        s << "**Boucles rAF permanentes** (elles tournent tant que l'onglet est visible) : " \
-             "#{j.boucles.map { |b| "`#{b[:fonction]}` (#{b[:fichier]}:#{b[:ligne]})" }.join(', ')}\n\n"
+        # ⚠️ « SE RELANCE » N'EST PAS « TOURNE », et l'ancienne formulation
+        # affirmait le second. Une fonction qui se rappelle en rAF ne tourne que
+        # si quelqu'un l'a demarree, et le demarrage depend souvent d'une garde
+        # (`prefers-reduced-motion`, presence d'une cible) que la carte ne suit
+        # pas. Elle a d'ailleurs longtemps liste `updateParallax` comme
+        # permanente alors que son bloc sortait a sa premiere ligne utile.
+        s << "**Fonctions qui se relancent elles-memes en rAF** : " \
+             "#{j.boucles.map { |b| "`#{b[:fonction]}` (#{b[:fichier]}:#{b[:ligne]})" }.join(', ')}. " \
+             "Une fois demarrees elles ne s'arretent plus, mais leur MISE EN ROUTE depend d'une " \
+             "garde que la carte ne suit pas : elle rapporte la forme, pas le fait.\n\n"
       end
       s << anomalies("", [j]).sub(/\A## \n\n/, "")
       s

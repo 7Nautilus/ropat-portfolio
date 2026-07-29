@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T00:47:30Z",
-  "commit": "b0cba0c",
+  "genere_le": "2026-07-29T01:05:00Z",
+  "commit": "7e9fb3d",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -453,10 +453,8 @@
     "--rhythm-lg",
     "--rhythm-md",
     "--rhythm-sm",
-    "--scrim-canal",
     "--secondary-color",
     "--shadow-ambient",
-    "--shadow-ambient-strong",
     "--shadow-md",
     "--shadow-signal",
     "--shadow-sm",
@@ -469,7 +467,6 @@
     "--spacing-xs",
     "--squircle-full",
     "--squircle-medium",
-    "--squircle-small",
     "--success",
     "--surface",
     "--surface-faint",
@@ -481,7 +478,6 @@
     "--text-caption",
     "--text-display",
     "--text-meta",
-    "--text-muted",
     "--text-subhead",
     "--text-title",
     "--track-caps",
@@ -496,10 +492,6 @@
     "--rhythm-lg",
     "--rhythm-md",
     "--rhythm-sm",
-    "--scrim-canal",
-    "--shadow-ambient-strong",
-    "--squircle-small",
-    "--text-muted",
     "--track-display"
   ],
   "selecteurs_absents": [
@@ -554,9 +546,9 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 175566,
-    "gzip": 51177,
-    "sans_commentaires": 76287,
-    "gzip_sans": 12451
+    "brut": 175369,
+    "gzip": 51094,
+    "sans_commentaires": 76084,
+    "gzip_sans": 12406
   }
 }

@@ -2,6 +2,25 @@
   Script de détection de langue du navigateur
   Ce script redirige automatiquement l'utilisateur vers la version linguistique appropriée
   basée sur la langue de son navigateur, sauf s'il a déjà visité le site (cookie)
+
+  ══════════════════════════════════════════════════════════════════════════
+  ⚠️ CE SCRIPT EST INLINE, DONC SES COMMENTAIRES PARTENT CHEZ LE VISITEUR
+  ══════════════════════════════════════════════════════════════════════════
+
+  Tout ce qui se trouve dans le `<script>` ci-dessous est émis dans les 63 pages
+  et ne passe par aucune minification, contrairement au SCSS (compressé en CI)
+  et à `script.js` (externe, donc mis en cache une fois). La convention du dépôt
+  reste de commenter abondamment ; ici seulement, l'explication vit dans ce bloc
+  Liquid, qui disparaît au build, et le code ne garde qu'un renvoi d'une ligne.
+
+  ── `SameSite=Lax` sur `lang_choice`, ajouté le 29/07/2026 ────────────────
+  Le même cookie était posé à DEUX endroits avec DEUX politiques : ici sans
+  attribut, et dans `assets/js/script.js` (au clic sur le lien de langue) avec
+  `SameSite=Lax`.
+  L'effet est nul AUJOURD'HUI, les navigateurs traitant l'absence comme `Lax`
+  par défaut, et c'est précisément ce qui rendait l'écart dangereux : il ne se
+  voyait pas, et le jour où ce défaut change, un seul des deux chemins suivrait.
+  Deux écritures du même cookie doivent porter la même politique.
 {% endcomment %}
 
 <script>
@@ -17,7 +36,8 @@
   function setCookie(name, value, days) {
     const expires = new Date();
     expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    // SameSite=Lax : voir l'en-tête de ce fichier (les deux écritures du cookie).
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;SameSite=Lax`;
   }
 
   const existingChoice = getCookie('lang_choice');

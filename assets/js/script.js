@@ -89,13 +89,24 @@ function annoncer(texte) {
   }
 
   // Éléments interactifs → état hover (blob orange élargi)
-  bindCursorState('a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector, .burger-menu, .btn, .dropdown .select, .social-link, .socialContainer, label', 'cursor-hover');
+  // ⚠️ `.lang-selector-container` ET NON `.lang-selector`. La classe emise par
+  // `_includes/lang-selector.html` est `lang-selector-container` : le selecteur
+  // d'origine ne matchait donc RIEN, et le lien de langue du pied de page n'a
+  // jamais eu son etat de curseur. Ce n'etait pas du code mort mais un BUG,
+  // c'est-a-dire l'inverse : du code qui aurait du servir.
+  // Le defaut restait invisible parce que le `a` du meme selecteur attrape le
+  // lien lui-meme, donc le curseur changeait quand meme, pour une autre raison.
+  bindCursorState('a, button, [role="button"], .project-card, .service-card, .partner-logo, .lang-selector-container, .burger-menu, .btn, .dropdown .select, .social-link, .socialContainer, label', 'cursor-hover');
 
   // Texte pur → état text (barre fine)
-  bindCursorState('p, h1, h2, h3, h4, h5, li, blockquote, .section-description', 'cursor-text');
+  // `.section-description` retire : absent des 63 pages construites.
+  bindCursorState('p, h1, h2, h3, h4, h5, li, blockquote', 'cursor-text');
 
   // Images cliquables / lightbox → état zoom (cercle + croix)
-  bindCursorState('.lightbox-trigger, .thumbnail-image, .zoomable', 'cursor-zoom');
+  // `.thumbnail-image` et `.zoomable` retires : absents des 63 pages
+  // construites. Vestiges du permutateur de vignettes, remplace par la
+  // sequence en flux pendant la Phase 1.
+  bindCursorState('.lightbox-trigger', 'cursor-zoom');
 
   // Masquer le blob quand la souris quitte la fenêtre
   document.addEventListener('mouseleave', () => { blob.style.opacity = '0'; });
@@ -1343,58 +1354,19 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 // ================================
-// PARALLAX HERO IMAGE : Fade + Scale (Desktop uniquement)
+// PARALLAX HERO IMAGE : RETIRE LE 29/07/2026
 // ================================
-(function () {
-  if (!window.matchMedia('(pointer: fine)').matches) return;
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
-
-  // ⚠️ Le hero projet en deux colonnes n'existe plus : la page ouvre sur un
-  // media bord a bord (.project-open). Ce parallax visait des couches
-  // supprimees, il est donc inerte ici. Il sera re-cible sur l'ouverture en
-  // Phase 4, avec le reste de la grammaire de mouvement.
-  const heroSection = document.querySelector('.hero-project');
-  if (!heroSection) return;
-
-  // Layers avec leur vitesse propre : [sélecteur, facteurY, facteurScale]
-  const layers = [
-    { el: heroSection.querySelector('.hero-project-title-container'), speedY: 0.06, speedScale: 0 },
-    { el: heroSection.querySelector('.bubble-container'),             speedY: 0.10, speedScale: 0 },
-    { el: heroSection.querySelector('.hero-image-container'),         speedY: 0.18, speedScale: 0.05 },
-  ].filter(l => l.el);
-
-  layers.forEach(l => { l.el.style.willChange = 'transform, opacity, filter'; });
-  heroSection.style.willChange = 'opacity, filter';
-
-  let ticking = false;
-
-  function updateParallax() {
-    const heroHeight = heroSection.offsetHeight;
-    const delay    = heroHeight * 0.25;
-    const progress = Math.min(Math.max((window.scrollY - delay) / (heroHeight - delay), 0), 1);
-
-    const opacity = Math.max(1 - progress * 0.85, 0.15);
-    const blur    = progress * 12;
-
-    // Fade + blur global sur le hero
-    heroSection.style.opacity = opacity;
-    heroSection.style.filter  = `blur(${blur}px)`;
-
-    // Chaque layer bouge à sa propre vitesse
-    layers.forEach(l => {
-      const translateY = window.scrollY * l.speedY;
-      const scale      = 1 + progress * l.speedScale;
-      l.el.style.transform = `translateY(${translateY}px) scale(${scale})`;
-    });
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-})();
+//
+// ⚠️ 53 LIGNES QUI NE POUVAIENT PLUS RIEN FAIRE. Le bloc cherchait
+// `.hero-project` et sortait aussitot : cette classe est absente des 63 pages
+// construites, comme `.hero-project-title-container` et `.hero-image-container`
+// qu'il visait ensuite. Le hero projet en deux colonnes a ete remplace par une
+// ouverture bord a bord (`.project-open`) pendant la Phase 1.
+// Le code etait donc telecharge et analyse sur chaque page pour s'arreter a sa
+// premiere ligne utile, et son propre commentaire le disait deja. Un
+// commentaire qui signale du code mort ne le supprime pas.
+//
+// Ce qu'il faisait, pour la Phase 4 qui devra le refaire sur la bonne cible :
+// fondu et flou progressifs du hero au defilement, plus trois couches a
+// vitesses distinctes (0,06 / 0,10 / 0,18) avec une legere mise a l'echelle sur
+// la derniere. Recuperable dans l'historique.

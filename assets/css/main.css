@@ -136,25 +136,17 @@
      dire ce qu'elle fait, et celle-la n'avait pas de reponse.
      La barre n'a donc plus de fond du tout : le `backdrop-filter` de
      `.blur-bg` suffit a la decoller du contenu. */
-  /* ⚠️ CANAL DES LISERES POSES SUR UNE OEUVRE, pas une couleur de la charte.
-     Un triplet et non une couleur complete, parce que ses consommateurs ont
-     besoin d'opacites DIFFERENTES du meme noir : 0,9 pour les quatre ombres
-     nettes et la lueur du liseré de la nav, 0,92 pour le halo du logo.
-     Un jeton par palier aurait fait sept jetons pour une seule intention.
-     S'utilise en `rgba(var(--scrim-canal), 0.9)`.
-     Le noir pur y est VOLONTAIRE et n'est pas soumis a la regle « plus de noir
-     pur dans les aplats » : ce n'est pas un aplat, c'est une DENSITE. Et c'est
-     le seul canal qui fasse chuter la luminance quelle que soit l'image
-     dessous, ce qui est exactement ce qu'on lui demande.
-
-     ⚠️ Il a change d'emploi le 28/07. Il servait d'abord un degrade de 180 px
-     pose en bande au sommet des pages projet (0,62 / 0,58 / 0,30 / 0), qui
-     garantissait 7,43:1 a la nav sans dependre de l'image. Ropat a fait
-     retirer cette bande : elle se lisait comme un fond de header. Le meme noir
-     travaille desormais au TRACE des glyphes au lieu d'une surface. Il a donc
-     survecu a la disparition de son premier usage, ce qui est plutot bon
-     signe pour son nom : il designait deja une matiere, pas une forme. */
-  --scrim-canal: 0, 0, 0;
+  /* ⚠️ `--scrim-canal` A ETE RETIRE LE 29/07/2026, ET C'ETAIT LE PLUS TROMPEUR
+     DES ONZE JETONS SANS CONSOMMATEUR. Il portait dix-huit lignes de commentaire
+     qui expliquaient soigneusement son emploi au TRACE des glyphes du chrome...
+     usage lui-meme retire le 28/07, avec le lisere de la nav, sur decision de
+     Ropat (regle 8 : l'oeuvre ne paye jamais la lisibilite du chrome).
+     Le jeton avait donc survecu a ses DEUX emplois successifs, et son
+     commentaire continuait d'affirmer qu'il servait.
+     C'est pire qu'un jeton mort silencieux : celui-la se defendait.
+     Si un noir de densite redevient necessaire, le rouvrir depuis
+     l'historique : le raisonnement sur le triplet plutot que la couleur
+     complete, lui, reste juste. */
   /* Encre. Quatre niveaux, du plus present au plus retire.
 
      ⚠️ CES DEUX GRIS SONT HORS DE LA FAMILLE, ET C'EST ASSUME.
@@ -251,7 +243,8 @@
   --danger: var(--p-rouge-erreur);
   /* Ombres. L'ambiante souleve, la signal designe : ne pas les confondre. */
   --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-ambient-strong: 0 4px 6px rgba(0, 0, 0, 0.3);
+  /* `--shadow-ambient-strong` retire le 29/07 : zero consommateur dans les
+     deux skins. `--shadow-ambient` reste, lui est consomme. */
   --shadow-signal: 0 6px 16px color-mix(in srgb, var(--accent) 50%, transparent);
   /* ==========================================================
      3. TYPOGRAPHIE  (hors theme)
@@ -365,7 +358,8 @@
   --radius-lg: 2rem;
   --radius-xl: 6rem;
   --radius-pill: 9999px;
-  --squircle-small: 15%;
+  /* `--squircle-small` retire le 29/07 : zero consommateur. Les deux paliers
+     survivants (`--squircle-medium`, `--squircle-full`) le sont. */
   --squircle-medium: 6rem;
   --squircle-full: 50%;
   /* ==========================================================
@@ -414,7 +408,9 @@
      SCSS, rien dans les includes, rien dans le JS, rien dans DESIGN.md ; et
      dither.js ne lit aucune variable CSS. */
   --border-subtle: var(--line);
-  --text-muted: var(--ink-subtle);
+  /* `--text-muted` retire le 29/07 : alias a zero usage, alors que le role
+     qu'il pointait (`--ink-subtle`) en a un. Un alias que personne n'appelle
+     n'est pas une compatibilite, c'est un nom de plus a lire. */
   --border-primary: var(--signal-width) solid var(--accent);
   --border-radius-sm: var(--radius-sm);
   --border-radius-md: var(--radius-md);
@@ -477,7 +473,6 @@
      c'est son emploi (masse, jamais texte). --accent-ink est deja sombre
      dans les deux skins, il n'a donc rien a surcharger ici. */
   --shadow-ambient: 0 4px 6px rgba(5, 16, 15, 0.08);
-  --shadow-ambient-strong: 0 4px 6px rgba(5, 16, 15, 0.18);
 }
 
 /* ============================================
