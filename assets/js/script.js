@@ -326,85 +326,17 @@ window.addEventListener('load', () => {
 })();
 
 // ================================
-// L'OEUVRE MENE LA NAVIGATION
+// L'OEUVRE MENE LA NAVIGATION : DEPLACE EN LIGNE LE 29/07/2026
 // ================================
 //
-// Entre la grille et la page projet, c'est l'oeuvre qui se deplace : la
-// vignette cliquee et le media d'ouverture partagent un nom de transition, et
-// le navigateur les relie. Le reste de la page se fond derriere.
-//
-// Cote page projet le nom est POSE EN DUR dans le CSS, il n'y a qu'une
-// ouverture. Cote grille il ne peut pas l'etre :
-//
-// ⚠️ UN NOM DE TRANSITION DOIT ETRE UNIQUE DANS LE DOCUMENT. Deux elements qui
-// le portent font ABANDONNER la transition entiere, sans erreur ni message.
-// Une grille de vingt cartes ne peut donc pas le porter en CSS : il se pose sur
-// UNE carte, au dernier moment.
-//
-// ⚠️ ET C'EST `pageswap` QUI DECIDE, PAS LE CLIC. Le clic paraissait plus
-// simple, mais il ne voit ni les retours arriere, ni les navigations declenchees
-// autrement. `pageswap` se declenche sur la page quittee, pour TOUTE navigation
-// entre documents, et il porte la destination : c'est l'endroit prevu pour
-// preparer la sortie, et le seul qui donne l'information dont on a besoin.
-(function () {
-  const NOM = 'oeuvre';
-
-  // Le chemin d'une URL, pour comparer des `href` a une destination sans se
-  // faire piéger par le domaine ou une ancre.
-  function chemin(url) {
-    try { return new URL(url, location.href).pathname; } catch (e) { return null; }
-  }
-
-  // Trouve la vignette de la carte qui mene a ce chemin, s'il y en a une.
-  function vignettePour(url) {
-    const cible = chemin(url);
-    if (!cible) return null;
-    for (const lien of document.querySelectorAll('.project-card .project-link')) {
-      if (chemin(lien.getAttribute('href')) === cible)
-        return lien.querySelector('.project-card-image img');
-    }
-    return null;
-  }
-
-  // ⚠️ TOUJOURS NETTOYER AVANT DE POSER. Une page rendue par le cache de retour
-  // revient telle qu'elle a ete quittee, donc AVEC son nom encore en place. Un
-  // depart suivant vers une autre carte en poserait un second, et la transition
-  // serait abandonnee sans un mot. Le nettoyage coute un parcours de la grille
-  // et ferme le cas.
-  function nettoyer() {
-    document.querySelectorAll('.project-card-image img[style*="view-transition-name"]')
-      .forEach(function (img) { img.style.viewTransitionName = ''; });
-  }
-
-  // Sortie : on part vers une page projet, la vignette prend le nom.
-  window.addEventListener('pageswap', function (e) {
-    if (!e.viewTransition || !e.activation || !e.activation.entry) return;
-    nettoyer();
-    const img = vignettePour(e.activation.entry.url);
-    if (img) img.style.viewTransitionName = NOM;
-  });
-
-  // Retour : on ARRIVE sur la grille en venant d'une page projet, et c'est la
-  // meme vignette qui doit recevoir l'oeuvre. L'origine se lit dans l'API
-  // Navigation, absente de certains navigateurs : sans elle le retour se fait
-  // simplement sans morphing, ce qui n'est pas une panne.
-  window.addEventListener('pagereveal', function (e) {
-    if (!e.viewTransition) return;
-    const nav = window.navigation;
-    const depuis = nav && nav.activation && nav.activation.from ? nav.activation.from.url : null;
-    if (!depuis) return;
-    nettoyer();
-    const img = vignettePour(depuis);
-    if (!img) return;
-    img.style.viewTransitionName = NOM;
-    // ⚠️ LE RETIRER UNE FOIS LE GESTE FINI. Laisse en place, il resterait sur
-    // cette carte, et le prochain depart vers une AUTRE carte poserait le meme
-    // nom deux fois : la transition serait abandonnee en silence.
-    e.viewTransition.finished.finally(function () {
-      img.style.viewTransitionName = '';
-    });
-  });
-})();
+// ⚠️ CE MODULE N'EST PLUS ICI, ET IL NE PEUT PAS Y REVENIR.
+// Il ecoutait `pagereveal`, qui se declenche AVANT les scripts differes : son
+// ecouteur n'existait donc pas encore au moment de l'evenement, et le
+// morphing de RETOUR n'a jamais pu se declencher. Le sens aller marchait, lui,
+// parce qu'il passe par `pageswap`, emis bien plus tard.
+// Il vit desormais en ligne dans le <head> de `_layouts/default.html`, avec
+// l'etiquette de sens de navigation, pour exactement la meme raison.
+// Le remettre ici le casserait a moitie, en silence.
 
 // ================================
 // DROPDOWN : controleur unique

@@ -178,6 +178,107 @@
       });
     </script>
 
+    {%- comment -%}
+      ⚠️ CE LIEN RETARDE LE PREMIER RENDU JUSQU'AU PIED DE PAGE, ET C'EST VOULU.
+
+      `pagereveal` se déclenche avant le premier rendu, donc potentiellement sur
+      un document ENCORE EN COURS DE PARSING. Mesure du 29/07/2026 sur la page
+      portfolio : `readyState` à `loading` et **6 cartes sur 20** présentes.
+      L'appariement de l'œuvre cherchait donc une vignette qui n'existait pas
+      encore, et ne trouvait rien. Aucune erreur, aucun signe.
+
+      `rel="expect"` est le mécanisme prévu pour ça : il bloque le rendu tant
+      que l'élément visé n'est pas parsé. En visant le pied de page, on garantit
+      que le corps entier est là quand `pagereveal` arrive.
+
+      Le coût est réel et assumé : le premier rendu attend la fin du corps. Sur
+      ce site les pages sont statiques et légères, mais si le HTML grossit un
+      jour, c'est ici qu'il faudra revenir.
+    {%- endcomment -%}
+    <link rel="expect" blocking="render" href="#pied">
+
+    {%- comment -%}
+      L'OEUVRE MENE LA NAVIGATION.
+
+      Entre la grille et la page projet, c'est l'œuvre qui se déplace : la
+      vignette cliquée et le média d'ouverture partagent un nom de transition, et
+      le navigateur les relie. Le reste de la page se fond derrière.
+
+      Côté page projet le nom est posé en dur dans le CSS, il n'y a qu'une
+      ouverture. Côté grille il ne peut pas l'être :
+
+      ⚠️ UN NOM DE TRANSITION DOIT ÊTRE UNIQUE DANS LE DOCUMENT. Deux éléments
+      qui le portent font ABANDONNER la transition entière, sans erreur ni
+      message. Une grille de vingt cartes ne peut donc pas le porter en CSS : il
+      se pose sur UNE carte, au dernier moment.
+
+      ⚠️ EN LIGNE, ET LE MODULE ENTIER, PAS SEULEMENT LE RETOUR. Il vivait dans
+      script.js, qui est différé : son écouteur `pagereveal` n'existait donc pas
+      encore au moment de l'événement, et le morphing de RETOUR n'a jamais pu se
+      déclencher. Le sens aller marchait, lui, parce qu'il passe par `pageswap`,
+      émis bien plus tard. On monte les deux ensemble plutôt que le seul retour :
+      ils partagent leurs trois fonctions, et les séparer les ferait dériver.
+    {%- endcomment -%}
+    <script>
+      (function () {
+        var NOM = 'oeuvre';
+
+        function chemin(url) {
+          try { return new URL(url, location.href).pathname; } catch (e) { return null; }
+        }
+
+        function vignettePour(url) {
+          var cible = chemin(url);
+          if (!cible) return null;
+          var liens = document.querySelectorAll('.project-card .project-link');
+          for (var i = 0; i < liens.length; i++) {
+            if (chemin(liens[i].getAttribute('href')) === cible)
+              return liens[i].querySelector('.project-card-image img');
+          }
+          return null;
+        }
+
+        /* ⚠️ TOUJOURS NETTOYER AVANT DE POSER. Une page rendue par le cache de
+           retour revient telle qu'elle a été quittée, donc AVEC son nom encore
+           en place. Un départ suivant vers une autre carte en poserait un
+           second, et la transition serait abandonnée sans un mot. */
+        function nettoyer() {
+          var sales = document.querySelectorAll('.project-card-image img[style*="view-transition-name"]');
+          for (var i = 0; i < sales.length; i++) sales[i].style.viewTransitionName = '';
+        }
+
+        /* Sortie : on part vers une page projet, la vignette prend le nom.
+           `pageswap` plutôt que le clic : il voit TOUTE navigation entre
+           documents, retours compris, et il porte la destination. */
+        window.addEventListener('pageswap', function (e) {
+          if (!e.viewTransition || !e.activation || !e.activation.entry) return;
+          nettoyer();
+          var img = vignettePour(e.activation.entry.url);
+          if (img) img.style.viewTransitionName = NOM;
+        });
+
+        /* Retour : on ARRIVE sur la grille en venant d'une page projet, et c'est
+           la même vignette qui doit recevoir l'œuvre. L'origine se lit dans
+           l'API Navigation ; sans elle le retour se fait sans morphing, ce qui
+           n'est pas une panne. */
+        window.addEventListener('pagereveal', function (e) {
+          if (!e.viewTransition) return;
+          var a = window.navigation && window.navigation.activation;
+          var depuis = a && a.from ? a.from.url : null;
+          if (!depuis) return;
+          nettoyer();
+          var img = vignettePour(depuis);
+          if (!img) return;
+          img.style.viewTransitionName = NOM;
+          /* Le retirer une fois le geste fini : laissé en place, le prochain
+             départ vers une AUTRE carte poserait le même nom deux fois. */
+          e.viewTransition.finished.finally(function () {
+            img.style.viewTransitionName = '';
+          });
+        });
+      })();
+    </script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
 

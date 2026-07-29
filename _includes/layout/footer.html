@@ -1,4 +1,14 @@
-<footer>
+{%- comment -%}
+  ⚠️ `id="pied"` N'EST PAS DECORATIF. Le <head> porte un
+  `<link rel="expect" blocking="render" href="#pied">` qui retarde le premier
+  rendu jusqu'a ce que cet element soit parse, donc jusqu'a ce que le corps le
+  soit. Sans lui, `pagereveal` se declenche sur un document encore en
+  `loading` : mesure du 29/07/2026 sur la page portfolio, 6 cartes sur 20
+  presentes, donc l'appariement de l'oeuvre cherche une vignette qui n'existe
+  pas encore et ne trouve rien, en silence.
+  Retirer cet id casse le morphing de retour sans qu'aucune erreur ne le dise.
+{%- endcomment -%}
+<footer id="pied">
   <div class="footer-content">
     <!-- Footer Top -->
     <div class="footer-top">
