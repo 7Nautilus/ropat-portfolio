@@ -3287,7 +3287,16 @@ html.scrollbar-saisie {
   }
 }
 .card {
-  border: 2px solid var(--primary-color);
+  /* ⚠️ LE LISERE PORTE LA COULEUR DE L'OEUVRE, PAS CELLE DU SITE.
+     `--oeuvre-couleur` est pose en ligne par `projects/project-card.html` a
+     partir du champ `couleur` du projet ; sans lui on retombe sur l'orange, ce
+     qui est le cas des sept projets dont l'oeuvre est achromatique.
+     Releve chez Lu Yu : chacune de ses dix couvertures porte une bordure dans
+     SA couleur. Le signal n'est pas la marque du portfolio, c'est la marque du
+     travail. Toutes ses couleurs tiennent 3:1 sur son fond, de 3,22 a 13,91 ;
+     les treize couleurs posees ici tiennent le meme seuil, quatre ayant du etre
+     eclaircies a teinte constante pour l'atteindre. */
+  border: 2px solid var(--oeuvre-couleur, var(--primary-color));
   box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
@@ -3418,7 +3427,9 @@ html.scrollbar-saisie {
   text-transform: uppercase;
   /* Restaure avec le reste de l'habillage de carte le 28/07/2026 (cf. la note
      en tete de _cards.scss). */
-  border-bottom: 1px solid var(--primary-color);
+  /* Le filet sous l'image suit la meme couleur que le liseré de la carte,
+     sinon la carte porterait deux signaux qui se contredisent. */
+  border-bottom: 1px solid var(--oeuvre-couleur, var(--primary-color));
   aspect-ratio: 1/1;
   width: 100%;
   overflow: hidden;

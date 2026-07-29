@@ -2,7 +2,18 @@
 {% assign project_locale = include.project.locales[current_lang] | default: include.project.locales.en %}
 {% assign project_url = project_locale.url %}
 
-<article class="card project-card" data-category="{{ include.project.category }}">
+{% comment %}
+  `couleur` porte le signal du projet, tiré de l'œuvre elle-même, et il remplace
+  l'orange du site sur le liseré de cette carte. Le champ est facultatif : sans
+  lui la carte retombe sur `--primary-color`, ce qui est le cas des sept projets
+  dont l'œuvre est achromatique.
+
+  Relevé chez Lu Yu le 29/07/2026 : chacune de ses dix couvertures porte une
+  bordure dans SA couleur, jamais une couleur de site. Le signal n'est pas la
+  marque du portfolio, c'est la marque du travail.
+{% endcomment %}
+<article class="card project-card" data-category="{{ include.project.category }}"
+  {% if include.project.couleur %}style="--oeuvre-couleur: {{ include.project.couleur }}"{% endif %}>
   <a href="{{ project_url | relative_url }}" class="project-link" aria-label="{{ project_locale.aria_label }}">
     <!-- Project Image -->
     <div class="project-card-image">

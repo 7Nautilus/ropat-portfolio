@@ -21,7 +21,9 @@
   text-transform: uppercase;
   /* Restaure avec le reste de l'habillage de carte le 28/07/2026 (cf. la note
      en tete de _cards.scss). */
-  border-bottom: 1px solid var(--primary-color);
+  /* Le filet sous l'image suit la meme couleur que le liseré de la carte,
+     sinon la carte porterait deux signaux qui se contredisent. */
+  border-bottom: 1px solid var(--oeuvre-couleur, var(--primary-color));
   aspect-ratio: 1 / 1;
   width: 100%;
   overflow: hidden;

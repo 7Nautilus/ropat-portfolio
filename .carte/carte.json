@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T17:12:17Z",
-  "commit": "91ba6ca",
+  "genere_le": "2026-07-29T18:10:43Z",
+  "commit": "0432bdf",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -494,7 +494,6 @@
   ],
   "jetons_sans_consommateur": [
     "--dur-loader-hold",
-    "--dur-reveal",
     "--p-vert-haute",
     "--p-vert-mediane",
     "--rhythm-lg",
@@ -551,10 +550,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 190611,
-    "gzip": 56407,
-    "sans_commentaires": 77982,
-    "gzip_sans": 12739
+    "brut": 199187,
+    "gzip": 59301,
+    "sans_commentaires": 78998,
+    "gzip_sans": 12974
   },
   "ratios_faux": []
 }
