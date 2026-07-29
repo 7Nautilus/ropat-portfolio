@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 17:33 sur 66ffb21.
+> Generee le 29/07/2026 a 17:53 sur 668d2df.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 17:33 |
+| Date du build lu | 29/07/2026 17:53 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -196,7 +196,7 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-107 jetons definis, 102 consommes, 283 noms de selecteur, 11 `!important`.
+107 jetons definis, 102 consommes, 284 noms de selecteur, 11 `!important`.
 
 `!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`
 
@@ -230,19 +230,20 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 - .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
 - .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
 
-### Selecteurs absents du HTML mais POSES PAR LE JS  (13)
+### Selecteurs POSES PAR LE JS, absents du HTML construit  (14)
 
 Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : les supprimer casserait un composant qui fonctionne.
 
 - .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1122, assets/js/script.js:1127
-- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1484
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1536
 - .cursor-hover  style en assets/css/_sass/components/_cursor.scss:58, pose par assets/js/script.js:81
 - .cursor-text  style en assets/css/_sass/components/_cursor.scss:66, pose par assets/js/script.js:81
 - .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:76, pose par assets/js/script.js:81
 - .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:365
 - .loaded  style en assets/css/_sass/components/_loader.scss:22, pose par assets/js/script.js:123
-- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1393
-- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:43, pose par assets/js/script.js:1399
+- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1395
+- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1401
+- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1483, assets/js/script.js:1504
 - .was-validated  style en assets/css/_sass/pages/_contact.scss:126, pose par assets/js/script.js:1240
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1188
 - .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:182, assets/js/script.js:1229, assets/js/script.js:1233, assets/js/script.js:1257
@@ -291,7 +292,7 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 
 ## 5. JS
 
-2 fichiers, 39 selecteurs litteraux, 44 ecouteurs.
+2 fichiers, 39 selecteurs litteraux, 45 ecouteurs.
 
 **Fonctions qui se relancent elles-memes en rAF** : `animer` (assets/js/dither.js:635), `animateBlob` (assets/js/script.js:65). Une fois demarrees elles ne s'arretent plus, mais leur MISE EN ROUTE depend d'une garde que la carte ne suit pas : elle rapporte la forme, pas le fait.
 
@@ -309,7 +310,7 @@ A confronter au throttle : un handler sans rAF qui lit une metrique de layout fo
 - assets/js/script.js:455
 - assets/js/script.js:898  (passive)
 - assets/js/script.js:1352  (passive)
-- assets/js/script.js:1473  (passive)
+- assets/js/script.js:1510
 
 ## 6. Contrat des trois couches
 
@@ -323,14 +324,14 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `aria-describedby` | - | - | assets/js/script.js:1198 |
 | `aria-expanded` | 63 page(s) | oui | assets/js/script.js:153 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1397 |
+| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1399 |
 | `aria-invalid` | - | - | assets/js/script.js:1197 |
 | `aria-label` | 63 page(s) | - | assets/js/script.js:1282 |
 | `aria-labelledby` | 51 page(s) | - | - **personne ne le lit** |
 | `aria-live` | 63 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:163 |
-| `data-actif` | - | oui | assets/js/script.js:1419 |
+| `data-actif` | - | oui | assets/js/script.js:1417 |
 | `data-category` | 10 page(s) | - | assets/js/script.js:279 |
 | `data-chargee` | - | - | assets/js/script.js:1056 |
 | `data-chrome` | - | oui | assets/js/script.js:442 |
@@ -346,7 +347,7 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-encre` | - | oui | assets/js/script.js:862 |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
-| `data-saisi` | - | oui | assets/js/script.js:1448 |
+| `data-saisi` | - | oui | assets/js/script.js:1482 |
 | `data-set-lang` | 62 page(s) | - | assets/js/script.js:1106 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:975 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:974 |
@@ -393,7 +394,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 186637 o brut, 54905 o gzip. Sans les commentaires : 78088 o, 12719 o gzip, soit **77 % de moins** sur le fil.
+**CSS servi** : 188191 o brut, 55503 o gzip. Sans les commentaires : 78141 o, 12737 o gzip, soit **77 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

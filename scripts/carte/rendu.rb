@@ -48,6 +48,7 @@ module Carte
         jetons: @p[:css].jetons.keys.sort,
         jetons_sans_consommateur: (@p[:css].jetons.keys - @p[:css].consommations.keys).sort,
         selecteurs_absents: selecteurs_absents,
+        selecteurs_poses_par_js: selecteurs_poses_par_js,
         assets_orphelins: @p[:assets].orphelins,
         assets_manquants: @p[:assets].manquants,
         css_octets: @p[:build].faits[:css],
@@ -77,6 +78,7 @@ module Carte
       cmp.call(:jetons, "jeton")
       cmp.call(:jetons_sans_consommateur, "jeton sans consommateur")
       cmp.call(:selecteurs_absents, "selecteur absent")
+      cmp.call(:selecteurs_poses_par_js, "selecteur pose par le JS")
       cmp.call(:assets_orphelins, "asset orphelin")
       cmp.call(:assets_manquants, "ASSET MANQUANT")
 
@@ -99,8 +101,18 @@ module Carte
       ""
     end
 
+    # ⚠️ LE TITRE EST LA CLE, DONC IL DOIT DISCRIMINER. Ces deux methodes se
+    # ressemblent et ne doivent surtout pas se confondre : la premiere liste ce
+    # qu'on peut supprimer, la seconde ce qu'il ne faut pas toucher. Les
+    # prefixes sont donc pris aussi longs qu'il le faut pour qu'aucun bloc ne
+    # puisse repondre aux deux.
     def selecteurs_absents
-      bloc = @p[:css].anomalies.find { |a| a[:titre].start_with?("Selecteurs absents") }
+      bloc = @p[:css].anomalies.find { |a| a[:titre].start_with?("Selecteurs absents des") }
+      bloc ? bloc[:cas].map { |c| c.split(/\s{2,}/).first } : []
+    end
+
+    def selecteurs_poses_par_js
+      bloc = @p[:css].anomalies.find { |a| a[:titre].start_with?("Selecteurs POSES PAR LE JS") }
       bloc ? bloc[:cas].map { |c| c.split(/\s{2,}/).first } : []
     end
 

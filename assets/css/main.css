@@ -2710,10 +2710,17 @@ footer {
   background-clip: padding-box;
 }
 
-/* Pendant le glisser, le pouce garde sa couleur de saisie meme si le pointeur
-   sort de la bande, et le texte de la page ne se selectionne pas au passage. */
-.scrollbar[data-saisi=true] {
+/* ⚠️ LA REGLE PORTE SUR TOUTE LA PAGE, PAS SUR LA BARRE, et c'est ce qui la
+   rend utile : pendant le glisser le pointeur balaie le CONTENU, donc c'est le
+   texte de la page qui se surlignerait, pas celui du pouce.
+   Elle remplace un `preventDefault()` sur `pointerdown` qui faisait la meme
+   chose et coupait au passage les evenements souris de compatibilite, donc le
+   curseur sur mesure. Voir le commentaire du module dans script.js. */
+html.scrollbar-saisie {
   user-select: none;
+  /* Le pointeur ne redevient pas une fleche de texte en traversant un
+     paragraphe : on tient une barre, pas un mot. */
+  cursor: default;
 }
 
 .bubble-container {

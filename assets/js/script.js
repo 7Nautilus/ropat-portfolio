@@ -1467,10 +1467,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   pouce.addEventListener('pointerdown', function (e) {
-    e.preventDefault();
+    // ⚠️ PAS DE `preventDefault()` ICI, ET CE N'EST PAS UN OUBLI.
+    // Il y en avait un, pour empecher la selection de texte pendant le glisser.
+    // Effet de bord mesure le 29/07/2026 : `preventDefault` sur `pointerdown`
+    // supprime les evenements souris de COMPATIBILITE pour ce pointeur. Or le
+    // curseur sur mesure n'ecoute que `mousemove` (script.js:50). Comptage
+    // pendant un glisser reel : 0 `mousemove` contre des `pointermove` qui
+    // arrivent normalement. Le blob restait donc fige pendant qu'on faisait
+    // defiler la page avec le pouce.
+    // La selection de texte est desormais empechee par `user-select`, qui ne
+    // coupe rien d'autre.
     pouce.setPointerCapture(e.pointerId);
     saisie = { depart: e.clientY, origine: position };
     barre.dataset.saisi = 'true';
+    doc.classList.add('scrollbar-saisie');
   });
 
   pouce.addEventListener('pointermove', function (e) {
@@ -1491,6 +1501,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!saisie) return;
     saisie = null;
     barre.dataset.saisi = 'false';
+    doc.classList.remove('scrollbar-saisie');
     montrer();   // relance la minuterie, que la saisie tenait suspendue
   }
   pouce.addEventListener('pointerup', relacher);

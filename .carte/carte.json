@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T15:33:28Z",
-  "commit": "66ffb21",
+  "genere_le": "2026-07-29T15:53:14Z",
+  "commit": "668d2df",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -499,6 +499,31 @@
     "--track-display"
   ],
   "selecteurs_absents": [
+    ".reveal-arme",
+    ".transparent-orange-bg",
+    ".card-grid",
+    ".service-main-container",
+    ".hero-project",
+    ".hero-project-container",
+    ".hero-image-container",
+    ".hero-intro",
+    ".hero-image",
+    ".service-main-container-text",
+    ".services-page-subtitle",
+    ".services-page-description",
+    ".loader-logo-text",
+    ".service-card-big",
+    ".hero-theme-container",
+    ".hero-theme",
+    ".hero-theme-dot",
+    ".subservice-section",
+    "#contact-social-links",
+    ".social-links",
+    ".social-icon",
+    ".contact-select",
+    ".project-back-link"
+  ],
+  "selecteurs_poses_par_js": [
     ".is-visible",
     ".custom-scrollbar",
     ".cursor-hover",
@@ -508,6 +533,7 @@
     ".loaded",
     ".scrollbar",
     ".scrollbar-thumb",
+    ".scrollbar-saisie",
     ".was-validated",
     ".contact-erreur",
     ".is-invalid",
@@ -522,10 +548,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 186637,
-    "gzip": 54905,
-    "sans_commentaires": 78088,
-    "gzip_sans": 12719
+    "brut": 188191,
+    "gzip": 55503,
+    "sans_commentaires": 78141,
+    "gzip_sans": 12737
   },
   "ratios_faux": []
 }

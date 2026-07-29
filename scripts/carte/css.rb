@@ -238,7 +238,14 @@ module Carte
 
       unless par_le_js.empty?
         @anomalies << {
-          titre: "Selecteurs absents du HTML mais POSES PAR LE JS",
+          # ⚠️ CE TITRE NE DOIT PAS COMMENCER PAR « Selecteurs absents ».
+          # `rendu.rb` retrouve les blocs par leur debut de titre, avec un
+          # `find` qui rend le PREMIER correspondant. Le premier jet s'appelait
+          # « Selecteurs absents du HTML mais POSES PAR LE JS » et passait avant
+          # le bloc du CSS mort : le JSON de reference s'est mis a suivre les 14
+          # selecteurs VIVANTS au lieu des 23 morts, et le `--diff` a surveille
+          # la mauvaise liste sans que rien ne le dise.
+          titre: "Selecteurs POSES PAR LE JS, absents du HTML construit",
           detail: "Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : " \
                   "les supprimer casserait un composant qui fonctionne.",
           cas: par_le_js.map { |c| "#{c[:nom]}  style en #{c[:ou].first}, pose par #{c[:js].join(', ')}" }
