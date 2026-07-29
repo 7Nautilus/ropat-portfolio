@@ -1,0 +1,39 @@
+/* ============================================
+   TRANSITIONS ENTRE PAGES
+   ============================================ */
+
+/* Version minimale, posee le 29/07/2026. Le passage d'une page a l'autre est
+   une NAVIGATION REELLE dont le contenu s'anime, et non un rideau tire
+   par-dessus : c'est exactement ce que la veille a releve chez Lu Yu, obtenu
+   ici sans une ligne de JavaScript et sans bibliotheque.
+   Contrairement au souvenir qu'on en avait, la veille n'a identifie AUCUNE
+   bibliotheque de navigation interceptee : Lu Yu tourne sur Semplice 5, un
+   systeme WordPress commercial, avec GSAP et jQuery. Voir
+   docs/VEILLE-PORTFOLIOS-2026-07.md, section A3.
+
+   ⚠️ L'OPT-IN EST PAR DOCUMENT, ET IL EN FAUT DEUX. La regle doit etre
+   presente dans la page QUITTEE et dans la page ATTEINTE, sinon rien ne se
+   produit. Ici les deux lisent la meme `main.css`, donc c'est acquis ; ca
+   cesserait de l'etre le jour ou une page servirait une autre feuille.
+
+   ⚠️ Navigations de MEME ORIGINE uniquement. Un lien vers l'exterieur, une
+   soumission de formulaire vers un autre domaine : pas de transition, et c'est
+   le comportement voulu.
+
+   Support mesure le 29/07/2026 sur Chrome 148 : la regle est reconnue
+   (`CSSViewTransitionRule`), `view-transition-name` et `view-transition-class`
+   sont supportees. Firefox et Safari n'ont pas ete mesures ; l'API DEGRADE en
+   ne faisant rien, donc leur absence de support ne casse pas la navigation. */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Le reglage systeme coupe la transition entiere plutot que de l'accelerer :
+   un fondu de page est un mouvement global, et l'accelerer a 0,01 s comme le
+   fait le bloc de base/_bases.scss produirait un a-coup au lieu d'un repli. */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
