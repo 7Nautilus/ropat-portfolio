@@ -104,9 +104,10 @@ header[role="banner"] {
 
    Valeurs mesurees pour ce geste-ci : 1 s de glissement a l'aller en
    `Expo.easeInOut`, 0,4 s de fondu au retour en `expo.OutIn`, 1,1 s de
-   re-entree du contenu en `Expo.easeOut`. D'ou `--dur-page-in`, distinct de
-   `--dur-reveal` : un seul jeton ne peut pas porter deux grammaires sans en
-   trahir une. */
+   re-entree du contenu en `Expo.easeOut`. D'ou des jetons de passage distincts
+   de `--dur-reveal` : un seul jeton ne peut pas porter deux grammaires sans en
+   trahir une. Ce sont aujourd'hui les jetons `--dur-voile-*`, le glissement
+   ayant cede la place au balayage. */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -147,38 +148,60 @@ header[role="banner"] {
    D'ou deux courbes differentes : la sortante s'en va sans ceremonie, la
    entrante est en `--ease-expo-in-out`. */
 
+/* ⚠️ LE GESTE CHANGE DE NATURE LE 29/07/2026, DEMANDE DE ROPAT : un BALAYAGE
+   avec un aplat de couleur entre les deux vues, au lieu de deux pages qui
+   glissent l'une contre l'autre.
+
+   Ce n'est pas un adoucissement de plus, c'est une autre reponse au meme
+   probleme. Faire glisser deux pages derriere un cadre immobile produisait une
+   arete qui coupe ; un aplat qui COUVRE puis se retire ne coupe rien, il
+   masque. Le contenu n'a plus a glisser du tout : il est DECOUVERT.
+
+   Le mecanisme tient en trois pieces et n'emploie que du CSS :
+     1. `::view-transition-group(root)` recoit une couleur de fond. Il porte les
+        deux instantanes, donc sa couleur se voit partout ou ni l'un ni l'autre
+        ne couvre.
+     2. la page quittee est mangee de gauche a droite par un `clip-path` ;
+     3. la page atteinte est decouverte dans le meme sens, MAIS EN RETARD.
+   C'est ce retard qui ouvre la bande : entre le bord de fuite de l'une et le
+   bord d'attaque de l'autre, il n'y a rien, donc on voit la couleur du groupe.
+   Sans retard, les deux bords coincident et l'aplat ne se voit jamais. */
+
+::view-transition-group(root) {
+  background-color: var(--voile-transition);
+}
+
 ::view-transition-old(root) {
-  animation: page-sortie var(--dur-page-out) var(--ease-out-quart) both;
+  animation: voile-couvre var(--dur-voile-couvre) var(--ease-out-quart) both;
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-page-in) var(--ease-out-quart) both;
+  animation: voile-decouvre var(--dur-voile-decouvre) var(--ease-out-quart)
+             var(--dur-voile-retard) both;
 }
 
-/* ⚠️ `100%` SE RAPPORTE ICI A LA LARGEUR DE L'INSTANTANE, qui est celle du
-   viewport : les deux pseudo-elements sont dimensionnes par le navigateur. Pas
-   besoin de `100vw`, qui inclurait une gouttiere de barre de defilement que ce
-   site n'a plus de toute facon. */
-/* ⚠️ LA COURSE EST RACCOURCIE ET UN FONDU S'Y AJOUTE, ADOUCISSEMENT DU
-   29/07/2026. Le glissement d'un viewport entier est ce que fait Lu Yu, mais
-   chez lui TOUTE la page part : l'arete franche ne coupe rien, elle borde
-   l'objet qui bouge. Ici le cadre tient, donc cette meme arete balaie en
-   travers d'une entete immobile, et elle se lit comme un couperet.
-   Deux corrections, pas une : la course tombe a 35 % de la largeur, ce qui
-   fait un DEPLACEMENT et non un balayage, et l'opacite dissout l'arete au lieu
-   de la promener. Le caractere du geste tient a sa direction et a sa courbe,
-   pas a la distance parcourue. */
-@keyframes page-sortie {
-  to {
-    opacity: 0;
-    transform: translateX(-20%);
-  }
+/* ⚠️ L'ORDRE DE `inset()` EST HAUT DROITE BAS GAUCHE. `inset(0 0 0 100%)`
+   pousse donc le bord GAUCHE jusqu'au bout : la page est mangee de la gauche
+   vers la droite. `inset(0 100% 0 0)` fait l'inverse et ne laisse rien voir,
+   d'ou le point de depart de la page qui arrive. Les deux balaient dans le
+   MEME sens, sinon la bande ne se deplace pas, elle s'ouvre en deux. */
+@keyframes voile-couvre {
+  to { clip-path: inset(0 0 0 100%); }
 }
 
-@keyframes page-entree {
+/* La translation verticale repond au troisieme reproche : decouvert a plat, le
+   contenu apparaissait d'un bloc. Quatorze pixels suffisent a le faire SE POSER
+   au lieu d'etre revele. C'est le meme deplacement que la revelation au
+   defilement du site, en deux fois moins ample : on reconnait le geste, il ne
+   se repete pas. */
+@keyframes voile-decouvre {
   from {
-    opacity: 0;
-    transform: translateX(35%);
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(14px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
   }
 }
 
@@ -190,10 +213,10 @@ header[role="banner"] {
    gauche et entrer la precedente par la droite, c'est-a-dire le geste d'un pas
    en AVANT. On avancerait en reculant, et rien ne le signalerait.
 
-   L'etiquette `retour` est posee sur la transition par `script.js`, section
-   LE SENS DE LA NAVIGATION, a partir des index de l'API Navigation. Seule la
-   GEOMETRIE est retournee : durees et courbes restent les memes, parce que
-   c'est le meme geste, pas un autre.
+   L'etiquette `retour` est posee sur la transition par un script EN LIGNE dans
+   le <head> du layout, a partir des index de l'API Navigation. Seul le SENS du
+   balayage est retourne : durees, courbes et couleur restent les memes, parce
+   que c'est le meme geste, pas un autre.
 
    Lu Yu, lui, traite le retour comme un geste DIFFERENT : un fondu d'opacite
    de 0,4 s en `expo.OutIn`, puis une re-revelation de sa grille en 1,1 s
@@ -201,33 +224,48 @@ header[role="banner"] {
    couteuse ; celle-ci suffit a lever la contradiction. */
 
 :root:active-view-transition-type(retour)::view-transition-old(root) {
-  animation-name: page-sortie-retour;
+  animation-name: voile-couvre-retour;
 }
 
 :root:active-view-transition-type(retour)::view-transition-new(root) {
-  animation-name: page-entree-retour;
+  animation-name: voile-decouvre-retour;
 }
 
-@keyframes page-sortie-retour {
-  to { transform: translateX(100%); }
+/* Le balayage vient de la droite : c'est le bord DROIT qui avance, donc le
+   quatrieme terme de `inset()` cede la place au second. */
+@keyframes voile-couvre-retour {
+  to { clip-path: inset(0 100% 0 0); }
 }
 
-@keyframes page-entree-retour {
-  from { transform: translateX(-100%); }
+@keyframes voile-decouvre-retour {
+  from {
+    clip-path: inset(0 0 0 100%);
+    transform: translateY(14px);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
 }
 
 
 /* ── L'oeuvre qui mene ────────────────────────────────────────────────────
-   Elle se deplace et change de taille, de la grille vers la page. Meme duree
-   et meme courbe que le contenu, sinon les deux gestes se contredisent. */
+   Elle se deplace et change de taille, de la grille vers la page. Son groupe
+   est SEPARE de celui de la page, donc elle voyage AU-DESSUS de l'aplat : c'est
+   la seule chose qui reste visible pendant que la couleur couvre l'echange.
 
-/* ⚠️ MEME DUREE ET MEME COURBE QUE LA PAGE. Elles ne l'etaient pas : l'oeuvre
-   morphait en `--ease-expo-out` pendant que la page glissait en
-   `--ease-expo-in-out`. Deux courbes differentes dans un meme geste se
-   contredisent, et c'est l'oeuvre qu'on remarque, donc c'est elle qui paraissait
-   brutale. Un seul geste, une seule courbe. */
+   ⚠️ SA DUREE EST CALCULEE, PAS RECOPIEE. Elle doit couvrir le geste entier,
+   retard compris, pour se poser au moment ou la page finit d'etre decouverte.
+   Un chiffre en dur ici derivait au premier reglage du balayage : le jeton
+   `--dur-page-in` auquel elle etait accrochee a d'ailleurs disparu avec le
+   glissement, ce qui rendait sa duree invalide.
+
+   ⚠️ Meme courbe que la page, pour la meme raison qu'hier : l'oeuvre morphait
+   en `--ease-expo-out` pendant que la page etait en `--ease-expo-in-out`, et
+   deux courbes dans un meme geste se contredisent. C'est l'oeuvre qu'on
+   regarde, donc c'est elle qui paraissait brutale. */
 ::view-transition-group(oeuvre) {
-  animation-duration: var(--dur-page-in);
+  animation-duration: calc(var(--dur-voile-retard) + var(--dur-voile-decouvre));
   animation-timing-function: var(--ease-out-quart);
 }
 

@@ -445,29 +445,42 @@
      revelations au defilement sont un livrable de la Phase 4. */
   --dur-reveal: 0.8s;
 
-  /* Le passage d'une page a l'autre : un glissement horizontal, mesure image
-     par image chez Lu Yu. Valeur relevee, pas transposee de la grammaire de
-     revelation, ce qui est precisement l'erreur corrigee plus haut.
+  /* ⚠️ LE GLISSEMENT DE PAGE A ETE ABANDONNE LE 29/07/2026, ET SES JETONS AVEC.
+     Il faisait glisser deux pages l'une contre l'autre, valeurs relevees image
+     par image chez Lu Yu. Deux passes d'adoucissement n'ont pas suffi, et la
+     raison est structurelle : chez lui TOUTE la page part, donc l'arete franche
+     borde l'objet qui bouge ; ici le cadre tient, donc la meme arete balaie en
+     travers d'une entete immobile. Le meme chiffre ne produit pas le meme geste
+     dans deux compositions differentes.
+     Les valeurs sont conservees ici parce qu'elles restent la mesure exacte, et
+     qu'elles redeviendraient les bonnes si le glissement revenait un jour :
+     1 s chez lui, ramenee a 0,7 s d'entree et 0,52 s de sortie, soit 75 %.
+     Une sortie doit toujours etre plus rapide qu'une entree, sinon la page
+     quittee s'attarde et bouche l'arrivee. */
 
-     ⚠️ RAMENEE DE 1 S A 0,7 S LE 29/07/2026. La seconde etait la mesure exacte
-     de Lu Yu, et elle s'est revelee trop longue ICI : chez lui tout glisse,
-     entete comprise, donc l'oeil suit UN objet ; chez nous le cadre tient, donc
-     le contenu passe DERRIERE un element fixe et le mouvement relatif est
-     double. Le meme chiffre ne produit pas le meme geste dans deux
-     compositions differentes. 0,7 s tombe dans la fourchette d'entree
-     recommandee, 500 a 800 ms.
+  /* ── LE BALAYAGE ──────────────────────────────────────────────────────
+     Un aplat de couleur couvre l'echange puis se retire, au lieu de faire
+     glisser deux pages derriere un cadre immobile. Demande de Ropat le
+     29/07/2026, apres deux tentatives d'adoucissement du glissement : le
+     probleme n'etait pas le reglage, c'etait le geste.
 
-     ⚠️ LA SORTIE VAUT 75 % DE L'ENTREE, et c'est une regle, pas un gout : une
-     sortie doit etre plus rapide qu'une entree, sinon la page quittee s'attarde
-     et bouche l'arrivee. Elles etaient egales.
+     Trois durees, et c'est le RETARD qui compte : sans lui, le bord de fuite de
+     la page quittee et le bord d'attaque de la page atteinte coincident, donc
+     l'aplat n'est jamais visible. C'est l'ecart entre les deux qui ouvre la
+     bande de couleur.
 
-     ⚠️ Un `--dur-page-out` de 0,4 s a existe ici le temps d'une version a
-     fondu. La valeur reste vraie du geste de RETOUR de Lu Yu, un fondu
-     d'opacite de 0,4 s en `expo.OutIn`, que ce site ne reproduit pas ;
-     `expo.OutIn` etant une courbe COMPOSITE de GSAP, aucune `cubic-bezier`
-     unique ne la reproduira exactement. */
-  --dur-page-in: 0.7s;
-  --dur-page-out: 0.52s;
+     ⚠️ LA LARGEUR DE LA BANDE SE CALCULE, ELLE NE SE TATONNE PAS :
+         largeur ≈ (retard / duree de couverture) x largeur du viewport
+     A 0,35 s de retard pour 0,5 s de couverture, l'ecart valait 70 % de la
+     course : l'aplat couvrait presque tout l'ecran, donc un RIDEAU et non un
+     balayage. A 0,22 s il occupe environ 44 % de la largeur, ce qui se lit
+     comme une bande qui traverse.
+     C'est le seul chiffre a bouger pour changer le caractere du geste : monte-le
+     vers un rideau, baisse-le vers un liseré. */
+  --voile-transition: var(--accent);   /* l'aplat. Un mot a changer. */
+  --dur-voile-couvre: 0.5s;            /* la page quittee est mangee */
+  --dur-voile-retard: 0.22s;           /* l'ecart, donc la largeur de la bande */
+  --dur-voile-decouvre: 0.6s;          /* la page atteinte est decouverte */
 
   /* Le loader d'accueil. Ces deux durees sont lues par le CSS ET par le JS
      (`assets/js/script.js`, sections PAGE LOADER et RADAR), c'est pourquoi
