@@ -867,10 +867,26 @@ body:has(.project-page) header[data-zone="ouverture"] {
 .project-open-lede > *:nth-child(2) { --echelon: 1; }
 .project-open-lede > *:nth-child(3) { --echelon: 2; }
 
+/* ⚠️ LE FLOU EST LA PIECE QUI ENLEVE LA BRUSQUERIE, pas la duree ni le retard.
+   Ropat, 29/07/2026 : « ce n'est pas une question de retard mais d'animation,
+   le contenu arrive trop brusquement. » Diagnostic : `opacity: 0 -> 1` est un
+   INTERRUPTEUR, le texte surgit au lieu d'apparaitre, et 18 px de course sur
+   une courbe tres en avance ajoutaient une secousse.
+   Le flou change la nature de l'entree : le texte se FORME au lieu de se poser.
+   C'est la matiere que la reference nomme pour les entrees adoucies, et la
+   seule qui traite la cause plutot que de rallonger le symptome.
+   La course tombe donc de 18 a 10 px : avec un flou, le deplacement n'a plus a
+   porter le geste, il l'accompagne. */
 @keyframes hero-arrive {
   from {
     opacity: 0;
-    transform: translate3d(0, 18px, 0);
+    filter: blur(10px);
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 

@@ -483,7 +483,10 @@
      ⚠️ Ce ne sont PAS des jetons de transition : l'animation est une animation
      CSS ordinaire, portee par le DOM vivant et non par la couche
      `::view-transition`. Voir la note dans pages/_project.scss. */
-  --dur-hero-arrivee: 0.55s;
+  /* ⚠️ Allongee de 0,55 a 0,8 s le 29/07/2026, non pour retarder mais parce
+     qu'un FLOU a besoin de temps pour se lire. Trop court, il ne se voit pas
+     comme une mise au point, il se voit comme un scintillement. */
+  --dur-hero-arrivee: 0.8s;
   --dur-hero-retard: 0.3s;
   --dur-hero-echelon: 0.09s;
 
