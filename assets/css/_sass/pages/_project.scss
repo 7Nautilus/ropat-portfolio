@@ -874,7 +874,25 @@ body:has(.project-page) header[data-zone="ouverture"] {
    ligne du layout, section du sens de navigation.
    `paused` pendant la phase de retard maintient l'animation a son etat de
    depart : le retard fait partie de la frise, il se met en pause avec elle. */
-html.voile-en-cours .project-open-lede > * {
+/* Le voile de lisibilite entre lui aussi, mais SANS remonter : c'est un aplat a
+   fond perdu, le translater montrerait le bord de l'image. Il se contente donc
+   d'apparaitre, et il le fait AVANT le texte.
+   ⚠️ CET ORDRE EST UNE CONTRAINTE DE LISIBILITE, PAS UN GOUT. Ce voile existe
+   pour donner 4,5:1 aux mots poses sur l'oeuvre : le micro-libelle du theme a
+   ete mesure a 1,04:1 sans lui, sur un mockup clair. S'il arrivait en meme temps
+   que le texte, il y aurait une fenetre ou les mots sont lisibles et pas encore
+   proteges. Il part donc sans retard et va deux fois plus vite qu'eux. */
+.project-open--contexte::after {
+  animation: hero-scrim var(--dur-hero-scrim) var(--ease-out-fort) both;
+}
+
+@keyframes hero-scrim {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+html.voile-en-cours .project-open-lede > *,
+html.voile-en-cours .project-open--contexte::after {
   animation-play-state: paused;
 }
 
@@ -913,6 +931,15 @@ html.voile-en-cours .project-open-lede > * {
 @media (prefers-reduced-motion: reduce) {
   .project-open-lede > * {
     animation: hero-arrive-sobre 0.25s ease both !important;
+  }
+
+  /* Le voile de lisibilite, lui, ne s'anime PLUS DU TOUT sous ce reglage : il
+     est deja un simple fondu, donc l'adoucir n'a pas de sens, et le retirer
+     ferait apparaitre les mots sur l'oeuvre nue le temps du fondu. Une contrainte
+     de contraste ne se negocie pas contre une preference de mouvement. */
+  .project-open--contexte::after {
+    animation: none !important;
+    opacity: 1;
   }
 }
 

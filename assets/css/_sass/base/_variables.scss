@@ -506,6 +506,14 @@
      donc l'accroche, simple paragraphe mais haute de 198 px, voyageait plus que
      le titre : la hierarchie s'inversait. */
   --course-hero: 0.5em;
+  /* Le voile de lisibilite entre AVANT le texte, et ce n'est pas une preference.
+     Il existe pour donner 4,5:1 aux mots poses sur l'oeuvre : sans lui, le
+     micro-libelle du theme a ete mesure a 1,04:1 sur un mockup clair. S'il
+     arrivait EN MEME TEMPS que le texte, il y aurait une fenetre ou les mots
+     sont lisibles et pas encore proteges.
+     0,35 s pour un retard de texte de 0,15 s : le voile est en place bien avant
+     que le texte devienne lisible. */
+  --dur-hero-scrim: 0.35s;
 
   --voile-transition: var(--accent);   /* l'aplat. Un mot a changer. */
   --dur-voile-couvre: 0.5s;            /* la page quittee est mangee */
