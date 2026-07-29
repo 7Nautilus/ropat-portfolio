@@ -36,12 +36,38 @@ jobs:
         run: sudo snap install dart-sass
 
       # 3. Compiler le SCSS directement DANS le dossier de sortie de Jekyll
+      #
+      # ⚠️ `--style=compressed` A ETE AJOUTE LE 29/07, ET SON ABSENCE COUTAIT CHER.
+      # Le SCSS de ce projet est commente a 56 % : chaque decision de design y est
+      # expliquee a l'endroit ou elle mord, ce qui est voulu et doit rester. Mais
+      # ces commentaires partaient EN PRODUCTION, sur une feuille bloquante au
+      # premier rendu, sur les 63 pages du site.
+      # Mesure : 175 566 octets bruts et 51 175 gzip, contre 12 824 gzip une fois
+      # les commentaires retires. Soit 75 % de moins sur le fil.
+      # Le fichier `assets/css/main.css` commite reste LISIBLE : il sert au
+      # `jekyll serve` local et ses diffs doivent rester relisibles. La version
+      # compressee n'existe que dans `_site`, et n'est jamais commitee.
+      #
+      # ⚠️ `set -euo pipefail` N'EST PAS DECORATIF, il ferme un mode de defaillance
+      # INVISIBLE. Cette etape ecrit dans `_site` APRES que `jekyll build` y a
+      # copie le `main.css` commite. Si `dart-sass` echouait, le fichier copie
+      # restait en place, le build se terminait en succes, et la production
+      # recevait silencieusement un CSS perime. Rien, nulle part, ne l'aurait dit.
+      # L'assertion de taille ferme le second cas : un fichier ecrit mais vide.
       - name: Compile SCSS into _site
         run: |
+          set -euo pipefail
           mkdir -p _site/assets/css
-          dart-sass assets/css/main.scss _site/assets/css/main.css --load-path=assets/css/_sass
-          echo "Vérification du CSS final dans _site :"
-          ls -lh _site/assets/css/main.css
+          dart-sass assets/css/main.scss _site/assets/css/main.css \
+            --load-path=assets/css/_sass \
+            --style=compressed \
+            --no-source-map
+          taille=$(stat -c%s _site/assets/css/main.css)
+          echo "CSS final : ${taille} octets"
+          if [ "$taille" -lt 20000 ]; then
+            echo "::error::CSS suspect (${taille} o). Un fichier tronque ou vide ne doit pas partir en production."
+            exit 1
+          fi
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

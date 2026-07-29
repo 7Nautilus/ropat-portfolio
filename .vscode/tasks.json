@@ -1,0 +1,86 @@
+{
+  // ⚠️ CE FICHIER EST ENFIN VERSIONNE (29/07/2026). Il ne l'etait pas : le
+  // `.gitignore` excluait `.vscode/` puis tentait `!.vscode/tasks.json`, ce que
+  // git ne sait pas faire (il n'entre pas dans un repertoire exclu, donc la
+  // negation n'est jamais evaluee). Corrige en `.vscode/*`.
+  // Consequence de cette exclusion : la seule definition du build local vivait
+  // hors du depot, donc personne ne pouvait constater qu'elle avait diverge de
+  // celle de la CI.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // ⚠️ PAS DE `--style=compressed` ICI, ET C'EST DELIBERE. La sortie de cette
+      // tache est `assets/css/main.css`, qui est COMMITE : il sert au
+      // `jekyll serve` local, Jekyll ne compilant jamais le SCSS lui-meme.
+      // Un fichier commite doit rester relisible en diff ; minifie, le moindre
+      // changement de variable produirait un diff d'une seule ligne de 60 Ko.
+      // La compression appartient a la CI, qui ecrit dans `_site` et ne commite
+      // rien. Voir `.github/workflows/deploy.yml`.
+      // L'ancienne version portait `--style=compressed --source-map` et n'etait
+      // manifestement pas utilisee : le `main.css` commite est en clair, et le
+      // `.map` sur disque datait de trois mois.
+      "label": "Sass: Build",
+      "type": "shell",
+      "command": "sass assets/css/main.scss assets/css/main.css --load-path=assets/css/_sass --no-source-map",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "silent", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Sass: Watch",
+      "type": "shell",
+      "command": "sass assets/css/main.scss assets/css/main.css --load-path=assets/css/_sass --no-source-map --watch",
+      "group": "build",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": {
+        "owner": "sass",
+        "pattern": { "regexp": "^Error: (.*)$", "message": 1 },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^Sass is watching",
+          "endsPattern": "^Compiled"
+        }
+      }
+    },
+    {
+      // ⚠️ LES DEUX CONFIGURATIONS. Sans `_config.dev.yml`, `labo/design-system.html`
+      // n'est plus servi en local non plus, puisqu'il est desormais exclu de la
+      // production. Voir le commentaire de ce fichier.
+      "label": "Jekyll: Serve",
+      "type": "shell",
+      "command": "bundle exec jekyll serve --livereload --config _config.yml,_config.dev.yml",
+      "group": "build",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev: Sass Watch + Jekyll",
+      "dependsOn": ["Sass: Watch", "Jekyll: Serve"],
+      "dependsOrder": "parallel",
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      // La carte du depot. `--build` est necessaire des qu'une source a change :
+      // la carte lit `_site` comme oracle et refuse de repondre sur un build
+      // perime.
+      "label": "Carte: regenerer",
+      "type": "shell",
+      "command": "bundle exec ruby scripts/carte.rb --build",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      // Ce qui a bouge depuis la derniere carte commitee. A lancer avant de
+      // commiter un changement structurel.
+      "label": "Carte: ce qui a bouge",
+      "type": "shell",
+      "command": "bundle exec ruby scripts/carte.rb --build && bundle exec ruby scripts/carte.rb --diff",
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}

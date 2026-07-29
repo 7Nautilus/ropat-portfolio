@@ -27,7 +27,8 @@ module Carte
   class Emis
     ATTRS_INTERESSANTS = %w[id class role src href poster srcset style].freeze
 
-    attr_reader :pages, :classes, :ids, :attributs, :references, :perime, :date_build
+    attr_reader :pages, :classes, :ids, :attributs, :references, :perime, :date_build,
+                :lu_dans, :avertissement
 
     def initialize(couverture)
       @couverture = couverture
@@ -50,10 +51,14 @@ module Carte
     private
 
     def charger
-      racine = Carte.chemin("_site")
+      racine = Carte.dossier_build
+      @lu_dans = Carte.relatif(racine)
       unless Dir.exist?(racine)
-        @perime = "_site n'existe pas. Lancer `bundle exec jekyll build` ou `carte.rb --build`."
+        @perime = "aucun build a lire. Lancer `bundle exec ruby scripts/carte.rb --build`."
         return
+      end
+      unless Carte.build_prive?
+        @avertissement = "lecture de `_site`, qui appartient au serveur de developpement. "                          "Un `jekyll serve` en cours le reecrit avec SA configuration de demarrage. "                          "Preferer `--build`, qui construit dans `.carte/site`."
       end
 
       fichiers = Dir.glob(File.join(racine, "**", "*.html"))
@@ -87,7 +92,7 @@ module Carte
       exclus = %w[scripts/ CARTE.md .carte/ TODO.md VEILLE.md CLAUDE.md DESIGN.md README.md docs/]
       sources = Carte.fichiers("**/*").reject do |f|
         rel = Carte.relatif(f)
-        f.include?("/_site/") || exclus.any? { |e| e.end_with?("/") ? rel.start_with?(e) : rel == e }
+        f.include?("/_site/") || f.include?("/.carte/") || exclus.any? { |e| e.end_with?("/") ? rel.start_with?(e) : rel == e }
       end
       plus_recente = sources.max_by { |f| File.mtime(f) }
       return unless plus_recente && File.mtime(plus_recente) > @date_build

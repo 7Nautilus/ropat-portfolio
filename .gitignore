@@ -9,7 +9,15 @@ _site/
 # Il sera transformé en XML pur par Jekyll lors du build
 
 # IDE
-.vscode/
+# ⚠️ `.vscode/*` ET NON `.vscode/`, ET C'EST TOUTE LA DIFFERENCE. Git ne peut pas
+# reinclure un fichier dont le REPERTOIRE parent est exclu : il n'entre meme pas
+# dedans, donc le `!` de la ligne suivante n'etait jamais evalue. Verifie :
+# `git check-ignore -v .vscode/tasks.json` ne matchait meme pas, et
+# `git ls-files .vscode` ne rendait rien.
+# Consequence concrete : le seul fichier qui porte la commande Sass correcte
+# (`--style=compressed`) n'etait pas dans le depot, donc personne ne pouvait voir
+# que la CI et le local avaient divergé.
+.vscode/*
 !.vscode/tasks.json
 .idea/
 
@@ -36,3 +44,5 @@ TODO.md
 CLAUDE.md
 docs/
 TESTS/
+# Le build prive de `scripts/carte.rb`. Le JSON de la carte, lui, EST versionne.
+.carte/site/

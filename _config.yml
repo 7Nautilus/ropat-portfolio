@@ -19,10 +19,27 @@ exclude:
   - CARTE.md
   - scripts/
   - DESIGN.md
+  # ⚠️ LES PAGES DE TRAVAIL SORTENT DE LA PRODUCTION (29/07/2026). Elles etaient
+  # publiees sur ropat.art, protegees par un seul `noindex` : `labo/design-system.html`
+  # (1771 lignes, 123 Ko rendus) et `TESTS/dither.html`. Un `noindex` demande a un
+  # moteur de ne pas indexer, il n'empeche personne d'ouvrir l'URL.
+  # ⚠️ ELLES RESTENT ACCESSIBLES EN LOCAL, via `_config.dev.yml` : c'est ce que
+  # lance la tache « Jekyll: Serve ». Le labo a besoin de Jekyll (il inclut
+  # `ui/button.html` et lit `site.data`), il ne peut donc pas etre ouvert en
+  # `file://`.
+  - labo/
+  - TESTS/
 
-sass:
-  style: compressed # Optionnel : pour minifier ton CSS
-  sass_dir: _sass   # Si tu mets tes partials dans un dossier nommé _sass
+# ⚠️ LE BLOC `sass:` A ETE RETIRE LE 29/07, ET IL N'A JAMAIS RIEN FAIT.
+# Il declarait `style: compressed` et `sass_dir: _sass`. Or :
+#   - `assets/css/main.scss` n'a PAS de front matter, donc Jekyll ne le compile
+#     jamais, il le COPIE tel quel dans `_site` ;
+#   - il n'existe aucun repertoire `_sass` a la racine, les partiels vivent dans
+#     `assets/css/_sass/` et sont resolus par les `@use` relatifs.
+# Sa presence etait pire que son absence : elle donnait a lire que la compression
+# etait configuree, alors que le CSS partait en production non minifie.
+# La compilation reelle a lieu dans `.github/workflows/deploy.yml`, etape
+# « Compile SCSS into _site ». C'est le seul endroit qui compte.
 
 # Configuration Business (pour Schema.org)
 business:

@@ -8,7 +8,7 @@
 #   bundle exec ruby scripts/carte.rb --diff     n'affiche QUE ce qui a bouge
 #   bundle exec ruby scripts/carte.rb --check    sortie non nulle si la carte est perimee
 #   bundle exec ruby scripts/carte.rb --routes   la seule table des routes
-#   bundle exec ruby scripts/carte.rb --build    construit `_site` d'abord
+#   bundle exec ruby scripts/carte.rb --build    construit dans .carte/site d'abord
 #
 # ⚠️ `bundle exec` N'EST PAS UNE CONVENTION, C'EST UNE CONTRAINTE. Deux raisons,
 # toutes deux mesurees sur cette machine :
@@ -19,7 +19,8 @@
 #      passe qui confronte parametres passes et parametres lus rend une reponse
 #      vide sans se plaindre.
 #
-# Le script ne LIT que le depot. Il n'ecrit que `CARTE.md` et `.carte/carte.json`.
+# Le script ne LIT que le depot. Il n'ecrit que `CARTE.md`, `.carte/carte.json`,
+# et `.carte/site/` quand on lui passe `--build`. Il ne touche JAMAIS `_site`.
 
 $LOAD_PATH.unshift(__dir__)
 
@@ -79,16 +80,22 @@ module Carte
     emis.perime ? 2 : 0
   end
 
-  # ⚠️ La construction va dans un repertoire A PART. Ecraser `_site` pendant
-  # qu'un `jekyll serve` tourne lui coupe l'herbe sous le pied ; et la carte doit
-  # pouvoir se lancer sans rien perturber.
+  # ⚠️ `jekyll clean` D'ABORD, ET CE N'EST PAS DE LA PRUDENCE DECORATIVE.
+  # `_site` peut contenir des pages que le build ne produit plus. C'est arrive le
+  # 29/07 : apres avoir exclu `labo/` et `TESTS/`, l'oracle lisait encore 65 pages
+  # dont deux qui n'existaient plus. La carte affirmait alors des choses sur des
+  # pages fantomes, et surtout elle comptait faux, ce qui contamine la phrase
+  # « absent des N pages construites » qui est le fondement de tous ses verdicts.
+  # La CI ne connait pas ce probleme (le checkout est neuf a chaque fois), donc
+  # c'est un piege PUREMENT local, c'est-a-dire le plus difficile a voir.
   def construire
+    dest = chemin(BUILD_PROPRE)
+    puts "construction dans #{BUILD_PROPRE} ..."
     require "fileutils"
-    dest = chemin("_site")
-    puts "construction de _site ..."
-    ok = system("bundle", "exec", "jekyll", "build", "--quiet", chdir: RACINE)
+    FileUtils.rm_rf(dest)
+    ok = system("bundle", "exec", "jekyll", "build", "--quiet", "-d", dest, chdir: RACINE)
     abort("le build a echoue, la carte s'arrete") unless ok
-    puts "construit : #{Dir.glob(File.join(dest, '**', '*.html')).size} pages"
+    puts "construit : #{Dir.glob(File.join(dest, "**", "*.html")).size} pages"
   end
 
   def diff(rendu)

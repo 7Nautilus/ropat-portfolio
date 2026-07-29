@@ -13,6 +13,25 @@ require_relative "socle"
 # locale n'etait meme pas versionnee, donc personne ne pouvait comparer.
 
 module Carte
+  module_function
+
+  # ⚠️ LIRE LE YAML, PAS UNE REGEXP, ET CE N'EST PAS UN GOUT PERSONNEL.
+  # La premiere version cherchait le bloc `exclude:` par expression reguliere, ce
+  # qui exigeait que CHAQUE ligne de la liste commence par un tiret. Le jour ou un
+  # commentaire a ete insere au milieu de cette liste, l'extraction s'est arretee
+  # la, et la carte a annonce que `labo/` etait publie en production alors qu'on
+  # venait de l'exclure DANS LE MEME COMMIT.
+  # Une carte qui se trompe sur le changement qu'on vient de faire est pire
+  # qu'aucune carte : elle est fausse au moment precis ou on la consulte.
+  # `Psych` sait lire du YAML. Il n'y a aucune raison de l'imiter a la main.
+  def liste_exclue(yaml)
+    return [] unless yaml
+
+    Array(YAML.safe_load(yaml, permitted_classes: [Date, Time], aliases: true)&.fetch("exclude", nil))
+  rescue Psych::Exception
+    []
+  end
+
   class Build
     attr_reader :faits, :anomalies
 
@@ -24,6 +43,8 @@ module Carte
     end
 
     private
+
+    def liste_exclue(y) = Carte.liste_exclue(y)
 
     def lire(f)
       chemin = Carte.chemin(f)
@@ -92,7 +113,7 @@ module Carte
       end
 
       # ── Publication ───────────────────────────────────────────────────────
-      exclus = config.to_s[/^exclude:\s*\n((?:\s+-.*\n)+)/, 1].to_s.scan(/-\s*(\S+)/).flatten
+      exclus = liste_exclue(config)
       @faits[:exclus] = exclus
       %w[labo/ TESTS/].each do |d|
         next unless Dir.exist?(Carte.chemin(d))
@@ -103,6 +124,29 @@ module Carte
           ou: "_config.yml (exclude)",
           pourquoi: "Rien ne l'exclut du build. Seul un `noindex` le protege, ce qui n'est pas une exclusion."
         }
+      end
+
+      # ── La derive entre les deux configurations ───────────────────────────
+      #
+      # `_config.dev.yml` doit redeclarer la liste d'exclusion ENTIERE, parce que
+      # Jekyll remplace les tableaux au lieu de les completer. Cette duplication
+      # est le prix a payer pour garder le labo accessible en local, et une
+      # duplication non surveillee derive toujours. Ce controle est la surveillance.
+      dev = lire("_config.dev.yml")
+      if dev
+        liste_dev = liste_exclue(dev)
+        ecart_attendu = %w[labo/ TESTS/]
+        manquants = (exclus - ecart_attendu) - liste_dev
+        en_trop   = liste_dev - exclus
+        if manquants.any? || en_trop.any?
+          ecarts << {
+            quoi: "`_config.dev.yml` a derive de `_config.yml`",
+            ou: "_config.dev.yml (exclude)",
+            pourquoi: "Attendu : la liste de production moins #{ecart_attendu.join(' et ')}. " \
+                      "#{manquants.any? ? "Absent du dev : #{manquants.join(', ')}. " : ''}" \
+                      "#{en_trop.any? ? "En trop dans le dev : #{en_trop.join(', ')}." : ''}"
+          }
+        end
       end
 
       # ── Epinglage ─────────────────────────────────────────────────────────

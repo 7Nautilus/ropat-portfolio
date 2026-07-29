@@ -49,12 +49,9 @@ module Carte
     # valide la regle d'URL se remplit de faux positifs et cesse d'etre lisible,
     # donc cesse d'etre lu.
     def exclus
-      @exclus ||= begin
-        cfg = File.exist?(Carte.chemin("_config.yml")) ? Carte.lire(Carte.chemin("_config.yml")) : ""
-        cfg[/^exclude:\s*
-((?:\s+-.*
-)+)/, 1].to_s.scan(/-\s*(\S+)/).flatten
-      end
+      @exclus ||= Carte.liste_exclue(
+        File.exist?(Carte.chemin("_config.yml")) ? Carte.lire(Carte.chemin("_config.yml")) : nil
+      )
     end
 
     def exclu?(rel)
@@ -86,7 +83,7 @@ module Carte
       @routes.each do |r|
         next if r.produite || !r.sortie.end_with?(".xml", ".txt")
 
-        r.produite = File.exist?(File.join(Carte.chemin("_site"), r.sortie))
+        r.produite = File.exist?(File.join(Carte.dossier_build, r.sortie))
       end
 
       manquantes = @routes.reject(&:produite)
@@ -177,7 +174,7 @@ module Carte
       return unless @emis.existe?
 
       casses = []
-      racine = Carte.chemin("_site")
+      racine = Carte.dossier_build
 
       @emis.pages.each_key do |page|
         html = Carte.lire(File.join(racine, page))
@@ -216,7 +213,7 @@ module Carte
       chemin = chemin.delete_prefix("/")
       chemin = chemin.empty? ? "index.html" : chemin
       chemin += "index.html" if chemin.end_with?("/")
-      @emis.pages.key?(chemin) || File.exist?(File.join(Carte.chemin("_site"), chemin))
+      @emis.pages.key?(chemin) || File.exist?(File.join(Carte.dossier_build, chemin))
     end
   end
 end

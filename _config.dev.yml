@@ -1,0 +1,30 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  CONFIGURATION DE DEVELOPPEMENT
+# ══════════════════════════════════════════════════════════════════════════
+#
+#   bundle exec jekyll serve --livereload --config _config.yml,_config.dev.yml
+#
+# Sa seule raison d'etre : rendre `labo/` et `TESTS/` accessibles en local, alors
+# qu'ils sont exclus de la production.
+#
+# ⚠️ IL FAUT REDECLARER LA LISTE ENTIERE, et ce n'est pas un oubli. Jekyll fusionne
+# les configurations en REMPLACANT les tableaux, pas en les completant : une liste
+# partielle ici reintroduirait en local tout ce que la production exclut, y compris
+# `TODO.md` et `CLAUDE.md`.
+# ⚠️ CETTE DUPLICATION PEUT DERIVER, donc elle est surveillee : `scripts/carte.rb`
+# verifie que cette liste vaut exactement celle de `_config.yml` moins `labo/` et
+# `TESTS/`, et le signale sinon.
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - docs/
+  - backup.txt
+  - extract_font_sizes.py
+  - font_sizes_report.csv
+  - VEILLE.md
+  - TODO.md
+  - CLAUDE.md
+  - CARTE.md
+  - scripts/
+  - DESIGN.md

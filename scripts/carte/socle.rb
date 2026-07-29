@@ -61,6 +61,25 @@ module Carte
 
   def relatif(f) = f.delete_prefix(RACINE + "/").tr("\\", "/")
 
+  # ⚠️ LA CARTE NE LIT PAS `_site`, ET C'EST UNE LECON PAYEE DEUX FOIS.
+  # `_site` appartient au serveur de developpement : un `jekyll serve` qui tourne
+  # le REECRIT a chaque fichier touche, avec la configuration qu'il a chargee a
+  # son demarrage. Le 29/07, un serve lance avant l'exclusion de `labo/` a
+  # continue de republier `labo/`, `TESTS/` et `CARTE.md` dans `_site` apres
+  # chaque edition. Deux verifications ont conclu que l'exclusion ne marchait pas
+  # alors qu'elle marchait : un build propre lance a la main donnait 63 pages
+  # justes, et le serve les ecrasait dans la seconde qui suivait.
+  # La carte construit donc dans SON PROPRE repertoire, que personne d'autre ne
+  # touche. Elle retombe sur `_site` s'il n'existe pas, en le signalant.
+  BUILD_PROPRE = ".carte/site"
+
+  def dossier_build
+    prive = chemin(BUILD_PROPRE)
+    Dir.exist?(prive) ? prive : chemin("_site")
+  end
+
+  def build_prive? = Dir.exist?(chemin(BUILD_PROPRE))
+
   # ── Depouillement ────────────────────────────────────────────────────────
 
   # ⚠️ LE DEPOUILLEMENT PRESERVE LE NOMBRE DE LIGNES ET LES COLONNES.

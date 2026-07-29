@@ -1,23 +1,13 @@
 {
-  "genere_le": "2026-07-28T23:37:49Z",
-  "commit": "59f3125",
-  "pages_construites": 66,
+  "genere_le": "2026-07-29T00:06:09Z",
+  "commit": "8d2f579",
+  "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
   "routes": [
     {
       "source": "index.html",
       "url": "/",
-      "lang": "fr"
-    },
-    {
-      "source": "DESIGN.md",
-      "url": "/DESIGN.html",
-      "lang": null
-    },
-    {
-      "source": "design-system.html",
-      "url": "/design-system.html",
       "lang": "fr"
     },
     {
@@ -331,11 +321,6 @@
       "lang": "fr"
     },
     {
-      "source": "labo/design-system.html",
-      "url": "/labo/design-system.html",
-      "lang": null
-    },
-    {
       "source": "sitemap.xml",
       "url": "/sitemap.xml",
       "lang": null
@@ -347,7 +332,6 @@
     "_layouts/default.html -> layout/header.html",
     "_layouts/default.html -> meta/open-graph.html",
     "_layouts/default.html -> meta/schema-org.html",
-    "design-system.html -> social-media-icons.html",
     "en/about.html -> pages/about.html",
     "en/contact.html -> pages/contact.html",
     "en/index.html -> pages/index.html",
@@ -592,6 +576,7 @@
     ".social-links",
     ".social-icon",
     ".was-validated",
+    ".contact-erreur",
     ".contact-select",
     ".is-invalid",
     ".galerie-plus",

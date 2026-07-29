@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 01:37 sur 59f3125.
+> Generee le 29/07/2026 a 02:06 sur 8d2f579.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -14,8 +14,9 @@ ne le signale.
 
 | Mesure | Valeur |
 |---|---|
-| Pages construites lues comme oracle | **66** |
-| Date du build lu | 29/07/2026 01:37 |
+| Pages construites lues comme oracle | **63** |
+| Date du build lu | 29/07/2026 02:06 |
+| Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
 | Partiels SCSS | 31 |
@@ -25,12 +26,12 @@ Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
 
 **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
 Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
-qu'aucune mesure ne peut etablir. « Absent des 66 pages construites le
+qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
 29/07 » est un fait, datable et refutable.
 
 ## 1. Routes
 
-67 sources a front matter, dont 33 en FR et 31 en EN.
+64 sources a front matter, dont 32 en FR et 31 en EN.
 
 **48 pages ne portent qu'un identifiant** et un include d'une ligne : elles sont integralement derivables de leurs donnees.
 
@@ -39,8 +40,6 @@ qu'aucune mesure ne peut etablir. « Absent des 66 pages construites le
 | URL | Source | Lang |
 |---|---|---|
 | `/` | `index.html` | fr |
-| `/DESIGN.html` | `DESIGN.md` | - |
-| `/design-system.html` | `design-system.html` | fr |
 | `/en/` | `en/index.html` | en |
 | `/en/about.html` | `en/about.html` | en |
 | `/en/contact.html` | `en/contact.html` | en |
@@ -103,16 +102,9 @@ qu'aucune mesure ne peut etablir. « Absent des 66 pages construites le
 | `/fr/services/conception-graphique.html` | `fr/services/conception-graphique.html` | fr |
 | `/fr/services/design-musique.html` | `fr/services/design-musique.html` | fr |
 | `/fr/services/web-design.html` | `fr/services/web-design.html` | fr |
-| `/labo/design-system.html` | `labo/design-system.html` | - |
 | `/sitemap.xml` | `sitemap.xml` | - |
 
 </details>
-
-### Sources dont la sortie calculee est introuvable dans _site  (1)
-
-Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est fausse.
-
-- DESIGN.md -> DESIGN.html
 
 ### Pages dont le jumeau de langue calcule n'existe pas  (6)
 
@@ -125,13 +117,10 @@ Chacune produit un lien de bascule et un `<link rel="alternate">` vers une URL a
 - fr/experiences.html (fr) vise /en/experiences.html
 - fr/mentions-legales.html (fr) vise /en/mentions-legales.html
 
-### Liens de langue EMIS qui ne resolvent vers aucun fichier  (13)
+### Liens de langue EMIS qui ne resolvent vers aucun fichier  (10)
 
 Mesure sur `_site`, pas sur les sources. Attendu apres correction : 0.
 
-- design-system.html : lien de bascule -> /en/design-system.html
-- design-system.html : hreflang -> https://ropat.art/fr/design-system.html
-- design-system.html : hreflang -> https://ropat.art/en/design-system.html
 - en/legal-notice.html : lien de bascule -> /fr/legal-notice.html
 - en/legal-notice.html : hreflang -> https://ropat.art/fr/legal-notice.html
 - en/privacy.html : lien de bascule -> /fr/privacy.html
@@ -145,7 +134,7 @@ Mesure sur `_site`, pas sur les sources. Attendu apres correction : 0.
 
 ## 2. Graphe des includes
 
-30 includes, 120 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+30 includes, 119 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
 Aucun include orphelin.
 
@@ -174,7 +163,7 @@ Aucun include orphelin.
 - `services/service-card.html` <- pages/index.html, pages/services.html
 - `services/service-main.html` <- en/services/branding-strategy.html, en/services/graphic-design.html, en/services/music-design.html, en/services/web-design.html, fr/services/branding-strategie.html, fr/services/conception-graphique.html, fr/services/design-musique.html, fr/services/web-design.html
 - `services/subservices-card.html` <- services/service-main.html
-- `social-media-icons.html` <- design-system.html, pages/contact.html
+- `social-media-icons.html` <- pages/contact.html
 - `ui/button.html` <- labo/design-system.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
 - `ui/dropdown.html` <- labo/design-system.html, pages/contact.html, portfolio-filters.html
 - `ui/icon-arrow.html` <- ui/button.html
@@ -281,13 +270,7 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 - .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
 - .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
 
-### Selecteurs emis UNIQUEMENT par les pages internes  (1)
-
-Ni vivants sur le site public, ni absents. Leur sort depend de celui des pages de labo.
-
-- .contact-erreur  (assets/css/_sass/pages/_contact.scss:135) -> labo/design-system.html
-
-### Selecteurs absents des 66 pages construites  (29)
+### Selecteurs absents des 63 pages construites  (30)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
@@ -316,6 +299,7 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
 - .was-validated  assets/css/_sass/pages/_contact.scss:126 assets/css/_sass/pages/_contact.scss:316
+- .contact-erreur  assets/css/_sass/pages/_contact.scss:135 assets/css/_sass/pages/_contact.scss:145 assets/css/_sass/pages/_contact.scss:148
 - .contact-select  assets/css/_sass/pages/_contact.scss:155 assets/css/_sass/pages/_contact.scss:171
 - .is-invalid  assets/css/_sass/pages/_contact.scss:316
 - .galerie-plus  assets/css/_sass/pages/_project.scss:355 assets/css/_sass/pages/_project.scss:357 assets/css/_sass/pages/_project.scss:378
@@ -340,7 +324,7 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 
 **Boucles rAF permanentes** (elles tournent tant que l'onglet est visible) : `animer` (assets/js/dither.js:635), `animateBlob` (assets/js/script.js:65), `updateParallax` (assets/js/script.js:1372)
 
-### Selecteurs JS qui ne trouvent rien dans les 66 pages construites  (6)
+### Selecteurs JS qui ne trouvent rien dans les 63 pages construites  (6)
 
 Un selecteur qui ne matche rien n'echoue pas : il rend null et le code s'arrete en silence.
 
@@ -366,45 +350,40 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 
 | Attribut | HTML | CSS | JS |
 |---|---|---|---|
-| `aria-atomic` | 64 page(s) | - | - **personne ne le lit** |
-| `aria-controls` | 65 page(s) | - | assets/js/script.js:135 |
-| `aria-current` | 10 page(s) | - | - **personne ne le lit** |
-| `aria-describedby` | 1 page(s) | - | assets/js/script.js:1187 |
-| `aria-expanded` | 65 page(s) | oui | assets/js/script.js:142 |
-| `aria-haspopup` | 5 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 65 page(s) | - | - **personne ne le lit** |
-| `aria-invalid` | 1 page(s) | - | assets/js/script.js:1186 |
-| `aria-label` | 66 page(s) | - | assets/js/script.js:1271 |
+| `aria-atomic` | 63 page(s) | - | - **personne ne le lit** |
+| `aria-controls` | 63 page(s) | - | assets/js/script.js:135 |
+| `aria-current` | 8 page(s) | - | - **personne ne le lit** |
+| `aria-describedby` | - | - | assets/js/script.js:1187 |
+| `aria-expanded` | 63 page(s) | oui | assets/js/script.js:142 |
+| `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
+| `aria-hidden` | 63 page(s) | - | - **personne ne le lit** |
+| `aria-invalid` | - | - | assets/js/script.js:1186 |
+| `aria-label` | 63 page(s) | - | assets/js/script.js:1271 |
 | `aria-labelledby` | 51 page(s) | - | - **personne ne le lit** |
-| `aria-live` | 64 page(s) | - | - **personne ne le lit** |
+| `aria-live` | 63 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
-| `aria-selected` | 5 page(s) | oui | assets/js/script.js:152 |
+| `aria-selected` | 4 page(s) | oui | assets/js/script.js:152 |
 | `data-category` | 10 page(s) | - | assets/js/script.js:268 |
 | `data-chargee` | - | - | assets/js/script.js:1045 |
 | `data-chrome` | - | oui | assets/js/script.js:431 |
 | `data-chrome-fige` | 4 page(s) | - | - **personne ne le lit** |
-| `data-courbe` | 1 page(s) | - | - **personne ne le lit** |
 | `data-dbg` | - | - | assets/js/script.js:837 |
-| `data-dropdown-caret` | 5 page(s) | - | - **personne ne le lit** |
-| `data-dropdown-menu` | 5 page(s) | - | - **personne ne le lit** |
-| `data-dropdown-option` | 5 page(s) | - | - **personne ne le lit** |
-| `data-dropdown-selected` | 5 page(s) | - | - **personne ne le lit** |
-| `data-dropdown-trigger` | 5 page(s) | - | - **personne ne le lit** |
-| `data-dropdown-variant` | 5 page(s) | - | - **personne ne le lit** |
-| `data-ds` | 1 page(s) | - | - **personne ne le lit** |
-| `data-empty` | 3 page(s) | oui | assets/js/script.js:170 |
+| `data-dropdown-caret` | 4 page(s) | - | - **personne ne le lit** |
+| `data-dropdown-menu` | 4 page(s) | - | - **personne ne le lit** |
+| `data-dropdown-option` | 4 page(s) | - | - **personne ne le lit** |
+| `data-dropdown-selected` | 4 page(s) | - | - **personne ne le lit** |
+| `data-dropdown-trigger` | 4 page(s) | - | - **personne ne le lit** |
+| `data-dropdown-variant` | 4 page(s) | - | - **personne ne le lit** |
+| `data-empty` | 2 page(s) | oui | assets/js/script.js:170 |
 | `data-encre` | - | oui | assets/js/script.js:851 |
-| `data-jeton` | 1 page(s) | - | - **personne ne le lit** |
-| `data-mesure` | 1 page(s) | - | - **personne ne le lit** |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
-| `data-placeholder` | 3 page(s) | - | - **personne ne le lit** |
-| `data-set-lang` | 64 page(s) | - | assets/js/script.js:1095 |
+| `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
+| `data-set-lang` | 63 page(s) | - | assets/js/script.js:1095 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:964 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:963 |
 | `data-src` | 4 page(s) | - | assets/js/script.js:1047 |
 | `data-sur-media` | - | oui | assets/js/script.js:831 |
-| `data-theme` | 1 page(s) | oui | - |
-| `data-value` | 5 page(s) | oui | assets/js/script.js:174 |
+| `data-value` | 4 page(s) | oui | assets/js/script.js:174 |
 | `data-zone` | - | oui | assets/js/script.js:875 |
 | `loop` | - | - | assets/js/script.js:1061 |
 
@@ -454,28 +433,10 @@ Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
-### Desaccords entre la configuration, le workflow et la tache locale  (11)
+### Desaccords entre la configuration, le workflow et la tache locale  (5)
 
 Chacun decrit le meme build. Quand ils divergent, c'est toujours le workflow qui gagne.
 
-- Le CSS deploye n'est PAS compresse
-      .github/workflows/deploy.yml, etape dart-sass
-      La tache locale porte `--style=compressed`, la CI non. C'est donc la version commentee qui part en production.
-- Le bloc `sass:` de `_config.yml` est inerte
-      _config.yml
-      `main.scss` n'a pas de front matter, donc Jekyll ne le compile jamais, il le COPIE. Le reglage n'a jamais rien fait, et il donne a lire que la compression est configuree.
-- `sass_dir: _sass` pointe vers un repertoire inexistant
-      _config.yml
-      Les partiels vivent dans `assets/css/_sass/` et sont resolus par les `@use` relatifs.
-- La reinclusion `!.vscode/...` de `.gitignore` est inoperante
-      .gitignore
-      Git ne peut pas reinclure un fichier dont le REPERTOIRE parent est exclu. Il faut `.vscode/*` puis `!.vscode/tasks.json`.
-- `labo/` est publie en production
-      _config.yml (exclude)
-      Rien ne l'exclut du build. Seul un `noindex` le protege, ce qui n'est pas une exclusion.
-- `TESTS/` est publie en production
-      _config.yml (exclude)
-      Rien ne l'exclut du build. Seul un `noindex` le protege, ce qui n'est pas une exclusion.
 - dart-sass est installe en version flottante
       .github/workflows/deploy.yml
       `snap install dart-sass` prend la derniere version publiee au moment du build. Le CSS peut changer un jour ou personne n'a rien change.

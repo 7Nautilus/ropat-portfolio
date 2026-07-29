@@ -124,6 +124,8 @@ module Carte
       e = @p[:emis]
       s = +"## 0. Fiabilite de cette carte\n\n"
 
+      s << "> ⚠️ #{e.avertissement}\n\n" if e.avertissement
+
       if e.perime
         s << <<~MD
           > ### MESURE PERIMEE
@@ -140,6 +142,10 @@ module Carte
       s << "| Mesure | Valeur |\n|---|---|\n"
       s << "| Pages construites lues comme oracle | **#{e.nb_pages}** |\n"
       s << "| Date du build lu | #{e.date_build&.strftime('%d/%m/%Y %H:%M') || 'aucun'} |\n"
+      # Dire QUEL repertoire a servi d'oracle. `_site` appartient au serveur de
+      # developpement, `.carte/site` a la carte : la nuance a deja fausse deux
+      # verifications, elle doit etre visible en tete du fichier.
+      s << "| Repertoire lu | `#{e.lu_dans}` |\n"
       s << "| Fichiers de donnees | #{Carte.fichiers('_data/**/*.yml').size} |\n"
       s << "| Includes | #{Carte.fichiers('_includes/**/*.html').size} |\n"
       s << "| Partiels SCSS | #{@p[:css].fichiers_scss.size} |\n"

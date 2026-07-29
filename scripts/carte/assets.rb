@@ -111,7 +111,7 @@ module Carte
     def peser_les_pages
       return unless @emis.existe?
 
-      racine = Carte.chemin("_site")
+      racine = Carte.dossier_build
       @emis.pages.each_key do |page|
         html = Carte.lire(File.join(racine, page))
         somme = 0
