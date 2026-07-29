@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 20:48 sur e0a1007.
+> Generee le 29/07/2026 a 23:51 sur 2949259.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 20:48 |
+| Date du build lu | 29/07/2026 23:51 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -199,17 +199,18 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-111 jetons definis, 105 consommes, 283 noms de selecteur, 11 `!important`.
+121 jetons definis, 114 consommes, 284 noms de selecteur, 12 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`
+`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:915`
 
 Points de rupture ecrits en dur : 360px (3x), 520px (1x), 639px (2x), 767px (2x), 768px (2x), 900px (2x), 992px (1x), 1200px (1x)
 
-### Jetons definis, aucun `var()` ne les lit  (5)
+### Jetons definis, aucun `var()` ne les lit  (6)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
 - --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:446)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:544)
 - --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:396)
 - --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:395)
 - --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:394)
@@ -239,30 +240,31 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 - .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
 - .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
 
-### Selecteurs POSES PAR LE JS, absents du HTML construit  (14)
+### Selecteurs POSES PAR LE JS, absents du HTML construit  (16)
 
 Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : les supprimer casserait un composant qui fonctionne.
 
-- .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1399, assets/js/script.js:1404
-- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1813
+- .reveal-arme  style en assets/css/_sass/base/_animations.scss:17, pose par _layouts/default.html (script en ligne 2):2, _layouts/default.html (script en ligne 2):4
+- .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1331, assets/js/script.js:1336
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1745
 - .cursor-hover  style en assets/css/_sass/components/_cursor.scss:58, pose par assets/js/script.js:81
 - .cursor-text  style en assets/css/_sass/components/_cursor.scss:66, pose par assets/js/script.js:81
 - .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:76, pose par assets/js/script.js:81
-- .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:642
+- .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:574
 - .loaded  style en assets/css/_sass/components/_loader.scss:43, pose par assets/js/script.js:147, assets/js/script.js:316
-- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1672
-- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1678
-- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1760, assets/js/script.js:1781
-- .was-validated  style en assets/css/_sass/pages/_contact.scss:126, pose par assets/js/script.js:1517
-- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1465
-- .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:459, assets/js/script.js:1506, assets/js/script.js:1510, assets/js/script.js:1534
-- .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1257
+- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1604
+- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1610
+- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1692, assets/js/script.js:1713
+- .was-validated  style en assets/css/_sass/pages/_contact.scss:126, pose par assets/js/script.js:1449
+- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1397
+- .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
+- .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:877, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
-### Selecteurs absents des 63 pages construites  (22)
+### Selecteurs absents des 63 pages construites  (21)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
-- .reveal-arme  assets/css/_sass/base/_animations.scss:17 assets/css/_sass/base/_animations.scss:23
 - .transparent-orange-bg  assets/css/_sass/base/_generic.scss:20
 - .card-grid  assets/css/_sass/base/_media-queries.scss:17 assets/css/_sass/base/_media-queries.scss:126 assets/css/_sass/base/_media-queries.scss:240 assets/css/_sass/layout/_grids.scss:1
 - .service-main-container  assets/css/_sass/base/_media-queries.scss:40 assets/css/_sass/base/_media-queries.scss:219 assets/css/_sass/layout/_sections.scss:208
@@ -300,7 +302,7 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 
 ## 5. JS
 
-2 fichiers, 43 selecteurs litteraux, 48 ecouteurs.
+2 fichiers, 43 selecteurs litteraux, 49 ecouteurs.
 
 **Fonctions qui se relancent elles-memes en rAF** : `animer` (assets/js/dither.js:635), `animateBlob` (assets/js/script.js:65). Une fois demarrees elles ne s'arretent plus, mais leur MISE EN ROUTE depend d'une garde que la carte ne suit pas : elle rapporte la forme, pas le fait.
 
@@ -308,17 +310,17 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 
 Legitime si le JS s'en sert comme verrou interne, a verifier sinon.
 
-- stt-progress   (assets/js/script.js:1564)
-- stt-track   (assets/js/script.js:1563)
+- stt-progress   (assets/js/script.js:1496)
+- stt-track   (assets/js/script.js:1495)
 
 ### Ecouteurs `scroll` recenses  (4)
 
 A confronter au throttle : un handler sans rAF qui lit une metrique de layout force un reflow a chaque evenement.
 
-- assets/js/script.js:732
-- assets/js/script.js:1175  (passive)
-- assets/js/script.js:1629  (passive)
-- assets/js/script.js:1787
+- assets/js/script.js:664
+- assets/js/script.js:1107  (passive)
+- assets/js/script.js:1561  (passive)
+- assets/js/script.js:1719
 
 ## 6. Contrat des trois couches
 
@@ -327,44 +329,44 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | Attribut | HTML | CSS | JS |
 |---|---|---|---|
 | `aria-atomic` | 63 page(s) | - | - **personne ne le lit** |
-| `aria-controls` | 63 page(s) | - | assets/js/script.js:423 |
+| `aria-controls` | 63 page(s) | - | assets/js/script.js:355 |
 | `aria-current` | 8 page(s) | - | - **personne ne le lit** |
-| `aria-describedby` | - | - | assets/js/script.js:1475 |
-| `aria-expanded` | 63 page(s) | oui | assets/js/script.js:430 |
+| `aria-describedby` | - | - | assets/js/script.js:1407 |
+| `aria-expanded` | 63 page(s) | oui | assets/js/script.js:362 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1676 |
-| `aria-invalid` | - | - | assets/js/script.js:1474 |
-| `aria-label` | 63 page(s) | - | assets/js/script.js:1559 |
+| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1608 |
+| `aria-invalid` | - | - | assets/js/script.js:1406 |
+| `aria-label` | 63 page(s) | - | assets/js/script.js:1491 |
 | `aria-labelledby` | 51 page(s) | - | - **personne ne le lit** |
 | `aria-live` | 63 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
-| `aria-selected` | 4 page(s) | oui | assets/js/script.js:440 |
-| `data-actif` | - | oui | assets/js/script.js:1694 |
-| `data-category` | 10 page(s) | - | assets/js/script.js:556 |
-| `data-chargee` | - | - | assets/js/script.js:1333 |
-| `data-chrome` | - | oui | assets/js/script.js:719 |
+| `aria-selected` | 4 page(s) | oui | assets/js/script.js:372 |
+| `data-actif` | - | oui | assets/js/script.js:1626 |
+| `data-category` | 10 page(s) | - | assets/js/script.js:488 |
+| `data-chargee` | - | - | assets/js/script.js:1265 |
+| `data-chrome` | - | oui | assets/js/script.js:651 |
 | `data-chrome-fige` | 4 page(s) | - | - **personne ne le lit** |
-| `data-dbg` | - | - | assets/js/script.js:1125 |
+| `data-dbg` | - | - | assets/js/script.js:1057 |
 | `data-dropdown-caret` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-menu` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-option` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-selected` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-trigger` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-variant` | 4 page(s) | - | - **personne ne le lit** |
-| `data-empty` | 2 page(s) | oui | assets/js/script.js:458 |
-| `data-encre` | - | oui | assets/js/script.js:1139 |
+| `data-empty` | 2 page(s) | oui | assets/js/script.js:390 |
+| `data-encre` | - | oui | assets/js/script.js:1071 |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
-| `data-saisi` | - | oui | assets/js/script.js:1759 |
-| `data-set-lang` | 62 page(s) | - | assets/js/script.js:1383 |
-| `data-seuil` | 24 page(s) | - | assets/js/script.js:1252 |
-| `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1251 |
-| `data-src` | 4 page(s) | - | assets/js/script.js:1335 |
-| `data-sur-media` | - | oui | assets/js/script.js:1119 |
-| `data-value` | 4 page(s) | oui | assets/js/script.js:462 |
-| `data-zone` | - | oui | assets/js/script.js:1163 |
+| `data-saisi` | - | oui | assets/js/script.js:1691 |
+| `data-set-lang` | 62 page(s) | - | assets/js/script.js:1315 |
+| `data-seuil` | 24 page(s) | - | assets/js/script.js:1184 |
+| `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1183 |
+| `data-src` | 4 page(s) | - | assets/js/script.js:1267 |
+| `data-sur-media` | - | oui | assets/js/script.js:1051 |
+| `data-value` | 4 page(s) | oui | assets/js/script.js:394 |
+| `data-zone` | - | oui | assets/js/script.js:1095 |
 | `href` | - | - | assets/js/script.js:189 |
-| `loop` | - | - | assets/js/script.js:1349 |
+| `loop` | - | - | assets/js/script.js:1281 |
 
 ## 7. Assets
 
@@ -403,7 +405,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 200488 o brut, 59554 o gzip. Sans les commentaires : 79065 o, 12989 o gzip, soit **78 % de moins** sur le fil.
+**CSS servi** : 217684 o brut, 65779 o gzip. Sans les commentaires : 81117 o, 13399 o gzip, soit **80 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
@@ -421,10 +423,10 @@ Rien a signaler.
 
 - `assets/js/dither.js:621` : INTERACTIF
 - `assets/js/script.js:85` : selectors
-- `assets/js/script.js:423` : trigger.getAttribute('aria-controls'
-- `assets/js/script.js:535` : selector
-- `assets/js/script.js:1461` : champ.id + '-erreur'
-- `assets/js/script.js:1480` : champ.id + '-erreur'
+- `assets/js/script.js:355` : trigger.getAttribute('aria-controls'
+- `assets/js/script.js:467` : selector
+- `assets/js/script.js:1393` : champ.id + '-erreur'
+- `assets/js/script.js:1412` : champ.id + '-erreur'
 
 **Noms de variable liees a plusieurs sources** (55). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 

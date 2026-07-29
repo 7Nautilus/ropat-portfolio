@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T18:48:20Z",
-  "commit": "e0a1007",
+  "genere_le": "2026-07-29T21:51:16Z",
+  "commit": "2949259",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -404,18 +404,27 @@
     "--carousel-items-visible",
     "--carousel-speed",
     "--color-success",
+    "--course-hero",
     "--danger",
     "--dur-base",
+    "--dur-hero-arrivee",
+    "--dur-hero-echelon",
+    "--dur-hero-retard",
     "--dur-loader-fade",
     "--dur-loader-hold",
-    "--dur-page-in",
-    "--dur-page-out",
     "--dur-quick",
     "--dur-reveal",
+    "--dur-voile-couvre",
+    "--dur-voile-decouvre",
+    "--dur-voile-retard",
+    "--ease-expo-in-out",
     "--ease-expo-out",
     "--ease-out",
+    "--ease-out-fort",
+    "--ease-out-quart",
     "--ease-quad-out",
     "--ease-smooth",
+    "--echelon",
     "--encre-chrome",
     "--font-accent",
     "--font-body",
@@ -492,11 +501,13 @@
     "--track-caps",
     "--track-display",
     "--transition-base",
+    "--voile-transition",
     "--white-color"
   ],
   "jetons_sans_consommateur": [
     "--dur-loader-hold",
     "--dur-reveal",
+    "--ease-expo-in-out",
     "--p-vert-haute",
     "--p-vert-mediane",
     "--rhythm-lg",
@@ -505,7 +516,6 @@
     "--track-display"
   ],
   "selecteurs_absents": [
-    ".reveal-arme",
     ".transparent-orange-bg",
     ".card-grid",
     ".service-main-container",
@@ -529,6 +539,7 @@
     ".project-back-link"
   ],
   "selecteurs_poses_par_js": [
+    ".reveal-arme",
     ".is-visible",
     ".custom-scrollbar",
     ".cursor-hover",
@@ -542,7 +553,8 @@
     ".was-validated",
     ".contact-erreur",
     ".is-invalid",
-    ".galerie-plus"
+    ".galerie-plus",
+    ".voile-en-cours"
   ],
   "assets_orphelins": [
     "/assets/images/backgrounds/main-bg.webp",
@@ -553,10 +565,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 200488,
-    "gzip": 59554,
-    "sans_commentaires": 79065,
-    "gzip_sans": 12989
+    "brut": 217684,
+    "gzip": 65779,
+    "sans_commentaires": 81117,
+    "gzip_sans": 13399
   },
   "ratios_faux": []
 }

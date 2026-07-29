@@ -63,10 +63,33 @@ module Carte
 
     private
 
+    # ⚠️ LE JS EN LIGNE COMPTE AUTANT QUE LES FICHIERS, et depuis le 29/07/2026
+    # il porte de la vraie logique : tout ce qui touche a `pagereveal` a du
+    # migrer dans le <head> du layout, cet evenement se declenchant avant les
+    # scripts differes. Sans cette lecture, la carte rangeait `.voile-en-cours`
+    # parmi les selecteurs absents, c'est-a-dire dans la liste qui sert a
+    # supprimer du CSS mort. Meme piege que les classes posees par script.js,
+    # entre par une autre porte.
+    # On ne lit QUE les blocs sans `src` : un `<script src>` est deja couvert.
+    def sources
+      liste = fichiers.map { |f| [Carte.relatif(f), Carte.sans_commentaires_js(Carte.lire(f))] }
+
+      Carte.fichiers("_layouts/**/*.html").concat(Carte.fichiers("_includes/**/*.html")).each do |f|
+        html = Carte.lire(f)
+        rel = Carte.relatif(f)
+        n = 0
+        html.scan(%r{<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>}mi) do |(corps)|
+          n += 1
+          next if corps.strip.empty?
+
+          liste << ["#{rel} (script en ligne #{n})", Carte.sans_commentaires_js(corps)]
+        end
+      end
+      liste
+    end
+
     def analyser
-      fichiers.each do |f|
-        rel    = Carte.relatif(f)
-        propre = Carte.sans_commentaires_js(Carte.lire(f))
+      sources.each do |rel, propre|
 
         propre.scan(APPELS_DOM) do |_q, brut|
           ligne = Carte.numero_ligne(propre, Regexp.last_match.begin(0))
