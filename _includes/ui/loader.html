@@ -24,17 +24,23 @@
   Les durées ne sont pas ici : `--dur-loader-hold` et `--dur-loader-fade`
   vivent dans base/_variables.scss et sont lues par le CSS comme par le JS.
 
-  ⚠️ Ce gabarit rend EXACTEMENT le HTML qu'il remplace, à l'octet près. Un
-  `aria-hidden="true"` sur le voile serait justifié (il ne porte aucune
-  information, il cache le contenu le temps qu'il se pose) mais ce serait un
-  changement de comportement glissé dans une décomposition : il se décide à
-  part, pas ici.
+  ⚠️ `aria-hidden="true"` est délibéré, arbitrage de Ropat du 29/07/2026.
+  Le voile ne porte aucune information : il cache le contenu le temps qu'il se
+  pose, et cette attente est PUREMENT VISUELLE. Le contenu de la page est déjà
+  dans le DOM sous lui, donc un lecteur d'écran ne l'attend pas et n'est bloqué
+  par rien. Sans cet attribut, la seule chose qu'il entendrait ici serait le
+  logo décoratif, deux fois, puisqu'il figure déjà dans l'en-tête.
+  Il ne contient AUCUN élément focalisable, ce qui est la condition pour que
+  `aria-hidden` soit licite : le masquer ne retire donc rien du parcours
+  clavier. Ne pas y mettre de bouton sans retirer l'attribut.
+  Pas de `role="status"` non plus : annoncer « chargement » serait faux, rien
+  n'est en train d'arriver.
 {% endcomment %}
 
 {% assign indice = include.indice | default: "bar" %}
 {% assign marque = include.marque | default: "logo" %}
 
-<div class="page-loader" id="pageLoader">
+<div class="page-loader" id="pageLoader" aria-hidden="true">
   <div class="loader-content">
     {% if marque == "logo" %}
       <div class="loader-logo">{% include ui/logo.html %}</div>
