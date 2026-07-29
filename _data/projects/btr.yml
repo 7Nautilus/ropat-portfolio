@@ -5,16 +5,6 @@ theme:
   fr: "MUSIQUE & DESIGN GRAPHIQUE"
   en: "MUSIC & GRAPHIC DESIGN"
 category: music
-# Couleur de signal du projet, tiree de l oeuvre elle-meme.
-# Releve le 29/07/2026 par echantillonnage de `image_src` : quantification
-# en cases de 24, puis la plus SATUREE parmi celles assez frequentes. Une
-# moyenne aurait rendu un gris-brun, c est-a-dire l identite de rien.
-# eclaircie depuis #8700a7, contraste 2,48. Contraste 3,07:1 sur --surface.
-# ⚠️ Le seuil de 3:1 n est pas impose de l exterieur : les couleurs de
-# Lu Yu vont de 3,22 a 13,91 sur son propre fond, la plus basse etant juste
-# au-dessus. Une couleur qu on ne voit pas n est pas un signal.
-# ⚠️ MESURE, PAS ARBITREE. C est un point de depart pour l oeil de Ropat.
-couleur: "#9d00c2"
 featured: true
 client: 
   fr: "Maltezz"
