@@ -104,9 +104,9 @@ header[role="banner"] {
 
    Valeurs mesurees pour ce geste-ci : 1 s de glissement a l'aller en
    `Expo.easeInOut`, 0,4 s de fondu au retour en `expo.OutIn`, 1,1 s de
-   re-entree du contenu en `Expo.easeOut`. D'ou `--dur-page-out` et
-   `--dur-page-in`, distincts de `--dur-reveal` : un seul jeton ne peut pas
-   porter deux grammaires sans en trahir une. */
+   re-entree du contenu en `Expo.easeOut`. D'ou `--dur-page-in`, distinct de
+   `--dur-reveal` : un seul jeton ne peut pas porter deux grammaires sans en
+   trahir une. */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
@@ -116,23 +116,55 @@ header[role="banner"] {
   mix-blend-mode: normal;
 }
 
+/* ── Le glissement horizontal ─────────────────────────────────────────────
+   Releve image par image sur luyu.co le 29/07/2026, en ralentissant son moteur
+   a 15 % et en enregistrant la position des deux conteneurs a chaque image.
+   Deux conteneurs de la largeur du viewport :
+
+     temps    sortante    entrante
+       0 %       0         -845
+      17 %    +268         -840
+      36 %    +508         -776
+      56 %    +683         -178
+      75 %    +795          -12
+     100 %    +845            0
+
+   Chez lui, la sortante part vers la DROITE et l'entrante arrive par la GAUCHE.
+
+   ⚠️ ICI LE SENS EST INVERSE, ARBITRAGE DE ROPAT DU 29/07/2026. La sortante
+   part vers la gauche, l'entrante arrive par la droite. Le sens de Lu Yu est
+   celui d'un RETOUR dans la convention courante, ou l'on avance vers la gauche
+   et l'on revient vers la droite : entrer dans un projet en venant de la
+   gauche se lit comme un pas en arriere. C'est peut-etre un defaut de son
+   theme plutot qu'une intention, et rien ne permet de trancher. Ce qu'on lui
+   emprunte, ce sont les DUREES et le decalage des courbes, pas la direction.
+
+   ⚠️ ET ELLES NE VONT PAS AU MEME RYTHME, C'EST TOUT LE GESTE. A 36 % du temps
+   la sortante a fait 60 % du chemin quand l'entrante n'en a fait que 8 : elle
+   RETIENT, puis rattrape d'un coup. Deux glissements a la meme courbe
+   donneraient un carrousel rigide ; c'est le decalage entre les deux qui fait
+   qu'on lit un mouvement et pas un defilement.
+   D'ou deux courbes differentes : la sortante s'en va sans ceremonie, la
+   entrante est en `--ease-expo-in-out`. */
+
 ::view-transition-old(root) {
-  animation: page-sortie var(--dur-page-out) var(--ease-expo-out) both;
+  animation: page-sortie var(--dur-page-in) var(--ease-quad-out) both;
 }
 
 ::view-transition-new(root) {
-  animation: page-entree var(--dur-page-in) var(--ease-expo-out) both;
+  animation: page-entree var(--dur-page-in) var(--ease-expo-in-out) both;
 }
 
+/* ⚠️ `100%` SE RAPPORTE ICI A LA LARGEUR DE L'INSTANTANE, qui est celle du
+   viewport : les deux pseudo-elements sont dimensionnes par le navigateur. Pas
+   besoin de `100vw`, qui inclurait une gouttiere de barre de defilement que ce
+   site n'a plus de toute facon. */
 @keyframes page-sortie {
-  to { opacity: 0; }
+  to { transform: translateX(-100%); }
 }
 
 @keyframes page-entree {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
+  from { transform: translateX(100%); }
 }
 
 

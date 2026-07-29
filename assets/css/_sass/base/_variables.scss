@@ -445,16 +445,22 @@
      revelations au defilement sont un livrable de la Phase 4. */
   --dur-reveal: 0.8s;
 
-  /* Le passage d'une page a l'autre. Valeurs mesurees, pas transposees de la
-     grammaire de revelation : c'est precisement l'erreur qu'on vient de
-     corriger. La courbe est `--ease-expo-out`, la famille de Lu Yu pour ce
-     geste-la.
-     ⚠️ Sa sortie exacte est `expo.OutIn`, une courbe COMPOSITE de GSAP (sortie
-     puis entree). Une `cubic-bezier` unique ne peut pas la reproduire : on
-     approche par l'exponentielle sortante, et on le dit plutot que de laisser
-     croire a une equivalence. */
-  --dur-page-out: 0.4s;   /* le fondu de la page quittee */
-  --dur-page-in: 1.1s;    /* l'arrivee du contenu */
+  /* Le passage d'une page a l'autre : un glissement horizontal, mesure image
+     par image chez Lu Yu. Valeur relevee, pas transposee de la grammaire de
+     revelation, ce qui est precisement l'erreur corrigee plus haut.
+
+     ⚠️ UNE SEULE DUREE, ET C'EST LA MESURE QUI LE DIT. Le glissement fait
+     partir la sortante et arriver l'entrante sur LA MEME seconde : au terme du
+     geste la sortante atteint exactement le bord, elle ne finit pas avant.
+     Ce qui differe entre les deux n'est pas la duree mais la COURBE.
+
+     ⚠️ Un `--dur-page-out` de 0,4 s a existe ici le temps d'une version a
+     fondu, retire faute de consommateur. La valeur reste vraie du geste de
+     RETOUR de Lu Yu, un fondu d'opacite de 0,4 s en `expo.OutIn`, que ce site
+     ne reproduit pas encore : si un retour distinct est ajoute un jour, c'est
+     ce chiffre-la qu'il faut, et `expo.OutIn` etant une courbe COMPOSITE de
+     GSAP, aucune `cubic-bezier` unique ne la reproduira exactement. */
+  --dur-page-in: 1s;
 
   /* Le loader d'accueil. Ces deux durees sont lues par le CSS ET par le JS
      (`assets/js/script.js`, sections PAGE LOADER et RADAR), c'est pourquoi
@@ -476,6 +482,13 @@
      Ils relevent en fait de la grammaire INTRA-page, donc de `--ease-quad-out`.
      Les migrer est un arbitrage a part, pas un correctif : sujet de la Phase 4. */
   --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Equivalent CSS de `Expo.easeInOut`, la courbe du contenu QUI ARRIVE dans le
+     glissement de Lu Yu. Elle retient longtemps puis rattrape d'un coup :
+     mesure sur son site, a 36 % du temps l'entrante n'a fait que 8 % du chemin.
+     C'est cette retenue qui fait le geste, pas le glissement lui-meme.
+     Verifie numeriquement contre la formule de GSAP : ecart maximal 3,7 %. */
+  --ease-expo-in-out: cubic-bezier(0.87, 0, 0.13, 1);
   --ease-quad-out: cubic-bezier(0.5, 1, 0.89, 1);
   --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
