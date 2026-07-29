@@ -449,16 +449,25 @@
      ⚠️ Ce ne sont PAS des jetons de transition : l'animation est une animation
      CSS ordinaire, portee par le DOM vivant et non par la couche
      `::view-transition`. Voir la note dans pages/_project.scss. */
-  /* ⚠️ Allongee de 0,55 a 0,8 s le 29/07/2026, non pour retarder mais parce
-     qu'un FLOU a besoin de temps pour se lire. Trop court, il ne se voit pas
-     comme une mise au point, il se voit comme un scintillement. */
-  --dur-hero-arrivee: 0.8s;
-  /* ⚠️ Ramene de 0,3 a 0,15 s. Le retard servait a attendre que le voile ait
-     decouvert la page. Depuis que l'animation est SUSPENDUE pendant le voile,
-     il se consomme APRES lui et n'est plus une attente utile mais une
-     hesitation. Il ne garde de role que sur une arrivee froide, sans
-     transition, ou il vaut une respiration avant l'entree. */
-  --dur-hero-retard: 0.15s;
+  /* Allongee de 0,55 a 0,8 s parce qu'un FLOU a besoin de temps pour se lire :
+     trop court, il ne se voit pas comme une mise au point mais comme un
+     scintillement.
+     ⚠️ Puis ramenee a 0,65 s le 30/07 pour la FLUIDITE. Mesure faite avant de
+     toucher a quoi que ce soit : zero image perdue pendant cette fenetre, pire
+     ecart 7,1 ms sur 120 images. Le probleme n'etait donc pas la performance
+     mais la LONGUEUR : la derniere ligne se posait a 1,91 s du clic, et un geste
+     qui traine se lit comme un geste qui accroche. 0,65 s laisse au flou de quoi
+     se lire tout en ramenant la fin a 1,66 s. */
+  --dur-hero-arrivee: 0.65s;
+  /* Ramene de 0,3 a 0,15 s quand l'animation est passee en pause pendant le
+     voile : le retard se consomme desormais APRES lui, donc ce n'etait plus une
+     attente utile mais une hesitation.
+     ⚠️ Puis a 0,05 s le 30/07, et c'est LE point de la fluidite. La page vivante
+     est invisible jusqu'a la fin de la transition, donc l'entree du hero ne PEUT
+     PAS chevaucher le voile : les deux actes sont forcement successifs. Le seul
+     levier est la taille du trou entre eux, et 0,15 s de vide se lisaient comme
+     une coupure entre deux gestes au lieu d'un seul. */
+  --dur-hero-retard: 0.05s;
   /* ⚠️ Ramene de 0,09 a 0,07 s : l'echelon doit rester entre 30 et 80 ms. Au-dela
      la cascade se lit comme une lenteur au lieu d'un enchainement. */
   --dur-hero-echelon: 0.07s;
@@ -477,9 +486,12 @@
      micro-libelle du theme a ete mesure a 1,04:1 sur un mockup clair. S'il
      arrivait EN MEME TEMPS que le texte, il y aurait une fenetre ou les mots
      sont lisibles et pas encore proteges.
-     0,35 s pour un retard de texte de 0,15 s : le voile est en place bien avant
-     que le texte devienne lisible. */
-  --dur-hero-scrim: 0.35s;
+     ⚠️ Ramene de 0,35 a 0,3 s le 30/07, EN MEME TEMPS que le texte s'est
+     rapproche : le voile doit garder son avance, donc il ne suffisait pas de
+     raccourcir le texte, il fallait raccourcir le voile d'autant. Verifie par
+     mesure : son avancement reste superieur a celui du texte a CHAQUE
+     echantillon. */
+  --dur-hero-scrim: 0.3s;
   /* La course du voile de lisibilite, en `vh` et non en `em` : ce n'est pas du
      texte, c'est une surface a l'echelle de l'ecran. 3 vh valent environ 24 px
      sur un ecran de 800, ce qui suffit a lire une remontee sur un aplat de cette
