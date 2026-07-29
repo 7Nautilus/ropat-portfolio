@@ -4,6 +4,14 @@ lang: "fr"
 title: "Expériences Professionnelles - Ropat"
 meta_description: "Mes expériences professionnelles - Informations sur les projets et les compétences."
 canonical_url: "https://ropat.art/fr/experiences.html"
+# ?? CETTE PAGE N A PAS DE JUMELLE, et elle doit le DIRE plutot que de mentir.
+# `en/experiences.html` n existe pas. Sans ce champ, la bascule proposait
+# `/en/experiences.html` et le head declarait cette meme URL comme la version
+# anglaise : deux affirmations fausses, dont une adressee a Google.
+# `no_alternate` supprime le lien de bascule et fait declarer la page comme
+# existant dans une seule langue. Le jour ou la traduction existera, il suffira
+# de remplacer cette ligne par un `hreflang_alternate`.
+no_alternate: true
 og_title: "Expériences Professionnelles - Ropat"
 og_description: "Expériences professionnelles de Ropat"
 ---

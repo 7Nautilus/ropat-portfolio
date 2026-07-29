@@ -4,6 +4,12 @@ lang: "fr"
 title: "Mentions légales - Ropat"
 meta_description: "Mentions légales du site ropat.art - Informations sur l'éditeur, l'hébergement et les conditions d'utilisation."
 canonical_url: "https://ropat.art/fr/mentions-legales.html"
+# ?? AJOUTE LE 29/07/2026. Sans cette ligne, le lien de bascule ET le
+# `<link rel="alternate">` envoye a Google etaient calcules par substitution de
+# prefixe, ce qui donnait une URL qui N EXISTE PAS : les slugs des pages
+# legales different d une langue a l autre. La page se declarait donc traduite
+# par une adresse en 404.
+hreflang_alternate: "https://ropat.art/en/legal-notice.html"
 og_title: "Mentions légales - Ropat"
 og_description: "Mentions légales du site ropat.art"
 ---

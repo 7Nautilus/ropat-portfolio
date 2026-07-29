@@ -54,8 +54,27 @@
       {% assign current_canonical = site.url | append: page.url %}
     {% endif %}
 
-    {% comment %} Gestion des hreflang {% endcomment %}
-    {% if page.hreflang_alternate %}
+    {% comment %}
+      Gestion des hreflang.
+
+      ⚠️ L'ORDRE DES BRANCHES EST LE MECANISME, et il doit rester le meme que
+      dans `_includes/lang-selector.html` : `no_alternate` d'abord,
+      `hreflang_alternate` ensuite, la substitution de prefixe en dernier
+      recours. Le lien visible et ces balises decrivent la meme chose ; quand
+      leurs regles divergent, c'est le visiteur d'un cote et Google de l'autre
+      qui recoivent deux reponses differentes.
+    {% endcomment %}
+    {% if page.no_alternate %}
+      {% comment %}
+        ⚠️ UNE PAGE SANS TRADUCTION NE DECLARE QU'ELLE-MEME. Avant le 29/07,
+        `fr/experiences.html` emettait un `hreflang="en"` vers
+        `/en/experiences.html`, page qui n'existe pas : le site annoncait a
+        Google une version anglaise introuvable. Ne rien declarer est exact ;
+        declarer faux ne l'est jamais.
+      {% endcomment %}
+      <link rel="alternate" hreflang="{{ page.lang | default: 'en' }}" href="{{ current_canonical }}" />
+      <link rel="alternate" hreflang="x-default" href="{{ current_canonical }}" />
+    {% elsif page.hreflang_alternate %}
       {% if page.lang == 'fr' %}
       <link rel="alternate" hreflang="fr" href="{{ current_canonical }}" />
       <link rel="alternate" hreflang="en" href="{{ page.hreflang_alternate }}" />

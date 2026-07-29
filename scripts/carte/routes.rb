@@ -196,6 +196,15 @@ module Carte
       if (h = route.front["hreflang_alternate"])
         return h.to_s.sub(%r{\Ahttps?://[^/]+}, "")
       end
+
+      # ⚠️ L'ACCUEIL EST UN CAS PARTICULIER, ET L'OUBLIER FAISAIT CRIER LA CARTE
+      # A TORT. La home FR est `/`, la home EN est `/en/` : la substitution de
+      # prefixe rend `/fr/` pour la seconde, qui n'existe pas. Le selecteur, lui,
+      # traite ce cas depuis toujours. La carte annoncait donc un lien casse que
+      # le controle sur les pages EMISES ne confirmait pas, et deux sections de
+      # la meme carte se contredisaient.
+      # Une carte qui se contredit forme a ignorer celle des deux qui derange.
+      return autre == "fr" ? "/" : "/en/" if ["/", "/en/"].include?(route.url)
       return nil unless route.url.start_with?("/fr/", "/en/")
 
       route.url.sub(%r{\A/(fr|en)/}, "/#{autre}/")

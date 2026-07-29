@@ -1,44 +1,89 @@
 {% comment %}
-  1. Détermine la langue actuelle de la page à partir du front matter.
-  Le défaut est 'en', car c'est la langue par défaut du site.
+  ══════════════════════════════════════════════════════════════════════════
+   LE LIEN DE BASCULE DE LANGUE
+  ══════════════════════════════════════════════════════════════════════════
+
+  ⚠️ CET INCLUDE ET LE `<head>` DE `_layouts/default.html` DOIVENT S'ACCORDER,
+  et jusqu'au 29/07/2026 ils ne s'accordaient pas. Tous deux calculaient l'URL
+  jumelle par SUBSTITUTION DE PREFIXE (`/fr/x` devient `/en/x`), avec un cas
+  particulier pour les services et rien d'autre. Or trois familles de pages ont
+  des slugs qui different d'une langue a l'autre, ou n'ont pas de jumelle :
+
+    fr/confidentialite.html   proposait  /en/confidentialite.html   404
+    fr/mentions-legales.html  proposait  /en/mentions-legales.html  404
+    fr/experiences.html       proposait  /en/experiences.html       page inexistante
+
+  Dix liens emis pointaient vers le vide, dont la moitie etaient des
+  `<link rel="alternate">` adresses a Google : le site declarait des traductions
+  qui n'existent pas.
+
+  L'ORDRE CI-DESSOUS EST LA CORRECTION. `hreflang_alternate` passe en PREMIERE
+  source, avant toute deduction. Le lien visible et le `<head>` lisent donc le
+  meme champ, et s'accordent par construction au lieu de s'accorder par chance.
+  La substitution reste, en dernier recours, pour les pages dont le slug est
+  reellement identique dans les deux langues.
 {% endcomment %}
+
 {% assign current_lang = page.lang | default: 'en' %}
 
 {% comment %}
-  2. Retire le préfixe de langue de l'URL pour obtenir le chemin de la page (ex: /about.html)
-  Gestion spéciale pour la page d'accueil
+  ⚠️ UNE PAGE SANS JUMELLE NE REND AUCUN LIEN. Proposer une bascule vers une page
+  qui n'existe pas est pire que ne rien proposer : le visiteur clique et tombe
+  sur un 404. Voir `no_alternate` dans `fr/experiences.html`.
 {% endcomment %}
-{% assign path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
+{% unless page.no_alternate %}
+
+{% assign switch_url = nil %}
 
 {% comment %}
-  2bis. Gestion spécifique pour les pages Services dont les slugs diffèrent selon la langue
+  1. La source de verite quand elle existe. Le champ est ABSOLU parce que le
+     `<head>` l'exige ; un lien interne, lui, doit rester relatif.
+
+  ⚠️ ON NE RETIRE PAS `site.url`, ET C'EST UN PIEGE MESURE. La premiere version
+  faisait `| remove_first: site.url`, ce qui marche au build et PAS sous
+  `jekyll serve` : la commande `serve` remplace `site.url` par l'adresse du
+  serveur local. Le filtre ne trouvait alors rien a retirer et le lien restait
+  absolu, si bien qu'en developpement, cliquer sur « English » quittait le site
+  local pour aller sur ropat.art.
+  Verifie des deux cotes : le fichier construit rendait `/en/privacy.html`,
+  la page servie `https://ropat.art/en/privacy.html`. Le meme gabarit, deux
+  resultats, parce que la valeur d'une variable de configuration depend de la
+  commande qui a lance le build.
+  On retire donc le schema puis l'hote LU DANS LA VALEUR ELLE-MEME : la chaine
+  se suffit, elle ne depend plus d'une configuration qui bouge.
+
+  ⚠️ LE CAS PARTICULIER DES SERVICES A ETE RETIRE ICI. Il lisait
+  `site.data.services | where: "id", page.service_id | first`, c'est-a-dire un
+  balayage de tout le repertoire (`index.yml` compris, qui n'a pas d'`id`) pour
+  retrouver une valeur que la page porte desormais elle-meme : depuis le lot C,
+  `_plugins/pages_generees.rb` derive `hreflang_alternate` de `detail_url`.
+  Deux chemins vers la meme valeur, c'est deux occasions de diverger.
 {% endcomment %}
-{% assign switch_url = nil %}
-{% if page.service_id %}
-  {% assign service_item = site.data.services | where: "id", page.service_id | first %}
-  {% if service_item %}
-    {% if current_lang == 'fr' %}
-      {% assign switch_url = service_item.detail_url.en %}
-    {% else %}
-      {% assign switch_url = service_item.detail_url.fr %}
-    {% endif %}
-  {% endif %}
+{% if page.hreflang_alternate %}
+  {% assign hote = page.hreflang_alternate | split: '://' | last | split: '/' | first %}
+  {% assign switch_url = page.hreflang_alternate | remove_first: 'https://' | remove_first: 'http://' | remove_first: hote %}
 {% endif %}
 
+{% comment %}
+  2. L'accueil, dont l'asymetrie est structurelle : la home FR est `/`, la home
+     EN est `/en/`. Aucune substitution ne peut le deviner.
+{% endcomment %}
 {% if switch_url == nil %}
-{% if path_no_lang == "/index.html" or path_no_lang == "/" %}
-  {% if current_lang == 'fr' %}
-    {% assign switch_url = '/en/index.html' %}
+  {% assign path_no_lang = page.url | remove_first: "/fr" | remove_first: "/en" %}
+  {% if path_no_lang == "/index.html" or path_no_lang == "/" %}
+    {% if current_lang == 'fr' %}
+      {% assign switch_url = '/en/index.html' %}
+    {% else %}
+      {% assign switch_url = '/index.html' %}
+    {% endif %}
   {% else %}
-    {% assign switch_url = '/index.html' %}
+    {% comment %} 3. Dernier recours : le slug est le meme dans les deux langues. {% endcomment %}
+    {% if current_lang == 'fr' %}
+      {% assign switch_url = '/en' | append: path_no_lang %}
+    {% else %}
+      {% assign switch_url = '/fr' | append: path_no_lang %}
+    {% endif %}
   {% endif %}
-{% else %}
-  {% if current_lang == 'fr' %}
-    {% assign switch_url = '/en' | append: path_no_lang %}
-  {% else %}
-    {% assign switch_url = '/fr' | append: path_no_lang %}
-  {% endif %}
-{% endif %}
 {% endif %}
 
 <div class="lang-selector-container">
@@ -52,3 +97,5 @@
         </a>
     {% endif %}
 </div>
+
+{% endunless %}

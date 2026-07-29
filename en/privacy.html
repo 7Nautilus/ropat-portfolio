@@ -4,6 +4,12 @@ lang: "en"
 title: "Privacy Policy - Ropat"
 meta_description: "Privacy policy for ropat.art - Protection of your personal data in accordance with GDPR."
 canonical_url: "https://ropat.art/en/privacy.html"
+# ?? AJOUTE LE 29/07/2026. Sans cette ligne, le lien de bascule ET le
+# `<link rel="alternate">` envoye a Google etaient calcules par substitution de
+# prefixe, ce qui donnait une URL qui N EXISTE PAS : les slugs des pages
+# legales different d une langue a l autre. La page se declarait donc traduite
+# par une adresse en 404.
+hreflang_alternate: "https://ropat.art/fr/confidentialite.html"
 og_title: "Privacy Policy - Ropat"
 og_description: "Privacy policy and personal data protection"
 ---

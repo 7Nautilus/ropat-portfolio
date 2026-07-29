@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 02:34 sur be747aa.
+> Generee le 29/07/2026 a 02:47 sur b0cba0c.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 02:34 |
+| Date du build lu | 29/07/2026 02:47 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -104,31 +104,7 @@ qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
 
 </details>
 
-### Pages dont le jumeau de langue calcule n'existe pas  (6)
-
-Chacune produit un lien de bascule et un `<link rel="alternate">` vers une URL absente.
-
-- en/index.html (en) vise /fr/
-- en/legal-notice.html (en) vise /fr/legal-notice.html
-- en/privacy.html (en) vise /fr/privacy.html
-- fr/confidentialite.html (fr) vise /en/confidentialite.html
-- fr/experiences.html (fr) vise /en/experiences.html
-- fr/mentions-legales.html (fr) vise /en/mentions-legales.html
-
-### Liens de langue EMIS qui ne resolvent vers aucun fichier  (10)
-
-Mesure sur `_site`, pas sur les sources. Attendu apres correction : 0.
-
-- en/legal-notice.html : lien de bascule -> /fr/legal-notice.html
-- en/legal-notice.html : hreflang -> https://ropat.art/fr/legal-notice.html
-- en/privacy.html : lien de bascule -> /fr/privacy.html
-- en/privacy.html : hreflang -> https://ropat.art/fr/privacy.html
-- fr/confidentialite.html : lien de bascule -> /en/confidentialite.html
-- fr/confidentialite.html : hreflang -> https://ropat.art/en/confidentialite.html
-- fr/experiences.html : lien de bascule -> /en/experiences.html
-- fr/experiences.html : hreflang -> https://ropat.art/en/experiences.html
-- fr/mentions-legales.html : lien de bascule -> /en/mentions-legales.html
-- fr/mentions-legales.html : hreflang -> https://ropat.art/en/mentions-legales.html
+Rien a signaler.
 
 ## 2. Graphe des includes
 
@@ -376,7 +352,7 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-encre` | - | oui | assets/js/script.js:851 |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
-| `data-set-lang` | 63 page(s) | - | assets/js/script.js:1095 |
+| `data-set-lang` | 62 page(s) | - | assets/js/script.js:1095 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:964 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:963 |
 | `data-src` | 4 page(s) | - | assets/js/script.js:1047 |
@@ -468,9 +444,8 @@ Chacun decrit le meme build. Quand ils divergent, c'est toujours le workflow qui
 - `assets/js/script.js:1173` : champ.id + '-erreur'
 - `assets/js/script.js:1192` : champ.id + '-erreur'
 
-**Noms de variable liees a plusieurs sources** (53). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
+**Noms de variable liees a plusieurs sources** (52). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
-- _includes/lang-selector.html : `service_item` a 2 liaisons
 - _includes/lang-selector.html : `switch_url` a 3 liaisons
 - _includes/layout/footer.html : `item` a 2 liaisons
 - _includes/layout/footer.html : `link_name` a 2 liaisons
@@ -482,7 +457,8 @@ Chacun decrit le meme build. Quand ils divergent, c'est toujours le workflow qui
 - _includes/meta/schema-org.html : `project_locale` a 2 liaisons
 - _includes/meta/schema-org.html : `schema_image` a 2 liaisons
 - _includes/pages/about.html : `item` a 2 liaisons
-- ... et 41 autres
+- _includes/pages/index.html : `id` a 2 liaisons
+- ... et 40 autres
 
 ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 
