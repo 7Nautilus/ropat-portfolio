@@ -150,6 +150,21 @@ module Carte
     out
   end
 
+  # ⚠️ MEME REGLE QUE POUR LE CSS, ET J'AI OUBLIE DE L'APPLIQUER ICI D'ABORD.
+  # La passe build lit `_config.yml`, le `Gemfile` et le workflow comme du TEXTE
+  # pour y chercher des motifs (`bundler-cache: false`, `gem "webrick"`). Le jour
+  # ou ces reglages ont ete corriges, les commentaires qui EXPLIQUAIENT l'ancien
+  # etat contenaient encore ces motifs : la carte a donc continue d'annoncer deux
+  # defauts qu'on venait de fermer, en lisant sa propre explication de leur
+  # fermeture.
+  # Une sonde qui lit du texte doit toujours depouiller les commentaires. C'est
+  # la meme lecon que pour le SCSS, payee deux fois.
+  # Le `#` n'est traite comme un commentaire que s'il ouvre la ligne ou suit une
+  # espace : `"#fff"` et `https://x#y` restent intacts.
+  def sans_commentaires_diese(s)
+    s.gsub(/(^|\s)#[^\n]*/) { "#{Regexp.last_match(1)}#{blanchir(Regexp.last_match(0)[1..])}" }
+  end
+
   def sans_commentaires_html(s)
     s = s.gsub(/<!--.*?-->/m) { |m| blanchir(m) }
     s.gsub(/\{%-?\s*comment\s*-?%\}.*?\{%-?\s*endcomment\s*-?%\}/m) { |m| blanchir(m) }

@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 03:04 sur 7e9fb3d.
+> Generee le 29/07/2026 a 03:18 sur 165bd14.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 03:04 |
+| Date du build lu | 29/07/2026 03:18 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 30 |
@@ -397,25 +397,7 @@ Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
-### Desaccords entre la configuration, le workflow et la tache locale  (5)
-
-Chacun decrit le meme build. Quand ils divergent, c'est toujours le workflow qui gagne.
-
-- dart-sass est installe en version flottante
-      .github/workflows/deploy.yml
-      `snap install dart-sass` prend la derniere version publiee au moment du build. Le CSS peut changer un jour ou personne n'a rien change.
-- Aucun cache de gems en CI
-      .github/workflows/deploy.yml
-      `bundle install` complet a chaque push.
-- `gem "jekyll"` sans contrainte de version
-      Gemfile
-      Une majeure suivante entrerait sans que rien ne l'annonce.
-- `Gemfile.lock` ne declare pas la plateforme Linux
-      Gemfile.lock (PLATFORMS)
-      D'ou le contournement `bundle lock --add-platform x86_64-linux` a chaque build.
-- `webrick` declare alors que jekyll le tire deja
-      Gemfile
-      Redondance sans effet, mais elle laisse croire a une dependance directe.
+Rien a signaler.
 
 ## 9. Ce que la carte ne sait pas
 

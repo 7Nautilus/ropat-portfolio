@@ -1,4 +1,28 @@
 name: Deploy Jekyll + Sass
+
+# ══════════════════════════════════════════════════════════════════════════
+#  CE FICHIER EST LA SEULE DESCRIPTION VRAIE DU BUILD DE PRODUCTION
+# ══════════════════════════════════════════════════════════════════════════
+#
+# `_config.yml` n'en decrit qu'une partie, et le bloc `sass:` qu'il portait
+# jusqu'au 29/07/2026 n'a jamais rien fait. Quand la configuration, la tache
+# locale (`.vscode/tasks.json`) et ce fichier divergent, c'est TOUJOURS ce
+# fichier qui gagne. `scripts/carte.rb` surveille leurs desaccords.
+#
+# ── DURCISSEMENT DU 29/07/2026 ────────────────────────────────────────────
+# Le build marchait, mais rien n'y etait verrouille : il pouvait donc casser un
+# matin ou personne n'avait rien commite. Quatre points fermes :
+#   1. dart-sass etait installe par `snap install`, donc dans la DERNIERE
+#      version publiee au moment du build. Le compilateur de la feuille de style
+#      du site n'etait sous le controle de personne. Il est desormais telecharge
+#      a une version exacte, la meme qu'en local.
+#   2. `bundler-cache: false` reinstallait une trentaine de gems a chaque push.
+#   3. `Gemfile.lock` ne declarait que la plateforme Windows, d'ou un
+#      `bundle lock --add-platform` qui MODIFIAIT le verrou avant de s'en servir,
+#      ce qui le videeait de son sens. La plateforme Linux est maintenant dans le
+#      lock commite, et le contournement a disparu.
+#   4. Le JS partait en clair, alors que le CSS etait deja compresse.
+
 on:
   push:
     branches: ["main"]
@@ -8,6 +32,16 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  # ⚠️ EPINGLE, ET ALIGNE SUR LA VERSION LOCALE (`sass --version`). Si tu mets a
+  # jour dart-sass sur ta machine, mets a jour cette ligne dans le meme commit :
+  # sinon le CSS que tu relis en local et celui qui part en production sont
+  # compiles par deux outils differents.
+  DART_SASS_VERSION: "1.98.0"
+  # Version testee le 29/07 sur les deux fichiers du site, y compris les shaders
+  # GLSL en gabarits de chaine de `dither.js`.
+  TERSER_VERSION: "5.44.0"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,25 +49,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Installer Ruby et Jekyll pour tes includes HTML
+      # 1. Ruby et Jekyll, pour les includes et les donnees
+      #
+      # ⚠️ `bundler-cache: true` EXIGE UN LOCK COMPLET. Il echoue net si
+      # `Gemfile.lock` ne declare pas `x86_64-linux`, ce qui etait le cas avant
+      # le 29/07 (le lock avait ete commite depuis Windows). C'est pour ca que
+      # les deux changements vont ensemble.
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: false
-        
-      - name: Fix platform compatibility
-        run: |
-          bundle lock --add-platform x86_64-linux
-          bundle install
+          bundler-cache: true
 
       - name: Build Jekyll
         run: bundle exec jekyll build
-        # Jekyll va générer le site dans le dossier _site/
 
-      # 2. Installer Dart Sass pour ton CSS moderne (@use)
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
+      # 2. Dart Sass, a une version exacte
+      #
+      # ⚠️ PAS `snap install`, qui prend la derniere version publiee. On
+      # telecharge l'archive officielle de la version epinglee : deux builds du
+      # meme commit produisent alors le meme CSS, ce qui n'etait pas garanti.
+      # C'est aussi nettement plus rapide qu'un snap.
+      - name: Install Dart Sass ${{ env.DART_SASS_VERSION }}
+        run: |
+          set -euo pipefail
+          url="https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz"
+          curl -fsSL "$url" | tar -xz
+          echo "$PWD/dart-sass" >> "$GITHUB_PATH"
+          ./dart-sass/sass --version
 
       # 3. Compiler le SCSS directement DANS le dossier de sortie de Jekyll
       #
@@ -42,15 +85,15 @@ jobs:
       # expliquee a l'endroit ou elle mord, ce qui est voulu et doit rester. Mais
       # ces commentaires partaient EN PRODUCTION, sur une feuille bloquante au
       # premier rendu, sur les 63 pages du site.
-      # Mesure : 175 566 octets bruts et 51 175 gzip, contre 12 824 gzip une fois
-      # les commentaires retires. Soit 75 % de moins sur le fil.
+      # Mesure : 175 566 octets bruts et 51 177 gzip, contre 63 872 et 11 814 une
+      # fois compresse. Soit 77 % de moins sur le fil.
       # Le fichier `assets/css/main.css` commite reste LISIBLE : il sert au
       # `jekyll serve` local et ses diffs doivent rester relisibles. La version
       # compressee n'existe que dans `_site`, et n'est jamais commitee.
       #
       # ⚠️ `set -euo pipefail` N'EST PAS DECORATIF, il ferme un mode de defaillance
       # INVISIBLE. Cette etape ecrit dans `_site` APRES que `jekyll build` y a
-      # copie le `main.css` commite. Si `dart-sass` echouait, le fichier copie
+      # copie le `main.css` commite. Si la compilation echouait, le fichier copie
       # restait en place, le build se terminait en succes, et la production
       # recevait silencieusement un CSS perime. Rien, nulle part, ne l'aurait dit.
       # L'assertion de taille ferme le second cas : un fichier ecrit mais vide.
@@ -58,7 +101,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p _site/assets/css
-          dart-sass assets/css/main.scss _site/assets/css/main.css \
+          sass assets/css/main.scss _site/assets/css/main.css \
             --load-path=assets/css/_sass \
             --style=compressed \
             --no-source-map
@@ -69,10 +112,50 @@ jobs:
             exit 1
           fi
 
+      # 4. Minifier le JS servi
+      #
+      # ⚠️ LES SOURCES NE SONT PAS TOUCHEES. On ne minifie que la COPIE deja
+      # placee dans `_site` par Jekyll, exactement comme pour le CSS : les
+      # fichiers de `assets/js/` restent lisibles et commentes.
+      #
+      # Mesure du 29/07 : script.js 21 624 -> 7 056 octets gzip, dither.js
+      # 12 117 -> 6 755. Soit environ 20 Ko de moins par premiere visite.
+      #
+      # ⚠️ VERIFIE AU NAVIGATEUR AVANT D'ETRE MIS ICI, et pas seulement parse.
+      # Les deux fichiers ont ete minifies en local, installes a la place des
+      # sources, et la page verifiee : le shader dither peignait toujours, le
+      # curseur, l'escamotage du header et la bascule d'encre fonctionnaient,
+      # zero erreur console. `--mangle` ne touche que les variables locales, pas
+      # les proprietes, donc `window.RopatDither` et son API survivent.
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Minify JS into _site
+        run: |
+          set -euo pipefail
+          for f in script dither; do
+            src="assets/js/${f}.js"
+            dst="_site/assets/js/${f}.js"
+            [ -f "$src" ] || { echo "::error::${src} introuvable"; exit 1; }
+            avant=$(stat -c%s "$src")
+            npx --yes "terser@${TERSER_VERSION}" "$src" --compress --mangle -o "$dst"
+            apres=$(stat -c%s "$dst")
+            node --check "$dst"
+            echo "${f}.js : ${avant} -> ${apres} octets"
+            # Un fichier vide ou quasi vide signale une minification ratee que le
+            # code de sortie n'aurait pas rapportee.
+            if [ "$apres" -lt 2000 ] || [ "$apres" -ge "$avant" ]; then
+              echo "::error::${f}.js minifie suspect (${apres} o pour ${avant} en source)."
+              exit 1
+            fi
+          done
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # On déploie le dossier généré par Jekyll + ton CSS compilé
+          # Le site genere par Jekyll, plus le CSS et le JS traites ci-dessus.
           path: '_site/'
 
   deploy:

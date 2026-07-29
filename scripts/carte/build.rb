@@ -46,9 +46,18 @@ module Carte
 
     def liste_exclue(y) = Carte.liste_exclue(y)
 
+    # ⚠️ TOUT CE QUE CETTE PASSE LIT EST DEPOUILLE DE SES COMMENTAIRES, et ce
+    # n'est pas un raffinement : sans ca, la carte lit les explications qu'on
+    # ecrit APRES avoir corrige un defaut et continue de signaler ce defaut.
+    # C'est arrive le 29/07 sur deux points a la fois, `bundler-cache: false` et
+    # `gem "webrick"`, tous deux fermes dans le commit meme ou la carte
+    # affirmait qu'ils restaient ouverts.
     def lire(f)
       chemin = Carte.chemin(f)
-      File.exist?(chemin) ? Carte.lire(chemin) : nil
+      return nil unless File.exist?(chemin)
+
+      brut = Carte.lire(chemin)
+      f.end_with?(".json") ? Carte.sans_commentaires_js(brut) : Carte.sans_commentaires_diese(brut)
     end
 
     def analyser
@@ -82,6 +91,28 @@ module Carte
           ou: ".github/workflows/deploy.yml, etape dart-sass",
           pourquoi: "La tache locale porte `--style=compressed`#{local_compresse ? '' : ' (absente aussi)'}, " \
                     "la CI non. C'est donc la version commentee qui part en production."
+        }
+      end
+
+      # Le pendant JS du controle ci-dessus. Les deux couches doivent etre
+      # traitees de la meme facon, sans quoi l'une des deux redevient le poids
+      # dominant sans que personne ne le remarque.
+      unless deploy.to_s.include?("terser")
+        ecarts << {
+          quoi: "Le JS deploye n'est PAS minifie",
+          ou: ".github/workflows/deploy.yml",
+          pourquoi: "Le CSS l'est. Les deux couches sont servies a chaque premiere visite."
+        }
+      end
+
+      # ⚠️ UNE VERSION FLOTTANTE EST UN CHANGEMENT QUI N'A PAS DE COMMIT.
+      # Le controle porte sur l'outil qui compile la feuille de style du site :
+      # sans epinglage, deux builds du meme commit peuvent produire deux CSS.
+      if deploy && !deploy.match?(/DART_SASS_VERSION:\s*"\d+\.\d+\.\d+"/)
+        ecarts << {
+          quoi: "dart-sass n'est pas epingle a une version exacte",
+          ou: ".github/workflows/deploy.yml",
+          pourquoi: "Le compilateur du CSS n'est alors sous le controle de personne."
         }
       end
 
@@ -150,14 +181,6 @@ module Carte
       end
 
       # ── Epinglage ─────────────────────────────────────────────────────────
-      if deploy&.include?("snap install dart-sass") && !deploy.match?(/dart-sass[^\n]*--channel|dart-sass=\d/)
-        ecarts << {
-          quoi: "dart-sass est installe en version flottante",
-          ou: ".github/workflows/deploy.yml",
-          pourquoi: "`snap install dart-sass` prend la derniere version publiee au moment du build. " \
-                    "Le CSS peut changer un jour ou personne n'a rien change."
-        }
-      end
       if deploy&.include?("bundler-cache: false")
         ecarts << { quoi: "Aucun cache de gems en CI", ou: ".github/workflows/deploy.yml",
                     pourquoi: "`bundle install` complet a chaque push." }
