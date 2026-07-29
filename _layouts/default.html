@@ -169,7 +169,23 @@
     {%- endcomment -%}
     <script>
       window.addEventListener('pagereveal', function (e) {
-        if (!e.viewTransition || !e.viewTransition.types) return;
+        if (!e.viewTransition) return;
+
+        /* ⚠️ PAS DE VOILE SUR UNE PAGE QUI A DEJA UN LOADER. Arriver sur
+           l'accueil, c'est rencontrer son voile plein ecran : le balayage
+           s'ajouterait au loader et on paierait deux fois la meme attente.
+           La condition porte sur la PRESENCE DU LOADER, pas sur l'URL de
+           l'accueil : le jour ou le loader bouge ou se pose ailleurs, la regle
+           suit toute seule au lieu de se perimer en silence.
+           Sur, parce que le `<link rel="expect">` ci-dessus garantit que le
+           corps est parse a cet instant : verifie, `#pied` est present alors
+           que `readyState` vaut encore `loading`. */
+        if (document.getElementById('pageLoader')) {
+          e.viewTransition.skipTransition();
+          return;
+        }
+
+        if (!e.viewTransition.types) return;
         var a = window.navigation && window.navigation.activation;
         if (!a || a.navigationType !== 'traverse') return;
         var de = a.from, vers = a.entry;
