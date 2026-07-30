@@ -28,11 +28,18 @@ JSON_CHEMIN = ".carte/carte.json"
 MD_CHEMIN   = "CARTE.md"
 VOLATILES   = %w[genere_le commit].freeze
 
-# ⚠️ DEUX lignes de `CARTE.md` changent a chaque execution, pas une : l'en-tete et
-# la date du build lu. J'ai d'abord neutralise la premiere seulement, et un `diff`
-# de controle est passe quand meme parce que les deux generations comparees etaient
-# tombees dans la MEME MINUTE. Un test qui reussit par hasard vaut un test qui
-# echoue : verifier avec deux executions separees par un changement de minute.
+# ⚠️ DEUX lignes de `CARTE.md` changent a chaque execution : l'en-tete et la date du
+# build lu. J'ai d'abord neutralise la premiere seulement, et un `diff` de controle
+# est passe quand meme parce que les deux generations comparees etaient tombees dans
+# la MEME MINUTE. Un test qui reussit par hasard vaut un test qui echoue : verifier
+# avec deux executions separees par un changement de minute.
+#
+# ⚠️ ET UNE TROISIEME S'EST REVELEE AU CHANGEMENT DE JOUR : la prose des verdicts
+# reinserait la date du build (« Absent des 63 pages construites le 30/07 »). Elle a
+# ete retiree de `scripts/carte/rendu.rb` le 31/07/2026 plutot qu'ajoutee ici : une
+# date ecrite trois fois dans un fichier COMMITE le fait diverger tous les jours pour
+# rien, et allonger la liste des exceptions n'aurait fait que deplacer le probleme.
+# **Si une date reapparait dans la carte, la retirer a la source.**
 LIGNES_VOLATILES = [
   /^> Generee le .*$/,
   /^\| Date du build lu \| .*$/,

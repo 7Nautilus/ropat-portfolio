@@ -176,8 +176,8 @@ module Carte
       s << <<~MD
         **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
         Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
-        qu'aucune mesure ne peut etablir. « Absent des #{e.nb_pages} pages construites le
-        #{e.date_build&.strftime('%d/%m') || '?'} » est un fait, datable et refutable.
+        qu'aucune mesure ne peut etablir. « Absent des #{e.nb_pages} pages construites a la
+        date lue ci-dessus » est un fait, datable et refutable.
 
       MD
       s

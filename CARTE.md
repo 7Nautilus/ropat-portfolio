@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 30/07/2026 a 18:11, d'apres l'etat de 64ca5dd.
+> Generee le 31/07/2026 a 00:24, d'apres l'etat de dbba05d.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 30/07/2026 18:11 |
+| Date du build lu | 31/07/2026 00:24 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -28,8 +28,8 @@ Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
 
 **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
 Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
-qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
-30/07 » est un fait, datable et refutable.
+qu'aucune mesure ne peut etablir. « Absent des 63 pages construites a la
+date lue ci-dessus » est un fait, datable et refutable.
 
 ## 1. Routes
 
