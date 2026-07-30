@@ -120,11 +120,10 @@ $max-widths: (
   "mobile-etroit": 360px,
   "sous-sm": map.get($breakpoints, "sm") - 1px,   // 639px
   "sous-md": map.get($breakpoints, "md") - 1px,   // 767px
-  // ⚠️ CELUI-LA RECOUVRE `md` D'UN PIXEL : a 768px exactement, `min-width: 768px`
-  // ET ce plafond s'appliquent tous les deux. Etat anterieur au 30/07/2026,
-  // preserve tel quel faute de mandat pour le corriger, mais nomme pour qu'il
-  // cesse d'etre invisible. Deux consommateurs : `_carousel.scss`, `_about.scss`.
-  "jusqu-a-md": map.get($breakpoints, "md"),      // 768px
+  // Un plafond `jusqu-a-md` a 768px a existe ici quelques heures le 30/07/2026,
+  // le temps de nommer ce qui etait en dur. Il RECOUVRAIT `md` d'un pixel : a 768
+  // exactement, la regle `min-width: 768px` et ce plafond s'appliquaient tous les
+  // deux. Retire, ses deux consommateurs passes a `sous-md`. Ne pas le remettre.
   "carrousel-md": 992px,
   "carrousel-lg": 1200px,
 );

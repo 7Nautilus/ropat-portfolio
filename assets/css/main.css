@@ -3539,7 +3539,7 @@ html.scrollbar-saisie {
     --carousel-items-visible: 3;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .partners-carousel {
     /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
        clients, donc la section perd son argument. Deux gardent la lecture de
@@ -5249,7 +5249,7 @@ html.voile-en-cours .project-open--contexte::after {
   padding: var(--spacing-lg) 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .about-hero {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);

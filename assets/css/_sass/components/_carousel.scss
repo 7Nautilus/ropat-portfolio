@@ -162,7 +162,7 @@
   }
 }
 
-@include respond-below("jusqu-a-md") {
+@include respond-below("sous-md") {
   .partners-carousel {
     /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
        clients, donc la section perd son argument. Deux gardent la lecture de

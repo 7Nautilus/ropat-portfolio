@@ -347,7 +347,7 @@
 }
 
 // ── RESPONSIVE ────────────────────────
-@include respond-below("jusqu-a-md") {
+@include respond-below("sous-md") {
   .about-hero {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
