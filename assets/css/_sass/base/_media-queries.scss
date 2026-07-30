@@ -145,14 +145,14 @@
    Padding confortable des liens tant que le menu est un overlay plein écran.
    Doit couvrir toute la plage mobile (< 768px), pas seulement < 640px, sinon
    les liens de l'overlay perdent leur padding entre 640 et 767. */
-@media (max-width: 767px) {
+@include respond-below("sous-md") {
   .nav-links-header .nav-item a,
   .nav-contact {
     padding: 0.75rem var(--spacing-md);
   }
 }
 
-@media (max-width: 639px) {
+@include respond-below("sous-sm") {
   body {
     gap: var(--spacing-md);
   }
@@ -254,7 +254,7 @@
 }
 
 /* Very Small Mobile - Max 360px */
-@media (max-width: 360px) {
+@include respond-below("mobile-etroit") {
   .footer-text {
     font-size: var(--text-caption);
   }

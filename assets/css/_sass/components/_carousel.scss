@@ -1,4 +1,6 @@
-﻿.partners-carousel {
+﻿@use "base/mixins" as *;
+
+.partners-carousel {
   /* Configuration responsive du nombre d''items */
   container-type: inline-size;
   /* 5 et non 3 : sans carte pour les structurer, trois logos sur toute la
@@ -148,19 +150,19 @@
 /* Responsive */
 /* Paliers reajustes avec le passage a 5 : tomber directement de 5 a 2 a
    992px faisait doubler la taille des logos d'un coup. */
-@media (max-width: 1200px) {
+@include respond-below("carrousel-lg") {
   .partners-carousel {
     --carousel-items-visible: 4;
   }
 }
 
-@media (max-width: 992px) {
+@include respond-below("carrousel-md") {
   .partners-carousel {
     --carousel-items-visible: 3;
   }
 }
 
-@media (max-width: 768px) {
+@include respond-below("jusqu-a-md") {
   .partners-carousel {
     /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
        clients, donc la section perd son argument. Deux gardent la lecture de

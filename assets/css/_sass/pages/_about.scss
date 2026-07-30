@@ -347,7 +347,7 @@
 }
 
 // ── RESPONSIVE ────────────────────────
-@media (max-width: 768px) {
+@include respond-below("jusqu-a-md") {
   .about-hero {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);

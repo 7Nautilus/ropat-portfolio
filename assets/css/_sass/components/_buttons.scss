@@ -18,7 +18,7 @@
   width: 100%;
   padding: 0 var(--spacing-lg);
 
-  @media (max-width: 639px) {
+  @include respond-below("sous-sm") {
     padding: 0;
   }
 }
@@ -31,7 +31,7 @@
     padding: 0.875rem 2rem;
   }
 
-  @media (max-width: 360px) {
+  @include respond-below("mobile-etroit") {
     padding: var(--spacing-xs) var(--spacing-sm);
   }
 }
@@ -188,7 +188,7 @@
      On rend l'espace au texte plutot que de reduire sa taille.
      Le padding responsive vit ICI et non dans _media-queries.scss : ce dernier
      est charge en dernier et ecraserait la regle. */
-  @media (max-width: 360px) {
+  @include respond-below("mobile-etroit") {
     // ⚠️ COMPROMIS ASSUMÉ, et la seule combinaison mesurée qui tienne.
     // Sous 360px, la gouttière du `xl` (0.75rem) devient plus SERRÉE que celle
     // du `md` (0.875rem, héritée de `.btn`) : le bouton « extra large » est

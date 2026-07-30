@@ -92,13 +92,41 @@
 }
 
 // ── BREAKPOINTS ───────────────────────────────────────
-// Valeurs centralisees + mixin mobile-first.
-// Usage : @include respond-to("md") { ... }  ->  @include respond-to("md")
+// Valeurs centralisees + mixins mobile-first.
+// Usage : @include respond-to("md") { ... }  et  @include respond-below("sous-md")
+//
+// Les etages du systeme. `projet` n'en est PAS un : c'est le seuil a deux colonnes
+// de la page projet, ajoute le 30/07/2026 pour sortir un 900px ecrit en dur. Il
+// vit ici parce que centraliser vaut mieux que disperser, pas parce qu'il serait
+// devenu un palier general.
 $breakpoints: (
   "sm": 640px,
   "md": 768px,
+  "projet": 900px,
   "lg": 1024px,
   "xl": 1440px,
+);
+
+// Les paliers ecrits en `max-width`. Ils ne sont pas la meme chose que l'echelle :
+// un `max-width` designe un plafond, pas un etage, et les melanger dans une seule
+// table ferait croire qu'on peut passer n'importe quelle cle a n'importe quel
+// mixin.
+// ⚠️ LES VALEURS SONT REPRISES AU PIXEL PRES de ce qui etait en dur avant. Un
+// `max-width` decale d'un seul pixel cesse de s'appliquer PILE a la largeur
+// limite, ce qui est exactement le genre de regression qu'aucune capture ne
+// montre. Les deux plafonds qui doublent un etage sont donc CALCULES et non
+// recopies : si `sm` bouge, `sous-sm` suit.
+$max-widths: (
+  "mobile-etroit": 360px,
+  "sous-sm": map.get($breakpoints, "sm") - 1px,   // 639px
+  "sous-md": map.get($breakpoints, "md") - 1px,   // 767px
+  // ⚠️ CELUI-LA RECOUVRE `md` D'UN PIXEL : a 768px exactement, `min-width: 768px`
+  // ET ce plafond s'appliquent tous les deux. Etat anterieur au 30/07/2026,
+  // preserve tel quel faute de mandat pour le corriger, mais nomme pour qu'il
+  // cesse d'etre invisible. Deux consommateurs : `_carousel.scss`, `_about.scss`.
+  "jusqu-a-md": map.get($breakpoints, "md"),      // 768px
+  "carrousel-md": 992px,
+  "carrousel-lg": 1200px,
 );
 
 @mixin respond-to($bp) {
@@ -108,5 +136,15 @@ $breakpoints: (
     }
   } @else {
     @error "Breakpoint inconnu : #{$bp}. Valeurs : #{map.keys($breakpoints)}.";
+  }
+}
+
+@mixin respond-below($bp) {
+  @if map.has-key($max-widths, $bp) {
+    @media (max-width: map.get($max-widths, $bp)) {
+      @content;
+    }
+  } @else {
+    @error "Plafond inconnu : #{$bp}. Valeurs : #{map.keys($max-widths)}.";
   }
 }
