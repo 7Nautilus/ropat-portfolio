@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 30/07/2026 a 04:19 sur 1a5e291.
+> Generee le 30/07/2026 a 17:50 sur 144ad11.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 30/07/2026 04:19 |
+| Date du build lu | 30/07/2026 17:50 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -294,11 +294,11 @@ Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera
 - 1px ecrit 16 fois, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_bases.scss:35, assets/css/_sass/base/_bases.scss:36, assets/css/_sass/base/_generic.scss:8)
 - 3px ecrit 10 fois, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/base/_bases.scss:53, assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:62)
 - 4rem ecrit 10 fois, alors que --spacing-2xl vaut exactement ca   (ex. assets/css/_sass/components/_scroll-down.scss:56, assets/css/_sass/components/_scroll-down.scss:57, assets/css/_sass/pages/_project.scss:87)
-- 1rem ecrit 8 fois, alors que --radius-sm vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:79, assets/css/_sass/base/_typography.scss:32, assets/css/_sass/components/_buttons.scss:205)
-- 0.5rem ecrit 7 fois, alors que --spacing-xs vaut exactement ca   (ex. assets/css/_sass/components/cards/_experience-cards.scss:45, assets/css/_sass/layout/_sections.scss:187, assets/css/_sass/layout/_sections.scss:188)
-- 2rem ecrit 6 fois, alors que --radius-lg vaut exactement ca   (ex. assets/css/_sass/components/_buttons.scss:31, assets/css/_sass/components/_containers.scss:15, assets/css/_sass/pages/_project.scss:87)
 - 6rem ecrit 6 fois, alors que --radius-xl vaut exactement ca   (ex. assets/css/_sass/components/_scroll-down.scss:13, assets/css/_sass/pages/_about.scss:69, assets/css/_sass/pages/_project.scss:194)
+- 0.5rem ecrit 6 fois, alors que --spacing-xs vaut exactement ca   (ex. assets/css/_sass/components/cards/_experience-cards.scss:45, assets/css/_sass/layout/_sections.scss:187, assets/css/_sass/layout/_sections.scss:188)
+- 1rem ecrit 5 fois, alors que --radius-sm vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:79, assets/css/_sass/base/_typography.scss:32, assets/css/_sass/components/_dropdown.scss:89)
 - 5rem ecrit 5 fois, alors que --spacing-4xl vaut exactement ca   (ex. assets/css/_sass/components/cards/_cards.scss:25, assets/css/_sass/pages/_project.scss:95, assets/css/_sass/pages/_project.scss:616)
+- 2rem ecrit 4 fois, alors que --radius-lg vaut exactement ca   (ex. assets/css/_sass/pages/_project.scss:87, assets/css/_sass/pages/_project.scss:283, assets/css/_sass/pages/_project.scss:360)
 
 ## 5. JS
 
@@ -405,7 +405,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 224928 o brut, 68415 o gzip. Sans les commentaires : 82381 o, 13493 o gzip, soit **80 % de moins** sur le fil.
+**CSS servi** : 225026 o brut, 68404 o gzip. Sans les commentaires : 82479 o, 13492 o gzip, soit **80 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
