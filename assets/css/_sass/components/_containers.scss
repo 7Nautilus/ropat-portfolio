@@ -12,7 +12,7 @@
      donc invalide et le paragraphe heritait d'une couleur au hasard. La
      Phase 0 devait les supprimer, celui-ci avait survecu. */
   color: var(--ink-soft);
-  padding: 1.25rem 2rem;
+  padding: 1.25rem var(--spacing-lg);
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   background-color: var(--secondary-color);

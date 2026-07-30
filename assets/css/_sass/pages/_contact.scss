@@ -109,7 +109,7 @@ main:has(.contact-hero) {
   background: var(--surface-faint);
   border: var(--hairline-width) solid var(--line-control);
   @include squircle(var(--border-radius-sm));
-  padding: 0.75rem 1rem;
+  padding: 0.75rem var(--spacing-sm);
   width: 100%;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease;
@@ -302,7 +302,7 @@ main:has(.contact-hero) {
      qui etait deja en `md`. Les deux moities du meme composant n'avaient
      pas la meme forme. */
   @include squircle(var(--border-radius-md));
-  padding: 0.75rem 1rem;
+  padding: 0.75rem var(--spacing-sm);
   width: 100%;
   display: flex;
   align-items: center;

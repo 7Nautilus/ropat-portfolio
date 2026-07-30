@@ -358,7 +358,7 @@ body:has(.project-page) {
   display: block;
   width: calc(100% - 2 * var(--page-gutter));
   margin: 0 auto clamp(2rem, 5vw, 4rem);
-  padding: 1.1rem 1.5rem;
+  padding: 1.1rem var(--spacing-md);
   min-height: 44px;
   background: none;
   border: none;

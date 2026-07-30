@@ -193,7 +193,7 @@
 
 .about-tool-tag {
   display: inline-block;
-  padding: 0.5rem 0.9rem; // Padding vertical équilibré (0.35 → 0.5)
+  padding: var(--spacing-xs) 0.9rem; // Padding vertical équilibré (0.35 → 0.5)
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-full);
   @include squircle(var(--border-radius-full));

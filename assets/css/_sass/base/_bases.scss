@@ -12,7 +12,7 @@
   // Texte SOMBRE sur l'orange : le blanc ne donnait que 3.10:1 (< AA).
   // Sombre sur #ff5c00 ≈ 6.4:1, conforme WCAG AA.
   color: var(--background-dark);
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem var(--spacing-md);
   text-decoration: none;
   font-weight: 600;
   /* Il n'avait AUCUN rayon : c'etait le dernier rectangle a angles vifs du

@@ -28,7 +28,7 @@
   padding: var(--spacing-xs) var(--spacing-md);
 
   @include respond-to("sm") {
-    padding: 0.875rem 2rem;
+    padding: 0.875rem var(--spacing-lg);
   }
 
   @include respond-below("mobile-etroit") {
@@ -202,7 +202,7 @@
     // « Lançons votre projet » est long pour 320px. Une variante courte en
     // données réglerait le sujet mieux que n'importe quel réglage de padding.
     gap: 0.75rem;
-    padding: 1rem 1.25rem;
+    padding: var(--spacing-sm) 1.25rem;
   }
 }
 

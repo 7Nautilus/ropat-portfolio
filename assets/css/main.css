@@ -1323,7 +1323,7 @@ header[role=banner] {
   left: 0;
   background: var(--primary-color);
   color: var(--background-dark);
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem var(--spacing-md);
   text-decoration: none;
   font-weight: 600;
   /* Il n'avait AUCUN rayon : c'etait le dernier rectangle a angles vifs du
@@ -2824,7 +2824,7 @@ footer {
 }
 @media (min-width: 640px) {
   .btn--md {
-    padding: 0.875rem 2rem;
+    padding: 0.875rem var(--spacing-lg);
   }
 }
 @media (max-width: 360px) {
@@ -2848,7 +2848,7 @@ footer {
 @media (max-width: 360px) {
   .btn--xl {
     gap: 0.75rem;
-    padding: 1rem 1.25rem;
+    padding: var(--spacing-sm) 1.25rem;
   }
 }
 
@@ -3203,7 +3203,7 @@ html.scrollbar-saisie {
      donc invalide et le paragraphe heritait d'une couleur au hasard. La
      Phase 0 devait les supprimer, celui-ci avait survecu. */
   color: var(--ink-soft);
-  padding: 1.25rem 2rem;
+  padding: 1.25rem var(--spacing-lg);
   -webkit-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   background-color: var(--secondary-color);
@@ -4305,7 +4305,7 @@ body:has(.project-page) {
   display: block;
   width: calc(100% - 2 * var(--page-gutter));
   margin: 0 auto clamp(2rem, 5vw, 4rem);
-  padding: 1.1rem 1.5rem;
+  padding: 1.1rem var(--spacing-md);
   min-height: 44px;
   background: none;
   border: none;
@@ -5095,7 +5095,7 @@ html.voile-en-cours .project-open--contexte::after {
 
 .about-tool-tag {
   display: inline-block;
-  padding: 0.5rem 0.9rem;
+  padding: var(--spacing-xs) 0.9rem;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-full);
   border-radius: var(--border-radius-full);
@@ -5398,7 +5398,7 @@ main:has(.contact-hero) {
   }
 }
 .contact-input {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem var(--spacing-sm);
   width: 100%;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease;
@@ -5602,7 +5602,7 @@ main:has(.contact-hero) {
   }
 }
 .contact-dropdown {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem var(--spacing-sm);
   width: 100%;
   display: flex;
   align-items: center;
