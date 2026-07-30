@@ -2,7 +2,8 @@
   "detector": {
     "ignoreRules": [],
     "ignoreFiles": [
-      "labo/**"
+      "labo/**",
+      "TESTS/**"
     ],
     "ignoreValues": []
   }
