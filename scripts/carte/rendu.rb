@@ -121,7 +121,9 @@ module Carte
       <<~MD
         # Carte du depot
 
-        > Generee le #{Time.now.strftime('%d/%m/%Y a %H:%M')}#{commit.empty? ? '' : " sur #{commit}"}.
+        > Generee le #{Time.now.strftime('%d/%m/%Y a %H:%M')}#{commit.empty? ? '' : ", d'apres l'etat de #{commit}"}.
+        > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
+        > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
         > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
         > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 

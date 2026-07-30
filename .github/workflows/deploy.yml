@@ -158,8 +158,42 @@ jobs:
           # Le site genere par Jekyll, plus le CSS et le JS traites ci-dessus.
           path: '_site/'
 
+  # ══════════════════════════════════════════════════════════════════════
+  #  LA CARTE DECRIT-ELLE BIEN CES SOURCES ?
+  # ══════════════════════════════════════════════════════════════════════
+  #
+  # `CARTE.md` et `.carte/carte.json` sont GENERES. Commiter un changement de
+  # structure sans les regenerer laisse une carte qui affirme des choses fausses
+  # sur le depot, et c'est precisement ce qu'elle existe pour ne pas faire.
+  #
+  # Job SEPARE et non une etape de `build` : il tourne en parallele, donc il
+  # n'allonge pas la publication (environ 20 s, dont son propre build Jekyll).
+  #
+  # ⚠️ IL BLOQUE LE DEPLOIEMENT, par la ligne `needs` de `deploy` ci-dessous. Pour
+  # le rendre consultatif, retirer `carte` de cette liste : le workflow passera au
+  # rouge sans empecher la mise en ligne.
+  #
+  # ⚠️ NE PAS EN FAIRE UN HOOK GIT LOCAL. `carte.rb --build` cree et detruit
+  # `.carte/site`, ce qui tue le fil `listen` d'un `jekyll serve` en cours : le
+  # serveur continue alors de servir l'ANCIEN HTML en silence. En CI il n'y a pas
+  # de serveur de developpement, donc le piege n'existe pas.
+  carte:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Regenerer la carte et la comparer a celle qui est commitee
+        run: bundle exec ruby scripts/carte-a-jour.rb
+
   deploy:
-    needs: build
+    needs: [build, carte]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
