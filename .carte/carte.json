@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-29T21:51:16Z",
-  "commit": "2949259",
+  "genere_le": "2026-07-30T01:18:29Z",
+  "commit": "e43b383",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -405,11 +405,13 @@
     "--carousel-speed",
     "--color-success",
     "--course-hero",
+    "--course-hero-scrim",
     "--danger",
     "--dur-base",
     "--dur-hero-arrivee",
     "--dur-hero-echelon",
     "--dur-hero-retard",
+    "--dur-hero-scrim",
     "--dur-loader-fade",
     "--dur-loader-hold",
     "--dur-quick",
@@ -565,10 +567,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 217684,
-    "gzip": 65779,
-    "sans_commentaires": 81117,
-    "gzip_sans": 13399
+    "brut": 221503,
+    "gzip": 67201,
+    "sans_commentaires": 81631,
+    "gzip_sans": 13477
   },
   "ratios_faux": []
 }

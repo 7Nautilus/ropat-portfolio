@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 29/07/2026 a 23:51 sur 2949259.
+> Generee le 30/07/2026 a 03:18 sur e43b383.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 29/07/2026 23:51 |
+| Date du build lu | 30/07/2026 03:18 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -27,7 +27,7 @@ Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
 **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
 Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
 qu'aucune mesure ne peut etablir. « Absent des 63 pages construites le
-29/07 » est un fait, datable et refutable.
+30/07 » est un fait, datable et refutable.
 
 ## 1. Routes
 
@@ -199,9 +199,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-121 jetons definis, 114 consommes, 284 noms de selecteur, 12 `!important`.
+123 jetons definis, 116 consommes, 284 noms de selecteur, 13 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:915`
+`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
 
 Points de rupture ecrits en dur : 360px (3x), 520px (1x), 639px (2x), 767px (2x), 768px (2x), 900px (2x), 992px (1x), 1200px (1x)
 
@@ -210,7 +210,7 @@ Points de rupture ecrits en dur : 360px (3x), 520px (1x), 639px (2x), 767px (2x)
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
 - --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:446)
-- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:544)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:570)
 - --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:396)
 - --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:395)
 - --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:394)
@@ -259,7 +259,7 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1397
 - .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
-- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:877, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:914, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
 ### Selecteurs absents des 63 pages construites  (21)
 
@@ -405,7 +405,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 217684 o brut, 65779 o gzip. Sans les commentaires : 81117 o, 13399 o gzip, soit **80 % de moins** sur le fil.
+**CSS servi** : 221503 o brut, 67201 o gzip. Sans les commentaires : 81631 o, 13477 o gzip, soit **80 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
