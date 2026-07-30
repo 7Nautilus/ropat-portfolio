@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 30/07/2026 a 03:18 sur e43b383.
+> Generee le 30/07/2026 a 03:26 sur ec4f911.
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
 > Pour ne voir que ce qui a bouge : `bundle exec ruby scripts/carte.rb --diff`.
 
@@ -15,7 +15,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 30/07/2026 03:18 |
+| Date du build lu | 30/07/2026 03:26 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -199,9 +199,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-123 jetons definis, 116 consommes, 284 noms de selecteur, 13 `!important`.
+123 jetons definis, 116 consommes, 282 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/base/_generic.scss:21`, `assets/css/_sass/base/_generic.scss:60`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
+`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
 
 Points de rupture ecrits en dur : 360px (3x), 520px (1x), 639px (2x), 767px (2x), 768px (2x), 900px (2x), 992px (1x), 1200px (1x)
 
@@ -255,17 +255,16 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1604
 - .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1610
 - .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1692, assets/js/script.js:1713
-- .was-validated  style en assets/css/_sass/pages/_contact.scss:126, pose par assets/js/script.js:1449
-- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:135, pose par assets/js/script.js:1397
-- .is-invalid  style en assets/css/_sass/pages/_contact.scss:316, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
+- .was-validated  style en assets/css/_sass/pages/_contact.scss:138, pose par assets/js/script.js:1449
+- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1397
+- .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
 - .voile-en-cours  style en assets/css/_sass/pages/_project.scss:914, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
-### Selecteurs absents des 63 pages construites  (21)
+### Selecteurs absents des 63 pages construites  (20)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
-- .transparent-orange-bg  assets/css/_sass/base/_generic.scss:20
 - .card-grid  assets/css/_sass/base/_media-queries.scss:17 assets/css/_sass/base/_media-queries.scss:126 assets/css/_sass/base/_media-queries.scss:240 assets/css/_sass/layout/_grids.scss:1
 - .service-main-container  assets/css/_sass/base/_media-queries.scss:40 assets/css/_sass/base/_media-queries.scss:219 assets/css/_sass/layout/_sections.scss:208
 - .hero-project  assets/css/_sass/base/_media-queries.scss:103
@@ -284,14 +283,14 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - #contact-social-links  assets/css/_sass/layout/_sections.scss:272 assets/css/_sass/layout/_sections.scss:322
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
-- .contact-select  assets/css/_sass/pages/_contact.scss:155 assets/css/_sass/pages/_contact.scss:171
+- .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
 - .project-back-link  assets/css/_sass/pages/_project.scss:809 assets/css/_sass/pages/_project.scss:822 assets/css/_sass/pages/_project.scss:824 assets/css/_sass/pages/_project.scss:827
 
 ### Valeurs ecrites en dur alors qu'un jeton porte la meme  (8)
 
 Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera.
 
-- 1rem ecrit 19 fois, alors que --radius-sm vaut exactement ca   (ex. assets/css/_sass/base/_generic.scss:27, assets/css/_sass/base/_media-queries.scss:79, assets/css/_sass/base/_media-queries.scss:268)
+- 1rem ecrit 19 fois, alors que --radius-sm vaut exactement ca   (ex. assets/css/_sass/base/_generic.scss:26, assets/css/_sass/base/_media-queries.scss:79, assets/css/_sass/base/_media-queries.scss:268)
 - 3rem ecrit 18 fois, alors que --spacing-xl vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:175, assets/css/_sass/base/_media-queries.scss:176, assets/css/_sass/base/_media-queries.scss:200)
 - 2rem ecrit 16 fois, alors que --radius-lg vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:41, assets/css/_sass/components/_buttons.scss:31, assets/css/_sass/components/_buttons.scss:181)
 - 1px ecrit 14 fois, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_bases.scss:35, assets/css/_sass/base/_bases.scss:36, assets/css/_sass/base/_generic.scss:8)
@@ -405,7 +404,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 221503 o brut, 67201 o gzip. Sans les commentaires : 81631 o, 13477 o gzip, soit **80 % de moins** sur le fil.
+**CSS servi** : 222566 o brut, 67675 o gzip. Sans les commentaires : 81548 o, 13467 o gzip, soit **80 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

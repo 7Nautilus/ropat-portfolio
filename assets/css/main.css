@@ -1254,11 +1254,9 @@ header[role=banner] {
   backdrop-filter: blur(12px);
 }
 
-/* Fond orange transparent */
-.transparent-orange-bg {
-  background-color: var(--primary-color-alpha) !important;
-}
-
+/* `.transparent-orange-bg` retiree le 30/07/2026 : emise par ZERO page construite
+   et absente de tout gabarit, la carte la listait comme absente. Elle portait un
+   `!important` sur `background-color`. */
 .span-spacing p {
   display: flex;
   flex-direction: column;
@@ -1294,10 +1292,11 @@ header[role=banner] {
   text-align: center;
 }
 
-.text-start {
-  text-align: start !important;
-}
-
+/* `.text-start` retiree le 30/07/2026. Un utilitaire pour UN SEUL element du site,
+   le pitch du hero de la page contact, et il ne pouvait gagner qu'avec un
+   `!important` : charge en 8e position, il perdait contre `.hero-pitch` de
+   `layout/sections`, 16e, a egalite de specificite. La declaration vit desormais
+   dans `pages/_contact.scss`, ou l'ordre des couches suffit. */
 /* ============================================
    Règles Globales & Accessibilité
    ============================================ */
@@ -5285,6 +5284,18 @@ main:has(.contact-hero) {
 
 .contact-title {
   line-height: 1;
+}
+
+/* Le pitch de cette page s'aligne a gauche, la ou `.hero-pitch` centre partout
+   ailleurs (`layout/_sections.scss`).
+   ⚠️ CETTE REGLE REMPLACE UN `!important`. Elle vivait dans `base/_generic.scss`
+   sous la forme d'un utilitaire `.text-start`, charge en 8e position alors que
+   `layout/sections` l'est en 16e : a egalite de specificite, l'ordre source
+   decidait, donc l'utilitaire perdait et il fallait le forcer. Pose ici, dans une
+   couche chargee en 45e, elle gagne sans rien forcer. Ne pas la remonter dans une
+   couche generique : le `!important` reviendrait avec. */
+.contact-hero .hero-pitch {
+  text-align: start;
 }
 
 .contact-body {

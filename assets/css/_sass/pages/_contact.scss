@@ -25,6 +25,18 @@ main:has(.contact-hero) {
   line-height: 1;
 }
 
+/* Le pitch de cette page s'aligne a gauche, la ou `.hero-pitch` centre partout
+   ailleurs (`layout/_sections.scss`).
+   ⚠️ CETTE REGLE REMPLACE UN `!important`. Elle vivait dans `base/_generic.scss`
+   sous la forme d'un utilitaire `.text-start`, charge en 8e position alors que
+   `layout/sections` l'est en 16e : a egalite de specificite, l'ordre source
+   decidait, donc l'utilitaire perdait et il fallait le forcer. Pose ici, dans une
+   couche chargee en 45e, elle gagne sans rien forcer. Ne pas la remonter dans une
+   couche generique : le `!important` reviendrait avec. */
+.contact-hero .hero-pitch {
+  text-align: start;
+}
+
 // ── BODY : 2 colonnes ────────────
 .contact-body {
   display: grid;

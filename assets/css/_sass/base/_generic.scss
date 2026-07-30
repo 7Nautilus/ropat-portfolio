@@ -16,10 +16,9 @@
   backdrop-filter: blur(12px);
 }
 
-/* Fond orange transparent */
-.transparent-orange-bg {
-  background-color: var(--primary-color-alpha) !important;
-}
+/* `.transparent-orange-bg` retiree le 30/07/2026 : emise par ZERO page construite
+   et absente de tout gabarit, la carte la listait comme absente. Elle portait un
+   `!important` sur `background-color`. */
 
 .span-spacing p {
   display: flex; 
@@ -56,6 +55,8 @@
   text-align: center;
 }
 
-.text-start {
-  text-align: start !important;
-}
+/* `.text-start` retiree le 30/07/2026. Un utilitaire pour UN SEUL element du site,
+   le pitch du hero de la page contact, et il ne pouvait gagner qu'avec un
+   `!important` : charge en 8e position, il perdait contre `.hero-pitch` de
+   `layout/sections`, 16e, a egalite de specificite. La declaration vit desormais
+   dans `pages/_contact.scss`, ou l'ordre des couches suffit. */

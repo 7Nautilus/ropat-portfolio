@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-30T01:18:29Z",
-  "commit": "e43b383",
+  "genere_le": "2026-07-30T01:26:12Z",
+  "commit": "ec4f911",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -518,7 +518,6 @@
     "--track-display"
   ],
   "selecteurs_absents": [
-    ".transparent-orange-bg",
     ".card-grid",
     ".service-main-container",
     ".hero-project",
@@ -567,10 +566,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 221503,
-    "gzip": 67201,
-    "sans_commentaires": 81631,
-    "gzip_sans": 13477
+    "brut": 222566,
+    "gzip": 67675,
+    "sans_commentaires": 81548,
+    "gzip_sans": 13467
   },
   "ratios_faux": []
 }
