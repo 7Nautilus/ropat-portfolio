@@ -116,8 +116,8 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 0 var(--spacing-xl) 10rem var(--spacing-xl);
-  gap: 10rem;
+  padding: 0 var(--spacing-xl) var(--spacing-6xl) var(--spacing-xl);
+  gap: var(--spacing-6xl);
   min-height: 100vh;
 }
 

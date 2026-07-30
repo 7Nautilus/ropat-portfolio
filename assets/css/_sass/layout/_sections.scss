@@ -43,7 +43,7 @@
   min-height: calc(100vh - 3rem - 76px);;
   width: 100%;
   position: relative;
-  gap: 4rem;
+  gap: var(--spacing-2xl);
 }
 
 .hero-title {

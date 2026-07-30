@@ -347,6 +347,22 @@
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
+  /* Etage haut : les ecarts entre BLOCS et entre SECTIONS. Il existait deja dans
+     la mise en page, il n'avait simplement aucun nom : neuf litteraux disperses
+     dans sept fichiers, dont le rythme vertical de toutes les pages.
+     Nomme le 30/07/2026, a valeurs INCHANGEES (arbitrage de Ropat : on nomme,
+     on ne deplace rien).
+
+     ⚠️ CET ETAGE N'EST PAS REGULIER, et le nommer sert d'abord a le rendre
+     visible : 4 -> 4,5 est un pas de 12 %, 6 -> 10 un pas de 67 %. Cinq valeurs
+     distinctes pour une seule intention, separer de gros blocs. Une passe
+     ulterieure peut les rassembler ; ce sera un choix de rythme, donc un
+     arbitrage, pas un nettoyage. */
+  --spacing-2xl: 4rem; /* hero, cartes de service */
+  --spacing-3xl: 4.5rem; /* utilitaire .spacing-3xl, page services */
+  --spacing-4xl: 5rem; /* cartes d'experience, corps de la page contact */
+  --spacing-5xl: 6rem; /* page A propos */
+  --spacing-6xl: 10rem; /* <main> : le gap entre sections ET son padding bas */
   /* Gouttiere de page : la marge laterale du contenu. Fluide, donc elle
      n'a plus besoin d'une media query pour retomber sur mobile.
      Valeur reprise du prototype de page projet (docs/proto-page-projet.html).
@@ -769,8 +785,8 @@ main {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  padding: 0 var(--spacing-xl) 10rem var(--spacing-xl);
-  gap: 10rem;
+  padding: 0 var(--spacing-xl) var(--spacing-6xl) var(--spacing-xl);
+  gap: var(--spacing-6xl);
   min-height: 100vh;
 }
 
@@ -1468,8 +1484,12 @@ header[role=banner] {
   gap: var(--spacing-xl);
 }
 
-.spacing-2xl {
-  gap: 4.5rem;
+/* ⚠️ RENOMMEE le 30/07/2026, de `.spacing-2xl` a `.spacing-3xl`. Sa valeur, 4,5rem,
+   est le TROISIEME palier de l'etage haut (4 / 4,5 / 5 / 6 / 10rem), pas le
+   deuxieme : le nom annoncait un palier que le jeton contredisait. La valeur ne
+   bouge pas, seul le nom. Consommateur unique : `_includes/pages/services.html`. */
+.spacing-3xl {
+  gap: var(--spacing-3xl);
 }
 
 header {
@@ -2052,7 +2072,7 @@ header[data-sur-media] {
   min-height: calc(100vh - 3rem - 76px);
   width: 100%;
   position: relative;
-  gap: 4rem;
+  gap: var(--spacing-2xl);
 }
 
 .hero-title {
@@ -3643,8 +3663,8 @@ html.scrollbar-saisie {
 
 /* Variations */
 .service-card-big {
-  gap: 4rem;
-  padding: 4rem 2rem;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
   border-radius: var(--border-radius-squircle-medium);
 }
 @supports (corner-shape: squircle) {
@@ -3752,7 +3772,7 @@ html.scrollbar-saisie {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  gap: var(--spacing-4xl);
   width: 100%;
 }
 
@@ -4891,7 +4911,7 @@ html.voile-en-cours .project-open--contexte::after {
 .about-page {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: var(--spacing-5xl);
   padding-bottom: var(--spacing-xl);
 }
 
@@ -5307,7 +5327,7 @@ main:has(.contact-hero) {
   .contact-body {
     grid-template-columns: 1fr 380px;
     align-items: start;
-    gap: 5rem;
+    gap: var(--spacing-4xl);
   }
 }
 

@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-07-30T01:26:12Z",
-  "commit": "ec4f911",
+  "genere_le": "2026-07-30T02:19:12Z",
+  "commit": "1a5e291",
   "pages_construites": 63,
   "perime": null,
   "indetermines": 7,
@@ -480,6 +480,11 @@
     "--shadow-sm",
     "--signal-chrome",
     "--signal-width",
+    "--spacing-2xl",
+    "--spacing-3xl",
+    "--spacing-4xl",
+    "--spacing-5xl",
+    "--spacing-6xl",
     "--spacing-lg",
     "--spacing-md",
     "--spacing-sm",
@@ -566,10 +571,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 222566,
-    "gzip": 67675,
-    "sans_commentaires": 81548,
-    "gzip_sans": 13467
+    "brut": 224928,
+    "gzip": 68415,
+    "sans_commentaires": 82381,
+    "gzip_sans": 13493
   },
   "ratios_faux": []
 }

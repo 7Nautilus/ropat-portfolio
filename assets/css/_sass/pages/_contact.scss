@@ -46,7 +46,7 @@ main:has(.contact-hero) {
   @include respond-to("md") {
     grid-template-columns: 1fr 380px;
     align-items: start;
-    gap: 5rem;
+    gap: var(--spacing-4xl);
   }
 }
 

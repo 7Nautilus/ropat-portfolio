@@ -6,7 +6,7 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: var(--spacing-5xl);
   padding-bottom: var(--spacing-xl);
 }
 

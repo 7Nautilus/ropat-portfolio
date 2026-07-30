@@ -69,8 +69,8 @@
 
 /* Variations */
 .service-card-big {
-  gap: 4rem;
-  padding: 4rem 2rem;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
   @include squircle(var(--border-radius-squircle-medium));
 }
 

@@ -6,6 +6,10 @@
   gap: var(--spacing-xl);
 }
 
-.spacing-2xl {
-  gap: 4.5rem;
+/* ⚠️ RENOMMEE le 30/07/2026, de `.spacing-2xl` a `.spacing-3xl`. Sa valeur, 4,5rem,
+   est le TROISIEME palier de l'etage haut (4 / 4,5 / 5 / 6 / 10rem), pas le
+   deuxieme : le nom annoncait un palier que le jeton contredisait. La valeur ne
+   bouge pas, seul le nom. Consommateur unique : `_includes/pages/services.html`. */
+.spacing-3xl {
+  gap: var(--spacing-3xl);
 }
