@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Temoin : ton lecteur d'ecran prononce-t-il les regions vivantes ?</title>
+
+<!--
+  ══════════════════════════════════════════════════════════════════════════
+   TEMOIN D'ANNONCES, POUR LA PASSE NVDA
+  ══════════════════════════════════════════════════════════════════════════
+
+   http://localhost:4000/labo/temoin-annonces.html
+
+   Il existe pour une seule raison : sans lui, un silence pendant les tests 2 et
+   3 du protocole a DEUX causes possibles, un defaut du site ou une option de
+   NVDA, et rien ne permet de les distinguer. Cette page separe les deux.
+
+   Le bouton 3 reproduit la sequence EXACTE de `assets/js/script.js` a la
+   soumission d'un formulaire invalide : region videe, focus deplace, texte pose
+   a la frame suivante. C'est le seul endroit ou cette sequence s'observe sans le
+   reste du formulaire autour.
+
+   ⚠️ Volontairement autonome, sans `main.css` : un temoin qui depend de ce qu'il
+   teste ne prouve rien.
+
+   ⚠️ LES BOUTONS 2 ET 3 NE FONT RIEN DANS UN ONGLET MASQUE. Ils passent par
+   `requestAnimationFrame`, comme `annoncer()`, et le navigateur suspend les frames
+   d'un document invisible (`document.visibilityState === "hidden"`). Sans
+   consequence pour un lecteur d'ecran, dont l'utilisateur regarde sa page, mais
+   c'est un piege pour toute sonde automatique : elle mesure alors la composition
+   du panneau, pas la page. Verifie ici le 31/07/2026, le bouton 1 restant le seul
+   observable dans ces conditions.
+  ══════════════════════════════════════════════════════════════════════════
+-->
+
+<style>
+  body {
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    max-width: 46rem;
+    background: #030808;
+    color: #f2f0ec;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  h1 { font-size: 1.3rem; letter-spacing: 0.02em; margin: 0 0 0.4rem; }
+  h2 { font-size: 1rem; margin: 2rem 0 0.5rem; }
+  p { color: #a8aeaa; max-width: 62ch; }
+  p.fort { color: #f2f0ec; }
+  ol { color: #a8aeaa; max-width: 62ch; }
+  button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font: inherit;
+    color: #f2f0ec;
+    background: #0b1211;
+    border: 1px solid rgba(242, 240, 236, 0.18);
+    padding: 0.8em 1em;
+    margin: 0 0 0.5rem;
+    cursor: pointer;
+  }
+  button:hover { border-color: #ff5c00; }
+  button:focus-visible { outline: 3px solid #ff5c00; outline-offset: 2px; }
+  button b { color: #ff5c00; font-weight: 600; }
+  input {
+    font: inherit;
+    color: #f2f0ec;
+    background: #0b1211;
+    border: 1px solid rgba(242, 240, 236, 0.18);
+    padding: 0.6em 0.8em;
+    width: 100%;
+  }
+  input:focus-visible { outline: 3px solid #ff5c00; outline-offset: 2px; }
+  label { display: block; margin: 1rem 0 0.3rem; color: #a8aeaa; font-size: 0.9rem; }
+  .miroir {
+    border-left: 3px solid #ff5c00;
+    padding: 0.6em 0 0.6em 1em;
+    margin: 1.5rem 0;
+    min-height: 1.6em;
+    font-variant-numeric: tabular-nums;
+  }
+  .miroir:empty::before { content: "(rien pour l'instant)"; color: #6d736f; }
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Ton lecteur d'ecran prononce-t-il les regions vivantes ?</h1>
+<p class="fort">
+  Frappe les trois boutons dans l'ordre, en laissant cinq secondes apres chacun. Ce que
+  tu dois entendre est ecrit sous chaque bouton. Ce qui s'affiche dans le cadre orange
+  est ce qui vient d'etre pose dans la region : si le cadre change et que rien n'est dit,
+  c'est le lecteur qui n'a pas parle.
+</p>
+
+<!-- La region testee. Meme forme que celle du site. -->
+<div id="annonces" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<h2>1. Ecriture directe</h2>
+<button type="button" data-mode="direct">
+  <b>Bouton 1</b> : ecrire dans la region, sans rien d'autre
+</button>
+<p>
+  Doit dire : « Annonce directe numero N ». <strong>Si tu n'entends rien ici</strong>, le
+  reste ne veut rien dire : c'est l'option « signaler les changements de contenu
+  dynamique » de NVDA qui est a verifier, pas le site.
+</p>
+
+<h2>2. La technique du site</h2>
+<button type="button" data-mode="raf">
+  <b>Bouton 2</b> : vider la region, puis ecrire a la frame suivante
+</button>
+<p>
+  Doit dire la meme chose. C'est exactement ce que fait <code>annoncer()</code> dans
+  <code>script.js</code>. Le vidage prealable existe pour qu'un MEME texte repete soit
+  annonce deux fois : frappe ce bouton deux fois de suite, tu dois l'entendre deux fois.
+</p>
+
+<h2>3. La sequence du formulaire</h2>
+<button type="button" data-mode="focus">
+  <b>Bouton 3</b> : ecrire, et deplacer le focus dans la foulee
+</button>
+<p>
+  Doit dire l'annonce <strong>et</strong> nommer le champ qui recoit le focus. C'est la
+  sequence exacte d'une soumission invalide sur la page contact. Note bien
+  <strong>l'ordre</strong> des deux, et si l'un des deux manque.
+</p>
+
+<label for="cible">Champ qui recoit le focus au bouton 3</label>
+<input id="cible" type="text" placeholder="le focus doit atterrir ici">
+
+<h2>Ce qui vient d'etre pose dans la region</h2>
+<div class="miroir" id="miroir"></div>
+
+<h2>Comment lire le resultat</h2>
+<ol>
+  <li><strong>Rien n'est dit aux trois boutons</strong> : c'est le reglage de NVDA. Les
+      tests 2 et 3 du protocole sont a suspendre jusqu'a ce que ce temoin parle.</li>
+  <li><strong>1 et 2 parlent, 3 non</strong> : le deplacement de focus etouffe l'annonce.
+      Le defaut est dans le site, et il est reparable.</li>
+  <li><strong>Les trois parlent</strong> : la mecanique d'annonce est saine. Un silence
+      pendant le test 2 viendra alors d'autre chose, et c'est une information precieuse.</li>
+</ol>
+
+<script>
+(() => {
+  const region = document.getElementById('annonces');
+  const miroir = document.getElementById('miroir');
+  const cible = document.getElementById('cible');
+  let n = 0;
+
+  const poser = (texte) => { region.textContent = texte; miroir.textContent = texte; };
+
+  document.querySelectorAll('button[data-mode]').forEach(b => {
+    b.addEventListener('click', () => {
+      n += 1;
+      const texte = `Annonce ${b.dataset.mode} numero ${n}.`;
+      if (b.dataset.mode === 'direct') {
+        poser(texte);
+        return;
+      }
+      // Les deux autres modes reproduisent `annoncer()` : vidage, puis pose a la
+      // frame suivante. Le mode `focus` y ajoute le deplacement immediat, donc le
+      // focus part AVANT que le texte soit ecrit, comme dans le formulaire.
+      region.textContent = '';
+      miroir.textContent = '';
+      if (b.dataset.mode === 'focus') cible.focus();
+      requestAnimationFrame(() => poser(texte));
+    });
+  });
+})();
+</script>
+</body>
+</html>
