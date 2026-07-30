@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 31/07/2026 a 00:24, d'apres l'etat de dbba05d.
+> Generee le 31/07/2026 a 00:27, d'apres l'etat de f4520ab.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **63** |
-| Date du build lu | 31/07/2026 00:24 |
+| Date du build lu | 31/07/2026 00:27 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |

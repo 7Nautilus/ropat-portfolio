@@ -77,6 +77,12 @@ structure_ok = (a == b)
 rendu_ok     = (md_a == md_b)
 
 if structure_ok && rendu_ok
+  # ⚠️ ON REMET LES OCTETS D'ORIGINE. La generation vient de reecrire deux
+  # horodatages identiques au sens du verdict mais differents au sens de git : sans
+  # ca, un controle qui PASSE laisse l'arbre sale, et le bruit finit par etre
+  # commite ou par masquer un vrai changement.
+  File.write(JSON_CHEMIN, json_avant, encoding: "utf-8")
+  File.write(MD_CHEMIN, md_avant, encoding: "utf-8")
   puts "Carte a jour : ce qui est commite est ce qu'une generation fraiche produit."
   exit 0
 end
