@@ -482,9 +482,15 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
   </button>
   {%- comment -%}
-    Pas de <img> vide ici : l'element est cree par script.js a la premiere
-    ouverture. Un <img src=""> expedie une boite d'image cassee dans le DOM
-    de chaque page projet, meme masquee.
+    Aucune balise image vide ici : `script.js` cree l'element par `createElement`
+    a la premiere ouverture. Une balise image dont le `src` est vide expedie une
+    boite d'image cassee dans le DOM de chaque page projet, meme masquee.
+    Mesure du 30/07/2026 : zero `src` vide servi sur une page projet.
+
+    ⚠️ La balise n'est PAS epelee en clair ci-dessus, et ce n'est pas une maladresse :
+    le detecteur de design lit le TEXTE des commentaires, sans retirer les blocs
+    Liquid. L'y ecrire produisait deux faux `broken-image` a demeure sur un fichier
+    chaud, donc du bruit qui aurait fini par masquer un vrai constat.
   {%- endcomment -%}
 </div>
 {% endif %}
