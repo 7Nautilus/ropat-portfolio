@@ -45,8 +45,16 @@ LIGNES_VOLATILES = [
   /^\| Date du build lu \| .*$/,
 ].freeze
 
+# ⚠️ LES FINS DE LIGNE SONT NORMALISEES AVANT DE COMPARER, et ce n'est pas une
+# coquetterie : `git checkout` ecrit ce fichier en CRLF (conversion a la sortie sous
+# Windows) tandis que `carte.rb` l'ecrit en LF. Les octets du fichier de travail
+# dependent donc de QUI l'a ecrit en dernier, et une comparaison brute declarait la
+# carte perimee sur un diff qui ne contenait que deux horodatages. Git, lui, stocke
+# du LF et considere les deux formes equivalentes : la comparaison doit faire pareil.
+# ⚠️ La RESTAURATION, elle, reecrit les octets d'origine tels quels : c'est ce qui
+# rend l'arbre propre, quelle que soit la forme qui s'y trouvait.
 def neutraliser(md)
-  LIGNES_VOLATILES.reduce(md) { |t, r| t.sub(r, "") }
+  LIGNES_VOLATILES.reduce(md.gsub("\r\n", "\n")) { |t, r| t.sub(r, "") }
 end
 
 # ⚠️ On compare au DISQUE, pas a `git show HEAD:`. Avec HEAD, le script melangerait
@@ -58,20 +66,23 @@ unless File.exist?(JSON_CHEMIN) && File.exist?(MD_CHEMIN)
   warn "Carte absente du disque. La generer d'abord : scripts/carte.rb --build"
   exit 1
 end
-json_avant = File.read(JSON_CHEMIN, encoding: "utf-8")
-md_avant   = File.read(MD_CHEMIN, encoding: "utf-8")
+# ⚠️ BINAIRE, PAS `File.read`. Sous Windows, Ruby lit en mode texte (CRLF -> LF) et
+# reecrit en CRLF : une restauration censee etre fidele rendait un fichier plus gros
+# de 471 octets, un par ligne. Le verdict etait juste et l'arbre restait sale.
+json_avant = File.binread(JSON_CHEMIN)
+md_avant   = File.binread(MD_CHEMIN)
 
 unless system("bundle", "exec", "ruby", "scripts/carte.rb", "--build")
   warn "La generation a echoue : c'est elle qu'il faut regarder d'abord."
   exit 1
 end
 
-a = JSON.parse(json_avant)
-b = JSON.parse(File.read(JSON_CHEMIN, encoding: "utf-8"))
+a = JSON.parse(json_avant.dup.force_encoding("utf-8"))
+b = JSON.parse(File.binread(JSON_CHEMIN).force_encoding("utf-8"))
 VOLATILES.each { |k| a.delete(k); b.delete(k) }
 
-md_a = neutraliser(md_avant)
-md_b = neutraliser(File.read(MD_CHEMIN, encoding: "utf-8"))
+md_a = neutraliser(md_avant.dup.force_encoding("utf-8"))
+md_b = neutraliser(File.binread(MD_CHEMIN).force_encoding("utf-8"))
 
 structure_ok = (a == b)
 rendu_ok     = (md_a == md_b)
@@ -81,8 +92,8 @@ if structure_ok && rendu_ok
   # horodatages identiques au sens du verdict mais differents au sens de git : sans
   # ca, un controle qui PASSE laisse l'arbre sale, et le bruit finit par etre
   # commite ou par masquer un vrai changement.
-  File.write(JSON_CHEMIN, json_avant, encoding: "utf-8")
-  File.write(MD_CHEMIN, md_avant, encoding: "utf-8")
+  File.binwrite(JSON_CHEMIN, json_avant)
+  File.binwrite(MD_CHEMIN, md_avant)
   puts "Carte a jour : ce qui est commite est ce qu'une generation fraiche produit."
   exit 0
 end
