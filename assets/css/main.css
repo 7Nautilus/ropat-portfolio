@@ -5669,7 +5669,14 @@ main:has(.contact-hero) {
   align-items: center;
   gap: 0.6rem;
   padding: 0.6rem 0.75rem;
-  border-radius: calc(var(--border-radius-sm) - 4px);
+  /* Rayon CONCENTRIQUE avec celui du menu, et non une valeur choisie a l'oeil.
+     Le menu porte `--border-radius-md` (24px), une bordure de 2px et un padding
+     de 0,35rem (5,6px) : le rayon interieur qui suit sa courbe vaut donc
+     24 - 2 - 5,6 = 16,4px, soit `--border-radius-sm` a 0,4px pres.
+     Avant le 30/07/2026 : `calc(var(--border-radius-sm) - 4px)`, soit 12px, hors
+     de l'echelle documentee et 4,4px trop serre, donc des coins qui coupaient
+     a travers la courbe du menu au survol. */
+  border-radius: var(--border-radius-sm);
   corner-shape: squircle;
   font-family: var(--font-body);
   font-size: var(--text-meta);
