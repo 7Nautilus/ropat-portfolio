@@ -14,7 +14,7 @@
   width: 100%;
   max-width: 850px;
   padding: 2.5rem;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
   background-color: var(--secondary-color);
 
   /* Restaure le 28/07/2026 : les cartes gardent leur habillage d'origine
@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1.5rem;
+  gap: var(--spacing-md);
 
   font-size: var(--text-subhead);
   font-weight: 400;
@@ -61,7 +61,7 @@
 .experience-card-text {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--spacing-lg);
 }
 
 .experience-card-description {
@@ -83,13 +83,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: var(--spacing-lg);
 }
 
 .experience-card-tag {
   background-color: var(--primary-color-alpha);
   color: var(--ink);
-  padding: 0.5rem 1.5rem;
+  padding: var(--spacing-xs) var(--spacing-md);
 
   border: 3px solid var(--primary-color);
   @include squircle(var(--border-radius-sm));

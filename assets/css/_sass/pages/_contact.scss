@@ -307,7 +307,7 @@ main:has(.contact-hero) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
   cursor: pointer;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease;

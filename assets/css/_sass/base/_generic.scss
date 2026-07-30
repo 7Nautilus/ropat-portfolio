@@ -23,7 +23,7 @@
 .span-spacing p {
   display: flex; 
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
 
 .max-80h {

@@ -33,12 +33,12 @@
   .social-icons-card {
     width: fit-content;
     max-width: 50vw;
-    gap: 1.5rem;
+    gap: var(--spacing-md);
   }
 
 
   .service-main-container {
-    padding: 0 2rem;
+    padding: 0 var(--spacing-lg);
   }
 }
 
@@ -265,12 +265,12 @@
   }
 
   .social-icons-card {
-    gap: 1rem;
+    gap: var(--spacing-sm);
     padding: 0.875rem 1.25rem;
   }
 
   .socialContainer {
-    padding: 0.5rem;
+    padding: var(--spacing-xs);
   }
 }
 
@@ -369,8 +369,8 @@ footer {
 
   .project-open--contexte .project-open-lede {
     padding-top: calc(var(--hauteur-chrome) + 0.75rem);
-    padding-bottom: 1.5rem;
-    gap: 0.5rem;
+    padding-bottom: var(--spacing-md);
+    gap: var(--spacing-xs);
   }
 
   .project-open {

@@ -177,8 +177,8 @@
 // L'icône, elle, reste en `1em` depuis la consolidation des flèches : elle
 // suivra automatiquement si la police change un jour.
 .btn--xl {
-  gap: 1.5rem;
-  padding: 1rem 2rem;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
 
   /* A 320 px, « Lançons votre projet » passait sur DEUX lignes : boite mesuree
      a 272x104 contre 308x71 partout ailleurs, soit exactement une ligne de

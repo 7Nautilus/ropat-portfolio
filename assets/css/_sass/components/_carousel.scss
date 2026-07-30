@@ -37,7 +37,7 @@
     align-items: center;
     width: max-content;
     gap: var(--carousel-gap);
-    padding-bottom: 1rem;
+    padding-bottom: var(--spacing-sm);
     animation: scroll-carousel var(--carousel-speed) linear infinite;
   }
 
@@ -48,12 +48,12 @@
     flex-direction: column; /* Aligne le logo et le texte (span) verticalement */
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: var(--spacing-sm);
     /* Le vertical passe de 2,5rem a 1rem : sans fond ni bordure, il ne
        dessinait plus rien, il ne faisait qu'ajouter de la hauteur a une boite
        invisible. L'horizontal se resserre aussi, la place par logo ayant ete
        divisee par 5 au lieu de 3. */
-    padding: 1rem;
+    padding: var(--spacing-sm);
 
     /* ── SANS CARTE, essai du 28/07/2026 ──────────────────────────────
        Les logos sont poses directement sur le sol dither. Ce qu'il y avait
