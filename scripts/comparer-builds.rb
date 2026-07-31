@@ -85,12 +85,39 @@ end
 avant, apres = ARGV[0], ARGV[1]
 abort("usage: comparer-builds.rb <build_avant> <build_apres>") unless avant && apres
 
+# ⚠️ SOUS WINDOWS, `Dir.glob` TRAITE L'ANTISLASH COMME UN ECHAPPEMENT et non
+# comme un separateur. Une racine donnee sous sa forme naturelle (`C:\...\avant`)
+# ne fait donc correspondre AUCUN fichier, et l'outil repondait alors :
+#
+#   0 fichiers, identiques : aucune URL creee ni perdue.
+#   DIFFERENCES REELLES    : 0
+#
+# ... avec un code de sortie 0. Un vert qu'AUCUN changement n'aurait pu rendre
+# rouge, produit par l'outil meme dont c'est la seule raison d'exister. Releve le
+# 31/07/2026, en s'en servant.
+#
+# `File::ALT_SEPARATOR` vaut "\\" sous Windows et nil ailleurs : un antislash
+# dans un nom de fichier Unix, ou il est un caractere legal, reste donc intact.
+sous_forme_glob = ->(r) { File::ALT_SEPARATOR ? r.tr(File::ALT_SEPARATOR, "/") : r }
+avant, apres = sous_forme_glob.call(avant), sous_forme_glob.call(apres)
+
 lister = lambda do |racine|
   Dir.glob(File.join(racine, "**", "*")).select { |f| File.file?(f) }
      .map { |f| f.delete_prefix(racine.chomp("/") + "/").tr("\\", "/") }.sort
 end
 
 fa, fb = lister.call(avant), lister.call(apres)
+
+# ⚠️ LE GARDE. La normalisation ci-dessus ferme le cas connu ; celui-ci ferme
+# tous les autres, y compris ceux qu'on n'a pas encore rencontres : un build
+# jamais lance, un dossier deja nettoye, un chemin mal recopie. Une racine vide
+# n'est pas une comparaison reussie, c'est une comparaison qui n'a pas eu lieu.
+[[avant, fa], [apres, fb]].each do |racine, fichiers|
+  next unless fichiers.empty?
+
+  abort("#{racine} : aucun fichier. Build absent, deja supprime, ou chemin errone.\n" \
+        "Rien n'a ete compare, et surtout : rien n'a ete prouve.")
+end
 
 puts "═══ 1. CHEMINS ═══"
 perdus = fa - fb
