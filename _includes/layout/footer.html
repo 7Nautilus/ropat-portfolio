@@ -58,8 +58,14 @@
         <div class="footer-nav-container">
           <h3 class="footer-nav-title nav-element">Socials</h3>
           <ul class="nav-links nav-links-footer" id="footer-social-links">
-            {% comment %} Boucle sur les réseaux sociaux définis dans _data/socials.yml {% endcomment %}
+            {% comment %} Boucle sur les réseaux sociaux définis dans _data/socials.yml. Les entrées
+            marquées `sameas_only` n'y sont déclarées que pour le Schema.org : elles n'ont pas d'icône
+            et n'ont rien à faire ici. Le trait d'union ouvrant de la ligne suivante mange le blanc du
+            saut de ligne, pour que le HTML émis reste identique au caractère près.
+            ⚠️ Ne pas écrire de délimiteur Liquid dans ce bloc : Liquid analyse les tags jusque dans
+            un commentaire, et un délimiteur cité casse le build. {% endcomment %}
             {% for item in site.data.socials %}
+              {%- if item.sameas_only %}{% continue %}{% endif %}
               <li class="nav-item">
                 <a href="{{ item.link }}" class="nav-element nav-link social-link {{ item.name }}" aria-label="{{ item.aria-label }}">
                   <!-- {{ item.icon }} -->
