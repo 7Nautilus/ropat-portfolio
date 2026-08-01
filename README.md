@@ -14,7 +14,7 @@ Bienvenue sur mon portfolio en ligne. Ce site présente mes projets, compétence
 
 - **Jekyll** (Ruby + Bundler) pour la génération statique
 - **Dart Sass** (SCSS, modules `@use`, architecture ITCSS) pour les styles
-- **JavaScript vanilla** (aucun framework)
+- **JavaScript** : l'outil le plus pertinent par tâche, aucune dépendance front à ce jour
 - **GitHub Pages** pour l'hébergement
 - **GitHub Actions** pour l'automatisation CI/CD (build + sitemap)
 
