@@ -17,6 +17,10 @@ exclude:
   - CLAUDE.md
   # Sortie de `scripts/carte.rb`. Sans cette ligne Jekyll la rend en /CARTE.html.
   - CARTE.md
+  # Meme piege : sans cette ligne, la doctrine du site serait PUBLIEE en
+  # /DOCTRINE.html sur ropat.art. Elle est versionnee (contrairement a TODO.md et
+  # CLAUDE.md), donc c'est bien ici qu'elle doit etre exclue, pas dans .gitignore.
+  - DOCTRINE.md
   - scripts/
   - DESIGN.md
   # ⚠️ LES PAGES DE TRAVAIL SORTENT DE LA PRODUCTION (29/07/2026). Elles etaient
