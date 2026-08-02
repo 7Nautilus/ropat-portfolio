@@ -1,0 +1,369 @@
+---
+layout: null
+robots: noindex, nofollow
+sitemap: false
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Les cinq anneaux de focus - Ropat</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+
+{%- comment -%}
+  ============================================================
+  POURQUOI CETTE PAGE EXISTE, ET POURQUOI ELLE EST SEPAREE DU CHANTIER.
+
+  Ropat, le 02/08/2026, sur les cinq anneaux de focus du site : « montre moi ».
+  Ils ne se voient JAMAIS ensemble sur le site, parce que le focus est exclusif :
+  un seul element l'a a la fois. Toute comparaison reelle est donc sequentielle,
+  a plusieurs secondes d'ecart, souvent entre deux pages. Ce banc montre un ecart
+  que l'usage ne presente jamais ainsi. C'est sa valeur et c'est aussi sa limite,
+  et les deux sont dites en tete de page.
+
+  ⚠️ ELLE CHARGE LES JETONS DE PRODUCTION, PAS CEUX DU CHANTIER.
+  `labo/design-system.html` enferme tout dans `[data-ds="chantier"]` avec son
+  propre pont de jetons, parce qu'elle dessine l'identite A VENIR. Ici on regarde
+  ce que le site rend AUJOURD'HUI : la feuille de production est chargee telle
+  quelle et rien n'est redeclare.
+  ============================================================
+{%- endcomment -%}
+<link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+<!-- ============================================================
+     BANC DES CINQ ANNEAUX DE FOCUS. Releve du 02/08/2026.
+
+     AUCUN DE CES ELEMENTS N'EST REELLEMENT FOCALISE, ET C'EST LA
+     SEULE FACON DE LES MONTRER ENSEMBLE. `:focus-visible` est une
+     pseudo-classe d'ETAT : le navigateur ne l'accorde qu'a UN element
+     a la fois, et seulement apres une interaction clavier. Elle ne se
+     simule pas, elle ne se force pas depuis la feuille de style.
+     Chaque pastille porte donc une CLASSE (`.banc-anneau--*`) qui
+     RECOPIE, declaration par declaration, l'outline de son anneau reel.
+     Ce que tu vois est exact ; ce n'est pas un vrai focus.
+
+     Les cinq pastilles ont la MEME TAILLE et la MEME FORME (4px de
+     rayon) pour que seule la difference d'anneau se voie. Sur le site
+     leurs formes reelles divergent : le burger force un squircle, le
+     tag A propos est une gelule, la croix de lightbox et le socle
+     heritent des 4px de `:where(*:focus-visible)`.
+
+     Aucun jeton n'est redeclare ici, et aucune couleur n'est inventee :
+     tout passe par les var() du site, charges par main.css.
+     ============================================================ -->
+<style>
+  .banc-anneaux {
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-body);
+    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-4xl);
+  }
+
+  .banc-anneaux__titre {
+    margin: 0 0 var(--spacing-xs);
+    font-family: var(--font-heading);
+    font-size: var(--text-subhead);
+    font-weight: 700;
+    letter-spacing: var(--track-caps);
+    text-transform: uppercase;
+  }
+
+  .banc-anneaux__avertissement {
+    max-width: var(--measure-prose);
+    margin: 0 0 var(--spacing-2xl);
+    padding-left: var(--spacing-sm);
+    border-left: var(--signal-width) solid var(--accent);
+    font-size: var(--text-meta);
+    line-height: var(--leading-meta);
+    color: var(--ink-muted);
+  }
+
+  .banc-anneaux__rangee {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* 4rem d'ecart : l'empreinte la plus large fait 7px, les anneaux ne
+       peuvent donc pas se toucher, meme replies sur deux lignes. */
+    gap: var(--spacing-2xl);
+  }
+
+  .banc-anneaux__cas {
+    flex: 0 0 auto;
+    width: 13rem;
+    margin: 0;
+  }
+
+  /* LA PASTILLE. Identique pour les cinq : meme boite, meme fond, meme
+     rayon. Tout ce qui differe d'une colonne a l'autre est l'anneau. */
+  .banc-anneaux__pastille {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 4.5rem;
+    margin-bottom: var(--spacing-md);
+    border: 0;
+    border-radius: var(--radius-anneau);
+    background: var(--surface-subtle);
+    color: var(--ink);
+    font-family: var(--font-heading);
+    font-size: var(--text-meta);
+    font-weight: 600;
+    letter-spacing: var(--track-caps);
+  }
+
+  /* -- 1. LE SOCLE -- base/_bases.scss:52-55, puis :77 pour le rayon.
+     Recopie exacte. C'est le seul des quatre anneaux dont la LARGEUR
+     porte un nom (--signal-width). */
+  .banc-anneau--socle {
+    outline: var(--signal-width) solid var(--primary-color);
+    outline-offset: 4px;
+  }
+
+  /* -- 2. LE BURGER -- layout/_header.scss:537-542. Recopie exacte,
+     `corner-shape` compris : c'est le seul anneau qui impose sa forme. */
+  .banc-anneau--burger {
+    border-radius: var(--radius-anneau);
+    outline: 2px solid var(--signal-chrome);
+    outline-offset: 4px;
+  }
+  @supports (corner-shape: squircle) {
+    .banc-anneau--burger { corner-shape: squircle; }
+  }
+
+  /* -- 3. LE TAG A PROPOS -- pages/_about.scss:213-218. Recopie exacte,
+     y compris les deux declarations de couleur qui accompagnent
+     l'outline. Cet anneau n'atteint aucun element du site : il vise un
+     <li> sans href ni tabindex, donc jamais focalisable. */
+  .banc-anneau--tag {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    color: var(--white-color);
+    border-color: var(--primary-color);
+  }
+
+  /* -- 4. LA CROIX DE LIGHTBOX -- components/_lightbox.scss:70-73.
+     Recopie exacte. Meme largeur, meme decalage et meme couleur rendue
+     que le cas 3 : deux ecritures pour un seul anneau. */
+  .banc-anneau--lightbox {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* -- 5. LE LIEN DE NAV -- layout/_header.scss:444-449. Il ANNULE
+     l'anneau du socle et le remplace par trois indices. Les trois sont
+     recopies ici dans leur etat de focus : la couleur, le filet qui
+     passe de 0 a 100 % de large, et le deplacement de 10px.
+     Le filet vient de .nav-link::before (_header.scss:428-442). */
+  .banc-anneau--nav {
+    position: relative;
+    outline: none;
+    color: var(--signal-chrome);
+    transform: translateX(10px);
+  }
+  .banc-anneau--nav::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--signal-chrome);
+  }
+
+  /* -- ETIQUETTES -- */
+  .banc-anneaux__etiquette { margin: 0; }
+
+  .banc-anneaux__lieu {
+    display: block;
+    font-size: var(--text-caption);
+    line-height: var(--leading-meta);
+    color: var(--ink-subtle);
+    overflow-wrap: anywhere;
+  }
+
+  .banc-anneaux__selecteur {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    font-weight: 700;
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+
+  .banc-anneaux__faits {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-caption);
+    line-height: var(--leading-body);
+    color: var(--ink-muted);
+  }
+
+  .banc-anneaux__faits b {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  .banc-anneaux__note {
+    display: block;
+    margin-top: var(--spacing-xs);
+    font-size: var(--text-caption);
+    line-height: var(--leading-meta);
+    color: var(--ink-subtle);
+  }
+
+  .banc-anneaux__bilan {
+    max-width: var(--measure-prose);
+    margin: var(--spacing-2xl) 0 0;
+    font-size: var(--text-meta);
+    line-height: var(--leading-body);
+    color: var(--ink-muted);
+  }
+</style>
+
+<section class="banc-anneaux" aria-labelledby="banc-anneaux-titre">
+  <h2 class="banc-anneaux__titre" id="banc-anneaux-titre">Les cinq anneaux de focus</h2>
+
+  <p class="banc-anneaux__avertissement">
+    Aucune de ces pastilles n'est reellement focalisee. La pseudo-classe
+    <code>:focus-visible</code> ne s'accorde qu'a un element a la fois, apres une
+    interaction clavier : elle ne se simule pas. Chaque pastille porte donc une classe
+    qui recopie, declaration par declaration, l'outline de son anneau reel. Meme boite,
+    meme fond, meme rayon partout : la seule chose qui change d'une colonne a l'autre
+    est l'anneau.
+  </p>
+
+  <div class="banc-anneaux__rangee">
+
+    <figure class="banc-anneaux__cas">
+      <div class="banc-anneaux__pastille banc-anneau--socle">SOCLE</div>
+      <figcaption class="banc-anneaux__etiquette">
+        <span class="banc-anneaux__lieu">base/_bases.scss:52</span>
+        <span class="banc-anneaux__selecteur">*:focus-visible</span>
+        <ul class="banc-anneaux__faits">
+          <li>largeur <b>var(--signal-width)</b>, soit 3px</li>
+          <li>decalage <b>4px</b> en dur</li>
+          <li>couleur <b>--primary-color</b>, rendue <b>#ff5c00</b></li>
+          <li>forme : le rayon de l'element, sinon 4px</li>
+          <li>empreinte exterieure <b>7px</b></li>
+        </ul>
+        <span class="banc-anneaux__note">
+          Tout ce qui prend le focus sur le site, sauf les quatre exceptions
+          ci-contre : liens, boutons, cartes, champs, vignettes, croix, listes.
+        </span>
+      </figcaption>
+    </figure>
+
+    <figure class="banc-anneaux__cas">
+      <div class="banc-anneaux__pastille banc-anneau--burger">BURGER</div>
+      <figcaption class="banc-anneaux__etiquette">
+        <span class="banc-anneaux__lieu">layout/_header.scss:537</span>
+        <span class="banc-anneaux__selecteur">.burger-menu:focus</span>
+        <ul class="banc-anneaux__faits">
+          <li>largeur <b>2px</b> en dur</li>
+          <li>decalage <b>4px</b> en dur</li>
+          <li>couleur <b>--signal-chrome</b>, rendue <b>#ff5c00</b></li>
+          <li>forme : 4px <b>squircle</b> impose</li>
+          <li>empreinte exterieure <b>6px</b></li>
+        </ul>
+        <span class="banc-anneaux__note">
+          Un seul bouton, et seulement sous 768px : au-dela le burger est en
+          display none. Seul anneau declenche aussi a la souris (:focus et non
+          :focus-visible), et seul anneau qui change de couleur, en #05100F
+          quand l'entete surplombe un media clair.
+        </span>
+      </figcaption>
+    </figure>
+
+    <figure class="banc-anneaux__cas">
+      <div class="banc-anneaux__pastille banc-anneau--tag">TAG</div>
+      <figcaption class="banc-anneaux__etiquette">
+        <span class="banc-anneaux__lieu">pages/_about.scss:213</span>
+        <span class="banc-anneaux__selecteur">.about-tool-tag:focus-visible</span>
+        <ul class="banc-anneaux__faits">
+          <li>largeur <b>2px</b> en dur</li>
+          <li>decalage <b>2px</b> en dur</li>
+          <li>couleur <b>--primary-color</b>, rendue <b>#ff5c00</b></li>
+          <li>forme reelle : gelule squircle</li>
+          <li>empreinte exterieure <b>4px</b></li>
+        </ul>
+        <span class="banc-anneaux__note">
+          Zero consommateur. Il vise sept <code>&lt;li&gt;</code> sans href ni
+          tabindex, donc jamais focalisables. Cet anneau n'a jamais ete rendu.
+        </span>
+      </figcaption>
+    </figure>
+
+    <figure class="banc-anneaux__cas">
+      <div class="banc-anneaux__pastille banc-anneau--lightbox">CROIX</div>
+      <figcaption class="banc-anneaux__etiquette">
+        <span class="banc-anneaux__lieu">components/_lightbox.scss:70</span>
+        <span class="banc-anneaux__selecteur">.lightbox-close:focus-visible</span>
+        <ul class="banc-anneaux__faits">
+          <li>largeur <b>2px</b> en dur</li>
+          <li>decalage <b>2px</b> en dur</li>
+          <li>couleur <b>--accent</b>, rendue <b>#ff5c00</b></li>
+          <li>forme : 4px, herite du socle</li>
+          <li>empreinte exterieure <b>4px</b></li>
+        </ul>
+        <span class="banc-anneaux__note">
+          Un bouton par page projet, soit 40 pages. Rigoureusement le meme
+          anneau que le TAG ci-contre, ecrit avec un autre nom de jeton.
+        </span>
+      </figcaption>
+    </figure>
+
+    <figure class="banc-anneaux__cas">
+      <div class="banc-anneaux__pastille banc-anneau--nav">NAV</div>
+      <figcaption class="banc-anneaux__etiquette">
+        <span class="banc-anneaux__lieu">layout/_header.scss:444</span>
+        <span class="banc-anneaux__selecteur">.nav-link:focus</span>
+        <ul class="banc-anneaux__faits">
+          <li>largeur <b>aucune</b>, outline: none</li>
+          <li>decalage <b>sans objet</b></li>
+          <li>indice 1 : encre <b>--signal-chrome</b>, #ff5c00</li>
+          <li>indice 2 : filet bas 2px, 0 vers 100 %</li>
+          <li>indice 3 : <b>translateX(10px)</b></li>
+        </ul>
+        <span class="banc-anneaux__note">
+          Douze liens par page : trois dans l'entete, cinq dans le pied, quatre
+          reseaux sociaux. Le pied de page perd donc son anneau lui aussi, ce
+          qui n'a rien de specifique a la nav. Au-dela de 768px le survol perd
+          son deplacement mais le focus le garde.
+        </span>
+      </figcaption>
+    </figure>
+
+  </div>
+
+  <p class="banc-anneaux__bilan">
+    Quatre anneaux, trois combinaisons de largeur et de decalage, une seule couleur
+    rendue. TAG et CROIX sont le meme anneau ecrit deux fois, et TAG n'atteint aucun
+    element. Ce qui se voit vraiment d'une colonne a l'autre n'est ni le 2px contre 3px
+    ni le decalage, c'est l'empreinte exterieure totale : 7px pour le socle contre 4px
+    pour la croix, et rien du tout pour la nav.
+  </p>
+
+  <p class="banc-anneaux__bilan">
+    <strong>Ce banc n'est pas exhaustif, et il faut le savoir avant de trancher.</strong>
+    Il montre la famille <code>outline</code>. Le formulaire de contact, lui, signale son
+    focus par un tout autre mecanisme : une <code>border</code> de 2px orange plus un fond
+    teinte a 4&nbsp;%, sur les champs
+    (<code>pages/_contact.scss:132</code>) et sur le deroulant
+    (<code>pages/_contact.scss:320</code>). Ces deux-la ne sont donc pas des anneaux, ils
+    ne se comparent pas aux cinq ci-dessus, et aucun outil ne les relie a eux : le site
+    porte <strong>sept</strong> traitements de focus, pas cinq. Les mettre dans la meme
+    rangee aurait fausse la comparaison, puisqu'une bordure change la boite alors qu'un
+    contour se pose autour d'elle.
+  </p>
+</section>
+</body>
+</html>
