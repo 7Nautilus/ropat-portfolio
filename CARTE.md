@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 02/08/2026 a 05:50, d'apres l'etat de 05c892f.
+> Generee le 03/08/2026 a 01:15, d'apres l'etat de d1b508e.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -16,8 +16,8 @@ ne le signale.
 
 | Mesure | Valeur |
 |---|---|
-| Pages construites lues comme oracle | **63** |
-| Date du build lu | 02/08/2026 05:50 |
+| Pages construites lues comme oracle | **64** |
+| Date du build lu | 03/08/2026 01:14 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 37 |
 | Includes | 31 |
@@ -28,18 +28,20 @@ Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
 
 **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
 Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
-qu'aucune mesure ne peut etablir. « Absent des 63 pages construites a la
+qu'aucune mesure ne peut etablir. « Absent des 64 pages construites a la
 date lue ci-dessus » est un fait, datable et refutable.
 
 ## 1. Routes
 
-64 routes, dont **48 engendrees** par `_plugins/` et 16 portees par un fichier source. 32 en FR, 31 en EN.
+66 routes, dont **48 engendrees** par `_plugins/` et 18 portees par un fichier source. 33 en FR, 31 en EN.
 
 <details><summary>Table complete des routes</summary>
 
 | URL | Source | Lang |
 |---|---|---|
 | `/` | `index.html` | fr |
+| `/.claude/skills/mesurer-au-navigateur/SKILL.html` | `.claude/skills/mesurer-au-navigateur/SKILL.md` | - |
+| `/404.html` | `404.html` | fr |
 | `/en/` | `en/index.html` | en |
 | `/en/about.html` | `en/about.html` | en |
 | `/en/contact.html` | `en/contact.html` | en |
@@ -106,11 +108,15 @@ date lue ci-dessus » est un fait, datable et refutable.
 
 </details>
 
-Rien a signaler.
+### Sources dont la sortie calculee est introuvable dans _site  (1)
+
+Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est fausse.
+
+- .claude/skills/mesurer-au-navigateur/SKILL.md -> .claude/skills/mesurer-au-navigateur/SKILL.html
 
 ## 2. Graphe des includes
 
-31 includes, 72 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+31 includes, 75 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
 **Orphelins** : projects/project-main.html, services/service-main.html.
 
@@ -138,7 +144,7 @@ Rien a signaler.
 - `services/service-card.html` <- pages/index.html, pages/services.html
 - `services/subservices-card.html` <- services/service-main.html
 - `social-media-icons.html` <- pages/contact.html
-- `ui/button.html` <- labo/design-system.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
+- `ui/button.html` <- 404.html, labo/design-system.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
 - `ui/dropdown.html` <- labo/design-system.html, pages/contact.html, portfolio-filters.html
 - `ui/icon-arrow.html` <- ui/button.html
 - `ui/icon-send.html` <- ui/button.html
@@ -201,9 +207,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-128 jetons definis, 121 consommes, 282 noms de selecteur, 11 `!important`.
+130 jetons definis, 123 consommes, 283 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:63`, `assets/css/_sass/base/_bases.scss:64`, `assets/css/_sass/base/_bases.scss:65`, `assets/css/_sass/base/_bases.scss:66`, `assets/css/_sass/base/_bases.scss:77`, `assets/css/_sass/base/_bases.scss:82`, `assets/css/_sass/base/_bases.scss:83`, `assets/css/_sass/base/_bases.scss:84`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
+`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
 
 Points de rupture ecrits en dur : 520px (1x)
 
@@ -211,8 +217,8 @@ Points de rupture ecrits en dur : 520px (1x)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
-- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:463)
-- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:587)
+- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:506)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:630)
 - --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:413)
 - --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:412)
 - --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:411)
@@ -263,7 +269,7 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
 - .voile-en-cours  style en assets/css/_sass/pages/_project.scss:914, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
-### Selecteurs absents des 63 pages construites  (20)
+### Selecteurs absents des 64 pages construites  (20)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
@@ -288,19 +294,40 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
 - .project-back-link  assets/css/_sass/pages/_project.scss:809 assets/css/_sass/pages/_project.scss:822 assets/css/_sass/pages/_project.scss:824 assets/css/_sass/pages/_project.scss:827
 
-### Valeurs ecrites en dur alors qu'un jeton porte la meme  (9)
+### Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme  (2)
 
 Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera.
 
-- 3rem ecrit 18 fois, alors que --spacing-xl vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:175, assets/css/_sass/base/_media-queries.scss:176, assets/css/_sass/base/_media-queries.scss:200)
-- 1px ecrit 16 fois, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_bases.scss:35, assets/css/_sass/base/_bases.scss:36, assets/css/_sass/base/_generic.scss:8)
-- 3px ecrit 10 fois, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/base/_bases.scss:53, assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:62)
-- 4rem ecrit 10 fois, alors que --spacing-2xl vaut exactement ca   (ex. assets/css/_sass/components/_scroll-down.scss:56, assets/css/_sass/components/_scroll-down.scss:57, assets/css/_sass/pages/_project.scss:87)
-- 6rem ecrit 6 fois, alors que --radius-xl vaut exactement ca   (ex. assets/css/_sass/components/_scroll-down.scss:13, assets/css/_sass/pages/_about.scss:69, assets/css/_sass/pages/_project.scss:194)
-- 0.5rem ecrit 6 fois, alors que --spacing-xs vaut exactement ca   (ex. assets/css/_sass/components/cards/_experience-cards.scss:45, assets/css/_sass/layout/_sections.scss:187, assets/css/_sass/layout/_sections.scss:188)
-- 1rem ecrit 5 fois, alors que --radius-sm vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:79, assets/css/_sass/base/_typography.scss:32, assets/css/_sass/components/_dropdown.scss:89)
-- 5rem ecrit 5 fois, alors que --spacing-4xl vaut exactement ca   (ex. assets/css/_sass/components/cards/_cards.scss:25, assets/css/_sass/pages/_project.scss:95, assets/css/_sass/pages/_project.scss:616)
-- 2rem ecrit 4 fois, alors que --radius-lg vaut exactement ca   (ex. assets/css/_sass/pages/_project.scss:87, assets/css/_sass/pages/_project.scss:283, assets/css/_sass/pages/_project.scss:360)
+- 1px ecrit 6 fois en trait, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:189, assets/css/_sass/components/cards/_project-cards.scss:24, assets/css/_sass/layout/_sections.scss:128)
+- 3px ecrit 4 fois en trait, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:62, assets/css/_sass/components/cards/_experience-cards.scss:22)
+
+### Valeurs HORS ECHELLE : aucun jeton de leur famille ne les porte  (23)
+
+Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un nom pour devenir auditable, pas forcement d'etre deplacee. `scripts/jetons-hors-echelle.rb` verrouille cette liste contre une liste commitee.
+
+- decalage 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_lightbox.scss:72, assets/css/_sass/pages/_about.scss:215)
+- decalage 4px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:54, assets/css/_sass/layout/_header.scss:541)
+- espacement 0.4rem : 8 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:314, assets/css/_sass/base/_media-queries.scss:315, assets/css/_sass/base/_media-queries.scss:387)
+- espacement 0.6rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_contact.scss:396, assets/css/_sass/pages/_contact.scss:397)
+- espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:297)
+- espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
+- espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:298, assets/css/_sass/components/_containers.scss:15)
+- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:566, assets/css/_sass/pages/_project.scss:661)
+- espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:196, assets/css/_sass/pages/_project.scss:426)
+- espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
+- espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:249, assets/css/_sass/pages/_contact.scss:375)
+- espacement -1px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:38)
+- espacement 0.15rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:270)
+- espacement 0.35rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:372)
+- espacement 0.5em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:469)
+- espacement 1.1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:469)
+- espacement 1.1rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:361)
+- espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
+- espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
+- espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:462)
+- espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:21)
+- trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:80)
+- trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
 
 ## 5. JS
 
@@ -330,17 +357,17 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 
 | Attribut | HTML | CSS | JS |
 |---|---|---|---|
-| `aria-atomic` | 63 page(s) | - | - **personne ne le lit** |
-| `aria-controls` | 63 page(s) | - | assets/js/script.js:355 |
+| `aria-atomic` | 64 page(s) | - | - **personne ne le lit** |
+| `aria-controls` | 64 page(s) | - | assets/js/script.js:355 |
 | `aria-current` | 8 page(s) | - | - **personne ne le lit** |
 | `aria-describedby` | - | - | assets/js/script.js:1407 |
-| `aria-expanded` | 63 page(s) | oui | assets/js/script.js:362 |
+| `aria-expanded` | 64 page(s) | oui | assets/js/script.js:362 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 63 page(s) | - | assets/js/script.js:1608 |
+| `aria-hidden` | 64 page(s) | - | assets/js/script.js:1608 |
 | `aria-invalid` | - | - | assets/js/script.js:1406 |
-| `aria-label` | 63 page(s) | - | assets/js/script.js:1491 |
-| `aria-labelledby` | 51 page(s) | - | - **personne ne le lit** |
-| `aria-live` | 63 page(s) | - | - **personne ne le lit** |
+| `aria-label` | 64 page(s) | - | assets/js/script.js:1491 |
+| `aria-labelledby` | 52 page(s) | - | - **personne ne le lit** |
+| `aria-live` | 64 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:372 |
 | `data-actif` | - | oui | assets/js/script.js:1626 |
@@ -356,6 +383,7 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-dropdown-trigger` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-variant` | 4 page(s) | - | - **personne ne le lit** |
 | `data-empty` | 2 page(s) | oui | assets/js/script.js:390 |
+| `data-en` | 1 page(s) | oui | - |
 | `data-encre` | - | oui | assets/js/script.js:1071 |
 | `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
@@ -407,7 +435,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 225026 o brut, 68404 o gzip. Sans les commentaires : 82479 o, 13492 o gzip, soit **80 % de moins** sur le fil.
+**CSS servi** : 236586 o brut, 72938 o gzip. Sans les commentaires : 83255 o, 13625 o gzip, soit **81 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

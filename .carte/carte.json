@@ -1,13 +1,23 @@
 {
-  "genere_le": "2026-08-02T03:50:49Z",
-  "commit": "05c892f",
-  "pages_construites": 63,
+  "genere_le": "2026-08-02T23:15:02Z",
+  "commit": "d1b508e",
+  "pages_construites": 64,
   "perime": null,
   "indetermines": 7,
   "routes": [
     {
       "source": "index.html",
       "url": "/",
+      "lang": "fr"
+    },
+    {
+      "source": ".claude/skills/mesurer-au-navigateur/SKILL.md",
+      "url": "/.claude/skills/mesurer-au-navigateur/SKILL.html",
+      "lang": null
+    },
+    {
+      "source": "404.html",
+      "url": "/404.html",
       "lang": "fr"
     },
     {
@@ -327,6 +337,7 @@
     }
   ],
   "includes": [
+    "404.html -> ui/button.html",
     "_layouts/default.html -> lang-detector.html",
     "_layouts/default.html -> layout/footer.html",
     "_layouts/default.html -> layout/header.html",
@@ -461,6 +472,8 @@
     "--page-gutter",
     "--primary-color",
     "--primary-color-alpha",
+    "--radius-anneau",
+    "--radius-carte",
     "--radius-lg",
     "--radius-md",
     "--radius-pill",
@@ -571,10 +584,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 225026,
-    "gzip": 68404,
-    "sans_commentaires": 82479,
-    "gzip_sans": 13492
+    "brut": 236586,
+    "gzip": 72938,
+    "sans_commentaires": 83255,
+    "gzip_sans": 13625
   },
   "ratios_faux": []
 }
