@@ -1,63 +1,76 @@
 ---
+# ⚠️ CE BLOC EST ENGENDRE. Ne pas l'editer a la main : `bundle exec ruby
+# scripts/design.rb` le reecrit en entier depuis
+# `assets/css/_sass/base/_variables.scss`, theme sombre (`:root`).
+# Le CORPS en prose, lui, est ecrit a la main et n'est PAS verifie.
+# Le commentaire a droite de chaque valeur donne le jeton source : les noms
+# de la convention Google et ceux du depot ne coincident pas toujours.
+# `version`, `name` et `description` sont PRESERVES, pas engendres.
 version: alpha
 name: Ropat
 description: Portfolio de Ropat, directeur artistique et graphiste. Socle sombre presque monochrome, ponctué d'orange.
 colors:
-  primary: "#FFFFFF"
-  secondary: "#9CA3AF"
-  accent: "#FF5C00"
-  accent-soft: "rgba(255, 92, 0, 0.2)"
-  neutral: "#030808"
-  surface: "rgba(255, 255, 255, 0.1)"
-  border: "rgba(255, 255, 255, 0.08)"
-  muted: "rgba(255, 255, 255, 0.45)"
-  success: "#34C759"
+  primary:     "#F0F4F1"                          # --ink
+  secondary:   "#9CA3AF"                          # --ink-muted
+  accent:      "#FF5C00"                          # --accent
+  accent-soft: "rgba(255, 92, 0, 0.2)"            # --accent-soft
+  neutral:     "#030808"                          # --p-vert-basse
+  surface:     "rgba(255, 255, 255, 0.1)"         # --surface-subtle
+  border:      "rgba(255, 255, 255, 0.08)"        # --line
+  muted:       "rgba(255, 255, 255, 0.46)"        # --ink-subtle
+  success:     "#34C759"                          # --success
 typography:
   display:
-    fontFamily: Chakra Petch
-    fontSize: 6rem
+    fontFamily: Chakra Petch             # --font-heading
+    fontSize: 6rem                       # --text-display
     fontWeight: 700
   heading-lg:
-    fontFamily: Chakra Petch
-    fontSize: 3rem
+    fontFamily: Chakra Petch             # --font-heading
+    fontSize: 3rem                       # --text-title
     fontWeight: 700
   heading-md:
-    fontFamily: Chakra Petch
-    fontSize: 2.25rem
+    fontFamily: Chakra Petch             # --font-heading
+    fontSize: 2rem                       # --text-subhead
     fontWeight: 700
   nav:
-    fontFamily: Chakra Petch
-    fontSize: 1rem
+    fontFamily: Chakra Petch             # --font-heading
+    fontSize: 1rem                       # --text-meta
     fontWeight: 700
-    letterSpacing: 3px
+    letterSpacing: 0.10em                # --track-caps
   body-lg:
-    fontFamily: Manrope
-    fontSize: 1.25rem
+    fontFamily: Manrope                  # --font-body
+    fontSize: 1.25rem                    # --text-body
     fontWeight: 400
   body-md:
-    fontFamily: Manrope
-    fontSize: 1rem
+    fontFamily: Manrope                  # --font-body
+    fontSize: 1rem                       # --text-meta
     fontWeight: 400
   caption:
-    fontFamily: Manrope
-    fontSize: 0.875rem
+    fontFamily: Manrope                  # --font-body
+    fontSize: 0.8rem                     # --text-caption
     fontWeight: 400
   accent:
-    fontFamily: Underdog
+    fontFamily: Underdog                 # --font-accent
     fontWeight: 400
 spacing:
-  xs: 0.5rem
-  sm: 1rem
-  md: 1.5rem
-  lg: 2rem
-  xl: 3rem
+  xs:    0.5rem                                   # --spacing-xs
+  sm:    1rem                                     # --spacing-sm
+  md:    1.5rem                                   # --spacing-md
+  lg:    2rem                                     # --spacing-lg
+  xl:    3rem                                     # --spacing-xl
+  2xl:   4rem                                     # --spacing-2xl
+  3xl:   4.5rem                                   # --spacing-3xl
+  4xl:   5rem                                     # --spacing-4xl
+  5xl:   6rem                                     # --spacing-5xl
+  6xl:   10rem                                    # --spacing-6xl
 rounded:
-  sm: 1rem
-  md: 1.5rem
-  lg: 2rem
-  xl: 6rem
-  full: 9999px
+  sm:    1rem                                     # --radius-sm
+  md:    1.5rem                                   # --radius-md
+  lg:    2rem                                     # --radius-lg
+  xl:    6rem                                     # --radius-xl
+  full:  9999px                                   # --radius-pill
 components:
+  # ⚠️ Bloc NON engendre : les composants vivent dans components/_*.scss.
   button:
     rounded: full
     backgroundColor: accent-soft
