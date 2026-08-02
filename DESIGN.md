@@ -69,6 +69,11 @@ rounded:
   lg:    2rem                                     # --radius-lg
   xl:    6rem                                     # --radius-xl
   full:  9999px                                   # --radius-pill
+roundedOffScale:
+  # ⚠️ Engendre. Ces rayons servent et ne sont sur AUCUN palier de
+  # `rounded` ci-dessus. Voir _variables.scss pour la raison de chacun.
+  anneau:    4px                                  # --radius-anneau
+  carte:     5rem                                 # --radius-carte
 components:
   # ⚠️ Bloc NON engendre : les composants vivent dans components/_*.scss.
   button:

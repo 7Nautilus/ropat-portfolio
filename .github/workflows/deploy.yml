@@ -192,6 +192,20 @@ jobs:
       - name: Regenerer la carte et la comparer a celle qui est commitee
         run: bundle exec ruby scripts/carte-a-jour.rb
 
+      # Aucune valeur hors echelle n'arrive en silence. Le script compare ce que
+      # le SCSS porte a `.carte/hors-echelle.txt`, commite, et sort en 1 des
+      # qu'une valeur apparait sans avoir ete declaree. Voir l'en-tete du script :
+      # nommer n'est pas aligner, il ne demande a personne de deplacer un pixel.
+      - name: Les valeurs hors echelle sont-elles toutes declarees
+        run: bundle exec ruby scripts/jetons-hors-echelle.rb
+
+      # ⚠️ ET LE CONTROLE SAIT-IL ECHOUER. Ce depot a deja pris une sonde qui
+      # rendait zero constat des deux cotes pour une preuve. Le temoin ampute la
+      # reference d'une entree et exige que la comparaison la signale : sans lui,
+      # un « toutes declarees » ne prouverait rien.
+      - name: Temoin, le controle sait echouer
+        run: bundle exec ruby scripts/jetons-hors-echelle.rb --temoin
+
   deploy:
     needs: [build, carte]
     runs-on: ubuntu-latest

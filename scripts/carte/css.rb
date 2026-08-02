@@ -287,36 +287,192 @@ module Carte
       }
     end
 
-    # Les valeurs ecrites en dur alors qu'un jeton porte exactement la meme.
-    def confronter_litteraux
-      echelle = @jetons.select { |n, _| n.start_with?("--spacing-", "--radius-", "--signal-width", "--hairline-") }
-                       .to_h { |n, d| [d[:valeur], n] }
-                       .reject { |v, _| v.include?("var(") || v.include?("clamp") }
+    # ── Les litteraux confrontes a leur PROPRE famille ───────────────────────
+    #
+    # ⚠️ DEUX QUESTIONS, PAS UNE, et l'ancienne version n'en posait qu'une, mal.
+    # Reecrit le 02/08/2026.
+    #
+    # CE QU'ELLE FAISAIT DE FAUX, et ce n'etait pas une approximation :
+    #   1. Un `to_h { [valeur, nom] }` qui INVERSE valeur vers jeton. Or
+    #      `--spacing-sm` et `--radius-sm` valent tous deux 1rem : le second
+    #      ecrasait le premier, et la famille etait perdue avant meme le test.
+    #   2. Elle cherchait la valeur N'IMPORTE OU sur la ligne, sans jamais
+    #      regarder la propriete. Resultat publie dans CARTE.md, avec chemin et
+    #      numero de ligne : un rayon propose pour un `bottom:`, un espacement
+    #      propose pour un `border-radius`. C'est le corollaire pose par Ropat
+    #      le 30/07 viole dans les deux sens : LE FILTRE PORTE SUR LA PROPRIETE
+    #      AVANT DE PORTER SUR LA VALEUR.
+    #   3. Son seuil `n >= 3` eliminait par construction toute EXCEPTION, qui
+    #      par definition ne sert qu'une ou deux fois. C'est-a-dire exactement
+    #      ce qu'on cherche depuis le 02/08.
+    #
+    # LES DEUX QUESTIONS SONT SYMETRIQUES :
+    #   A. ce litteral egale un jeton DE SA FAMILLE   -> il devrait le prendre
+    #   B. ce litteral n'a AUCUN jeton de sa famille  -> il est HORS ECHELLE
+    # La seconde est l'inventaire que `scripts/jetons-hors-echelle.rb` verrouille
+    # ensuite contre une liste commitee. Ici on le PRODUIT, la-bas on le GARDE.
 
-      comptes = Hash.new(0)
-      ou = Hash.new { |h, k| h[k] = [] }
-      fichiers_scss.each do |f|
+    # La table qui manquait. Une propriete appartient a une famille, et une
+    # famille a ses prefixes de jetons. Rien d'autre ne se confronte.
+    FAMILLES = {
+      "rayon" => {
+        proprietes: /\A(border-radius|border-(top|bottom)-(left|right)-radius)\z/,
+        prefixes:   ["--radius-", "--squircle-"]
+      },
+      "espacement" => {
+        proprietes: /\A(padding|margin|gap|row-gap|column-gap)(-(top|right|bottom|left))?\z/,
+        prefixes:   ["--spacing-"]
+      },
+      # ⚠️ `--signal-width` EST ECRIT EN ENTIER, ET C'EST UN CONSTAT, PAS UN CHOIX.
+      # Les deux autres familles se declarent par un PREFIXE (`--radius-`,
+      # `--spacing-`), donc elles sont enumerables : un jeton ajoute demain y
+      # entre tout seul. Les epaisseurs, elles, n'ont aucun radical commun
+      # (`--hairline-width` vaut 1px, `--signal-width` vaut 3px, et `-width` nomme
+      # la propriete, pas la famille). Il faut donc les nommer une par une, et un
+      # troisieme jeton d'epaisseur resterait invisible a cette table tant que
+      # personne ne l'y aurait inscrit A LA MAIN. C'est le cout exact d'un radical
+      # manquant, et c'est ici qu'il se paye.
+      "trait" => {
+        proprietes: /\A(border|outline)(-(top|right|bottom|left))?(-width)?\z/,
+        prefixes:   ["--hairline-", "--signal-width"]
+      },
+      # Le decalage de l'anneau de focus. Famille A PART et non un trait : ce
+      # n'est pas une epaisseur d'encre mais une DISTANCE entre l'objet et son
+      # anneau. Ajoutee le 02/08/2026 apres un trou mesure : le motif de la
+      # famille trait ci-dessus ne matche pas `outline-offset`, donc les quatre
+      # decalages du site etaient invisibles a l'inventaire, dans les deux sens.
+      # Aucun jeton ne les porte aujourd'hui : les quatre ressortent en orphelins,
+      # ce qui est exactement le constat cherche.
+      "decalage" => {
+        proprietes: /\Aoutline-offset\z/,
+        prefixes:   ["--offset-"]
+      }
+    }.freeze
+
+    # ⚠️ LIMITE CONNUE, ECRITE ICI POUR QU'ON NE LA PRENNE PAS POUR UN BUG.
+    # Ce scanner lit LIGNE A LIGNE, il ne voit pas le bloc. Il ne peut donc pas
+    # savoir qu'un `border-top: 6px solid ...` pose sur une boite `width: 0;
+    # height: 0` n'est pas un trait mais un TRIANGLE CSS (`.caret` de
+    # components/_dropdown.scss). Ce 6px ressort donc en famille trait alors qu'il
+    # est une dimension de forme.
+    # C'est un faux positif ASSUME plutot qu'une heuristique fragile : il est
+    # declare dans `.carte/hors-echelle.txt` comme les autres, donc visible et
+    # compte. Le rendre muet demanderait de parser les blocs, c'est-a-dire un
+    # vrai compilateur Sass, pour gagner une entree sur vingt-trois.
+
+    # Ni des paliers ni des longueurs : des mots-cles, des formes, des idiomes.
+    NEUTRES = %w[0 0px auto inherit initial none unset revert solid dashed dotted double
+                 transparent currentcolor fit-content max-content min-content
+                 -webkit-fill-available].freeze
+
+    def confronter_litteraux
+      egaux, orphelins = self.class.scanner(fichiers_scss, @jetons)
+      publier_egaux(egaux)
+      publier_orphelins(orphelins)
+    end
+
+    # ⚠️ PASSE DE CLASSE, ET C'EST DELIBERE : `scripts/jetons-hors-echelle.rb`
+    # l'appelle telle quelle pour verrouiller la liste en CI. Deux lecteurs, une
+    # seule logique. Si elle redevenait une methode d'instance, le garde-fou
+    # devrait la recopier, et deux copies divergent toujours.
+    #
+    # Rend [egaux, orphelins], tous deux { cle => [fichier:ligne] } :
+    #   egaux     [famille, valeur, jeton] -> le litteral double un jeton de sa famille
+    #   orphelins [famille, valeur]        -> aucun jeton de sa famille ne le porte
+    def self.scanner(fichiers, jetons)
+      paliers   = paliers_par_famille(jetons)
+      egaux     = Hash.new { |h, k| h[k] = [] }
+      orphelins = Hash.new { |h, k| h[k] = [] }
+
+      fichiers.each do |f|
         rel = Carte.relatif(f)
         Carte.sans_commentaires_css(Carte.lire(f)).each_line.with_index(1) do |l, i|
           next if l =~ /^\s*--/ # la definition du jeton lui-meme
+          # ⚠️ Les bornes d'un `clamp()` ne sont pas des paliers, elles decrivent
+          # une COURBE. Ropat, 30/07 : on ne les nomme pas. Idem calc/min/max.
+          next if l =~ /\b(clamp|calc|min|max)\s*\(/
 
-          echelle.each_key do |val|
-            next unless l =~ /(?<![\w.-])#{Regexp.escape(val)}(?![\w.-])/
+          famille, valeurs = famille_et_valeurs(l)
+          next unless famille
 
-            comptes[val] += 1
-            ou[val] << "#{rel}:#{i}"
+          valeurs.each do |v|
+            if (jeton = paliers[famille][v])
+              egaux[[famille, v, jeton]] << "#{rel}:#{i}"
+            else
+              orphelins[[famille, v]] << "#{rel}:#{i}"
+            end
           end
         end
       end
 
-      cas = comptes.select { |_, n| n >= 3 }.sort_by { |_, n| -n }.map do |val, n|
-        "#{val} ecrit #{n} fois, alors que #{echelle[val]} vaut exactement ca   (ex. #{ou[val].first(3).join(', ')})"
+      [egaux, orphelins]
+    end
+
+    # famille => { valeur litterale => nom du jeton }. Les alias (`var(...)`) et
+    # les courbes sont ecartes : ils n'ont pas de valeur propre a confronter.
+    def self.paliers_par_famille(jetons)
+      FAMILLES.to_h do |nom, d|
+        table = jetons.select { |n, _| d[:prefixes].any? { |p| n.start_with?(p) } }
+                      .reject { |_, j| j[:valeur].include?("var(") || j[:valeur].include?("clamp") }
+                      .to_h { |n, j| [j[:valeur], n] }
+        [nom, table]
+      end
+    end
+
+    # Rend [famille, valeurs confrontables] pour une ligne, ou nil.
+    # ⚠️ `@include squircle(5rem)` EST un rayon. Il ne s'ecrit pas
+    # `propriete: valeur`, donc tout releve qui cherchait `border-radius:` le
+    # manquait : c'est exactement ainsi que le `5rem` de toutes les cartes est
+    # reste invisible jusqu'au 02/08.
+    def self.famille_et_valeurs(ligne)
+      if (m = ligne.match(/@include\s+squircle\s*\(\s*([^)]+)\)/))
+        return ["rayon", longueurs(m[1])]
+      end
+
+      m = ligne.match(/^\s*([a-z-]+)\s*:\s*([^;{}]+);/)
+      return nil unless m
+
+      prop = m[1]
+      famille = FAMILLES.find { |_, d| prop =~ d[:proprietes] }&.first
+      return nil unless famille
+
+      # Sur un raccourci `border` ou `outline`, seule la PREMIERE valeur est une
+      # epaisseur ; les suivantes sont un style et une couleur.
+      brut = famille == "trait" ? m[2].strip.split(/\s+/).first.to_s : m[2]
+      [famille, longueurs(brut)]
+    end
+
+    def self.longueurs(texte)
+      texte.split(/\s+/).reject { |v| v.include?("var(") || NEUTRES.include?(v.downcase) }
+           .select { |v| v =~ /\A-?\d*\.?\d+(px|rem|em)\z/ }
+    end
+
+    def publier_egaux(egaux)
+      cas = egaux.sort_by { |_, lieux| -lieux.size }.map do |(famille, val, jeton), lieux|
+        "#{val} ecrit #{lieux.size} fois en #{famille}, alors que #{jeton} vaut exactement ca" \
+          "   (ex. #{lieux.first(3).join(', ')})"
       end
       return if cas.empty?
 
       @anomalies << {
-        titre: "Valeurs ecrites en dur alors qu'un jeton porte la meme",
+        titre: "Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme",
         detail: "Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera.",
+        cas: cas
+      }
+    end
+
+    def publier_orphelins(orphelins)
+      cas = orphelins.sort_by { |(famille, val), lieux| [famille, -lieux.size, val] }.map do |(famille, val), lieux|
+        "#{famille} #{val} : #{lieux.size} declaration(s), AUCUN jeton de cette famille ne porte cette valeur" \
+          "   (ex. #{lieux.first(3).join(', ')})"
+      end
+      return if cas.empty?
+
+      @anomalies << {
+        titre: "Valeurs HORS ECHELLE : aucun jeton de leur famille ne les porte",
+        detail: "Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un " \
+                "nom pour devenir auditable, pas forcement d'etre deplacee. " \
+                "`scripts/jetons-hors-echelle.rb` verrouille cette liste contre une liste commitee.",
         cas: cas
       }
     end

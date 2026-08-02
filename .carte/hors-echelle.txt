@@ -1,0 +1,34 @@
+# LES VALEURS HORS ECHELLE DECLAREES DE CE DEPOT.
+#
+# Engendre par `bundle exec ruby scripts/jetons-hors-echelle.rb --ecrire`.
+# Ne pas editer a la main : le script est la seule source.
+#
+# Une ligne ici veut dire « on sait, et c'est assume ». Nommer n'est pas
+# aligner : rien dans ce fichier ne demande qu'un pixel bouge.
+# Le controle verrouille l'ENSEMBLE des valeurs, pas leurs occurrences.
+#
+jeton     --radius-anneau = 4px
+jeton     --radius-carte = 5rem
+litteral  decalage 2px
+litteral  decalage 4px
+litteral  espacement -1px
+litteral  espacement 0.15rem
+litteral  espacement 0.25rem
+litteral  espacement 0.35rem
+litteral  espacement 0.4rem
+litteral  espacement 0.5em
+litteral  espacement 0.6rem
+litteral  espacement 0.75rem
+litteral  espacement 0.875rem
+litteral  espacement 0.9rem
+litteral  espacement 1.1em
+litteral  espacement 1.1rem
+litteral  espacement 1.25rem
+litteral  espacement 1.4rem
+litteral  espacement 1.75rem
+litteral  espacement 1em
+litteral  espacement 2.5rem
+litteral  espacement 20px
+litteral  espacement 2px
+litteral  trait 2px
+litteral  trait 6px

@@ -233,6 +233,24 @@ def entete(table, meta)
   l << "rounded:"
   RAYONS.each { |k, jeton| l << format("  %-6s %-40s # %s", "#{k}:", valeur(jeton, table), jeton) }
 
+  # ⚠️ LES EXCEPTIONS SONT PUBLIEES, ET C'EST TOUT L'OBJET DE CE BLOC.
+  # Ajoute le 02/08/2026. `RAYONS` ci-dessus est une liste ECRITE A LA MAIN des
+  # cinq paliers : elle publiait donc l'echelle en taisant ce qui n'y est pas,
+  # c'est-a-dire exactement ce qu'un document de design system ne doit pas
+  # faire. Les rayons hors palier sont maintenant DEDUITS (tout `--radius-*`
+  # moins les cinq paliers), donc la liste ne peut plus prendre du retard.
+  # Nommer n'est pas aligner : ce bloc ne demande aucun deplacement, il rend
+  # visible. Il est verrouille par `scripts/jetons-hors-echelle.rb`.
+  hors_echelle = (table.keys.select { |n| n.start_with?("--radius-") } - RAYONS.values).sort
+  unless hors_echelle.empty?
+    l << "roundedOffScale:"
+    l << "  # ⚠️ Engendre. Ces rayons servent et ne sont sur AUCUN palier de"
+    l << "  # `rounded` ci-dessus. Voir _variables.scss pour la raison de chacun."
+    hors_echelle.each do |n|
+      l << format("  %-10s %-36s # %s", "#{n.delete_prefix('--radius-')}:", valeur(n, table), n)
+    end
+  end
+
   # ⚠️ ECRIT A LA MAIN, ET C'EST DELIBERE. Les composants ne vivent pas dans
   # `_variables.scss` mais dans `components/_buttons.scss` : les engendrer
   # demanderait de parser des regles CSS, pas des declarations de jetons. Tant
