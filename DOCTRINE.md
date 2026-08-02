@@ -268,11 +268,10 @@ On est maximaliste **autour** de l'œuvre, jamais dessus. Restent donc entièrem
 page projet : le cadrage, le récit, le chrome, le mouvement, l'arrivée depuis la grille, la façon
 dont l'œuvre entre et se présente.
 
-**Le critère de réussite, énoncé par Ropat le 31/07/2026 :** *« La refonte aura marché si le site
-est devenu une source de leads. »* Ce n'est pas un critère esthétique, et il est mesurable. État
-de départ, mesuré le même jour : **zéro lead venu du site depuis toujours.** Tout arrive par Malt,
-et le site sert d'étape de **validation** à des prospects qui demandent le portfolio *après* un
-premier contact. Le faire passer de validation à **acquisition** est le vrai sujet de la refonte.
+**Le critère de réussite, l'offre et les publics ont quitté ce fichier le 02/08/2026** pour
+`PRODUCT.md`. Ce n'était pas de la loi de design, et un document qui mélange les règles et les
+raisons finit par ne plus être opposable ni sur les unes ni sur les autres. Ici : ce qu'on a le
+droit de faire. Là-bas : pour qui, et à quoi on saura que ça a marché.
 
 **Les points d'appui actuels** (⚠️ appelés « points fixes non négociables » jusqu'au 31/07/2026 ;
 Ropat a corrigé le cadre ce jour-là : *« rien n'est figé, tout peut être mis en question à tout
@@ -288,11 +287,9 @@ moment, je ne prends rien pour acquis et je reste toujours ouvert »*) :
 > interdire de changer d'avis. La différence pratique : rouvrir un sujet demande **un élément
 > neuf** ou **sa décision**, et non l'un des deux seulement.
 
-**Rien n'est publié avant la fin du chantier** (Ropat, 31/07/2026). Voir le registre pour ce que
-cette décision coûte, et l'atténuation proposée.
-⚠️ **Conséquence directe sur le critère de réussite ci-dessus :** un site non publié ne produit
-aucun lead et ne se mesure pas. La date de publication est donc aussi la date à laquelle le
-chronomètre du critère démarre.
+**Rien n'est publié avant la fin du chantier** (Ropat, 31/07/2026). Ce que cette décision coûte,
+et l'atténuation proposée, sont au registre de `docs/PLAN-MAINTENANCE.md` §2.2. Sa conséquence sur
+le critère de réussite est dans `PRODUCT.md` §3.
 
 ---
 
