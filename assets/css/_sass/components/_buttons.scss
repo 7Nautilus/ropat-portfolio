@@ -4,8 +4,11 @@
    BOUTON : composant à propriétés
    ============================================
    .btn          base commune
-   variantes :   .btn--solid (défaut) | .btn--ghost
+   variantes :   .btn--solid (défaut) | .btn--ghost | .btn--card
+                 Les deux premières sont des boutons et partagent leur boîte.
+                 La troisième est un libellé de carte : voir sa note.
    tailles :     .btn--md (défaut) | .btn--xl (CTA principal)
+                 s'appliquent à solid ET à ghost ; card n'en reçoit pas.
 
    Le padding responsive vit ICI et non dans _media-queries.scss :
    ce dernier est chargé en dernier et écrasait silencieusement le
@@ -68,8 +71,14 @@
 
 /* ── Variantes ──────────────────────────── */
 
-// La typographie appartient à la variante, pas à la base :
-// le bouton texte hérite de la taille et de la graisse de son contexte.
+// La typographie appartient à la variante, pas à la base, et depuis le
+// 02/08/2026 cette phrase se lit dans les deux sens :
+//   `solid` et `ghost` la POSENT (20px, 600). Ce sont deux boutons, ils se
+//     retrouvent côte à côte, et deux boutons voisins qui n'ont pas la même
+//     taille de texte se lisent comme une erreur. C'est exactement ce que
+//     faisait la 404 : 20px contre 16.
+//   `card` ne la pose PAS et hérite de son contexte, parce que ce n'est pas
+//     un bouton mais un libellé posé dans une carte.
 .btn--solid {
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
@@ -139,10 +148,94 @@
   }
 }
 
-// Bouton texte : pas de fond, pas de bordure, pas de padding.
-// Il vit à l'intérieur d'une carte cliquable, c'est le survol de la carte
-// qui l'anime.
+/* Bouton fantôme : la boîte du bouton, sans son enveloppe.
+   Reconstruit le 02/08/2026 sur demande de Ropat, et « reconstruit » est le
+   mot : ce qui s'appelait `ghost` jusque-là n'était pas une variante de
+   bouton, c'était le libellé des cartes de service. Il avait UN usage,
+   `services/service-card.html`, en `tag="div"`, dans une carte dont le survol
+   faisait tout le travail. Posé seul sur la 404, il rendait 127x26px sans
+   fond, sans bordure, sans padding, sans curseur, sans survol : un lien
+   orange qui se donnait le nom d'un bouton.
+   Ce comportement n'a pas été supprimé, il a été renommé `card`, ci-dessous.
+
+   Ce que la variante prend de `solid`, et pourquoi :
+   la même taille de police et la même graisse, le même padding par la classe
+   de taille, la même flèche qui avance de 6px. Tout ce qui fait qu'un bouton
+   posé à côté d'un autre a la même hauteur et le même axe de lecture.
+
+   Ce qu'elle ne prend pas : le fond, la bordure, le biseau. C'est la demande,
+   et c'est aussi ce qui la rend utile, elle porte l'action SECONDAIRE. Sur la
+   404, « Voir le travail » est un aplat plein et « Me contacter » ne l'est
+   pas : la hiérarchie se lit sans lire les mots.
+
+   ⚠️ SON SURVOL NE RECOPIE PAS CELUI DU SOLIDE, et pas seulement par souci de
+   distinction. Le survol du solide inverse un aplat, geste qui suppose un
+   aplat au repos. Sur un fantôme il faudrait en FAIRE apparaître un, donc en
+   faire un solide à l'engagement : la variante s'annulerait au moment précis
+   où on la regarde. Le filet, lui, ajoute sans remplir.
+   Il se trace de gauche à droite, dans le sens où la flèche avance. Les deux
+   gestes disent la même chose, ce qui est l'argument retenu le 28/07 pour
+   préférer la translation à la rotation.
+
+   Le filet est un dégradé de fond sur le libellé et non un `border-bottom` :
+   la bordure se poserait sous le PADDING, à 14px du texte, et non sous le
+   texte. `background-size` s'anime, `text-decoration` non.
+   Il vit sur le `<span>` que l'include pose toujours autour du libellé.
+   ⚠️ En `prefers-reduced-motion`, la règle globale de _bases.scss ramène
+   toutes les durées à 0,01ms : le filet apparaît alors d'un coup au lieu de
+   se tracer. L'affordance reste, le mouvement part. C'est le bon repli, et il
+   ne demande aucune ligne ici.
+
+   PAS DE `scale` : il n'y a pas de boîte visible à agrandir, donc l'échelle
+   ne ferait bouger que du texte, ce qui se lit comme un défaut de rendu.
+   Le focus clavier est déjà servi par `*:focus-visible` (_bases.scss), un
+   contour orange à 3px. Le doubler d'un filet n'ajouterait rien. */
 .btn--ghost {
+  cursor: pointer;
+  /* ⚠️ UNE BORDURE TRANSPARENTE N'EST PAS UNE BORDURE, c'est de la géométrie.
+     Elle ne contredit pas « sans bordure » : rien ne se voit. Elle est là
+     parce que sans elle le fantôme mesurait 61px de haut contre 67 au solide,
+     soit les 2 x 2,86px de contour que l'autre porte. Deux boutons voisins
+     hauts de 6px d'écart, ça se voit, et ça se voit d'autant plus que tout le
+     reste vient d'être aligné.
+     C'est `--signal-width` et non une valeur en dur, la même variable que
+     `--border-primary` : les deux boîtes ne peuvent donc plus diverger.
+     Effet de bord voulu : la cible de clic gagne ces 6px. */
+  border: var(--signal-width) solid transparent;
+  color: var(--primary-color);
+  font-size: var(--text-body);
+  font-weight: 600;
+
+  span {
+    background-image: linear-gradient(
+      var(--primary-color),
+      var(--primary-color)
+    );
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 2px;
+    transition: background-size var(--transition-base);
+  }
+
+  &:hover span {
+    background-size: 100% 2px;
+  }
+
+  &:hover svg {
+    transform: translateX(6px);
+  }
+}
+
+/* Libellé de carte. Ce n'est PAS un bouton, et le nom le dit maintenant.
+   Il passe par l'include des boutons pour la flèche et pour le balisage, il
+   est rendu en `div` parce qu'il vit dans un `<a>` et qu'imbriquer deux liens
+   est invalide. Il n'a ni padding, ni typographie propre, ni survol propre :
+   la carte entière est la cible, donc c'est le survol de la carte qui
+   l'anime. Un survol qui lui serait propre serait même un défaut, il
+   suggérerait une cible plus petite que la vraie.
+   ⚠️ `_bases.scss` désactive ces deux transformations en reduced-motion et
+   les nomme par ce sélecteur : les deux fichiers doivent bouger ensemble. */
+.btn--card {
   padding: 0;
   color: var(--primary-color);
 

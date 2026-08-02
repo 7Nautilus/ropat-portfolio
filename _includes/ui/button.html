@@ -11,10 +11,22 @@
                        (utiliser "div" quand le bouton est DANS un <a>,
                         car imbriquer deux liens est invalide)
     type               type du <button>, défaut "submit"
-    variant            "solid" (défaut) | "ghost"
+    variant            "solid" (défaut) | "ghost" | "card"
+                       solid = l'aplat orange, l'action principale.
+                       ghost = MÊME bouton, sans fond ni bordure. Même boîte,
+                         même typographie, même flèche optionnelle : il
+                         s'aligne avec un solide posé à côté de lui. Son survol
+                         lui est propre (un filet se trace sous le libellé),
+                         il ne recopie pas le remplissage du solide.
+                       card = libellé de carte, PAS un bouton. Sans padding,
+                         typographie héritée, animé par le survol de la carte
+                         qui le contient et non par le sien. Voir la note de
+                         components/_buttons.scss : c'est ce que « ghost »
+                         désignait jusqu'au 02/08/2026, ce qui empêchait
+                         d'avoir un vrai bouton fantôme.
     size               "md" (défaut) | "xl"
                        xl = CTA principal (hero de la home, clôture de À propos)
-                       ignoré pour ghost, qui n'a ni fond ni padding
+                       ignoré pour card seul, qui n'a pas de padding
     icon               "arrow" (défaut) | "send" | "none"
                        ⚠️ "arrow-long" a été SUPPRIMÉ le 28/07/2026 : il rendait
                        une flèche de même proportion que "arrow", seul le
@@ -31,7 +43,9 @@
     {% include ui/button.html href="/fr/contact.html" label="Me contacter" %}
     {% include ui/button.html href=url label=txt size="xl" %}
     {% include ui/button.html label=txt tag="button" icon="send" class="contact-submit" %}
-    {% include ui/button.html label=txt tag="div" variant="ghost" %}
+    {% include ui/button.html href=url label=txt variant="ghost" %}
+    {% include ui/button.html href=url label=txt variant="ghost" icon="none" %}
+    {% include ui/button.html label=txt tag="div" variant="card" %}
   ============================================================
 {% endcomment %}
 
@@ -56,7 +70,18 @@
   {% assign tag = "button" %}
 {% endif %}
 
-{% capture classes %}btn btn--{{ variant }}{% unless variant == "ghost" %} btn--{{ size }}{% endunless %}{% if include.class %} {{ include.class }}{% endif %}{% endcapture %}
+{%- comment -%}
+  Blancs coupes des deux cotes : ce commentaire est rendu sur presque toutes
+  les pages du site, et sans les tirets il y ajouterait une ligne vide.
+
+  L'exclusion de taille vise « card » et lui SEUL. Elle visait « ghost »
+  jusqu'au 02/08/2026, et c'est la moitié de la raison pour laquelle il n'y
+  avait pas de vrai bouton fantôme : privé de `btn--md`, il n'héritait
+  d'aucun padding, donc d'aucune boîte. L'autre moitié était un
+  `padding: 0` dans la feuille. Les deux sont tombées ensemble.
+{%- endcomment -%}
+
+{% capture classes %}btn btn--{{ variant }}{% unless variant == "card" %} btn--{{ size }}{% endunless %}{% if include.class %} {{ include.class }}{% endif %}{% endcapture %}
 
 <{{ tag }} class="{{ classes }}"{% if include.href %} href="{{ include.href }}"{% endif %}{% if tag == "button" %} type="{{ include.type | default: 'submit' }}"{% endif %}{% if include.aria %} aria-label="{{ include.aria }}"{% endif %}{% if include.current %} aria-current="{{ include.current }}"{% endif %}>
   <span>{{ include.label }}</span>

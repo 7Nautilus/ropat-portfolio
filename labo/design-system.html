@@ -921,8 +921,8 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       <thead><tr><th>Propriété</th><th>Valeurs</th><th>Défaut</th></tr></thead>
       <tbody>
         <tr><td><code>label</code></td><td>texte</td><td><span style="color:#FF6B6B">requis</span></td></tr>
-        <tr><td><code>variant</code></td><td><code>solid</code>, <code>ghost</code></td><td><code>solid</code></td></tr>
-        <tr><td><code>size</code></td><td><code>md</code>, <code>xl</code></td><td><code>md</code>, et <strong>ignoré pour ghost</strong></td></tr>
+        <tr><td><code>variant</code></td><td><code>solid</code>, <code>ghost</code>, <code>card</code></td><td><code>solid</code></td></tr>
+        <tr><td><code>size</code></td><td><code>md</code>, <code>xl</code></td><td><code>md</code>, et <strong>ignoré pour card</strong></td></tr>
         <tr><td><code>icon</code></td><td><code>arrow</code>, <code>send</code>, <code>none</code></td><td><code>arrow</code></td></tr>
         <tr><td><code>tag</code></td><td><code>a</code>, <code>button</code>, <code>div</code>, <code>span</code></td><td><code>a</code> si <code>href</code>, sinon <code>button</code></td></tr>
         <tr><td><code>current</code></td><td><code>page</code></td><td>aucun. Ajouté le 28/07 : sans lui, la nav aurait perdu son <code>aria-current</code> en passant par l'include</td></tr>
@@ -940,10 +940,19 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;margin-bottom:1.8rem">
       {% include ui/button.html label="solid" href="#" %}
       {% include ui/button.html label="ghost" href="#" variant="ghost" %}
+      {% include ui/button.html label="card" tag="div" variant="card" %}
     </div>
-    <p style="margin:-.9rem 0 1.8rem">Le <code>ghost</code> n'a ni fond, ni bordure, ni padding, ni
-    rayon : c'est du texte cliquable. Il vit dans une carte, et c'est le survol de la carte qui
-    l'anime, pas le sien.</p>
+    <p style="margin:-.9rem 0 1.8rem">Le <code>ghost</code> est un <strong>vrai bouton</strong>
+    depuis le 02/08/2026 : même boîte, même police et même flèche que le <code>solid</code>, mais
+    sans fond ni bordure. Survole-le, son filet se trace de gauche à droite pendant que la flèche
+    avance : il n'emprunte pas le remplissage du solide, qui l'annulerait au moment même où on le
+    regarde. C'est l'action <strong>secondaire</strong>, et la hiérarchie se lit sans lire les mots.</p>
+    <p style="margin:-.9rem 0 1.8rem">⚠️ Le troisième, <code>card</code>, <strong>n'est pas un
+    bouton</strong> : c'est le libellé des cartes de service, sans padding ni typographie propre.
+    Ici il paraît inerte, et c'est exact : il est animé par le survol de <em>la carte qui le
+    contient</em>, pas par le sien. Le voir seul, c'est le voir hors de son seul usage.
+    C'est ce que <code>ghost</code> désignait jusqu'au 02/08, ce qui interdisait d'avoir un vrai
+    bouton fantôme : posé sur la page 404, il rendait 127x26px, sans curseur et sans survol.</p>
 
     <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 2 · la taille</p>
     <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center;margin-bottom:1.8rem">
@@ -953,9 +962,12 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     </div>
     <p style="margin:-.9rem 0 1.8rem">⚠️ Les deux premiers ont la <strong>même police</strong>,
     le même padding horizontal et le même rayon : ils ne diffèrent que par 2px de padding
-    vertical et 10px de gouttière. Et le troisième est identique au <code>ghost</code>
-    ci-dessus : <code>size</code> est <strong>avalé en silence</strong> sur un ghost, l'API
-    l'accepte et ne fait rien.</p>
+    vertical et 10px de gouttière. Le troisième, lui, <strong>répond enfin</strong> à
+    <code>size</code> : <strong>71px de haut contre 67</strong> au <code>ghost</code> de l'axe 1,
+    soit le même écart qu'entre <code>xl</code> et <code>md</code> juste avant. C'est la hauteur
+    qui le prouve et pas la largeur, puisque les libellés diffèrent. Jusqu'au 02/08 l'include
+    retirait la classe de taille aux ghosts : l'API acceptait <code>size</code> et ne faisait
+    rien. Cette exclusion ne vise plus que <code>card</code>, qui n'a pas de padding à recevoir.</p>
 
     <p class="sur-titre" style="color:rgba(255,255,255,.46)">Axe 3 · l'icône</p>
     <div style="display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;margin-bottom:1.8rem">
