@@ -50,9 +50,32 @@
 
 /* Focus visible pour accessibilité */
 *:focus-visible {
-  outline: 3px solid var(--primary-color);
+  outline: var(--signal-width) solid var(--primary-color);
   outline-offset: 4px;
-  border-radius: 4px;
+}
+
+/* ⚠️ LE RAYON DE L'ANNEAU EST POSE A SPECIFICITE ZERO, ET C'EST UN CORRECTIF.
+   Constate et corrige le 02/08/2026.
+
+   CE QUI SE PASSAIT. La declaration vivait dans la regle ci-dessus, donc elle
+   pesait (0,1,0) : le selecteur universel ne compte pas, la pseudo-classe
+   compte pour une classe. Exactement le meme poids que `.skip-link`, declare
+   TRENTE-DEUX LIGNES PLUS HAUT DANS CE FICHIER. A poids egal c'est l'ordre
+   source qui tranche, donc le 4px gagnait.
+   Le resultat, mesure au clavier sur l'accueil : la pastille de saut affichait
+   16px au repos, c'est-a-dire pendant qu'elle est a `top: -100px` et invisible,
+   et 4px des qu'elle passe a `top: 0`. Son squircle de 1rem n'a donc JAMAIS
+   rendu une seule fois, alors que le commentaire qui l'a choisi argumente le
+   241x50 de la pastille, mesure verifiee exacte.
+
+   POURQUOI ON NE SUPPRIME PAS LA LIGNE. Elle sert vraiment : le contour suit
+   le `border-radius` de l'element, donc sur un element qui n'a AUCUN rayon
+   (le bouton fantome, un lien de texte) elle arrondit l'anneau au lieu de le
+   laisser a angles vifs. C'est l'intention d'origine et elle est bonne.
+   `:where()` la garde en rendant la decision a chaque element : tout ce qui
+   declare sa propre forme gagne, quel que soit l'ordre des `@use`. */
+:where(*:focus-visible) {
+  border-radius: var(--radius-anneau);
 }
 
 // REDUCED MOTION

@@ -128,25 +128,22 @@
   height: fit-content;
   
   /* Spacing */
-  /* padding: 1.75rem 2.5rem; */
   gap: 1.25rem;
 
-  /* Border
-  border: 2px solid var(--primary-color);
-  border-radius: 3rem;
+  /* ⚠️ TOUT LE TRAITEMENT VISUEL DE CETTE CARTE A ETE RETIRE, et il vivait ici
+     en code commente jusqu'au 02/08/2026 : un padding, une bordure de 2px, un
+     rayon de 3rem avec un repli squircle a 7rem, un fond et une ombre.
+     Ce conteneur est donc volontairement NU : il ne fait plus que ranger ses
+     icones en ligne. C'est un etat, pas un oubli.
 
-  @supports (corner-shape: squircle) {
-    border-radius: 7rem;;
-    corner-shape: squircle;
-  }
-  */
-  
-  /* Colors & Background
-  background-color: var(--secondary-color);
-  */
-  /* Effects
-  box-shadow: var(--shadow-ambient);
-  */
+     POURQUOI LE CODE COMMENTE EST PARTI, et c'est la seule raison qui compte :
+     il FAUSSAIT TOUT INVENTAIRE. Le 02/08, un releve des rayons hors echelle a
+     compte ce `3rem` et ce `7rem` comme deux valeurs vivantes alors qu'aucune
+     des deux n'a jamais ete emise ; le `1.75rem` et le `2.5rem` du padding
+     polluaient de meme le releve des espacements. Le `;;` de la ligne du
+     squircle prouvait d'ailleurs que rien n'avait ete recompile depuis.
+     Des cicatrices comptees comme des blessures. Git garde l'historique, une
+     note en prose garde l'intention, et un inventaire redevient fiable. */
 }
 
 

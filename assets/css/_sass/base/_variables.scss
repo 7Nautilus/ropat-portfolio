@@ -424,8 +424,51 @@
   --radius-xl: 6rem;
   --radius-pill: 9999px;
 
+  /* ⚠️ HORS ECHELLE, ET C'EST DIT ICI POUR QUE CA SE VOIE. Pose le 02/08/2026
+     sur demande de Ropat : « attribuer des variables aux valeurs hors echelle,
+     mais en signalant justement qu'elles le sont, cela les rendrait auditables
+     et suivables ».
+
+     LA REGLE, en une ligne : les suffixes d'une echelle sont un ALPHABET FERME.
+     Pour les rayons c'est `sm md lg xl pill`. Un jeton de rayon dont le suffixe
+     est un MOT n'est donc, par construction, sur aucun palier.
+
+     ⚠️ CE N'EST PAS LE NOM QUI GARANTIT LE SUIVI, c'est le controle.
+     Un nom de role seul reste ambigu : `--radius-carte` peut se lire comme un
+     simple alias semantique, c'est-a-dire l'inverse du message. La garantie est
+     `scripts/jetons-hors-echelle.rb`, lance en CI : il confronte la liste des
+     jetons hors alphabet a la liste commitee, et sort en 1 quand quelqu'un en
+     ajoute un sans le declarer. Le nom peut donc rester sobre, puisque rien ne
+     peut deriver en silence.
+
+     VALEURS INCHANGEES. Nommer n'est pas aligner (Ropat, 30/07/2026) : on donne
+     un nom a ce qui existe, on ne deplace aucun pixel. Meme geste que
+     `--spacing-2xl` a `--spacing-6xl` plus haut, et que `--ink-decorative`. */
+  --radius-carte: 5rem; /* 1 appel : components/cards/_cards.scss, en argument
+                           de squircle(). Entre lg (2rem) et xl (6rem). Il
+                           habille TOUTES les cartes, projets compris. Il etait
+                           ecrit en dur, donc invisible a tout releve qui
+                           cherchait `border-radius:`. */
+  --radius-anneau: 4px; /* Le rayon de l'ANNEAU DE FOCUS, et uniquement pour les
+                           elements qui n'ont aucun rayon propre. Voir la note
+                           de base/_bases.scss : la declaration est desormais en
+                           `:where()`, donc a specificite nulle, sans quoi elle
+                           ecrasait la forme de ceux qui en ont une.
+                           ⚠️ Le burger l'a rejoint le 02/08 : il portait 5px,
+                           soit la meme intention ecrite a 1px pres. Arbitrage
+                           de Ropat, aligner plutot que nommer deux fois. */
+
   /* `--squircle-small` retire le 29/07 : zero consommateur. Les deux paliers
-     survivants (`--squircle-medium`, `--squircle-full`) le sont. */
+     survivants (`--squircle-medium`, `--squircle-full`) le sont.
+
+     ⚠️ `--squircle-full` A REPRIS SES SIX CONSOMMATEURS le 02/08/2026, sur
+     arbitrage de Ropat. Ils ecrivaient `border-radius: 50%` en clair : le
+     curseur, la pastille de theme du hero, la puce de specialite et le jalon de
+     frise d'A propos, la pastille de contexte d'un projet.
+     Ce n'est PAS une substitution par egalite de valeur, ce qui serait la faute
+     exacte que le corollaire du 30/07 interdit. C'est la meme FAMILLE : les six
+     posent `corner-shape: squircle` dans la meme regle, donc chacun demandait
+     deja le plein de la famille squircle, en clair et sans le nommer. */
   --squircle-medium: 6rem;
   --squircle-full: 50%;
 

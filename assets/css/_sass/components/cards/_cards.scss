@@ -22,7 +22,12 @@
   font-family: var(--font-body);
   background-color: var(--secondary-color);
 
-  @include squircle(5rem);
+  /* ⚠️ `5rem` etait ecrit en dur ici jusqu'au 02/08/2026, et c'etait le rayon
+     hors echelle le plus VISIBLE du site : il habille toutes les cartes,
+     projets compris. Il echappait a tout releve qui cherchait `border-radius:`,
+     puisqu'il passe par un argument de mixin. Voir la note de `--radius-carte`
+     dans _variables.scss : la valeur n'a pas bouge, elle a pris un nom. */
+  @include squircle(var(--radius-carte));
 
   border: 2px solid var(--primary-color);
   box-shadow: var(--shadow-sm);
@@ -37,7 +42,14 @@
   box-shadow: var(--shadow-md);
 }
 
-.card:focus-visible {
-  outline: 3px solid var(--primary-color);
-  outline-offset: 4px;
-}
+/* ⚠️ `.card:focus-visible` A ETE SUPPRIME le 02/08/2026, et il ne manque a
+   personne : il redeclarait `outline: 3px solid var(--primary-color)` et
+   `outline-offset: 4px`, c'est-a-dire le socle de `base/_bases.scss` AU
+   CARACTERE PRES. Aucune regle intermediaire ne touche l'`outline` d'une
+   `.card`, donc ce bloc etait inerte et sa suppression ne change pas un pixel.
+   Ce qui MANQUE ici, en revanche, et qui n'est pas corrige dans ce lot :
+   `.card:hover` pose un `translateY` et une ombre, `.card:hover .btn--card`
+   pose un `scale` et fait avancer la fleche, et RIEN de tout ca n'a de pendant
+   `:focus-visible`. Au clavier, une carte recoit son anneau et rien d'autre,
+   alors que `.project-next-link` deux fichiers plus loin traite bien les deux.
+   A reprendre avec la sortie du libelle de carte. */

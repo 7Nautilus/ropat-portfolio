@@ -524,8 +524,18 @@ header[data-sur-media] {
   transform: scale(1.1);
 }
 
+/* ⚠️ LE RAYON A REJOINT CELUI DU SOCLE le 02/08/2026, et un pixel a bouge.
+   Il valait `5px` en dur, soit la meme intention que le `4px` de l'anneau
+   general ecrite a 1px pres, dans deux fichiers, sans que rien ne relie les
+   deux. Arbitrage de Ropat : aligner plutot que nommer deux fois un ecart qui
+   n'en est pas un. C'est donc une exception a « nommer n'est pas aligner »,
+   et elle est assumee : ici l'ecart n'etait pas un choix, c'etait un oubli.
+   ⚠️ La LARGEUR du contour, elle, reste a 2px et diverge toujours des 3px du
+   socle. Ce n'est pas un oubli de ce lot, c'est une question qui n'a pas encore
+   ete posee : le site porte cinq anneaux de focus pour trois combinaisons de
+   largeur et de decalage, et aucune n'est nommee. */
 .burger-menu:focus {
-  border-radius: 5px;
+  border-radius: var(--radius-anneau);
   corner-shape: squircle;
   outline: 2px solid var(--signal-chrome);
   outline-offset: 4px;
