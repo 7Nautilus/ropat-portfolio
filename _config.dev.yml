@@ -28,3 +28,8 @@ exclude:
   - CARTE.md
   - scripts/
   - DESIGN.md
+  # Ajoutes le 02/08/2026, et c'est la surveillance de `carte.rb` qui les a
+  # reclames : ils avaient ete exclus de la production sans l'etre ici, donc
+  # `jekyll serve` en local rendait deux pages que la production ne rend pas.
+  - DOCTRINE.md
+  - PRODUCT.md
