@@ -94,9 +94,35 @@
       <link rel="alternate" hreflang="x-default" href="{{ current_canonical }}" />
       {% endif %}
     {% elsif page_path_no_lang == "/index.html" or page_path_no_lang == "/" %}
-      <link rel="alternate" hreflang="fr" href="{{ site.url }}/index.html" />
-      <link rel="alternate" hreflang="en" href="{{ site.url }}/en/index.html" />
-      <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en/index.html" />
+      {% comment %}
+        ⚠️ CES TROIS URLS DOIVENT ETRE LES FORMES CANONIQUES DES DEUX ACCUEILS,
+        ET ELLES NE L'ETAIENT PAS (corrige le 02/08/2026).
+
+        Cette branche ecrivait `/index.html` et `/en/index.html`, alors que le
+        front matter des deux accueils declare `canonical_url: https://ropat.art`
+        et `https://ropat.art/en/`. Sur les deux pages les plus importantes du
+        site, le hreflang designait donc une URL que le canonical de la MEME page
+        declarait non canonique.
+
+        Ce que ca coute : un hreflang doit pointer une URL canonique, sinon Google
+        ignore l'annotation entiere. L'appariement FR <-> EN de l'accueil n'etait
+        donc probablement pas pris en compte, sur le seul couple de pages ou il
+        compte vraiment. Releve sur les 63 pages construites : 61 etaient justes,
+        ces deux-la seules etaient fausses.
+
+        L'INVARIANT A TENIR : ces deux href doivent rester egaux, au caractere
+        pres, aux `canonical_url` de `index.html` et de `en/index.html`. Ils en
+        derivent aujourd'hui (`site.url` nu, et `site.url` + `/en/`) ; si l'un des
+        deux front matter change de forme, celui-ci doit suivre dans le meme
+        commit.
+
+        ⚠️ Le `x-default` continue de pointer l'ANGLAIS. Ce n'est pas un oubli :
+        c'est le comportement d'avant, et le changer est un arbitrage
+        (l'audience mesuree est francaise) qui n'a pas ete demande ici.
+      {% endcomment %}
+      <link rel="alternate" hreflang="fr" href="{{ site.url }}" />
+      <link rel="alternate" hreflang="en" href="{{ site.url }}/en/" />
+      <link rel="alternate" hreflang="x-default" href="{{ site.url }}/en/" />
     {% else %}
       <link rel="alternate" hreflang="fr" href="{{ site.url }}/fr{{ page_path_no_lang }}" />
       <link rel="alternate" hreflang="en" href="{{ site.url }}/en{{ page_path_no_lang }}" />
