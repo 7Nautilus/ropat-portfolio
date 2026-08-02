@@ -1,3 +1,26 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  CETTE LISTE EST LA MISE EN AVANT, PAS L'EXISTENCE
+# ══════════════════════════════════════════════════════════════════════════
+#
+# ⚠️ `graphic-design` EST ABSENT DE CETTE LISTE VOLONTAIREMENT (Ropat, 31/07/2026).
+# Ne pas « réparer » la ligne manquante : elle est une décision.
+#
+# Ce que l'absence fait vraiment, mesuré le 31/07 sur le build : le plugin
+# `_plugins/pages_generees.rb` engendre une page pour TOUS les fichiers de ce
+# répertoire qui ont un `detail_url`, pas seulement pour ceux listés ici. Donc
+# `/fr/services/conception-graphique.html` et sa jumelle EXISTENT, aucune page du
+# site n'y renvoie, et elles sont dans `sitemap.xml`. C'est-à-dire : invisibles
+# pour un humain, proposées à Google.
+#
+# C'était un oubli, c'est devenu un choix. L'état s'appelle « publié sans être mis
+# en avant », et il est légitime : une prestation rare peut mériter une page qui
+# capte une requête sans encombrer l'offre. Voir la longue traîne dans TODO.md.
+#
+# ⚠️ MAIS IL DOIT DEVENIR UN CHAMP, PAS UNE LIGNE ABSENTE. Une absence ne se relit
+# pas, une valeur si. Le champ arrive avec l'inventaire complet des prestations
+# (chantier ouvert au 31/07), qui réécrira ce répertoire : trois états déclarés,
+# `inventaire` (aucune page), `publie` (page indexable, pas de carte),
+# `mis_en_avant` (carte, menu, liens).
 order:
   - branding-strategy
   - music-design
