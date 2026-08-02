@@ -28,7 +28,7 @@
        survole sans le masquer. */
     background: var(--surface-veil);
     border: 3px solid var(--primary-color);
-    border-radius: 50%;
+    border-radius: var(--squircle-full);
     corner-shape: squircle;
     pointer-events: none;
     /* ⚠️ LE CURSEUR EST LE SEUL ELEMENT QUI A LE DROIT D'ETRE AU-DESSUS DE

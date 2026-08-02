@@ -187,7 +187,7 @@
   height: 0.5rem;
   width: 0.5rem;
   background-color: var(--primary-color);
-  border-radius: 50%;
+  border-radius: var(--squircle-full);
   corner-shape: squircle;
   // from chatnoir
   display: inline-block;

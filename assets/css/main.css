@@ -394,8 +394,50 @@
   --radius-lg: 2rem;
   --radius-xl: 6rem;
   --radius-pill: 9999px;
+  /* ⚠️ HORS ECHELLE, ET C'EST DIT ICI POUR QUE CA SE VOIE. Pose le 02/08/2026
+     sur demande de Ropat : « attribuer des variables aux valeurs hors echelle,
+     mais en signalant justement qu'elles le sont, cela les rendrait auditables
+     et suivables ».
+
+     LA REGLE, en une ligne : les suffixes d'une echelle sont un ALPHABET FERME.
+     Pour les rayons c'est `sm md lg xl pill`. Un jeton de rayon dont le suffixe
+     est un MOT n'est donc, par construction, sur aucun palier.
+
+     ⚠️ CE N'EST PAS LE NOM QUI GARANTIT LE SUIVI, c'est le controle.
+     Un nom de role seul reste ambigu : `--radius-carte` peut se lire comme un
+     simple alias semantique, c'est-a-dire l'inverse du message. La garantie est
+     `scripts/jetons-hors-echelle.rb`, lance en CI : il confronte la liste des
+     jetons hors alphabet a la liste commitee, et sort en 1 quand quelqu'un en
+     ajoute un sans le declarer. Le nom peut donc rester sobre, puisque rien ne
+     peut deriver en silence.
+
+     VALEURS INCHANGEES. Nommer n'est pas aligner (Ropat, 30/07/2026) : on donne
+     un nom a ce qui existe, on ne deplace aucun pixel. Meme geste que
+     `--spacing-2xl` a `--spacing-6xl` plus haut, et que `--ink-decorative`. */
+  --radius-carte: 5rem; /* 1 appel : components/cards/_cards.scss, en argument
+   de squircle(). Entre lg (2rem) et xl (6rem). Il
+   habille TOUTES les cartes, projets compris. Il etait
+   ecrit en dur, donc invisible a tout releve qui
+   cherchait `border-radius:`. */
+  --radius-anneau: 4px; /* Le rayon de l'ANNEAU DE FOCUS, et uniquement pour les
+   elements qui n'ont aucun rayon propre. Voir la note
+   de base/_bases.scss : la declaration est desormais en
+   `:where()`, donc a specificite nulle, sans quoi elle
+   ecrasait la forme de ceux qui en ont une.
+   ⚠️ Le burger l'a rejoint le 02/08 : il portait 5px,
+   soit la meme intention ecrite a 1px pres. Arbitrage
+   de Ropat, aligner plutot que nommer deux fois. */
   /* `--squircle-small` retire le 29/07 : zero consommateur. Les deux paliers
-     survivants (`--squircle-medium`, `--squircle-full`) le sont. */
+     survivants (`--squircle-medium`, `--squircle-full`) le sont.
+
+     ⚠️ `--squircle-full` A REPRIS SES SIX CONSOMMATEURS le 02/08/2026, sur
+     arbitrage de Ropat. Ils ecrivaient `border-radius: 50%` en clair : le
+     curseur, la pastille de theme du hero, la puce de specialite et le jalon de
+     frise d'A propos, la pastille de contexte d'un projet.
+     Ce n'est PAS une substitution par egalite de valeur, ce qui serait la faute
+     exacte que le corollaire du 30/07 interdit. C'est la meme FAMILLE : les six
+     posent `corner-shape: squircle` dans la meme regle, donc chacun demandait
+     deja le plein de la famille squircle, en clair et sans le nommer. */
   --squircle-medium: 6rem;
   --squircle-full: 50%;
   /* ==========================================================
@@ -1360,9 +1402,32 @@ header[role=banner] {
 
 /* Focus visible pour accessibilité */
 *:focus-visible {
-  outline: 3px solid var(--primary-color);
+  outline: var(--signal-width) solid var(--primary-color);
   outline-offset: 4px;
-  border-radius: 4px;
+}
+
+/* ⚠️ LE RAYON DE L'ANNEAU EST POSE A SPECIFICITE ZERO, ET C'EST UN CORRECTIF.
+   Constate et corrige le 02/08/2026.
+
+   CE QUI SE PASSAIT. La declaration vivait dans la regle ci-dessus, donc elle
+   pesait (0,1,0) : le selecteur universel ne compte pas, la pseudo-classe
+   compte pour une classe. Exactement le meme poids que `.skip-link`, declare
+   TRENTE-DEUX LIGNES PLUS HAUT DANS CE FICHIER. A poids egal c'est l'ordre
+   source qui tranche, donc le 4px gagnait.
+   Le resultat, mesure au clavier sur l'accueil : la pastille de saut affichait
+   16px au repos, c'est-a-dire pendant qu'elle est a `top: -100px` et invisible,
+   et 4px des qu'elle passe a `top: 0`. Son squircle de 1rem n'a donc JAMAIS
+   rendu une seule fois, alors que le commentaire qui l'a choisi argumente le
+   241x50 de la pastille, mesure verifiee exacte.
+
+   POURQUOI ON NE SUPPRIME PAS LA LIGNE. Elle sert vraiment : le contour suit
+   le `border-radius` de l'element, donc sur un element qui n'a AUCUN rayon
+   (le bouton fantome, un lien de texte) elle arrondit l'anneau au lieu de le
+   laisser a angles vifs. C'est l'intention d'origine et elle est bonne.
+   `:where()` la garde en rendant la decision a chaque element : tout ce qui
+   declare sa propre forme gagne, quel que soit l'ordre des `@use`. */
+:where(*:focus-visible) {
+  border-radius: var(--radius-anneau);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1378,7 +1443,7 @@ header[role=banner] {
   .project-card:hover,
   .service-card:hover,
   .btn:hover,
-  .card:hover .btn--ghost,
+  .card:hover .btn--card,
   .nav-link:hover,
   .project-next-link:hover .project-next-arrow,
   .project-next-link:focus-visible .project-next-arrow {
@@ -1996,8 +2061,18 @@ header[data-sur-media] {
   transform: scale(1.1);
 }
 
+/* ⚠️ LE RAYON A REJOINT CELUI DU SOCLE le 02/08/2026, et un pixel a bouge.
+   Il valait `5px` en dur, soit la meme intention que le `4px` de l'anneau
+   general ecrite a 1px pres, dans deux fichiers, sans que rien ne relie les
+   deux. Arbitrage de Ropat : aligner plutot que nommer deux fois un ecart qui
+   n'en est pas un. C'est donc une exception a « nommer n'est pas aligner »,
+   et elle est assumee : ici l'ecart n'etait pas un choix, c'etait un oubli.
+   ⚠️ La LARGEUR du contour, elle, reste a 2px et diverge toujours des 3px du
+   socle. Ce n'est pas un oubli de ce lot, c'est une question qui n'a pas encore
+   ete posee : le site porte cinq anneaux de focus pour trois combinaisons de
+   largeur et de decalage, et aucune n'est nommee. */
 .burger-menu:focus {
-  border-radius: 5px;
+  border-radius: var(--radius-anneau);
   corner-shape: squircle;
   outline: 2px solid var(--signal-chrome);
   outline-offset: 4px;
@@ -2224,7 +2299,7 @@ header[data-sur-media] {
   height: 0.5rem;
   width: 0.5rem;
   background-color: var(--primary-color);
-  border-radius: 50%;
+  border-radius: var(--squircle-full);
   corner-shape: squircle;
   display: inline-block;
   flex-shrink: 0;
@@ -2522,7 +2597,7 @@ footer {
        survole sans le masquer. */
     background: var(--surface-veil);
     border: 3px solid var(--primary-color);
-    border-radius: 50%;
+    border-radius: var(--squircle-full);
     corner-shape: squircle;
     pointer-events: none;
     /* ⚠️ LE CURSEUR EST LE SEUL ELEMENT QUI A LE DROIT D'ETRE AU-DESSUS DE
@@ -2689,8 +2764,11 @@ footer {
    BOUTON : composant à propriétés
    ============================================
    .btn          base commune
-   variantes :   .btn--solid (défaut) | .btn--ghost
+   variantes :   .btn--solid (défaut) | .btn--ghost | .btn--card
+                 Les deux premières sont des boutons et partagent leur boîte.
+                 La troisième est un libellé de carte : voir sa note.
    tailles :     .btn--md (défaut) | .btn--xl (CTA principal)
+                 s'appliquent à solid ET à ghost ; card n'en reçoit pas.
 
    Le padding responsive vit ICI et non dans _media-queries.scss :
    ce dernier est chargé en dernier et écrasait silencieusement le
@@ -2803,18 +2881,99 @@ footer {
   transform: translateX(6px);
 }
 
+/* Bouton fantôme : la boîte du bouton, sans son enveloppe.
+   Reconstruit le 02/08/2026 sur demande de Ropat, et « reconstruit » est le
+   mot : ce qui s'appelait `ghost` jusque-là n'était pas une variante de
+   bouton, c'était le libellé des cartes de service. Il avait UN usage,
+   `services/service-card.html`, en `tag="div"`, dans une carte dont le survol
+   faisait tout le travail. Posé seul sur la 404, il rendait 127x26px sans
+   fond, sans bordure, sans padding, sans curseur, sans survol : un lien
+   orange qui se donnait le nom d'un bouton.
+   Ce comportement n'a pas été supprimé, il a été renommé `card`, ci-dessous.
+
+   Ce que la variante prend de `solid`, et pourquoi :
+   la même taille de police et la même graisse, le même padding par la classe
+   de taille, la même flèche qui avance de 6px. Tout ce qui fait qu'un bouton
+   posé à côté d'un autre a la même hauteur et le même axe de lecture.
+
+   Ce qu'elle ne prend pas : le fond, la bordure, le biseau. C'est la demande,
+   et c'est aussi ce qui la rend utile, elle porte l'action SECONDAIRE. Sur la
+   404, « Voir le travail » est un aplat plein et « Me contacter » ne l'est
+   pas : la hiérarchie se lit sans lire les mots.
+
+   ⚠️ SON SURVOL NE RECOPIE PAS CELUI DU SOLIDE, et pas seulement par souci de
+   distinction. Le survol du solide inverse un aplat, geste qui suppose un
+   aplat au repos. Sur un fantôme il faudrait en FAIRE apparaître un, donc en
+   faire un solide à l'engagement : la variante s'annulerait au moment précis
+   où on la regarde. Le filet, lui, ajoute sans remplir.
+   Il se trace de gauche à droite, dans le sens où la flèche avance. Les deux
+   gestes disent la même chose, ce qui est l'argument retenu le 28/07 pour
+   préférer la translation à la rotation.
+
+   Le filet est un dégradé de fond sur le libellé et non un `border-bottom` :
+   la bordure se poserait sous le PADDING, à 14px du texte, et non sous le
+   texte. `background-size` s'anime, `text-decoration` non.
+   Il vit sur le `<span>` que l'include pose toujours autour du libellé.
+   ⚠️ En `prefers-reduced-motion`, la règle globale de _bases.scss ramène
+   toutes les durées à 0,01ms : le filet apparaît alors d'un coup au lieu de
+   se tracer. L'affordance reste, le mouvement part. C'est le bon repli, et il
+   ne demande aucune ligne ici.
+
+   PAS DE `scale` : il n'y a pas de boîte visible à agrandir, donc l'échelle
+   ne ferait bouger que du texte, ce qui se lit comme un défaut de rendu.
+   Le focus clavier est déjà servi par `*:focus-visible` (_bases.scss), un
+   contour orange à 3px. Le doubler d'un filet n'ajouterait rien. */
 .btn--ghost {
+  cursor: pointer;
+  /* ⚠️ UNE BORDURE TRANSPARENTE N'EST PAS UNE BORDURE, c'est de la géométrie.
+     Elle ne contredit pas « sans bordure » : rien ne se voit. Elle est là
+     parce que sans elle le fantôme mesurait 61px de haut contre 67 au solide,
+     soit les 2 x 2,86px de contour que l'autre porte. Deux boutons voisins
+     hauts de 6px d'écart, ça se voit, et ça se voit d'autant plus que tout le
+     reste vient d'être aligné.
+     C'est `--signal-width` et non une valeur en dur, la même variable que
+     `--border-primary` : les deux boîtes ne peuvent donc plus diverger.
+     Effet de bord voulu : la cible de clic gagne ces 6px. */
+  border: var(--signal-width) solid transparent;
+  color: var(--primary-color);
+  font-size: var(--text-body);
+  font-weight: 600;
+}
+.btn--ghost span {
+  background-image: linear-gradient(var(--primary-color), var(--primary-color));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 2px;
+  transition: background-size var(--transition-base);
+}
+.btn--ghost:hover span {
+  background-size: 100% 2px;
+}
+.btn--ghost:hover svg {
+  transform: translateX(6px);
+}
+
+/* Libellé de carte. Ce n'est PAS un bouton, et le nom le dit maintenant.
+   Il passe par l'include des boutons pour la flèche et pour le balisage, il
+   est rendu en `div` parce qu'il vit dans un `<a>` et qu'imbriquer deux liens
+   est invalide. Il n'a ni padding, ni typographie propre, ni survol propre :
+   la carte entière est la cible, donc c'est le survol de la carte qui
+   l'anime. Un survol qui lui serait propre serait même un défaut, il
+   suggérerait une cible plus petite que la vraie.
+   ⚠️ `_bases.scss` désactive ces deux transformations en reduced-motion et
+   les nomme par ce sélecteur : les deux fichiers doivent bouger ensemble. */
+.btn--card {
   padding: 0;
   color: var(--primary-color);
 }
-.card:hover .btn--ghost {
+.card:hover .btn--card {
   transform: scale(1.05);
 }
-.btn--ghost {
+.btn--card {
   /* Même geste que sur le solide, et plus aucune exclusion : voir la note
      ci-dessus, une translation vaut pour toutes les icones. */
 }
-.card:hover .btn--ghost svg {
+.card:hover .btn--card svg {
   transform: translateX(6px);
 }
 
@@ -3313,23 +3472,21 @@ html.scrollbar-saisie {
   width: -webkit-fill-available;
   height: fit-content;
   /* Spacing */
-  /* padding: 1.75rem 2.5rem; */
   gap: 1.25rem;
-  /* Border
-  border: 2px solid var(--primary-color);
-  border-radius: 3rem;
+  /* ⚠️ TOUT LE TRAITEMENT VISUEL DE CETTE CARTE A ETE RETIRE, et il vivait ici
+     en code commente jusqu'au 02/08/2026 : un padding, une bordure de 2px, un
+     rayon de 3rem avec un repli squircle a 7rem, un fond et une ombre.
+     Ce conteneur est donc volontairement NU : il ne fait plus que ranger ses
+     icones en ligne. C'est un etat, pas un oubli.
 
-  @supports (corner-shape: squircle) {
-    border-radius: 7rem;;
-    corner-shape: squircle;
-  }
-  */
-  /* Colors & Background
-  background-color: var(--secondary-color);
-  */
-  /* Effects
-  box-shadow: var(--shadow-ambient);
-  */
+     POURQUOI LE CODE COMMENTE EST PARTI, et c'est la seule raison qui compte :
+     il FAUSSAIT TOUT INVENTAIRE. Le 02/08, un releve des rayons hors echelle a
+     compte ce `3rem` et ce `7rem` comme deux valeurs vivantes alors qu'aucune
+     des deux n'a jamais ete emise ; le `1.75rem` et le `2.5rem` du padding
+     polluaient de meme le releve des espacements. Le `;;` de la ligne du
+     squircle prouvait d'ailleurs que rien n'avait ete recompile depuis.
+     Des cicatrices comptees comme des blessures. Git garde l'historique, une
+     note en prose garde l'intention, et un inventaire redevient fiable. */
 }
 
 .socialContainer {
@@ -3574,11 +3731,16 @@ html.scrollbar-saisie {
   align-items: flex-start;
   font-family: var(--font-body);
   background-color: var(--secondary-color);
-  border-radius: 5rem;
+  /* ⚠️ `5rem` etait ecrit en dur ici jusqu'au 02/08/2026, et c'etait le rayon
+     hors echelle le plus VISIBLE du site : il habille toutes les cartes,
+     projets compris. Il echappait a tout releve qui cherchait `border-radius:`,
+     puisqu'il passe par un argument de mixin. Voir la note de `--radius-carte`
+     dans _variables.scss : la valeur n'a pas bouge, elle a pris un nom. */
+  border-radius: var(--radius-carte);
 }
 @supports (corner-shape: squircle) {
   .card {
-    border-radius: 5rem;
+    border-radius: var(--radius-carte);
     corner-shape: squircle;
   }
 }
@@ -3594,11 +3756,17 @@ html.scrollbar-saisie {
   box-shadow: var(--shadow-md);
 }
 
-.card:focus-visible {
-  outline: 3px solid var(--primary-color);
-  outline-offset: 4px;
-}
-
+/* ⚠️ `.card:focus-visible` A ETE SUPPRIME le 02/08/2026, et il ne manque a
+   personne : il redeclarait `outline: 3px solid var(--primary-color)` et
+   `outline-offset: 4px`, c'est-a-dire le socle de `base/_bases.scss` AU
+   CARACTERE PRES. Aucune regle intermediaire ne touche l'`outline` d'une
+   `.card`, donc ce bloc etait inerte et sa suppression ne change pas un pixel.
+   Ce qui MANQUE ici, en revanche, et qui n'est pas corrige dans ce lot :
+   `.card:hover` pose un `translateY` et une ombre, `.card:hover .btn--card`
+   pose un `scale` et fait avancer la fleche, et RIEN de tout ca n'a de pendant
+   `:focus-visible`. Au clavier, une carte recoit son anneau et rien d'autre,
+   alors que `.project-next-link` deux fichiers plus loin traite bien les deux.
+   A reprendre avec la sortie du libelle de carte. */
 /* ============================================
    Services Cards
    ============================================ */
@@ -4157,7 +4325,7 @@ body:has(.project-page) {
   content: "";
   width: 6px;
   height: 6px;
-  border-radius: 50%;
+  border-radius: var(--squircle-full);
   corner-shape: squircle;
   background: var(--accent);
   flex: none;
@@ -5150,12 +5318,14 @@ html.voile-en-cours .project-open--contexte::after {
   height: 0.4em;
   min-width: 6px;
   min-height: 6px;
-  border-radius: 50%;
-  border-radius: 50%;
+  /* ⚠️ Un `border-radius: 50%` figurait ICI, juste avant l'appel du mixin, et
+     il faisait DOUBLON : `squircle()` emet deja sa propre valeur de repli hors
+     du `@supports`. Retire le 02/08/2026 avec la prise du jeton. */
+  border-radius: var(--squircle-full);
 }
 @supports (corner-shape: squircle) {
   .about-specialty-dot {
-    border-radius: 50%;
+    border-radius: var(--squircle-full);
     corner-shape: squircle;
   }
 }
@@ -5218,7 +5388,7 @@ html.voile-en-cours .project-open--contexte::after {
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  border-radius: var(--squircle-full);
   corner-shape: squircle;
   background: var(--primary-color);
   border: 2px solid var(--background-dark);

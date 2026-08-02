@@ -243,8 +243,10 @@
   height: 0.4em;
   min-width: 6px; // Garde un minimum visible
   min-height: 6px;
-  border-radius: 50%;
-  @include squircle(50%);
+  /* ⚠️ Un `border-radius: 50%` figurait ICI, juste avant l'appel du mixin, et
+     il faisait DOUBLON : `squircle()` emet deja sa propre valeur de repli hors
+     du `@supports`. Retire le 02/08/2026 avec la prise du jeton. */
+  @include squircle(var(--squircle-full));
   background: var(--primary-color);
   flex-shrink: 0;
 }
@@ -309,7 +311,7 @@
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    border-radius: 50%;
+    border-radius: var(--squircle-full);
     corner-shape: squircle;
     background: var(--primary-color);
     border: 2px solid var(--background-dark);

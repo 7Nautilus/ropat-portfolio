@@ -222,7 +222,7 @@ body:has(.project-page) {
     content: "";
     width: 6px;
     height: 6px;
-    border-radius: 50%;
+    border-radius: var(--squircle-full);
     corner-shape: squircle;
     background: var(--accent);
     flex: none;
