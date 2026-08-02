@@ -1,0 +1,102 @@
+---
+layout: default
+lang: "fr"
+title: "Page introuvable - Ropat"
+meta_description: "Cette adresse ne mène nulle part sur ropat.art."
+canonical_url: "https://ropat.art/404.html"
+robots: "noindex, follow"
+no_alternate: true
+---
+
+{% comment %}
+  ══════════════════════════════════════════════════════════════════════════
+   PAGE 404, POSEE LE 02/08/2026
+  ══════════════════════════════════════════════════════════════════════════
+
+  POURQUOI ELLE EXISTE. Il n'y en avait aucune, donc toute adresse erronee du
+  domaine tombait sur la page d'erreur generique de GitHub Pages : une impasse,
+  sans un seul lien pour revenir. GitHub Pages sert automatiquement `/404.html`
+  pour tout chemin introuvable, sans configuration.
+
+  ⚠️ CE N'EST PAS UN CORRECTIF POUR QUATRE URLS. Le releve Search Console du
+  02/08 a montre quatre anciennes adresses classees entre les positions 1,5 et
+  2,9 et absentes du build (`/projet-hdd.html`, `/services.html`,
+  `/contact.html`, `/portfolio.html`). J'ai d'abord propose quatre redirections.
+  Ropat a demande si ces URLs meritaient vraiment ca, et il avait raison : ce
+  sont des vestiges d'un ancien nommage, la position est trompeuse (59
+  impressions par AN, soit une par semaine : une position 1,5 sur une requete
+  que personne ne tape ne vaut rien), et le gain total etait de dix clics par
+  an, en decroissance puisque ces URLs ne sont plus au sitemap.
+  Cette page couvre ces quatre cas ET tous les autres : fautes de frappe, liens
+  tronques dans un message, adresses partagees par des tiers. Meme travail,
+  couverture entiere.
+  Si l'audit trimestriel montre un jour qu'une de ces anciennes URLs prend du
+  volume REEL, une redirection ciblee se posera alors, sur une base mesuree.
+
+  DEUX LANGUES, UNE SEULE PAGE. GitHub Pages sert ce fichier pour n'importe quel
+  chemin, y compris `/en/...`. Le francais est le defaut (l'audience mesuree est
+  francaise), et le script bascule en anglais quand le chemin DEMANDE commence
+  par `/en/`. C'est exact : `window.location.pathname` conserve l'adresse
+  demandee, pas celle de ce fichier.
+  ⚠️ Sans JavaScript, la page reste en francais. C'est un repli et non un
+  defaut : elle est lisible, elle a ses deux sorties, et ses liens pointent par
+  defaut vers le francais.
+
+  ⚠️ LE `lang` DE LA RACINE N'EST PAS TOUCHE, ET C'EST UNE CORRECTION.
+  La premiere version posait `lang="en"` sur le document entier quand la bascule
+  se declenchait. Or l'entete, le pied de page et les mentions restent en
+  FRANCAIS : un lecteur d'ecran aurait donc prononce du francais avec une
+  phonetique anglaise, ce qui est PIRE que de ne rien changer. L'attribut est
+  desormais pose sur les seuls elements reellement traduits, ce qui decrit
+  exactement la page : un contenu anglais dans un chrome francais.
+  ⚠️ Le chemin est mis en minuscules avant le test : `/EN/...` est une adresse
+  distincte de `/en/...` sur GitHub Pages, et elle tombe ici aussi.
+
+  ⚠️ VERIFIE, PAS SUPPOSE : les feuilles de style se chargent bien depuis une
+  profondeur quelconque. Teste sur `/fr/projects/nimporte-quoi.html`, les
+  couleurs calculees rendent les vrais jetons (encre #F0F4F1 sur sol #030808),
+  donc les chemins d'assets du layout sont absolus. C'etait le risque principal
+  d'une page servie a tous les niveaux.
+
+  `robots: noindex, follow` : une page d'erreur ne s'indexe pas, mais ses liens
+  se suivent. `no_alternate` : il n'existe pas de jumelle a declarer.
+
+  CE QUI RESTE A FAIRE, ET C'EST DELIBEREMENT NON FAIT. Aucune classe nouvelle,
+  aucun SCSS ajoute : la page emprunte `hero` et herite de la typographie du
+  site. C'est un point de depart correct, pas une composition. Une page d'erreur
+  est un des rares endroits ou le visiteur est DEJA surpris, donc un ecart
+  d'intensite y est legitime au sens de la regle 5. Cet ecart appartient a
+  Ropat.
+{% endcomment %}
+
+<section class="hero" aria-labelledby="erreur-titre">
+  <div class="hero-title-container">
+    <h1 class="hero-title" id="erreur-titre" data-en="This address leads nowhere">Cette adresse ne mène nulle part</h1>
+  </div>
+
+  <div class="bubble-container span-spacing">
+    <p data-en="It changed, or it never existed. The work is still here.">Elle a changé, ou elle n'a jamais existé. Le travail, lui, est toujours là.</p>
+  </div>
+
+  {% include ui/button.html href="/fr/portfolio.html" label="Voir le travail" class="js-404-travail" %}
+  {% include ui/button.html href="/fr/contact.html" label="Me contacter" variant="ghost" class="js-404-contact" %}
+</section>
+
+<script>
+  (function () {
+    if (!location.pathname.toLowerCase().startsWith('/en/')) return;
+    function anglais(n, texte) { n.textContent = texte; n.setAttribute('lang', 'en'); }
+    document.querySelectorAll('[data-en]').forEach(function (n) { anglais(n, n.dataset.en); });
+    var liens = {
+      '.js-404-travail': ['/en/portfolio.html', 'See the work'],
+      '.js-404-contact': ['/en/contact.html', 'Get in touch']
+    };
+    Object.keys(liens).forEach(function (sel) {
+      var a = document.querySelector(sel);
+      if (!a) return;
+      a.setAttribute('href', liens[sel][0]);
+      var t = a.querySelector('span');
+      if (t) anglais(t, liens[sel][1]);
+    });
+  })();
+</script>
