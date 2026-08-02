@@ -3,6 +3,39 @@ description: "Portfolio de Ropat, graphiste et directeur artistique à Angers : 
 baseurl: ""
 url: "https://ropat.art"
 
+# ══════════════════════════════════════════════════════════════════════════
+#  GOOGLE TAG MANAGER : L'INTERRUPTEUR
+# ══════════════════════════════════════════════════════════════════════════
+#
+# VIDE = pas de conteneur GTM sur le site. Pour le remettre, il suffit de
+# recoller l'identifiant ici, rien d'autre :
+#
+#   gtm_id: "GTM-KN22K5FS"
+#
+# ⚠️ UN INTERRUPTEUR ET NON DU CODE COMMENTE, deliberement. Un bloc commente
+# dans le layout part quand meme chez le visiteur (les commentaires HTML sont
+# servis), et surtout une absence ne se relit pas alors qu'une valeur si.
+#
+# ── POURQUOI IL A ETE RETIRE, le 02/08/2026 ───────────────────────────────
+# Mesure sur le fil, en gzip : le conteneur pese 114 705 o et `gtag.js`
+# 170 388 o. Le site chargeait LES DEUX, soit environ 278 Ko, alors que le
+# conteneur ne declenche AUCUNE balise GA4 : verifie en telechargeant son
+# contenu, zero identifiant `G-` a l'interieur. Analytics est charge en direct
+# plus bas dans ce meme layout. GTM etait donc 112 Ko et une origine tierce
+# sur 64 routes, pour rien.
+#
+# ⚠️ ET IL NE REGLE PAS LE CONSENTEMENT, contrairement a ce que j'avais dit.
+# GTM n'est pas un bandeau : il n'apporte que la plomberie qui retient les
+# balises tant que le consentement n'est pas donne. Cette plomberie ne vaut
+# quelque chose qu'a PLUSIEURS balises ; avec une seule, l'API `gtag('consent',
+# …)` fait la meme chose en quatre lignes.
+#
+# ⚠️ Le remettre n'a de sens que pour un usage precis et nomme. Si c'est pour
+# poser une balise GA4 dedans, IL FAUT RETIRER `gtag.js` du layout DANS LE MEME
+# DEPLOIEMENT : sinon chaque page vue est comptee deux fois, et ca ne se voit
+# qu'au doublement des chiffres du jour au lendemain.
+gtm_id: ""
+
 # Exclusions pour Jekyll
 exclude:
   - README.md

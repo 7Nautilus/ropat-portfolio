@@ -2,13 +2,34 @@
 <html lang="{{ page.lang | default: 'en' }}">
 <head>
     <meta charset="UTF-8">
+    {%- comment -%}
+      Google Tag Manager, pilote par `gtm_id` dans `_config.yml`. Vide = rien
+      n'est emis, ici comme dans le `<noscript>` en bas de page. L'explication
+      complete, et ce qu'il faut verifier avant de le rallumer, sont a cote de
+      la cle dans `_config.yml`.
+
+      ⚠️ LE TEST EST ECRIT EN DEUX MORCEAUX, ET CE N'EST PAS DE LA LOURDEUR.
+      La premiere version comparait la cle au mot-cle `blank`. Ca se lit juste
+      et ca ne filtre RIEN : construit avec une cle vide, le site emettait
+      quand meme les deux blocs, dont un `ns.html?id=` a identifiant vide.
+      Mesure : 63 pages sur 63, interrupteur eteint. Le mot-cle `blank` ne se
+      comporte pas sur une chaine vide comme sa lecture le laisse croire.
+      La forme ci-dessous couvre les trois cas sans ambiguite : cle absente
+      (nulle, donc fausse), cle vide (egale a la chaine vide), cle renseignee.
+
+      ⚠️ Et ne pas ecrire de delimiteur Liquid dans ce bloc : Liquid analyse
+      les tags jusque dans un commentaire, et un delimiteur cite casse le
+      build. Meme piege que dans `_includes/layout/footer.html`.
+    {%- endcomment -%}
+    {%- if site.gtm_id and site.gtm_id != "" -%}
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-KN22K5FS');</script>
+    })(window,document,'script','dataLayer','{{ site.gtm_id }}');</script>
     <!-- End Google Tag Manager -->
+    {%- endif -%}
 
     {%- comment -%}
       `viewport-fit=cover` est OBLIGATOIRE pour que env(safe-area-inset-*)
@@ -428,10 +449,13 @@
     <!-- Language Detection Script -->
     {% include lang-detector.html %}
     
+    {%- comment -%} Meme test qu'en tete de page, voir la note qui l'accompagne. {%- endcomment -%}
+    {%- if site.gtm_id and site.gtm_id != "" -%}
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KN22K5FS"
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtm_id }}"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    {%- endif -%}
 
     {% include layout/header.html %}
 
