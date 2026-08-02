@@ -14,6 +14,45 @@
 #   bundle exec jekyll build --quiet -d ../apres
 #   bundle exec ruby scripts/comparer-builds.rb ../avant ../apres
 #
+# ── QUATRE PIEGES D'OPERATEUR, TOUS PAYES ─────────────────────────────────
+#
+# ⚠️ 1. CONSTRUIRE HORS DU DEPOT, ET LE `../` CI-DESSUS N'EST PAS UN HASARD.
+#    Un build dans l'arbre de travail tue le fil `listen` d'un `jekyll serve`
+#    qui tournerait a cote : il meurt sur un EACCES en scannant le dossier que
+#    l'on cree et detruit. Le serveur continue alors de servir l'ANCIEN HTML,
+#    en silence. Le 29/07/2026, toutes les mesures prises apres une edition ont
+#    porte sur une page qui n'avait jamais recu le correctif.
+#    Le signe qui trahit : la source contient la modification, `curl` sur le
+#    serveur ne la contient pas. Verifier ca AVANT de conclure quoi que ce soit.
+#
+# ⚠️ 2. LA CIBLE EST « ZERO DIFFERENCE REELLE », JAMAIS « ZERO DIFFERENCE ».
+#    Le layout pose un cache-buster `?v=<horodatage>` sur `main.css`,
+#    `script.js` et `dither.js`. Deux builds successifs ne peuvent donc PAS
+#    rendre le meme HTML, et 61 fichiers sur 148 tombent en « identiques aux
+#    blancs pres » a chaque comparaison, sans qu'aucune edition en soit la
+#    cause. C'est une valeur d'attribut, que cet outil range malgre tout dans
+#    les blancs. Ne pas chercher a faire tomber ces 61, et surtout ne pas les
+#    lire comme un effet de bord de l'edition en cours.
+#
+# ⚠️ 3. LES DEUX BUILDS DOIVENT PARTAGER LA MEME CONFIGURATION.
+#    Comparer un `_site` ecrit par `jekyll serve` a un build de production fait
+#    apparaitre douze lignes d'ecart qui ne sont que `site.url`,
+#    `http://localhost:4000` contre `https://ropat.art` : hreflang, canonical,
+#    og, et les `@id` du Schema.org. Ce n'est pas un changement, c'est une
+#    autre configuration.
+#    Pour isoler UN lot quand d'autres editions sont deja en cours :
+#    `git stash push -- <les seuls fichiers du lot>`, build avant, `git stash
+#    pop`, build apres. Tout le reste est alors tenu constant.
+#
+# ⚠️ 4. IL NE PROUVE RIEN SUR UNE PASSE CSS PURE.
+#    Sa comparaison semantique porte sur les balises, les attributs et le
+#    texte. Sur `main.css` il dit « different » et s'arrete la. La preuve
+#    d'inertie d'un changement CSS se fait a cote, par RESOLUTION INVERSE :
+#    remplacer chaque `var(--jeton)` par sa valeur litterale dans le CSS
+#    d'avant et dans celui d'apres, retirer les commentaires, puis comparer.
+#    ⚠️ Et EXIGER UN TEMOIN a chaque fois : la meme comparaison doit savoir
+#    voir un `50%` devenu `49%`. Sans lui, « identiques » ne prouve rien.
+#
 # ⚠️ CET OUTIL EST LA RAISON POUR LAQUELLE LES COMMITS DU CHANTIER DE JUILLET
 # 2026 PEUVENT DIRE « rien n'a change » SANS QUE CE SOIT UNE FIGURE DE STYLE.
 # Il a d'abord vecu dans un dossier temporaire, ce qui rendait chacune de ces

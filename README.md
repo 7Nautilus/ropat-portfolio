@@ -32,7 +32,8 @@ _data/
 │   └── ...
 ├── pages/                     # Contenu des pages (about, contact, services, experiences...)
 ├── services/                  # Offres de services (4 services + index.yml)
-├── design-system.yml          # Référence design system (couleurs, typo)
+├── design-system.yml          # L'icône de flèche de scroll, source unique. Rien d'autre :
+│                              # les couleurs et la typo vivent dans _sass/base/_variables.scss
 ├── partners.yml               # Partenaires / clients
 └── socials.yml                # Liens réseaux sociaux
 ```
@@ -52,19 +53,16 @@ Chaque projet possède son propre fichier YAML. Les champs globaux (année, outi
 ropat-portfolio/
 ├── fr/
 │   ├── index.html, about.html, contact.html, portfolio.html, services.html
-│   └── projects/
-│       ├── a-lone.html
-│       ├── btr.html
-│       ├── cheetah.html
-│       └── ...
+│   └── projects/, services/    ← ENGENDRÉS AU BUILD, aucun fichier sur le disque
 └── en/
     ├── index.html, about.html, contact.html, portfolio.html, services.html
-    └── projects/
-        ├── a-lone.html
-        ├── btr.html
-        ├── cheetah.html
-        └── ...
+    └── projects/, services/    ← idem
 ```
+
+> ⚠️ Les 48 pages projet et service **n'existent pas dans le dépôt**. Elles sont produites au build
+> par `_plugins/pages_generees.rb` à partir de `_data/projects/` et `_data/services/`. Seules les
+> 14 pages fixes par langue sont écrites à la main. Chercher `fr/projects/aelio.html` sur le disque
+> ne rend rien, et c'est normal.
 
 - URLs distinctes : `/fr/...` et `/en/...`
 - Textes et métadonnées centralisés dans `_data/projects/<slug>.yml`
@@ -73,87 +71,85 @@ ropat-portfolio/
 
 ## Ajouter un nouveau projet
 
-1. **Lancer l'assistant** :
-   ```powershell
-   powershell -ExecutionPolicy Bypass -File .\scripts\new-project.ps1
-   # ou : pwsh -File ./scripts/new-project.ps1
-   ```
-   Le script crée automatiquement :
-   - `_data/projects/<slug>.yml`
-   - l'entrée correspondante dans `_data/projects/index.yml`
-   - `fr/projects/<slug>.html` et `en/projects/<slug>.html`
+**Il n'y a aucune page à écrire.** Depuis le 29/07/2026, `_plugins/pages_generees.rb` engendre au
+build les pages projet et service dans les deux langues. `_data/projects/index.yml` n'est donc plus
+une liste d'**ordre** mais une liste d'**existence** : un projet absent n'a pas de page, un projet
+présent en a deux.
 
-2. **Compléter le YAML généré** : renseigner les textes FR/EN manquants, les champs SEO et les médias supplémentaires.
+> ⚠️ Ce plugin ne s'exécute que parce que la CI lance `jekyll build` elle-même. Si le déploiement
+> repassait par le constructeur intégré de GitHub Pages, les pages disparaîtraient **en silence**.
 
-### Modèle YAML de référence
+Deux gestes suffisent :
+
+1. **Créer `_data/projects/<slug>.yml`** en partant de `_data/projects/aelio.yml`, qui est le
+   modèle de référence et le seul à jour.
+2. **Ajouter le slug à `_data/projects/index.yml`**, à la place voulue dans l'ordre d'affichage.
+
+> ⚠️ `scripts/new-project.ps1` est **périmé** et ne doit pas être lancé : il engendre l'ancien
+> format `context_content` et il écrit les fichiers de page qui n'existent plus.
+
+### Modèle YAML minimal
 
 ```yaml
 slug: exemple
-project_title: EXEMPLE
-category: music
-featured: false
-client: "Nom du client (optionnel)"
+project_title: EXEMPLE          # le nom du travail : un album, une campagne, ou la marque
+subtitle: "Branding"            # le TYPE, affiché sous le titre du hero
+theme: { fr: "…", en: "…" }
+category: branding              # sert le filtre du portfolio (voir _data/projects/categories.yml)
 year: "2025"
+client: { fr: "…", en: "…" }
 tools: "Photoshop, Illustrator"
-image_src: /assets/images/projects/exemple.avif
-main_image: /assets/images/projects/exemple.avif
+image_src: /assets/images/projects/exemple.avif   # vignette, sert aussi d'image OG par défaut
+main_image: /assets/images/projects/exemple.avif  # média du hero, image ou vidéo
 media_type: image
+aspect: "4/3"                   # ratio L/H du hero. À POSER si l'image n'est pas carrée : sans lui
+                                # le défaut est 1/1 et la page prend du décalage de mise en page.
+context: { fr: "…", en: "…" }   # l'OCCASION : sortie d'album, lancement de marque…
+secteur: { fr: "…", en: "…" }   # l'ACTIVITÉ du client. À omettre pour un projet personnel.
+context_sections:               # le récit du projet, format unique
+  - title: { fr: "…", en: "…" }
+    content:
+      fr: |
+        …
+      en: |
+        …
 locales:
   fr:
     url: /fr/projects/exemple.html
-    aria_label: "Voir le projet Exemple"
-    image_alt: "Visuel du projet Exemple"
-    title: "Titre FR"
-    subtitle: "Sous-titre avec **mise en avant**"
-    description: "Résumé court du projet en français."
+    title: "Titre de carte FR"
+    description: "Résumé court."
     services: "Compétences mises en œuvre"
-    context_title: "Contexte du projet"
-    context_content: |
-      Paragraphe(s) détaillant le déroulé du projet.
     seo:
       title: "Titre SEO FR | Ropat"
       description: "Meta description FR"
-      canonical_url: "https://ropat.art/fr/projects/exemple.html"
       og_title: "Titre Open Graph FR"
       og_description: "Description Open Graph FR"
-      og_url: "https://ropat.art/fr/projects/exemple.html"
-      og_image: "https://ropat.art/assets/images/projects/exemple.avif"
   en:
-    url: /en/projects/exemple.html
-    aria_label: "View the Exemple project"
-    image_alt: "Exemple project visual"
-    title: "English title"
-    subtitle: "English subtitle with **emphasis**"
-    description: "Short English summary."
-    services: "Services provided"
-    context_title: "Project Context"
-    context_content: |
-      Paragraph(s) describing the project in English.
-    seo:
-      title: "SEO Title EN | Ropat"
-      description: "Meta description EN"
-      canonical_url: "https://ropat.art/en/projects/exemple.html"
-      og_title: "Open Graph Title EN"
-      og_description: "Open Graph Description EN"
-      og_url: "https://ropat.art/en/projects/exemple.html"
-      og_image: "https://ropat.art/assets/images/projects/exemple.avif"
+    # même structure
 ```
 
-> Modèle minimal. Les projets aboutis enrichissent ce schéma avec une liste `context_sections` (sections titre + contenu bilingue) et un bloc `case_study` (`mockups`, `colors`, `typography`, `specs`). Voir `_data/projects/aelio.yml` comme exemple complet.
+Quatre champs à **ne pas** remettre, tous dérivés automatiquement :
 
-### Pages générées (FR/EN)
+| Champ | Pourquoi |
+|---|---|
+| `canonical_url`, `og_url` | le layout les dérive de `site.url` + `page.url` |
+| `og_image` en URL absolue | c'est un **chemin** top-level, dérivé de `image_src` par défaut |
+| `context_title` | centralisé dans `_includes/projects/project-main.html` (« Coulisses du projet ») |
+| `context_content` | remplacé par `context_sections` |
 
-```yaml
----
-layout: default
-lang: "fr" # ou "en"
-project_id: "exemple"
----
+Le `subtitle` qui compte est celui du **haut du fichier** : un `subtitle` placé dans `locales` n'est
+lu par personne. Et la catégorie ne va **jamais** dans `locales.*.title` : elle vit dans `category`.
 
-{% include projects/project-main.html project_id=page.project_id %}
+Les projets aboutis enrichissent ce schéma avec un bloc `case_study` (`mockups`, `colors`,
+`typography`, `specs`) et des `thumbnails`, dont seul `src` est obligatoire.
+
+### Vérifier après coup
+
+```bash
+bundle exec ruby scripts/carte.rb --build --diff
 ```
 
-`project_id` doit correspondre au slug. Cette clé pilote le chargement des données et des métadonnées SEO.
+La carte doit annoncer deux routes de plus et aucune perdue.
 
 ## Flux SEO
 
