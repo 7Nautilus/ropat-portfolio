@@ -17,10 +17,18 @@ exclude:
   - CLAUDE.md
   # Sortie de `scripts/carte.rb`. Sans cette ligne Jekyll la rend en /CARTE.html.
   - CARTE.md
-  # Meme piege : sans cette ligne, la doctrine du site serait PUBLIEE en
-  # /DOCTRINE.html sur ropat.art. Elle est versionnee (contrairement a TODO.md et
-  # CLAUDE.md), donc c'est bien ici qu'elle doit etre exclue, pas dans .gitignore.
+  # ⚠️ REGLE, ET ELLE A DEJA MORDU DEUX FOIS : TOUT `.md` VERSIONNE A LA RACINE
+  # DOIT ETRE AJOUTE ICI. Jekyll rend n'importe quel Markdown de la racine en
+  # page, donc un document de travail versionne se retrouve PUBLIE sur ropat.art
+  # sans que rien ne le signale. `.gitignore` ne protege de rien : il decide de
+  # ce qui part dans git, pas de ce qui part dans `_site`. C'est meme l'inverse,
+  # seuls les fichiers VERSIONNES ont besoin de cette ligne (TODO.md et CLAUDE.md
+  # sont ignores par git mais restent exclus ici, car ils existent sur le disque).
+  # Premiere morsure : CARTE.md. Seconde : PRODUCT.md, ajoute le 02/08/2026 apres
+  # avoir ete commite sans sa ligne, une heure apres que j'aie ecrit cet
+  # avertissement pour DOCTRINE.md.
   - DOCTRINE.md
+  - PRODUCT.md
   - scripts/
   - DESIGN.md
   # ⚠️ LES PAGES DE TRAVAIL SORTENT DE LA PRODUCTION (29/07/2026). Elles etaient
