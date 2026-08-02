@@ -247,10 +247,20 @@ trois-là ne sont pas des curseurs, ce sont des planchers.
 > vitesse, la lisibilité ou l'accessibilité est refusé, quelle que soit sa beauté. Pas d'arbitrage
 > au cas par cas, sinon la règle ne sert à rien : c'est toujours au cas par cas qu'on cède.
 
-⚠️ **Le budget chiffré reste à fixer**, et il ne peut pas l'être honnêtement aujourd'hui : le site
-n'a **aucune mesure d'audience**, donc aucune donnée de terrain. Référence provisoire, l'état
-actuel : 25,6 Ko gzip de CSS et de JS à la première visite. Le chantier de mesure, autorisé le
-31/07, doit rendre ce seuil opposable au lieu d'indicatif.
+⚠️ **Le budget chiffré reste à fixer, et les deux chiffres que j'ai cités ici étaient faux.**
+Corrigé le 02/08/2026 par une remesure :
+- **Le plafond de 25,6 Ko est déjà franchi** : la chaîne rejouée donne **27 818 o** de CSS et de JS
+  en première visite, soit 8,6 % au-dessus.
+- **Il ne comptait pas les polices** : environ **91 Ko** de Google Fonts bloquantes, jamais
+  incluses dans le budget. La graisse 300 de Chakra Petch y est chargée pour rien (**zéro**
+  `font-weight: 300` dans tout le CSS, vérifié).
+- Et le plancher doit porter sur le **poids total de la première visite** de la page concernée,
+  médias d'ouverture compris : une page projet sert jusqu'à 9,5 Mo de vidéo.
+
+⚠️ **Et la CI ne peut pas attraper un dépassement.** Les deux assertions de `deploy.yml`
+(`-lt 20000` pour le CSS, `-lt 2000` pour le JS) sont des **planchers** : elles voient un fichier
+tronqué, jamais un fichier qui gonfle. Il manque une assertion de **plafond**, à écrire à côté de
+celles qui lui servent de modèle.
 
 ⚠️ Cette règle est la **contrepartie** de la direction maximaliste, pas une réserve à son égard.
 Elle existe parce que le maximalisme a un prix connu et que Ropat a nommé la devise dans laquelle

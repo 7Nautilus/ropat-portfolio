@@ -53,9 +53,24 @@ portfolio, il ne s'écrit pas à la main, et on ne le soutient que là où il y 
 
 > **La refonte aura marché si le site est devenu une source de leads.** (Ropat, 31/07/2026)
 
-Ce n'est pas un critère esthétique, et il se mesure. ⚠️ Il ne se mesure pas aujourd'hui : le site
-n'a **aucun outil de mesure d'audience**. Le chantier de mesure n'est donc pas un à-côté, c'est
-l'**instrument** de ce critère.
+Ce n'est pas un critère esthétique, et il se mesure.
+
+⚠️ **CORRECTION DU 02/08/2026 : LE SITE EST MESURÉ, ET J'AVAIS ÉCRIT L'INVERSE ICI.**
+`_layouts/default.html` injecte **Google Analytics 4** (`G-JDE6T1D92Q`, ligne 343) et un conteneur
+**Google Tag Manager** (`GTM-KN22K5FS`) sur les 64 routes. La propriété a été ouverte le 02/08 :
+elle porte **douze mois de données**.
+
+**Ce que la lecture a établi, et qui change le cadre :** le problème est le **trafic**, pas la
+conversion. La refonte de design **seule** ne peut donc pas faire bouger le compteur de leads ;
+il faut le contenu, la publication et la recherche avec.
+Et le signal encourageant : **les visiteurs venus de la recherche s'engagent nettement plus, et
+restent nettement plus longtemps, que ceux qui arrivent par un lien qu'on leur a tendu.** Le
+public visé se comporte déjà comme espéré. La longue traîne n'est plus une hypothèse.
+
+⚠️ **Les chiffres eux-mêmes ne sont pas dans ce fichier** (versionné, donc potentiellement public)
+et **ils sont pollués** : aucun filtre de trafic interne n'existe, donc les sessions de travail de
+Ropat sont dans la mesure, et une part importante des « utilisateurs » ne tient pas six secondes.
+Détail, chiffres et réglages à faire : `docs/MESURE-AUDIENCE-2026-08.md`.
 
 ⚠️ Et un site non publié ne produit aucun lead et ne se mesure pas. **La date de mise en ligne
 est la date à laquelle le chronomètre démarre.**
