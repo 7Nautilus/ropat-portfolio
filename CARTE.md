@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 16:03, d'apres l'etat de 99cc620.
+> Generee le 03/08/2026 a 16:11, d'apres l'etat de 383f974.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 16:03 |
+| Date du build lu | 03/08/2026 16:11 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 38 |
 | Includes | 32 |
@@ -211,7 +211,7 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 130 jetons definis, 123 consommes, 293 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1292`, `assets/css/_sass/pages/_project.scss:1300`
+`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1315`, `assets/css/_sass/pages/_project.scss:1323`
 
 Points de rupture ecrits en dur : 520px (1x)
 
@@ -238,9 +238,9 @@ Aucun `var()` ne les lit, mais ils ont un consommateur. A ne PAS ranger avec les
 
 Si la donnee qui pose le `style=` manque, la declaration entiere tombe.
 
-- assets/css/_sass/pages/_project.scss:914  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:922  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:938  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:937  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:945  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:961  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 
 ### DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre  (3)
 
@@ -269,7 +269,7 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1397
 - .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
-- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1254, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1277, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
 ### Selecteurs absents des 64 pages construites  (20)
 
@@ -294,7 +294,7 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
 - .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
-- .project-back-link  assets/css/_sass/pages/_project.scss:1149 assets/css/_sass/pages/_project.scss:1162 assets/css/_sass/pages/_project.scss:1164 assets/css/_sass/pages/_project.scss:1167
+- .project-back-link  assets/css/_sass/pages/_project.scss:1172 assets/css/_sass/pages/_project.scss:1185 assets/css/_sass/pages/_project.scss:1187 assets/css/_sass/pages/_project.scss:1190
 
 ### Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme  (2)
 
@@ -314,7 +314,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:298)
 - espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
 - espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:299, assets/css/_sass/components/_containers.scss:15)
-- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:906, assets/css/_sass/pages/_project.scss:1001)
+- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:929, assets/css/_sass/pages/_project.scss:1024)
 - espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:196, assets/css/_sass/pages/_project.scss:428)
 - espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
 - espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:249, assets/css/_sass/pages/_contact.scss:375)
@@ -437,7 +437,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 256024 o brut, 79944 o gzip. Sans les commentaires : 85956 o, 13977 o gzip, soit **83 % de moins** sur le fil.
+**CSS servi** : 257583 o brut, 80655 o gzip. Sans les commentaires : 86016 o, 14004 o gzip, soit **83 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

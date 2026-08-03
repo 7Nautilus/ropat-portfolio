@@ -834,12 +834,35 @@ body:has(.project-page) {
     color: var(--ink-muted);
   }
 
+  /* ⚠️ CHIFFRES TABULAIRES, ET LE MOTIF N'EST PAS CELUI QUE J'AVAIS ANNONCE.
+     J'avais ecrit que le colophon etait « desaligne » : c'est FAUX, et la mesure
+     l'a dit. Les cellules sont des pistes de grille de largeur fixe (171,89 px
+     relevés), donc rien ne pouvait reflouer et rien n'etait decale.
+
+     Ce que la mesure montre vraiment, largeur du TEXTE RENDU lue au Range :
+       « 2026 »              32,38 -> 30,72 px   (-1,66)
+       « 1:1 · 4:5 · 9:16 »  72,37 -> 80,78 px   (**+8,41, soit +11,6 %**)
+     Le gain est donc sur la SERIE DE RATIOS, et il est reel : en chiffres
+     proportionnels le `1` de Plus Jakarta Sans mesure a peine plus de la moitie
+     du `0` (temoin : dix `1` font 47,49 px, dix `0` en font 93,70). « 1:1 » se
+     serrait donc contre « 4:5 » et « 9:16 », et une serie de ratios doit se lire
+     comme un ENSEMBLE, pas comme trois blocs de largeurs differentes.
+
+     ⚠️ Deux valeurs seulement portent des chiffres ici, `annee` et `formats`.
+     La regle s'applique a tous les `dd` parce qu'elle est INERTE sur du texte,
+     et parce qu'une valeur chiffree ajoutee demain en beneficiera sans qu'on y
+     repense.
+     ⚠️ La propriete et non le tag : `font-variant-numeric` continue de marcher
+     quand un repli non variable est rendu, `font-feature-settings: "tnum"` non.
+     ⚠️ Possible SEULEMENT depuis le passage a Plus Jakarta Sans : Manrope
+     n'avait aucun jeu tabulaire, la propriete n'aurait rien fait. */
   dd {
     margin: 0;
     font-family: var(--font-body);
     font-size: var(--text-caption);
     line-height: 1.5;
     color: var(--ink);
+    font-variant-numeric: tabular-nums;
   }
 }
 
