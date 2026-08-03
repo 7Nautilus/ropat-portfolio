@@ -1,6 +1,13 @@
 <div class="social-icons-card">
   {% for item in site.data.socials %}
-    {%- comment %} Les entrées `sameas_only` n'ont pas d'`icon` : rendues ici, elles poseraient un lien vide. {% endcomment %}{% if item.sameas_only %}{% continue %}{% endif %}
+    {%- comment %} Deux drapeaux, deux raisons, et cette carte est le seul consommateur qui écarte les
+    deux. `sameas_only` : l'entrée n'est déclarée qu'aux moteurs. `sans_icone` : elle est visible
+    dans le pied de page, qui rend du texte, mais elle n'a pas de dessin, donc ici elle poserait un
+    lien VIDE. Voir _data/socials.yml, la nuance y est écrite en entier.
+    ⚠️ DEUX TESTS SIMPLES ET NON UN `or`. Écrite en condition composée, la seconde clé devient
+    invisible à `carte.rb`, qui l'a rangée dans « définies, aucun gabarit ne les lit » alors
+    qu'elle est lue ici même. Un futur lecteur aurait pu la supprimer sur la foi de la carte.
+    La forme simple est celle que le reste du dépôt emploie, et elle se laisse voir. {% endcomment %}{% if item.sameas_only %}{% continue %}{% endif %}{% if item.sans_icone %}{% continue %}{% endif %}
     <a href="{{ item.link }}" class="socialContainer {{ item.name }}" title="{{ item.aria-label }}" aria-label="{{ item.aria-label }}" target="_blank" rel="noopener noreferrer">
       {{ item.icon }}
     </a>

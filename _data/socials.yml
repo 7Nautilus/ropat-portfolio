@@ -19,29 +19,41 @@
   aria-label: Behance
 
 # ══════════════════════════════════════════════════════════════════════════
-#  ENTREE DECLAREE AUX MOTEURS SEULEMENT, JAMAIS AFFICHEE (31/07/2026)
+#  MALT : VISIBLE DANS LE PIED DE PAGE DEPUIS LE 03/08/2026
 # ══════════════════════════════════════════════════════════════════════════
 #
 # Ce fichier a TROIS consommateurs, pas un : le pied de page
-# (`_includes/layout/footer.html`), la carte d'icones
-# (`_includes/social-media-icons.html`) et le `sameAs` du Schema.org
-# (`_includes/meta/schema-org.html`). Une entree ordinaire sort donc dans les
-# trois d'un seul geste.
+# (`_includes/layout/footer.html`) qui rend le LIBELLE TEXTE, la carte
+# d'icones (`_includes/social-media-icons.html`) qui rend l'ICONE, et le
+# `sameAs` du Schema.org (`_includes/meta/schema-org.html`).
 #
-# `sameas_only: true` la retire des deux consommateurs VISIBLES et la laisse
-# dans le `sameAs`. Sans ce drapeau, Malt sortirait en texte dans le pied de
-# page et en lien VIDE dans la carte, faute d'`icon` : le drapeau ferme un
-# defaut d'affichage silencieux, il n'est pas decoratif.
+# POURQUOI ELLE DEVIENT VISIBLE. Malt etait declare aux moteurs et cache aux
+# humains : `malt.fr` sortait 64 fois dans le build, une fois par route, et
+# ZERO fois en lien cliquable. Or c'est la SEULE preuve tierce verifiable du
+# site. La page A propos cite meme la note Malt comme argument, sans donner
+# aucun moyen de la verifier : un chiffre affirme dont la preuve est ailleurs
+# et vers laquelle le site n'emmene pas.
+# ⚠️ Et les chiffres cites etaient PERIMES DANS LE MAUVAIS SENS, releve du
+# 03/08 : le profil porte 11 evaluations et 25 projets quand `about.yml`
+# annonce 9 avis et une vingtaine de projets.
 #
-# ⚠️ LE DRAPEAU EST EXPLICITE, ET NE DOIT PAS ETRE REMPLACE PAR UN TEST SUR
+# ⚠️ `sans_icone` N'EST PAS `sameas_only`, ET LA NUANCE EST LE SUJET.
+# `sameas_only` retire une entree des DEUX consommateurs visibles. Ici on veut
+# l'inverse d'un cote : le pied de page rend `aria-label` en texte, donc il
+# n'a besoin d'aucune icone et affiche Malt sans probleme. La carte d'icones,
+# elle, ne rend QUE l'icone : sans dessin, elle poserait un lien vide.
+# Le drapeau dit donc exactement ce qu'il fait, « visible la ou le texte
+# suffit, ecarte la ou une icone est exigee ».
+#
+# ⚠️ IL RESTE EXPLICITE, ET NE DOIT TOUJOURS PAS ETRE REMPLACE PAR UN TEST SUR
 # L'ABSENCE D'`icon`. Deduire le comportement d'un champ manquant ferait
-# disparaitre du pied de page, sans un mot, toute entree dont on aurait juste
-# oublie l'icone.
+# disparaitre de la carte, sans un mot, toute entree dont on aurait juste
+# oublie l'icone. C'est la meme raison qu'au 31/07, elle n'a pas change.
 #
-# Pour la rendre visible un jour : dessiner l'icone au format des quatre
-# autres (`<svg class="socialSvg maltSvg" viewBox="...">`) et retirer la ligne
-# `sameas_only`. Rien d'autre a toucher.
+# Pour la promouvoir dans la carte d'icones un jour : dessiner l'icone au
+# format des quatre autres (`<svg class="socialSvg maltSvg" viewBox="...">`)
+# et retirer la ligne `sans_icone`. Rien d'autre a toucher.
 - name: malt
   link: https://www.malt.fr/profile/victorjarry
   aria-label: Malt
-  sameas_only: true
+  sans_icone: true
