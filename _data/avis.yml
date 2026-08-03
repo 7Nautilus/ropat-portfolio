@@ -38,8 +38,15 @@
 # parle d'un court de padel jamais remplace).
 # **Un avis dont `projet` est vide, ou dont la fiche n'est pas publiee, ne
 # s'affiche nulle part.** Le rendu se derive des fiches existantes, il ne se
-# force pas. Aucun consommateur n'existe a ce jour : c'est volontaire, la
-# donnee est posee avant le rendu.
+# force pas. Le consommateur existe depuis le 03/08/2026 :
+# `_includes/projects/project-avis.html`, appele par `project-main.html`, une
+# section entre le recit et le colophon. Il rend UNE fiche sur vingt.
+#
+# ⚠️ TROIS CLES DE CE FICHIER NE SONT LUES PAR PERSONNE, et la carte le dit :
+# `source`, `date` et `intitule`. Elles sont conservees parce qu'elles
+# documentent la provenance du releve, pas parce qu'un gabarit les attend. Ne
+# pas les confondre avec `projet` et `publiable`, qui sont lues par les filtres
+# `where:` du rendu et sans lesquelles rien ne sort.
 #
 # ⚠️ DEUX `projet` SEULEMENT SONT RENSEIGNES, LES AUTRES SONT VIDES EXPRES.
 # Rattacher l'avis d'un client a la mauvaise fiche lui ferait commenter un
