@@ -9,59 +9,88 @@
 # devenu visible dans le pied de page le 03/08/2026 ; ce fichier prepare
 # l'etape suivante, placer chaque avis DANS la fiche du projet qu'il commente.
 #
-# ⚠️ MALT RESTE LA SOURCE DE VERITE, PAS CE FICHIER.
-# Le profil porte **11 evaluations** au 03/08/2026 (5,0 · Qualite 5,0 ·
-# Delai 5,0 · Communication 5,0) et **25 projets**. Ce fichier n'en transcrit
-# qu'une partie : les neuf autres avis exigent de deplier la liste sur Malt, et
-# la page s'y fige (injection de script en timeout, y compris depuis un
-# navigateur reel connecte). Ils seront ajoutes a la main.
+# ETAT AU 03/08/2026 : les **11 avis** sont transcrits, releve complet fait sur
+# la session connectee. Le profil porte 5,0 (Qualite 5,0, Delai 5,0,
+# Communication 5,0) et 25 projets.
 #
-# ⚠️⚠️ NE JAMAIS DERIVER UN COMPTE DE CE FICHIER. Un `size` pose quelque part
-# afficherait « 2 avis » quand Malt en porte onze, et rendrait Ropat plus petit
-# qu'il n'est. C'est exactement le defaut deja mesure sur `about.yml`, qui
-# annonce 9 avis et une vingtaine de projets quand le profil dit 11 et 25.
-# **Le nombre appartient a Malt, il se cite avec le lien vers Malt.**
+# ⚠️ MALT RESTE LA SOURCE DE VERITE, PAS CE FICHIER. Un avis peut etre modifie
+# ou retire la-bas sans que rien ne le signale ici.
 #
-# ⚠️ `texte` N'EST PAS TRADUIT, ET C'EST UNE DECISION.
-# Traduire la phrase d'une personne nommee, c'est lui faire dire des mots
-# qu'elle n'a pas ecrits tout en continuant a les lui attribuer. Sur les pages
-# anglaises la citation reste donc en francais, et c'est le CONTEXTE autour qui
-# passe en anglais : c'est l'usage courant pour une citation, et c'est coherent
-# avec le refus du contenu genere pose dans PRODUCT.md.
-# Les autres cles peuvent devenir bilingues si un jour elles s'affichent ;
-# `texte` non.
+# ⚠️⚠️ NE JAMAIS DERIVER UN COMPTE DE CE FICHIER, meme maintenant qu'il est
+# complet. Il porte 11 lignes pour 11 avis, mais **8 CLIENTS DISTINCTS** : trois
+# avis viennent du meme (ADF) et deux d'une autre (STRAKARA). Un `size` pose
+# quelque part dirait « 11 clients », ce qui serait faux. Le nombre d'avis
+# appartient a Malt et se cite avec le lien vers Malt ; le nombre de clients se
+# compte sur `entreprise`, jamais sur les lignes.
 #
-# ⚠️ LA CLE `projet` FAIT TOUT LE TRAVAIL, et elle peut etre vide.
-# Elle porte le slug d'une fiche de `_data/projects/`. C'est elle qui permettra
-# de rendre l'avis dans la fiche qu'il commente plutot que dans un mur de
-# temoignages. Un mur est un piege connu : quatre emplacements sont quatre
-# trous, et un trou finit rempli (constate sur sandracreates.com, dont un
-# temoignage sur quatre parle d'un court de padel jamais remplace).
+# ⚠️ `texte` N'EST PAS TRADUIT, ET C'EST UNE DECISION. Traduire la phrase d'une
+# personne nommee, c'est lui faire dire des mots qu'elle n'a pas ecrits tout en
+# continuant a les lui attribuer. Sur les pages anglaises la citation reste en
+# francais, et seul le CONTEXTE autour passe en anglais : c'est l'usage courant
+# pour une citation, et c'est coherent avec le refus du contenu genere pose
+# dans PRODUCT.md. Les autres cles peuvent devenir bilingues, `texte` non.
+#
+# ⚠️ LA CLE `projet` FAIT TOUT LE TRAVAIL, et elle peut etre vide. Elle porte le
+# slug d'une fiche de `_data/projects/`. C'est elle qui permettra de rendre
+# l'avis dans la fiche qu'il commente plutot que dans un mur de temoignages. Un
+# mur est un piege connu : quatre emplacements sont quatre trous, et un trou
+# finit rempli (constate sur sandracreates.com, dont un temoignage sur quatre
+# parle d'un court de padel jamais remplace).
 # **Un avis dont `projet` est vide, ou dont la fiche n'est pas publiee, ne
 # s'affiche nulle part.** Le rendu se derive des fiches existantes, il ne se
 # force pas. Aucun consommateur n'existe a ce jour : c'est volontaire, la
 # donnee est posee avant le rendu.
+#
+# ⚠️ DEUX `projet` SEULEMENT SONT RENSEIGNES, LES AUTRES SONT VIDES EXPRES.
+# Rattacher l'avis d'un client a la mauvaise fiche lui ferait commenter un
+# travail qui n'est pas le sien. `hepwayne` est sur, l'intitule de l'avis
+# nommant le projet ; `jhag-banana-rush` a ete confirme par Ropat le 03/08. Les
+# neuf autres restent vides tant que le rattachement n'est pas certain, et six
+# d'entre eux n'ont de toute facon aucune fiche a rejoindre.
+# **Un seul avis est donc affichable aujourd'hui**, celui de Lola sur
+# `jhag-banana-rush` : le sien est le seul dont la fiche soit publiee.
+#
+# ⚠️ SIX CLIENTS SUR HUIT N'ONT AUCUNE FICHE SUR LE SITE : AKIMA PARIS, YVES,
+# STRAKARA, NEWRONI, ADF et Cinco. Ils ont paye, ils ont note 5, et le site ne
+# les montre pas. C'est le meme constat que celui de la page A propos, vu par
+# l'autre bout.
+#
+# ⚠️⚠️ `publiable` EST OBLIGATOIRE SUR CHAQUE LIGNE, ET IL N'EST PAS DEDUCTIBLE.
+# Un avis 5 etoiles n'est pas automatiquement publiable : **ADF est
+# BoostFollowers**, dont `docs/INVENTAIRE-2026-08.md` dit « Refus strategique :
+# achat de followers, Ropat ne veut pas de l'association », et qui figure dans
+# la liste de ses deux refus assumes a cote de la generation de contenu par IA.
+# Ce client a laisse TROIS avis, c'est-a-dire la meilleure preuve de « client
+# qui revient » du profil, et elle est **inutilisable**. Publier son nom
+# reviendrait a annuler le refus qui le justifie.
+# Le champ est donc ecrit `true` ou `false` sur TOUTES les entrees, jamais
+# omis : un rendu qui testerait l'absence du champ publierait par defaut, et le
+# defaut serait la faute.
+#
+# ⚠️ CE QUE CA CHANGE AU COMPTE DES CLIENTS REVENUS. Deux des huit clients sont
+# revenus, ADF (3 avis) et STRAKARA (2). Mais ADF n'est pas publiable, donc la
+# preuve affichable du « client qui revient » se reduit a **UN client sur
+# huit**. Ne pas annoncer deux.
 
+# ── Hepwayne ──────────────────────────────────────────────────────────────
 - source: malt
+  publiable: true
   auteur: "Marine"
   entreprise: "Hepwayne"
-  # ⚠️ La fiche `hepwayne` N'EXISTE PAS ENCORE : le projet est sous embargo
-  # jusqu'a la sortie du t-shirt (voir docs/INVENTAIRE-2026-08.md). Le slug est
-  # pose d'avance pour que l'avis se branche tout seul le jour ou la fiche est
-  # publiee. C'est aussi le projet realise EN COLLABORATION avec une
-  # illustratrice, donc la premiere fiche cosignee du site.
+  # ⚠️ La fiche N'EXISTE PAS ENCORE : embargo jusqu'a la sortie du t-shirt (voir
+  # docs/INVENTAIRE-2026-08.md). Le slug est pose d'avance pour que l'avis se
+  # branche seul le jour de la publication. C'est aussi le projet realise EN
+  # COLLABORATION avec une illustratrice, donc la premiere fiche cosignee.
   projet: hepwayne
   intitule: "Création de l'identité visuelle et pack d'illustrations"
   date: "2026-07-19"
   texte: "Encore merci pour ton travail ; je recommande Victor les yeux fermés."
 
+# ── AKIMA PARIS ───────────────────────────────────────────────────────────
 - source: malt
+  publiable: true
   auteur: "Akima"
   entreprise: "AKIMA PARIS"
-  # Aucune fiche : le travail existe, la preuve n'est pas publiee sur le site.
-  # C'est l'avis qui porte le mieux le « client qui revient », mecanisme que
-  # `PRODUCT.md` identifie comme le modele economique reel et que le site
-  # n'ecrit nulle part.
   projet:
   intitule: "Optimisation HD et vectorisation du logo"
   date: "2026-07-13"
@@ -73,3 +102,137 @@
     de cette première collaboration et je n'hésiterai pas à faire de nouveau
     appel à lui pour les prochains projets de ma marque. Je recommande
     vivement ses services.
+
+# ── STRAKARA, cliente revenue une fois ────────────────────────────────────
+- source: malt
+  publiable: true
+  auteur: "Laura"
+  role: "Dirigeante — SAS ETS SSP"
+  entreprise: "STRAKARA"
+  projet:
+  intitule: "Création du logo et des flyers"
+  date: "2026-04-20"
+  texte: >-
+    J'ai fait appel à Victor pour la création du logo et des flyers de
+    STRAKARA. Dès le premier brief, il a su comprendre mon positionnement et
+    traduire mon univers en une identité visuelle cohérente et soignée. Le
+    travail rendu était précis, moderne et exactement ce que je recherchais.
+    Victor est réactif, professionnel et force de proposition. Une vraie valeur
+    ajoutée pour tout projet de communication. Je le recommande les yeux fermés !
+
+- source: malt
+  publiable: true
+  auteur: "Laura"
+  role: "Dirigeante — SAS ETS SSP"
+  entreprise: "STRAKARA"
+  projet:
+  intitule: "Remise en qualité du logo"
+  date: "2026-04-20"
+  texte: >-
+    Victor est intervenu sur le logo de STRAKARA pour une remise en qualité et
+    le résultat est bluffant. Il a su sublimer l'existant avec précision et
+    professionnalisme, en apportant la touche qui manquait. Fichiers
+    parfaitement livrés, communication fluide, réactivité au top. Exactement ce
+    dont j'avais besoin. Merci Victor !
+
+# ── Juliette has a gun ────────────────────────────────────────────────────
+- source: malt
+  publiable: true
+  auteur: "Lola"
+  role: "Chef de projet en design graphique"
+  entreprise: "Juliette has a gun"
+  # Confirme par Ropat le 03/08 : le premier projet avec JHAG etait Banana Rush.
+  # C'est le SEUL avis rattachable a une fiche deja publiee, donc le seul qui
+  # puisse s'afficher aujourd'hui.
+  projet: jhag-banana-rush
+  intitule: "Assets digitaux statiques et vidéos, campagne de lancement PAID"
+  date: "2026-03-26"
+  texte: >-
+    Nous avons collaboré avec Victor sur un projet de production d'assets
+    digitaux statiques et vidéos dans le cadre d'une campagne de lancement
+    PAID. Victor a su comprendre l'identité graphique de la marque et répondre
+    à nos attentes spécifiques en termes de contenu. Victor a fourni un travail
+    détaillé et rigoureux et a su faire preuve d'une grande disponibilité. Ce
+    fut un projet agréable à mener en collaboration avec Victor.
+
+# ── NEWRONI ───────────────────────────────────────────────────────────────
+- source: malt
+  publiable: true
+  auteur: "Antoine"
+  role: "Directeur Marketing"
+  entreprise: "NEWRONI"
+  projet:
+  intitule:
+  date: "2026-03-16"
+  texte: >-
+    Excellente communication et livraison effectuée dans les temps convenus.
+    Je recommande chaleureusement Victor.
+
+# ── ADF = BoostFollowers ⚠️ NON PUBLIABLE ─────────────────────────────────
+# Trois missions en trois semaines, du 25/02 au 14/03, et donc la MEILLEURE
+# preuve de « client qui revient » que porte le profil. Elle est inutilisable.
+# `docs/INVENTAIRE-2026-08.md` : « Refus strategique : achat de followers,
+# Ropat ne veut pas de l'association », et BoostFollowers figure dans la liste
+# de ses deux refus assumes, a cote de la generation de contenu par IA.
+# Publier ces trois avis avec leur nom annulerait le refus qui les justifie.
+# Transcrits pour que le releve soit complet et pour que personne ne les
+# redecouvre dans six mois en croyant a une bonne nouvelle.
+- source: malt
+  publiable: false   # ADF = BoostFollowers, refus assume
+  auteur: "Romain"
+  role: "CEO"
+  entreprise: "ADF"
+  projet:
+  intitule:
+  date: "2026-03-14"
+  texte: "Super profil réactif"
+
+- source: malt
+  publiable: false   # ADF = BoostFollowers, refus assume
+  auteur: "Romain"
+  role: "CEO"
+  entreprise: "ADF"
+  projet:
+  intitule:
+  date: "2026-03-06"
+  texte: "Je recommande fortement"
+
+- source: malt
+  publiable: false   # ADF = BoostFollowers, refus assume
+  auteur: "Romain"
+  role: "CEO"
+  entreprise: "ADF"
+  projet:
+  intitule:
+  date: "2026-02-25"
+  texte: "Super profil ! Réactif et talentueux"
+
+# ── YVES = Tryskele ───────────────────────────────────────────────────────
+# Logo d'une application fitness, nom de travail « Tryskele ». Aucune fiche, et
+# `docs/INVENTAIRE-2026-08.md` porte le jugement de Ropat lui-meme sur le
+# resultat : « le logo est pas dingue ». Publiable sans probleme ethique, mais
+# l'avis tient en deux mots et le travail n'est pas montre : rien a en tirer.
+- source: malt
+  publiable: true
+  auteur: "Yves"
+  role: "Entrepreneur"
+  entreprise: "YVES"
+  projet:
+  intitule:
+  date: "2026-04-28"
+  texte: "Parfait !!"
+
+# ── Cinco ─────────────────────────────────────────────────────────────────
+- source: malt
+  publiable: true
+  auteur: "Sebastien"
+  role: "Directeur"
+  entreprise: "Cinco"
+  projet:
+  intitule:
+  date: "2026-04-27"
+  # ⚠️ NOTE SANS COMMENTAIRE. L'avis existe et compte dans la moyenne, mais son
+  # auteur n'a rien ecrit. Transcrit quand meme pour que le releve soit complet
+  # et honnete : un fichier qui n'aurait que dix lignes laisserait croire a un
+  # oubli. Rien a citer, donc rien a afficher.
+  texte:
