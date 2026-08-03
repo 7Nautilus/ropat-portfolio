@@ -293,7 +293,29 @@
      Toute graisse hors de cette plage sera fabriquee par le navigateur.
      Decision et reserves : docs/CHANTIER-IDENTITE-2026-07.md section 5. */
   --font-heading: 'Chakra Petch', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+  /* ⚠️ PLUS JAKARTA SANS REMPLACE MANROPE DEPUIS LE 03/08/2026, ET LE CHOIX
+     N'EST PAS DEFINITIF : il leve d'abord un defaut, il ne cloture pas le
+     sujet. Manrope n'a AUCUN italique, ni dans notre requete ni chez Google
+     (demande explicitement, reponse 200, zero bloc `font-style: italic`), donc
+     tout `font-style: italic` du site etait un cisaillement synthetise et non
+     un dessin.
+     Sept familles mesurees au navigateur, banc dans `labo/specimen-polices.html`.
+     Ce qui a decide, dans l'ordre :
+       . un VRAI italique                      -> sort Manrope
+       . des chiffres TABULAIRES               -> sort DM Sans, et Manrope aussi
+       . une hauteur d'x proche                -> sort Figtree et Work Sans
+     Restaient Inter et Plus Jakarta Sans ; Ropat a tranche sur le dessin.
+     Metriques relevees, Jakarta contre Manrope : avance +2,6 %, hauteur d'x
+     IDENTIQUE (54 contre 54 a 100 px). Rien a recalibrer.
+     ⚠️ ET LE +2,6 % NE S'EST PAS VU SUR LA MESURE DE LIGNE. Le ratio d'avance
+     predisait 59,4 caracteres par ligne au lieu de 60,9 ; releve APRES la
+     bascule, la citation tient toujours en 7 lignes et le recit en 6, donc les
+     deux restent a 60,9 et 61,3. Un ratio d'avance predit une largeur MOYENNE,
+     pas une coupure de ligne : le mou de la derniere ligne a absorbe l'ecart.
+     Ne pas propager le 59,4, il n'a jamais existe a l'ecran.
+     ⚠️ Elle apporte en plus les chiffres tabulaires, que Manrope n'avait pas :
+     le colophon etait donc desaligne, et personne ne l'avait releve. */
+  --font-body: 'Plus Jakarta Sans', sans-serif;
   /* REGLE : Underdog ne porte JAMAIS une phrase, elle met l'emphase sur des
      MOTS. Aujourd'hui : l'esperluette du titre de la home, rien d'autre.
 
@@ -302,7 +324,11 @@
      d'accent s'afficherait donc en Comic Sans en plein titre.
 
      ⚠️ Si un jour elle sert dans du LABEUR : sa hauteur d'x est 6 % plus basse
-     que celle de Manrope, il faut donc compenser avec font-size: 1.06em.
+     que celle du texte de labeur, il faut donc compenser avec font-size: 1.06em.
+     ⚠️ CETTE COMPENSATION EST UN RAPPORT ENTRE DEUX POLICES, donc elle devait
+     etre reverifiee au remplacement de Manrope. Elle l'a ete, et elle TIENT :
+     hauteurs d'x mesurees a 100 px, Underdog 51, Manrope 54, Plus Jakarta Sans
+     54. L'ecart reste de 5,6 % et le facteur reste 1,059. Ne pas la toucher.
      Inutile dans un titre : Chakra Petch et Underdog ont les memes proportions
      (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
@@ -353,7 +379,9 @@
   /* Mesures de ligne, en rem et NON en `ch` : le `ch` se resout sur la
      police de l'element qui PORTE la declaration, pas sur celle du texte
      qu'il contient. Un `56ch` pose sur un div a 16 px pour du texte a 20 px
-     rendait 44,8 caracteres. 40rem donne environ 66 caracteres en Manrope
+     rendait 44,8 caracteres. 40rem donne 61,3 caracteres MESURES (le « environ
+     66 » qui figurait ici etait une estimation, jamais relevee ; la valeur vaut
+     pour Manrope comme pour Plus Jakarta Sans, elle n'a pas bouge a la bascule)
      20 px, au centre de la fenetre de confort 45-75. */
   --measure-prose: 40rem;
   --measure-lede:  30rem;

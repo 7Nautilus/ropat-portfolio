@@ -46,7 +46,8 @@
   width: fit-content;
   gap: 0.875rem;
   /* Chakra Petch sur TOUS les boutons, pas seulement le CTA principal.
-     Auparavant seul .btn--xl la portait et .btn--md heritait de Manrope :
+     Auparavant seul .btn--xl la portait et .btn--md heritait du labeur
+     (Manrope a l'epoque, Plus Jakarta Sans depuis le 03/08/2026) :
      une divergence sans intention, laissee en suspens dans le TODO. La
      decision typographique la tranche, les boutons vont avec les titres. */
   font-family: var(--font-heading);

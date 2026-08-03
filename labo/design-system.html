@@ -13,7 +13,7 @@ sitemap: false
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Manrope:wght@200..800&family=Underdog&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Underdog&display=swap" rel="stylesheet">
 
 {%- comment -%}
   La feuille de PRODUCTION est chargee telle quelle. C'est volontaire : les
@@ -202,7 +202,7 @@ sitemap: false
       descendant. La premiere version faisait `background: var(--p-vert-sol)`
       sur body : declaration invalide, fond blanc par defaut, et le `color:
       #fff` pose dessus rendait titres et libelles invisibles. */
-body { background: #030808; color: #ffffff; font-family: 'Manrope', sans-serif;
+body { background: #030808; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif;
        margin: 0; line-height: 1.65; }
 .labo { max-width: 78rem; margin: 0 auto; padding: clamp(1.5rem, 4vw, 3.5rem); }
 .labo h1 { font-family: 'Chakra Petch', sans-serif; font-weight: 700; text-transform: uppercase;
@@ -708,7 +708,7 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       <tr><td style="font-family:'Chakra Petch',sans-serif;font-weight:700">Chakra Petch</td>
           <td>Titres, micro-libellés, boutons</td>
           <td>Du texte de labeur : elle fatigue au-delà de deux lignes</td></tr>
-      <tr><td style="font-family:'Manrope',sans-serif;font-weight:600">Manrope</td>
+      <tr><td style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600">Plus Jakarta Sans</td>
           <td>Tout le texte qui se lit vraiment</td>
           <td>Les titres : elle n'a pas le caractère de la première</td></tr>
       <tr><td style="font-family:'Underdog',sans-serif">Underdog</td>
@@ -1491,7 +1491,7 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
     ['--text-display', 'Direction artistique', 'titre'],
     ['--text-title', 'Direction artistique', 'titre'],
     ['--text-subhead', 'Direction artistique', 'titre'],
-    ['--text-body', 'Le corps de texte, en Manrope', 'corps'],
+    ['--text-body', 'Le corps de texte, en Plus Jakarta Sans', 'corps'],
     ['--text-meta', 'Metadonnee secondaire', 'corps'],
     ['--text-caption', 'Micro libelle', 'caps']
   ];
@@ -1507,7 +1507,7 @@ table.jetons code { font-family: 'Chakra Petch', monospace; color: #e2e8f0; font
       var faible = r && r < 1.25;
       var style = 'font-size:var(' + e[0] + ');line-height:1.05;'
         + (e[2] === 'corps'
-            ? "font-family:'Manrope',sans-serif;font-weight:400;line-height:1.4;"
+            ? "font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;line-height:1.4;"
             : "font-family:'Chakra Petch',sans-serif;font-weight:700;")
         + (e[2] === 'caps' ? 'text-transform:uppercase;letter-spacing:.10em;' : '')
         + 'white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;';

@@ -274,7 +274,29 @@
      Toute graisse hors de cette plage sera fabriquee par le navigateur.
      Decision et reserves : docs/CHANTIER-IDENTITE-2026-07.md section 5. */
   --font-heading: 'Chakra Petch', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+  /* ⚠️ PLUS JAKARTA SANS REMPLACE MANROPE DEPUIS LE 03/08/2026, ET LE CHOIX
+     N'EST PAS DEFINITIF : il leve d'abord un defaut, il ne cloture pas le
+     sujet. Manrope n'a AUCUN italique, ni dans notre requete ni chez Google
+     (demande explicitement, reponse 200, zero bloc `font-style: italic`), donc
+     tout `font-style: italic` du site etait un cisaillement synthetise et non
+     un dessin.
+     Sept familles mesurees au navigateur, banc dans `labo/specimen-polices.html`.
+     Ce qui a decide, dans l'ordre :
+       . un VRAI italique                      -> sort Manrope
+       . des chiffres TABULAIRES               -> sort DM Sans, et Manrope aussi
+       . une hauteur d'x proche                -> sort Figtree et Work Sans
+     Restaient Inter et Plus Jakarta Sans ; Ropat a tranche sur le dessin.
+     Metriques relevees, Jakarta contre Manrope : avance +2,6 %, hauteur d'x
+     IDENTIQUE (54 contre 54 a 100 px). Rien a recalibrer.
+     ⚠️ ET LE +2,6 % NE S'EST PAS VU SUR LA MESURE DE LIGNE. Le ratio d'avance
+     predisait 59,4 caracteres par ligne au lieu de 60,9 ; releve APRES la
+     bascule, la citation tient toujours en 7 lignes et le recit en 6, donc les
+     deux restent a 60,9 et 61,3. Un ratio d'avance predit une largeur MOYENNE,
+     pas une coupure de ligne : le mou de la derniere ligne a absorbe l'ecart.
+     Ne pas propager le 59,4, il n'a jamais existe a l'ecran.
+     ⚠️ Elle apporte en plus les chiffres tabulaires, que Manrope n'avait pas :
+     le colophon etait donc desaligne, et personne ne l'avait releve. */
+  --font-body: 'Plus Jakarta Sans', sans-serif;
   /* REGLE : Underdog ne porte JAMAIS une phrase, elle met l'emphase sur des
      MOTS. Aujourd'hui : l'esperluette du titre de la home, rien d'autre.
 
@@ -283,7 +305,11 @@
      d'accent s'afficherait donc en Comic Sans en plein titre.
 
      ⚠️ Si un jour elle sert dans du LABEUR : sa hauteur d'x est 6 % plus basse
-     que celle de Manrope, il faut donc compenser avec font-size: 1.06em.
+     que celle du texte de labeur, il faut donc compenser avec font-size: 1.06em.
+     ⚠️ CETTE COMPENSATION EST UN RAPPORT ENTRE DEUX POLICES, donc elle devait
+     etre reverifiee au remplacement de Manrope. Elle l'a ete, et elle TIENT :
+     hauteurs d'x mesurees a 100 px, Underdog 51, Manrope 54, Plus Jakarta Sans
+     54. L'ecart reste de 5,6 % et le facteur reste 1,059. Ne pas la toucher.
      Inutile dans un titre : Chakra Petch et Underdog ont les memes proportions
      (rapport x/capitale 0,714 contre 0,713). */
   --font-accent: 'Underdog', sans-serif;
@@ -331,7 +357,9 @@
   /* Mesures de ligne, en rem et NON en `ch` : le `ch` se resout sur la
      police de l'element qui PORTE la declaration, pas sur celle du texte
      qu'il contient. Un `56ch` pose sur un div a 16 px pour du texte a 20 px
-     rendait 44,8 caracteres. 40rem donne environ 66 caracteres en Manrope
+     rendait 44,8 caracteres. 40rem donne 61,3 caracteres MESURES (le « environ
+     66 » qui figurait ici etait une estimation, jamais relevee ; la valeur vaut
+     pour Manrope comme pour Plus Jakarta Sans, elle n'a pas bouge a la bascule)
      20 px, au centre de la fenetre de confort 45-75. */
   --measure-prose: 40rem;
   --measure-lede: 30rem;
@@ -1247,7 +1275,8 @@ header[role=banner] {
    ============================================
    Aucun @font-face ici, et c'est voulu.
 
-   Les trois familles du site (Chakra Petch, Manrope, Underdog) viennent de
+   Les trois familles du site (Chakra Petch, Plus Jakarta Sans, Underdog)
+   viennent de
    Google Fonts, declarees dans _layouts/default.html.
 
    Ce bloc hebergeait autrefois trois fontes CLIENTES (Resort Sans, Anicon
@@ -2208,7 +2237,7 @@ header[data-sur-media] {
   font-size: var(--text-body);
   color: var(--grey-light-400);
   /* 300 et non 100 : c'est deja ce que le navigateur affichait, la graisse la
-     plus fine chargee. Manrope etant variable de 200 a 800, on pourrait
+     plus fine chargee. Le labeur etant variable de 200 a 800, on pourrait
      descendre a 200 si on voulait reellement plus fin. */
   font-weight: 400;
   line-height: 1.6;
@@ -2793,7 +2822,8 @@ footer {
   width: fit-content;
   gap: 0.875rem;
   /* Chakra Petch sur TOUS les boutons, pas seulement le CTA principal.
-     Auparavant seul .btn--xl la portait et .btn--md heritait de Manrope :
+     Auparavant seul .btn--xl la portait et .btn--md heritait du labeur
+     (Manrope a l'epoque, Plus Jakarta Sans depuis le 03/08/2026) :
      une divergence sans intention, laissee en suspens dans le TODO. La
      decision typographique la tranche, les boutons vont avec les titres. */
   font-family: var(--font-heading);
@@ -4517,7 +4547,9 @@ body:has(.project-page) {
 .project-recit-corps {
   /* 40rem et non 54 : le correctif precedent avait SURCORRIGE, de 44,8
      caracteres par ligne a 92, traversant la fenetre de confort 45-75 sans
-     s'y arreter. 40rem donne environ 66 caracteres en Manrope 20 px. */
+     s'y arreter. 40rem donne 61,3 caracteres MESURES a 20 px. Le « environ 66 »
+     qui figurait ici etait une estimation jamais relevee ; la valeur vaut pour
+     Manrope comme pour Plus Jakarta Sans, elle n'a pas bouge a la bascule. */
   max-width: min(var(--measure-prose), 100%);
   margin-inline: auto;
   display: flex;
@@ -4594,10 +4626,9 @@ body:has(.project-page) {
    `--measure-prose` vaut 40rem parce qu'il est calibre pour du 20 px : le
    reutiliser sur du 31 px annule ce calibrage. Ne pas re-agrandir la citation
    sans redimensionner sa colonne dans le meme geste.
-   ⚠️ Au passage, le « environ 66 caracteres » du commentaire du recit est
-   OPTIMISTE : la meme sonde en rend **61,3** sur le recit de cette page. Le
-   chiffre reste dans la fenetre, rien a corriger dans le reglage, mais ne pas
-   s'appuyer sur 66 pour un calcul. */
+   ⚠️ Le « environ 66 caracteres » du commentaire du recit a ete CORRIGE en
+   61,3, valeur mesuree, le 03/08/2026. Inchange apres le passage a Plus Jakarta
+   Sans : la citation tient toujours en 7 lignes et le recit en 6. */
 .project-avis {
   padding: clamp(2.5rem, 6vw, 5rem) var(--page-gutter);
 }
@@ -4644,32 +4675,21 @@ body:has(.project-page) {
   gap: var(--spacing-xl);
 }
 
-/* ⚠️ L'ITALIQUE EST SYNTHETISE, ET AUCUNE FONTE DU SITE N'EN PORTE UN VRAI.
-   Demande de Ropat le 03/08/2026. Mesure avant de poser, et elle est nette :
-   les avances des glyphes sont IDENTIQUES AU CENTIEME entre droit et italique
-   sur les deux familles du site, ce qui est la signature d'un cisaillement pur
-   et non d'un dessin. Releve au canvas 2D sur 45 caracteres a 40 px :
-     Manrope        844,46 px droit / 844,46 px italique  ecart 0
-     Chakra Petch   885,80 px droit / 885,80 px italique  ecart 0
-     temoin Georgia 819,80 px droit / 837,77 px italique  ecart 17,97
-     temoin Times   751,82 px droit / 754,34 px italique  ecart  2,52
-   Les deux temoins prouvent que la sonde SAIT voir un vrai italique : sans eux
-   « synthetise partout » n'aurait rien prouve.
-   La liste des faces chargees le confirme, elles sont toutes `normal`.
-
-   ⚠️ ET CE N'EST PAS UN OUBLI DE LA REQUETE GOOGLE FONTS : j'ai demande
-   l'italique de Manrope explicitement (`ital,wght@0,200..800;1,200..800`),
-   reponse 200 et **ZERO bloc `font-style: italic`**. La famille n'en a pas.
-   Chakra Petch, elle, en a un (8 blocs renvoyes) : un vrai italique EST
-   possible sur ce site, mais au prix du changement de famille de la citation,
-   c'est-a-dire de la face de TITRAGE en 7 lignes de texte courant.
-
-   ⚠️ ARBITRE PAR ROPAT LE 03/08/2026 : ON GARDE LE FAUX ITALIQUE. La vraie
-   reponse n'est pas de changer la famille de CE bloc, c'est de remplacer Manrope
-   par une famille plus flexible pour tout le site, et c'est un chantier a part
-   entiere. Tant qu'il n'est pas fait, ne pas « corriger » cette declaration :
-   elle est le symptome assume d'un manque qui se traite ailleurs.
-   Le brief chiffre de ce remplacement est dans `TODO.md`, section du 03/08. */
+/* ⚠️ L'ITALIQUE EST UN VRAI DESSIN DEPUIS LE 03/08/2026, ET IL NE L'ETAIT PAS.
+   Pose d'abord sur Manrope, qui n'a AUCUN italique : le navigateur cisaillait
+   l'upright de 12 degres. Mesure qui l'a etabli, avances de glyphes sur 45
+   caracteres a 40 px, un vrai italique redessinant les glyphes et un faux les
+   laissant identiques :
+     Manrope        844,46 droit / 844,46 italique   ecart 0
+     Chakra Petch   885,80 droit / 885,80 italique   ecart 0
+     temoin Georgia 819,80 droit / 837,77 italique   ecart 17,97
+     temoin Times   751,82 droit / 754,34 italique   ecart  2,52
+   Les deux temoins prouvent que la sonde savait voir un vrai italique.
+   `--font-body` porte maintenant Plus Jakarta Sans, demandee avec son axe
+   `ital`, donc cette declaration rend enfin ce qu'elle annonce. Le banc qui a
+   servi a choisir vit dans `labo/specimen-polices.html`.
+   ⚠️ Le remplacement n'est PAS definitif (voir `_variables.scss`) : il leve ce
+   defaut, il ne cloture pas le sujet de la famille de labeur. */
 .project-avis-mot {
   position: relative;
   margin: 0;
@@ -5851,7 +5871,7 @@ main:has(.contact-hero) {
 }
 
 /* C'est un <h2>, et c'etait la TROISIEME convention du site pour le meme
-   role : Manrope 700 en capitales a 12 px ici, Chakra 500 en capitales sur
+   role : le labeur en 700 capitales a 12 px ici, Chakra 500 en capitales sur
    la page projet, Chakra 700 sans capitales sur A propos. Les trois
    rejoignent `subhead`. Un titre de section n'est pas une etiquette de
    metadonnee. */

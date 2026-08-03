@@ -405,7 +405,9 @@ body:has(.project-page) {
 .project-recit-corps {
   /* 40rem et non 54 : le correctif precedent avait SURCORRIGE, de 44,8
      caracteres par ligne a 92, traversant la fenetre de confort 45-75 sans
-     s'y arreter. 40rem donne environ 66 caracteres en Manrope 20 px. */
+     s'y arreter. 40rem donne 61,3 caracteres MESURES a 20 px. Le « environ 66 »
+     qui figurait ici etait une estimation jamais relevee ; la valeur vaut pour
+     Manrope comme pour Plus Jakarta Sans, elle n'a pas bouge a la bascule. */
   max-width: min(var(--measure-prose), 100%);
   margin-inline: auto;
   display: flex;
@@ -482,10 +484,9 @@ body:has(.project-page) {
    `--measure-prose` vaut 40rem parce qu'il est calibre pour du 20 px : le
    reutiliser sur du 31 px annule ce calibrage. Ne pas re-agrandir la citation
    sans redimensionner sa colonne dans le meme geste.
-   ⚠️ Au passage, le « environ 66 caracteres » du commentaire du recit est
-   OPTIMISTE : la meme sonde en rend **61,3** sur le recit de cette page. Le
-   chiffre reste dans la fenetre, rien a corriger dans le reglage, mais ne pas
-   s'appuyer sur 66 pour un calcul. */
+   ⚠️ Le « environ 66 caracteres » du commentaire du recit a ete CORRIGE en
+   61,3, valeur mesuree, le 03/08/2026. Inchange apres le passage a Plus Jakarta
+   Sans : la citation tient toujours en 7 lignes et le recit en 6. */
 .project-avis {
   padding: clamp(2.5rem, 6vw, 5rem) var(--page-gutter);
 }
@@ -532,32 +533,21 @@ body:has(.project-page) {
   gap: var(--spacing-xl);
 }
 
-/* ⚠️ L'ITALIQUE EST SYNTHETISE, ET AUCUNE FONTE DU SITE N'EN PORTE UN VRAI.
-   Demande de Ropat le 03/08/2026. Mesure avant de poser, et elle est nette :
-   les avances des glyphes sont IDENTIQUES AU CENTIEME entre droit et italique
-   sur les deux familles du site, ce qui est la signature d'un cisaillement pur
-   et non d'un dessin. Releve au canvas 2D sur 45 caracteres a 40 px :
-     Manrope        844,46 px droit / 844,46 px italique  ecart 0
-     Chakra Petch   885,80 px droit / 885,80 px italique  ecart 0
-     temoin Georgia 819,80 px droit / 837,77 px italique  ecart 17,97
-     temoin Times   751,82 px droit / 754,34 px italique  ecart  2,52
-   Les deux temoins prouvent que la sonde SAIT voir un vrai italique : sans eux
-   « synthetise partout » n'aurait rien prouve.
-   La liste des faces chargees le confirme, elles sont toutes `normal`.
-
-   ⚠️ ET CE N'EST PAS UN OUBLI DE LA REQUETE GOOGLE FONTS : j'ai demande
-   l'italique de Manrope explicitement (`ital,wght@0,200..800;1,200..800`),
-   reponse 200 et **ZERO bloc `font-style: italic`**. La famille n'en a pas.
-   Chakra Petch, elle, en a un (8 blocs renvoyes) : un vrai italique EST
-   possible sur ce site, mais au prix du changement de famille de la citation,
-   c'est-a-dire de la face de TITRAGE en 7 lignes de texte courant.
-
-   ⚠️ ARBITRE PAR ROPAT LE 03/08/2026 : ON GARDE LE FAUX ITALIQUE. La vraie
-   reponse n'est pas de changer la famille de CE bloc, c'est de remplacer Manrope
-   par une famille plus flexible pour tout le site, et c'est un chantier a part
-   entiere. Tant qu'il n'est pas fait, ne pas « corriger » cette declaration :
-   elle est le symptome assume d'un manque qui se traite ailleurs.
-   Le brief chiffre de ce remplacement est dans `TODO.md`, section du 03/08. */
+/* ⚠️ L'ITALIQUE EST UN VRAI DESSIN DEPUIS LE 03/08/2026, ET IL NE L'ETAIT PAS.
+   Pose d'abord sur Manrope, qui n'a AUCUN italique : le navigateur cisaillait
+   l'upright de 12 degres. Mesure qui l'a etabli, avances de glyphes sur 45
+   caracteres a 40 px, un vrai italique redessinant les glyphes et un faux les
+   laissant identiques :
+     Manrope        844,46 droit / 844,46 italique   ecart 0
+     Chakra Petch   885,80 droit / 885,80 italique   ecart 0
+     temoin Georgia 819,80 droit / 837,77 italique   ecart 17,97
+     temoin Times   751,82 droit / 754,34 italique   ecart  2,52
+   Les deux temoins prouvent que la sonde savait voir un vrai italique.
+   `--font-body` porte maintenant Plus Jakarta Sans, demandee avec son axe
+   `ital`, donc cette declaration rend enfin ce qu'elle annonce. Le banc qui a
+   servi a choisir vit dans `labo/specimen-polices.html`.
+   ⚠️ Le remplacement n'est PAS definitif (voir `_variables.scss`) : il leve ce
+   defaut, il ne cloture pas le sujet de la famille de labeur. */
 .project-avis-mot {
   position: relative;
   margin: 0;

@@ -289,7 +289,7 @@ moment, je ne prends rien pour acquis et je reste toujours ouvert »*) :
 - `#FF5C00` et sa filiation **Realtree** : camouflage de chasse avec du blaze orange floqué ;
 - l'orange n'est **jamais** du texte de labeur ;
 - trio sombre du fond : `#030808 · #030F0C · #051510` ;
-- typo : Chakra Petch / Manrope / Underdog.
+- typo : Chakra Petch / Plus Jakarta Sans / Underdog.
 
 > **Comment lire « rien n'est figé » sans que la doctrine perde son sens.** Le registre et cette
 > doctrine lient **l'exécutant**, pas Ropat : ils empêchent de rejouer en boucle des sujets déjà

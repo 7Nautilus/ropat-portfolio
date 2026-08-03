@@ -38,15 +38,15 @@ typography:
     fontWeight: 700
     letterSpacing: 0.10em                # --track-caps
   body-lg:
-    fontFamily: Manrope                  # --font-body
+    fontFamily: Plus Jakarta Sans        # --font-body
     fontSize: 1.25rem                    # --text-body
     fontWeight: 400
   body-md:
-    fontFamily: Manrope                  # --font-body
+    fontFamily: Plus Jakarta Sans        # --font-body
     fontSize: 1rem                       # --text-meta
     fontWeight: 400
   caption:
-    fontFamily: Manrope                  # --font-body
+    fontFamily: Plus Jakarta Sans        # --font-body
     fontSize: 0.8rem                     # --text-caption
     fontWeight: 400
   accent:
@@ -103,7 +103,8 @@ Le gris (`secondary`, #9CA3AF) porte les informations secondaires : métadonnée
 Trois familles, trois rôles :
 
 - **Chakra Petch** porte les titres, les micro-libellés, la navigation et les boutons. Souvent en capitales, interlettrage marqué (3px sur la navigation), graisse 700. C'est la signature visuelle. Attention : elle est **statique**, cinq graisses de 300 à 700 seulement. Toute graisse hors de cette plage sera fabriquée par le navigateur.
-- **Manrope** porte le corps de texte : paragraphes, descriptions, contenu long. Fonte variable, 200 à 800.
+- **Plus Jakarta Sans** porte le corps de texte : paragraphes, descriptions, contenu long. Fonte variable, 200 à 800, avec un **vrai italique**.
+  ⚠️ Elle remplace **Manrope** depuis le 03/08/2026, et le choix n'est pas définitif : il lève d'abord un défaut. Manrope n'avait aucun italique (ni dans notre requête ni chez Google), donc tout `font-style: italic` du site était un cisaillement synthétisé. Elle n'avait pas non plus de chiffres tabulaires, ce qui désalignait le colophon. Le banc de comparaison des sept familles vit dans `labo/specimen-polices.html`.
 - **Underdog** est la police d'accent. Elle ne porte **jamais une phrase** : elle met l'emphase sur des **mots**, et n'a qu'une seule graisse.
 
 Les tailles ci-dessus sont les valeurs de grand écran. En réalité l'échelle est fluide (`clamp`) : un titre de héros va de 3rem sur mobile à 6rem sur desktop, un paragraphe de 1rem à 1.25rem. Les héros sont volontairement grands et affirmés.
@@ -135,7 +136,7 @@ Les angles sont généreux : 1rem à 2rem sur les cartes et conteneurs, jusqu'à
 
 **Bouton** : gélule, bordure orange de 3px, fond orange à 20 %, qui devient orange plein au survol. Deux variantes, `solid` et `ghost`. Deux tailles, `md` par défaut et `xl` réservée aux appels à l'action principaux (héros de l'accueil, clôture de la page à propos). Un bouton texte existe aussi : ni fond, ni bordure, ni padding.
 
-**Carte projet** : image en ratio 1:1 surmontant le contenu, séparée par un filet orange de 1px. Titre en Chakra Petch, client en gris, description en Manrope tronquée à 3 lignes.
+**Carte projet** : image en ratio 1:1 surmontant le contenu, séparée par un filet orange de 1px. Titre en Chakra Petch, client en gris, description en Plus Jakarta Sans tronquée à 3 lignes.
 
 **Menu déroulant** : l'état ouvert vit dans `aria-expanded`, jamais dans une classe.
 
