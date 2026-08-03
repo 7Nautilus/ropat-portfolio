@@ -1,0 +1,80 @@
+{% comment %}
+  ══════════════════════════════════════════════════════════════════════════
+   L'AVIS CLIENT, DANS LA FICHE DU PROJET QU'IL COMMENTE
+  ══════════════════════════════════════════════════════════════════════════
+
+  Parametres : project_id (le slug), lang.
+
+  ⚠️ `include.lang` ET NON `lang` NU. Les portees fuient en Liquid, donc lire
+  `lang` marchait : la variable posee en tete de `project-main.html` restait
+  visible ici. Mais l'include recevait alors un parametre qu'il ne lisait
+  jamais, ce que la carte a signale sous « parametres passes a un include qui
+  ne les lit jamais ». Un include qui depend d'une fuite de portee casse le
+  jour ou on l'appelle d'ailleurs, sans rien afficher qui l'explique. Meme
+  forme que `project-note.html`, avec le meme defaut `'en'` que partout.
+
+  POURQUOI ICI ET PAS DANS UN MUR DE TEMOIGNAGES. Un mur est un piege connu :
+  quatre emplacements sont quatre trous, et un trou finit rempli. Constate sur
+  `sandracreates.com`, dont un temoignage sur quatre parle d'un court de padel
+  bien eclaire, texte de gabarit jamais remplace, en production, au milieu de
+  trois vrais. A vingt projets, c'est une machine a produire du faux.
+  Un avis attache a la fiche qu'il commente ne peut pas avoir ce defaut : il
+  n'y a pas d'emplacement a remplir, il y a une fiche qui a un avis ou n'en a
+  pas.
+
+  PLACE DANS LA PAGE. Apres le recit, avant le colophon. Le lecteur a vu
+  l'oeuvre, il a lu ce qui a ete fait et pourquoi ; la voix du client ferme le
+  recit, et la meta technique suit. Regle 1 respectee : l'avis est EN AVAL de
+  l'oeuvre, il ne la concurrence jamais.
+
+  ⚠️ TROIS GARDES, ET AUCUNE N'EST DEDUITE D'UN CHAMP MANQUANT.
+    1. `projet` doit valoir le slug de CETTE fiche. Un avis sans `projet`, ou
+       pointant ailleurs, ne sort nulle part.
+    2. `publiable` doit valoir `true` EXPLICITEMENT. Un avis 5 etoiles n'est
+       pas automatiquement publiable : ADF est BoostFollowers, dont Ropat
+       refuse l'association, et ses trois avis sont dans le fichier. Tester
+       l'absence du champ publierait par defaut, et le defaut serait la faute.
+    3. `texte` doit etre non vide. Un avis peut etre une note sans commentaire
+       (Cinco), il compte dans la moyenne et n'a rien a citer.
+
+  ⚠️ LE TEXTE N'EST PAS TRADUIT, MEME SUR LES PAGES ANGLAISES, et c'est
+  delibere : traduire la phrase d'une personne nommee, c'est lui faire dire des
+  mots qu'elle n'a pas ecrits tout en continuant a les lui attribuer. Seul le
+  CONTEXTE autour passe en anglais. `lang` sur le `blockquote` le declare aux
+  lecteurs d'ecran, qui doivent basculer de phonetique.
+
+  ⚠️ L'URL DE MALT VIENT DE `_data/socials.yml`, jamais ecrite en dur ici :
+  une seule source, et le lien de verification ne peut pas diverger de celui du
+  pied de page.
+{% endcomment %}
+
+{% assign _lang = include.lang | default: "en" %}
+
+{% assign _avis = site.data.avis
+   | where: "projet", include.project_id
+   | where: "publiable", true
+   | first %}
+
+{% if _avis and _avis.texte %}
+  {% assign _texte = _avis.texte | strip %}
+{% endif %}
+
+{% if _texte and _texte != "" %}
+  {% assign _malt = site.data.socials | where: "name", "malt" | first %}
+
+  <section class="project-avis animate-fade-up"
+           aria-label="{% if _lang == 'fr' %}Ce qu'en dit la cliente ou le client{% else %}What the client said{% endif %}">
+    <figure class="project-avis-corps">
+      <blockquote class="project-avis-mot" lang="fr">{{ _texte }}</blockquote>
+      <figcaption class="project-avis-source">
+        <span class="project-avis-qui">{{ _avis.auteur }}{% if _avis.entreprise %}, {{ _avis.entreprise }}{% endif %}</span>
+        {%- if _avis.role %}<span class="project-avis-role">{{ _avis.role }}</span>{% endif %}
+        {%- if _malt %}
+        <a class="project-avis-preuve" href="{{ _malt.link }}" target="_blank" rel="noopener noreferrer">
+          {% if _lang == 'fr' %}Vérifier sur Malt{% else %}Verify on Malt{% endif %}
+        </a>
+        {%- endif %}
+      </figcaption>
+    </figure>
+  </section>
+{% endif %}

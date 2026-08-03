@@ -323,6 +323,14 @@
   </section>
   {% endif %}
 
+  {% comment %}
+    L'avis client, s'il en existe un pour CETTE fiche et qu'il est publiable.
+    L'include porte ses trois gardes et ne rend rien quand l'une manque : au
+    03/08/2026 une seule fiche sur vingt en a un. Voir son en-tete pour la
+    raison du placement, apres le recit et avant la meta.
+  {% endcomment %}
+  {% include projects/project-avis.html project_id=include.project_id lang=lang %}
+
   <!-- ── COLOPHON : la meta en index, plus en fiche technique ─── -->
   <dl class="project-colophon animate-fade-up"{% if seq_count == 0 and notes_pleines == 0 %} id="project-suite"{% endif %}>
     {% assign _client = project.client[lang] | default: project.client.fr %}

@@ -4542,6 +4542,92 @@ body:has(.project-page) {
   max-width: none;
 }
 
+/* ── L'AVIS CLIENT ───────────────────────────────────────────────────────
+   Pose entre le recit et le colophon : la voix du client ferme le recit, la
+   meta technique suit. Il est EN AVAL de l'oeuvre et ne la concurrence
+   jamais, regle 1.
+
+   ⚠️ PAS DE FILET EN HAUT. `.project-recit` en porte deja un en bas, et deux
+   traits colles auraient fait une double barre au lieu d'une separation. Le
+   filet du recit sert donc de separateur, et celui d'ici ferme le bloc avant
+   le colophon.
+
+   ⚠️ AUCUNE VALEUR HORS ECHELLE : tout vient des jetons.
+
+   ⚠️ LA CITATION EST EN `--text-body` ET NON EN `--text-subhead`, ET C'EST UNE
+   CORRECTION. Elle a d'abord ete posee en subhead, pour qu'elle se lise comme
+   une VOIX et pas comme une note. Mesure au navigateur, avis de Lola sur
+   `jhag-banana-rush` a 1280 px, lignes visuelles comptees par les rectangles
+   d'un Range :
+     31,0 px dans 640 px -> 11 lignes -> **38,7 caracteres par ligne**
+     20,0 px dans 640 px ->  7 lignes -> **60,9 caracteres par ligne**
+   Le premier est sous la fenetre de confort de 45-75, le second dedans. C'est
+   l'erreur inverse de celle que `.project-recit-corps` documente juste
+   au-dessus : `--measure-prose` vaut 40rem parce qu'il est calibre pour du
+   20 px. Le reutiliser sur du 31 px annule ce calibrage.
+   ⚠️ Au passage, le « environ 66 caracteres » du commentaire du recit est
+   OPTIMISTE : la meme sonde en rend **61,3** sur le recit de cette page. Le
+   chiffre reste dans la fenetre, donc rien a corriger dans le reglage, mais ne
+   pas s'appuyer sur 66 pour un calcul.
+   La voix est donc portee par la STRUCTURE et non par la taille : une section
+   a elle, un filet qui la ferme, une attribution nommee, et un lien de
+   verification. C'est suffisant, et ca evite la surcorrection dont le recit
+   porte deja la cicatrice. */
+.project-avis {
+  padding: clamp(2.5rem, 6vw, 5rem) var(--page-gutter);
+  border-bottom: var(--hairline-width) solid var(--line);
+}
+
+.project-avis-corps {
+  max-width: min(var(--measure-prose), 100%);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.project-avis-mot {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.project-avis-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--text-meta);
+  line-height: var(--leading-meta);
+}
+
+.project-avis-qui {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.project-avis-role {
+  color: var(--ink-subtle);
+}
+
+/* ⚠️ LE SEUL ORANGE DU BLOC, ET IL SIGNALE UNE ACTION : aller verifier l'avis
+   chez un tiers. C'est exactement ce que la regle 3 demande a un orange, et
+   c'est ce qui distingue cet avis d'une citation decorative. Sans ce lien,
+   la preuve resterait affirmee au lieu d'etre verifiable. */
+.project-avis-preuve {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: from-font;
+  transition: opacity var(--transition-base);
+}
+
+.project-avis-preuve:hover {
+  opacity: 0.75;
+}
+
 /* ── NOTE : le texte ponctue ─────────────────────────────────────────── */
 .project-note {
   padding: 0 var(--page-gutter);
