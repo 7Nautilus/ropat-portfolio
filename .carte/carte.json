@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-08-03T09:12:26Z",
-  "commit": "d94ca9d",
+  "genere_le": "2026-08-03T09:38:04Z",
+  "commit": "ffe42b1",
   "pages_construites": 64,
   "perime": null,
   "indetermines": 7,
@@ -585,10 +585,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 251341,
-    "gzip": 78161,
-    "sans_commentaires": 85919,
-    "gzip_sans": 13963
+    "brut": 254153,
+    "gzip": 79238,
+    "sans_commentaires": 85946,
+    "gzip_sans": 13968
   },
   "ratios_faux": []
 }

@@ -532,10 +532,32 @@ body:has(.project-page) {
   gap: var(--spacing-xl);
 }
 
+/* ⚠️ L'ITALIQUE EST SYNTHETISE, ET AUCUNE FONTE DU SITE N'EN PORTE UN VRAI.
+   Demande de Ropat le 03/08/2026. Mesure avant de poser, et elle est nette :
+   les avances des glyphes sont IDENTIQUES AU CENTIEME entre droit et italique
+   sur les deux familles du site, ce qui est la signature d'un cisaillement pur
+   et non d'un dessin. Releve au canvas 2D sur 45 caracteres a 40 px :
+     Manrope        844,46 px droit / 844,46 px italique  ecart 0
+     Chakra Petch   885,80 px droit / 885,80 px italique  ecart 0
+     temoin Georgia 819,80 px droit / 837,77 px italique  ecart 17,97
+     temoin Times   751,82 px droit / 754,34 px italique  ecart  2,52
+   Les deux temoins prouvent que la sonde SAIT voir un vrai italique : sans eux
+   « synthetise partout » n'aurait rien prouve.
+   La liste des faces chargees le confirme, elles sont toutes `normal`.
+
+   ⚠️ ET CE N'EST PAS UN OUBLI DE LA REQUETE GOOGLE FONTS : j'ai demande
+   l'italique de Manrope explicitement (`ital,wght@0,200..800;1,200..800`),
+   reponse 200 et **ZERO bloc `font-style: italic`**. La famille n'en a pas.
+   Chakra Petch, elle, en a un (8 blocs renvoyes) : un vrai italique EST
+   possible sur ce site, mais au prix du changement de famille de la citation,
+   c'est-a-dire de la face de TITRAGE en 7 lignes de texte courant. C'est un
+   arbitrage de design, il revient a Ropat, et il est chiffre ici pour qu'il
+   puisse le prendre sans refaire la mesure. */
 .project-avis-mot {
   position: relative;
   margin: 0;
   font-size: var(--text-body);
+  font-style: italic;
   line-height: var(--leading-body);
   color: var(--ink);
   text-wrap: pretty;
@@ -555,13 +577,32 @@ body:has(.project-page) {
    prose ordinaire, et c'est en mobile que ca se voit le plus, la ou 426
    caracteres tiennent sur 13 lignes.
 
-   ⚠️ IL EST DECORATIF ET IL EST DECLARE COMME TEL. `--ink-decorative` mesure
-   1,72:1, il ECHOUE au contraste et le fichier de jetons l'ecrit
-   (`_variables.scss`, la table des mesures). C'est exactement l'emploi pour
-   lequel ce jeton existe : une forme qu'on lit comme une texture, jamais une
+   ⚠️ IL EST DECORATIF ET IL EST DECLARE COMME TEL. Il ECHOUE au contraste, et
+   c'est l'emploi voulu : une forme qu'on lit comme une texture, jamais une
    information. Si le guillemet devait etre lu pour comprendre le bloc, il
    faudrait une autre encre, et ce serait le signe qu'il porte du sens qu'il ne
    doit pas porter.
+
+   ⚠️ IL EST PASSE DE `--ink-decorative` A `--primary-color-alpha` LE 03/08/2026,
+   demande de Ropat. Le jeton existait deja et c'est litteralement « primary
+   alpha » : `--primary-color-alpha` est l'alias de `--accent-soft`, soit
+   `color-mix(in srgb, var(--accent) 20%, transparent)`. Aucun jeton nouveau.
+   ⚠️ MAIS IL PESE MOINS LOURD QUE CE QU'IL REMPLACE, et le chiffre doit etre
+   ecrit ici pour que personne ne le redecouvre. Compositions sur le sol reel :
+     --ink-decorative      blanc 20% sur #030808 -> rgb(53,57,57)  1,72:1
+     --primary-color-alpha orange 20% sur #030808 -> rgb(53,25,6)  1,24:1
+   L'orange a une luminance plus basse que le blanc, donc a alpha egal il
+   disparait davantage. Pour rendre EXACTEMENT le meme poids optique qu'avant il
+   faudrait un orange a **37 %** sur le sombre et **40 %** sur le clair (mesure).
+   On ne le fait pas : le jeton demande est celui-la, il est deja nomme, et
+   fabriquer une troisieme valeur d'alpha pour un ornement couterait un jeton
+   sans rien prouver. Si le guillemet parait trop efface, la valeur a poser est
+   connue et elle est ci-dessus.
+   ⚠️ REGLE 3, PARCE QUE C'EST UN ORANGE DE PLUS DANS UN BLOC QUI EN AVAIT UN
+   SEUL. Il signale « ici on cite quelqu'un d'autre », ce qui est nommable, donc
+   le test passe. Mais c'est le premier orange du site qui ne porte ni action ni
+   etat, et a 1,24:1 il est a la limite ou un signal devient une texture. C'est
+   assume, pas ignore.
 
    ⚠️ `content: open-quote / ""` : LE SECOND MEMBRE EST LE TEXTE ALTERNATIF, et
    il est VIDE EXPRES. Sans lui, le contenu genere est annonce par une partie
@@ -589,7 +630,7 @@ body:has(.project-page) {
   /* `1` et non `--leading-body` : a 44-96 px l'interligne de labeur ouvrirait
      une boite de 150 px pour un glyphe qui en occupe 40. */
   line-height: 1;
-  color: var(--ink-decorative);
+  color: var(--primary-color-alpha);
 
   /* ⚠️ `-0.22em` N'EST PAS UN REGLAGE A L'OEIL, C'EST UNE MESURE. A `top: 0` le
      guillemet tombait 18 px trop bas et se lisait a cheval sur les deux
