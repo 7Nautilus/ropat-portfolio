@@ -435,43 +435,101 @@ body:has(.project-page) {
    meta technique suit. Il est EN AVAL de l'oeuvre et ne la concurrence
    jamais, regle 1.
 
-   ⚠️ PAS DE FILET EN HAUT. `.project-recit` en porte deja un en bas, et deux
-   traits colles auraient fait une double barre au lieu d'une separation. Le
-   filet du recit sert donc de separateur, et celui d'ici ferme le bloc avant
-   le colophon.
-
    ⚠️ AUCUNE VALEUR HORS ECHELLE : tout vient des jetons.
 
-   ⚠️ LA CITATION EST EN `--text-body` ET NON EN `--text-subhead`, ET C'EST UNE
-   CORRECTION. Elle a d'abord ete posee en subhead, pour qu'elle se lise comme
-   une VOIX et pas comme une note. Mesure au navigateur, avis de Lola sur
-   `jhag-banana-rush` a 1280 px, lignes visuelles comptees par les rectangles
-   d'un Range :
+   ⚠️ AUCUN APLAT SOUS LA CITATION. Le sol dither reste visible, comme sous le
+   recit et pour la meme raison ecrite plus haut : le voiler tuerait la texture
+   la plus distinctive du site precisement la ou l'on lit. Un panneau pour
+   « detacher » l'avis serait une regression doctrinale, pas une lisibilite.
+
+   ── REFONTE DU 03/08/2026 ────────────────────────────────────────────────
+   Les cinq defauts de STRUCTURE sont traites dans `project-avis.html`, la ou
+   ils vivent. Ici les trois qui sont de la mise en forme, tous MESURES au
+   navigateur sur `fr/projects/jhag-banana-rush.html` avant correction.
+
+   ⚠️ 1. LE FILET DU BAS EST SUPPRIME, ET IL PRODUISAIT LA DOUBLE BARRE QUE LE
+   COMMENTAIRE PRECEDENT SE FELICITAIT D'AVOIR EVITEE. Il disait « pas de filet
+   en haut, deux traits colles auraient fait une double barre », et il en posait
+   un en bas, contre le `border-top` du colophon. Mesure : ecart de **0 px**
+   entre les deux bords, 0,571 px chacun, soit **1,14 px cumules** la ou tout le
+   reste de la page vaut 0,571. Le filet du recit separe au-dessus, celui du
+   colophon separe en dessous, ce bloc n'a donc besoin d'aucun des deux.
+
+   ⚠️ 2. LE SURVOL DU LIEN LE FAISAIT PASSER SOUS LE SEUIL AA, c'est-a-dire au
+   moment precis ou le lecteur l'engage. `opacity: 0.75` compose l'orange avec
+   le sol : mesure par composition alpha explicite sur le fond opaque reel
+   (#030808), **6,51:1 au repos contre 3,98:1 au survol**, pour un minimum de
+   4,5 a 16 px. La convention etait inversee. La couleur ne bouge donc plus du
+   tout : le survol epaissit le soulignement, ce qui ne peut pas baisser un
+   contraste. Et `:focus-visible` est groupe avec `:hover`, le clavier n'avait
+   droit qu'a l'anneau global.
+
+   ⚠️ 3. SUR LE THEME CLAIR, LE SEUL ELEMENT REPERABLE DU BLOC ETAIT ILLISIBLE.
+   Mesure en basculant `data-theme` en direct : **2,79:1**, tres loin des 4,5.
+   Ce n'est pas un cas limite, c'est une regle que `_variables.scss` a deja
+   ecrite : « sur fond clair, l'orange ne peut PAS porter de texte. Il n'y est
+   admis qu'en MASSE, en aplat. » On ne fabrique donc pas un orange assombri de
+   plus (`--scrollbar-thumb-active` en est un, mesure a 3,35:1, ce qui suffit a
+   un composant d'interface et PAS a du texte) : sur le skin clair le lien prend
+   `--ink` et le soulignement porte seul l'affordance.
+
+   ⚠️ LA CITATION RESTE EN `--text-body`, ET C'EST UNE CORRECTION DEJA PAYEE.
+   Elle avait ete posee en `--text-subhead` pour se lire comme une VOIX. Mesure
+   au navigateur, lignes visuelles comptees par les rectangles d'un Range :
      31,0 px dans 640 px -> 11 lignes -> **38,7 caracteres par ligne**
      20,0 px dans 640 px ->  7 lignes -> **60,9 caracteres par ligne**
-   Le premier est sous la fenetre de confort de 45-75, le second dedans. C'est
-   l'erreur inverse de celle que `.project-recit-corps` documente juste
-   au-dessus : `--measure-prose` vaut 40rem parce qu'il est calibre pour du
-   20 px. Le reutiliser sur du 31 px annule ce calibrage.
+   Le premier est sous la fenetre de confort 45-75, le second dedans.
+   `--measure-prose` vaut 40rem parce qu'il est calibre pour du 20 px : le
+   reutiliser sur du 31 px annule ce calibrage. Ne pas re-agrandir la citation
+   sans redimensionner sa colonne dans le meme geste.
    ⚠️ Au passage, le « environ 66 caracteres » du commentaire du recit est
    OPTIMISTE : la meme sonde en rend **61,3** sur le recit de cette page. Le
-   chiffre reste dans la fenetre, donc rien a corriger dans le reglage, mais ne
-   pas s'appuyer sur 66 pour un calcul.
-   La voix est donc portee par la STRUCTURE et non par la taille : une section
-   a elle, un filet qui la ferme, une attribution nommee, et un lien de
-   verification. C'est suffisant, et ca evite la surcorrection dont le recit
-   porte deja la cicatrice. */
+   chiffre reste dans la fenetre, rien a corriger dans le reglage, mais ne pas
+   s'appuyer sur 66 pour un calcul. */
 .project-avis {
   padding: clamp(2.5rem, 6vw, 5rem) var(--page-gutter);
-  border-bottom: var(--hairline-width) solid var(--line);
 }
 
-.project-avis-corps {
+.project-avis-corps,
+.project-avis-titre {
   max-width: min(var(--measure-prose), 100%);
   margin-inline: auto;
+}
+
+/* C'est un vrai `<h2>`, et c'est le premier correctif du lot : le bloc
+   n'emettait AUCUN titre, donc un lecteur d'ecran qui navigue par titres, le
+   mode de parcours le plus courant, passait des trois `<h2>` du recit aux deux
+   du systeme de design sans jamais rencontrer la seule preuve tierce de la
+   page.
+   ⚠️ IL EST COMPOSE EN MICRO-LIBELLE ET NON A L'ECHELON `subhead`, a l'inverse
+   de `.project-note-title` juste dessous. Ce n'est pas une incoherence : un
+   titre de recit NOMME son contenu et merite sa masse, celui-ci ne fait que
+   declarer un genre. Le poser a 26-32 px en ferait la plus grosse encre du bloc
+   au benefice des deux mots les moins informatifs qu'il porte. Les capitales,
+   `--track-caps` et la famille de titrage suffisent a le faire lire vite au
+   milieu d'un bloc de labeur : c'est le mecanisme par lequel le colophon se
+   balaie d'un coup malgre ses 12,8 px. */
+.project-avis-titre {
+  margin: 0 0 var(--spacing-md);
+  font-family: var(--font-heading);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* ⚠️ `--spacing-xl` ET NON `--spacing-md`, ET L'ECART EST LE DEFAUT LUI-MEME.
+   L'ancien `gap` valait 24 px pour un interligne de citation de 33 px
+   (--text-body 20 px x --leading-body 1,65) : la signature se lisait donc comme
+   une ligne SUPPLEMENTAIRE du paragraphe au lieu de s'en detacher, et c'est
+   exactement le mecanisme par lequel la preuve ne se voyait pas. 48 px donne
+   1,45 fois l'interligne au-dehors contre 8 px au-dedans du groupe, soit un
+   rapport de 6. */
+.project-avis-corps {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-xl);
 }
 
 .project-avis-mot {
@@ -482,38 +540,128 @@ body:has(.project-page) {
   text-wrap: pretty;
 }
 
+/* Trois groupes empiles, et non plus une seule ligne qui passe a la ligne :
+   qui parle, sur quelle mission, et ou verifier. `align-items: start` et non
+   `baseline` : le releve est une grille, il n'a pas de ligne de base commune
+   avec le reste. */
 .project-avis-source {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--spacing-xs) var(--spacing-sm);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-md);
   font-size: var(--text-meta);
   line-height: var(--leading-meta);
 }
 
+/* ⚠️ L'ENTREPRISE PORTE LE PLUS DE POIDS DU GROUPE, ET C'EST DELIBERE. Elle
+   etait concatenee au prenom dans une meme chaine, une meme graisse et une meme
+   encre (« Lola, Juliette has a gun »). Or c'est le seul actif RECONNAISSABLE
+   du bloc : « Juliette has a gun » est une maison de parfum, « Lola » ne l'est
+   pas, et c'est l'entreprise qui VARIE d'une fiche a l'autre la ou tout le
+   reste du gabarit est constant. Les donnees les separaient pourtant deja en
+   deux cles.
+   ⚠️ Elle reste a `--text-body` et non a `--text-subhead` : la porter a 32 px
+   sur une fiche projet la mettrait en concurrence avec le `<h1>` du projet, et
+   sur cette fiche-ci elle repeterait a l'identique le CLIENT que le colophon
+   affiche 200 px plus bas. Le poids se prend par la graisse et l'encre, pas par
+   l'echelon. */
 .project-avis-qui {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.project-avis-ou {
+  font-family: var(--font-heading);
+  font-size: var(--text-body);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  color: var(--ink);
+}
+
+/* ⚠️ `--ink-soft` ET NON `--ink-subtle`. Le role etait la seule ligne du bloc
+   dans l'encre la plus faible de la palette, alors que c'est LUI qui qualifie
+   le jugement : que la personne qui evalue soit chef de projet EN DESIGN
+   GRAPHIQUE est ce qui donne son poids a l'avis. La hierarchie etait inversee
+   par rapport a la valeur de preuve. */
+.project-avis-nom {
   color: var(--ink-soft);
-  font-weight: 600;
 }
 
-.project-avis-role {
-  color: var(--ink-subtle);
+/* Le releve des deux faits verifiables que le bloc jetait, `intitule` et
+   `date`. Meme grammaire que le colophon, etiquette en capitales et valeur
+   dessous, parce que c'est celle que la page emploie deja pour dire « fait
+   verifiable » et qu'en inventer une seconde couterait sans rien prouver.
+   ⚠️ MESURE SUR LES 11 ENTREES : `intitule` n'est rempli que 5 fois sur 11.
+   Le gabarit n'emet donc le `<dl>` que si au moins un des deux champs existe,
+   et chaque cellule est gardee separement : aucune etiquette orpheline, jamais.
+   ⚠️ `auto-fit` et non `auto-fill` ici : a deux cellules maximum, `auto-fill`
+   creerait des pistes vides et comprimerait l'intitule, qui est long. */
+.project-avis-releve {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  width: 100%;
+
+  @include respond-to("md") {
+    grid-template-columns: repeat(auto-fit, minmax(11rem, auto));
+    gap: var(--spacing-md) var(--spacing-xl);
+  }
+
+  dt {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-caption);
+    font-weight: 600;
+    letter-spacing: var(--track-caps);
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
 }
 
-/* ⚠️ LE SEUL ORANGE DU BLOC, ET IL SIGNALE UNE ACTION : aller verifier l'avis
-   chez un tiers. C'est exactement ce que la regle 3 demande a un orange, et
-   c'est ce qui distingue cet avis d'une citation decorative. Sans ce lien,
-   la preuve resterait affirmee au lieu d'etre verifiable. */
+/* ⚠️ LE SEUL ORANGE DU BLOC, ET IL SAIT DIRE CE QU'IL SIGNALE : aller verifier
+   chez un tiers. C'est litteralement le test de la regle 3, et il passe. Sans
+   ce lien la preuve resterait affirmee au lieu d'etre verifiable.
+   Comptage du 03/08 sur la page entiere, sonde qui ne compte que ce qui est
+   effectivement PEINT et par element, avec un temoin qui doit rendre zero et
+   qui le rend : 18 elements peignent l'accent, dont 5 tracés d'un meme logo.
+   Le bloc en porte UN.
+   ⚠️ Le libelle a change. « Verifier sur Malt » promettait de verifier CET
+   avis ; la destination est le profil general, qui en porte onze, sans ancre.
+   Un lien decrit sa destination : il dit maintenant « Profil Malt ».
+   ⚠️ `min-height` : l'ancre est enfant d'un conteneur flex donc blockifiee, sa
+   hauteur valait sa boite de ligne, soit 24,0 px, c'est-a-dire EXACTEMENT le
+   plancher de WCAG 2.5.8 sans un pixel de marge. C'est le seul element
+   interactif du bloc sur mobile.
+   ⚠️ `--dur-quick` et `--ease-quad-out` et non `--transition-base` : c'est un
+   micro-geste intra-page, et la grammaire du depot n'admet que des ease-out
+   dans une page. */
 .project-avis-preuve {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 0.2em;
   text-decoration-thickness: from-font;
-  transition: opacity var(--transition-base);
+  transition: text-decoration-thickness var(--dur-quick) var(--ease-quad-out);
 }
 
-.project-avis-preuve:hover {
-  opacity: 0.75;
+.project-avis-preuve:hover,
+.project-avis-preuve:focus-visible {
+  text-decoration-thickness: 2px;
+}
+
+[data-theme="light"] .project-avis-preuve {
+  color: var(--ink);
 }
 
 /* ── NOTE : le texte ponctue ─────────────────────────────────────────── */

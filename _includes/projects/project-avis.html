@@ -10,8 +10,7 @@
   visible ici. Mais l'include recevait alors un parametre qu'il ne lisait
   jamais, ce que la carte a signale sous « parametres passes a un include qui
   ne les lit jamais ». Un include qui depend d'une fuite de portee casse le
-  jour ou on l'appelle d'ailleurs, sans rien afficher qui l'explique. Meme
-  forme que `project-note.html`, avec le meme defaut `'en'` que partout.
+  jour ou on l'appelle d'ailleurs, sans rien afficher qui l'explique.
 
   POURQUOI ICI ET PAS DANS UN MUR DE TEMOIGNAGES. Un mur est un piege connu :
   quatre emplacements sont quatre trous, et un trou finit rempli. Constate sur
@@ -37,15 +36,71 @@
     3. `texte` doit etre non vide. Un avis peut etre une note sans commentaire
        (Cinco), il compte dans la moyenne et n'a rien a citer.
 
+  ⚠️ AUCUNE NOTE N'EST AFFICHEE, ET CE N'EST PAS UN OUBLI. Il n'existe aucune
+  note par avis : ni dans `_data/avis.yml`, ni sur Malt, dont le releve brut du
+  03/08/2026 montre une carte d'avis sans le moindre chiffre. Les seules notes
+  sont AGREGEES au niveau du profil (5,0 sur 11 evaluations). Ecrire « 5 » a
+  cote du nom d'une personne nommee serait fabriquer une attribution, pas en
+  transcrire une. C'est un acquis silencieux, et il est facile de le perdre en
+  cherchant de la lisibilite rapide.
+
   ⚠️ LE TEXTE N'EST PAS TRADUIT, MEME SUR LES PAGES ANGLAISES, et c'est
   delibere : traduire la phrase d'une personne nommee, c'est lui faire dire des
   mots qu'elle n'a pas ecrits tout en continuant a les lui attribuer. Seul le
   CONTEXTE autour passe en anglais. `lang` sur le `blockquote` le declare aux
   lecteurs d'ecran, qui doivent basculer de phonetique.
+  ⚠️ Il est ecrit EN DUR a `fr` parce que les 11 avis sont en francais, et
+  qu'aucune cle de langue n'existe dans les donnees. Le jour ou un avis arrive
+  en anglais, ajouter `langue:` a `_data/avis.yml` et le lire ici : sans ca il
+  sera declare francais et le lecteur d'ecran basculera de phonetique a tort,
+  sans que rien ne le signale.
 
   ⚠️ L'URL DE MALT VIENT DE `_data/socials.yml`, jamais ecrite en dur ici :
   une seule source, et le lien de verification ne peut pas diverger de celui du
-  pied de page.
+  pied de page ni du `sameAs` du Schema.org.
+
+  ══════════════════════════════════════════════════════════════════════════
+   REFONTE DU 03/08/2026 : CINQ DEFAUTS MESURES, PAS UN RHABILLAGE
+  ══════════════════════════════════════════════════════════════════════════
+
+  1. LE BLOC N'AVAIT AUCUN TITRE. Un lecteur d'ecran qui navigue par titres,
+     ce qui est le mode de parcours le plus courant, passait des `<h2>` du
+     recit a ceux du systeme de design SANS JAMAIS RENCONTRER la seule preuve
+     tierce de la page. Releve des titres de la page construite avant
+     correction : un h1, trois h2 de recit, deux h2 de systeme, un h2 de CTA,
+     ZERO pour l'avis. D'ou le `<h2>` et le passage de `aria-label` a
+     `aria-labelledby` : le nom accessible ne peut plus diverger du titre
+     visible, puisque c'est le meme texte.
+
+  2. RIEN NE DISAIT QUE C'ETAIT LA PAROLE D'UN TIERS avant la fin des 426
+     caracteres. La citation partageait avec la prose du recit sa famille, sa
+     taille (--text-body), sa mesure (--measure-prose) et son interligne ; elle
+     n'en differait que par l'encre. Mesure : `content` de `::before` valait
+     `none`, il n'y avait aucun guillemet, aucun titre, aucun retrait. Le
+     micro-libelle en tete regle ca en 12,8 px, sans ornement.
+
+  3. LE PREMIER ELEMENT RAPIDE A LIRE ETAIT LE LIEN ORANGE, c'est-a-dire une
+     invitation a QUITTER la page, sur un bloc dont le travail est de retenir.
+     L'attribution existait mais arrivait apres la citation, en une seule
+     chaine (`Lola, Juliette has a gun`), meme graisse et meme encre pour les
+     deux. Or l'entreprise est le seul actif RECONNAISSABLE du bloc : « Juliette
+     has a gun » est une maison de parfum, « Lola » ne l'est pas. Les deux sont
+     desormais separes, et le lien passe en dernier.
+
+  4. DEUX FAITS VERIFIABLES ETAIENT JETES. `intitule` et `date` sont transcrits
+     depuis Malt et n'etaient lus par personne. Ils datent et situent la preuve
+     pour zero cout de collecte.
+     ⚠️ ILS SONT OPTIONNELS ET LE GABARIT DOIT LE SUPPORTER : mesure sur les 11
+     entrees, `intitule` n'est rempli que 5 fois sur 11 et `role` 9 fois sur 11.
+     Le releve entier disparait si les deux champs manquent, il ne laisse pas
+     d'etiquette orpheline.
+
+  5. LE LIBELLE DU LIEN MENTAIT SUR SA DESTINATION. « Verifier sur Malt »
+     promet de verifier CET avis ; la destination est le profil general, qui
+     porte onze avis, sans ancre. Il dit maintenant ou il va.
+
+  Le sixieme defaut, la double barre, et les deux echecs de contraste sont
+  traites dans `_project.scss`, la ou ils vivent.
 {% endcomment %}
 
 {% assign _lang = include.lang | default: "en" %}
@@ -62,16 +117,60 @@
 {% if _texte and _texte != "" %}
   {% assign _malt = site.data.socials | where: "name", "malt" | first %}
 
-  <section class="project-avis animate-fade-up"
-           aria-label="{% if _lang == 'fr' %}Ce qu'en dit la cliente ou le client{% else %}What the client said{% endif %}">
+  <section class="project-avis animate-fade-up" aria-labelledby="project-avis-titre">
+    <h2 class="project-avis-titre" id="project-avis-titre">
+      {%- if _lang == 'fr' -%}Avis client{%- else -%}Client review{%- endif -%}
+    </h2>
+
     <figure class="project-avis-corps">
-      <blockquote class="project-avis-mot" lang="fr">{{ _texte }}</blockquote>
+      <blockquote class="project-avis-mot" lang="fr"
+                  {%- if _malt %} cite="{{ _malt.link }}"{% endif %}>{{ _texte }}</blockquote>
+
       <figcaption class="project-avis-source">
-        <span class="project-avis-qui">{{ _avis.auteur }}{% if _avis.entreprise %}, {{ _avis.entreprise }}{% endif %}</span>
-        {%- if _avis.role %}<span class="project-avis-role">{{ _avis.role }}</span>{% endif %}
+        {%- comment -%}
+          L'entreprise porte le plus de poids : c'est ce qui VARIE d'une fiche a
+          l'autre et ce qui se reconnait. La personne et son role viennent
+          apres, et le role monte de `--ink-subtle` a `--ink-soft` : que la
+          personne qui evalue soit chef de projet EN DESIGN GRAPHIQUE est ce qui
+          rend son jugement qualifie, c'etait la seule ligne du bloc dans
+          l'encre la plus faible de la palette.
+        {%- endcomment -%}
+        <p class="project-avis-qui">
+          {%- if _avis.entreprise %}<span class="project-avis-ou">{{ _avis.entreprise }}</span>{% endif -%}
+          <span class="project-avis-nom">{{ _avis.auteur }}{% if _avis.role %}, {{ _avis.role }}{% endif %}</span>
+        </p>
+
+        {%- if _avis.intitule or _avis.date %}
+        <dl class="project-avis-releve">
+          {%- if _avis.intitule %}
+          <div>
+            <dt>{% if _lang == 'fr' %}Mission{% else %}Engagement{% endif %}</dt>
+            <dd lang="fr">{{ _avis.intitule }}</dd>
+          </div>
+          {%- endif %}
+          {%- if _avis.date %}
+          <div>
+            <dt>{% if _lang == 'fr' %}Avis déposé le{% else %}Review posted{% endif %}</dt>
+            {%- comment -%}
+              ⚠️ FORME NUMERIQUE EN FR, MOIS ABREGE EN EN. Liquid rend les noms
+              de mois en anglais et Jekyll ne les localise pas : `%B` donnerait
+              « March » sur la page francaise. Le francais s'ecrit donc en
+              chiffres, l'anglais profite du rendu natif. `datetime` porte l'ISO
+              brut, qui lui ne depend d'aucune langue.
+            {%- endcomment -%}
+            <dd><time datetime="{{ _avis.date }}">{% if _lang == 'fr' %}{{ _avis.date | date: "%d/%m/%Y" }}{% else %}{{ _avis.date | date: "%b %-d, %Y" }}{% endif %}</time></dd>
+          </div>
+          {%- endif %}
+        </dl>
+        {%- endif %}
+
         {%- if _malt %}
         <a class="project-avis-preuve" href="{{ _malt.link }}" target="_blank" rel="noopener noreferrer">
-          {% if _lang == 'fr' %}Vérifier sur Malt{% else %}Verify on Malt{% endif %}
+          {%- if _lang == 'fr' -%}
+            Profil Malt<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span>
+          {%- else -%}
+            Malt profile<span class="sr-only"> (opens in a new tab)</span>
+          {%- endif -%}
         </a>
         {%- endif %}
       </figcaption>
