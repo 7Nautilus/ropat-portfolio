@@ -726,10 +726,22 @@ body:has(.project-page) {
     color: var(--ink-muted);
   }
 
+  /* Chiffres tabulaires, comme le colophon, et pour la meme raison de fond :
+     ce releve emprunte SA grammaire (etiquette capitales, valeur dessous), donc
+     il doit rendre ses chiffres de la meme facon. Deux blocs du meme dessin a
+     200 px l'un de l'autre qui composeraient leurs dates differemment, ca se
+     verrait avant que ca ne gene.
+     Effet mesure sur « 26/03/2026 » : **94,80 -> 90,54 px**, soit -4,26.
+     ⚠️ Et il faut dire ce que ce n'est PAS : la date est seule dans sa cellule,
+     elle ne partage de colonne avec rien (releve : x 574 contre x 110 pour la
+     mission), et la boite ne bouge pas d'un pixel. Il n'y a donc aucun
+     alignement a proteger ici. Le motif est la coherence avec le colophon, pas
+     la correction d'un defaut. */
   dd {
     margin: 0;
     color: var(--ink-soft);
     text-wrap: pretty;
+    font-variant-numeric: tabular-nums;
   }
 }
 

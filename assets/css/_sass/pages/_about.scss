@@ -136,6 +136,18 @@
   gap: var(--spacing-xs);
 }
 
+/* ⚠️ PAS DE `font-variant-numeric: tabular-nums` ICI, ET C'EST MESURE.
+   Demande le 03/08/2026 par symetrie avec le colophon. La declaration serait
+   MORTE : ces valeurs composent en `--font-heading`, donc en Chakra Petch, qui
+   n'a AUCUN jeu tabulaire. Les dix chiffres y gardent dix largeurs distinctes
+   avec la propriete comme sans (le `1` mesure 38,21 px quand le `0` en mesure
+   65,21 a 100 px), et l'effet sur les trois valeurs rendues est de **0,00 px**.
+   ⚠️ Et il n'y a rien a corriger : les trois stats sont sur une meme ligne mais
+   dans trois cellules separees (x 163, 389, 599), donc aucun chiffre ne s'aligne
+   verticalement avec un autre. Poser la propriete serait une regle qui ne fait
+   rien et qui se lit comme un correctif.
+   Si la chasse irreguliere de Chakra Petch genait un jour a cette taille (40,4 px
+   mesures), le levier serait la FAMILLE de ces valeurs, pas cette propriete. */
 .about-stat-value {
   font-family: var(--font-heading);
   font-size: var(--text-title);

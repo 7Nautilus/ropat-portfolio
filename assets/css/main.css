@@ -4868,10 +4868,24 @@ body:has(.project-page) {
   text-transform: uppercase;
   color: var(--ink-muted);
 }
+.project-avis-releve {
+  /* Chiffres tabulaires, comme le colophon, et pour la meme raison de fond :
+     ce releve emprunte SA grammaire (etiquette capitales, valeur dessous), donc
+     il doit rendre ses chiffres de la meme facon. Deux blocs du meme dessin a
+     200 px l'un de l'autre qui composeraient leurs dates differemment, ca se
+     verrait avant que ca ne gene.
+     Effet mesure sur « 26/03/2026 » : **94,80 -> 90,54 px**, soit -4,26.
+     ⚠️ Et il faut dire ce que ce n'est PAS : la date est seule dans sa cellule,
+     elle ne partage de colonne avec rien (releve : x 574 contre x 110 pour la
+     mission), et la boite ne bouge pas d'un pixel. Il n'y a donc aucun
+     alignement a proteger ici. Le motif est la coherence avec le colophon, pas
+     la correction d'un defaut. */
+}
 .project-avis-releve dd {
   margin: 0;
   color: var(--ink-soft);
   text-wrap: pretty;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ⚠️ LE SEUL ORANGE DU BLOC, ET IL SAIT DIRE CE QU'IL SIGNALE : aller verifier
@@ -5602,6 +5616,18 @@ html.voile-en-cours .project-open--contexte::after {
   gap: var(--spacing-xs);
 }
 
+/* ⚠️ PAS DE `font-variant-numeric: tabular-nums` ICI, ET C'EST MESURE.
+   Demande le 03/08/2026 par symetrie avec le colophon. La declaration serait
+   MORTE : ces valeurs composent en `--font-heading`, donc en Chakra Petch, qui
+   n'a AUCUN jeu tabulaire. Les dix chiffres y gardent dix largeurs distinctes
+   avec la propriete comme sans (le `1` mesure 38,21 px quand le `0` en mesure
+   65,21 a 100 px), et l'effet sur les trois valeurs rendues est de **0,00 px**.
+   ⚠️ Et il n'y a rien a corriger : les trois stats sont sur une meme ligne mais
+   dans trois cellules separees (x 163, 389, 599), donc aucun chiffre ne s'aligne
+   verticalement avec un autre. Poser la propriete serait une regle qui ne fait
+   rien et qui se lit comme un correctif.
+   Si la chasse irreguliere de Chakra Petch genait un jour a cette taille (40,4 px
+   mesures), le levier serait la FAMILLE de ces valeurs, pas cette propriete. */
 .about-stat-value {
   font-family: var(--font-heading);
   font-size: var(--text-title);
