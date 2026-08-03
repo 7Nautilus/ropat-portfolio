@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 01:15, d'apres l'etat de d1b508e.
+> Generee le 03/08/2026 a 05:30, d'apres l'etat de e6da0c7.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,9 +17,9 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 01:14 |
+| Date du build lu | 03/08/2026 05:30 |
 | Repertoire lu | `.carte/site` |
-| Fichiers de donnees | 37 |
+| Fichiers de donnees | 38 |
 | Includes | 31 |
 | Partiels SCSS | 34 |
 | Cas **INDETERMINES** | **7** |
@@ -177,10 +177,11 @@ Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni viv
 - site.data.services.web-design.seo.en
 - site.data.services.web-design.seo.fr
 
-### Cles de donnees definies, aucun gabarit ne les lit  (2)
+### Cles de donnees definies, aucun gabarit ne les lit  (3)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
+- site.data.avis
 - site.data.pages.contact.en.cta
 - site.data.pages.contact.fr.cta
 
