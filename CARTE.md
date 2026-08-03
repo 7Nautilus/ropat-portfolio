@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 16:37, d'apres l'etat de 318e5e3.
+> Generee le 03/08/2026 a 16:43, d'apres l'etat de a110bd6.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 16:36 |
+| Date du build lu | 03/08/2026 16:43 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 38 |
 | Includes | 32 |
@@ -311,9 +311,9 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - decalage 4px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:54, assets/css/_sass/layout/_header.scss:560)
 - espacement 0.4rem : 9 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:314, assets/css/_sass/base/_media-queries.scss:315, assets/css/_sass/base/_media-queries.scss:387)
 - espacement 0.6rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_contact.scss:396, assets/css/_sass/pages/_contact.scss:397)
-- espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:298)
+- espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:310)
 - espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
-- espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:299, assets/css/_sass/components/_containers.scss:15)
+- espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:311, assets/css/_sass/components/_containers.scss:15)
 - espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:941, assets/css/_sass/pages/_project.scss:1036)
 - espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:208, assets/css/_sass/pages/_project.scss:428)
 - espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
@@ -437,7 +437,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 264281 o brut, 83044 o gzip. Sans les commentaires : 86304 o, 14052 o gzip, soit **83 % de moins** sur le fil.
+**CSS servi** : 265954 o brut, 83710 o gzip. Sans les commentaires : 86308 o, 14050 o gzip, soit **83 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

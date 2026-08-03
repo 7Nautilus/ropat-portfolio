@@ -730,6 +730,18 @@
   --border-radius-squircle-medium: var(--squircle-medium);
   --border-radius-squircle-full: var(--squircle-full);
 
+  /* ⚠️⚠️ CES DEUX ALIAS GELENT CE QU'ILS COPIENT, ET C'EST UN PIEGE PAYE LE
+     03/08/2026. Un alias declare ICI voit son `var()` substitue ICI, avec la
+     valeur de la racine. Toute surcharge posee plus bas dans l'arbre atteindra
+     `--shadow-signal` et **PAS** `--shadow-md`.
+     Vecu : `header[data-sur-media][data-encre="sombre"]` redeclare
+     `--shadow-signal` pour que la lueur suive l'encre sombre. Sur le bouton,
+     `--shadow-signal` valait bien #05100F et `--shadow-md` toujours #ff5c00, et
+     le CTA gardait donc sa lueur orange. Corrige en faisant lire le JETON au
+     bouton.
+     ⚠️ REGLE : un composant qui peut recevoir une variante doit lire le jeton de
+     ROLE, jamais un alias de compatibilite. Les alias servent le code qui n'a
+     pas encore migre, pas celui qu'on ecrit aujourd'hui. */
   --shadow-sm: var(--shadow-ambient);
   --shadow-md: var(--shadow-signal);
 }

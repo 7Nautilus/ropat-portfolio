@@ -122,10 +122,22 @@
      l'encre sombre. En blanc il tombait a 3,10:1, sous les 4,5:1 exiges pour
      du texte ; `--accent-ink` tient 6,51:1. Le token existait deja pour ca et
      la dette etait notee dans _variables.scss depuis la Phase 0. */
+  /* ⚠️ `--shadow-signal` ET NON `--shadow-md`, CORRIGE LE 03/08/2026, ET LE
+     COMMENTAIRE CI-DESSUS DISAIT DEJA `--shadow-signal` PENDANT QUE LE CODE
+     LISAIT L'ALIAS. Signale par Ropat : la lueur du CTA restait orange sur la
+     variante sombre du header alors que celle du logo, elle, avait ete corrigee.
+     Mesure sur le bouton, header en `data-encre="sombre"` :
+       --signal-chrome  #05100F
+       --shadow-signal  #05100F   (la surcharge du header l'atteignait bien)
+       --shadow-md      #ff5c00   (l'alias, lui, restait orange)
+     `--shadow-md: var(--shadow-signal)` est declare a la RACINE, donc son
+     `var()` y est substitue avec la valeur de la racine. La surcharge posee dans
+     le header arrive trop tard pour lui : un alias GELE la valeur qu'il copie.
+     On lit donc le jeton directement. */
   &:hover {
     background-color: var(--primary-color);
     color: var(--accent-ink);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-signal);
     transform: scale(1.05);
   }
 
