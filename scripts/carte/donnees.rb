@@ -122,6 +122,15 @@ module Carte
             depuis = n.instance_variable_get(:@from)
             src = Carte.chaine_lookup(depuis)
             table[cible] << src if src
+            # `| where: ... | first` lie la cible a UN ELEMENT et non a la
+            # collection : meme decalage de profondeur que la boucle `for`
+            # juste dessous. Voir `Carte::REDUCTEURS` pour ce qui compte comme
+            # tel, et pourquoi la liste est fermee.
+            # On AJOUTE la liaison au lieu de la remplacer : la table est un
+            # ensemble de sources possibles, et garder les deux laisse le biais
+            # du bon cote (declarer vivante une cle qui ne l'est pas, jamais
+            # l'inverse).
+            table[cible] << "#{src}.*" if src && Carte.reduit_a_un_element?(depuis)
             # `{% assign pieces = pieces | concat: project.thumbnails %}` lie
             # aussi `pieces` a `project.thumbnails`. Sans cette ligne, tout ce
             # qu'on lit ensuite sur les elements de `pieces` se perd, et les

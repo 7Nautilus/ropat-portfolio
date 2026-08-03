@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 05:30, d'apres l'etat de e6da0c7.
+> Generee le 03/08/2026 a 06:17, d'apres l'etat de ef8472e.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,10 +17,10 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 05:30 |
+| Date du build lu | 03/08/2026 06:17 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 38 |
-| Includes | 31 |
+| Includes | 32 |
 | Partiels SCSS | 34 |
 | Cas **INDETERMINES** | **7** |
 
@@ -116,7 +116,7 @@ Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est f
 
 ## 2. Graphe des includes
 
-31 includes, 75 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+32 includes, 76 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
 **Orphelins** : projects/project-main.html, services/service-main.html.
 
@@ -138,6 +138,7 @@ Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est f
 - `pages/portfolio.html` <- en/portfolio.html, fr/portfolio.html
 - `pages/services.html` <- en/services.html, fr/services.html
 - `portfolio-filters.html` <- pages/portfolio.html
+- `projects/project-avis.html` <- projects/project-main.html
 - `projects/project-card.html` <- pages/index.html, pages/portfolio.html, services/service-main.html
 - `projects/project-note.html` <- projects/project-main.html
 - `scroll-down-link.html` <- pages/experiences.html, pages/portfolio.html, pages/services.html, projects/project-main.html
@@ -177,11 +178,13 @@ Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni viv
 - site.data.services.web-design.seo.en
 - site.data.services.web-design.seo.fr
 
-### Cles de donnees definies, aucun gabarit ne les lit  (3)
+### Cles de donnees definies, aucun gabarit ne les lit  (5)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
-- site.data.avis
+- site.data.avis.*.date
+- site.data.avis.*.intitule
+- site.data.avis.*.source
 - site.data.pages.contact.en.cta
 - site.data.pages.contact.fr.cta
 
@@ -208,9 +211,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-130 jetons definis, 123 consommes, 283 noms de selecteur, 11 `!important`.
+130 jetons definis, 123 consommes, 290 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:952`, `assets/css/_sass/pages/_project.scss:960`
+`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1038`, `assets/css/_sass/pages/_project.scss:1046`
 
 Points de rupture ecrits en dur : 520px (1x)
 
@@ -237,9 +240,9 @@ Aucun `var()` ne les lit, mais ils ont un consommateur. A ne PAS ranger avec les
 
 Si la donnee qui pose le `style=` manque, la declaration entiere tombe.
 
-- assets/css/_sass/pages/_project.scss:574  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:582  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:598  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:660  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:668  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:684  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 
 ### DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre  (3)
 
@@ -268,7 +271,7 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1397
 - .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
-- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:914, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1000, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
 ### Selecteurs absents des 64 pages construites  (20)
 
@@ -293,7 +296,7 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
 - .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
-- .project-back-link  assets/css/_sass/pages/_project.scss:809 assets/css/_sass/pages/_project.scss:822 assets/css/_sass/pages/_project.scss:824 assets/css/_sass/pages/_project.scss:827
+- .project-back-link  assets/css/_sass/pages/_project.scss:895 assets/css/_sass/pages/_project.scss:908 assets/css/_sass/pages/_project.scss:910 assets/css/_sass/pages/_project.scss:913
 
 ### Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme  (2)
 
@@ -313,7 +316,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:297)
 - espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
 - espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:298, assets/css/_sass/components/_containers.scss:15)
-- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:566, assets/css/_sass/pages/_project.scss:661)
+- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:652, assets/css/_sass/pages/_project.scss:747)
 - espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:196, assets/css/_sass/pages/_project.scss:426)
 - espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
 - espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:249, assets/css/_sass/pages/_contact.scss:375)
@@ -325,7 +328,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 1.1rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:361)
 - espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
 - espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
-- espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:462)
+- espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:548)
 - espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:21)
 - trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:80)
 - trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
@@ -436,7 +439,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 236586 o brut, 72938 o gzip. Sans les commentaires : 83255 o, 13625 o gzip, soit **81 % de moins** sur le fil.
+**CSS servi** : 239863 o brut, 74015 o gzip. Sans les commentaires : 84254 o, 13760 o gzip, soit **81 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
@@ -459,8 +462,9 @@ Rien a signaler.
 - `assets/js/script.js:1393` : champ.id + '-erreur'
 - `assets/js/script.js:1412` : champ.id + '-erreur'
 
-**Noms de variable liees a plusieurs sources** (55). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
+**Noms de variable liees a plusieurs sources** (58). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
+- _includes/lang-selector.html : `hote` a 2 liaisons
 - _includes/lang-selector.html : `switch_url` a 3 liaisons
 - _includes/layout/footer.html : `item` a 2 liaisons
 - _includes/layout/footer.html : `link_name` a 2 liaisons
@@ -472,8 +476,7 @@ Rien a signaler.
 - _includes/meta/schema-org.html : `project_locale` a 2 liaisons
 - _includes/meta/schema-org.html : `schema_image` a 2 liaisons
 - _includes/pages/about.html : `item` a 2 liaisons
-- _includes/pages/index.html : `id` a 2 liaisons
-- ... et 43 autres
+- ... et 46 autres
 
 ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 

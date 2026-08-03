@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-08-03T03:30:20Z",
-  "commit": "e6da0c7",
+  "genere_le": "2026-08-03T04:17:35Z",
+  "commit": "ef8472e",
   "pages_construites": 64,
   "perime": null,
   "indetermines": 7,
@@ -381,6 +381,7 @@
     "pages/services.html -> services/service-card.html",
     "pages/services.html -> ui/button.html",
     "portfolio-filters.html -> ui/dropdown.html",
+    "projects/project-main.html -> projects/project-avis.html",
     "projects/project-main.html -> projects/project-note.html",
     "projects/project-main.html -> scroll-down-link.html",
     "projects/project-main.html -> ui/button.html",
@@ -584,10 +585,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 236586,
-    "gzip": 72938,
-    "sans_commentaires": 83255,
-    "gzip_sans": 13625
+    "brut": 239863,
+    "gzip": 74015,
+    "sans_commentaires": 84254,
+    "gzip_sans": 13760
   },
   "ratios_faux": []
 }

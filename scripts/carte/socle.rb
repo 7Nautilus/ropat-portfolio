@@ -207,9 +207,11 @@ module Carte
       when Liquid::Variable
         vus << chaine_lookup(n.name)
         vus.concat(args_de_filtres(n))
+        vus.concat(proprietes_de_filtres(n))
       when Liquid::Assign
         vus << chaine_lookup(n.instance_variable_get(:@from))
         vus.concat(args_de_filtres(n.instance_variable_get(:@from)))
+        vus.concat(proprietes_de_filtres(n.instance_variable_get(:@from)))
       when Liquid::If, Liquid::Unless, Liquid::Case
         n.instance_variable_get(:@blocks)&.each do |b|
           cond = b.respond_to?(:left) ? b : nil
@@ -241,6 +243,66 @@ module Carte
     variable.filters.to_a.flat_map do |(_nom, args, *)|
       Array(args).map { |a| chaine_lookup(a) }
     end.compact
+  rescue StandardError
+    []
+  end
+
+  # ⚠️ CERTAINS FILTRES CHANGENT LA PROFONDEUR DU CHEMIN, ET LES IGNORER FAIT
+  # DECLARER MORTE UNE DONNEE VIVANTE. `{% assign a = site.data.avis | where:
+  # "projet", x | first %}` ne lie pas `a` a la COLLECTION mais a UN de ses
+  # ELEMENTS : ce qu'on lit ensuite en `a.texte` vaut `site.data.avis.*.texte`,
+  # cinq segments, et non `site.data.avis.texte`, quatre. La confrontation
+  # exige `lue.size >= definie.size`, donc le chemin trop court ne matchait
+  # aucune cle definie et TOUT `_data/avis.yml` sortait « qu'aucun gabarit ne
+  # lit », alors que la fiche Banana Rush affichait l'avis a l'ecran.
+  # C'est exactement le meme decalage que la boucle `for`, qui lui est deja
+  # traite (`table[cible] << "#{src}.*"`), sauf qu'il passe par un filtre.
+  # ⚠️ La liste est FERMEE et courte expres : seuls les filtres qui prennent UN
+  # element dans une liste. `where`, `sort`, `reverse`, `uniq` et `concat`
+  # rendent une liste, ils ne decalent rien. Elargir cette liste au hasard
+  # rendrait la carte muette, ce qui est la meme chose qu'une carte fausse.
+  REDUCTEURS = %w[first last sample].freeze
+
+  # Vrai si la chaine de filtres finit par extraire un element de la collection.
+  def reduit_a_un_element?(variable)
+    return false unless variable.respond_to?(:filters)
+
+    variable.filters.to_a.any? { |(nom, *)| REDUCTEURS.include?(nom.to_s) }
+  rescue StandardError
+    false
+  end
+
+  # ⚠️ UN NOM DE CHAMP PASSE EN CHAINE A UN FILTRE EST UNE LECTURE, et c'est la
+  # seule forme de lecture qui n'apparait nulle part comme chemin.
+  # `site.data.avis | where: "publiable", true` lit bel et bien `publiable` sur
+  # chaque element, mais le nom du champ est un LITTERAL : aucun
+  # `VariableLookup` ne le porte, donc `args_de_filtres` le laisse tomber et la
+  # carte declarait mortes `projet` et `publiable` de `_data/avis.yml`. Ce sont
+  # les deux cles dont tout le rendu depend, et `publiable: false` est la garde
+  # qui tient les trois avis de BoostFollowers hors du site. Une carte qui
+  # invite a les supprimer est pire qu'une carte muette.
+  # ⚠️ Liste fermee, et `where_exp` en est ABSENT expres : son argument est une
+  # expression a parser (`"item.a > 2"`), pas un nom de champ. Le prendre pour
+  # un nom fabriquerait une cle qui n'existe pas.
+  PROPRIETES = %w[where find group_by sort sort_natural map].freeze
+
+  # Les chemins lus « par leur nom » a travers un filtre, sous la forme
+  # `<source>.*.<champ>` : le `*` parce que le filtre s'applique a CHAQUE
+  # element de la collection.
+  def proprietes_de_filtres(variable)
+    return [] unless variable.respond_to?(:filters)
+
+    src = chaine_lookup(variable)
+    return [] unless src
+
+    variable.filters.to_a.filter_map do |(nom, args, *)|
+      next unless PROPRIETES.include?(nom.to_s)
+
+      champ = Array(args).first
+      next unless champ.is_a?(String) && champ.match?(/\A[a-z_][\w-]*\z/i)
+
+      "#{src}.*.#{champ}"
+    end
   rescue StandardError
     []
   end
