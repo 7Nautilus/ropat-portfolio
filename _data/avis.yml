@@ -1,0 +1,75 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  LES AVIS CLIENTS, TRANSCRITS DEPUIS MALT
+# ══════════════════════════════════════════════════════════════════════════
+#
+# POURQUOI CE FICHIER EXISTE. Malt est la SEULE preuve tierce verifiable du
+# site, et elle etait invisible : `malt.fr` sortait 64 fois dans le build, une
+# fois par route, et zero fois en lien cliquable. La page A propos citait meme
+# la note comme argument sans donner aucun moyen de la verifier. Le lien est
+# devenu visible dans le pied de page le 03/08/2026 ; ce fichier prepare
+# l'etape suivante, placer chaque avis DANS la fiche du projet qu'il commente.
+#
+# ⚠️ MALT RESTE LA SOURCE DE VERITE, PAS CE FICHIER.
+# Le profil porte **11 evaluations** au 03/08/2026 (5,0 · Qualite 5,0 ·
+# Delai 5,0 · Communication 5,0) et **25 projets**. Ce fichier n'en transcrit
+# qu'une partie : les neuf autres avis exigent de deplier la liste sur Malt, et
+# la page s'y fige (injection de script en timeout, y compris depuis un
+# navigateur reel connecte). Ils seront ajoutes a la main.
+#
+# ⚠️⚠️ NE JAMAIS DERIVER UN COMPTE DE CE FICHIER. Un `size` pose quelque part
+# afficherait « 2 avis » quand Malt en porte onze, et rendrait Ropat plus petit
+# qu'il n'est. C'est exactement le defaut deja mesure sur `about.yml`, qui
+# annonce 9 avis et une vingtaine de projets quand le profil dit 11 et 25.
+# **Le nombre appartient a Malt, il se cite avec le lien vers Malt.**
+#
+# ⚠️ `texte` N'EST PAS TRADUIT, ET C'EST UNE DECISION.
+# Traduire la phrase d'une personne nommee, c'est lui faire dire des mots
+# qu'elle n'a pas ecrits tout en continuant a les lui attribuer. Sur les pages
+# anglaises la citation reste donc en francais, et c'est le CONTEXTE autour qui
+# passe en anglais : c'est l'usage courant pour une citation, et c'est coherent
+# avec le refus du contenu genere pose dans PRODUCT.md.
+# Les autres cles peuvent devenir bilingues si un jour elles s'affichent ;
+# `texte` non.
+#
+# ⚠️ LA CLE `projet` FAIT TOUT LE TRAVAIL, et elle peut etre vide.
+# Elle porte le slug d'une fiche de `_data/projects/`. C'est elle qui permettra
+# de rendre l'avis dans la fiche qu'il commente plutot que dans un mur de
+# temoignages. Un mur est un piege connu : quatre emplacements sont quatre
+# trous, et un trou finit rempli (constate sur sandracreates.com, dont un
+# temoignage sur quatre parle d'un court de padel jamais remplace).
+# **Un avis dont `projet` est vide, ou dont la fiche n'est pas publiee, ne
+# s'affiche nulle part.** Le rendu se derive des fiches existantes, il ne se
+# force pas. Aucun consommateur n'existe a ce jour : c'est volontaire, la
+# donnee est posee avant le rendu.
+
+- source: malt
+  auteur: "Marine"
+  entreprise: "Hepwayne"
+  # ⚠️ La fiche `hepwayne` N'EXISTE PAS ENCORE : le projet est sous embargo
+  # jusqu'a la sortie du t-shirt (voir docs/INVENTAIRE-2026-08.md). Le slug est
+  # pose d'avance pour que l'avis se branche tout seul le jour ou la fiche est
+  # publiee. C'est aussi le projet realise EN COLLABORATION avec une
+  # illustratrice, donc la premiere fiche cosignee du site.
+  projet: hepwayne
+  intitule: "Création de l'identité visuelle et pack d'illustrations"
+  date: "2026-07-19"
+  texte: "Encore merci pour ton travail ; je recommande Victor les yeux fermés."
+
+- source: malt
+  auteur: "Akima"
+  entreprise: "AKIMA PARIS"
+  # Aucune fiche : le travail existe, la preuve n'est pas publiee sur le site.
+  # C'est l'avis qui porte le mieux le « client qui revient », mecanisme que
+  # `PRODUCT.md` identifie comme le modele economique reel et que le site
+  # n'ecrit nulle part.
+  projet:
+  intitule: "Optimisation HD et vectorisation du logo"
+  date: "2026-07-13"
+  texte: >-
+    Victor a réalisé un excellent travail. Il a été très réactif, à l'écoute de
+    mes demandes et a toujours pris le temps de répondre à mes questions avec
+    professionnalisme. Les livrables sont de très bonne qualité et la
+    communication a été fluide tout au long du projet. Je suis très satisfaite
+    de cette première collaboration et je n'hésiterai pas à faire de nouveau
+    appel à lui pour les prochains projets de ma marque. Je recommande
+    vivement ses services.
