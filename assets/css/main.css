@@ -265,6 +265,17 @@
   --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
   /* `--shadow-ambient-strong` retire le 29/07 : zero consommateur dans les
      deux skins. `--shadow-ambient` reste, lui est consomme. */
+  /* ⚠️ ORANGE EN DUR ICI, ET C'EST OBLIGATOIRE, PAS UN OUBLI.
+     J'ai essaye d'ecrire `var(--signal-chrome)` a la place, pour que la lueur
+     suive la variante sombre du header. **Ca ne marche pas**, mesure a l'appui :
+     sur un header en `data-encre="sombre"`, `--signal-chrome` valait bien
+     #05100F et `--shadow-signal` rendait toujours #ff5c00.
+     LA RAISON : les `var()` d'une propriete personnalisee sont substitues sur
+     l'element ou elle est DECLAREE, ici `:root`, et le resultat inherite ensuite
+     comme une valeur deja resolue. Une surcharge de `--signal-chrome` plus bas
+     dans l'arbre ne rejoue pas cette substitution.
+     La variante qui veut une autre lueur doit donc REDECLARER `--shadow-signal`
+     chez elle, ce que fait `layout/_header.scss`. */
   --shadow-signal: 0 6px 16px color-mix(in srgb, var(--accent) 50%, transparent);
   /* ==========================================================
      3. TYPOGRAPHIE  (hors theme)
@@ -1809,6 +1820,24 @@ header {
 header[data-sur-media][data-encre=sombre] {
   --encre-chrome: var(--p-encre-sombre);
   --signal-chrome: var(--p-encre-sombre);
+  /* ⚠️ LA LUEUR PORTEE DOIT ETRE REDECLAREE ICI, ET LES DEUX LIGNES AU-DESSUS
+     NE SUFFISENT PAS. Signale par Ropat le 03/08/2026 : sur cette variante, le
+     logo et le bouton contact passaient bien a l'encre sombre, mais leur ombre
+     portee restait ORANGE.
+     Mesure sur `jhag-banana-rush`, header en `data-encre="sombre"` :
+       --signal-chrome  #05100F   suivait
+       --shadow-signal  #ff5c00   ne suivait pas
+     ⚠️ ET FAIRE DERIVER `--shadow-signal` DE `--signal-chrome` DANS
+     `_variables.scss` NE CORRIGE RIEN, essaye et mesure : les `var()` d'une
+     propriete personnalisee sont substitues sur l'element ou elle est DECLAREE,
+     donc a la racine, et le resultat inherite deja resolu. Une surcharge plus
+     bas dans l'arbre arrive trop tard.
+     La redeclaration doit donc vivre ICI, dans le meme bloc que la surcharge de
+     `--signal-chrome`, ou elle est calculee avec la bonne valeur.
+     Elle couvre les deux consommateurs du header d'un coup, la lueur du logo
+     (`filter: drop-shadow`) et celle du bouton contact (`box-shadow`), qui sont
+     deux elements du meme chrome et ne peuvent pas diverger. */
+  --shadow-signal: 0 6px 16px color-mix(in srgb, var(--signal-chrome) 50%, transparent);
 }
 
 /* Mouvement reduit : la bascule reste, seule sa DUREE tombe. Supprimer la
@@ -2646,6 +2675,48 @@ footer {
     transform: translate(-50%, -50%);
     will-change: transform;
     transition: width 0.35s var(--ease-smooth), height 0.35s var(--ease-smooth), border-radius 0.35s ease, background 0.3s ease, border 0.3s ease;
+    /* ══════════════════════════════════════════════════════════════════
+       DANS LA LIGHTBOX : DEUX TONS, PARCE QU'UNE SEULE COULEUR NE PEUT PAS
+       SUFFIRE SUR UNE OEUVRE QUELCONQUE
+       ══════════════════════════════════════════════════════════════════
+       Signale par Ropat le 03/08/2026 : « le curseur n'est pas visible en
+       lightbox ». Ce n'est PAS le probleme de z-index deja traite plus haut :
+       verifie, le blob est bien peint (`z-index` 2147483647, aucun ancetre ne
+       cree de contexte d'empilement, il bouge avec la souris).
+
+       LA CAUSE, MESUREE. Dans la lightbox le corps ne porte AUCUNE classe
+       d'etat : `bindCursorState` lie `cursor-zoom` a `.lightbox-trigger`,
+       c'est-a-dire a la VIGNETTE de la page, pas au calque ni a l'image
+       agrandie. Le curseur y tombe donc dans son etat par DEFAUT, anneau
+       orange. Or la lightbox montre l'oeuvre en grand, et une oeuvre peut etre
+       de n'importe quelle couleur.
+       Releve sur `jhag-banana-rush`, image echantillonnee au canvas sous la
+       couronne du curseur, 12 points a 30 degres :
+
+         anneau orange (actuel)   moyenne 1,82:1   **12/12 sous le seuil de 3**
+         anneau blanc (etat zoom) moyenne 1,87:1   **12/12 sous le seuil**
+         encre sombre             moyenne 11,34:1   0/12
+         DEUX TONS blanc + sombre moyenne 11,34:1   0/12
+
+       ⚠️ LE PIEGE ETAIT D'APPLIQUER L'ETAT `cursor-zoom` A LA LIGHTBOX. Son
+       commentaire dit « images cliquables / lightbox », donc le geste paraissait
+       evident et il aurait ete INUTILE : le blanc marque 1,87 contre 1,82 pour
+       l'orange sur cette image. On aurait echange un curseur invisible contre
+       un autre.
+       ⚠️ Et aucune couleur UNIQUE ne peut marcher : ce qui sauve le blanc sur
+       une oeuvre sombre condamne le blanc sur une oeuvre claire. C'est le meme
+       constat que pour l'encre deduite du fond, deja tranche sur ce depot.
+
+       LA SORTIE : deux tons. L'anneau orange garde son identite, et un filet
+       sombre est pose de chaque cote. Sur une oeuvre claire ce sont les filets
+       qui portent (11,34 mesure) ; sur une oeuvre sombre c'est l'orange
+       (6,51 sur le sol du site). Au moins un des deux contraste toujours.
+       ⚠️ PORTEE VOLONTAIREMENT LIMITEE A LA LIGHTBOX. Partout ailleurs le site
+       maitrise ses fonds et l'anneau orange seul suffit ; l'ajouter globalement
+       serait un changement de dessin que personne n'a demande. */
+  }
+  body:has(.lightbox.active) #cursor-blob {
+    box-shadow: 0 0 0 1px var(--p-encre-sombre), inset 0 0 0 1px var(--p-encre-sombre);
   }
   body.cursor-hover #cursor-blob {
     width: 64px;

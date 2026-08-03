@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 16:18, d'apres l'etat de f4635a4.
+> Generee le 03/08/2026 a 16:37, d'apres l'etat de 318e5e3.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 16:18 |
+| Date du build lu | 03/08/2026 16:36 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 38 |
 | Includes | 32 |
@@ -219,12 +219,12 @@ Points de rupture ecrits en dur : 520px (1x)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
-- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:534)
-- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:658)
-- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:441)
-- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:440)
-- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:439)
-- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:377)
+- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:545)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:669)
+- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:452)
+- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:451)
+- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:450)
+- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:388)
 
 ### Jetons lus UNIQUEMENT depuis le JavaScript  (3)
 
@@ -257,9 +257,9 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .reveal-arme  style en assets/css/_sass/base/_animations.scss:17, pose par _layouts/default.html (script en ligne 2):2, _layouts/default.html (script en ligne 2):4
 - .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1331, assets/js/script.js:1336
 - .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1745
-- .cursor-hover  style en assets/css/_sass/components/_cursor.scss:58, pose par assets/js/script.js:81
-- .cursor-text  style en assets/css/_sass/components/_cursor.scss:66, pose par assets/js/script.js:81
-- .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:76, pose par assets/js/script.js:81
+- .cursor-hover  style en assets/css/_sass/components/_cursor.scss:103, pose par assets/js/script.js:81
+- .cursor-text  style en assets/css/_sass/components/_cursor.scss:111, pose par assets/js/script.js:81
+- .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:121, pose par assets/js/script.js:81
 - .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:574
 - .loaded  style en assets/css/_sass/components/_loader.scss:43, pose par assets/js/script.js:147, assets/js/script.js:316
 - .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1604
@@ -301,14 +301,14 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera.
 
 - 1px ecrit 6 fois en trait, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:189, assets/css/_sass/components/cards/_project-cards.scss:24, assets/css/_sass/layout/_sections.scss:128)
-- 3px ecrit 4 fois en trait, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:62, assets/css/_sass/components/cards/_experience-cards.scss:22)
+- 3px ecrit 4 fois en trait, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:107, assets/css/_sass/components/cards/_experience-cards.scss:22)
 
 ### Valeurs HORS ECHELLE : aucun jeton de leur famille ne les porte  (23)
 
 Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un nom pour devenir auditable, pas forcement d'etre deplacee. `scripts/jetons-hors-echelle.rb` verrouille cette liste contre une liste commitee.
 
 - decalage 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_lightbox.scss:72, assets/css/_sass/pages/_about.scss:227)
-- decalage 4px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:54, assets/css/_sass/layout/_header.scss:541)
+- decalage 4px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:54, assets/css/_sass/layout/_header.scss:560)
 - espacement 0.4rem : 9 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:314, assets/css/_sass/base/_media-queries.scss:315, assets/css/_sass/base/_media-queries.scss:387)
 - espacement 0.6rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_contact.scss:396, assets/css/_sass/pages/_contact.scss:397)
 - espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:298)
@@ -321,14 +321,14 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement -1px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:38)
 - espacement 0.15rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:270)
 - espacement 0.35rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:372)
-- espacement 0.5em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:469)
-- espacement 1.1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:469)
+- espacement 0.5em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:488)
+- espacement 1.1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:488)
 - espacement 1.1rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:361)
 - espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
 - espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
 - espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:814)
 - espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:21)
-- trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:80)
+- trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:125)
 - trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
 
 ## 5. JS
@@ -437,7 +437,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 259350 o brut, 81324 o gzip. Sans les commentaires : 86079 o, 14010 o gzip, soit **83 % de moins** sur le fil.
+**CSS servi** : 264281 o brut, 83044 o gzip. Sans les commentaires : 86304 o, 14052 o gzip, soit **83 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

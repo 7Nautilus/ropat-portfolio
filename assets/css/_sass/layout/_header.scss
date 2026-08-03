@@ -231,6 +231,25 @@ header {
 header[data-sur-media][data-encre="sombre"] {
   --encre-chrome: var(--p-encre-sombre);
   --signal-chrome: var(--p-encre-sombre);
+
+  /* ⚠️ LA LUEUR PORTEE DOIT ETRE REDECLAREE ICI, ET LES DEUX LIGNES AU-DESSUS
+     NE SUFFISENT PAS. Signale par Ropat le 03/08/2026 : sur cette variante, le
+     logo et le bouton contact passaient bien a l'encre sombre, mais leur ombre
+     portee restait ORANGE.
+     Mesure sur `jhag-banana-rush`, header en `data-encre="sombre"` :
+       --signal-chrome  #05100F   suivait
+       --shadow-signal  #ff5c00   ne suivait pas
+     ⚠️ ET FAIRE DERIVER `--shadow-signal` DE `--signal-chrome` DANS
+     `_variables.scss` NE CORRIGE RIEN, essaye et mesure : les `var()` d'une
+     propriete personnalisee sont substitues sur l'element ou elle est DECLAREE,
+     donc a la racine, et le resultat inherite deja resolu. Une surcharge plus
+     bas dans l'arbre arrive trop tard.
+     La redeclaration doit donc vivre ICI, dans le meme bloc que la surcharge de
+     `--signal-chrome`, ou elle est calculee avec la bonne valeur.
+     Elle couvre les deux consommateurs du header d'un coup, la lueur du logo
+     (`filter: drop-shadow`) et celle du bouton contact (`box-shadow`), qui sont
+     deux elements du meme chrome et ne peuvent pas diverger. */
+  --shadow-signal: 0 6px 16px color-mix(in srgb, var(--signal-chrome) 50%, transparent);
 }
 
 /* Mouvement reduit : la bascule reste, seule sa DUREE tombe. Supprimer la

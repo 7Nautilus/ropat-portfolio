@@ -282,6 +282,17 @@
   --shadow-ambient: 0 4px 6px rgba(0, 0, 0, 0.1);
   /* `--shadow-ambient-strong` retire le 29/07 : zero consommateur dans les
      deux skins. `--shadow-ambient` reste, lui est consomme. */
+  /* ⚠️ ORANGE EN DUR ICI, ET C'EST OBLIGATOIRE, PAS UN OUBLI.
+     J'ai essaye d'ecrire `var(--signal-chrome)` a la place, pour que la lueur
+     suive la variante sombre du header. **Ca ne marche pas**, mesure a l'appui :
+     sur un header en `data-encre="sombre"`, `--signal-chrome` valait bien
+     #05100F et `--shadow-signal` rendait toujours #ff5c00.
+     LA RAISON : les `var()` d'une propriete personnalisee sont substitues sur
+     l'element ou elle est DECLAREE, ici `:root`, et le resultat inherite ensuite
+     comme une valeur deja resolue. Une surcharge de `--signal-chrome` plus bas
+     dans l'arbre ne rejoue pas cette substitution.
+     La variante qui veut une autre lueur doit donc REDECLARER `--shadow-signal`
+     chez elle, ce que fait `layout/_header.scss`. */
   --shadow-signal: 0 6px 16px color-mix(in srgb, var(--accent) 50%, transparent);
 
   /* ==========================================================

@@ -54,6 +54,51 @@
       background    0.3s ease,
       border        0.3s ease;
 
+    /* ══════════════════════════════════════════════════════════════════
+       DANS LA LIGHTBOX : DEUX TONS, PARCE QU'UNE SEULE COULEUR NE PEUT PAS
+       SUFFIRE SUR UNE OEUVRE QUELCONQUE
+       ══════════════════════════════════════════════════════════════════
+       Signale par Ropat le 03/08/2026 : « le curseur n'est pas visible en
+       lightbox ». Ce n'est PAS le probleme de z-index deja traite plus haut :
+       verifie, le blob est bien peint (`z-index` 2147483647, aucun ancetre ne
+       cree de contexte d'empilement, il bouge avec la souris).
+
+       LA CAUSE, MESUREE. Dans la lightbox le corps ne porte AUCUNE classe
+       d'etat : `bindCursorState` lie `cursor-zoom` a `.lightbox-trigger`,
+       c'est-a-dire a la VIGNETTE de la page, pas au calque ni a l'image
+       agrandie. Le curseur y tombe donc dans son etat par DEFAUT, anneau
+       orange. Or la lightbox montre l'oeuvre en grand, et une oeuvre peut etre
+       de n'importe quelle couleur.
+       Releve sur `jhag-banana-rush`, image echantillonnee au canvas sous la
+       couronne du curseur, 12 points a 30 degres :
+
+         anneau orange (actuel)   moyenne 1,82:1   **12/12 sous le seuil de 3**
+         anneau blanc (etat zoom) moyenne 1,87:1   **12/12 sous le seuil**
+         encre sombre             moyenne 11,34:1   0/12
+         DEUX TONS blanc + sombre moyenne 11,34:1   0/12
+
+       ⚠️ LE PIEGE ETAIT D'APPLIQUER L'ETAT `cursor-zoom` A LA LIGHTBOX. Son
+       commentaire dit « images cliquables / lightbox », donc le geste paraissait
+       evident et il aurait ete INUTILE : le blanc marque 1,87 contre 1,82 pour
+       l'orange sur cette image. On aurait echange un curseur invisible contre
+       un autre.
+       ⚠️ Et aucune couleur UNIQUE ne peut marcher : ce qui sauve le blanc sur
+       une oeuvre sombre condamne le blanc sur une oeuvre claire. C'est le meme
+       constat que pour l'encre deduite du fond, deja tranche sur ce depot.
+
+       LA SORTIE : deux tons. L'anneau orange garde son identite, et un filet
+       sombre est pose de chaque cote. Sur une oeuvre claire ce sont les filets
+       qui portent (11,34 mesure) ; sur une oeuvre sombre c'est l'orange
+       (6,51 sur le sol du site). Au moins un des deux contraste toujours.
+       ⚠️ PORTEE VOLONTAIREMENT LIMITEE A LA LIGHTBOX. Partout ailleurs le site
+       maitrise ses fonds et l'anneau orange seul suffit ; l'ajouter globalement
+       serait un changement de dessin que personne n'a demande. */
+    body:has(.lightbox.active) & {
+      box-shadow:
+        0 0 0 1px var(--p-encre-sombre),
+        inset 0 0 0 1px var(--p-encre-sombre);
+    }
+
     // État hover : boutons, liens, cartes
     body.cursor-hover & {
       width: 64px;
