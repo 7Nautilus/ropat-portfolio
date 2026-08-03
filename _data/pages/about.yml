@@ -1,3 +1,25 @@
+# ⚠️ LES CHIFFRES DU BLOC `stats` VIENNENT DE MALT, PAS DU SITE.
+# Releves le 03/08/2026 sur `malt.fr/profile/victorjarry` : 25 projets,
+# 11 evaluations, note 5,0 (Qualite 5,0, Delai 5,0, Communication 5,0).
+# Ils annoncaient « ~20 » et « 9 », perimes DANS LE MAUVAIS SENS : le site se
+# faisait plus petit qu'il n'est, sur la page dont le travail est de reduire le
+# risque. Le lien vers Malt est visible dans le pied de page depuis le meme
+# jour, donc les trois se verifient maintenant en un clic.
+#
+# ⚠️ ILS DERIVERONT ENCORE, et rien ne le signalera : aucun outil du depot ne
+# lit Malt. Les reverifier a chaque relevé d'audience, ou les remplacer par une
+# formulation qui ne se perime pas.
+#
+# ⚠️ « 25 projets clients » EST LE CHIFFRE DE MALT, PAS CELUI DE CETTE GRILLE.
+# Le portfolio publie 20 fiches dont 8 portent `client: "Projet personnel"`,
+# soit 12 projets clients montres. Un lecteur qui compte les cartes trouvera
+# donc 12 et non 25. L'ecart n'est pas une erreur, c'est de la sous-publication,
+# mais il se voit en un clic : voir le chantier de la page A propos, ou ces
+# trois chiffres sont de toute facon candidats a la suppression au profit de la
+# PENTE (« dix des douze projets clients datent de 2026 »).
+#
+# ⚠️ La note 5/5 est JUSTE et l'a toujours ete. Ne pas la « corriger ».
+
 fr:
   title: "À propos"
 
@@ -6,11 +28,11 @@ fr:
   availability: "Disponible pour de nouveaux projets"
 
   stats:
-    - value: "~20"
+    - value: "25"
       label: "Projets clients"
     - value: "5/5"
       label: "Note sur Malt"
-    - value: "9"
+    - value: "11"
       label: "Avis clients"
 
   skills:
@@ -42,7 +64,7 @@ fr:
       - period: "Récemment"
         description: "Campagne ads <em>Banana Rush</em> pour la maison de parfumerie Juliette has a gun."
       - period: "Aujourd'hui"
-        description: "Une vingtaine de projets clients, 5/5 sur Malt, et des collaborations qui comptent."
+        description: "Vingt-cinq projets clients, 5/5 sur Malt, et des collaborations qui comptent."
 
   cta:
     label: "On travaille ensemble ?"
@@ -55,11 +77,11 @@ en:
   availability: "Available for new projects"
 
   stats:
-    - value: "~20"
+    - value: "25"
       label: "Client projects"
     - value: "5/5"
       label: "Rating on Malt"
-    - value: "9"
+    - value: "11"
       label: "Client reviews"
 
   skills:
@@ -91,7 +113,7 @@ en:
       - period: "Recently"
         description: "Ads campaign <em>Banana Rush</em> for the perfumery house Juliette has a gun."
       - period: "Today"
-        description: "About twenty client projects, 5/5 on Malt, and collaborations that matter."
+        description: "Twenty-five client projects, 5/5 on Malt, and collaborations that matter."
 
   cta:
     label: "Want to work together?"
