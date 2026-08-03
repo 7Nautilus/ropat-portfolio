@@ -401,16 +401,16 @@ sitemap: false
     <thead>
       <tr><th scope="col">Famille</th><th scope="col">Ratio d'avance</th>
           <th scope="col">Car./ligne à 640 px</th><th scope="col">Ratio hauteur d'x</th>
-          <th scope="col">Axes</th><th scope="col">Italique</th></tr>
+          <th scope="col">Axes</th><th scope="col">Italique</th><th scope="col">Chiffres tabulaires</th></tr>
     </thead>
     <tbody>
-      <tr data-actuelle><td><b>Manrope</b> (actuelle)</td><td>1,000</td><td>60,9</td><td>1,000</td><td>wght</td><td data-alerte>aucun</td></tr>
-      <tr><td>Figtree</td><td>0,981</td><td>62,1</td><td data-alerte>0,926</td><td>wght</td><td>oui</td></tr>
-      <tr><td>Public Sans</td><td>1,010</td><td>60,3</td><td>0,963</td><td>wght</td><td>oui</td></tr>
-      <tr><td>DM Sans</td><td>1,014</td><td>60,1</td><td data-alerte>0,926</td><td>wght + opsz</td><td>oui</td></tr>
-      <tr><td><b>Plus Jakarta Sans</b></td><td>1,026</td><td>59,4</td><td><b>1,000</b></td><td>wght</td><td>oui</td></tr>
-      <tr><td>Inter</td><td>1,039</td><td>58,6</td><td>1,019</td><td>wght + opsz</td><td>oui</td></tr>
-      <tr><td>Work Sans</td><td>1,080</td><td>56,4</td><td data-alerte>0,926</td><td>wght</td><td>oui</td></tr>
+      <tr data-actuelle><td><b>Manrope</b> (actuelle)</td><td>1,000</td><td>60,9</td><td>1,000</td><td>wght</td><td data-alerte>aucun</td><td data-alerte>aucun</td></tr>
+      <tr><td>Figtree</td><td>0,981</td><td>62,1</td><td data-alerte>0,926</td><td>wght</td><td>oui</td><td>tnum</td></tr>
+      <tr><td>Public Sans</td><td>1,010</td><td>60,3</td><td>0,963</td><td>wght</td><td>oui</td><td>tnum</td></tr>
+      <tr><td>DM Sans</td><td>1,014</td><td>60,1</td><td data-alerte>0,926</td><td>wght + opsz</td><td>oui</td><td data-alerte>aucun</td></tr>
+      <tr><td><b>Plus Jakarta Sans</b></td><td>1,026</td><td>59,4</td><td><b>1,000</b></td><td>wght</td><td>oui</td><td>tnum</td></tr>
+      <tr><td>Inter</td><td>1,039</td><td>58,6</td><td>1,019</td><td>wght + opsz</td><td>oui</td><td>tnum</td></tr>
+      <tr><td>Work Sans</td><td>1,080</td><td>56,4</td><td data-alerte>0,926</td><td>wght</td><td>oui</td><td>tnum</td></tr>
     </tbody>
   </table>
   <p class="labo-note"><b>Aucune candidate ne force à recalibrer <code>--measure-prose</code></b> :
@@ -419,6 +419,13 @@ sitemap: false
   d'x identique. <b>DM Sans paraît la plus proche par l'avance et ne l'est pas</b> : sa hauteur d'x
   est 7,4 % plus petite, donc à <code>--text-body</code> égal le texte paraîtrait plus petit.
   Regarder la seule avance menait au mauvais choix.</p>
+  <p class="labo-note"><b>Les chiffres tabulaires sont un critere, pas un detail</b>, et
+  <code>better-typography</code> le pose : « tabular numbers matter for changing values ». Le
+  colophon aligne des dates et des ratios en colonnes. Test : avec <code>tabular-nums</code>
+  demande, les dix chiffres doivent avoir la meme avance. <b>Manrope n'en a pas</b> (deux largeurs
+  distinctes subsistent) et <b>DM Sans non plus</b> (neuf). Les cinq autres repondent a
+  <code>tnum</code>. Cela sort DM Sans, qui etait l'une des deux candidates a axe
+  <code>opsz</code>.</p>
   <p class="labo-note">Ce que cette page ne dit toujours pas : le <b>poids sur le fil</b> de chaque
   candidate, et la <b>couverture de caractères</b> au-delà du latin. À mesurer avant de trancher
   définitivement.</p>
