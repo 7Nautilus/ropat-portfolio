@@ -4645,11 +4645,81 @@ body:has(.project-page) {
 }
 
 .project-avis-mot {
+  position: relative;
   margin: 0;
   font-size: var(--text-body);
   line-height: var(--leading-body);
   color: var(--ink);
   text-wrap: pretty;
+  /* ⚠️ `quotes: auto` fait choisir la marque PAR LA LANGUE de l'element.
+     `open-quote` rend donc « en francais et " en anglais, sans qu'aucune valeur
+     ne soit ecrite ici. C'est ce qui rend la regle juste le jour ou un avis
+     arrivera en anglais : le `lang` du blockquote decidera seul. Ecrire « en
+     dur marcherait aujourd'hui, les 11 avis etant francais, et deviendrait faux
+     en silence. */
+  quotes: auto;
+}
+
+/* ── LE GUILLEMET ────────────────────────────────────────────────────────
+   Il repond a un defaut precis, et pas au besoin d'habiller le bloc : le `<h2>`
+   nomme la section, mais des qu'il sort de l'ecran la citation redevient de la
+   prose ordinaire, et c'est en mobile que ca se voit le plus, la ou 426
+   caracteres tiennent sur 13 lignes.
+
+   ⚠️ IL EST DECORATIF ET IL EST DECLARE COMME TEL. `--ink-decorative` mesure
+   1,72:1, il ECHOUE au contraste et le fichier de jetons l'ecrit
+   (`_variables.scss`, la table des mesures). C'est exactement l'emploi pour
+   lequel ce jeton existe : une forme qu'on lit comme une texture, jamais une
+   information. Si le guillemet devait etre lu pour comprendre le bloc, il
+   faudrait une autre encre, et ce serait le signe qu'il porte du sens qu'il ne
+   doit pas porter.
+
+   ⚠️ `content: open-quote / ""` : LE SECOND MEMBRE EST LE TEXTE ALTERNATIF, et
+   il est VIDE EXPRES. Sans lui, le contenu genere est annonce par une partie
+   des lecteurs d'ecran, qui liraient « guillemet ouvrant » avant une citation
+   que la semantique `<blockquote>` declare deja. Un ornement qui se fait
+   entendre n'est plus un ornement, c'est du bruit. Les navigateurs qui ne
+   connaissent pas la syntaxe alternative ignorent la declaration entiere : le
+   guillemet disparait, rien ne casse, et c'est la bonne facon d'echouer.
+
+   ⚠️ DEUX POSITIONS, ET C'EST LA LARGEUR QUI DECIDE, PAS LE GOUT. Suspendre un
+   guillemet demande une marge ou le suspendre. A 1280 px la colonne de 640 px
+   laisse environ 260 px de chaque cote, il y a la place. A 375 px la gouttiere
+   ne vaut que 20 px : un glyphe suspendu deborderait de la page. Sous le seuil
+   « projet » il se pose donc SUR SA PROPRE LIGNE au-dessus du texte, ce qui ne
+   coute que de la hauteur, la seule ressource dont on dispose la.
+   Dans les deux cas il ne DEPLACE PAS le texte : au-dessus du seuil il est en
+   `absolute`, en dessous il est en `block` avant un paragraphe qui garde sa
+   mesure. La longueur de ligne mesuree ne bouge pas. */
+.project-avis-mot::before {
+  content: open-quote/"";
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--text-display);
+  font-weight: 700;
+  /* `1` et non `--leading-body` : a 44-96 px l'interligne de labeur ouvrirait
+     une boite de 150 px pour un glyphe qui en occupe 40. */
+  line-height: 1;
+  color: var(--ink-decorative);
+  /* ⚠️ `-0.22em` N'EST PAS UN REGLAGE A L'OEIL, C'EST UNE MESURE. A `top: 0` le
+     guillemet tombait 18 px trop bas et se lisait a cheval sur les deux
+     premieres lignes. Releve des metriques reelles du glyphe au canvas 2D, la
+     seule source qui donne les extents de l'ENCRE et pas ceux de la boite :
+       haut d'encre du « dans sa boite em (Chakra Petch 700, 81 px) : 27 px
+       haut de capitale de la 1re ligne dans son interligne de 33 px :  9 px
+       decalage a appliquer : 9 - 27 = -18 px, soit -0,222 em du glyphe
+     ⚠️ EN `em` ET NON EN PIXELS, et c'est ce qui rend le reglage durable :
+     `--text-display` est un `clamp()` de 44 a 96 px, donc un -18px cale a
+     1134 px de large serait faux partout ailleurs. En `em` l'alignement suit la
+     taille tout seul. */
+}
+@media (min-width: 900px) {
+  .project-avis-mot::before {
+    position: absolute;
+    right: 100%;
+    top: -0.22em;
+    margin-right: var(--spacing-xs);
+  }
 }
 
 /* Trois groupes empiles, et non plus une seule ligne qui passe a la ligne :
