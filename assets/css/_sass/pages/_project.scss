@@ -550,9 +550,14 @@ body:has(.project-page) {
    reponse 200 et **ZERO bloc `font-style: italic`**. La famille n'en a pas.
    Chakra Petch, elle, en a un (8 blocs renvoyes) : un vrai italique EST
    possible sur ce site, mais au prix du changement de famille de la citation,
-   c'est-a-dire de la face de TITRAGE en 7 lignes de texte courant. C'est un
-   arbitrage de design, il revient a Ropat, et il est chiffre ici pour qu'il
-   puisse le prendre sans refaire la mesure. */
+   c'est-a-dire de la face de TITRAGE en 7 lignes de texte courant.
+
+   ⚠️ ARBITRE PAR ROPAT LE 03/08/2026 : ON GARDE LE FAUX ITALIQUE. La vraie
+   reponse n'est pas de changer la famille de CE bloc, c'est de remplacer Manrope
+   par une famille plus flexible pour tout le site, et c'est un chantier a part
+   entiere. Tant qu'il n'est pas fait, ne pas « corriger » cette declaration :
+   elle est le symptome assume d'un manque qui se traite ailleurs.
+   Le brief chiffre de ce remplacement est dans `TODO.md`, section du 03/08. */
 .project-avis-mot {
   position: relative;
   margin: 0;
