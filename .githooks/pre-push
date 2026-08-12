@@ -1,0 +1,12 @@
+#!/bin/sh
+# ⚠️ CE HOOK EST VERSIONNE, ET C'EST LE POINT. `.git/hooks/` ne l'est pas : un
+# hook pose la-bas disparait au premier reclonage, donc la garde s'evapore
+# exactement le jour ou la machine change, c'est-a-dire le jour ou elle sert.
+#
+# Il est actif tant que `core.hooksPath` vaut `.githooks` :
+#   git config core.hooksPath .githooks
+#
+# Tout le travail vit dans le script, pour qu'il soit lisible, testable a la main
+# et porteur de son propre temoin :
+#   scripts/verifier-avant-push.sh --temoin
+exec "$(git rev-parse --show-toplevel)/scripts/verifier-avant-push.sh"

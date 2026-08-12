@@ -18,6 +18,33 @@ Bienvenue sur mon portfolio en ligne. Ce site présente mes projets, compétence
 - **GitHub Pages** pour l'hébergement
 - **GitHub Actions** pour l'automatisation CI/CD (build + sitemap)
 
+## Après un clonage, une commande
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Elle arme `.githooks/pre-push`, qui rejoue les trois étapes du job `carte` de la CI
+sur un checkout de ce que tu t'apprêtes à pousser, dans un worktree jetable, et
+refuse le push si l'une échoue.
+
+**Pourquoi ce n'est pas facultatif.** Les gardes de ce dépôt tournaient jusqu'ici
+sur la machine de développement, dont l'état est un sur-ensemble de ce que git
+contient : `.claude/`, des composants volontairement gitignorés, des fiches non
+suivies, des bancs de laboratoire. Un contrôle qui passait en local ne prouvait
+donc rien sur la CI. Le 12/08/2026, une carte publiant une route que rien ne
+produit a bloqué le déploiement, sans qu'aucun contrôle local puisse le voir.
+
+⚠️ **`core.hooksPath` est une configuration locale : elle ne se clone pas.** Le
+hook, lui, est versionné, précisément pour qu'il ne disparaisse pas le jour où la
+machine change. Cette ligne est le seul geste manuel qui reste.
+
+Pour vérifier que la garde sait échouer autant que réussir :
+
+```bash
+sh scripts/verifier-avant-push.sh --temoin
+```
+
 ## Architecture des contenus
 
 ### Données
