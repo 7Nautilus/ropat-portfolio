@@ -55,12 +55,23 @@ module Jekyll
         raise "pages_generees : `#{id}` est dans index.yml mais _data/projects/#{id}.yml n'existe pas" if projet.nil?
 
         %w[fr en].each do |lang|
-          # ⚠️ LA CLE EST `locales.<lang>.url`, JAMAIS LE SLUG, et ce n'est pas
-          # une precaution theorique : `_data/projects/ottony.yml` porte
-          # `slug: ottony` pour les URLs `/fr/projects/ottony-paris.html` et
-          # `/en/projects/ottony-paris.html`. Un generateur indexe sur le slug ou
-          # sur le nom de fichier RENOMMERAIT deux URLs vivantes, et rien dans le
-          # build ne le signalerait.
+          # ⚠️ LA CLE EST `locales.<lang>.url`, JAMAIS LE NOM DE FICHIER.
+          # Ce n'etait pas une precaution theorique : jusqu'au 03/08/2026,
+          # `_data/projects/ottony.yml` portait `slug: ottony` alors que ses URLs
+          # etaient `/fr/projects/ottony-paris.html` et son equivalent anglais. Un
+          # generateur indexe sur le slug ou sur le nom de fichier AURAIT RENOMME
+          # deux URLs vivantes, sans que rien dans le build ne le signale.
+          #
+          # ETAT DEPUIS LE 03/08/2026 : `slug` a ete supprime des vingt fichiers
+          # (personne ne le lisait, verifie sur Liquid, Ruby, les scripts et le JS)
+          # et `ottony.yml` est devenu `ottony-paris.yml`. Les vingt noms de fichier
+          # coincident donc maintenant avec leur segment d'URL.
+          #
+          # ⚠️ LA REGLE RESTE MALGRE CA, ET C'EST VOLONTAIRE. La coincidence est un
+          # FAIT du jour, pas une garantie : rien n'empeche la prochaine fiche de
+          # porter une URL qui differe de son nom de fichier, et c'est meme sain
+          # qu'une URL survive au renommage de son fichier. Deriver l'URL du nom de
+          # fichier marcherait aujourd'hui et casserait en silence ce jour-la.
           url = projet.dig("locales", lang, "url")
           if url.nil? || url.empty?
             raise "pages_generees : _data/projects/#{id}.yml n'a pas de `locales.#{lang}.url`. " \
