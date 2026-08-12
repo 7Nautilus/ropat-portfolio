@@ -1,0 +1,52 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  CE QUE ropat.art DOIT REPONDRE, APRES CHAQUE DEPLOIEMENT
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Lu par `scripts/verifier-en-ligne.rb`, lance par le job `apres-deploiement` de
+# `.github/workflows/deploy.yml`.
+#
+# ⚠️ CE FICHIER EXISTE PARCE QU'UN DEPOT NE SAIT PAS CE QU'IL SERT. Le 12/08/2026,
+# trois fontes sous licence d'essai et 64 Mo de rushes clients abandonnes etaient
+# toujours telechargeables sur ropat.art. Elles avaient ete retirees du depot les
+# 21/07 et 04/08. Le depot se croyait propre, la production ne l'etait pas, et
+# AUCUN controle ne regardait de ce cote : les gardes lisent des fichiers, pas des
+# reponses HTTP.
+#
+# ⚠️ LES LIGNES `200` NE SONT PAS DECORATIVES, ELLES SONT LE TEMOIN. Une liste qui
+# n'exigerait que des 404 passerait triomphalement le jour ou le site entier
+# tomberait, ou ou le domaine changerait : tout repondrait 404, donc « tout ce qui
+# doit avoir disparu a disparu ». Sans ces lignes, le controle ne pourrait pas
+# echouer pour la bonne raison.
+#
+# Format : <code attendu> <chemin>
+
+# ── Le site repond, et c'est ce qui donne son sens a tout le reste ──────────
+200 /
+200 /en/
+200 /fr/portfolio.html
+200 /en/portfolio.html
+200 /fr/contact.html
+200 /sitemap.xml
+200 /robots.txt
+
+# ── Fontes sous licence d'essai, retirees du depot le 21/07/2026 ────────────
+# Leur licence etait dans leur propre table de noms : « CoFo Raffine VF Trial »,
+# « FONTSPRING DEMO - Resort Sans ». Versions d'essai, prevues pour maquetter en
+# local, pas pour etre servies depuis un domaine public. Voir `TODO.md`.
+404 /assets/fonts/CoFoRaffine-VF-Trial.ttf
+404 /assets/fonts/ANICON%20SANS%20BLACK.OTF
+404 /assets/fonts/Fontspring-DEMO-resort-sansregular.otf
+
+# ── Rushes clients abandonnes, sortis du depot vers `_archives/` ────────────
+# Quatre variantes de montage que plus aucune page ne cite. `_archives/LISEZ-MOI.md`
+# en parlait deja au passe alors qu'elles etaient encore servies.
+404 /assets/videos/crow-noir-fluo.mp4
+404 /assets/videos/crow-ascii.mp4
+404 /assets/videos/cheetah-noir-fluo.mp4
+
+# ── Pages de travail sorties de la production le 29/07/2026 ─────────────────
+# `_config.yml` les exclut du build. Un `noindex` demande a un moteur de ne pas
+# indexer, il n'empeche personne d'ouvrir l'URL.
+404 /design-system.html
+404 /labo/design-system.html
+404 /labo/fiches.html

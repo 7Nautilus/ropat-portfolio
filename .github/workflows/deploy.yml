@@ -216,3 +216,53 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ══════════════════════════════════════════════════════════════════════
+  #  ET LE SITE PUBLIE, QUE REPOND-IL VRAIMENT ?
+  # ══════════════════════════════════════════════════════════════════════
+  #
+  # ⚠️ TOUTES LES AUTRES GARDES LISENT DES FICHIERS. Celle-ci lit des reponses
+  # HTTP, et c'est la seule qui parle de la surface qu'un client voit.
+  #
+  # Elle existe a cause d'un constat du 12/08/2026 : trois fontes sous licence
+  # d'essai et 64 Mo de rushes clients abandonnes etaient toujours telechargeables
+  # sur ropat.art, alors que le depot les avait retirees les 21/07 et 04/08. Le
+  # depot se croyait propre, la production ne l'etait pas, et aucun controle ne
+  # regardait de ce cote. Le seul geste qui les eteint est un deploiement reussi,
+  # donc le seul controle qui le PROUVE est un GET apres coup.
+  #
+  # ⚠️ IL NE BLOQUE RIEN, ET C'EST VOULU : il tourne APRES `deploy`, il ne peut
+  # donc pas empecher une mise en ligne. Il la constate. Ce qu'il apporte est
+  # qu'un ecart devienne visible le jour meme au lieu d'un mois plus tard.
+  #
+  # La reference est `.carte/en-ligne.txt`, commitee. Ses lignes `200` sont le
+  # temoin du dispositif : sans elles, un site entierement tombe rendrait 404
+  # partout et le controle conclurait que tout ce qui devait disparaitre a
+  # disparu.
+  apres-deploiement:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      # Le CDN de GitHub Pages peut servir un fichier supprime pendant quelques
+      # instants. Le script rejoue chaque adresse trois fois avant de conclure ;
+      # cette attente lui laisse en plus le temps de propager.
+      - name: Laisser le deploiement se propager
+        run: sleep 30
+
+      - name: Le site publie est-il celui que le depot decrit
+        run: bundle exec ruby scripts/verifier-en-ligne.rb
+
+      # ⚠️ ET LE CONTROLE SAIT-IL ECHOUER. Meme raison qu'au job `carte` : une
+      # sonde qui ne peut pas rendre un verdict negatif ne prouve rien quand elle
+      # rend un verdict positif.
+      - name: Temoin, le controle sait echouer
+        run: bundle exec ruby scripts/verifier-en-ligne.rb --temoin
