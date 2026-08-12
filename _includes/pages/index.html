@@ -15,15 +15,15 @@
 
 <main id="main-content">
   <section class="hero">
-    <!--
-    <div>
-      <div class="hero-theme-container">
-        <span class="hero-theme-dot"></span>
-        <span class="hero-theme">DIRECTION ARTISTIQUE - Angers</span> 
-      </div>
-      <h1 class="hero-title">DESIGN <span class="hero-title-span">GRAPHIQUE</span> <br><span class="hero-title-span2">&</span> STRATÉGIE</h1>
-    </div> 
-    -->
+    {%- comment -%}
+      ⚠️ Un ancien hero vivait ici en commentaire HTML, donc EMIS sur les deux
+      accueils : un `hero-theme-container`, la mention « DIRECTION ARTISTIQUE -
+      Angers » et un second `<h1 class="hero-title">DESIGN GRAPHIQUE & STRATEGIE</h1>`
+      code en dur en francais. Consequence mesuree : `_site/en/index.html` portait un
+      titre francais ligne 617 et le vrai ligne 620, et l'accueil anglais transportait
+      une accroche francaise jamais affichee. Retire le 12/08/2026, remplace par un
+      commentaire Liquid, qui lui n'est PAS emis.
+    {%- endcomment -%}
     <h1 class="hero-title uppercase">{{ index.title }}</h1>
     <div class="hero-container">
       <p class="hero-pitch">{{ index.pitch }}</p>
@@ -70,6 +70,39 @@
     <h2 class="section-title" id="partners-carousel-title">{{ index.carousel.subtitle }}</h2>
     <div class="partners-carousel-container">
       <!-- Carousel Content -->
+      {%- comment %}
+        ⚠️ LES LOGOS SONT DES FICHIERS DEPUIS LE 04/08/2026, PLUS DU BALISAGE.
+        `_data/partners.yml` portait les six SVG EN LIGNE. Mesure qui a decide :
+        ils pesaient 95,5 % de tout le SVG de cette page, rendus DEUX fois par
+        les deux boucles ci-dessous, soit 50 493 o gzip a eux seuls, quand le
+        budget CSS + JS du site entier est de 25 583 o.
+        Rien ne justifiait qu'ils soient en ligne : ils n'utilisent AUCUN
+        `currentColor` et portent 75 fills blancs en dur. C'est l'inverse exact
+        des icones de `ui/`, qui doivent rester en ligne pour suivre l'encre de
+        leur bouton (voir l'en-tete de `ui/icon-send.html`).
+        La branche conditionnelle reste : elle accepte encore du balisage en
+        ligne si un partenaire en exige un jour.
+        ⚠️ NE PAS ECRIRE DE BALISE LIQUID DANS CE COMMENTAIRE. Un `comment` de
+        Liquid TOKENISE quand meme ce qu'il contient : une conditionnelle citee
+        entre accolades y est lue comme une vraie, non fermee, et le build sort
+        en « Syntax Error in tag ». Paye ici meme le 04/08/2026.
+
+        ⚠️ CE NE SONT PAS DES IMAGES MAIS DES SURFACES MASQUEES, depuis le
+        04/08/2026. Une image externe ne peut pas heriter de `currentColor`
+        (mesure dans `components/_carousel.scss`), donc la couleur ne serait
+        jamais un jeton et ces logos disparaitraient sous le theme clair. Le
+        masque garde le fichier externe ET rend la couleur au systeme.
+        Consequence directe ici : une surface n'a pas de dimensions propres, le
+        `--ratio` du YAML les lui donne, et son nom accessible passe par
+        `role="img"` + `aria-label` puisqu'il n'y a plus d'attribut `alt`.
+
+        ⚠️ LA SECONDE BOUCLE EST `aria-hidden`, ET ELLE NE L'ETAIT PAS.
+        Elle n'existe que pour l'illusion de defilement. Tant que les logos
+        etaient en ligne SANS titre ni `aria-label`, un lecteur d'ecran
+        n'annoncait AUCUN nom : le defaut etait invisible. Nommes, les douze se
+        seraient annonces, soit chaque partenaire DEUX fois. Le masque plus le
+        masquage retablissent ce que la section promet : six noms.
+      {% endcomment -%}
       <div class="partners-carousel-track">
         {% assign partner_ids = site.data.partners.index.order %}
         <!-- Première boucle -->
@@ -79,21 +112,21 @@
             {% if item.logo contains '<svg' %}
               {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
             {% else %}
-              <img src="{{ item.logo }}" alt="{{ item.name }} logo" class="partner-logo">
+              <span class="partner-logo partner-logo--masque" role="img" aria-label="{{ item.name }}"
+                    style="--logo: url('{{ item.logo }}'); --ratio: {{ item.ratio }};"></span>
             {% endif %}
-            <!-- <span>{{ item.name }}</span> -->
           </div>
         {% endfor %}
         <!-- Deuxième boucle pour créer l'illusion d'un défilement infini -->
         {% for id in partner_ids %}
           {% assign item = site.data.partners[id] %}
-          <div class="partner-logo-container">
+          <div class="partner-logo-container" aria-hidden="true">
             {% if item.logo contains '<svg' %}
               {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
             {% else %}
-              <img src="{{ item.logo }}" alt="{{ item.name }} logo" class="partner-logo">
+              <span class="partner-logo partner-logo--masque"
+                    style="--logo: url('{{ item.logo }}'); --ratio: {{ item.ratio }};"></span>
             {% endif %}
-            <!-- <span>{{ item.name }}</span> -->
           </div>
         {% endfor %}
       </div>
