@@ -22,8 +22,10 @@ La musique est **l'origine, pas le métier actuel**. Elle explique l'œil et ell
 portfolio, elle ne dirige plus le discours.
 
 ⚠️ **Le site affiche encore le contraire au 02/08/2026.** `_config.yml` annonce « spécialisé
-dans l'accompagnement visuel des artistes musicaux ». Mesure : **3 projets sur 20** portent une
-catégorie musicale, **2 sur 20** déclarent un secteur musical. La correction est un chantier
+dans l'accompagnement visuel des artistes musicaux ». Mesure remise à jour le 12/08/2026, sur les
+**21 projets publiés** : **3** portent une catégorie musicale (`btr`, `a-lone`, `jpeja`) et **2**
+déclarent un secteur musical (`btr`, `a-lone`). Le numérateur n'a pas bougé depuis le 02/08, le
+dénominateur si. La correction est un chantier
 ouvert. Ne pas propager cette formulation dans de nouveaux textes.
 
 ---
