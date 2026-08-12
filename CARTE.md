@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 19:50, d'apres l'etat de d36ab06.
+> Generee le 12/08/2026 a 20:10, d'apres l'etat de 60f7682.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 19:50 |
+| Date du build lu | 12/08/2026 20:10 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -257,20 +257,20 @@ Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, 
 Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : les supprimer casserait un composant qui fonctionne.
 
 - .reveal-arme  style en assets/css/_sass/base/_animations.scss:17, pose par _layouts/default.html (script en ligne 2):2, _layouts/default.html (script en ligne 2):4
-- .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1331, assets/js/script.js:1336
-- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1745
+- .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1383, assets/js/script.js:1388
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1810
 - .cursor-hover  style en assets/css/_sass/components/_cursor.scss:103, pose par assets/js/script.js:81
 - .cursor-text  style en assets/css/_sass/components/_cursor.scss:111, pose par assets/js/script.js:81
 - .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:121, pose par assets/js/script.js:81
-- .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:574
+- .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:626
 - .loaded  style en assets/css/_sass/components/_loader.scss:43, pose par assets/js/script.js:147, assets/js/script.js:316
-- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1604
-- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1610
-- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1692, assets/js/script.js:1713
-- .was-validated  style en assets/css/_sass/pages/_contact.scss:138, pose par assets/js/script.js:1449
-- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1397
-- .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
-- .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
+- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1669
+- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1675
+- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1757, assets/js/script.js:1778
+- .was-validated  style en assets/css/_sass/pages/_contact.scss:138, pose par assets/js/script.js:1501
+- .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1449
+- .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1490, assets/js/script.js:1494, assets/js/script.js:1518
+- .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1241
 - .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1310, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
 ### Selecteurs absents des 66 pages construites  (20)
@@ -335,7 +335,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 
 ## 5. JS
 
-2 fichiers, 43 selecteurs litteraux, 49 ecouteurs.
+2 fichiers, 45 selecteurs litteraux, 50 ecouteurs.
 
 **Fonctions qui se relancent elles-memes en rAF** : `animer` (assets/js/dither.js:635), `animateBlob` (assets/js/script.js:65). Une fois demarrees elles ne s'arretent plus, mais leur MISE EN ROUTE depend d'une garde que la carte ne suit pas : elle rapporte la forme, pas le fait.
 
@@ -343,17 +343,17 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 
 Legitime si le JS s'en sert comme verrou interne, a verifier sinon.
 
-- stt-progress   (assets/js/script.js:1496)
-- stt-track   (assets/js/script.js:1495)
+- stt-progress   (assets/js/script.js:1557)
+- stt-track   (assets/js/script.js:1556)
 
 ### Ecouteurs `scroll` recenses  (4)
 
 A confronter au throttle : un handler sans rAF qui lit une metrique de layout force un reflow a chaque evenement.
 
-- assets/js/script.js:664
-- assets/js/script.js:1107  (passive)
-- assets/js/script.js:1561  (passive)
-- assets/js/script.js:1719
+- assets/js/script.js:716
+- assets/js/script.js:1159  (passive)
+- assets/js/script.js:1626  (passive)
+- assets/js/script.js:1784
 
 ## 6. Contrat des trois couches
 
@@ -364,22 +364,22 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `aria-atomic` | 66 page(s) | - | - **personne ne le lit** |
 | `aria-controls` | 66 page(s) | - | assets/js/script.js:355 |
 | `aria-current` | 8 page(s) | - | - **personne ne le lit** |
-| `aria-describedby` | - | - | assets/js/script.js:1407 |
+| `aria-describedby` | - | - | assets/js/script.js:1459 |
 | `aria-expanded` | 66 page(s) | oui | assets/js/script.js:362 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 66 page(s) | oui | assets/js/script.js:1608 |
-| `aria-invalid` | - | - | assets/js/script.js:1406 |
-| `aria-label` | 66 page(s) | - | assets/js/script.js:1491 |
+| `aria-hidden` | 66 page(s) | oui | assets/js/script.js:1673 |
+| `aria-invalid` | - | - | assets/js/script.js:1458 |
+| `aria-label` | 66 page(s) | - | assets/js/script.js:1552 |
 | `aria-labelledby` | 54 page(s) | - | - **personne ne le lit** |
 | `aria-live` | 66 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 42 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:372 |
-| `data-actif` | - | oui | assets/js/script.js:1626 |
-| `data-category` | 10 page(s) | - | assets/js/script.js:488 |
-| `data-chargee` | - | - | assets/js/script.js:1265 |
-| `data-chrome` | - | oui | assets/js/script.js:651 |
+| `data-actif` | - | oui | assets/js/script.js:1691 |
+| `data-category` | 10 page(s) | - | assets/js/script.js:540 |
+| `data-chargee` | - | - | assets/js/script.js:1317 |
+| `data-chrome` | - | oui | assets/js/script.js:703 |
 | `data-chrome-fige` | 4 page(s) | - | - **personne ne le lit** |
-| `data-dbg` | - | - | assets/js/script.js:1057 |
+| `data-dbg` | - | - | assets/js/script.js:1109 |
 | `data-dropdown-caret` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-menu` | 4 page(s) | - | - **personne ne le lit** |
 | `data-dropdown-option` | 4 page(s) | - | - **personne ne le lit** |
@@ -388,18 +388,18 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-dropdown-variant` | 4 page(s) | - | - **personne ne le lit** |
 | `data-empty` | 2 page(s) | oui | assets/js/script.js:390 |
 | `data-en` | 1 page(s) | oui | - |
-| `data-encre` | - | oui | assets/js/script.js:1071 |
+| `data-encre` | - | oui | assets/js/script.js:1123 |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
-| `data-saisi` | - | oui | assets/js/script.js:1691 |
-| `data-set-lang` | 64 page(s) | - | assets/js/script.js:1315 |
-| `data-seuil` | 24 page(s) | - | assets/js/script.js:1184 |
-| `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1183 |
-| `data-src` | 4 page(s) | - | assets/js/script.js:1267 |
-| `data-sur-media` | - | oui | assets/js/script.js:1051 |
+| `data-saisi` | - | oui | assets/js/script.js:1756 |
+| `data-set-lang` | 64 page(s) | - | assets/js/script.js:1367 |
+| `data-seuil` | 24 page(s) | - | assets/js/script.js:1236 |
+| `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1235 |
+| `data-src` | 4 page(s) | - | assets/js/script.js:1319 |
+| `data-sur-media` | - | oui | assets/js/script.js:1103 |
 | `data-value` | 4 page(s) | oui | assets/js/script.js:394 |
-| `data-zone` | - | oui | assets/js/script.js:1095 |
+| `data-zone` | - | oui | assets/js/script.js:1147 |
 | `href` | - | - | assets/js/script.js:189 |
-| `loop` | - | - | assets/js/script.js:1281 |
+| `loop` | - | - | assets/js/script.js:1333 |
 
 ## 7. Assets
 
@@ -456,9 +456,9 @@ Rien a signaler.
 - `assets/js/dither.js:621` : INTERACTIF
 - `assets/js/script.js:85` : selectors
 - `assets/js/script.js:355` : trigger.getAttribute('aria-controls'
-- `assets/js/script.js:467` : selector
-- `assets/js/script.js:1393` : champ.id + '-erreur'
-- `assets/js/script.js:1412` : champ.id + '-erreur'
+- `assets/js/script.js:519` : selector
+- `assets/js/script.js:1445` : champ.id + '-erreur'
+- `assets/js/script.js:1464` : champ.id + '-erreur'
 
 **Noms de variable liees a plusieurs sources** (62). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
