@@ -65,8 +65,15 @@
     1. `project.sequence` (nouveau schema explicite, le « kit arrangeable »)
     2. sinon, on reconstitue depuis l'ancien schema : thumbnails + mockups.
   L'ouverture (main_image) est retiree de la sequence pour ne pas paraitre
-  deux fois : dans les 8 projets a vignettes, thumbnails[0].src EGALE
-  main_image (verifie sur les 20 fichiers).
+  deux fois. Le retrait se fait par COMPARAISON de `src`, piece par piece
+  (ligne 97), jamais par rang.
+  ⚠️ ET L'INVARIANT ANNONCE ICI ETAIT FAUX, corrige le 12/08/2026. Il disait
+  « dans les 8 projets a vignettes, thumbnails[0].src EGALE main_image ». Ce
+  n'est vrai que pour 5 d'entre eux. Pour jhag-banana-rush, jhag-discovery-set
+  et a-lone, main_image n'est simplement PAS dans la sequence.
+  Le code n'a jamais eu ce defaut, il compare bien les `src` : c'est la prose
+  qui promettait un invariant que les donnees ne tiennent pas. Ne pas ecrire de
+  code qui s'appuierait sur `thumbnails[0]`.
 {% endcomment %}
 {% comment %}
   ⚠️ Ne JAMAIS fabriquer un tableau avec `unTruc | split: ""`. Sur un hash,
@@ -349,8 +356,10 @@
       ⚠️ `discipline` BRANCHE LE 29/07/2026, ET CE N'EST PAS UN DOUBLON DE
       `secteur`. Le premier releve l'avait range parmi les cles mortes, en le
       prenant pour une redite. Les deux champs sont en fait parfaitement
-      COMPLEMENTAIRES : 8 projets portent `discipline`, 12 portent `secteur`,
-      et aucun ne porte les deux.
+      COMPLEMENTAIRES : 8 projets portent `discipline`, 13 portent `secteur`,
+      et aucun ne porte les deux. Les deux ensembles couvrent exactement les
+      21 fiches indexees (recompte le 12/08/2026 ; la valeur precedente, 12,
+      datait d'avant l'ajout de strakara).
       La raison est dans le schema : `secteur` decrit l'ACTIVITE DU CLIENT et
       n'a pas de sens pour un projet personnel, qui n'en a pas. Les huit projets
       concernes sont donc exactement les projets perso, et leur colophon

@@ -124,9 +124,12 @@
         pose `list-style: none`, ce que le CSS fait deux lignes plus bas et ne peut pas ne
         pas faire. Sur iOS, VoiceOver annoncerait donc encore six images isolees, sur la
         classe d'appareil ou Ropat a justement signale le probleme.
-        Le role le retablit explicitement. C'est le seul cas du depot ou une `ul` en porte
-        un ; les autres listes du site ne visent pas ce role, elles ne font que se
-        debarrasser des puces.
+        Le role le retablit explicitement.
+        ⚠️ CE N'EST PAS LE SEUL DU DEPOT, et cette phrase disait le contraire jusqu'au
+        12/08/2026. `_includes/pages/about.html` en porte trois : `about-tools-list` (:98) et
+        `about-specialties-list` (:106), deux `ul`, plus `about-timeline` (:120) qui est une
+        `ol`. La regle vaut donc pour toute liste dont le CSS retire les puces, pas seulement
+        pour celle-ci.
       {%- endcomment -%}
       <ul class="partners-carousel-track" role="list">
         {% assign partner_ids = site.data.partners.index.order %}

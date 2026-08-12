@@ -54,13 +54,22 @@
 # s'affiche nulle part.** Le rendu se derive des fiches existantes, il ne se
 # force pas. Le consommateur existe depuis le 03/08/2026 :
 # `_includes/projects/project-avis.html`, appele par `project-main.html`, une
-# section entre le recit et le colophon. Il rend UNE fiche sur vingt.
+# section entre le recit et le colophon. Il rend DEUX fiches sur vingt-et-une
+# (strakara et jhag-banana-rush, recompte le 12/08/2026 ; la phrase disait
+# « une fiche sur vingt », vrai avant l'ajout de strakara).
 #
-# ⚠️ TROIS CLES DE CE FICHIER NE SONT LUES PAR PERSONNE, et la carte le dit :
-# `source`, `date` et `intitule`. Elles sont conservees parce qu'elles
-# documentent la provenance du releve, pas parce qu'un gabarit les attend. Ne
-# pas les confondre avec `projet` et `publiable`, qui sont lues par les filtres
-# `where:` du rendu et sans lesquelles rien ne sort.
+# ⚠️ UNE SEULE CLE DE CE FICHIER N'EST LUE PAR PERSONNE : `source`. Elle est
+# conservee parce qu'elle documente la provenance du releve, pas parce qu'un
+# gabarit l'attend.
+# ⚠️ CE PARAGRAPHE EN ANNONCAIT TROIS, et il invoquait la carte en lui faisant
+# dire le contraire de ce qu'elle dit. Corrige le 12/08/2026. `date` et
+# `intitule` sont RENDUS, par `_includes/projects/project-avis.html:174-192`,
+# dans le releve sous la citation, des que `projet` est renseigne. Verifie a
+# l'emission : `_site/fr/projects/strakara.html` sort « Mission / Creation du
+# logo et des flyers » puis « Avis depose le / 20/04/2026 ». Et `CARTE.md` ne
+# liste bien que `source` parmi les cles mortes.
+# Ne pas les confondre avec `projet` et `publiable`, qui sont lues par les
+# filtres `where:` du rendu et sans lesquelles rien ne sort.
 #
 # ⚠️ QUATRE `projet` SONT RENSEIGNES, LES AUTRES SONT VIDES EXPRES.
 # Rattacher l'avis d'un client a la mauvaise fiche lui ferait commenter un

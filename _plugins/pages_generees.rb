@@ -27,9 +27,13 @@
 # pas la gem `github-pages`. `_plugins/` s'execute donc, et ce depot ne s'en
 # etait jamais servi.
 # ⚠️ Si le deploiement repassait un jour par le constructeur integre de Pages, ce
-# fichier cesserait de s'executer EN SILENCE et 48 pages disparaitraient. Le
-# repli est prevu et documente dans le plan : un script qui ecrit les memes 48
+# fichier cesserait de s'executer EN SILENCE et 50 pages disparaitraient. Le
+# repli est prevu et documente dans le plan : un script qui ecrit les memes 50
 # fichiers, avec un mode `--check` pour detecter la derive.
+# ⚠️ Ces deux comptes disaient 48, le nombre de fichiers d'AVANT la bascule du
+# 29/07. Ce que ce plugin engendre aujourd'hui, c'est 42 + 8 = 50 (releve du
+# 12/08/2026, il suit `_data/projects/index.yml`). Les mentions de 48 plus haut
+# et plus bas parlent bien du passe, ne pas les toucher.
 
 module Jekyll
   class PagesGenerees < Generator
@@ -45,7 +49,7 @@ module Jekyll
 
     private
 
-    # ── Les 40 pages projet ─────────────────────────────────────────────────
+    # ── Les 42 pages projet ─────────────────────────────────────────────────
     def generer_projets
       ordre = @site.data.dig("projects", "index", "order")
       raise "pages_generees : _data/projects/index.yml n'a pas de cle `order`" unless ordre.is_a?(Array)

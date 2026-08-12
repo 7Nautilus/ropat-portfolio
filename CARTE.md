@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 21:48, d'apres l'etat de 8d90143.
+> Generee le 12/08/2026 a 22:43, d'apres l'etat de 815e206.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 21:48 |
+| Date du build lu | 12/08/2026 22:43 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -209,9 +209,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-129 jetons definis, 125 consommes, 294 noms de selecteur, 11 `!important`.
+128 jetons definis, 124 consommes, 273 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1348`, `assets/css/_sass/pages/_project.scss:1356`
+`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1323`, `assets/css/_sass/pages/_project.scss:1331`
 
 Points de rupture ecrits en dur : 520px (1x)
 
@@ -219,12 +219,12 @@ Points de rupture ecrits en dur : 520px (1x)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
-- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:572)
-- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:696)
-- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:479)
-- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:478)
-- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:477)
-- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:415)
+- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:585)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:709)
+- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:492)
+- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:491)
+- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:490)
+- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:428)
 
 ### Jetons lus UNIQUEMENT depuis le JavaScript  (2)
 
@@ -244,13 +244,12 @@ Si la donnee qui pose le `style=` manque, la declaration entiere tombe.
 - assets/css/_sass/pages/_project.scss:978  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 - assets/css/_sass/pages/_project.scss:994  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 
-### DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre  (3)
+### DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre  (2)
 
 Ce n'est pas du code non emis, c'est du style qui ne s'applique pas. A reparer, pas a supprimer.
 
-- .projects-title style en assets/css/_sass/base/_media-queries.scss:236, mais le HTML emet id="projects-title" sur 4 page(s)
-- .contact-email style en assets/css/_sass/base/_media-queries.scss:326, mais le HTML emet id="contact-email" sur 2 page(s)
-- .projects-grid style en assets/css/_sass/layout/_grids.scss:12, mais le HTML emet id="projects-grid" sur 12 page(s)
+- .projects-title style en assets/css/_sass/base/_media-queries.scss:183, mais le HTML emet id="projects-title" sur 4 page(s)
+- .contact-email style en assets/css/_sass/base/_media-queries.scss:268, mais le HTML emet id="contact-email" sur 2 page(s)
 
 ### Selecteurs POSES PAR LE JS, absents du HTML construit  (16)
 
@@ -258,51 +257,26 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 
 - .reveal-arme  style en assets/css/_sass/base/_animations.scss:17, pose par _layouts/default.html (script en ligne 2):2, _layouts/default.html (script en ligne 2):4
 - .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1383, assets/js/script.js:1388
-- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:70, pose par assets/js/script.js:1810
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:70, pose par assets/js/script.js:1814
 - .cursor-hover  style en assets/css/_sass/components/_cursor.scss:103, pose par assets/js/script.js:81
 - .cursor-text  style en assets/css/_sass/components/_cursor.scss:111, pose par assets/js/script.js:81
 - .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:121, pose par assets/js/script.js:81
 - .lightbox-image  style en assets/css/_sass/components/_lightbox.scss:35, pose par assets/js/script.js:626
 - .loaded  style en assets/css/_sass/components/_loader.scss:43, pose par assets/js/script.js:147, assets/js/script.js:316
-- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1669
-- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1675
-- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1757, assets/js/script.js:1778
+- .scrollbar  style en assets/css/_sass/components/_scrollbar.scss:14, pose par assets/js/script.js:1673
+- .scrollbar-thumb  style en assets/css/_sass/components/_scrollbar.scss:59, pose par assets/js/script.js:1679
+- .scrollbar-saisie  style en assets/css/_sass/components/_scrollbar.scss:91, pose par assets/js/script.js:1761, assets/js/script.js:1782
 - .was-validated  style en assets/css/_sass/pages/_contact.scss:138, pose par assets/js/script.js:1501
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1449
-- .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1490, assets/js/script.js:1494, assets/js/script.js:1518
+- .is-invalid  style en assets/css/_sass/pages/_contact.scss:306, pose par assets/js/script.js:391, assets/js/script.js:1490, assets/js/script.js:1494, assets/js/script.js:1518
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1241
-- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1310, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
-
-### Selecteurs absents des 66 pages construites  (20)
-
-Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
-
-- .card-grid  assets/css/_sass/base/_media-queries.scss:17 assets/css/_sass/base/_media-queries.scss:126 assets/css/_sass/base/_media-queries.scss:240 assets/css/_sass/layout/_grids.scss:1
-- .service-main-container  assets/css/_sass/base/_media-queries.scss:40 assets/css/_sass/base/_media-queries.scss:219 assets/css/_sass/layout/_sections.scss:208
-- .hero-project  assets/css/_sass/base/_media-queries.scss:103
-- .hero-project-container  assets/css/_sass/base/_media-queries.scss:107 assets/css/_sass/components/_containers.scss:82
-- .hero-image-container  assets/css/_sass/base/_media-queries.scss:111 assets/css/_sass/base/_media-queries.scss:195
-- .hero-intro  assets/css/_sass/base/_media-queries.scss:134
-- .hero-image  assets/css/_sass/base/_media-queries.scss:169
-- .service-main-container-text  assets/css/_sass/base/_media-queries.scss:223 assets/css/_sass/layout/_sections.scss:215
-- .services-page-subtitle  assets/css/_sass/base/_media-queries.scss:227 assets/css/_sass/layout/_sections.scss:247
-- .services-page-description  assets/css/_sass/base/_media-queries.scss:231 assets/css/_sass/layout/_sections.scss:251
-- .service-card-big  assets/css/_sass/components/cards/_service-cards.scss:71
-- .hero-theme-container  assets/css/_sass/layout/_sections.scss:161
-- .hero-theme  assets/css/_sass/layout/_sections.scss:176
-- .hero-theme-dot  assets/css/_sass/layout/_sections.scss:186
-- .subservice-section  assets/css/_sass/layout/_sections.scss:201
-- #contact-social-links  assets/css/_sass/layout/_sections.scss:272 assets/css/_sass/layout/_sections.scss:322
-- .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
-- .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
-- .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
-- .project-back-link  assets/css/_sass/pages/_project.scss:1205 assets/css/_sass/pages/_project.scss:1218 assets/css/_sass/pages/_project.scss:1220 assets/css/_sass/pages/_project.scss:1223
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1285, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
 ### Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme  (2)
 
 Chacune est un endroit que le jeton ne pourra pas deplacer le jour ou il bougera.
 
-- 1px ecrit 6 fois en trait, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:189, assets/css/_sass/components/cards/_project-cards.scss:24, assets/css/_sass/layout/_sections.scss:128)
+- 1px ecrit 6 fois en trait, alors que --hairline-width vaut exactement ca   (ex. assets/css/_sass/base/_media-queries.scss:156, assets/css/_sass/components/cards/_project-cards.scss:24, assets/css/_sass/layout/_sections.scss:128)
 - 3px ecrit 4 fois en trait, alors que --signal-width vaut exactement ca   (ex. assets/css/_sass/components/_cursor.scss:30, assets/css/_sass/components/_cursor.scss:107, assets/css/_sass/components/cards/_experience-cards.scss:22)
 
 ### Valeurs HORS ECHELLE : aucun jeton de leur famille ne les porte  (23)
@@ -311,26 +285,26 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 
 - decalage 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_lightbox.scss:72, assets/css/_sass/pages/_about.scss:227)
 - decalage 4px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:54, assets/css/_sass/layout/_header.scss:560)
-- espacement 0.4rem : 9 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:314, assets/css/_sass/base/_media-queries.scss:315, assets/css/_sass/base/_media-queries.scss:387)
-- espacement 0.6rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_contact.scss:396, assets/css/_sass/pages/_contact.scss:397)
-- espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:310)
-- espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
-- espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:311, assets/css/_sass/components/_containers.scss:15)
-- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:962, assets/css/_sass/pages/_project.scss:1057)
+- espacement 0.4rem : 8 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:256, assets/css/_sass/base/_media-queries.scss:257, assets/css/_sass/base/_media-queries.scss:329)
+- espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:124, assets/css/_sass/components/_buttons.scss:310)
+- espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:211, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
+- espacement 0.6rem : 6 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:78, assets/css/_sass/pages/_contact.scss:374, assets/css/_sass/pages/_contact.scss:375)
+- espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:211, assets/css/_sass/components/_buttons.scss:311, assets/css/_sass/components/_containers.scss:15)
+- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:78, assets/css/_sass/pages/_project.scss:962, assets/css/_sass/pages/_project.scss:1057)
 - espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:208, assets/css/_sass/pages/_project.scss:428)
-- espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
-- espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:249, assets/css/_sass/pages/_contact.scss:375)
+- espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:227, assets/css/_sass/pages/_contact.scss:353)
 - espacement -1px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:38)
-- espacement 0.15rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:270)
-- espacement 0.35rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:372)
+- espacement 0.15rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:248)
+- espacement 0.35rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:350)
 - espacement 0.5em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:488)
 - espacement 1.1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/layout/_header.scss:488)
 - espacement 1.1rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:361)
 - espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
-- espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
+- espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:101)
 - espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:835)
+- espacement 2.5rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16)
 - espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:26)
-- trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:125)
+- trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:99, assets/css/_sass/components/_containers.scss:159, assets/css/_sass/components/_cursor.scss:125)
 - trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
 
 ## 5. JS
@@ -343,8 +317,8 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 
 Legitime si le JS s'en sert comme verrou interne, a verifier sinon.
 
-- stt-progress   (assets/js/script.js:1557)
-- stt-track   (assets/js/script.js:1556)
+- stt-progress   (assets/js/script.js:1561)
+- stt-track   (assets/js/script.js:1560)
 
 ### Ecouteurs `scroll` recenses  (4)
 
@@ -352,8 +326,8 @@ A confronter au throttle : un handler sans rAF qui lit une metrique de layout fo
 
 - assets/js/script.js:716
 - assets/js/script.js:1159  (passive)
-- assets/js/script.js:1626  (passive)
-- assets/js/script.js:1784
+- assets/js/script.js:1630  (passive)
+- assets/js/script.js:1788
 
 ## 6. Contrat des trois couches
 
@@ -367,14 +341,14 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `aria-describedby` | - | - | assets/js/script.js:1459 |
 | `aria-expanded` | 66 page(s) | oui | assets/js/script.js:362 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 66 page(s) | oui | assets/js/script.js:1673 |
+| `aria-hidden` | 66 page(s) | oui | assets/js/script.js:1677 |
 | `aria-invalid` | - | - | assets/js/script.js:1458 |
-| `aria-label` | 66 page(s) | - | assets/js/script.js:1552 |
+| `aria-label` | 66 page(s) | - | assets/js/script.js:1556 |
 | `aria-labelledby` | 54 page(s) | - | - **personne ne le lit** |
 | `aria-live` | 66 page(s) | - | - **personne ne le lit** |
 | `aria-modal` | 42 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:372 |
-| `data-actif` | - | oui | assets/js/script.js:1691 |
+| `data-actif` | - | oui | assets/js/script.js:1695 |
 | `data-category` | 10 page(s) | - | assets/js/script.js:540 |
 | `data-chargee` | - | - | assets/js/script.js:1317 |
 | `data-chrome` | - | oui | assets/js/script.js:703 |
@@ -390,7 +364,7 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-en` | 1 page(s) | oui | - |
 | `data-encre` | - | oui | assets/js/script.js:1123 |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
-| `data-saisi` | - | oui | assets/js/script.js:1756 |
+| `data-saisi` | - | oui | assets/js/script.js:1760 |
 | `data-set-lang` | 64 page(s) | - | assets/js/script.js:1367 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:1236 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1235 |
@@ -437,7 +411,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 284533 o brut, 90673 o gzip. Sans les commentaires : 87477 o, 14184 o gzip, soit **84 % de moins** sur le fil.
+**CSS servi** : 281571 o brut, 90515 o gzip. Sans les commentaires : 83137 o, 13540 o gzip, soit **85 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 

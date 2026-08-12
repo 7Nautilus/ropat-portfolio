@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-08-12T19:48:53Z",
-  "commit": "8d90143",
+  "genere_le": "2026-08-12T20:43:30Z",
+  "commit": "815e206",
   "pages_construites": 66,
   "perime": null,
   "indetermines": 7,
@@ -495,7 +495,6 @@
     "--scrollbar-thumb-active",
     "--secondary-color",
     "--shadow-ambient",
-    "--shadow-md",
     "--shadow-signal",
     "--shadow-sm",
     "--signal-chrome",
@@ -541,28 +540,7 @@
     "--rhythm-sm",
     "--track-display"
   ],
-  "selecteurs_absents": [
-    ".card-grid",
-    ".service-main-container",
-    ".hero-project",
-    ".hero-project-container",
-    ".hero-image-container",
-    ".hero-intro",
-    ".hero-image",
-    ".service-main-container-text",
-    ".services-page-subtitle",
-    ".services-page-description",
-    ".service-card-big",
-    ".hero-theme-container",
-    ".hero-theme",
-    ".hero-theme-dot",
-    ".subservice-section",
-    "#contact-social-links",
-    ".social-links",
-    ".social-icon",
-    ".contact-select",
-    ".project-back-link"
-  ],
+  "selecteurs_absents": [],
   "selecteurs_poses_par_js": [
     ".reveal-arme",
     ".is-visible",
@@ -589,10 +567,10 @@
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 284533,
-    "gzip": 90673,
-    "sans_commentaires": 87477,
-    "gzip_sans": 14184
+    "brut": 281571,
+    "gzip": 90515,
+    "sans_commentaires": 83137,
+    "gzip_sans": 13540
   },
   "ratios_faux": []
 }
