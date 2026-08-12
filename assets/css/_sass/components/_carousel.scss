@@ -81,41 +81,126 @@
        toute facon donne du noir sur du quasi-noir, le fond de carte calcule
        valant rgb(1,4,4). Le survol y rendait le texte MOINS lisible. */
 
-    /* ── SURVOL : les deux couches de la charte ───────────────────────
+    /* ── SURVOL : le blaze, et rien que le blaze ──────────────────────
        Realtree, c'est un camouflage dense ET un blaze orange qui claque
-       CONTRE lui. Le carrousel avait deja la premiere couche sans le savoir :
-       le niveau de gris au repos, c'est le logo dissimule, et le survol le
-       fait sortir du camouflage en lui rendant ses couleurs.
-       Il manquait le blaze. Le halo orange suit le TRACE du logo et non une
-       boite, ce qui est la seule forme possible depuis qu'il n'y a plus de
-       carte. L'orange n'est pose nulle part au repos : il n'apparait qu'a
+       CONTRE lui. Le halo orange suit le TRACE du logo et non une boite, ce
+       qui est la seule forme possible depuis qu'il n'y a plus de carte.
+       L'orange n'est pose nulle part au repos : il n'apparait qu'a
        l'engagement, donc il signale encore quelque chose.
-       Les deux fonctions se composent dans un seul `filter`, dans cet ordre :
-       la desaturation d'abord, le halo ensuite, sinon le halo serait
-       desature avec le reste et virerait au gris. */
+
+       ⚠️ LA DESATURATION A ETE RETIREE LE 04/08/2026, ET ELLE N'A JAMAIS RIEN
+       FAIT. Le commentaire d'origine decrivait la premiere couche du
+       camouflage : « le niveau de gris au repos, c'est le logo dissimule, et
+       le survol le fait sortir du camouflage en lui rendant ses couleurs ».
+       Mesure : **les six logos partenaires sont MONOCHROMES**, cinq en
+       `fill="white"` et Seiko en `.cls-1 { fill: #fff }`. Un `grayscale()` sur
+       du blanc rend du blanc. L'effet decrit n'a donc jamais existe, et le
+       survol ne revelait aucune couleur.
+       Depuis le passage au masque, la desaturation deviendrait meme NUISIBLE :
+       l'encre du site est `#DCE6E0`, une teinte legerement verte, et
+       `grayscale()` la ramenerait a un gris neutre. Elle effacerait donc
+       exactement ce que la tokenisation vient d'apporter.
+       ⚠️ Pour retrouver la reveleation promise, il faudrait des logos FOURNIS
+       EN COULEUR. C'est une decision d'assets, pas de CSS. */
+    /* ⚠️ LE HALO EST POSE SUR LE CONTENEUR, PAS SUR LE LOGO, ET C'EST OBLIGATOIRE
+       DEPUIS LE MASQUE. Ordre de rendu CSS sur un meme element : `filter`, PUIS
+       `clip`, PUIS `mask`. Un `drop-shadow` deborde de la boite ; le masque, dont
+       le `mask-clip` vaut `border-box` par defaut, le rognerait donc entierement.
+       Le halo aurait disparu sans que rien ne le signale.
+       Pose sur le conteneur, qui n'est pas masque, il se calcule a partir du
+       rendu de son enfant, c'est-a-dire de la silhouette DEJA masquee : il suit
+       toujours le trace du logo, et il n'est plus rogne. */
+    /* Le conteneur n'avait aucune transition : sans elle le halo apparaitrait
+       d'un coup pendant que l'echelle du logo, elle, glisserait sur 0,3 s. */
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 55%, transparent));
+    }
+
     &:hover .partner-logo {
-      filter: grayscale(0%)
-              drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 55%, transparent));
       transform: scale(1.05);
     }
   }
 
+  /* ⚠️ TAILLE PILOTEE PAR LE RATIO DE LA SOURCE, ET IL VIENT DU YAML.
+     Une balise image tirait sa largeur de ses dimensions intrinseques ; une
+     surface masquee n'en a aucune. `--ratio` porte donc le `viewBox` de chaque
+     logo, depuis `_data/partners.yml`, ce qui reproduit les largeurs au pixel :
+     Ottony 180, Vetoquinol 180, Juliette 144, Seiko 180, PrintoClock 180,
+     Moon 175, releve avant la bascule et revérifie apres.
+     `contain` joue ici le role de l'ancien `object-fit: contain`, y compris le
+     letterboxing des logos tres larges plafonnes a 180. */
   .partner-logo {
-    width: auto;
-    max-width: 180px;
-    height: 80px;
-    object-fit: contain;
+    display: block;
+    inline-size: auto;
+    max-inline-size: 180px;
+    block-size: 80px;
+    /* ⚠️ PAS DE REPLI DANS CE `var()`, ET C'EST VOULU, 04/08/2026.
+       La premiere version ecrivait `var(--ratio, 2 / 1)`. Le repli aurait force
+       un format 2/1 sur la branche qui rend encore du SVG EN LIGNE, laquelle ne
+       pose pas `--ratio` : le logo y aurait ete deforme sans que rien ne le
+       signale. Sans repli, la declaration devient invalide a la valeur calculee
+       quand `--ratio` manque, donc `aspect-ratio` retombe sur `auto`, ce qui est
+       exactement ce qu'un SVG en ligne veut : son propre `viewBox`. */
+    aspect-ratio: var(--ratio);
+    /* ⚠️ PAS D'`object-fit` ICI, ET LA LIGNE QUI Y ETAIT SE JUSTIFIAIT MAL.
+       Elle annoncait servir « si un partenaire repasse en balisage en ligne ».
+       C'est faux : `object-fit` ne s'applique qu'aux elements REMPLACES, et un
+       `<svg>` ecrit en ligne n'en est pas un. Ce qui protege cette branche est
+       son `preserveAspectRatio`, actif par defaut, qui n'a rien a ecrire ici.
+       Retire le 04/08/2026 : une ligne morte assortie d'une raison fausse coute
+       plus que rien du tout. */
 
     /* `opacity: 0.6` est RETIRE. Cette section s'intitule « Ils m'ont fait
        confiance » : c'est la preuve, et sa valeur tient entierement a ce que
        les noms soient RECONNAISSABLES. Desaturer ET effacer a 60 % sur un
        fond a rgb(1,4,4) rendait Vetoquinol, Juliette has a gun et Seiko
-       fantomatiques, donc la section se retournait contre son propre but.
-       Le niveau de gris reste, lui : il tient la coherence visuelle entre des
-       chartes tierces qui n'ont aucune raison de s'accorder, et il laisse au
-       survol quelque chose a reveler. */
-    filter: grayscale(100%);
+       fantomatiques, donc la section se retournait contre son propre but. */
     transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  /* ══ LE LOGO EST UNE SURFACE PEINTE A TRAVERS UN MASQUE ══════════════════
+     ⚠️ POURQUOI PAS UNE IMAGE EXTERNE + `currentColor` : MESURE DU 04/08/2026.
+     Un `currentColor` place dans un SVG appele comme image externe se resout
+     dans le document du SVG, PAS dans la page hote. Temoin : le meme carre en
+     `fill="currentColor"`, sous un parent dont la couleur est un rouge pur,
+     rend du NOIR OPAQUE en image externe et le ROUGE ATTENDU quand il est
+     ecrit en ligne. Les deux mesures ont ete lues au canevas, pixel central.
+     Remettre les SVG en ligne pour recuperer l'heritage couterait les 50 493 o
+     gzip que leur sortie en fichiers vient d'economiser sur l'accueil.
+     Le masque tient les deux bouts : le fichier reste externe et mis en cache,
+     et la couleur redevient un JETON. Verifie sur les six, Moon compris malgre
+     ses deux PNG embarques en masques de luminance.
+     ⚠️ Ce qu'il coute : l'element n'est plus une image, donc son nom
+     accessible passe par `role="img"` + `aria-label` dans le gabarit.
+     ⚠️ Le prefixe `-webkit-` reste tant que des Safari anterieurs a 15.4
+     circulent : sans lui, le masque est ignore et la surface rend un aplat
+     plein de la taille de la boite, ce qui est pire que pas de logo. */
+  .partner-logo--masque {
+    color: var(--ink);
+    background: currentColor;
+    -webkit-mask: var(--logo) center / contain no-repeat;
+            mask: var(--logo) center / contain no-repeat;
+  }
+
+  /* ⚠️ MODE COULEURS FORCEES : LE SEUL POINT DE CE LOT QUE JE N'AI PAS PU
+     MESURER, ET LE RAISONNEMENT EST DONC A VERIFIER LE JOUR OU C'EST POSSIBLE.
+     Une image restait visible en `forced-colors` : le systeme ne repeint pas
+     les images. Une surface masquee, elle, tire sa couleur d'un
+     `background-color`, que ce mode REMPLACE par la couleur systeme. Le logo
+     deviendrait alors une silhouette de la couleur du fond, sur ce fond, donc
+     invisible. C'est le prix cache du masque, et il ne se voit sur aucun ecran
+     ordinaire.
+     `forced-color-adjust: none` sort l'element du mode. La specification cite
+     explicitement les LOGOS comme cas legitime : une marque tierce n'est pas
+     du texte a re-contraster, c'est une preuve a reconnaitre, et cette section
+     s'intitule « Ils m'ont fait confiance ».
+     ⚠️ Le volet de mesure de ce depot ne sait pas emuler `forced-colors`. Cette
+     regle est donc DEDUITE, pas observee : la verifier sur un vrai Windows en
+     contraste eleve avant de la considerer acquise. */
+  @media (forced-colors: active) {
+    .partner-logo--masque { forced-color-adjust: none; }
   }
 }
 
@@ -133,6 +218,26 @@
     width: 100%;
     overflow-x: auto;
     flex-wrap: nowrap;
+  }
+
+  /* ⚠️ LE SECOND TOUR DISPARAIT, ET CE DEFAUT ETAIT LA AVANT LE MASQUE.
+     Les six logos sont rendus DEUX fois, uniquement pour donner l'illusion
+     d'une boucle sans fin. Cette media query supprime justement la boucle : le
+     doublon ne sert alors plus a rien et la bande, devenue defilable a la main,
+     annonce chaque partenaire deux fois de suite a qui la parcourt des yeux.
+     Les lecteurs d'ecran etaient deja couverts par l'`aria-hidden` pose le
+     04/08 ; c'est ce meme attribut qui permet de fermer le cas visuel en une
+     ligne. */
+  .partners-carousel .partner-logo-container[aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Le fondu de bord du conteneur existe pour adoucir une bande QUI GLISSE.
+     Sur une bande qu'on fait defiler soi-meme, il efface exactement ce vers
+     quoi on avance : les 80 px de chaque bord partent au transparent. */
+  .partners-carousel .partners-carousel-container {
+    -webkit-mask-image: none;
+            mask-image: none;
   }
 }
 

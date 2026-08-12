@@ -229,8 +229,8 @@ header {
    possible depuis que son SVG est passe a `currentColor` ; tant qu'il portait
    `#FF5C00` en dur, cette variante etait inatteignable. */
 header[data-sur-media][data-encre="sombre"] {
-  --encre-chrome: var(--p-encre-sombre);
-  --signal-chrome: var(--p-encre-sombre);
+  --encre-chrome: var(--p-vert-mediane);
+  --signal-chrome: var(--p-vert-mediane);
 
   /* ⚠️ LA LUEUR PORTEE DOIT ETRE REDECLAREE ICI, ET LES DEUX LIGNES AU-DESSUS
      NE SUFFISENT PAS. Signale par Ropat le 03/08/2026 : sur cette variante, le
@@ -474,7 +474,7 @@ header[data-sur-media] {
    ombre, et un survol complet. C'etait un `.btn--solid` reecrit a la main sous
    un autre nom, et la duplication a coute un defaut reel : le correctif de
    contraste pose sur `.btn--solid:hover` pendant la passe `include` (texte
-   blanc sur aplat orange plein, 3,10:1, corrige a 6,51:1 via `--accent-ink`)
+   blanc sur aplat orange plein, 3,10:1, corrige a 6,29:1 via `--accent-ink`)
    n'a jamais atteint ce bouton, reste a 3,10:1 sur toutes les pages.
 
    Depuis le 28/07/2026, il passe par `ui/button.html` et herite de

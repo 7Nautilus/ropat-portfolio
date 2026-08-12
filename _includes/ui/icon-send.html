@@ -13,9 +13,19 @@
   états, et le `filter: invert(1)` disparaît avec elle.
 
   `1em` comme la flèche : l'icône suit la taille du texte au lieu de la fixer.
+
+  ⚠️ L'ÉPAISSEUR SE LIT EN POURCENTAGE DE LA BOÎTE, PAS EN UNITÉS DU `viewBox`.
+  Ce tracé vient d'un dessin en 160, la flèche est en 24 : comparer 16 à 2 ne
+  veut rien dire. Ce qui se compare est le rapport. La flèche trace 2/24, soit
+  8,33 % ; ce fichier traçait 16/160, soit 10,0 %, donc **20 % plus épais**
+  qu'elle à taille égale. Rendus tous deux à 20 px, cela faisait 2,00 px contre
+  1,67 px, et les deux se côtoient dans un même bouton.
+  Aligné sur la flèche le 04/08/2026, sur décision de Ropat : 160 x 2/24 =
+  13,333. Toute reprise de ce tracé garde ce rapport, ou l'icône redevient la
+  plus grasse du système sans que personne ne l'ait voulu.
 {% endcomment %}
 <svg class="btn-icon-send" width="1em" height="1em" viewBox="0 0 160 160"
      fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <path d="M152,26c0,1.99-.32,3.91-.92,5.7l-36,108c-2.39,7.15-9.13,12.3-17.08,12.3-8.39,0-15.44-5.74-17.43-13.5h0l-10.23-36.38h-.01c-1.72-6.15-6.62-10.96-12.82-12.55h0s-36.39-10.24-36.39-10.24h0c-7.57-2.13-13.11-9.09-13.11-17.33s5.32-14.91,12.65-17.19L127.81,9.09l.49-.17c1.79-.59,3.71-.92,5.7-.92,9.94,0,18,8.06,18,18Z"
-        stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+        stroke="currentColor" stroke-width="13.333" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

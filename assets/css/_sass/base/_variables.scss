@@ -68,7 +68,16 @@
   --p-neige-haute:   #F0F4F1;
   --p-neige-mediane: #DCE6E0;
   --p-neige-basse:   #BFD1C7;
-  --p-encre-sombre:  #05100F;
+
+  /* ⚠️ `--p-encre-sombre: #05100F` EST SUPPRIME, 04/08/2026, arbitrage de Ropat.
+     Il valait une quatrieme valeur sombre pour une famille qui en avait deja
+     trois, et il etait a **dE 1,05** du vert median : a peine perceptible, donc
+     une primitive de plus sans matiere de plus. Tout ce qui le lisait lit
+     desormais `--p-vert-mediane`.
+     ⚠️ LA BASCULE EST UN GAIN, PAS UN COMPROMIS, et c'est ce qui l'autorise :
+     l'encre sur la neige passe de 17,39:1 a 17,55:1, et `--accent-ink` sur
+     l'orange de 6,24:1 a 6,29:1. Aucun contraste ne baisse.
+     Ne pas le reintroduire : la famille sombre a trois paliers, pas quatre. */
 
   /* ⚠️ `--blanc: #ffffff` est SUPPRIME. Un blanc pur etait le seul corps
      etranger d'une palette entierement teintee : il n'appartenait a aucun des
@@ -191,7 +200,20 @@
 
      Le skin clair, lui, est deja sur l'axe (147 a 175 degres) et n'a jamais eu
      ce defaut : l'ecart est confine au bloc sombre. */
-  --ink: var(--p-neige-haute);
+  /* ⚠️ LE MEDIAN ET NON LE HAUT DE LA RAMPE, 04/08/2026, arbitrage de Ropat.
+     Le systeme se lit maintenant en symetrie : **les sols occupent les bouts des
+     deux rampes, les encres leur median**. Sombre, sol `--p-vert-basse` et encre
+     `--p-neige-mediane` ; clair, sol `--p-neige-haute` et encre
+     `--p-vert-mediane`. Avant, l'encre claire prenait le HAUT de sa rampe quand
+     l'encre sombre prenait un quatrieme ton hors rampe : deux exceptions pour un
+     seul role.
+     ⚠️ CE CHANGEMENT COUTE DU CONTRASTE, ET C'EST LE SEUL DU LOT QUI EN COUTE :
+     **18,15:1 -> 15,77:1** sur le sol. Il reste tres au-dessus de AAA (7), donc
+     le plancher de la regle 9 tient, mais ce n'est pas une operation blanche :
+     c'est le corps de texte de tout le site qui bouge. Ne pas l'annuler par
+     inadvertance en « restaurant » `--p-neige-haute`, qui reste le sol du skin
+     clair et n'a donc pas disparu. */
+  --ink: var(--p-neige-mediane);
   --ink-soft: #e2e8f0;
   --ink-muted: #9CA3AF;
   /* 0.46 et non 0.45 : a 0.45 le contraste tombe a 4,47:1 sur le plancher du
@@ -246,11 +268,16 @@
   --accent-soft: color-mix(in srgb, var(--accent) 20%, transparent);
   /* Texte pose SUR un aplat d'orange : il doit etre SOMBRE.
      Mesure : blanc sur #ff5c00 = 3,10:1, sous AA pour du texte courant.
-     Encre sombre sur #ff5c00 = 6,51:1. Vaut dans les deux skins, l'orange
-     ne changeant pas d'un theme a l'autre.
+     Encre sombre sur #ff5c00 = **6,29:1**, releve au navigateur le 04/08/2026
+     sur la valeur reellement resolue. Vaut dans les deux skins, l'orange ne
+     changeant pas d'un theme a l'autre.
+     ⚠️ CE FICHIER A LONGTEMPS ANNONCE 6,51:1, ET CE CHIFFRE N'A JAMAIS ETE
+     DELIVRE. 6,51 est ce que donnerait `--p-vert-basse` ; le jeton valait
+     `--p-encre-sombre` (6,24:1) puis `--p-vert-mediane` (6,29:1). Le nombre
+     avait survecu a deux changements de valeur sans etre remesure.
      Dette soldee le 28/07/2026 : .btn--solid:hover bascule desormais sur ce
      token au lieu de garder un texte blanc a 3,10:1. */
-  --accent-ink: var(--p-encre-sombre);
+  --accent-ink: var(--p-vert-mediane);
   --signal-width: 3px;          /* le trait epais, quand il veut dire quelque chose */
 
   /* ── Barre de defilement ───────────────────────────────────────────────
@@ -767,10 +794,10 @@
      C'est ce qui prouve que le nom `raised` etait faux dans les deux skins et
      pas seulement dans le sombre. */
   --surface-veil: var(--p-neige-mediane);
-  --surface-subtle: rgba(5, 16, 15, 0.06);
-  --surface-faint: rgba(5, 16, 15, 0.025);
+  --surface-subtle: rgba(3, 15, 12, 0.06);
+  --surface-faint: rgba(3, 15, 12, 0.025);
   /* Meme role, meme absence de seuil : c'est une texture, pas un texte. */
-  --ink-decorative: rgba(5, 16, 15, 0.2);
+  --ink-decorative: rgba(3, 15, 12, 0.2);
   --surface-scrim: rgba(240, 244, 241, 0.98);
   --surface-placeholder: var(--p-neige-basse);
   /* ⚠️ Le canal du voile reste NOIR dans le skin clair, et ce n'est pas un
@@ -779,19 +806,19 @@
      au-dessus d'un media passera a l'encre sombre (Phase 3), c'est le calcul
      entier qu'il faudra refaire, pas ce triplet qu'il faudra inverser. */
 
-  --ink: var(--p-encre-sombre);
+  --ink: var(--p-vert-mediane);
   --ink-soft: #1B2B27;
   --ink-muted: #46564F;
-  --ink-subtle: rgba(5, 16, 15, 0.62);
+  --ink-subtle: rgba(3, 15, 12, 0.62);
 
-  --line: rgba(5, 16, 15, 0.14);
+  --line: rgba(3, 15, 12, 0.14);
   /* Meme role, meme exigence, direction inversee.
      ⚠️ Mesure le 29/07/2026 en forcant `[data-theme="light"]` au navigateur :
      3,05:1, et non « environ 3,4:1 » comme l'annoncait le calcul ecrit ici.
      Le seuil de 3:1 tient toujours, mais sans la marge annoncee. Quand la
      Phase 3 donnera sa vraie matiere au skin clair, ce nombre est a reprendre
      en premier : il n'a plus qu'un point cinq de reserve. */
-  --line-control: rgba(5, 16, 15, 0.45);
+  --line-control: rgba(3, 15, 12, 0.45);
 
   /* #FF6B6B tient 7,26:1 sur le sol sombre mais tombe a 2,44:1 sur la neige :
      une couleur d'etat ne traverse pas un changement de skin sans etre
@@ -812,7 +839,7 @@
      le fait passer : 90 % d'orange et 10 % d'encre donnent 3,35:1 mesure.
      La teinte reste lue comme l'orange de la marque, elle cesse d'etre
      illisible sur fond clair. */
-  --scrollbar-thumb-active: color-mix(in srgb, var(--accent) 90%, var(--p-encre-sombre));
+  --scrollbar-thumb-active: color-mix(in srgb, var(--accent) 90%, var(--p-vert-mediane));
 
-  --shadow-ambient: 0 4px 6px rgba(5, 16, 15, 0.08);
+  --shadow-ambient: 0 4px 6px rgba(3, 15, 12, 0.08);
 }

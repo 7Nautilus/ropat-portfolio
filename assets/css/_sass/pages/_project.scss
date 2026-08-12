@@ -533,6 +533,27 @@ body:has(.project-page) {
   gap: var(--spacing-xl);
 }
 
+/* ⚠️ SEPARER DEUX AVIS PLUS QUE LEURS PARTIES, ET LE DEFAUT ETAIT MESURE.
+   Depuis que le composant rend PLUSIEURS avis par fiche (04/08/2026, premier cas
+   reel : `strakara`, deux missions donc deux avis), un second niveau de
+   groupement existe et il etait inverse : une citation se tenait a 48 px de son
+   PROPRE auteur, mais deux avis de personnes DIFFERENTES n'etaient separes que
+   par 32 px. L'oeil groupe par proximite : la seconde citation se rattachait
+   visuellement a la premiere attribution.
+
+   ⚠️ LES 32 PX NE VENAIENT PAS D'ICI, et c'est ce qui rendait le defaut
+   invisible en lisant ce fichier : ils viennent d'un selecteur `section` GLOBAL
+   qui pose `display: flex; gap: var(--spacing-lg)` sur toutes les sections du
+   site. Cette marge s'AJOUTE donc a ce gap herite.
+
+   Composition : 32 px herites + 64 px ici = **96 px**, soit exactement le double
+   des 48 px internes. Le rapport de 2 suffit a rendre le groupement non
+   ambigu, la ou 1,33 (64 px) restait discutable. Ne pas lire `--spacing-2xl`
+   comme la valeur finale : la valeur finale est la somme. */
+.project-avis-corps + .project-avis-corps {
+  margin-top: var(--spacing-2xl);
+}
+
 /* ⚠️ L'ITALIQUE EST UN VRAI DESSIN DEPUIS LE 03/08/2026, ET IL NE L'ETAIT PAS.
    Pose d'abord sur Manrope, qui n'a AUCUN italique : le navigateur cisaillait
    l'upright de 12 degres. Mesure qui l'a etabli, avances de glyphes sur 45
