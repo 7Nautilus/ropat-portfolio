@@ -50,3 +50,33 @@ TESTS/
 # Archives locales : rushes abandonnes et originaux avant traitement.
 # Jekyll les ignore deja (prefixe underscore) ; git les ignore ici.
 _archives/
+
+# ══════════════════════════════════════════════════════════════════════════
+#  LE CHANTIER « MISE EN SITUATION », 04/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# Ropat : « ils doivent bien rester non versionnes ». Ces dix fichiers sont donc
+# gardes SUR LE DISQUE, hors de tout commit.
+#
+# ⚠️ CETTE SECTION NE LES CACHE PAS, ELLE LES PROTEGE. Un fichier simplement
+# non suivi est emporte par `git clean -fd` sans confirmation ni trace ; un
+# fichier IGNORE y survit, il faut `-fdx` pour l'atteindre. Les lister ici est
+# donc le seul moyen de tenir les deux a la fois : non versionnes ET durables.
+#
+# ⚠️ LES CHEMINS SONT ECRITS UN PAR UN, ET CE N'EST PAS DE LA VERBOSITE. Un
+# `labo/` global contredirait la pratique du depot : 5 bancs y sont DEJA
+# versionnes (41 commits), et `_config.yml` les exclut du build pour qu'ils
+# vivent dans le depot sans etre publies. Un motif large ferait disparaitre en
+# silence tout banc futur.
+#
+# Le jour ou le composant trouve un hote et entre en service, retirer les deux
+# premieres lignes : un composant servi n'a rien a faire hors du depot.
+_includes/projects/mise-en-situation.html
+assets/css/_sass/components/_situation.scss
+_includes/ui/icon-heart.html
+_includes/ui/icon-message-circle.html
+_includes/ui/icon-bookmark.html
+_includes/ui/icon-ellipsis.html
+labo/mise-en-situation.html
+labo/cadre-dessine.html
+labo/page-projet-ouverture.html
+labo/voile-transition.html
