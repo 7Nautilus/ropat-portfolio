@@ -29,6 +29,24 @@
 200 /sitemap.xml
 200 /robots.txt
 
+# ── ⚠️ LES PAGES ENGENDREES, ET C'EST LA LE DEFAUT QUE CE BLOC REPARE ───────
+# Le 12/08/2026, ce controle a rendu « tout concorde » pendant que 50 pages
+# etaient en 404 : les 42 fiches projet et les 8 pages service. Ses sept temoins
+# `200` etaient TOUS des pages fixes, donc aucun ne pouvait voir la disparition
+# des pages que `_plugins/pages_generees.rb` engendre.
+#
+# C'est le meme piege que celui contre lequel les lignes `200` existent, entre par
+# une autre porte : un controle qui ne teste que ce qui ne peut pas casser.
+#
+# ⚠️ CES QUATRE LIGNES SONT LE SEUL ENDROIT DU DEPOT QUI VERIFIE QUE LE PLUGIN A
+# TOURNE EN PRODUCTION. Le constructeur integre de GitHub Pages n'execute jamais
+# les plugins personnalises : si le depot repasse un jour par lui, ces adresses
+# rendent 404 et rien d'autre ne le dirait. Ne pas les retirer.
+200 /fr/projects/aelio.html
+200 /en/projects/aelio.html
+200 /fr/services/branding-strategie.html
+200 /en/services/branding-strategy.html
+
 # ── Fontes sous licence d'essai, retirees du depot le 21/07/2026 ────────────
 # Leur licence etait dans leur propre table de noms : « CoFo Raffine VF Trial »,
 # « FONTSPRING DEMO - Resort Sans ». Versions d'essai, prevues pour maquetter en

@@ -115,9 +115,39 @@ unless structure_ok
   end
 end
 
-if !rendu_ok && structure_ok
-  puts "  La structure est identique, seul le RENDU differe : `scripts/carte/rendu.rb`"
-  puts "  a change sans que `CARTE.md` soit regeneree."
+if !rendu_ok
+  # ⚠️ CE BLOC AFFIRMAIT UNE CAUSE QU'IL NE POUVAIT PAS CONNAITRE. Il ecrivait
+  # « `scripts/carte/rendu.rb` a change sans que `CARTE.md` soit regeneree », qui
+  # n'est que le cas le PLUS FREQUENT. Le 12/08/2026, la CI a echoue avec ce
+  # message alors que `rendu.rb` n'avait pas bouge d'un caractere : le job a
+  # regenere exactement les memes tailles (30328 o et 14529 o), la structure
+  # correspondait au bit pres, et pourtant le Markdown differait. Impossible a
+  # diagnostiquer depuis une autre machine, parce que le script ne disait pas OU.
+  #
+  # Il montre desormais les lignes qui divergent. Un outil qui detecte un ecart
+  # sans savoir le nommer envoie chercher une cause plausible, et c'est
+  # exactement comme ca qu'on repare a cote.
+  la = md_a.split("\n", -1)
+  lb = md_b.split("\n", -1)
+
+  puts "  La structure est identique, seul le RENDU differe." if structure_ok
+  puts "  #{la.size} lignes commitees, #{lb.size} regenerees."
+
+  ecarts = (0...[la.size, lb.size].max).reject { |i| la[i] == lb[i] }
+  puts "  #{ecarts.size} ligne(s) divergente(s). Les premieres :"
+  ecarts.first(8).each do |i|
+    puts "    ligne #{i + 1}"
+    puts "      commite  : #{(la[i] || '<absente>')[0, 150]}"
+    puts "      regenere : #{(lb[i] || '<absente>')[0, 150]}"
+  end
+
+  # ⚠️ MEME LONGUEUR NE VEUT PAS DIRE MEME CONTENU, et l'inverse non plus : le
+  # dire evite de conclure trop vite a un probleme de fins de ligne, qui sont
+  # deja normalisees plus haut.
+  if md_a.bytesize == md_b.bytesize
+    puts "  ⚠️ Les deux textes font la MEME taille (#{md_a.bytesize} o) : l'ecart est un"
+    puts "     remplacement, pas un ajout. Suspecter une valeur de meme largeur ou un ordre."
+  end
 end
 
 puts
