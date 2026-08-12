@@ -7,7 +7,18 @@
   {% endif %}
   {% assign home_title = 'Ropat - Home' %}
   {% if current_lang == 'fr' %}
-    {% assign home_title = "Ropat - Retour à l\'accueil" %}
+    {%- comment -%}
+      ⚠️ LA CONTRE-OBLIQUE ETAIT UN CARACTERE DU TEXTE, retiree le 12/08/2026.
+      La chaine s'ecrivait `"Ropat - Retour à l\'accueil"`. Liquid ne traite AUCUNE sequence
+      d'echappement dans un litteral, et l'apostrophe n'avait de toute facon rien a echapper dans
+      une chaine a guillemets doubles : la contre-oblique partait donc telle quelle. Verifie a
+      l'emission, 34 pages FR portaient `title="Ropat - Retour à l\'accueil"`.
+      Ce n'est pas cosmetique : le `<svg>` de `ui/logo.html` n'a ni `role="img"`, ni `<title>`, ni
+      `aria-label`, donc le lien n'a AUCUN contenu textuel et son nom accessible retombe sur ce
+      `title`. C'est litteralement ce qu'un lecteur d'ecran prononce sur le premier lien de chaque
+      page francaise.
+    {%- endcomment -%}
+    {% assign home_title = "Ropat - Retour à l'accueil" %}
   {% endif %}
   <!-- LOGO / NOM DE MARQUE -->
   <a href="{{ home_url | relative_url }}"  title="{{ home_title }}">

@@ -1549,7 +1549,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btn = document.createElement('button');
   btn.id = 'scroll-top-btn';
-  btn.setAttribute('aria-label', 'Retour en haut');
+  // ⚠️ CE LIBELLE ETAIT EN FRANCAIS EN DUR, sur les 23 pages projet ANGLAISES aussi.
+  // C'est le SEUL nom accessible du bouton : les deux `<svg>` de l'innerHTML sont
+  // `aria-hidden`, et le bouton n'a aucun texte. Un lecteur d'ecran anglais annoncait donc
+  // « Retour en haut ». Le patron existe trois fois dans ce fichier (l. 570, 1237, 1429).
+  btn.setAttribute('aria-label', document.documentElement.lang === 'fr' ? 'Retour en haut' : 'Back to top');
   btn.innerHTML = `
     <svg width="${svgSize}" height="${svgSize}" viewBox="0 0 ${svgSize} ${svgSize}"
       style="position:absolute;top:-2px;left:-2px;pointer-events:none;" aria-hidden="true">

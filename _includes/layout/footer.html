@@ -13,7 +13,26 @@
     <!-- Footer Top -->
     <div class="footer-top">
       <div class="footer-left-section">
-        <h2 class="footer-title">Parlons de votre <span class="orange"><strong>projet</strong>.</span></h2>
+        {%- comment -%}
+          ⚠️ CE TITRE ETAIT ECRIT EN DUR EN FRANCAIS, corrige le 12/08/2026.
+          « Parlons de votre projet. » sortait tel quel sur les 33 pages ANGLAISES, en tete du
+          pied, juste au-dessus d'un paragraphe qui, lui, est bilingue depuis toujours. Verifie sur
+          la page emise : `_site/en/index.html` ouvrait son pied en francais puis enchainait en
+          anglais sur tout le reste (navigation, mentions, bascule de langue).
+          Ce n'est pas qu'une coquille : c'est WCAG 3.1.2 « Langue d'un passage », niveau AA. Un
+          lecteur d'ecran regle sur l'anglais prononcait cette phrase avec la phonetique anglaise.
+          La forme du correctif n'invente rien, elle recopie le patron du `<p>` juste en dessous.
+          ⚠️ LA FORMULATION ANGLAISE EST UNE TRADUCTION DIRECTE, PAS UNE ACCROCHE ECRITE. Elle est
+          calee sur le registre du paragraphe voisin (« Want to give your brand a new dimension? »).
+          A reecrire librement : c'est du texte de marque, il appartient a Ropat.
+        {%- endcomment -%}
+        <h2 class="footer-title">
+          {%- if page.lang == 'fr' -%}
+            Parlons de votre <span class="orange"><strong>projet</strong>.</span>
+          {%- else -%}
+            Let's talk about your <span class="orange"><strong>project</strong>.</span>
+          {%- endif -%}
+        </h2>
         <p class="footer-description">
           {% if page.lang == 'fr' %}
             Envie de donner une nouvelle dimension à votre marque ?<br>
@@ -29,7 +48,19 @@
         <div class="footer-nav-container">
           <h3 class="footer-nav-title nav-element">Navigation</h3>
           <!-- Navigation -->
-          <nav class="footer-nav" aria-label="Footer Navigation">
+          {%- comment -%}
+            ⚠️ CE NOM DE REPERE ETAIT EN ANGLAIS SUR LES PAGES FRANCAISES, corrige le 12/08/2026.
+            Un lecteur d'ecran liste les reperes de la page : la page francaise annoncait
+            « Navigation principale » pour l'en-tete et « Footer Navigation » pour le pied. Le
+            patron bilingue existe a quatre fichiers de la, `layout/header.html:16`.
+            ⚠️ `page.lang` ET NON `current_lang`, ET CE N'EST PAS INDIFFERENT. `current_lang` est
+            bien defini a cet endroit, mais par ACCIDENT : `assign` de Liquid ecrit dans la portee
+            la plus externe, donc la variable posee en tete de `header.html` fuit jusqu'ici, et
+            seulement parce que `_layouts/default.html` inclut l'en-tete AVANT le pied. Le fichier
+            la reassigne lui-meme plus bas, apres cette ligne. S'appuyer dessus, c'est dependre de
+            l'ordre des includes sans que rien ne le dise.
+          {%- endcomment -%}
+          <nav class="footer-nav" aria-label="{% if page.lang == 'fr' %}Navigation du pied de page{% else %}Footer navigation{% endif %}">
             <ul class="nav-links nav-links-footer">
               {% assign current_lang = page.lang | default: 'en' %}
               {% for item in site.data.navigation %}
