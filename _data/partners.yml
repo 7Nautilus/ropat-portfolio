@@ -5,7 +5,7 @@ index:
     - juliette
     - seiko
     - printoclock
-    - moon_vtc
+    - moon-vtc
 
 ottony-paris:
   name: "Ottony Paris"
@@ -27,9 +27,9 @@ printoclock:
   logo: /assets/images/partners/printoclock.svg
   ratio: "548 / 92"
 
-moon_vtc:
+moon-vtc:
   name: "Moon VTC"
-  logo: /assets/images/partners/moon_vtc.svg
+  logo: /assets/images/partners/moon-vtc.svg
   ratio: "116 / 53"
 
 seiko:
