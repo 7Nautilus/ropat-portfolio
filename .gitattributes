@@ -1,0 +1,48 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  FINS DE LIGNE
+# ══════════════════════════════════════════════════════════════════════════
+#
+# ⚠️ CE FICHIER EXISTE A CAUSE D'UNE MESURE, PAS PAR HYGIENE.
+#
+# `scripts/carte/build.rb` enregistre dans `CARTE.md` la taille BRUTE de
+# `assets/css/main.css`, et cette taille depend des fins de ligne. Releve du
+# 12/08/2026, le meme commit lu dans deux checkouts :
+#
+#   copie de travail actuelle, en LF ....... 277 056 o
+#   checkout Windows frais, en CRLF ........ 283 982 o
+#
+# L'ecart vaut exactement les 6 926 lignes du fichier. `core.autocrlf` valait
+# `true` en local et il n'y avait aucun `.gitattributes` : la valeur ecrite dans
+# la carte dependait donc de la machine qui l'avait generee. Ubuntu checkoutant
+# en LF, la CI disait 277 056 et coincidait AVEC LA COPIE DE TRAVAIL ACTUELLE par
+# accident historique. Au premier reclonage sur Windows, la carte locale aurait
+# annonce 283 982, `carte-a-jour.rb` aurait echoue indefiniment, et rien dans son
+# rapport n'aurait designe la cause.
+#
+# ⚠️ CE QUI COMPTE N'EST PAS « LF », C'EST « LA MEME VALEUR PARTOUT ». Le defaut
+# n'etait pas d'avoir des CRLF, il etait d'avoir une valeur qui change selon la
+# machine.
+#
+# Pose sans risque le 12/08/2026 : `git ls-files --eol` rendait alors 0 fichier
+# portant du CRLF dans l'INDEX (97 en `i/lf w/lf`, 85 en `i/lf w/crlf`, 69
+# binaires). Cette ligne ne modifie donc aucun blob, elle ne change que ce que
+# git materialise au checkout.
+* text=auto eol=lf
+
+# Binaires. Le heuristique de `text=auto` les detecte deja tout seul : ces lignes
+# sont une ceinture, pas une correction. `.svg` est volontairement ABSENT, c'est
+# du XML et il doit rester lisible en diff.
+*.webp  binary
+*.avif  binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.mp4   binary
+*.woff  binary
+*.woff2 binary
+*.ico   binary
+
+# ⚠️ SEULE EXCEPTION, ET ELLE EST ASSUMEE. `cmd.exe` peut echouer sur un `goto`
+# dans un fichier en LF. Un `.bat` en CRLF PARTOUT reste deterministe, donc il ne
+# reintroduit pas le defaut que ce fichier ferme.
+*.bat text eol=crlf
