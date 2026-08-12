@@ -10,7 +10,7 @@ version: alpha
 name: Ropat
 description: Portfolio de Ropat, directeur artistique et graphiste. Socle sombre presque monochrome, ponctué d'orange.
 colors:
-  primary:     "#F0F4F1"                          # --ink
+  primary:     "#DCE6E0"                          # --ink
   secondary:   "#9CA3AF"                          # --ink-muted
   accent:      "#FF5C00"                          # --accent
   accent-soft: "rgba(255, 92, 0, 0.2)"            # --accent-soft

@@ -69,9 +69,9 @@ design.
 |---|---|---|
 | **1** | L'œuvre est le produit | fondatrice, précisée le 28/07/2026 |
 | **2** | Deux couches, jamais une | référent Realtree |
-| **3** | Chaque orange doit pouvoir nommer ce qu'il signale | 26/07/2026 |
+| ~~**3**~~ | ~~Chaque orange doit pouvoir nommer ce qu'il signale~~ | 26/07/2026, **RETIRÉE le 04/08/2026** |
 | **4** | Un jeton nomme un rôle, jamais une apparence | 28/07/2026 |
-| **5** | L'intensité est composée, pas répartie | 26/07/2026 |
+| **5** | L'intensité est composée, pas répartie | 26/07/2026, test refondu le 04/08/2026 |
 | **6** | Rien ne se décide sans mesure | permanente |
 | **7** | Le camouflage habille les surfaces, pas les encres | Ropat, 28/07/2026 |
 | **8** | L'œuvre ne paye jamais la lisibilité du chrome | Ropat, 28/07/2026, six arbitrages |
@@ -114,13 +114,40 @@ Où s'arrête le camouflage : voir la règle 7.
 
 ---
 
-### 3 · Chaque orange doit pouvoir nommer ce qu'il signale
+### 3 · ~~Chaque orange doit pouvoir nommer ce qu'il signale~~ — **RETIRÉE le 04/08/2026**
 
-**Le test d'acceptation :** sur un écran donné, compter les oranges et dire, pour chacun, ce
-qu'il signale. Un orange qui ne signale rien est une régression.
+> **Ce que disait la règle.** Sur un écran donné, compter les oranges et dire, pour chacun, ce
+> qu'il signale. Un orange qui ne signale rien était une régression.
 
-La mesure en direct du nombre de déclarations de bordure orange sur la feuille servie vit dans
-`labo/design-system.html`, section « Le test de la règle 3 ». Relevé du 28/07/2026 : 36.
+**Motif du retrait, dans les mots de Ropat :** *« La règle n'a plus vraiment de sens, ce qui est
+en orange n'a pas pour but de signaler, mais d'attirer l'attention, de claquer. »*
+
+**Elle reposait sur une théorie sémantique de la couleur** — l'orange *désigne* quelque chose — et
+le site en applique une autre : l'orange est une **intensité**. Les deux cohabitaient sans qu'on le
+voie, parce que la règle 5 portait déjà la seconde.
+
+⚠️ **LE FREIN NE DISPARAÎT PAS, IL CHANGE DE NATURE, et c'est ce qui autorise le retrait.** La
+règle 3 freinait **élément par élément**, par un test sémantique. La règle 5 freine **séquence par
+séquence** : *« si tout claque, plus rien ne claque »* interdit l'orange partout aussi sûrement,
+mais par un critère qui correspond à ce que le site cherche. Retirer la 3 sans la 5 laisserait le
+maximalisme sans contrepoids ; c'est la 5 qui le tient, et elle le tenait déjà.
+
+⚠️ **CE QUE LE RETRAIT LÉGITIME, ET QUE LA RÈGLE 3 CONDAMNAIT :** l'aplat de
+`--voile-transition`, qui couvre l'écran entier entre deux pages. Il ne signale rien, donc il était
+une régression. Mesuré le 04/08, il est **le seul écart d'intensité du trajet portfolio → fiche
+projet** : l'orange y passe de 3,46 % à 100 % de l'écran, puis retombe à 4,13 %. Sous la règle 5,
+ce n'est pas une décoration en trop, c'est **la seule chose qui fasse le travail**.
+
+⚠️ **LA NUMÉROTATION NE BOUGE PAS.** Les règles 4 à 9 gardent leur numéro : **33 mentions dans 14
+fichiers** les citent, et renuméroter transformerait chacune en référence fausse sans qu'aucun
+outil ne le signale. Le compte des règles **actives** passe de neuf à huit, ce qui rend enfin vrai
+l'en-tête de ce fichier, qui annonçait huit depuis l'origine.
+
+⚠️ **Les commentaires de code qui invoquent encore la règle 3 restent valables**, et il ne faut pas
+les corriger mécaniquement : ils justifient des décisions de **retenue** (`_buttons.scss:112`,
+`_project.scss:617` et `:770`) qui sont toujours bonnes. Seul leur fondement a changé, il est
+désormais la règle 5. La sonde « Le test de la règle 3 » de `labo/design-system.html` mesure, elle,
+une chose qui ne décide plus rien.
 
 ---
 
@@ -159,6 +186,38 @@ claque, plus rien ne claque : **l'écart est le travail.**
 geste.** « Retirer X et le remplacer par Y » n'est pas deux tâches dont une est optionnelle.
 Livrer X seul ne donne pas un état neutre, il donne un état **pire que le départ**. Sur ce projet,
 « safe » veut dire invisible.
+
+**Le test d'acceptation, refondu le 04/08/2026** en reprenant celui que portait la règle 3.
+
+Compter les oranges d'**un** écran ne décide plus de rien : la règle ne porte pas sur la quantité,
+elle porte sur **l'écart**. Le test est donc comparatif. Pour deux écrans que le visiteur enchaîne,
+relever la **part de surface peinte en orange** et la comparer.
+
+⚠️ **La sonde ne doit compter que les propriétés RÉELLEMENT peintes** — `color`,
+`background-color`, et les `border-*-color` dont la largeur est non nulle. Inclure `outline-color`,
+`fill` ou `stroke` fait exploser le compte, ces propriétés héritant de `currentColor` : l'erreur a
+été payée deux fois, à 63 marques comptées pour 18 réelles. **Un témoin sur une couleur absente,
+le bleu, doit rendre zéro** avant qu'on croie un seul chiffre.
+
+**Relevé du 04/08/2026**, témoin bleu à 0 sur les cinq écrans :
+
+| Écran | Marques | Surface orange |
+|---|---|---|
+| accueil | 38 | **7,54 %** |
+| fiche projet | 25 | 4,13 % |
+| À propos | 39 | 3,63 % |
+| portfolio | 64 | 3,46 % |
+| contact | 23 | 3,09 % |
+
+⚠️ **LA RÈGLE N'EST PAS TENUE AUJOURD'HUI, et le manquement est là où il coûte le plus.** Quatre
+écrans sur cinq tiennent entre 3,09 et 4,13 %, soit un point d'écart, imperceptible. Le pire cas
+est **portfolio → fiche projet**, 3,46 % puis 4,13 % : c'est le trajet le plus emprunté du site, le
+moment où le visiteur passe de l'index à la preuve, et rien n'y change d'intensité. Seul l'accueil
+se détache, à plus du double du plus calme.
+
+**Ce que ce test ne dit pas**, et qu'il ne faut pas lui faire dire : la surface peinte n'est pas
+l'intensité perçue. Un aplat de 3 % en plein centre pèse plus qu'un liseré de 6 % en périphérie, et
+la mesure ne le sait pas. Elle sert à **repérer l'uniformité**, pas à noter une composition.
 
 ---
 
@@ -207,8 +266,13 @@ nature. Ce qu'il n'a pas le droit de faire, c'est **déborder** : voile, bande, 
 ce qui peint au-delà de sa propre boîte.
 
 **Précision du 29/07/2026.** La règle interdit d'**assombrir** l'œuvre pour se rendre lisible.
-Elle n'interdit pas de **signaler** dessus. Une lueur orange n'assombrit rien et n'existe qu'à
-l'engagement, ce que la règle 3 demande justement à un orange.
+Elle n'interdit pas de **peindre** dessus. Une lueur orange n'assombrit rien et n'existe qu'à
+l'engagement.
+
+⚠️ *Cette précision s'appuyait sur la règle 3, retirée le 04/08/2026. Elle tient sans elle : ce qui
+l'autorise n'est pas que la lueur signale quelque chose, c'est qu'elle **n'existe pas au repos**,
+donc qu'elle ne coûte rien à l'œuvre. Le test ci-dessous est le vrai fondement, et il n'a jamais eu
+besoin de la règle 3.*
 
 > **Le test qui tranche : l'effet existe-t-il au repos ?**
 > Un voile, un fond de barre, un halo permanent sont posés en permanence sur le travail du
