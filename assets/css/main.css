@@ -3957,9 +3957,9 @@ html.scrollbar-saisie {
 }
 @media (max-width: 767px) {
   .partners-carousel {
-    /* 2 et non 1 : un seul logo par ecran ne se lit plus comme une SUITE de
-       clients, donc la section perd son argument. Deux gardent la lecture de
-       bande, et les logos sont larges de 180px au plus, donc ils tiennent. */
+    /* Deux logos tiennent ici, et c'est verifie : le seuil est a 504px de volet,
+       plus bas dans `carrousel-sm`. Entre 504 et 767, la case vaut au moins
+       212px pour un logo de 180. */
     --carousel-items-visible: 2;
     --carousel-speed: 20s;
   }
@@ -3967,6 +3967,46 @@ html.scrollbar-saisie {
     /* Fondus plus discrets sur mobile (40px au lieu de 80px) */
     -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
     mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+  }
+}
+/* ══════════════════════════════════════════════════════════════════════════
+   UN SEUL LOGO PAR ECRAN, SOUS 504px
+   ══════════════════════════════════════════════════════════════════════════
+
+   Demande de Ropat le 12/08/2026, sur son telephone : « l'affichage du
+   carrousel de clients n'est pas bon du tout, il faut qu'ils soient un par un
+   sur l'ecran ».
+
+   ⚠️ ET LE COMMENTAIRE QUI DEFENDAIT « 2 ET NON 1 » CONTENAIT UNE ERREUR DE
+   FAIT. Il ecrivait « les logos sont larges de 180px au plus, donc ils
+   tiennent ». Mesure au rendu, volet 375 : la case valait **148px** pour un
+   logo de **180px**, soit **33px de debordement**, verifie par comparaison des
+   rectangles (le logo sortait de sa case des deux cotes). Deux logos ne
+   tenaient donc pas, ils se chevauchaient dans la gouttiere. Ce n'est pas un
+   arbitrage de gout qui a change, c'est une affirmation fausse qui est tombee.
+
+   Le seuil n'est pas choisi a l'oeil, il est calcule : voir `carrousel-sm`
+   dans `base/_mixins.scss`.
+
+   ⚠️ LA VITESSE EST RECALCULEE, PAS RECOPIEE. L'animation parcourt une
+   demi-piste en `--carousel-speed`, donc une duree fixe sur une piste plus
+   longue RALENTIT le defilement percu. Releve a 375px :
+     a 2 par ecran : pas de 180px par logo, demi-piste 1077px en 20s = 53,9 px/s
+     a 1 par ecran : pas de 359px par logo, demi-piste 2154px
+   Pour garder les memes 53,9 px/s, il faut **40s**. Sans ce calcul, les logos
+   auraient defile deux fois trop vite.
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 504px) {
+  .partners-carousel {
+    --carousel-items-visible: 1;
+    --carousel-speed: 40s;
+  }
+  .partners-carousel .partners-carousel-container {
+    /* Le fondu retombe a 24px. A 40px il mangeait 80px sur 327 de conteneur,
+       soit pres d'un quart de la largeur, alors qu'un seul logo doit pouvoir
+       s'y poser entier. */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent);
   }
 }
 /* ⚠️ `components/situation` EST DEBRANCHE, ET C'EST VOLONTAIRE, 04/08/2026.
