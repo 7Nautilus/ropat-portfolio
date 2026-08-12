@@ -448,11 +448,57 @@ document.addEventListener('DOMContentLoaded', () => {
   const burgerMenu = document.querySelector('.burger-menu');
   const navLinks = document.querySelector('.nav-links');
   if (burgerMenu && navLinks) {
+    // ⚠️ CONFINEMENT DU TAB ET `inert`, AJOUTES LE 12/08/2026. L'overlay de
+    // navigation etait un PIEGE AU CLAVIER : `_header.scss:385-402` le pose en
+    // `position: fixed`, plein ecran, opaque (`--surface-scrim`, noir a 0,98), et
+    // le clic posait `body.style.overflow = 'hidden'`. Tabuler au-dela du dernier
+    // lien envoyait donc le focus DERRIERE le voile, sur le pied de page, sans que
+    // la page puisse defiler jusqu'a lui. Echap fermait bien, donc la sortie
+    // existait ; c'est la CONTENTION qui manquait.
+    //
+    // C'est exactement le defaut que la lightbox a corrige plus bas, avec mesure a
+    // l'appui (« sur un lien du pied de page a 9586 px »). Le patron est repris ici
+    // tel quel, il n'y en a pas deux dans ce fichier.
+    //
+    // ⚠️ `#main-content` NE SUFFIT PAS, contrairement a la lightbox. Le pied de
+    // page vit HORS de lui (`_includes/layout/footer.html:11`, `<footer id="pied">`),
+    // et c'est precisement la que le focus atterrissait. Les deux sont rendus
+    // inertes.
+    const zonesHorsMenu = () => [document.getElementById('main-content'), document.getElementById('pied')].filter(Boolean);
+
+    // La liste est construite par UNE requete sur l'entete, puis filtree : ca
+    // preserve l'ordre du DOM sans avoir a le supposer.
+    // ⚠️ Le test de visibilite est `getClientRects().length`, PAS `offsetParent` :
+    // l'overlay est en `position: fixed`, donc son `offsetParent` vaut `null` et
+    // ce filtre-la aurait vide la liste, desarmant le piege en silence.
+    const focusablesNav = () => {
+      const entete = burgerMenu.closest('header') || document;
+      return [...entete.querySelectorAll('a[href], button, [tabindex]:not([tabindex="-1"])')]
+        .filter(el => (el === burgerMenu || navLinks.contains(el)) && el.getClientRects().length > 0);
+    };
+
+    const piegerTabNav = event => {
+      if (event.key !== 'Tab' || !navLinks.classList.contains('active')) return;
+      const focusables = focusablesNav();
+      if (!focusables.length) return;
+      const premier = focusables[0];
+      const dernier = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === premier) {
+        event.preventDefault();
+        dernier.focus();
+      } else if (!event.shiftKey && document.activeElement === dernier) {
+        event.preventDefault();
+        premier.focus();
+      }
+    };
+
     const closeMenu = () => {
       navLinks.classList.remove('active');
       burgerMenu.classList.remove('active');
       burgerMenu.setAttribute('aria-expanded', 'false');
       body.style.overflow = '';
+      zonesHorsMenu().forEach(z => { z.inert = false; });
+      document.removeEventListener('keydown', piegerTabNav, true);
     };
 
     burgerMenu.addEventListener('click', () => {
@@ -460,6 +506,12 @@ document.addEventListener('DOMContentLoaded', () => {
       burgerMenu.classList.toggle('active');
       burgerMenu.setAttribute('aria-expanded', String(isActive));
       body.style.overflow = isActive ? 'hidden' : '';
+      zonesHorsMenu().forEach(z => { z.inert = isActive; });
+      if (isActive) {
+        document.addEventListener('keydown', piegerTabNav, true);
+      } else {
+        document.removeEventListener('keydown', piegerTabNav, true);
+      }
     });
 
     const navInteractiveSelectors = ['.nav-link', '.nav-contact'];
@@ -1473,8 +1525,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // ================================
 (function () {
   if (!document.querySelector('.project-page')) return;
+
+  // ⚠️ CE MODULE SORTAIT ENTIEREMENT SOUS `prefers-reduced-motion`, ET IL
+  // SUPPRIMAIT AINSI UN CONTROLE FONCTIONNEL. Le bouton « Retour en haut »
+  // n'etait pas seulement immobile, il n'existait pas : un reglage de MOUVEMENT
+  // retirait un moyen de NAVIGUER. La regle 9 l'interdit nommement, elle autorise
+  // a payer en sobriete et jamais en accessibilite.
+  //
+  // Le bon repli etait deja employe deux fois dans ce fichier, sur la galerie et
+  // sur la barre de defilement : on garde l'element, on retire le mouvement.
+  // Corrige le 12/08/2026.
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
 
   const size = 44;
   const svgSize = size + 4;   // 48px : 2px de débordement de chaque côté pour bordure centrée
@@ -1544,18 +1605,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     progressCircle.style.strokeDashoffset = circumference * (1 - progress);
 
-    // Apparaît après 10% de scroll
+    // Apparaît après 10% de scroll.
+    // Sous `prefers-reduced-motion`, l'apparition se fait sur la seule opacite :
+    // le glissement de 12 px est du mouvement, le bouton non.
     if (progress > 0.1) {
       btn.style.opacity   = '1';
-      btn.style.transform = 'translateY(0)';
+      btn.style.transform = prefersReducedMotion ? 'none' : 'translateY(0)';
     } else {
       btn.style.opacity   = '0';
-      btn.style.transform = 'translateY(12px)';
+      btn.style.transform = prefersReducedMotion ? 'none' : 'translateY(12px)';
     }
   }
 
   btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // `instant` et non `smooth` sous reglage de mouvement reduit : le geste
+    // aboutit au meme endroit, sans le trajet.
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'instant' : 'smooth' });
   });
 
   window.addEventListener('scroll', updateProgress, { passive: true });
