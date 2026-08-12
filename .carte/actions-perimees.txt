@@ -1,0 +1,25 @@
+# Actions ouvertes visant un chemin absent, ADMISES.
+# Une ligne vaut « <document><TAB><chemin> ». Y figurer veut dire : on sait, et
+# c'est voulu.
+#
+# ⚠️ CE FICHIER EST LE SEUL ENDROIT OU UNE PEREMPTION DEVIENT ACCEPTABLE. L'y
+# mettre sans motif, c'est eteindre le controle. `--ecrire` fige TOUT ce qui est
+# trouve : ne s'en servir qu'apres avoir trie, jamais pour rendre la sortie verte.
+#
+# ── Categorie 1 : action de CREATION ───────────────────────────────────────
+# Sa cible ne peut pas exister, c'est le seul faux positif structurel de la regle.
+TODO.md	_projects
+docs/PROJET-OPTIA-2026-07.md	_data/projects/optia.yml
+docs/PLAN-ACTIONS.md	en/experiences.html
+
+# ── Categorie 2 : mention HISTORIQUE dans un item reste ouvert ─────────────
+# Ajoutee le 12/08/2026, et c'est une limite reelle de l'outil : il ne distingue
+# pas un chemin VISE d'un chemin CITE comme deja retire. Ces cinq entrees vivent
+# dans deux items volontairement laisses ouverts parce que leur AUTRE moitie
+# reste a faire ; la note qui explique le retrait cite forcement le chemin retire.
+# Les tordre pour faire taire l'outil aurait abime la note.
+TODO.md	branding/icon_old.png
+TODO.md	crow-ascii.mp4
+TODO.md	crow-noir-fluo.mp4
+TODO.md	cheetah-noir-fluo.mp4
+TODO.md	jhag-br-p3-anim-pile.mp4
