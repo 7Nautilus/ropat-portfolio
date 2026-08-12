@@ -78,6 +78,16 @@ aspect: "4/3"      # mockup du flyer, 1440x1080, remesure au canevas le 12/08/20
 # defilement que les autres n'ont pas.
 # Le classement est justifie : le hero est `strakara-flyer-mockup.avif`, un
 # mockup, pas le flyer nu. La reserve du bloc ci-dessus ne s'y applique donc pas.
+# ✅ CONFIRME PAR ROPAT LE 13/08/2026, et ce n'est pas une formalite. Tout ce qui
+# etablissait « c'est un mockup » etait INDIRECT : le nom du fichier, le ratio
+# 1440x1080 en paysage (l'A6 nu vaut 105/148 en portrait), et un profil de bord
+# comparable a celui des autres mises en situation. Aucune de ces mesures ne
+# DISCRIMINE, faute d'un seul hero `livrable` dans le depot qui puisse servir de
+# contre-exemple : elles montraient que strakara n'etait pas aberrante parmi les
+# mockups, pas qu'elle en etait un. Seul l'auteur de l'image pouvait trancher, il
+# l'a fait, et le rendu plein cadre est valide.
+# ⚠️ Ne pas rouvrir cette case en la prenant pour une deduction : c'est une
+# confirmation a la source.
 nature: contexte
 
 # ── Le cadrage ────────────────────────────────────────────────────────────
