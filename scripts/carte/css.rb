@@ -468,7 +468,8 @@ module Carte
     end
 
     def publier_egaux(egaux)
-      cas = egaux.sort_by { |_, lieux| -lieux.size }.map do |(famille, val, jeton), lieux|
+      # Cle TOTALE : le triplet departage les ex aequo. Voir `assets.rb`.
+      cas = egaux.sort_by { |k, lieux| [-lieux.size, k.map(&:to_s)] }.map do |(famille, val, jeton), lieux|
         "#{val} ecrit #{lieux.size} fois en #{famille}, alors que #{jeton} vaut exactement ca" \
           "   (ex. #{lieux.first(3).join(', ')})"
       end

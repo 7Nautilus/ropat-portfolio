@@ -169,7 +169,8 @@ module Carte
 
       unless @c.total.zero?
         s << "Repartition des indetermines : "
-        s << @c.par_categorie.sort_by { |_, n| -n }.map { |k, n| "#{k} (#{n})" }.join(", ")
+        # Cle TOTALE : la categorie departage les ex aequo. Voir `assets.rb`.
+        s << @c.par_categorie.sort_by { |k, n| [-n, k.to_s] }.map { |k, n| "#{k} (#{n})" }.join(", ")
         s << ".\n\n"
       end
 

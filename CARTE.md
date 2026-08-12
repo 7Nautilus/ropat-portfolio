@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 20:10, d'apres l'etat de 60f7682.
+> Generee le 12/08/2026 a 20:23, d'apres l'etat de c35ec32.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 20:10 |
+| Date du build lu | 12/08/2026 20:23 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -193,13 +193,13 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 - **chrome** : 2/21
 - **formats** : 4/21
 - **og_image** : 7/21
-- **thumbnails** : 8/21
 - **discipline** : 8/21
+- **thumbnails** : 8/21
 - **mockup_a_produire** : 12/21
 - **secteur** : 13/21   absent de chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials
 - **aspect** : 15/21   absent de btr, cheetah, crow, jhag-banana-rush, logo-process, moon-vtc
-- **nature** : 20/21   absent de strakara
 - **case_study** : 20/21   absent de hors-champ
+- **nature** : 20/21   absent de strakara
 
 ### Couverture des cles de premier niveau dans `_data/services/` (4 fichiers)  (1)
 
@@ -418,16 +418,16 @@ Detection par nom de fichier : un chemin construit dynamiquement y echapperait. 
 
 Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices ne sont pas comptes.
 
--    9.5 Mo  fr/projects/jpeja.html   JPeJA.mp4
 -    9.5 Mo  en/projects/jpeja.html   JPeJA.mp4
--    1.1 Mo  fr/projects/cheetah.html   CHEETAH.mp4
+-    9.5 Mo  fr/projects/jpeja.html   JPeJA.mp4
 -    1.1 Mo  en/projects/cheetah.html   CHEETAH.mp4
--  547.8 Ko  fr/projects/exit.html   exit.webp
+-    1.1 Mo  fr/projects/cheetah.html   CHEETAH.mp4
 -  547.8 Ko  en/projects/exit.html   exit.webp
--  501.4 Ko  fr/projects/zylkene.html   zylkene-mockup.webp
+-  547.8 Ko  fr/projects/exit.html   exit.webp
 -  501.4 Ko  en/projects/zylkene.html   zylkene-mockup.webp
--  462.2 Ko  fr/projects/outlast-trials.html   outlast-trials.png
+-  501.4 Ko  fr/projects/zylkene.html   zylkene-mockup.webp
 -  462.2 Ko  en/projects/outlast-trials.html   outlast-trials.png
+-  462.2 Ko  fr/projects/outlast-trials.html   outlast-trials.png
 
 ## 8. Ratios declares contre dimensions reelles
 

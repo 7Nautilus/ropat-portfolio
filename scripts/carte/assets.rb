@@ -99,7 +99,7 @@ module Carte
       end
 
       @orphelins = @fichiers.keys.reject { |f| references.include?(f) }
-                            .sort_by { |f| -@fichiers[f] }
+                            .sort_by { |f| [-@fichiers[f], f.to_s] } # cle TOTALE, voir plus bas
 
       @manquants = references.select { |r| r.start_with?("/assets/") && !@fichiers.key?(r) }
                              .reject { |r| r.start_with?("/assets/css/", "/assets/js/") }
@@ -150,7 +150,21 @@ module Carte
         @avides[page] = { octets: somme, detail: detail } if somme.positive?
       end
 
-      lourdes = @avides.sort_by { |_, v| -v[:octets] }.first(10)
+      # ⚠️ LA CLE DE TRI DOIT ETRE TOTALE, ET CELLE-CI A FAIT ECHOUER LA CI.
+      # Trier sur le seul poids laisse les EX AEQUO se departager par l'ordre
+      # d'ENTREE, que `sort_by` ne garantit pas de preserver et qui depend du
+      # systeme de fichiers. Or les deux langues d'une meme fiche pesent
+      # exactement pareil : `fr/projects/jpeja.html` et `en/projects/jpeja.html`
+      # sortaient dans un ordre sous Windows et dans l'autre sur le runner Linux.
+      #
+      # Symptome, le 12/08/2026 : `carte-a-jour.rb` echouait en CI avec
+      # « structure identique, seul le RENDU differe », 10 lignes divergentes A
+      # TAILLE EGALE, et la meme commande sortait en 0 en local sur le sha exact.
+      # Indiagnosticable sans voir les lignes, puisque rien n'avait change.
+      #
+      # Le chemin de page departage : il est unique, donc la cle devient totale.
+      # Meme forme qu'a `css.rb`, qui trie deja sur `[famille, -taille, valeur]`.
+      lourdes = @avides.sort_by { |p, v| [-v[:octets], p.to_s] }.first(10)
       return if lourdes.empty?
 
       @anomalies << {

@@ -324,7 +324,8 @@ module Carte
         end
 
         total = fichiers.size
-        partielles = cles.select { |_, l| l.size < total }.sort_by { |_, l| l.size }
+        # Cle TOTALE : le nom de cle departage les ex aequo. Voir `assets.rb`.
+        partielles = cles.select { |_, l| l.size < total }.sort_by { |k, l| [l.size, k.to_s] }
         next if partielles.empty?
 
         @anomalies << {
