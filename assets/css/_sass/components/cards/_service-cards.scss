@@ -67,13 +67,6 @@
   transform: scale(1.05);
 }
 
-/* Variations */
-.service-card-big {
-  gap: var(--spacing-2xl);
-  padding: var(--spacing-2xl) var(--spacing-lg);
-  @include squircle(var(--border-radius-squircle-medium));
-}
-
 .service-card-simple {
   justify-content: space-between;
   width: -webkit-fill-available;

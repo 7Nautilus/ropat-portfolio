@@ -1172,7 +1172,6 @@ body:has(.project-page) header[data-zone="ouverture"] {
    est propre a la page projet, c'est-a-dire la barre transparente sur
    l'ouverture. */
 
-
 /* ── CTA ─────────────────────────────────────────────────────────────── */
 .project-cta {
   display: flex;
@@ -1200,30 +1199,6 @@ body:has(.project-page) header[data-zone="ouverture"] {
   line-height: 1.1;
   text-wrap: balance;
 }
-
-/* ── BACK LINK (conserve : utilise hors page projet) ─────────────────── */
-.project-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: 600;
-  color: var(--ink-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  transition: color var(--transition-base), gap var(--transition-base);
-
-  svg { transition: transform var(--transition-base); }
-
-  &:hover {
-    color: var(--ink);
-    gap: 0.6rem;
-    svg { transform: translateX(-3px); }
-  }
-}
-
 
 /* ================================
    L'ARRIVEE DU HERO

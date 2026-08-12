@@ -68,7 +68,6 @@
   text-transform: uppercase;
 }
 
-
 /* hero container */
 
 .hero-container {
@@ -77,10 +76,6 @@
   justify-content: center;
   width: 100%;
   gap: var(--spacing-lg);
-}
-
-.hero-project-container {
-  max-width: 100%;
 }
 
 .hero-service-container {
@@ -146,7 +141,6 @@
      note en prose garde l'intention, et un inventaire redevient fiable. */
 }
 
-
 .socialContainer {
   /* Layout */
   display: flex;
@@ -183,7 +177,6 @@
   box-shadow: 0px 0px 15px var(--primary-color);
   transform: scale(1.1);
 }
-
 
 .socialContainer:active {
   transform: scale(0.9);

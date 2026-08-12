@@ -718,9 +718,22 @@
      bouton.
      ⚠️ REGLE : un composant qui peut recevoir une variante doit lire le jeton de
      ROLE, jamais un alias de compatibilite. Les alias servent le code qui n'a
-     pas encore migre, pas celui qu'on ecrit aujourd'hui. */
+     pas encore migre, pas celui qu'on ecrit aujourd'hui.
+
+     ⚠️ `--shadow-md` EST SUPPRIME LE 12/08/2026, ET C'ETAIT LE DERNIER PIEGE
+     ARME. Il avait encore trois lecteurs, `cards/_cards.scss:42` et
+     `_dropdown.scss:35` et `:64`, passes au jeton de role. Aucun ne vivait sous
+     la seule surcharge de `--shadow-signal` du depot (`layout/_header.scss:252`,
+     dans le bloc du header sur media a encre sombre) : verifie, les deux seuls
+     appelants du dropdown sont `pages/contact.html:50` et
+     `portfolio-filters.html:45`, tous deux dans `main`, jamais dans le header.
+     Le defaut visible etait donc nul, et c'est exactement pour ca qu'il fallait
+     le retirer maintenant : il n'attendait qu'un composant deplace sous le
+     header pour rejouer la lueur orange du CTA, sans que rien ne le signale.
+     Meme geste que le retrait de `--text-muted` le 29/07.
+     `--shadow-sm` reste : il a des lecteurs, et son retrait est une preference
+     de coherence, pas la meme correction. */
   --shadow-sm: var(--shadow-ambient);
-  --shadow-md: var(--shadow-signal);
 }
 
 /* ============================================================
@@ -2375,68 +2388,27 @@ header[data-sur-media] {
   line-height: 1;
 }
 
-/* ============================================
-   HERO THEME
-   ============================================ */
-.hero-theme-container {
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-/* ⚠️ Ce selecteur a ete signale comme du CSS mort lors de la passe typeset.
-   Il ne l'est pas : le balisage est bien emis par _includes/pages/index.html
-   et present sur 2 pages generees. Verifie avant de supprimer quoi que ce
-   soit. Il rejoint donc l'echelle au lieu de disparaitre.
-   `letter-spacing` etait en 3px absolus, soit 25 % a cette taille, bien
-   au-dela du plafond de 12 % pour des capitales. */
-.hero-theme {
-  font-family: var(--font-heading);
-  font-size: var(--text-caption);
-  color: var(--ink);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--track-caps);
-  line-height: var(--leading-tight);
-}
-
-.hero-theme-dot {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: var(--primary-color);
-  border-radius: var(--squircle-full);
-  corner-shape: squircle;
-  display: inline-block;
-  flex-shrink: 0;
-}
-
+/* ⚠️ LA SECTION HERO THEME EST SUPPRIMEE, ET SON COMMENTAIRE DE GARDE DISAIT
+   L'INVERSE DE LA VERITE. Retiree le 12/08/2026.
+   Il defendait `.hero-theme` contre une suppression : « signale comme du CSS
+   mort lors de la passe typeset. Il ne l'est pas : le balisage est bien emis
+   par _includes/pages/index.html et present sur 2 pages generees. Verifie
+   avant de supprimer quoi que ce soit. »
+   Il avait raison a l'epoque, et il a cesse d'avoir raison sans que personne
+   ne le mette a jour. Ce que le balisage etait, en realite, c'est un
+   COMMENTAIRE HTML : emis, donc visible dans la source, mais jamais un
+   element. Il a ete converti en commentaire Liquid le 12/08/2026, voir
+   `_includes/pages/index.html:18-26`.
+   Verifie sur les trois plans avant de supprimer : `hero-theme` n'apparait
+   dans aucun attribut `class=` de `_includes/`, `_layouts/`, `fr/`, `en/` ni
+   `index.html`, et sa seule occurrence dans `_site/` etait le CSS compile
+   lui-meme, zero page HTML.
+   ⚠️ La lecon est generale : un commentaire qui INTERDIT une suppression doit
+   dire a quelle condition il cesse de valoir. Celui-ci ne le disait pas, donc
+   il aurait protege ces 39 lignes indefiniment. */
 /* ============================================
    SERVICES SECTION
    ============================================ */
-.subservice-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: var(--spacing-lg);
-}
-
-.service-main-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-lg);
-}
-
-.service-main-container-text {
-  display: flex;
-  height: -webkit-fill-available;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
 .service-main-title {
   text-align: center;
   font-size: var(--text-title);
@@ -2462,15 +2434,6 @@ header[data-sur-media] {
   text-align: center;
 }
 
-.services-page-subtitle {
-  font-size: var(--text-title);
-}
-
-.services-page-description {
-  font-size: var(--text-body);
-  line-height: 1.6;
-}
-
 .service-title {
   font-family: var(--font-heading);
   /* subhead et non le corps : un titre de carte a la taille du texte est
@@ -2487,40 +2450,17 @@ header[data-sur-media] {
 }
 
 /* ============================================
-   CONTACT SECTION
-   ============================================ */
-#contact-social-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.social-links {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--spacing-sm);
-  font-size: var(--text-meta);
-}
-
-.social-links li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.social-links a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.social-links a:hover {
-  text-decoration: underline;
-}
-
-/* Styles pour les liens sociaux */
+   LIENS SOCIAUX DU PIED DE PAGE
+   ============================================
+   ⚠️ CETTE SECTION S'APPELAIT « CONTACT SECTION », ET C'ETAIT FAUX depuis le
+   retrait de ses regles mortes, 12/08/2026. Ce qui y vivait pour la page
+   contact (`#contact-social-links`, `.social-links`, `.social-icon`) ne visait
+   plus rien : releve sur l'oracle, le seul identifiant emis contenant
+   « social » est `footer-social-links`, 70 fois, et la seule classe emise est
+   `social-link`, 350 fois. Toutes deux viennent du PIED
+   (`_includes/layout/footer.html:60` et `:80`), jamais de la page contact.
+   Le titre est donc renomme plutot que laisse en place : garder « CONTACT »
+   ferait chercher un consommateur qui n'existe pas. */
 .social-link {
   text-decoration: none;
   transition: transform var(--transition-base), color var(--transition-base);
@@ -2530,36 +2470,6 @@ header[data-sur-media] {
   width: 24px;
   height: 24px;
   transition: transform var(--transition-base);
-}
-
-.social-icon {
-  color: var(--primary-color);
-  width: 24px;
-  height: 24px;
-}
-
-/* Icônes plus grandes dans la page de contact */
-#contact-social-links .social-icon {
-  width: 48px;
-  height: 48px;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  width: 100%;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 0 var(--spacing-lg);
-  gap: var(--spacing-lg);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  padding: 0 var(--spacing-lg);
-  gap: var(--spacing-lg);
 }
 
 .grid-four {
@@ -3224,7 +3134,7 @@ footer {
    L'ancien `.select.clicked` était mort : le JS posait `select-clicked`. */
 .select[aria-expanded=true] {
   border: var(--border-primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-signal);
 }
 
 .select[aria-expanded=true]:hover {
@@ -3251,7 +3161,7 @@ footer {
   padding: var(--spacing-sm);
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-signal);
   border-radius: var(--border-radius-md);
   corner-shape: squircle;
   position: absolute;
@@ -3587,10 +3497,6 @@ html.scrollbar-saisie {
   justify-content: center;
   width: 100%;
   gap: var(--spacing-lg);
-}
-
-.hero-project-container {
-  max-width: 100%;
 }
 
 .hero-service-container {
@@ -4144,7 +4050,7 @@ html.scrollbar-saisie {
 
 .card:hover {
   transform: translateY(-0.25rem);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-signal);
 }
 
 /* ⚠️ `.card:focus-visible` A ETE SUPPRIME le 02/08/2026, et il ne manque a
@@ -4218,19 +4124,6 @@ html.scrollbar-saisie {
 .service-card:hover .service-card-details {
   color: var(--primary-color);
   transform: scale(1.05);
-}
-
-/* Variations */
-.service-card-big {
-  gap: var(--spacing-2xl);
-  padding: var(--spacing-2xl) var(--spacing-lg);
-  border-radius: var(--border-radius-squircle-medium);
-}
-@supports (corner-shape: squircle) {
-  .service-card-big {
-    border-radius: var(--border-radius-squircle-medium);
-    corner-shape: squircle;
-  }
 }
 
 .service-card-simple {
@@ -5701,31 +5594,6 @@ body:has(.project-page) header[data-zone=ouverture] {
   text-wrap: balance;
 }
 
-/* ── BACK LINK (conserve : utilise hors page projet) ─────────────────── */
-.project-back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: 600;
-  color: var(--ink-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  transition: color var(--transition-base), gap var(--transition-base);
-}
-.project-back-link svg {
-  transition: transform var(--transition-base);
-}
-.project-back-link:hover {
-  color: var(--ink);
-  gap: 0.6rem;
-}
-.project-back-link:hover svg {
-  transform: translateX(-3px);
-}
-
 /* ================================
    L'ARRIVEE DU HERO
    ================================ */
@@ -6423,27 +6291,6 @@ main:has(.contact-hero) {
   margin-right: 0.4rem;
 }
 
-.contact-select {
-  cursor: pointer;
-  /* ⚠️ Le rgba de ce chevron ne PEUT PAS etre une variable : il vit dans un
-     data-URI, et une `url()` n'interpole aucune custom property. C'est la
-     seule couleur du site legitimement hors palette, pour une raison
-     technique et non par oubli. Si elle doit changer, elle change ici.
-     Alternative si ca devient genant : passer le chevron en <svg> inline dans
-     l'include du dropdown, ou le remplacer par un `mask-image` colore en
-     `background-color`, qui lui accepte une variable. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 1rem center;
-  padding-right: 2.5rem;
-  /* Un <option> natif est rendu par le systeme : il lui faut une couleur
-     OPAQUE, une translucide n'y survit pas. `--surface` en est une. */
-}
-.contact-select option {
-  background: var(--surface);
-  color: var(--ink);
-}
-
 .contact-textarea {
   resize: vertical;
   min-height: 140px;
@@ -6711,9 +6558,6 @@ main:has(.contact-hero) {
   .section-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
@@ -6728,9 +6572,6 @@ main:has(.contact-hero) {
     width: fit-content;
     max-width: 50vw;
     gap: var(--spacing-md);
-  }
-  .service-main-container {
-    padding: 0 var(--spacing-lg);
   }
 }
 /* Medium Tablets - 768px + */
@@ -6782,15 +6623,6 @@ main:has(.contact-hero) {
   .hero-title-span {
     -webkit-text-stroke: 2px var(--primary-color);
   }
-  .hero-project {
-    flex-direction: row;
-  }
-  .hero-project-container {
-    max-width: 55%;
-  }
-  .hero-image-container {
-    width: 40%;
-  }
 }
 /* Desktop - 1024px + */
 @media (min-width: 1024px) {
@@ -6800,14 +6632,8 @@ main:has(.contact-hero) {
   .section-grid-simple {
     grid-template-columns: repeat(3, 1fr);
   }
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
   .grid-four {
     grid-template-columns: repeat(4, 1fr);
-  }
-  .hero-intro {
-    max-width: 80%;
   }
   .social-icons-card {
     max-width: 33vw;
@@ -6834,11 +6660,6 @@ main:has(.contact-hero) {
   header {
     padding: var(--spacing-sm) var(--spacing-md);
   }
-  /* Hero Section */
-  .hero-image {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
   .scroll-down-pastille svg {
     width: 3rem;
     height: 3rem;
@@ -6857,9 +6678,6 @@ main:has(.contact-hero) {
     width: fit-content;
     align-items: center;
   }
-  .hero-image-container {
-    max-width: 100%;
-  }
   .scroll-down-link {
     bottom: 3rem;
   }
@@ -6876,25 +6694,9 @@ main:has(.contact-hero) {
   .service-detail {
     padding: 0 var(--spacing-md) var(--spacing-xl);
   }
-  .service-main-container {
-    flex-direction: column;
-  }
-  .service-main-container-text {
-    gap: var(--spacing-sm);
-  }
-  .services-page-subtitle {
-    text-align: center;
-  }
-  .services-page-description {
-    text-align: center;
-  }
   /* Projects Section */
   .projects-title {
     font-size: var(--text-subhead);
-  }
-  .card-grid {
-    padding: 0;
-    gap: var(--spacing-md);
   }
   /* Footer */
   .footer-top {

@@ -154,70 +154,28 @@
   line-height: 1;
 }
 
-/* ============================================
-   HERO THEME
-   ============================================ */
-
-.hero-theme-container {
-  display: flex;
-  width: fit-content;
-  height: fit-content;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-/* ⚠️ Ce selecteur a ete signale comme du CSS mort lors de la passe typeset.
-   Il ne l'est pas : le balisage est bien emis par _includes/pages/index.html
-   et present sur 2 pages generees. Verifie avant de supprimer quoi que ce
-   soit. Il rejoint donc l'echelle au lieu de disparaitre.
-   `letter-spacing` etait en 3px absolus, soit 25 % a cette taille, bien
-   au-dela du plafond de 12 % pour des capitales. */
-.hero-theme {
-  font-family: var(--font-heading);
-  font-size: var(--text-caption);
-  color: var(--ink);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: var(--track-caps);
-  line-height: var(--leading-tight);
-}
-
-.hero-theme-dot {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: var(--primary-color);
-  border-radius: var(--squircle-full);
-  corner-shape: squircle;
-  // from chatnoir
-  display: inline-block;
-  flex-shrink: 0;
-}
+/* ⚠️ LA SECTION HERO THEME EST SUPPRIMEE, ET SON COMMENTAIRE DE GARDE DISAIT
+   L'INVERSE DE LA VERITE. Retiree le 12/08/2026.
+   Il defendait `.hero-theme` contre une suppression : « signale comme du CSS
+   mort lors de la passe typeset. Il ne l'est pas : le balisage est bien emis
+   par _includes/pages/index.html et present sur 2 pages generees. Verifie
+   avant de supprimer quoi que ce soit. »
+   Il avait raison a l'epoque, et il a cesse d'avoir raison sans que personne
+   ne le mette a jour. Ce que le balisage etait, en realite, c'est un
+   COMMENTAIRE HTML : emis, donc visible dans la source, mais jamais un
+   element. Il a ete converti en commentaire Liquid le 12/08/2026, voir
+   `_includes/pages/index.html:18-26`.
+   Verifie sur les trois plans avant de supprimer : `hero-theme` n'apparait
+   dans aucun attribut `class=` de `_includes/`, `_layouts/`, `fr/`, `en/` ni
+   `index.html`, et sa seule occurrence dans `_site/` etait le CSS compile
+   lui-meme, zero page HTML.
+   ⚠️ La lecon est generale : un commentaire qui INTERDIT une suppression doit
+   dire a quelle condition il cesse de valoir. Celui-ci ne le disait pas, donc
+   il aurait protege ces 39 lignes indefiniment. */
 
 /* ============================================
    SERVICES SECTION
    ============================================ */
-
-.subservice-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: var(--spacing-lg);
-}
-
-.service-main-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-lg);
-}
-
-.service-main-container-text {
-  display: flex;
-  height: -webkit-fill-available;
-  justify-content: space-between;
-  flex-direction: column;
-}
 
 .service-main-title {
   text-align: center;
@@ -244,15 +202,6 @@
   text-align: center;
 }
 
-.services-page-subtitle {
-  font-size: var(--text-title);
-}
-
-.services-page-description {
-  font-size: var(--text-body);
-  line-height: 1.6;
-}
-
 .service-title {
   @include card-title;
 }
@@ -266,41 +215,18 @@
 }
 
 /* ============================================
-   CONTACT SECTION
-   ============================================ */
+   LIENS SOCIAUX DU PIED DE PAGE
+   ============================================
+   ⚠️ CETTE SECTION S'APPELAIT « CONTACT SECTION », ET C'ETAIT FAUX depuis le
+   retrait de ses regles mortes, 12/08/2026. Ce qui y vivait pour la page
+   contact (`#contact-social-links`, `.social-links`, `.social-icon`) ne visait
+   plus rien : releve sur l'oracle, le seul identifiant emis contenant
+   « social » est `footer-social-links`, 70 fois, et la seule classe emise est
+   `social-link`, 350 fois. Toutes deux viennent du PIED
+   (`_includes/layout/footer.html:60` et `:80`), jamais de la page contact.
+   Le titre est donc renomme plutot que laisse en place : garder « CONTACT »
+   ferait chercher un consommateur qui n'existe pas. */
 
-#contact-social-links {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.social-links {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: var(--spacing-sm);
-  font-size: var(--text-meta);
-}
-
-.social-links li {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.social-links a {
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-.social-links a:hover {
-  text-decoration: underline;
-}
-
-/* Styles pour les liens sociaux */
 .social-link {
   text-decoration: none;
   transition: transform var(--transition-base), color var(--transition-base);
@@ -312,14 +238,3 @@
   transition: transform var(--transition-base);
 }
 
-.social-icon {
-  color: var(--primary-color);
-  width: 24px;
-  height: 24px;
-}
-
-/* Icônes plus grandes dans la page de contact */
-#contact-social-links .social-icon {
-  width: 48px;
-  height: 48px;
-}

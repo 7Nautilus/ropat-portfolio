@@ -32,7 +32,7 @@
    L'ancien `.select.clicked` était mort : le JS posait `select-clicked`. */
 .select[aria-expanded="true"] {
   border: var(--border-primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-signal);
 }
 
 .select[aria-expanded="true"]:hover {
@@ -61,7 +61,7 @@
   padding: var(--spacing-sm);
   background-color: var(--primary-color-alpha);
   border: var(--border-primary);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-signal);
   border-radius: var(--border-radius-md);
   corner-shape: squircle;
   position: absolute;

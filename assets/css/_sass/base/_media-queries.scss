@@ -14,10 +14,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .footer-container {
     flex-direction: row;
     justify-content: space-between;
@@ -36,10 +32,6 @@
     gap: var(--spacing-md);
   }
 
-
-  .service-main-container {
-    padding: 0 var(--spacing-lg);
-  }
 }
 
 /* Medium Tablets - 768px + */
@@ -100,17 +92,6 @@
     -webkit-text-stroke: 2px var(--primary-color);
   }
 
-  .hero-project {
-    flex-direction: row;
-  }
-
-  .hero-project-container {
-    max-width: 55%;
-  }
-
-  .hero-image-container {
-    width: 40%;
-  }
 }
 
 /* Desktop - 1024px + */
@@ -123,16 +104,8 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .card-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
   .grid-four {
     grid-template-columns: repeat(4, 1fr);
-  }
-
-  .hero-intro {
-    max-width: 80%;
   }
 
   .social-icons-card {
@@ -165,12 +138,6 @@
     padding: var(--spacing-sm) var(--spacing-md);
   }
 
-  /* Hero Section */
-  .hero-image {
-    border-radius: var(--border-radius-sm);
-    corner-shape: squircle;
-  }
-
   .scroll-down-pastille svg {
     width: 3rem;
     height: 3rem;
@@ -190,10 +157,6 @@
     padding-top: var(--spacing-lg);
     width: fit-content;
     align-items: center;
-  }
-
-  .hero-image-container {
-    max-width: 100%;
   }
 
   .scroll-down-link {
@@ -216,30 +179,9 @@
     padding: 0 var(--spacing-md) var(--spacing-xl);
   }
 
-  .service-main-container {
-    flex-direction: column;
-  }
-
-  .service-main-container-text {
-    gap: var(--spacing-sm);
-  }
-
-  .services-page-subtitle {
-    text-align: center;
-  }
-
-  .services-page-description {
-    text-align: center;
-  }
-
   /* Projects Section */
   .projects-title {
     font-size: var(--text-subhead);
-  }
-
-  .card-grid {
-    padding: 0;
-    gap: var(--spacing-md);
   }
 
   /* Footer */

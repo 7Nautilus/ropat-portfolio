@@ -366,17 +366,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Une seule requête pour les trois familles : deux <link> vers le même hôte
-         coûtaient deux allers-retours au lieu d'un.
-         Chakra Petch : titres, micro-libellés, boutons. STATIQUE, 300 à 700.
-         Plus Jakarta Sans : texte de labeur. Variable, 200 à 800, axe `ital`.
-         Elle remplace Manrope le 03/08/2026 ; le motif est dans _variables.scss.
-         Underdog : accent, sur des mots seulement. Une seule graisse existe. -->
+    {%- comment -%}
+      Une seule requête pour les trois familles : deux link vers le même hôte
+      coûtaient deux allers-retours au lieu d'un.
+      Chakra Petch : titres, micro-libellés, boutons. STATIQUE, 300 à 700.
+      Plus Jakarta Sans : texte de labeur. Variable, 200 à 800, axe `ital`.
+      Elle remplace Manrope le 03/08/2026 ; le motif est dans _variables.scss.
+      Underdog : accent, sur des mots seulement. Une seule graisse existe.
+    {%- endcomment -%}
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;family=Underdog&amp;display=swap" rel="stylesheet">
 
-    <!-- JS -->
-    <!-- Le fond n'est plus une image mais un shader : plus rien à précharger,
-         et main-bg.webp (453 Ko) n'est plus demandé du tout. -->
+    {%- comment -%}
+      JS. Le fond n'est plus une image mais un shader : plus rien à précharger,
+      et main-bg.webp (453 Ko) n'est plus demandé du tout.
+    {%- endcomment -%}
     {%- comment -%}
       Jeton de version, comme sur main.css ligne 99. Sans lui, le navigateur
       resservait l'ANCIEN script avec le NOUVEAU CSS : tout comportement pose
@@ -399,10 +402,12 @@
       });
     </script>
 
-    <!-- Icon.
-         ⚠️ L'attribut `id` est lu par le module de radar de chargement dans
-         script.js, qui remplace `href` pendant le chargement puis le remet.
-         Le retirer n'a l'air de rien et desactive le radar en silence. -->
+    {%- comment -%}
+      Icon.
+      ⚠️ L'attribut `id` est lu par le module de radar de chargement dans
+      script.js, qui remplace `href` pendant le chargement puis le remet.
+      Le retirer n'a l'air de rien et desactive le radar en silence.
+    {%- endcomment -%}
     <link id="favicon" rel="icon" href="/assets/images/branding/icon.png" type="image/png">
 
     <!-- Open Graph -->
@@ -422,9 +427,20 @@
 </head>
 <body>
 
-    <!-- Fond dither : remplace main-bg.webp. Rendu par assets/js/dither.js,
-         qui s'y accroche seul via cet identifiant. Si WebGL manque, le canvas
-         est retiré et la couleur de fond CSS prend le relais. -->
+    {%- comment -%}
+      Fond dither : remplace main-bg.webp. Rendu par assets/js/dither.js,
+      qui s'y accroche seul via cet identifiant. Si WebGL manque, le canvas
+      est retiré et la couleur de fond CSS prend le relais.
+
+      ⚠️ CES QUATRE BLOCS ETAIENT DES COMMENTAIRES HTML, donc EMIS, corriges le
+      12/08/2026. Mesure sur un build de production frais : 1065 octets par page
+      x 66 pages = 70 290 octets de prose de maintenance partis sur le fil, dont
+      environ 490 octets gzip par page, sur un depot dont le budget CSS + JS
+      entier est de 25 583 o. Un commentaire Liquid n'est pas emis.
+      ⚠️ Ce n'est PAS tout ce que les pages emettent en commentaires : il reste
+      environ 1216 octets par page en commentaires d'UNE ligne, venus des
+      includes. Ces quatre-la etaient les gros.
+    {%- endcomment -%}
     <canvas id="fond-dither" aria-hidden="true"></canvas>
 
     <!-- Curseur personnalisé (desktop uniquement) -->
