@@ -31,11 +31,73 @@ module Carte
   INDETERMINE = "INDETERMINE"
 
   # Les repertoires que la carte ne parcourt jamais.
-  IGNORES = %w[_site .git .jekyll-cache node_modules vendor .carte .impeccable].freeze
+  #
+  # ⚠️ CETTE LISTE NE SUFFIT PAS, ET ELLE NE PEUT PAS SUFFIRE : c'est une liste de
+  # REPERTOIRES, elle ne sait pas exprimer une regle de `.gitignore`. Voir
+  # `suivis_par_git` juste en dessous, qui porte la vraie regle depuis le
+  # 12/08/2026. Elle reste utile pour deux choses qu'un filtre git ne ferait pas :
+  # `.carte/` contient `carte.json` et `hors-echelle.txt`, qui SONT suivis et que
+  # la carte ne doit pas se lire a elle-meme ; et `_site` est l'oracle, pas une
+  # source.
+  IGNORES = %w[_site .git .jekyll-cache node_modules vendor .carte .impeccable .claude].freeze
 
   module_function
 
   def chemin(*bouts) = File.join(RACINE, *bouts)
+
+  # ══════════════════════════════════════════════════════════════════════════
+  #  ⚠️ LA CARTE LIT CE QUE GIT SUIT, PAS CE QUE LE DISQUE PORTE (12/08/2026)
+  # ══════════════════════════════════════════════════════════════════════════
+  #
+  # Elle decrit le DEPOT. Un fichier qui n'est pas dans l'index n'est pas dans le
+  # depot : il ne sera pas dans le checkout de la CI, donc tout ce que la carte en
+  # dit est une affirmation que personne d'autre ne peut reproduire.
+  #
+  # Le defaut a ete paye trois fois le meme jour, et les trois etaient invisibles :
+  #   1. `.claude/skills/mesurer-au-navigateur/SKILL.md`, gitignore, portait un
+  #      front matter : la carte publiait la route
+  #      `/.claude/skills/mesurer-au-navigateur/SKILL.html`, qu'AUCUN build ne
+  #      produit (Jekyll ignore les repertoires en point). Sur un checkout de CI la
+  #      regeneration comptait 65 routes contre 66 commitees, `carte-a-jour.rb`
+  #      sortait en 1, et le job `carte` bloquait `deploy`.
+  #   2. Le chantier « mise en situation » : `_situation.scss` plus cinq includes,
+  #      gitignores VOLONTAIREMENT par `.gitignore:59-82` pour survivre a un
+  #      `git clean -fd`. Mesure : « Includes 38 » et « Partiels SCSS 34 » en local
+  #      contre 33 et 33 en CI, plus 35 mentions dans le corps de la carte.
+  #      Ceux-la ne peuvent PAS etre deplaces, c'est le but de leur protection.
+  #   3. `_data/projects/cinco.yml` et `luz-optique.yml`, non suivis : la passe
+  #      donnees compte les FICHIERS du disque et non l'`order`, d'ou un « 20/23 »
+  #      la ou la CI voit « 20/21 ».
+  #
+  # `git ls-files` rend l'INDEX, donc exactement ce qu'un commit contiendrait :
+  # les ajouts stages y sont, les suppressions non encore commitees en sortent par
+  # l'intersection avec le glob. C'est la bonne definition, pas `git ls-tree HEAD`.
+  #
+  # ⚠️ CETTE REGLE NE VAUT QUE POUR LES SOURCES. L'oracle est lu par un
+  # `Dir.glob` direct dans `emis.rb`, sur `.carte/site` ou `_site`, qui ne sont
+  # suivis ni l'un ni l'autre et doivent continuer d'etre lus.
+  #
+  # ⚠️ AUCUN REPLI SILENCIEUX. Si git ne repond pas, la carte s'arrete. Retomber
+  # sur un scan du disque redonnerait une carte fausse sans que rien ne le dise,
+  # c'est-a-dire exactement le defaut qu'on ferme ici.
+  # Consequence a connaitre : `carte.rb` ne tourne plus dans un repertoire qui
+  # n'est pas un depot git. Pour simuler un checkout de CI, utiliser
+  # `git worktree add --detach`, pas une extraction `git archive`.
+  def suivis_par_git
+    @suivis_par_git ||= begin
+      sortie = begin
+        IO.popen(["git", "-C", RACINE, "ls-files", "-z"], &:read)
+      rescue SystemCallError => e
+        abort("carte : git est introuvable (#{e.message}). La carte lit l'index git, elle ne peut pas s'en passer.")
+      end
+      abort("carte : `git ls-files` a echoue dans #{RACINE}. Est-ce bien un depot git ?") unless $?.success?
+
+      liste = sortie.to_s.force_encoding("UTF-8").split("\0").reject(&:empty?)
+      abort("carte : `git ls-files` n'a rendu aucun fichier. La carte refuse de decrire un depot vide.") if liste.empty?
+
+      liste.map { |r| r.tr("\\", "/") }.to_set
+    end
+  end
 
   def lire(f)
     File.read(f, encoding: "bom|utf-8")
@@ -51,11 +113,16 @@ module Carte
     File.binwrite(f, contenu.encode("UTF-8"))
   end
 
-  # Tous les fichiers du depot, hors repertoires ignores.
+  # Tous les fichiers SUIVIS PAR GIT, hors repertoires ignores.
+  # Le glob garde `File::FNM_DOTMATCH` : ce n'est plus lui qui protege des
+  # repertoires en point, c'est l'index.
   def fichiers(motif)
+    suivis = suivis_par_git
     Dir.glob(File.join(RACINE, motif), File::FNM_DOTMATCH).reject do |f|
-      rel = f.delete_prefix(RACINE + "/")
-      IGNORES.any? { |d| rel == d || rel.start_with?("#{d}/") } || File.directory?(f)
+      rel = relatif(f)
+      IGNORES.any? { |d| rel == d || rel.start_with?("#{d}/") } ||
+        File.directory?(f) ||
+        !suivis.include?(rel)
     end.sort
   end
 
