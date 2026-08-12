@@ -19,7 +19,6 @@
 
 // 3. Components
 @use "components/cursor";
-@use "components/utils";
 @use "components/loader";
 @use "components/buttons";
 @use "components/dropdown";
@@ -31,6 +30,27 @@
 @use "components/scrollbar" as scrollbar-dom;
 @use "components/containers";
 @use "components/carousel";
+/* ⚠️ `components/situation` EST DEBRANCHE, ET C'EST VOLONTAIRE, 04/08/2026.
+   Le composant de mise en situation est ecrit, mesure et documente, mais aucune
+   page ne l'emploie : l'essai d'integration au hero a ete annule par Ropat
+   (« il faut revenir a comment le hero etait avant »). Le hero est concu pour
+   une image PLEIN CADRE avec le lede pose par-dessus ; empiler une carte bornee
+   et ce meme lede ne laisse pas de place aux deux, le lede occupant 54 % de
+   l'ouverture (445 px sur 817, mesure a 1440x900).
+   Le brancher ferait donc expedier une trentaine de regles que personne ne lit.
+   Pour le remettre en service : retirer le commentaire de la ligne ci-dessous,
+   et lui trouver un hote qui n'est PAS le hero.
+
+   ⚠️ ET LE FICHIER VISE N'EST PAS DANS LE DEPOT. `components/_situation.scss`
+   est volontairement **ignore par git** (decision de Ropat, 04/08/2026 : le
+   chantier reste non versionne, une section de `.gitignore` le protege de
+   `git clean -fd`). Ce fichier-ci est suivi, lui : il reference donc une chose
+   absente d'un clone neuf.
+   Consequence a connaitre AVANT de decommenter : sur une machine qui n'a pas le
+   chantier en local, dart-sass sort en 65 sur « Can't find stylesheet to
+   import » et ne compile RIEN. Le jour du branchement, il faut donc d'abord
+   sortir le composant de `.gitignore` et le commiter. */
+// @use "components/situation";
 
 // 3.1 Cards
 @use "components/cards/cards";
