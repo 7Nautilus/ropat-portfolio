@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 19:12, d'apres l'etat de cf81e90.
+> Generee le 12/08/2026 a 19:37, d'apres l'etat de f980488.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 19:12 |
+| Date du build lu | 12/08/2026 19:37 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
