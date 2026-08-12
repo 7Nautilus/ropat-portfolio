@@ -1,0 +1,258 @@
+# ══════════════════════════════════════════════════════════════════════════
+#  STRAKARA, flyer A6 recto-verso et reprise du logo
+# ══════════════════════════════════════════════════════════════════════════
+#
+# Sources du contenu : dossier projet `0-Archive/Strakara` (wireframe annote,
+# maquette HTML, exports press-ready du 17/04/2026), memoire de la session de
+# production, site du client strakara.fr, et les deux avis de Malt.
+#
+# ⚠️⚠️ LE LOGO PREEXISTAIT. NE JAMAIS ECRIRE « CREATION DU LOGO ».
+# L'avis de Laura dit « j'ai fait appel a Victor pour la creation du logo et des
+# flyers » : ce sont SES mots, ils se citent tels quels et ne se corrigent pas.
+# Mais le fait est autre : la cliente avait deja un logo, la premiere mission
+# etait le FLYER, et la reprise du logo est venue APRES. Le texte de cette fiche
+# doit donc rester exact la ou la citation, elle, est enthousiaste. L'ecart se
+# lit comme une cliente contente, pas comme une revendication.
+# Meme famille de piege que « Seiko » sur la fiche LUZ Optique.
+#
+# ⚠️ ET C'EST POUR CA QUE LE CORPS DU TEXTE EST EXPLICITE. Le `subtitle` retenu
+# par Ropat est « Print & identite » ; pris seul, le mot « identite » peut se lire
+# comme une revendication de conception. Les sections de recit disent donc
+# noir sur blanc que le logo etait fourni. Ne pas les alleger sur ce point.
+#
+# ⚠️ NE JAMAIS FAIRE FIGURER ICI : le montant de la mission, ni le nom de famille
+# de la cliente. Ce fichier est VERSIONNE dans un depot PUBLIC. Les avis ne
+# portent que son prenom, cette fiche s'aligne dessus.
+
+project_title: "Strakara"
+
+# ⚠️ `subtitle` PORTE LES LIVRABLES, `theme` PORTE LA DISCIPLINE. Les deux
+# s'affichent l'un sous l'autre en haut de page : le bandeau `theme` d'abord,
+# puis le `<h1>` qui compose « project_title / subtitle ». Y mettre la meme
+# chaine donne « PRINT & IDENTITÉ » puis « Strakara Print & identité », soit les
+# memes mots deux fois a trois lignes d'ecart. Constate par Ropat le 04/08/2026.
+# Le precedent qui fait autorite est `sipsmith` : subtitle « Menu & Invitation »
+# (les objets livres), theme « IDENTITÉ ÉVÉNEMENTIELLE & PRINT » (le champ).
+subtitle: "Flyer & logo"
+
+theme:
+  fr: "PRINT & IDENTITÉ"
+  en: "PRINT & IDENTITY"
+
+category: design   # ⚠️ `categories.yml` n'a ni `print` ni `logo`. Cette fiche est
+                   # une piece de plus au dossier du vocabulaire ferme.
+featured: false
+
+client:
+  fr: "Strakara"
+  en: "Strakara"
+
+year: "2026"
+tools: "Affinity Publisher, Illustrator, Figma"
+
+# ── Les medias ────────────────────────────────────────────────────────────
+# ⚠️ EN ATTENTE DES MOCKUPS DE ROPAT. Le dossier projet porte le recto fini
+# (`recto.png`, 2481x1749, l'A6 occupant la moitie gauche), le wireframe annote
+# (`export.png`) et les exports press-ready, mais aucune mise en situation.
+image_src: /assets/images/projects/strakara/strakara-flyer-mockup.avif
+main_image: /assets/images/projects/strakara/strakara-flyer-mockup.avif
+media_type: image
+aspect: "4/3"            # mockup du flyer, 1440x1080, lu dans l en-tete AVIF le 04/08/2026
+                   # donc `105/148` si le mockup cadre la piece seule. Ne pas
+                   # laisser le defaut 1/1 : c'est la premiere fiche du site a
+                   # porter un format long, et c'est l'interet de l'exercice.
+
+# ── Le cadrage ────────────────────────────────────────────────────────────
+context:
+  fr: "Lancement de l'entreprise"
+  en: "Company launch"
+
+secteur:
+  fr: "Réseau d'espaces professionnels partagés"
+  en: "Shared professional space network"
+
+context_sections:
+  - title:
+      fr: "Un flyer, deux publics opposés"
+      en: "One flyer, two opposite audiences"
+    content:
+      fr: |
+        Strakara met en relation deux profils que tout sépare. D'un côté des entreprises qui
+        disposent de mètres carrés inutilisés dans un entrepôt, un hangar ou un atelier. De
+        l'autre des professionnels qui cherchent de la surface sans s'engager dans un bail.
+
+        Le réseau ne fonctionne que si les deux côtés adhèrent, et l'entreprise se lançait :
+        il fallait convaincre les deux en même temps, avec un seul support.
+
+        **Le format a réglé le problème avant le design.** Un A6 recto-verso donne deux faces,
+        donc deux discours entiers, chacun adressé à un seul lecteur. Le recto parle à celui
+        qui possède l'espace et lui propose un revenu. Le verso parle à celui qui en cherche
+        et lui retire le bail. La même marque, deux entrées.
+      en: |
+        Strakara connects two profiles that have nothing in common. On one side, businesses
+        sitting on unused square meters in a warehouse, a hangar or a workshop. On the other,
+        professionals looking for space without committing to a lease.
+
+        The network only works if both sides join, and the company was launching: both had to
+        be convinced at once, with a single piece.
+
+        **The format solved the problem before the design did.** A double-sided A6 gives two
+        faces, so two complete arguments, each addressed to one reader only. The front speaks
+        to whoever owns the space and offers revenue. The back speaks to whoever needs space
+        and removes the lease. One brand, two doors.
+
+  - title:
+      fr: "Le logo remis en état de servir"
+      en: "Bringing the logo up to production standard"
+    content:
+      fr: |
+        **Le logo existait déjà et n'a pas été redessiné.** Il m'a été fourni en image matricielle,
+        dans une seule version, sans fichier vectoriel ni déclinaison : utilisable sur un écran,
+        pas sur un document destiné à l'impression.
+
+        Le travail a donc porté sur sa mise en production plutôt que sur son dessin. Vectorisation
+        du cube isométrique et du logotype, puis construction d'un jeu complet de déclinaisons :
+        quatre versions vectorielles et quinze déclinaisons matricielles, couvrant les tracés
+        clair, foncé, or et par défaut sur fond transparent, blanc, gris et navy.
+
+        C'est ce qui a permis de le poser sur le bandeau navy du flyer sans détourage approximatif,
+        et ce qui laisse à la cliente de quoi l'employer partout ensuite.
+      en: |
+        **The logo already existed and was not redrawn.** It was supplied as a raster image, in a
+        single version, with no vector file and no variants: usable on screen, not on a document
+        headed for print.
+
+        The work was therefore about making it production-ready rather than about drawing it.
+        Vectorizing the isometric cube and the logotype, then building a complete set of variants:
+        four vector versions and fifteen raster ones, covering the light, dark, gold and default
+        artwork on transparent, white, gray and navy backgrounds.
+
+        That is what allowed it to sit on the flyer's navy band without a rough cut-out, and what
+        leaves the client something she can use anywhere afterwards.
+
+  - title:
+      fr: "Une hiérarchie posée avant la couleur"
+      en: "Hierarchy settled before color"
+    content:
+      fr: |
+        Un flyer se lit en trois secondes ou ne se lit pas. Chaque face a donc été structurée
+        en gris avant d'être habillée, bloc par bloc, avec un ordre de lecture numéroté et une
+        seule chose à faire par face.
+
+        Le recto ouvre sur une question qui vise le lecteur (« vous avez des m² inutilisés dans
+        votre entrepôt ? »), énumère les surfaces concernées, promet un revenu mensuel, puis
+        aligne cinq bénéfices. Le verso ouvre sur le besoin inverse et pose son argument le plus
+        fort en badge : sans bail.
+
+        **Chaque face se termine sur un seul appel**, tenu par un bandeau or qui tranche sur le
+        navy. Le contraste de la couleur d'accent fait le travail que ferait ailleurs une flèche.
+      en: |
+        A flyer is read in three seconds or not at all. Each side was therefore laid out in gray
+        before being dressed, block by block, with a numbered reading order and a single thing to
+        do per face.
+
+        The front opens on a question aimed straight at the reader ("do you have unused square
+        meters in your warehouse?"), lists the kinds of space concerned, promises monthly revenue,
+        then lines up five benefits. The back opens on the opposite need and states its strongest
+        argument as a badge: no lease.
+
+        **Each face ends on one call to action**, carried by a gold band cutting through the navy.
+        The accent color does the work an arrow would do elsewhere.
+
+  - title:
+      fr: "Livré prêt pour l'imprimeur"
+      en: "Delivered press-ready"
+    content:
+      fr: |
+        La chaîne a été menée jusqu'au bout plutôt que jusqu'à l'écran : conversion des couleurs
+        en quadrichromie, fonds perdus de trois millimètres sur les blocs pleine largeur, et
+        contrôle de lisibilité à la taille réelle de 105 × 148 mm avant export.
+
+        Livraison en PDF haute définition prêt à imprimer, avec et sans fond perdu, le fichier
+        source vectoriel, et les deux faces également fournies séparément.
+      en: |
+        The chain was taken all the way to the printer rather than stopping at the screen: colors
+        converted to CMYK, three-millimeter bleeds on the full-width blocks, and a legibility check
+        at the actual size of 105 × 148 mm before export.
+
+        Delivered as a high-resolution print-ready PDF, with and without bleed, along with the
+        vector source file and both faces supplied separately.
+
+locales:
+  fr:
+    url: /fr/projects/strakara.html
+    aria_label: "Voir le flyer et la reprise de logo pour Strakara"
+    image_alt: "Flyer A6 recto-verso pour Strakara"
+    title: "Flyer de lancement"
+    pitch: "**A6 recto-verso** pour un réseau d'espaces professionnels partagés : une face pour ceux qui ont de l'espace, une pour ceux qui en cherchent."
+    description: "**Flyer A6 recto-verso** de lancement pour **Strakara**, réseau d'espaces professionnels partagés. Une face pour les entreprises qui ont des mètres carrés inutilisés, une face pour celles qui en cherchent. Le logo fourni a été **vectorisé et décliné** pour la production print."
+    services: "Mise en page, Préparation print, Vectorisation, Déclinaisons de logo"
+    seo:
+      title: "Flyer de lancement pour Strakara, réseau d'espaces partagés | Ropat"
+      description: "Flyer A6 recto-verso pour le lancement de Strakara : deux publics opposés, une face chacun. Vectorisation du logo fourni, jeu complet de déclinaisons et fichiers prêts pour l'imprimeur."
+      og_title: "Flyer de lancement Strakara"
+      og_description: "Un A6 recto-verso qui s'adresse à deux publics opposés, une face chacun, plus la mise en production du logo fourni."
+  en:
+    url: /en/projects/strakara.html
+    aria_label: "See the flyer and logo rework for Strakara"
+    image_alt: "Double-sided A6 flyer for Strakara"
+    title: "Launch flyer"
+    pitch: "**Double-sided A6** for a shared professional space network: one face for those with space, one for those who need it."
+    description: "**Double-sided A6 launch flyer** for **Strakara**, a shared professional space network. One face for businesses with unused square meters, one for those looking for space. The supplied logo was **vectorized and expanded into a full set of variants** for print production."
+    services: "Layout, Print preparation, Vectorization, Logo variants"
+    seo:
+      title: "Launch flyer for Strakara, a shared space network | Ropat"
+      description: "Double-sided A6 flyer for the launch of Strakara: two opposite audiences, one face each. Vectorization of the supplied logo, a full set of variants, and press-ready files."
+      og_title: "Launch flyer Strakara"
+      og_description: "A double-sided A6 addressing two opposite audiences, one face each, plus production-ready rework of the supplied logo."
+
+case_study:
+  # ⚠️ Les mockups attendent les fichiers de Ropat. Candidats deja au dossier :
+  # le recto fini, le verso, le wireframe annote (qui montre la METHODE, et que
+  # peu de portfolios osent montrer), et les declinaisons de logo en planche.
+  mockups: []
+
+  # Relevees dans la maquette de production `flyer-final.html`.
+  colors:
+    - hex: "#263545"
+      name:
+        fr: "Navy"
+        en: "Navy"
+    - hex: "#1a2839"
+      name:
+        fr: "Navy Profond"
+        en: "Deep Navy"
+    - hex: "#c8a254"
+      name:
+        fr: "Or"
+        en: "Gold"
+    - hex: "#d9b96e"
+      name:
+        fr: "Or Clair"
+        en: "Light Gold"
+    - hex: "#e8d09a"
+      name:
+        fr: "Or Pâle"
+        en: "Pale Gold"
+    - hex: "#cddae5"
+      name:
+        fr: "Bleu Glacier"
+        en: "Glacier Blue"
+    - hex: "#9ab4c8"
+      name:
+        fr: "Bleu Acier"
+        en: "Steel Blue"
+    - hex: "#ffffff"
+      name:
+        fr: "Blanc"
+        en: "White"
+
+  typography:
+    - name: "Barlow Condensed"
+      usage:
+        fr: "Titres et accroches, graisse maximale, en capitales"
+        en: "Headlines and hooks, maximum weight, all caps"
+    - name: "Barlow"
+      usage:
+        fr: "Corps de texte et bénéfices"
+        en: "Body copy and benefit lists"

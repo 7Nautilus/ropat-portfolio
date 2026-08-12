@@ -1,6 +1,28 @@
-slug: logo-process
 project_title: "Logo Design Process"
-subtitle: "Logo"
+# ⚠️ CORRIGE LE 04/08/2026 : valait « Logo », et le `<h1>` composant
+# « project_title / subtitle » se lisait donc « Logo Design Process Logo ».
+# La repetition etait DANS le titre lui-meme, sans meme compter le bandeau
+# « DESIGN DE LOGO & BRANDING » qui posait le mot une troisieme fois.
+# C'etait le seul titre du site fautif tout seul, hors contexte.
+#
+# ⚠️ POURQUOI « EXPLORATION » ET PAS UN NOM D'OBJET. Les sous-titres du site
+# nomment un livrable (Cover, Poster, Packaging, Menu & Invitation). Ici il n'y
+# a pas de commande : c'est un projet personnel qui montre une METHODE, du
+# croquis a la finition 3D. Le mot dit ce que le titre ne dit pas, c'est-a-dire
+# que la piece est auto-commandee.
+#
+# ⚠️ ET IL EST IDENTIQUE EN FRANCAIS ET EN ANGLAIS, ce qui n'est pas un hasard :
+# `subtitle` vit en TETE de fichier, hors de `locales`, donc il n'est pas
+# traduit et sort tel quel sur les 2 langues. Tous les sous-titres du site sont
+# neutres pour cette raison. Ne pas y mettre de tournure francaise.
+subtitle: "Exploration"
+# ✅ REPETITION ASSUMEE, ARBITREE PAR ROPAT LE 04/08/2026, NE PAS « CORRIGER ».
+# Le bandeau ci-dessous partage « logo » et « design » avec le titre de page, qui
+# compose « Logo Design Process / Exploration ». C'est structurel : le nom du
+# projet EST « Logo Design Process », donc aucun bandeau parlant de logo ou de
+# design ne peut l'eviter, et un bandeau qui les eviterait ne dirait plus la
+# discipline. Les 21 autres fiches ont ete debarrassees de leur repetition ; ces
+# deux-la (avec `zylkene`) sont les seules ou elle est inevitable.
 theme: 
   fr: "DESIGN DE LOGO & BRANDING"
   en: "LOGO DESIGN & BRANDING"
@@ -85,7 +107,7 @@ locales:
     aria_label: "Voir le processus de création de logo"
     image_alt: "Processus de design de logo"
     title: "Processus de design de logo"
-    pitch: "**Création d'un logo géométrique** : du croquis initial à la version finale 3D avec effets"
+    pitch: "**Du croquis initial au rendu 3D**, chaque étape de construction montrée dans l'ordre."
     description: "Exemple de processus de design de logo incluant sketch, développement et finalisation."
     seo:
       title: "Logo Design Process | Ropat"
@@ -97,7 +119,7 @@ locales:
     aria_label: "View the logo creation process"
     image_alt: "Logo design process"
     title: "Logo design process"
-    pitch: "**Creation of a geometric logo**: from initial sketch to final 3D version with effects"
+    pitch: "**From first sketch to 3D render**, every construction step shown in order."
     description: "Example of logo design process including sketch, development and finalization."
     seo:
       title: "Logo Design Process | Ropat"

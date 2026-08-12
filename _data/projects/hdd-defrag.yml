@@ -1,4 +1,3 @@
-slug: hdd-defrag
 project_title: "HDD DEFRAG"
 subtitle: "Poster"
 theme: 
@@ -69,7 +68,7 @@ locales:
     aria_label: "Voir le projet d'affiche HDD DEFRAG"
     image_alt: "Affiche HDD DEFRAG"
     title: "Affiche “HDD DEFRAG”"
-    pitch: "**Création d'une affiche** sur la défragmentation de disque dur."
+    pitch: "**La défragmentation d'un disque dur**, traitée comme un motif graphique."
     description: "**Création d'une affiche** sur le thème de la défragmentation de disque dur, utilisant **InDesign**, **Photoshop** et **Illustrator**."
     seo:
       title: "HDD DEFRAG - Affiche | Ropat"
@@ -81,7 +80,7 @@ locales:
     aria_label: "View the HDD DEFRAG poster project"
     image_alt: "HDD DEFRAG Poster"
     title: "Poster “HDD DEFRAG”"
-    pitch: "**Creation of a poster** on the theme of hard drive defragmentation."
+    pitch: "**Hard drive defragmentation**, treated as a graphic pattern."
     description: "**Creation of a poster** on the theme of hard drive defragmentation, using **InDesign**, **Photoshop**, and **Illustrator**."
     seo:
       title: "HDD DEFRAG - Poster | Ropat"

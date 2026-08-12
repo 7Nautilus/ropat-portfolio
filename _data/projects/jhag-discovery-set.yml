@@ -1,9 +1,8 @@
-slug: jhag-discovery-set
 project_title: "Discovery Set"
 subtitle: "Social Ads"
 theme:
-  fr: "CAMPAGNE PAID SOCIAL"
-  en: "PAID SOCIAL CAMPAIGN"
+  fr: "PAID MEDIA & MOTION DESIGN"
+  en: "PAID MEDIA & MOTION DESIGN"
 category: social-ads
 featured: false
 client:
@@ -64,7 +63,7 @@ context_sections:
       fr: |
         Habillage graphique et intégration de la copy publicitaire sur 3 concepts visuels distincts transmis par la maison. Un premier univers rose fuchsia épuré axé sur l'offre brute ; un second univers gris texturé mettant en scène les ingrédients naturels des fragrances (citron vert, vanille, lavande) ; et un troisième univers jaune safran au stylisme lifestyle affirmé évoquant un rituel d'écriture et de sélection.
       en: |
-        Ad layouts and copy integration across 3 distinct visual environments provided by the brand. The first, a minimalist fuchsia pink setup focusing on the raw offer; the second, a textured grey environment highlighting the natural ingredients of the fragrances (lime, vanilla, lavender); and the third, a saffron yellow setup with lifestyle-forward styling evoking a ritual of curation and writing.
+        Ad layouts and copy integration across 3 distinct visual environments provided by the brand. The first, a minimalist fuchsia pink setup focusing on the raw offer; the second, a textured gray environment highlighting the natural ingredients of the fragrances (lime, vanilla, lavender); and the third, a saffron yellow setup with lifestyle-forward styling evoking a ritual of curation and writing.
   - title:
       fr: "Composition typographique & Multi-format"
       en: "Typographic Layout & Multi-format Execution"
@@ -80,7 +79,7 @@ locales:
     aria_label: "Voir la campagne paid social Coffret Découverte - Juliette has a Gun"
     image_alt: "Campagne paid social Coffret Découverte - Juliette has a Gun"
     title: "Discovery Set"
-    pitch: "**Composition graphique et habillage d'assets publicitaires** pour la campagne de conversion du Coffret Découverte de **Juliette has a Gun**."
+    pitch: "**Composition graphique et habillage publicitaire** pour une campagne de conversion, déclinés sur tous les formats."
     description: "Intégration typographique, habillage graphique et déclinaisons de 3 concepts publicitaires bilingues (FR/EN) sur les formats statiques Meta Ads (1:1, 4:5, 9:16) pour promouvoir l'offre de remboursement du Coffret Découverte."
     services: "Composition graphique, Habillage publicitaire, Intégration typographique, Déclinaisons multi-formats"
     seo:
@@ -94,7 +93,7 @@ locales:
     aria_label: "See the Discovery Set paid social campaign - Juliette has a Gun"
     image_alt: "Discovery Set paid social campaign - Juliette has a Gun"
     title: "Discovery Set"
-    pitch: "**Graphic composition and ad layout styling** for the Discovery Set conversion campaign by **Juliette has a Gun**."
+    pitch: "**Graphic composition and ad styling** for a conversion campaign, adapted across every format."
     description: "Typographic integration, ad layout styling, and multi-format adaptations (1:1, 4:5, 9:16) for 3 bilingual (FR/EN) static ad concepts promoting the Discovery Set."
     services: "Graphic Composition, Advertising Layouts, Typographic Integration, Multi-format Adaptation"
     seo:
@@ -130,7 +129,7 @@ case_study:
     - hex: "#e3e3e3"
       name:
         fr: "Gris Minéral"
-        en: "Mineral Grey"
+        en: "Mineral Gray"
     - hex: "#000000"
       name:
         fr: "Noir"

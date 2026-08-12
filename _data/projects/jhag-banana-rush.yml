@@ -1,9 +1,8 @@
-slug: jhag-banana-rush
 project_title: "Banana Rush"
 subtitle: "Social Ads"
 theme:
-  fr: "CAMPAGNE PAID SOCIAL"
-  en: "PAID SOCIAL CAMPAIGN"
+  fr: "PAID MEDIA & MOTION DESIGN"
+  en: "PAID MEDIA & MOTION DESIGN"
 category: social-ads
 featured: true
 client:
@@ -64,7 +63,7 @@ locales:
     aria_label: "Voir la campagne paid social Banana Rush - Juliette has a Gun"
     image_alt: "Campagne paid social Banana Rush - Juliette has a Gun"
     title: "Banana Rush"
-    pitch: "**Composition graphique, co-branding et motion design** pour la campagne publicitaire de lancement du parfum **Banana Rush** de **Juliette has a Gun**."
+    pitch: "**Composition graphique et motion design** pour le lancement d'un parfum, en co-branding Sephora et décliné sur tous les formats."
     description: "Habillage publicitaire et animation de 10 concepts visuels déclinés en versions bilingues (FR/EN), formats Meta Ads (1:1, 4:5, 9:16), avec intégration systématique d'une déclinaison co-brandée pour Sephora."
     services: "Composition graphique, Motion Design, Co-branding Sephora, Déclinaisons multi-formats"
     seo:
@@ -78,7 +77,7 @@ locales:
     aria_label: "See the Banana Rush paid social campaign - Juliette has a Gun"
     image_alt: "Banana Rush paid social campaign - Juliette has a Gun"
     title: "Banana Rush"
-    pitch: "**Graphic composition, co-branding, and motion design** for the **Banana Rush** fragrance launch campaign by **Juliette has a Gun**."
+    pitch: "**Graphic composition and motion design** for a fragrance launch, co-branded with Sephora and adapted across every format."
     description: "Graphic layouts and animation of 10 visual concepts adapted in bilingual versions (FR/EN) across Meta Ads formats (1:1, 4:5, 9:16), featuring a systematic co-branded rollout for Sephora."
     services: "Graphic Composition, Motion Design, Sephora Co-branding, Multi-format Adaptation"
     seo:

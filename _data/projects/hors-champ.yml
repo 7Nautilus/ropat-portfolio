@@ -1,9 +1,8 @@
-slug: hors-champ
 project_title: "Hors Champ"
 subtitle: "Branding"
 theme:
-  fr: "IDENTITÉ VISUELLE & BRANDING"
-  en: "VISUAL IDENTITY & BRANDING"
+  fr: "IDENTITÉ VISUELLE & DESIGN SYSTEM"
+  en: "VISUAL IDENTITY & DESIGN SYSTEM"
 category: branding
 featured: false
 client:
@@ -61,8 +60,8 @@ locales:
     url: /fr/projects/hors-champ.html
     aria_label: "Voir le projet de branding pour Hors Champ"
     image_alt: "Mise en situation de l'identité visuelle de l'école d'audiovisuel Hors Champ"
-    title: "Hors Champ"
-    pitch: "Création de l'identité visuelle et d'un système de logo modulaire pour l'école supérieure d'audiovisuel Hors Champ."
+    title: "Identité visuelle"
+    pitch: "**Système de logo modulaire, charte et design system** pour une école supérieure d'audiovisuel."
     description: "Conception de l'identité de marque globale pour Hors Champ. Création d'un système de logotype inspiré de la pellicule de film et décliné en trois variantes (sur deux lignes, sur une ligne, et monogramme HC), choix de la charte typographique et définition du design system."
     services: "Direction artistique, Logotype System, Charte graphique, Design System"
     seo:
@@ -75,8 +74,8 @@ locales:
     url: /en/projects/hors-champ.html
     aria_label: "See the branding project for Hors Champ"
     image_alt: "Mockup of the visual identity for the Hors Champ audiovisual school"
-    title: "Hors Champ"
-    pitch: "Visual identity design and modular logo system created for the Hors Champ higher audiovisual school."
+    title: "Visual identity"
+    pitch: "**Modular logo system, brand guidelines and design system** for a higher school of audiovisual arts."
     description: "Global brand identity design for Hors Champ. Creation of a flexible logotype system inspired by movie filmstrips in three distinct variants (two lines, single line, and HC monogram), typographic curation, and design system setup."
     services: "Art Direction, Logo System, Brand Guidelines, Design System"
     seo:

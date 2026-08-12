@@ -1,4 +1,3 @@
-slug: btr
 project_title: BTR
 subtitle: "Cover"
 theme: 
@@ -68,7 +67,7 @@ locales:
     aria_label: "Voir le projet de la pochette du single 'BTR' de Maltezz"
     image_alt: "Pochette du single “BTR” de Maltezz"
     title: "Pochette du single “BTR”"
-    pitch: "**Direction artistique** et **création de la pochette** pour la sortie du single **BTR** de Maltezz"
+    pitch: "**Direction artistique et typographie sur mesure**, avec un visuel construit en 3D."
     description: "**Direction artistique** complète et **création de la pochette d'album** pour la sortie du **single** **BTR** de Maltezz."
     services: "Direction Artistique, Typographie custom & Design de pochette de single"
     seo:
@@ -81,7 +80,7 @@ locales:
     aria_label: "View the 'BTR' single cover project by Maltezz"
     image_alt: "“BTR” single cover by Maltezz"
     title: "Single Cover “BTR”"
-    pitch: "**Art direction** and **cover design** for Maltezz's **BTR** single release"
+    pitch: "**Art direction and custom lettering**, with a visual built in 3D."
     description: "Complete **art direction** and **cover art design** for the release of the single **BTR** by Maltezz."
     services: "Art Direction, Custom Typography & Single Cover Design"
     seo:

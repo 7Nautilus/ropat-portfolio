@@ -82,7 +82,7 @@
   {% if project.thumbnails %}{% assign pieces = pieces | concat: project.thumbnails %}{% endif %}
   {% if project.case_study.mockups %}{% assign pieces = pieces | concat: project.case_study.mockups %}{% endif %}
 {% endif %}
-{% comment %} Le mockup unique (ottony, zylkene) n'est pas un tableau : il est rendu a part. {% endcomment %}
+{% comment %} Le mockup unique (ottony-paris, zylkene) n'est pas un tableau : il est rendu a part. {% endcomment %}
 {% assign lone_mockup = nil %}
 {% unless project.sequence %}
   {% if project.case_study.mockup %}{% assign lone_mockup = project.case_study.mockup %}{% endif %}
@@ -111,7 +111,7 @@
 
 {%- comment -%}
   Defini UNE SEULE FOIS, hors de toute boucle. Il etait assigne A L'INTERIEUR
-  de la boucle sur les pieces : sur ottony et zylkene, qui n'ont qu'un
+  de la boucle sur les pieces : sur ottony-paris et zylkene, qui n'ont qu'un
   case_study.mockup et donc aucune iteration, la variable restait nulle et le
   filtre default codait « Agrandir » en dur, y compris sur les pages EN.
   Pas d'espace avant le deux-points en anglais (convention en_US du projet).

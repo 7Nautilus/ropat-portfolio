@@ -1,9 +1,8 @@
-slug: jhag-pinterest
 project_title: "Pinterest Campaign"
 subtitle: "Social Ads"
 theme:
-  fr: "CAMPAGNE PAID SOCIAL"
-  en: "PAID SOCIAL CAMPAIGN"
+  fr: "PAID MEDIA & MOTION DESIGN"
+  en: "PAID MEDIA & MOTION DESIGN"
 category: social-ads
 featured: false
 client:
@@ -67,7 +66,7 @@ locales:
     aria_label: "Voir la campagne paid social Pinterest - Juliette has a Gun"
     image_alt: "Campagne paid social Pinterest - Juliette has a Gun"
     title: "Pinterest Campaign"
-    pitch: "**Composition graphique, habillage publicitaire et motion design** pour la campagne de conversion de **Juliette has a Gun** sur Pinterest."
+    pitch: "**Composition graphique, habillage publicitaire et motion design** pour la première prise de parole de la maison sur ce réseau."
     description: "Composition graphique, habillage typographique et déclinaisons de 14 concepts publicitaires bilingues (FR/EN) sur le format vertical 2:3 spécifique à Pinterest Ads, associant des assets statiques et une création vidéo."
     services: "Composition graphique, Habillage publicitaire, Intégration typographique, Motion Design"
     seo:
@@ -81,7 +80,7 @@ locales:
     aria_label: "See the Pinterest paid social campaign - Juliette has a Gun"
     image_alt: "Pinterest paid social campaign - Juliette has a Gun"
     title: "Pinterest Campaign"
-    pitch: "**Graphic composition, ad layout styling, and motion design** for the Pinterest conversion campaign by **Juliette has a Gun**."
+    pitch: "**Graphic composition, ad styling and motion design** for the house's debut on that network."
     description: "Graphic composition, typographic styling, and multi-concept rollout (14 setups) in bilingual versions (FR/EN) for Pinterest's vertical 2:3 format, featuring static layouts and a motion design video."
     services: "Graphic Composition, Advertising Layouts, Typographic Integration, Motion Design"
     seo: 
@@ -126,7 +125,7 @@ case_study:
     - hex: "#e3e3e3"
       name:
         fr: "Gris Minéral"
-        en: "Mineral Grey"
+        en: "Mineral Gray"
 
   typography:
     - name: "ABChannel"

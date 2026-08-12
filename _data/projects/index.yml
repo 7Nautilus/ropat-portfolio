@@ -1,4 +1,33 @@
+# ╔════════════════════════════════════════════════════════════════════════╗
+# ║  L'ORDRE EST LA LISTE D'EXISTENCE, PAS SEULEMENT D'AFFICHAGE.          ║
+# ║  Un projet absent d'ici n'a AUCUNE page ; present, il en a deux.       ║
+# ║  C'est `_plugins/pages_generees.rb:50-55` qui le decide, et il leve si ║
+# ║  un identifiant liste n'a pas son `_data/projects/<id>.yml`.           ║
+# ╚════════════════════════════════════════════════════════════════════════╝
+#
+# ⚠️ `cinco` ET `luz-optique` RETIREES LE 12/08/2026, sur decision de Ropat.
+#    Motif : aucune autorisation client demandee, et leurs fiches sont vides
+#    (29 et 30 valeurs nulles, dont les 20 champs de `locales`). Indexees, elles
+#    produisaient quatre URLs a `<title>` vide, `og:image` reduit a la racine du
+#    site et `robots: index, follow` : des pages vides et indexables.
+#    Leurs fichiers restent sur le disque, non versionnes, et leurs propres
+#    en-tetes ("CETTE FICHE N'EST PAS DANS index.yml, ET C'EST VOLONTAIRE")
+#    redeviennent vraies par ce retrait.
+#
+# ⚠️ `strakara` RESTE, et ce n'est pas le meme cas. Le bandeau precedent la
+#    disait "vide" avec les deux autres : c'etait FAUX, verifie champ par champ
+#    le 12/08 (quinze champs remplis, `locales.fr` et `locales.en` a 8 cles
+#    chacune sans un seul vide, `case_study` present, image de 126 439 o
+#    existante). Elle eprouve le gabarit sur un format long, ce qui etait le but.
+#
+#    ⛔ MAIS `_data/projects/strakara.yml` N'EST PAS VERSIONNE. Commiter ce
+#    fichier-ci sans lui fait lever `pages_generees.rb:55` et casse le build en
+#    CI. Les deux partent ensemble, avec
+#    `assets/images/projects/strakara/strakara-flyer-mockup.avif` et l'avis
+#    correspondant de `_data/avis.yml`.
+
 order:
+  - strakara
   - jhag-banana-rush
   - btr
   - aelio
@@ -11,7 +40,7 @@ order:
   - cheetah
   - jhag-pinterest
   - chat-noir
-  - ottony
+  - ottony-paris
   - hdd-defrag
   - a-lone
   - exit

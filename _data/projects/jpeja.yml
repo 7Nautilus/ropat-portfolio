@@ -1,4 +1,3 @@
-slug: jpeja
 project_title: "JPeJA"
 subtitle: "Visualizer"
 theme: 
@@ -69,7 +68,7 @@ locales:
     aria_label: "Voir le projet de visualizer musical de JPeJA"
     image_alt: "Visualizer musical de JPeJA"
     title: "JPeJA"
-    pitch: "**Création d'un visualizer musical** pour le single **JPeJA** de **Wasting Shit**"
+    pitch: "**Visualizer musical** réalisé pour un single de Wasting Shit."
     description: "**Réalisation d'un visualizer musical** fictif pour la sortie du single **JPeJA** de **Wasting Shit**. Cette animation a été réalisée en utilisant **After Effects**."
     seo:
       title: "JPeJA Visualizer - Ropat"
@@ -81,7 +80,7 @@ locales:
     aria_label: "View the visualizer project"
     image_alt: "JPeJA Visualizer"
     title: "JPeJA"
-    pitch: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**"
+    pitch: "**A music visualizer** made for a Wasting Shit single."
     description: "**Creation of a musical visualizer** for the single **JPeJA** by **Wasting Shit**. This animation was created using **After Effects**."
     seo:
       title: "JPeJA Visualizer - Ropat"

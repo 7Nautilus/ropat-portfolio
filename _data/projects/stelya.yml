@@ -1,4 +1,3 @@
-slug: stelya
 # Le header garde l'encre claire et le logo orange sur cette page : la mesure
 # y donne les deux encres a moins de 0,3 l'une de l'autre, donc a l'ex aequo,
 # et c'est l'oeil qui tranche. Arbitrage de Ropat, 28/07/2026.
@@ -6,8 +5,8 @@ chrome: clair
 project_title: "Stelya"
 subtitle: "Branding"
 theme:
-  fr: "IDENTITÉ VISUELLE & BRANDING"
-  en: "VISUAL IDENTITY & BRANDING"
+  fr: "IDENTITÉ VISUELLE & DÉCLINAISONS"
+  en: "VISUAL IDENTITY & APPLICATIONS"
 category: branding
 featured: false
 client:
@@ -85,8 +84,8 @@ locales:
     url: /fr/projects/stelya.html
     aria_label: "Voir le projet de branding pour Stelya"
     image_alt: "Branding pour Stelya, cabinet de conseil en ingénierie"
-    title: "Branding pour Stelya"
-    pitch: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie"
+    title: "Identité visuelle"
+    pitch: "**Logo, icône, palette et typographie**, plus un pack LinkedIn, pour un cabinet de conseil en ingénierie."
     description: "**Identité visuelle** complète pour **Stelya**, cabinet de conseil en ingénierie. Création d'un logo, d'une icône et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **haut de gamme, sérieux et tech**."
     services: "Logo, Icône, Pack LinkedIn, Palette, Typographie"
     seo:
@@ -99,8 +98,8 @@ locales:
     url: /en/projects/stelya.html
     aria_label: "See the branding project for Stelya"
     image_alt: "Branding for Stelya, engineering consulting firm"
-    title: "Branding for Stelya"
-    pitch: "**Complete visual identity** for **Stelya**, engineering consulting firm"
+    title: "Visual identity"
+    pitch: "**Logo, icon, palette and typography**, plus a LinkedIn pack, for an engineering consulting firm."
     description: "**Complete visual identity** for **Stelya**, an engineering consulting firm. Creation of a logo, icon, and **LinkedIn identity pack**, with a defined color palette and typography. A positioning that is **premium, serious, and tech-forward**."
     services: "Logo, Icon, LinkedIn Pack, Color Palette, Typography"
     seo:

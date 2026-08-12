@@ -1,9 +1,8 @@
-slug: crow
 project_title: "Crow"
 subtitle: "Animation"
 theme: 
-  fr: "Animation & Motion Design"
-  en: "Animation & Motion Design"
+  fr: "MOTION DESIGN"
+  en: "MOTION DESIGN"
 category: animation
 featured: false
 client: 
@@ -65,10 +64,10 @@ context_sections:
 locales:
   fr:
     url: /fr/projects/crow.html
-    aria_label: "Voir le projet d'animation en stop-motion"
-    image_alt: "Animation en Stop-Motion"
-    title: "Animation en Stop-Motion"
-    pitch: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
+    aria_label: "Voir l'animation en stop-motion Crow"
+    image_alt: "Silhouette noire d'un corbeau en vol sur fond rouge"
+    title: "Stop-Motion : Crow"
+    pitch: "**Un corbeau en vol**, image par image : silhouette noire sur aplat rouge."
     description: "**Réalisation d'une animation en stop-motion** sur **After Effects** et **Illustrator**"
     seo:
       title: "Crow Animation - Ropat"
@@ -77,10 +76,10 @@ locales:
       og_description: "Animation en stop motion explorant la vitesse et l'agilité du corbeau."
   en:
     url: /en/projects/crow.html
-    aria_label: "View the stop-motion animation project"
-    image_alt: "Stop-Motion Animation"
-    title: "Stop-Motion Animation"
-    pitch: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
+    aria_label: "View the Crow stop-motion animation"
+    image_alt: "Black silhouette of a flying crow on a red background"
+    title: "Stop-Motion: Crow"
+    pitch: "**Wings up, mid flight**, frame by frame: black silhouette on flat red."
     description: "**Creation of a stop-motion animation** on **After Effects** and **Illustrator**"
     seo:
       title: "Crow Animation - Ropat"

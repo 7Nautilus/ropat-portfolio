@@ -1,4 +1,3 @@
-slug: aelio
 # Le header garde l'encre claire et le logo orange sur cette page : la mesure
 # y donne les deux encres a moins de 0,3 l'une de l'autre, donc a l'ex aequo,
 # et c'est l'oeil qui tranche. Arbitrage de Ropat, 28/07/2026.
@@ -6,8 +5,8 @@ chrome: clair
 project_title: "Aélio"
 subtitle: "Branding"
 theme:
-  fr: "IDENTITÉ VISUELLE & BRANDING"
-  en: "VISUAL IDENTITY & BRANDING"
+  fr: "IDENTITÉ VISUELLE & DÉCLINAISONS"
+  en: "VISUAL IDENTITY & APPLICATIONS"
 category: branding
 featured: false
 client:
@@ -95,40 +94,40 @@ context_sections:
       fr: |
         Le véritable défi de ce projet résidait dans le calendrier. Pour accompagner Aélio lors de l'événement majeure auquel l'entreprise participait, j'ai dû faire preuve d'une grande agilité.
 
-        En quelques jours, j'ai livré un pack opérationnel complet : cartes de visite premium, templates de carrousels LinkedIn stratégiques pour leur communication digitale, et des supports de présentation. Ce déploiement rapide a permis à l'entreprise de se présenter avec une image de marque forte et cohérente dès sa première prise de parole publique.
+        En quelques jours, j'ai livré un pack opérationnel complet : cartes de visite premium, gabarits de publication pour tous leurs réseaux, dans tous les formats, et des supports de présentation. Ce déploiement rapide a permis à l'entreprise de se présenter avec une image de marque forte et cohérente dès sa première prise de parole publique.
       en: |
         The real challenge of this project lay in the timeline. To support Aélio during the major event the company was participating in, I had to demonstrate great agility.
 
-        In just a few days, I delivered a complete operational pack: premium business cards, strategic LinkedIn carousel templates for their digital communication, and presentation materials. This rapid deployment allowed the company to present itself with a strong and coherent brand image from its first public appearance.
+        In just a few days, I delivered a complete operational pack: premium business cards, post templates for every one of their networks, in every format, and presentation materials. This rapid deployment allowed the company to present itself with a strong and coherent brand image from its first public appearance.
 
 locales:
   fr:
     url: /fr/projects/aelio.html
     aria_label: "Voir le projet de branding pour Aélio"
     image_alt: "Branding pour Aélio"
-    title: "Branding pour Aélio"
-    pitch: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation"
-    description: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation. Création d'un logo, d'une charte graphique et d'un **pack d'identité LinkedIn**, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **innovant, technique et ancré dans son territoire**."
+    title: "Identité visuelle"
+    pitch: "**Logo, charte graphique et gabarits pour tous les réseaux sociaux**, livrés à un cabinet de conseil en IA et automatisation."
+    description: "**Identité visuelle** complète pour **Aélio**, cabinet de conseil en IA et automatisation. Création d'un logo, d'une charte graphique et d'un **pack réseaux sociaux** décliné pour chaque plateforme et chaque format, avec définition de la palette de couleurs et des typographies. Un positionnement à la fois **innovant, technique et ancré dans son territoire**."
     services: "Logo, Charte graphique, Pack Social Media, Design System"
     seo:
       title: "Branding Aélio | Ropat"
-      description: "Identité visuelle complète pour Aélio, cabinet de conseil en IA et automatisation : logo, charte graphique, design system et pack LinkedIn, livrés en quelques jours."
+      description: "Identité visuelle complète pour Aélio, cabinet de conseil en IA et automatisation : logo, charte graphique, design system et gabarits pour tous les réseaux sociaux, livrés en quelques jours."
       og_title: "Branding Aélio"
-      og_description: "Création de l'identité visuelle d'Aélio, cabinet de conseil en IA : logotype, charte graphique, design system et supports LinkedIn, dans un positionnement innovant et ancré à La Réunion."
+      og_description: "Création de l'identité visuelle d'Aélio, cabinet de conseil en IA : logotype, charte graphique, design system et gabarits sociaux tous formats, dans un positionnement innovant et ancré à La Réunion."
 
   en:
     url: /en/projects/aelio.html
     aria_label: "See the branding project for Aélio"
     image_alt: "Branding for Aélio"
-    title: "Branding for Aélio"
-    pitch: "Complete **visual identity** for **Aélio**, an AI and automation consulting firm"
-    description: "Complete **visual identity** for **Aélio**, an AI and automation consulting firm. Creation of a logo, a graphic charter and a **LinkedIn identity pack**, with a defined color palette and typography. A positioning that is at once **innovative, technical and rooted in its territory**."
+    title: "Visual identity"
+    pitch: "**Logo, brand guidelines and templates for every social network**, delivered to an AI and automation consulting firm."
+    description: "Complete **visual identity** for **Aélio**, an AI and automation consulting firm. Creation of a logo, a graphic charter and a **social media pack** adapted to every platform and every format, with a defined color palette and typography. A positioning that is at once **innovative, technical and rooted in its territory**."
     services: "Logo, Graphic Charter, Social Media Pack, Design System"
     seo:
       title: "Branding Aélio | Ropat"
-      description: "Complete visual identity for Aélio, an AI and automation consulting firm: logo, graphic charter, design system and LinkedIn pack."
+      description: "Complete visual identity for Aélio, an AI and automation consulting firm: logo, graphic charter, design system and templates for every social network."
       og_title: "Branding Aélio"
-      og_description: "Visual identity for Aélio, an AI consulting firm: logotype, graphic charter, design system and LinkedIn assets, with an innovative positioning rooted in Réunion Island."
+      og_description: "Visual identity for Aélio, an AI consulting firm: logotype, graphic charter, design system and social templates in every format, with an innovative positioning rooted in Réunion Island."
 
 case_study:
   mockups:

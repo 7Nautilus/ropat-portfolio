@@ -1,9 +1,8 @@
-slug: moon-vtc
 project_title: "Moon VTC"
 subtitle: "Branding"
 theme:
-  fr: "IDENTITÉ VISUELLE & BRANDING"
-  en: "VISUAL IDENTITY & BRANDING"
+  fr: "IDENTITÉ VISUELLE"
+  en: "VISUAL IDENTITY"
 category: branding
 featured: false
 client:
@@ -40,7 +39,7 @@ context_sections:
       fr: |
         Contacté par **Moon VTC** alors que la société était en pleine phase de lancement, l'objectif était de construire une **identité visuelle forte, cohérente et évocatrice**, à la hauteur de l'ambition du service.
       en: |
-        Contacted by **Moon VTC** during their launch phase, the goal was to build a **strong, coherent and evocative visual identity** — one that matches the ambition of the service.
+        Contacted by **Moon VTC** during their launch phase, the goal was to build a **strong, coherent and evocative visual identity**, one that matches the ambition of the service.
 
   - title:
       fr: "Univers & direction artistique"
@@ -69,8 +68,8 @@ locales:
     url: /fr/projects/moon-vtc.html
     aria_label: "Voir l'identité visuelle Moon VTC"
     image_alt: "Logo Moon VTC - version typographique blanche"
-    title: "Moon VTC - Identité visuelle"
-    pitch: "Création de l'**identité visuelle complète** pour **Moon VTC**, société de VTC en phase de lancement : logo, palette de couleurs, typographie et charte graphique."
+    title: "Identité visuelle"
+    pitch: "**Logo, palette et typographie** pour une jeune société de chauffeurs privés."
     description: "Conception de l'**identité visuelle complète** de Moon VTC, société de transport avec chauffeur en phase de lancement. La mission comprenait la création d'un **set de logos**, une sélection de **palette de couleurs** et de **typographie**, ainsi qu'une **charte graphique** complète pour cadrer l'usage de ces éléments."
     services: "Identité visuelle, Création de logo, Charte graphique"
     seo:
@@ -83,8 +82,8 @@ locales:
     url: /en/projects/moon-vtc.html
     aria_label: "See the Moon VTC visual identity"
     image_alt: "Moon VTC logo - white typographic version"
-    title: "Moon VTC - Visual Identity"
-    pitch: "Creation of a **complete visual identity** for **Moon VTC**, a VTC company launching its brand: logo, color palette, typography, and brand guidelines."
+    title: "Visual identity"
+    pitch: "**Logo, palette and typography** for a private-hire company launching its brand."
     description: "Design of the **complete visual identity** for Moon VTC, a chauffeur-driven car service in its launch phase. The mission included creating a **logo set**, a **color palette** and **typography** selection, as well as a full **brand guidelines** document to frame the usage of these elements."
     services: "Visual Identity, Logo Design, Brand Guidelines"
     seo:

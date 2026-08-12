@@ -1,4 +1,3 @@
-slug: sipsmith
 project_title: "Sipsmith"
 subtitle: "Menu & Invitation"
 theme:
@@ -63,8 +62,8 @@ locales:
     url: /fr/projects/sipsmith.html
     aria_label: "Voir le projet de papeterie Sipsmith"
     image_alt: "Mockup de présentation du menu et du carton d'invitation pour Sipsmith"
-    title: "Menu & Invitation Sipsmith"
-    pitch: "**Design graphique et mise en page d'un menu et d'un carton d'invitation** pour un événement de la distillerie de gin londonienne **Sipsmith**."
+    title: "Menu & Invitation"
+    pitch: "**Mise en page éditoriale et préparation print** pour un événement d'une distillerie de gin londonienne."
     description: "Création d'un ensemble de papeterie événementielle haut de gamme pour Sipsmith. Recherche typographique, mise en page éditoriale et déclinaison en deux variantes chromatiques basées sur les tapisseries signatures de la marque."
     services: "Design graphique, Mise en page éditoriale, Identité événementielle, Préparation print"
     seo:
@@ -77,8 +76,8 @@ locales:
     url: /en/projects/sipsmith.html
     aria_label: "See the Sipsmith project"
     image_alt: "Presentation mockup of Sipsmith's event menu and invitation card"
-    title: "Sipsmith Menu & Invitation"
-    pitch: "**Graphic design and layout of a menu and invitation card** for an exclusive event of the London gin distillery **Sipsmith**."
+    title: "Menu & Invitation"
+    pitch: "**Editorial layout and print preparation** for an event held by a London gin distillery."
     description: "Creation of a premium event stationery suite for Sipsmith. Typographic curation, editorial layout, and design rollout in two distinct chromatic variations based on the brand's signature tapestries."
     services: "Graphic Design, Editorial Layout, Event Identity, Print Preparation"
     seo:

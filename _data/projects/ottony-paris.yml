@@ -1,9 +1,8 @@
-slug: ottony
 project_title: "Ottony Paris"
 subtitle: "Branding"
 theme: 
-  fr: "IDENTITÉ VISUELLE & BRANDING"
-  en: "VISUAL IDENTITY & BRANDING"
+  fr: "IDENTITÉ VISUELLE"
+  en: "VISUAL IDENTITY"
 category: branding
 featured: false
 client: 
@@ -71,8 +70,8 @@ locales:
     url: /fr/projects/ottony-paris.html
     aria_label: "Voir le projet de branding pour Ottony Paris"
     image_alt: "Branding pour Ottony Paris"
-    title: "Branding pour Ottony Paris"
-    pitch: "**Identité visuelle** et **branding** pour la marque de vêtements de luxe **Ottony Paris**"
+    title: "Identité visuelle"
+    pitch: "**Logo, palette et typographie** pour le lancement d'une marque de vêtements de luxe."
     description: "**Identité visuelle** complète et **branding** pour la marque de vêtements de luxe **Ottony Paris**, avec une attention particulière portée à la création d'une identité visuelle distinctive, mémorable, et alignée avec les aspirations de la marque."
     services: "Identité visuelle, Branding, Design de marque"
     
@@ -86,8 +85,8 @@ locales:
     url: /en/projects/ottony-paris.html
     aria_label: "See the branding project for Ottony Paris"
     image_alt: "Branding for Ottony Paris"
-    title: "Branding for Ottony Paris"
-    pitch: "**Visual identity** and **branding** for the luxury clothing brand **Ottony Paris**"
+    title: "Visual identity"
+    pitch: "**Logo, palette and typography** for the launch of a luxury clothing brand."
     description: "**Comprehensive visual identity** and **branding** for the luxury clothing brand **Ottony Paris**, with a focus on creating a distinctive, memorable visual identity that aligns with the brand's aspirations."
     services: "Visual identity, Branding, Brand design"
     
