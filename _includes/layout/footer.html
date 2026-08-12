@@ -67,8 +67,17 @@
             {% for item in site.data.socials %}
               {%- if item.sameas_only %}{% continue %}{% endif %}
               <li class="nav-item">
+                {%- comment -%}
+                  ⚠️ Un commentaire HTML entourant la sortie de `item.icon` vivait ici,
+                  et un commentaire HTML est EMIS. La variable etait donc rendue : les
+                  quatre SVG complets de `_data/socials.yml` partaient sur les 70 pages,
+                  soit 3 612 octets par page et 252 840 octets de balisage que personne
+                  ne lit. Retire le 12/08/2026. La cle `icon` reste lue par
+                  `social-media-icons.html:12`, elle n'est donc pas orpheline.
+                  Et conformement a l'avertissement ci-dessus, ce bloc ne cite AUCUN
+                  delimiteur Liquid : la premiere version de ce commentaire en portait un.
+                {%- endcomment -%}
                 <a href="{{ item.link }}" class="nav-element nav-link social-link {{ item.name }}" aria-label="{{ item.aria-label }}">
-                  <!-- {{ item.icon }} -->
                   {{ item.aria-label }}
                 </a>
               </li>
