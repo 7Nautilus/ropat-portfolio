@@ -442,9 +442,29 @@ module Carte
       [famille, longueurs(brut)]
     end
 
+    # ⚠️ UN LITTERAL CACHE DANS UN REPLI DE `var()` ECHAPPAIT AU CONTROLE, et la
+    # garantie « aucune valeur hors echelle n'arrive en silence » avait donc une
+    # faille de SYNTAXE, sur tout le depot. Temoin discriminant, meme valeur, deux
+    # ecritures, dans le meme fichier :
+    #
+    #   padding: 137px;                      signale, « litteral espacement 137px »
+    #   border-radius: 137px;                signale, « litteral rayon 137px »
+    #   border-radius: var(--radius-md, 138px);   MUET, sortie 0, « toutes declarees »
+    #
+    # Cause : le decoupage se faisait sur les blancs, puis rejetait tout jeton
+    # CONTENANT `var(`. `var(--radius-md, 138px)` donnait `var(--radius-md,` et
+    # `138px)`, dont aucun ne passait le motif ancre.
+    #
+    # Correctif : extraire les replis AVANT de neutraliser les `var()`, au lieu de
+    # jeter le jeton entier. Ecrit et mesure le 04/08/2026 sur neuf cas, aucune
+    # regression : le jeton nu reste muet, le repli non numerique aussi, et le
+    # `var()` imbrique est meme attrape.
     def self.longueurs(texte)
-      texte.split(/\s+/).reject { |v| v.include?("var(") || NEUTRES.include?(v.downcase) }
-           .select { |v| v =~ /\A-?\d*\.?\d+(px|rem|em)\z/ }
+      replis = texte.scan(/var\(\s*--[a-zA-Z0-9_-]+\s*,\s*([^()]+)\)/).flatten
+      nu     = texte.gsub(/var\([^()]*\)/, " ")
+      (nu.split(/\s+/) + replis.flat_map { |r| r.split(/\s+/) })
+        .reject { |v| v.empty? || NEUTRES.include?(v.downcase) }
+        .select { |v| v =~ /\A-?\d*\.?\d+(px|rem|em)\z/ }
     end
 
     def publier_egaux(egaux)
