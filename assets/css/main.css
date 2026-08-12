@@ -49,12 +49,25 @@
      a 3,1/3,2, la texture est donc deux fois plus discrete.
      Detail et mesures : docs/CHANTIER-IDENTITE-2026-07.md section 3.
 
-     ⚠️ Ces trois valeurs existent AUSSI dans assets/js/dither.js (ligne 43), qui
-     les code en dur pour le shader. Les deux doivent rester d'accord : ici
-     c'est la palette documentee et le repli CSS, la-bas c'est ce qui est
-     reellement peint. Les deux dernieres n'ont aucun consommateur CSS, et
-     c'est normal : elles documentent la palette du shader, elles ne peignent
-     rien elles-memes. */
+     ⚠️ CE PARAGRAPHE DISAIT L'INVERSE DE LA VERITE SUR DEUX POINTS, corrige le
+     12/08/2026. Il annoncait « ici la palette documentee et le repli CSS,
+     la-bas ce qui est reellement peint », et « les deux dernieres n'ont aucun
+     consommateur CSS ».
+
+     1. LE SENS DE LECTURE EST L'INVERSE. Depuis le 28/07/2026, `dither.js`
+        LIT ces jetons : `jetonCss` (dither.js:376-385) resout
+        `--p-vert-basse/mediane/haute` puis `--p-orange` depuis le CSS calcule.
+        Ses litteraux (dither.js ligne 46, pas 43) sont des REPLIS, actifs
+        seulement si le jeton manque ou n'est pas un hexa a six chiffres.
+        Verifie que la lecture aboutit : les trois jetons sont bien declares ici
+        sous `:root` en hexa a six chiffres, donc le repli ne se declenche pas.
+        **La source de ce qui est peint est ce fichier-ci.**
+     2. `--p-vert-mediane` A SIX CONSOMMATEURS, pas zero : `--accent-ink`,
+        `--ink`, `--scrollbar-thumb-active`, `--encre-chrome`, `--signal-chrome`
+        et l'ombre de `#cursor-blob`. Seule `--p-vert-haute` n'en a aucun DANS
+        LE CSS DU SITE : son unique usage vit dans `components/_situation.scss`,
+        debranche a `main.scss:53`. Les bancs de `labo/` la consomment aussi,
+        mais ils ne sont pas versionnes. */
   --p-vert-basse: #030808;
   --p-vert-mediane: #030F0C;
   --p-vert-haute: #051510;

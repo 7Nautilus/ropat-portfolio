@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 13/08/2026 a 00:00, d'apres l'etat de 2b0bee7.
+> Generee le 13/08/2026 a 00:46, d'apres l'etat de f86d344.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 13/08/2026 00:00 |
+| Date du build lu | 13/08/2026 00:46 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -410,7 +410,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 281571 o brut, 90515 o gzip. Sans les commentaires : 83137 o, 13540 o gzip, soit **85 % de moins** sur le fil.
+**CSS servi** : 282452 o brut, 90895 o gzip. Sans les commentaires : 83137 o, 13540 o gzip, soit **85 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
