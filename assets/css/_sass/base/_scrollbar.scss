@@ -16,9 +16,21 @@
 
 /* ── Blink et WebKit ─────────────────────────────────────────────────────
    Regles non prefixees par un selecteur : elles portent sur TOUTE zone
-   defilable, pas seulement la page. La seule autre aujourd'hui est la piste
-   de partenaires, qui passe en `overflow-x: auto` sous `prefers-reduced-motion`
-   (components/_carousel.scss:132), d'ou le `height` autant que le `width`. */
+   defilable, pas seulement la page.
+
+   ⚠️ LE `height` N'A PLUS AUCUN CONSOMMATEUR, ET IL RESTE, 12/08/2026.
+   Ces lignes citaient la piste de partenaires, qui passait en `overflow-x: auto`
+   sous `prefers-reduced-motion` : c'etait le seul defilement HORIZONTAL du site,
+   d'ou le `height` autant que le `width`. Ce regime a ete retire (la piste passe
+   en `flex-wrap: wrap`, voir components/_carousel.scss), et l'inventaire refait
+   apres coup ne trouve plus une seule zone defilable interne dans tout le depot :
+   le reste des `overflow` du JS sont des VERROUS (`hidden` sur `body`) et une
+   sonde de mesure hors ecran, pas des zones a parcourir.
+   La declaration reste quand meme : elle ne coute rien, elle ne peint rien tant
+   que rien ne defile, et le jour ou une zone horizontale reapparait, sa barre
+   sera deja a la charte. Ce qui est corrige ici est la RAISON ecrite, pas le
+   code : elle nommait un cas qui n'existe plus, et le numero de ligne qu'elle
+   citait etait deja faux. */
 ::-webkit-scrollbar {
   width: var(--scrollbar-size);
   height: var(--scrollbar-size);

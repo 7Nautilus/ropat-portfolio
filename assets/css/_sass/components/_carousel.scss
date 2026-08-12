@@ -7,7 +7,12 @@
      largeur laissaient trop d'air entre eux. Une bande de confiance se lit
      comme une SUITE, la densite fait partie de l'argument. */
   --carousel-items-visible: 5;
-  --carousel-gap: 2rem;
+  /* `var(--spacing-lg)` et non `2rem`, 12/08/2026 : meme valeur au pixel, mais
+     le pas de la bande est de l'espacement et il y a un palier a cette valeur.
+     C'est le cas ou « l'utilisation d'une variable d'echelle est evidente ».
+     Rien ne bouge aujourd'hui ; ce qui change, c'est que la bande suivra
+     l'echelle le jour ou elle bouge, au lieu de rester seule a 2rem. */
+  --carousel-gap: var(--spacing-lg);
   /* Calcule la largeur d''un item pour que "X" items rentrent parfaitement (espacements inclus) */
   --carousel-item-width: calc((100cqw / var(--carousel-items-visible)) - (var(--carousel-gap) * (var(--carousel-items-visible) - 1) / var(--carousel-items-visible)));
   --carousel-speed: 25s;
@@ -167,7 +172,13 @@
        les noms soient RECONNAISSABLES. Desaturer ET effacer a 60 % sur un
        fond a rgb(1,4,4) rendait Vetoquinol, Juliette has a gun et Seiko
        fantomatiques, donc la section se retournait contre son propre but. */
-    transition: filter 0.3s ease, transform 0.3s ease;
+    /* ⚠️ `filter` RETIRE DE CETTE TRANSITION LE 12/08/2026 : elle annoncait une
+       propriete que RIEN n'applique a cet element. Le seul `filter` du composant
+       est le `drop-shadow` du conteneur, et l'en-tete quelques lignes plus haut
+       explique justement pourquoi il doit y rester et jamais descendre ici. La
+       desaturation qui justifiait ce `filter` a ete retiree le 04/08. La moitie
+       de la declaration ne transitionnait donc rien. */
+    transition: transform 0.3s ease;
   }
 
   /* ══ LE LOGO EST UNE SURFACE PEINTE A TRAVERS UN MASQUE ══════════════════
@@ -218,16 +229,56 @@
    sans fin est exactement ce que ce reglage systeme demande de supprimer.
    ⚠️ Ce n'est PAS suffisant au regard de WCAG 2.2.2 (niveau A), qui exige un
    moyen de mettre en pause tout mouvement automatique de plus de 5 secondes.
-   La pause au survol existe mais ne compte pas : elle est inaccessible au
-   clavier et au tactile. Il manque un vrai bouton. */
+   La pause au survol existe mais ne compte pas. Il manque un vrai bouton.
+
+   ⚠️ ET LA RAISON ECRITE ICI ETAIT TROP LARGE, precisee le 12/08/2026. Elle
+   disait « inaccessible au clavier ET au tactile ». Le clavier est exact et
+   verifiable : aucun element de la bande n'est focalisable, les douze conteneurs
+   sont des `li` et les logos des `span`, donc la tabulation ne les atteint
+   jamais. Le tactile, lui, n'est pas sans issue : Safari sur iOS applique l'etat
+   `:hover` au premier tap sur un element qui porte des styles de survol, et le
+   conserve jusqu'a un tap ailleurs. Un doigt peut donc geler la bande, par
+   accident et sans savoir comment la relancer.
+   ⚠️ NON VERIFIE SUR UN APPAREIL REEL : c'est un comportement de plateforme
+   connu, pas une mesure de ce depot. Le volet de mesure emule le tactile mais
+   pas la persistance du survol d'iOS. A eprouver sur un iPhone avant d'en tirer
+   quoi que ce soit. Dans les deux cas le bouton reste a poser, et il rendrait ce
+   survol collant inoffensif en donnant un etat lisible. */
 @media (prefers-reduced-motion: reduce) {
   .partners-carousel .partners-carousel-track {
     animation: none;
-    /* Sans l'animation, la piste en `width: max-content` deborderait : on la
-       ramene a une bande lisible et defilable a la main. */
     width: 100%;
-    overflow-x: auto;
-    flex-wrap: nowrap;
+
+    /* ⚠️ LE CORRECTIF DE MOUVEMENT EN CREAIT UN AUTRE, corrige le 12/08/2026.
+       Ces trois lignes disaient `overflow-x: auto; flex-wrap: nowrap`, ce qui
+       remplacait une animation par une ZONE DE DEFILEMENT HORIZONTAL. Or les
+       doublons sont masques juste en dessous, il reste donc six cases calibrees
+       pour en montrer cinq : au moins un logo tombait hors champ.
+       Et cette zone ne portait ni `tabindex="0"`, ni role, ni nom accessible.
+       Quelqu'un qui demande la reduction de mouvement ET navigue au clavier,
+       c'est-a-dire souvent la meme personne, ne pouvait plus atteindre le
+       dernier client. Le reglage censé aider retirait une preuve que l'animation,
+       elle, montrait a tout le monde. WCAG 2.1.1, niveau A.
+
+       Le repli est `wrap` et non un conteneur defilant nomme : une bande qu'on
+       ne fait plus glisser n'a aucune raison de rester sur une seule ligne. Rien
+       ne sort du cadre, donc il n'y a plus de zone a atteindre, donc plus rien a
+       etiqueter. On supprime le besoin au lieu de l'outiller.
+
+       MESURE, volet 1280, cadre 48..1232, les deux regimes joues a la suite :
+         ancien  : piste 1427 pour 1184 de cadre, 243px de debordement,
+                   Moon VTC rendu a 1264..1475, donc ENTIEREMENT hors cadre
+         nouveau : debordement 0, aucun logo hors cadre, 2 lignes (140 -> 272px)
+       L'ancien regime servait de temoin : la sonde savait voir l'echec.
+
+       ⚠️ CE QUE CA COUTE, ET C'EST ASSUME : a 375px, la bande devient 6 lignes
+       et 848px de haut, plus haut que le volet. C'est le prix d'un empilement
+       honnete, et faire tenir deux logos par ligne n'y changerait rien (la case
+       de contenu vaut 212px pour un cadre de 327). Sous mouvement reduit, une
+       section de preuve devient une LISTE : c'est le bon patron, pas un repli. */
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: var(--carousel-gap);
   }
 
   /* ⚠️ LE SECOND TOUR DISPARAIT, ET CE DEFAUT ETAIT LA AVANT LE MASQUE.

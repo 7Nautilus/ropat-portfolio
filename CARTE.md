@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 21:32, d'apres l'etat de 339bb65.
+> Generee le 12/08/2026 a 21:48, d'apres l'etat de 8d90143.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 21:32 |
+| Date du build lu | 12/08/2026 21:48 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -237,9 +237,9 @@ Aucun `var()` ne les lit, mais ils ont un consommateur. A ne PAS ranger avec les
 
 Si la donnee qui pose le `style=` manque, la declaration entiere tombe.
 
-- assets/css/_sass/components/_carousel.scss:193  -webkit-mask: var(--logo) center / contain no-repeat;
-- assets/css/_sass/components/_carousel.scss:194  mask: var(--logo) center / contain no-repeat;
-- assets/css/_sass/components/_carousel.scss:156  aspect-ratio: var(--ratio);
+- assets/css/_sass/components/_carousel.scss:204  -webkit-mask: var(--logo) center / contain no-repeat;
+- assets/css/_sass/components/_carousel.scss:205  mask: var(--logo) center / contain no-repeat;
+- assets/css/_sass/components/_carousel.scss:161  aspect-ratio: var(--ratio);
 - assets/css/_sass/pages/_project.scss:970  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 - assets/css/_sass/pages/_project.scss:978  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 - assets/css/_sass/pages/_project.scss:994  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
@@ -258,7 +258,7 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 
 - .reveal-arme  style en assets/css/_sass/base/_animations.scss:17, pose par _layouts/default.html (script en ligne 2):2, _layouts/default.html (script en ligne 2):4
 - .is-visible  style en assets/css/_sass/base/_animations.scss:23, pose par assets/js/script.js:1383, assets/js/script.js:1388
-- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:58, pose par assets/js/script.js:1810
+- .custom-scrollbar  style en assets/css/_sass/base/_scrollbar.scss:70, pose par assets/js/script.js:1810
 - .cursor-hover  style en assets/css/_sass/components/_cursor.scss:103, pose par assets/js/script.js:81
 - .cursor-text  style en assets/css/_sass/components/_cursor.scss:111, pose par assets/js/script.js:81
 - .cursor-zoom  style en assets/css/_sass/components/_cursor.scss:121, pose par assets/js/script.js:81
@@ -329,7 +329,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
 - espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
 - espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:835)
-- espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:21)
+- espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:26)
 - trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:125)
 - trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
 
@@ -437,7 +437,7 @@ Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 280231 o brut, 88976 o gzip. Sans les commentaires : 87443 o, 14191 o gzip, soit **84 % de moins** sur le fil.
+**CSS servi** : 284533 o brut, 90673 o gzip. Sans les commentaires : 87477 o, 14184 o gzip, soit **84 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
