@@ -57,3 +57,35 @@
   link: https://www.malt.fr/profile/victorjarry
   aria-label: Malt
   sans_icone: true
+  # ⚠️ LA NOTE EST AGREGEE AU PROFIL, ELLE N'APPARTIENT A AUCUN AVIS.
+  # Il n'existe aucune note par avis, ni ici ni sur Malt : le releve du
+  # 03/08/2026 montre des cartes d'avis sans le moindre chiffre. Ecrire une note
+  # a cote du nom d'une personne fabriquerait une attribution. Ces deux valeurs
+  # ne peuvent donc s'afficher qu'en nommant LE PROFIL, jamais l'auteur cite.
+  #
+  # ⚠️ ELLES SE PERIMENT, ET RIEN NE LE SIGNALERA. Malt est la source de verite ;
+  # un avis peut y etre ajoute ou retire sans que ce fichier bouge. La garde
+  # n'est pas un controle, c'est le LIEN : il est affiche juste a cote, donc un
+  # lecteur verifie en un clic. C'est la seule raison pour laquelle on s'autorise
+  # a recopier un chiffre.
+  #
+  # ✅ SOURCE UNIQUE DEPUIS LE 03/08/2026. Ces trois valeurs etaient recopiees a
+  # la main dans `_data/pages/about.yml`, DEUX FOIS (bloc `fr` et bloc `en`), et
+  # ce doublon avait deja derive : il annoncait « ~20 » et « 9 » pour 25 et 11,
+  # perime DANS LE MAUVAIS SENS, sur la page dont le travail est de reduire le
+  # risque. `about.yml` ne porte plus que les LIBELLES ; les nombres viennent
+  # d'ici et de nulle part ailleurs.
+  #
+  # ⚠️ UN SEUL DES TROIS PEUT PORTER UN « + », ET LA RAISON EST LEUR SENS DE
+  # VARIATION, pas leur importance :
+  #   - `projets` ne peut que MONTER. Une mission livree ne se delivre pas.
+  #     « 25+ » restera donc vrai indefiniment : c'est un plancher, pas une
+  #     mesure, et un plancher ne se perime jamais.
+  #   - `evaluations` peut BAISSER : un auteur peut retirer son avis de Malt.
+  #     Un « + » y serait un mensonge des la premiere suppression. Reste exact.
+  #   - `note` peut bouger dans les deux sens. Reste exacte.
+  # C'est pour ca que le gabarit n'ajoute le « + » que sur `projets`.
+  projets: 25
+  evaluations: 11
+  note: "5.0"          # sur 5 ; s'ecrit « 5,0 » en francais, le gabarit convertit
+  releve: "2026-08-03"

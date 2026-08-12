@@ -105,23 +105,54 @@
 
 {% assign _lang = include.lang | default: "en" %}
 
-{% assign _avis = site.data.avis
+{%- comment -%}
+  ⚠️ PLUSIEURS AVIS PAR FICHE DEPUIS LE 04/08/2026, ET LE `| first` A DISPARU.
+  Il n'y avait qu'un avis affichable quand ce composant a ete ecrit, donc la
+  limite ne se voyait pas. `strakara` est le premier projet a en porter DEUX, et
+  le `first` prenait le premier de l'ordre du fichier sans que rien ne dise que
+  l'autre etait jete.
+
+  ⚠️ CE N'EST PAS UN MUR DE TEMOIGNAGES, et la difference est structurelle.
+  Un mur, c'est N emplacements FIXES qu'il faut remplir, donc des trous qui
+  finissent combles par n'importe quoi (constate sur sandracreates.com). Ici le
+  nombre est DERIVE : il vaut ce que la donnee porte, zero, un ou deux. Une
+  fiche sans avis n'affiche pas de section vide, elle n'affiche rien.
+
+  ⚠️ LE LIEN MALT EST SORTI DES FIGURES, VOLONTAIREMENT. Il porte la note
+  AGREGEE DU PROFIL, pas un fait de la citation : le repeter sous chaque figure
+  le rattacherait a chaque personne nommee, ce qui est exactement l'attribution
+  qu'on refuse de fabriquer. Il apparait donc UNE fois, apres les citations, au
+  niveau de la section.
+{%- endcomment -%}
+{% assign _tous = site.data.avis
    | where: "projet", include.project_id
-   | where: "publiable", true
-   | first %}
+   | where: "publiable", true %}
 
-{% if _avis and _avis.texte %}
-  {% assign _texte = _avis.texte | strip %}
-{% endif %}
+{%- comment -%}
+  Liquid ne sait pas filtrer sur « chaine non vide ». On compte d'abord, pour
+  savoir s'il faut ouvrir la section, puis on re-teste dans la boucle.
+{%- endcomment -%}
+{% assign _n = 0 %}
+{% for a in _tous %}
+  {% assign _t = a.texte | strip %}
+  {% if _t != "" %}{% assign _n = _n | plus: 1 %}{% endif %}
+{% endfor %}
 
-{% if _texte and _texte != "" %}
+{% if _n > 0 %}
   {% assign _malt = site.data.socials | where: "name", "malt" | first %}
 
   <section class="project-avis animate-fade-up" aria-labelledby="project-avis-titre">
     <h2 class="project-avis-titre" id="project-avis-titre">
-      {%- if _lang == 'fr' -%}Avis client{%- else -%}Client review{%- endif -%}
+      {%- if _lang == 'fr' -%}
+        {%- if _n > 1 -%}Avis clients{%- else -%}Avis client{%- endif -%}
+      {%- else -%}
+        {%- if _n > 1 -%}Client reviews{%- else -%}Client review{%- endif -%}
+      {%- endif -%}
     </h2>
 
+    {% for _avis in _tous %}
+    {%- assign _texte = _avis.texte | strip -%}
+    {%- if _texte != "" %}
     <figure class="project-avis-corps">
       <blockquote class="project-avis-mot" lang="fr"
                   {%- if _malt %} cite="{{ _malt.link }}"{% endif %}>{{ _texte }}</blockquote>
@@ -164,16 +195,43 @@
         </dl>
         {%- endif %}
 
-        {%- if _malt %}
-        <a class="project-avis-preuve" href="{{ _malt.link }}" target="_blank" rel="noopener noreferrer">
-          {%- if _lang == 'fr' -%}
-            Profil Malt<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span>
-          {%- else -%}
-            Malt profile<span class="sr-only"> (opens in a new tab)</span>
-          {%- endif -%}
-        </a>
-        {%- endif %}
       </figcaption>
     </figure>
+    {%- endif %}
+    {% endfor %}
+
+        {%- if _malt %}
+        {%- comment -%}
+          ⚠️ LA NOTE EST PORTEE PAR LE LIBELLE DU LIEN, ET C'EST DELIBERE.
+          Elle est AGREGEE au profil. La poser ailleurs dans ce `figcaption`, qui
+          attribue la citation a une personne nommee, laisserait croire que cette
+          personne a mis 5/5 : or aucune note par avis n'existe (voir plus haut).
+          En la faisant porter par le mot « profil », l'attribution est juste par
+          construction, et l'element qui affirme est aussi celui qui permet de
+          verifier.
+          Gain secondaire : le libelle decrit mieux sa destination, ce dont
+          profitent les lecteurs d'ecran quand ils listent les liens d'une page.
+          ⚠️ Les deux valeurs viennent de `_data/socials.yml` et s'y perimeront en
+          silence : les afficher n'est defendable que parce que le lien est la.
+        {%- endcomment -%}
+        {%- comment -%}
+          ⚠️ TOUT LE LIBELLE TIENT DANS UN SEUL ENFANT, ET C'EST OBLIGATOIRE.
+          `.project-avis-preuve` est en `display: inline-flex` : ses enfants
+          directs deviennent des elements flex, et **un noeud de blancs entre
+          deux elements flex n'est pas rendu**. Ecrire « noté <b>5,0/5</b> sur
+          11 avis » directement sous le lien collerait les mots au chiffre. Le
+          `<span>` rend l'interieur a un flux inline normal, ou les espaces
+          existent. Ne pas le retirer en croyant simplifier.
+        {%- endcomment -%}
+        <a class="project-avis-preuve" href="{{ _malt.link }}" target="_blank" rel="noopener noreferrer">
+          <span>
+            {%- if _lang == 'fr' -%}
+              Profil Malt{% if _malt.note %}, noté <b>{% include ui/note-malt.html lang=_lang %}</b>{% if _malt.evaluations %} sur {{ _malt.evaluations }} avis{% endif %}{% endif %}<span class="sr-only"> (s'ouvre dans un nouvel onglet)</span>
+            {%- else -%}
+              Malt profile{% if _malt.note %}, rated <b>{% include ui/note-malt.html lang=_lang %}</b>{% if _malt.evaluations %} from {{ _malt.evaluations }} reviews{% endif %}{% endif %}<span class="sr-only"> (opens in a new tab)</span>
+            {%- endif -%}
+          </span>
+        </a>
+        {%- endif %}
   </section>
 {% endif %}

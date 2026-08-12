@@ -1,5 +1,5 @@
 # ══════════════════════════════════════════════════════════════════════════
-#  LES AVIS CLIENTS, TRANSCRITS DEPUIS MALT
+#  LES AVIS CLIENTS PUBLIABLES, TRANSCRITS DEPUIS MALT
 # ══════════════════════════════════════════════════════════════════════════
 #
 # POURQUOI CE FICHIER EXISTE. Malt est la SEULE preuve tierce verifiable du
@@ -9,19 +9,33 @@
 # devenu visible dans le pied de page le 03/08/2026 ; ce fichier prepare
 # l'etape suivante, placer chaque avis DANS la fiche du projet qu'il commente.
 #
-# ETAT AU 03/08/2026 : les **11 avis** sont transcrits, releve complet fait sur
-# la session connectee. Le profil porte 5,0 (Qualite 5,0, Delai 5,0,
-# Communication 5,0) et 25 projets.
+# ⚠️⚠️ CE FICHIER EST VERSIONNE DANS UN DEPOT PUBLIC. Il ne porte donc QUE des
+# avis publiables, et rien qui identifie un client au-dela de ce qu'il a lui-
+# meme ecrit publiquement sur Malt. Aucun jugement de Ropat sur un client, sur
+# un resultat ou sur une raison de refus n'a sa place ici : ces elements vivent
+# dans les notes de travail non versionnees (`docs/`, gitignore). Nettoye le
+# 03/08/2026 apres qu'une premiere version en eut porte.
+#
+# ETAT DU PROFIL AU 03/08/2026, releve sur `malt.fr/profile/victorjarry` :
+# **25 projets, 11 evaluations, note 5,0** (Qualite 5,0, Delai 5,0,
+# Communication 5,0).
+# ⚠️ CES NOTES SONT AGREGEES AU PROFIL, AUCUNE N'APPARTIENT A UN AVIS. Les
+# cartes d'avis de Malt ne portent aucun chiffre : ecrire une note a cote du nom
+# d'une personne fabriquerait une attribution. Les deux valeurs affichees par le
+# site vivent dans `_data/socials.yml`, sur l'entree `malt`, et ne s'affichent
+# qu'en nommant LE PROFIL.
 #
 # ⚠️ MALT RESTE LA SOURCE DE VERITE, PAS CE FICHIER. Un avis peut etre modifie
-# ou retire la-bas sans que rien ne le signale ici.
+# ou retire la-bas sans que rien ne le signale ici. C'est pourquoi le chiffre ne
+# se cite jamais sans le lien qui permet de le verifier.
 #
-# ⚠️⚠️ NE JAMAIS DERIVER UN COMPTE DE CE FICHIER, meme maintenant qu'il est
-# complet. Il porte 11 lignes pour 11 avis, mais **8 CLIENTS DISTINCTS** : trois
-# avis viennent du meme (ADF) et deux d'une autre (STRAKARA). Un `size` pose
-# quelque part dirait « 11 clients », ce qui serait faux. Le nombre d'avis
-# appartient a Malt et se cite avec le lien vers Malt ; le nombre de clients se
-# compte sur `entreprise`, jamais sur les lignes.
+# ⚠️⚠️ NE JAMAIS DERIVER UN COMPTE DE CE FICHIER, et la raison a change le
+# 03/08/2026. Elle etait deja bonne : les lignes ne valent pas les clients,
+# puisqu'une meme entreprise peut en porter plusieurs. Elle est desormais plus
+# forte : **ce fichier est un SOUS-ENSEMBLE**, il ne contient pas les avis non
+# publiables. Un `size` pose ici sous-compterait les avis ET les clients.
+# Le nombre d'avis appartient a Malt et se cite avec le lien vers Malt ; le
+# releve complet vit dans les notes non versionnees.
 #
 # ⚠️ `texte` N'EST PAS TRADUIT, ET C'EST UNE DECISION. Traduire la phrase d'une
 # personne nommee, c'est lui faire dire des mots qu'elle n'a pas ecrits tout en
@@ -48,46 +62,70 @@
 # pas les confondre avec `projet` et `publiable`, qui sont lues par les filtres
 # `where:` du rendu et sans lesquelles rien ne sort.
 #
-# ⚠️ DEUX `projet` SEULEMENT SONT RENSEIGNES, LES AUTRES SONT VIDES EXPRES.
+# ⚠️ QUATRE `projet` SONT RENSEIGNES, LES AUTRES SONT VIDES EXPRES.
 # Rattacher l'avis d'un client a la mauvaise fiche lui ferait commenter un
 # travail qui n'est pas le sien. `hepwayne` est sur, l'intitule de l'avis
-# nommant le projet ; `jhag-banana-rush` a ete confirme par Ropat le 03/08. Les
-# neuf autres restent vides tant que le rattachement n'est pas certain, et six
-# d'entre eux n'ont de toute facon aucune fiche a rejoindre.
-# **Un seul avis est donc affichable aujourd'hui**, celui de Lola sur
-# `jhag-banana-rush` : le sien est le seul dont la fiche soit publiee.
+# nommant le projet ; `jhag-banana-rush` a ete confirme par Ropat le 03/08 ;
+# les deux `strakara` le sont depuis le 04/08, la fiche ayant ete ecrite.
+# Les autres restent vides tant que le rattachement n'est pas certain.
 #
-# ⚠️ SIX CLIENTS SUR HUIT N'ONT AUCUNE FICHE SUR LE SITE : AKIMA PARIS, YVES,
-# STRAKARA, NEWRONI, ADF et Cinco. Ils ont paye, ils ont note 5, et le site ne
-# les montre pas. C'est le meme constat que celui de la page A propos, vu par
-# l'autre bout.
+# ⚠️ LA CLE DE RATTACHEMENT EST LE NOM DE FICHIER DE LA FICHE, pas un slug et
+# pas l'URL : `project-avis.html` compare `projet` a `include.project_id`, qui
+# vaut la cle de `site.data.projects`. Renommer une fiche oblige donc a relire
+# ce fichier.
+#
+# ⚠️ ETAT AU 04/08/2026 : **DEUX fiches affichent un avis**, `jhag-banana-rush`
+# et `strakara`. PAS trois avis : le composant selectionne avec `| first`, donc
+# il rend **UN SEUL avis par fiche**. Strakara en porte deux dans la donnee, un
+# seul sort a l'ecran.
+# **Ne pas annoncer « 3 avis affiches » : c'est faux, et je l'ai ecrit avant de
+# le mesurer.** Le compte juste est : 2 fiches, 2 citations visibles.
+#
+# ⚠️ ET C'EST LE PREMIER PROJET A EN PORTER DEUX, donc le premier ou la limite se
+# voit. Le `| first` prend l'avis dans l'ordre du fichier, ici « Creation du logo
+# et des flyers » — c'est-a-dire celui dont la formulation entre en tension avec
+# le texte de la fiche, qui explique que le logo etait fourni. Arbitrage ouvert.
+#
+# ⚠️ QUATRE DES SEPT CLIENTS PRESENTS ICI N'ONT TOUJOURS AUCUNE FICHE : AKIMA
+# PARIS, YVES, NEWRONI et Cinco. Ils ont paye, ils ont note 5, et le site ne les
+# montre pas. Le correctif est de PUBLIER DES FICHES, pas d'ajouter des
+# temoignages : publier Strakara vient de faire passer les avis affiches de 1 a
+# 3 sans qu'une seule citation soit ajoutee.
 #
 # ⚠️⚠️ `publiable` EST OBLIGATOIRE SUR CHAQUE LIGNE, ET IL N'EST PAS DEDUCTIBLE.
-# Un avis 5 etoiles n'est pas automatiquement publiable : **ADF est
-# BoostFollowers**, dont `docs/INVENTAIRE-2026-08.md` dit « Refus strategique :
-# achat de followers, Ropat ne veut pas de l'association », et qui figure dans
-# la liste de ses deux refus assumes a cote de la generation de contenu par IA.
-# Ce client a laisse TROIS avis, c'est-a-dire la meilleure preuve de « client
-# qui revient » du profil, et elle est **inutilisable**. Publier son nom
-# reviendrait a annuler le refus qui le justifie.
-# Le champ est donc ecrit `true` ou `false` sur TOUTES les entrees, jamais
-# omis : un rendu qui testerait l'absence du champ publierait par defaut, et le
-# defaut serait la faute.
+# **Un avis 5 etoiles n'est pas automatiquement publiable.** Le champ est la
+# garde qui materialise ce tri. Un rendu qui testerait l'absence du champ
+# publierait par defaut, et le defaut serait la faute.
+# Il porte aujourd'hui DEUX motifs de `false` qu'il ne faut pas confondre :
+#   - un refus definitif, qui a fait sortir des lignes de ce fichier ;
+#   - un embargo temporaire, celui de `hepwayne`, **qui devra repasser a
+#     `true`** le jour ou sa fiche est publiee.
+# Le second est le plus dangereux des deux, parce qu'un `false` qui a survecu a
+# sa raison ne fait jamais de bruit.
 #
-# ⚠️ CE QUE CA CHANGE AU COMPTE DES CLIENTS REVENUS. Deux des huit clients sont
-# revenus, ADF (3 avis) et STRAKARA (2). Mais ADF n'est pas publiable, donc la
-# preuve affichable du « client qui revient » se reduit a **UN client sur
-# huit**. Ne pas annoncer deux.
+# ⚠️ LA PREUVE DU « CLIENT QUI REVIENT » SE REDUIT A UN SEUL CLIENT ICI,
+# STRAKARA, qui porte deux avis. Ne pas en annoncer davantage a partir de ce
+# fichier : il est un sous-ensemble, et le compte complet n'y est pas.
 
 # ── Hepwayne ──────────────────────────────────────────────────────────────
 - source: malt
-  publiable: true
+  # ⚠️⚠️ SOUS EMBARGO, ET LE MOTIF N'EST PAS LE MEME QUE POUR LES AUTRES.
+  # La citation elle-meme ne revele rien : elle ne nomme ni le client, ni le
+  # projet. Ce sont `entreprise` et `intitule` qui cassent l'embargo, en
+  # annoncant une collaboration avant la sortie du t-shirt. C'est donc la LIGNE
+  # qui n'est pas publiable, pas le texte.
+  #
+  # ⚠️ CE `false` EST TEMPORAIRE ET IL A UNE CONDITION DE LEVEE PRECISE :
+  # **le jour ou la fiche `hepwayne` est publiee, repasser ce champ a `true`.**
+  # Sans ca l'avis restera invisible alors que son embargo aura expire, et rien
+  # ne le signalera : la fiche s'affichera sans sa preuve, en silence. C'est le
+  # seul `false` du fichier et c'est le seul qui doive un jour redevenir `true`.
+  publiable: false
   auteur: "Marine"
   entreprise: "Hepwayne"
-  # ⚠️ La fiche N'EXISTE PAS ENCORE : embargo jusqu'a la sortie du t-shirt (voir
-  # docs/INVENTAIRE-2026-08.md). Le slug est pose d'avance pour que l'avis se
-  # branche seul le jour de la publication. C'est aussi le projet realise EN
-  # COLLABORATION avec une illustratrice, donc la premiere fiche cosignee.
+  # Le slug est pose d'avance pour que l'avis se branche seul le jour de la
+  # publication. C'est aussi le projet realise EN COLLABORATION avec une
+  # illustratrice, donc la premiere fiche cosignee.
   projet: hepwayne
   intitule: "Création de l'identité visuelle et pack d'illustrations"
   date: "2026-07-19"
@@ -116,7 +154,7 @@
   auteur: "Laura"
   role: "Dirigeante — SAS ETS SSP"
   entreprise: "STRAKARA"
-  projet:
+  projet: strakara
   intitule: "Création du logo et des flyers"
   date: "2026-04-20"
   texte: >-
@@ -132,7 +170,7 @@
   auteur: "Laura"
   role: "Dirigeante — SAS ETS SSP"
   entreprise: "STRAKARA"
-  projet:
+  projet: strakara
   intitule: "Remise en qualité du logo"
   date: "2026-04-20"
   texte: >-
@@ -175,50 +213,10 @@
     Excellente communication et livraison effectuée dans les temps convenus.
     Je recommande chaleureusement Victor.
 
-# ── ADF = BoostFollowers ⚠️ NON PUBLIABLE ─────────────────────────────────
-# Trois missions en trois semaines, du 25/02 au 14/03, et donc la MEILLEURE
-# preuve de « client qui revient » que porte le profil. Elle est inutilisable.
-# `docs/INVENTAIRE-2026-08.md` : « Refus strategique : achat de followers,
-# Ropat ne veut pas de l'association », et BoostFollowers figure dans la liste
-# de ses deux refus assumes, a cote de la generation de contenu par IA.
-# Publier ces trois avis avec leur nom annulerait le refus qui les justifie.
-# Transcrits pour que le releve soit complet et pour que personne ne les
-# redecouvre dans six mois en croyant a une bonne nouvelle.
-- source: malt
-  publiable: false   # ADF = BoostFollowers, refus assume
-  auteur: "Romain"
-  role: "CEO"
-  entreprise: "ADF"
-  projet:
-  intitule:
-  date: "2026-03-14"
-  texte: "Super profil réactif"
-
-- source: malt
-  publiable: false   # ADF = BoostFollowers, refus assume
-  auteur: "Romain"
-  role: "CEO"
-  entreprise: "ADF"
-  projet:
-  intitule:
-  date: "2026-03-06"
-  texte: "Je recommande fortement"
-
-- source: malt
-  publiable: false   # ADF = BoostFollowers, refus assume
-  auteur: "Romain"
-  role: "CEO"
-  entreprise: "ADF"
-  projet:
-  intitule:
-  date: "2026-02-25"
-  texte: "Super profil ! Réactif et talentueux"
-
-# ── YVES = Tryskele ───────────────────────────────────────────────────────
-# Logo d'une application fitness, nom de travail « Tryskele ». Aucune fiche, et
-# `docs/INVENTAIRE-2026-08.md` porte le jugement de Ropat lui-meme sur le
-# resultat : « le logo est pas dingue ». Publiable sans probleme ethique, mais
-# l'avis tient en deux mots et le travail n'est pas montre : rien a en tirer.
+# ── YVES ──────────────────────────────────────────────────────────────────
+# ⚠️ Aucune fiche, et l'avis tient en deux mots. Il est publiable, mais il n'y a
+# rien a en tirer tant que le travail n'est pas montre : une citation de deux
+# mots sans oeuvre a cote ne prouve rien au lecteur.
 - source: malt
   publiable: true
   auteur: "Yves"
@@ -238,8 +236,8 @@
   projet:
   intitule:
   date: "2026-04-27"
-  # ⚠️ NOTE SANS COMMENTAIRE. L'avis existe et compte dans la moyenne, mais son
-  # auteur n'a rien ecrit. Transcrit quand meme pour que le releve soit complet
-  # et honnete : un fichier qui n'aurait que dix lignes laisserait croire a un
-  # oubli. Rien a citer, donc rien a afficher.
+  # ⚠️ NOTE SANS COMMENTAIRE. L'avis existe et compte dans la moyenne sur Malt,
+  # mais son auteur n'a rien ecrit. Conserve ici pour que l'absence soit une
+  # information et non un oubli. Rien a citer, donc rien a afficher : la garde
+  # sur `texte` non vide s'en charge.
   texte:

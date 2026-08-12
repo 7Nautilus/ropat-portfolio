@@ -54,9 +54,35 @@
 
   <!-- ── STATS ── -->
   <section class="about-stats" aria-label="{% if current_lang == 'fr' %}Chiffres clés{% else %}Key numbers{% endif %}">
+    {%- comment -%}
+      ⚠️ LES NOMBRES VIENNENT DE `_data/socials.yml`, ENTREE `malt`, ET DE NULLE
+      PART AILLEURS. Ils etaient recopies a la main dans `about.yml`, deux fois
+      (bloc `fr` et bloc `en`), et ce doublon avait deja derive : « ~20 » et
+      « 9 » pour 25 et 11, donc perime DANS LE MAUVAIS SENS, sur la page dont le
+      travail est de reduire le risque. `about.yml` ne porte plus que `label` et
+      `source` ; `source` nomme une cle de l'entree `malt`.
+      `stat.value` reste lu en dernier recours, pour qu'un futur chiffre qui ne
+      viendrait PAS de Malt reste possible sans toucher a ce gabarit.
+
+      ⚠️ LE « + » N'EST POSE QUE SUR `projets`, ET LE MOTIF EST LEUR SENS DE
+      VARIATION. Une mission livree ne se delivre pas : « 25+ » est un plancher,
+      et un plancher ne se perime jamais. `evaluations` peut BAISSER (un auteur
+      peut retirer son avis) et `note` peut bouger dans les deux sens : un « + »
+      y mentirait des la premiere variation. Ne pas « harmoniser » les trois.
+    {%- endcomment -%}
+    {% assign _malt = site.data.socials | where: "name", "malt" | first %}
     {% for stat in about.stats %}
+    {%- if stat.source == 'projets' and _malt.projets -%}
+      {%- assign _valeur = _malt.projets | append: '+' -%}
+    {%- elsif stat.source == 'evaluations' and _malt.evaluations -%}
+      {%- assign _valeur = _malt.evaluations -%}
+    {%- elsif stat.source == 'note' and _malt.note -%}
+      {%- capture _valeur %}{% include ui/note-malt.html lang=current_lang %}{% endcapture -%}
+    {%- else -%}
+      {%- assign _valeur = stat.value -%}
+    {%- endif -%}
     <div class="about-stat">
-      <span class="about-stat-value">{{ stat.value }}</span>
+      <span class="about-stat-value">{{ _valeur }}</span>
       <span class="about-stat-label">{{ stat.label }}</span>
     </div>
     {% unless forloop.last %}

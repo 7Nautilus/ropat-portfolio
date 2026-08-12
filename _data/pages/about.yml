@@ -27,12 +27,15 @@ fr:
 
   availability: "Disponible pour de nouveaux projets"
 
+  # ⚠️ PLUS AUCUN NOMBRE ICI, ET C'EST LE CORRECTIF. `source` designe une cle de
+  # l'entree `malt` de `_data/socials.yml`, devenue la source unique. Ecrire un
+  # `value:` en dur reintroduirait le doublon qui a deja derive une fois.
   stats:
-    - value: "25"
+    - source: projets
       label: "Projets clients"
-    - value: "5/5"
+    - source: note
       label: "Note sur Malt"
-    - value: "11"
+    - source: evaluations
       label: "Avis clients"
 
   skills:
@@ -76,12 +79,13 @@ en:
 
   availability: "Available for new projects"
 
+  # Voir la note du bloc `fr` : les nombres vivent dans `_data/socials.yml`.
   stats:
-    - value: "25"
+    - source: projets
       label: "Client projects"
-    - value: "5/5"
+    - source: note
       label: "Rating on Malt"
-    - value: "11"
+    - source: evaluations
       label: "Client reviews"
 
   skills:
