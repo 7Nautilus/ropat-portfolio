@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 12/08/2026 a 22:43, d'apres l'etat de 815e206.
+> Generee le 13/08/2026 a 00:00, d'apres l'etat de 2b0bee7.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 12/08/2026 22:43 |
+| Date du build lu | 13/08/2026 00:00 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -185,7 +185,7 @@ Aucun chemin resolu ne les atteint, propagation a travers les parametres d'inclu
 - site.data.pages.contact.fr.cta
 - site.data.socials.*.releve
 
-### Couverture des cles de premier niveau dans `_data/projects/` (21 fichiers)  (11)
+### Couverture des cles de premier niveau dans `_data/projects/` (21 fichiers)  (10)
 
 Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sans que rien ne le dise.
 
@@ -199,7 +199,6 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 - **secteur** : 13/21   absent de chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials
 - **aspect** : 15/21   absent de btr, cheetah, crow, jhag-banana-rush, logo-process, moon-vtc
 - **case_study** : 20/21   absent de hors-champ
-- **nature** : 20/21   absent de strakara
 
 ### Couverture des cles de premier niveau dans `_data/services/` (4 fichiers)  (1)
 

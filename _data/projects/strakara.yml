@@ -57,10 +57,28 @@ tools: "Affinity Publisher, Illustrator, Figma"
 image_src: /assets/images/projects/strakara/strakara-flyer-mockup.avif
 main_image: /assets/images/projects/strakara/strakara-flyer-mockup.avif
 media_type: image
-aspect: "4/3"            # mockup du flyer, 1440x1080, lu dans l en-tete AVIF le 04/08/2026
-                   # donc `105/148` si le mockup cadre la piece seule. Ne pas
-                   # laisser le defaut 1/1 : c'est la premiere fiche du site a
-                   # porter un format long, et c'est l'interet de l'exercice.
+aspect: "4/3"      # mockup du flyer, 1440x1080, remesure au canevas le 12/08/2026
+# ⚠️ CE COMMENTAIRE PROPOSAIT `105/148` ET IL AURAIT DEFORME L'IMAGE. Corrige le
+# 12/08/2026. `105/148` est le ratio de l'A6 NU, or ce fichier n'est pas le flyer,
+# c'est un MOCKUP qui le cadre sur un support : 1440x1080, donc exactement 4/3.
+# Le poser en 105/148 aurait reserve une boite au mauvais format et rejoue le CLS
+# que `aspect` existe pour supprimer.
+# ⚠️ Et « c'est la premiere fiche du site a porter un format long » etait faux :
+# sept autres projets portent deja un aspect non carre (16/9, 2/3, 4/5, 900/1274...).
+
+# L'image d'ouverture est une MISE EN SITUATION, pas le livrable : elle peut
+# donc passer en fond, saigner et porter le titre. A ne jamais poser sur une
+# pochette, une affiche ou un logo, ou le voile falsifierait la couleur que
+# le client a signee. Defaut si absent : livrable.
+# ⚠️ CE CHAMP MANQUAIT, ET C'ETAIT LE SEUL ECART DE CONVENTION DE CETTE FICHE.
+# Ajoute le 12/08/2026 sur demande de Ropat. Les 20 autres fiches indexees le
+# portent toutes ; strakara etait la seule sans, donc elle recevait `livrable`
+# par le `default:` du gabarit et rendait un hero entierement different : mise
+# en page en grille au lieu du plein cadre, pas de voile, et un indice de
+# defilement que les autres n'ont pas.
+# Le classement est justifie : le hero est `strakara-flyer-mockup.avif`, un
+# mockup, pas le flyer nu. La reserve du bloc ci-dessus ne s'y applique donc pas.
+nature: contexte
 
 # ── Le cadrage ────────────────────────────────────────────────────────────
 context:
