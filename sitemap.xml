@@ -19,9 +19,19 @@ layout: null
   </url>
 
   <!-- Pages -->
+  {%- comment -%}
+    ⚠️ `en/index.html` EST EXCLU ICI, ET SANS LUI LE SITEMAP SE REPETE. Le bloc
+    « Home Pages » ci-dessus emet deja `/en/` en dur ; cette boucle le captait une
+    seconde fois, son `page.path` valant `en/index.html`, donc contenant `en/`.
+    Mesure sur le sitemap servi le 12/08/2026 : `https://ropat.art/en/` figurait
+    aux positions 2 et 9 sur 16.
+    L'accueil FR, lui, n'a jamais eu le probleme : son `page.path` est
+    `index.html` a la racine, il ne contient ni `fr/` ni `en/`, donc la boucle ne
+    le voit pas. Le defaut etait asymetrique, ce qui explique qu'il ait tenu.
+  {%- endcomment -%}
   {% for page in site.pages %}
     {% if page.path contains '.html' %}
-      {% unless page.path contains '_layouts' or page.path contains '_includes' or page.path contains 'projects/' %}
+      {% unless page.path contains '_layouts' or page.path contains '_includes' or page.path contains 'projects/' or page.path == 'en/index.html' %}
         {% if page.path contains 'fr/' or page.path contains 'en/' %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
