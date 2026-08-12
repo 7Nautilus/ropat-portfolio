@@ -3736,7 +3736,17 @@ html.scrollbar-saisie {
   align-items: center;
   width: max-content;
   gap: var(--carousel-gap);
-  padding-bottom: var(--spacing-sm);
+  /* ⚠️ CES TROIS LIGNES SONT LA PARCE QUE C'EST UNE `ul` DEPUIS LE 12/08/2026.
+     Le reset du depot ne touche pas aux listes, chaque composant neutralise la
+     sienne : meme patron qu'a `.nav-links` (`layout/_header.scss:370-376`).
+     Sans elles, la feuille du navigateur pose `padding-inline-start: 40px` et
+     `margin-block: 1em`, ce qui decalerait toute la piste vers la droite et
+     ajouterait deux marges verticales.
+     Le `padding` est ecrit en une fois, et non `padding-bottom` seul, sinon la
+     valeur de la feuille du navigateur survivrait sur l'axe en ligne. */
+  list-style: none;
+  margin: 0;
+  padding: 0 0 var(--spacing-sm);
   animation: scroll-carousel var(--carousel-speed) linear infinite;
 }
 .partners-carousel .partner-logo-container {

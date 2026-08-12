@@ -103,33 +103,60 @@
         seraient annonces, soit chaque partenaire DEUX fois. Le masque plus le
         masquage retablissent ce que la section promet : six noms.
       {% endcomment -%}
-      <div class="partners-carousel-track">
+      {%- comment -%}
+        ⚠️ UNE `ul`, ET PAS UN `div`, DEPUIS LE 12/08/2026. Six graphiques poses cote a cote
+        sans semantique de liste s'annoncent comme six images isolees : le lecteur d'ecran
+        n'apprend jamais COMBIEN il y en a, alors que la quantite EST l'argument de la
+        section. Il perd aussi la navigation par liste, donc il ne peut ni sauter la bande
+        ni savoir quand elle finit. WCAG 1.3.1, niveau A.
+        Le CSS ne change pas d'un pixel : `.partners-carousel-track` reste en flex, il gagne
+        seulement le `list-style: none; margin: 0; padding: 0` que `.nav-links` porte deja
+        pour la meme raison.
+
+        ⚠️ LES DEUX COMMENTAIRES QUI ETAIENT ICI ETAIENT DES COMMENTAIRES HTML, DONC EMIS.
+        « Premiere boucle » et « Deuxieme boucle pour creer l'illusion d'un defilement
+        infini » partaient en francais sur l'accueil ANGLAIS, comme le hero mort corrige
+        90 lignes plus haut. Passes en commentaire Liquid, qui n'est pas emis.
+      {%- endcomment -%}
+      {%- comment -%}
+        ⚠️ `role="list"` N'EST PAS REDONDANT SUR UNE `ul`, ET SANS LUI LE CORRECTIF NE SERT
+        A RIEN LA OU LE DEFAUT A ETE VU. Safari retire la semantique de liste des qu'on
+        pose `list-style: none`, ce que le CSS fait deux lignes plus bas et ne peut pas ne
+        pas faire. Sur iOS, VoiceOver annoncerait donc encore six images isolees, sur la
+        classe d'appareil ou Ropat a justement signale le probleme.
+        Le role le retablit explicitement. C'est le seul cas du depot ou une `ul` en porte
+        un ; les autres listes du site ne visent pas ce role, elles ne font que se
+        debarrasser des puces.
+      {%- endcomment -%}
+      <ul class="partners-carousel-track" role="list">
         {% assign partner_ids = site.data.partners.index.order %}
-        <!-- Première boucle -->
         {% for id in partner_ids %}
           {% assign item = site.data.partners[id] %}
-          <div class="partner-logo-container">
+          <li class="partner-logo-container">
             {% if item.logo contains '<svg' %}
               {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
             {% else %}
               <span class="partner-logo partner-logo--masque" role="img" aria-label="{{ item.name }}"
                     style="--logo: url('{{ item.logo }}'); --ratio: {{ item.ratio }};"></span>
             {% endif %}
-          </div>
+          </li>
         {% endfor %}
-        <!-- Deuxième boucle pour créer l'illusion d'un défilement infini -->
+        {%- comment -%}
+          La seconde boucle ne sert qu'a l'illusion du defilement infini. Elle reste en
+          `aria-hidden`, sinon les six clients seraient annonces douze fois.
+        {%- endcomment -%}
         {% for id in partner_ids %}
           {% assign item = site.data.partners[id] %}
-          <div class="partner-logo-container" aria-hidden="true">
+          <li class="partner-logo-container" aria-hidden="true">
             {% if item.logo contains '<svg' %}
               {{ item.logo | replace: '<svg', '<svg class="partner-logo"' }}
             {% else %}
               <span class="partner-logo partner-logo--masque"
                     style="--logo: url('{{ item.logo }}'); --ratio: {{ item.ratio }};"></span>
             {% endif %}
-          </div>
+          </li>
         {% endfor %}
-      </div>
+      </ul>
     </div>
   </section>
 

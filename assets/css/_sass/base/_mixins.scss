@@ -124,17 +124,33 @@ $max-widths: (
   // le temps de nommer ce qui etait en dur. Il RECOUVRAIT `md` d'un pixel : a 768
   // exactement, la regle `min-width: 768px` et ce plafond s'appliquaient tous les
   // deux. Retire, ses deux consommateurs passes a `sous-md`. Ne pas le remettre.
-  // ⚠️ `carrousel-sm` N'EST PAS UN CHOIX D'OEIL, C'EST UNE LARGEUR CALCULEE.
-  // C'est le volet en dessous duquel DEUX logos ne peuvent plus tenir, mesure le
-  // 12/08/2026 sur le rendu reel :
-  //   logo `max-width` 180 + padding d'item 32 = 212px par logo
-  //   deux logos + la gouttiere de piste (32) = 456px de conteneur
-  //   + la gouttiere de page (48) .............. = 504px de volet
-  // En dessous, la case vaut 148px pour un logo de 180 : il DEBORDAIT de 33px et
-  // empietait sur son voisin. Le defaut etait invisible en capture parce que rien
-  // n'est rogne, les logos se chevauchent simplement dans la gouttiere.
-  // Si `max-width` du logo ou le padding d'item bouge, ce plafond doit etre
-  // recalcule : il n'a pas de sens en soi.
+  // ⚠️ `carrousel-sm` N'EST PAS UN CHOIX D'OEIL, C'EST UNE LARGEUR MESUREE.
+  //
+  // ⚠️ ET IL Y A DEUX SEUILS, PAS UN. Ma premiere redaction les confondait et
+  // annoncait 504 comme « le volet en dessous duquel deux logos ne peuvent plus
+  // tenir ». C'est faux : ils tiennent plus bas, ils cessent seulement de
+  // respirer. Releve au navigateur, deux logos forces a plusieurs largeurs :
+  //
+  //   volet 460 -> case 190, logo 180 : pas de collision, padding perdu
+  //   volet 375 -> case 148, logo 180 : COLLISION, 33px de chevauchement
+  //
+  //   collision  : la case passe sous 180px (le `max-inline-size` du logo)
+  //                (conteneur - 32) / 2 < 180  ->  volet < 440px
+  //   respiration: la case passe sous 212px (logo 180 + padding d'item 32)
+  //                (conteneur - 32) / 2 < 212  ->  volet < 504px
+  //
+  // Le plafond est pose sur le SECOND, 504, et c'est un choix : le padding est de
+  // la respiration voulue, pas du rab. Entre 440 et 504 deux logos se toucheraient
+  // sans se recouvrir, ce qui est deja moins bien qu'un seul logo au calme.
+  //
+  // ⚠️ NE PAS EN DEDUIRE QUE LES AUTRES PALIERS DEBORDENT. Verifie au navigateur
+  // apres avoir cru le contraire par le calcul : a 1210px, cinq logos donnent une
+  // case de 197 pour un logo de 180, donc 17px de marge et AUCUN debordement. Le
+  // calcul disait 205 < 212 et concluait a tort : deborder le padding n'est pas
+  // deborder la case.
+  //
+  // Si `max-inline-size` du logo ou le padding d'item bouge, ces deux seuils
+  // doivent etre recalcules : ils n'ont pas de sens en soi.
   "carrousel-sm": 504px,
   "carrousel-md": 992px,
   "carrousel-lg": 1200px,
