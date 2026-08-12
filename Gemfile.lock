@@ -82,9 +82,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  jekyll
+  jekyll (~> 4.4)
   wdm (>= 0.1.0)
-  webrick
 
 BUNDLED WITH
    2.7.2

@@ -13,4 +13,16 @@ gem "jekyll", "~> 4.4"
 # Il reste donc installe, il cesse seulement de mentir sur son role.
 
 # Surveillance de fichiers native sous Windows, pour le `--watch` local.
-gem "wdm", ">= 0.1.0" if Gem.win_platform?
+#
+# ⚠️ `platforms:` ET NON `if Gem.win_platform?`, CORRIGE LE 12/08/2026. La forme
+# conditionnelle est evaluee A LA LECTURE du Gemfile : sur Windows bundler voyait
+# une dependance, sur le runner Linux il n'en voyait aucune. Les deux cotes ne
+# pouvaient donc PAS produire le meme `Gemfile.lock`, et la section `DEPENDENCIES`
+# du lock commite annoncait `jekyll` sans contrainte, `wdm` sans plateforme et
+# `webrick`, trois desaccords avec ce fichier. Le workflow lance
+# `ruby/setup-ruby` avec `bundler-cache: true` dans SES DEUX JOBS, mode qui exige
+# un lock complet : voir `.github/workflows/deploy.yml`, qui documente qu'il
+# « echoue net » sinon.
+# Avec `platforms:`, la dependance est declaree des DEUX cotes et le lock note
+# a quelle plateforme elle s'applique : la resolution devient reproductible.
+gem "wdm", ">= 0.1.0", platforms: [:windows]
