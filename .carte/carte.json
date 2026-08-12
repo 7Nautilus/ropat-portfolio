@@ -1,7 +1,7 @@
 {
-  "genere_le": "2026-08-03T14:43:56Z",
-  "commit": "a110bd6",
-  "pages_construites": 64,
+  "genere_le": "2026-08-12T17:12:48Z",
+  "commit": "cf81e90",
+  "pages_construites": 66,
   "perime": null,
   "indetermines": 7,
   "routes": [
@@ -9,11 +9,6 @@
       "source": "index.html",
       "url": "/",
       "lang": "fr"
-    },
-    {
-      "source": ".claude/skills/mesurer-au-navigateur/SKILL.md",
-      "url": "/.claude/skills/mesurer-au-navigateur/SKILL.html",
-      "lang": null
     },
     {
       "source": "404.html",
@@ -143,6 +138,11 @@
     {
       "source": "(engendree)",
       "url": "/en/projects/stelya.html",
+      "lang": "en"
+    },
+    {
+      "source": "(engendree)",
+      "url": "/en/projects/strakara.html",
       "lang": "en"
     },
     {
@@ -302,6 +302,11 @@
     },
     {
       "source": "(engendree)",
+      "url": "/fr/projects/strakara.html",
+      "lang": "fr"
+    },
+    {
+      "source": "(engendree)",
       "url": "/fr/projects/zylkene.html",
       "lang": "fr"
     },
@@ -363,6 +368,7 @@
     "layout/header.html -> ui/logo.html",
     "layout/nav.html -> ui/button.html",
     "pages/about.html -> ui/button.html",
+    "pages/about.html -> ui/note-malt.html",
     "pages/about.html -> ui/status-dot.html",
     "pages/contact.html -> social-media-icons.html",
     "pages/contact.html -> ui/button.html",
@@ -381,6 +387,7 @@
     "pages/services.html -> services/service-card.html",
     "pages/services.html -> ui/button.html",
     "portfolio-filters.html -> ui/dropdown.html",
+    "projects/project-avis.html -> ui/note-malt.html",
     "projects/project-main.html -> projects/project-avis.html",
     "projects/project-main.html -> projects/project-note.html",
     "projects/project-main.html -> scroll-down-link.html",
@@ -460,7 +467,6 @@
     "--line-control",
     "--measure-lede",
     "--measure-prose",
-    "--p-encre-sombre",
     "--p-neige-basse",
     "--p-neige-haute",
     "--p-neige-mediane",
@@ -530,7 +536,6 @@
     "--dur-reveal",
     "--ease-expo-in-out",
     "--p-vert-haute",
-    "--p-vert-mediane",
     "--rhythm-lg",
     "--rhythm-md",
     "--rhythm-sm",
@@ -580,15 +585,14 @@
     "/assets/images/backgrounds/main-bg.webp",
     "/assets/images/projects/JPeJA-thumbnail2.jpg",
     "/assets/images/projects/aelio/aelio-app-mockup-alone.avif",
-    "/assets/images/projects/jhag/jhag-br-p3-flambe.webp",
-    "/assets/images/partners/ottony-paris.svg"
+    "/assets/images/projects/jhag/jhag-br-p3-flambe.webp"
   ],
   "assets_manquants": [],
   "css_octets": {
-    "brut": 265954,
-    "gzip": 83710,
-    "sans_commentaires": 86308,
-    "gzip_sans": 14050
+    "brut": 277056,
+    "gzip": 87939,
+    "sans_commentaires": 87020,
+    "gzip_sans": 14163
   },
   "ratios_faux": []
 }

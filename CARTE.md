@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 03/08/2026 a 16:43, d'apres l'etat de a110bd6.
+> Generee le 12/08/2026 a 19:12, d'apres l'etat de cf81e90.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -16,31 +16,30 @@ ne le signale.
 
 | Mesure | Valeur |
 |---|---|
-| Pages construites lues comme oracle | **64** |
-| Date du build lu | 03/08/2026 16:43 |
+| Pages construites lues comme oracle | **66** |
+| Date du build lu | 12/08/2026 19:12 |
 | Repertoire lu | `.carte/site` |
-| Fichiers de donnees | 38 |
-| Includes | 32 |
-| Partiels SCSS | 34 |
+| Fichiers de donnees | 39 |
+| Includes | 33 |
+| Partiels SCSS | 33 |
 | Cas **INDETERMINES** | **7** |
 
 Repartition des indetermines : selecteur JS calcule (6), classe JS calculee (1).
 
 **Les trois seuls verdicts employes ici sont `CONFIRME`, `ABSENT` et `INDETERMINE`.**
 Le mot « mort » n'apparait nulle part : il affirme qu'une chose ne servira jamais, ce
-qu'aucune mesure ne peut etablir. « Absent des 64 pages construites a la
+qu'aucune mesure ne peut etablir. « Absent des 66 pages construites a la
 date lue ci-dessus » est un fait, datable et refutable.
 
 ## 1. Routes
 
-66 routes, dont **48 engendrees** par `_plugins/` et 18 portees par un fichier source. 33 en FR, 31 en EN.
+67 routes, dont **50 engendrees** par `_plugins/` et 17 portees par un fichier source. 34 en FR, 32 en EN.
 
 <details><summary>Table complete des routes</summary>
 
 | URL | Source | Lang |
 |---|---|---|
 | `/` | `index.html` | fr |
-| `/.claude/skills/mesurer-au-navigateur/SKILL.html` | `.claude/skills/mesurer-au-navigateur/SKILL.md` | - |
 | `/404.html` | `404.html` | fr |
 | `/en/` | `en/index.html` | en |
 | `/en/about.html` | `en/about.html` | en |
@@ -67,6 +66,7 @@ date lue ci-dessus » est un fait, datable et refutable.
 | `/en/projects/outlast-trials.html` | `(engendree)` | en |
 | `/en/projects/sipsmith.html` | `(engendree)` | en |
 | `/en/projects/stelya.html` | `(engendree)` | en |
+| `/en/projects/strakara.html` | `(engendree)` | en |
 | `/en/projects/zylkene.html` | `(engendree)` | en |
 | `/en/services.html` | `en/services.html` | en |
 | `/en/services/branding-strategy.html` | `(engendree)` | en |
@@ -98,6 +98,7 @@ date lue ci-dessus » est un fait, datable et refutable.
 | `/fr/projects/outlast-trials.html` | `(engendree)` | fr |
 | `/fr/projects/sipsmith.html` | `(engendree)` | fr |
 | `/fr/projects/stelya.html` | `(engendree)` | fr |
+| `/fr/projects/strakara.html` | `(engendree)` | fr |
 | `/fr/projects/zylkene.html` | `(engendree)` | fr |
 | `/fr/services.html` | `fr/services.html` | fr |
 | `/fr/services/branding-strategie.html` | `(engendree)` | fr |
@@ -108,15 +109,11 @@ date lue ci-dessus » est un fait, datable et refutable.
 
 </details>
 
-### Sources dont la sortie calculee est introuvable dans _site  (1)
-
-Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est fausse.
-
-- .claude/skills/mesurer-au-navigateur/SKILL.md -> .claude/skills/mesurer-au-navigateur/SKILL.html
+Rien a signaler.
 
 ## 2. Graphe des includes
 
-32 includes, 76 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+33 includes, 79 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
 **Orphelins** : projects/project-main.html, services/service-main.html.
 
@@ -151,6 +148,7 @@ Soit la page est exclue par `_config.yml`, soit la regle d'URL de la carte est f
 - `ui/icon-send.html` <- ui/button.html
 - `ui/loader.html` <- pages/index.html
 - `ui/logo.html` <- layout/header.html, ui/loader.html
+- `ui/note-malt.html` <- pages/about.html, projects/project-avis.html
 - `ui/status-dot.html` <- labo/design-system.html, pages/about.html, pages/index.html
 
 </details>
@@ -178,28 +176,30 @@ Hors de portee de l'analyse Liquid : `_plugins/` lit les donnees en Ruby. Ni viv
 - site.data.services.web-design.seo.en
 - site.data.services.web-design.seo.fr
 
-### Cles de donnees definies, aucun gabarit ne les lit  (3)
+### Cles de donnees definies, aucun gabarit ne les lit  (4)
 
 Aucun chemin resolu ne les atteint, propagation a travers les parametres d'include comprise.
 
 - site.data.avis.*.source
 - site.data.pages.contact.en.cta
 - site.data.pages.contact.fr.cta
+- site.data.socials.*.releve
 
-### Couverture des cles de premier niveau dans `_data/projects/` (20 fichiers)  (10)
+### Couverture des cles de premier niveau dans `_data/projects/` (21 fichiers)  (11)
 
 Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sans que rien ne le dise.
 
-- **livrables** : 1/20
-- **chrome** : 2/20
-- **formats** : 4/20
-- **og_image** : 7/20
-- **thumbnails** : 8/20
-- **discipline** : 8/20
-- **secteur** : 12/20   absent de chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials
-- **mockup_a_produire** : 12/20   absent de a-lone, aelio, chat-noir, hors-champ, ottony, sipsmith, stelya, zylkene
-- **aspect** : 14/20   absent de btr, cheetah, crow, jhag-banana-rush, logo-process, moon-vtc
-- **case_study** : 19/20   absent de hors-champ
+- **livrables** : 1/21
+- **chrome** : 2/21
+- **formats** : 4/21
+- **og_image** : 7/21
+- **thumbnails** : 8/21
+- **discipline** : 8/21
+- **mockup_a_produire** : 12/21
+- **secteur** : 13/21   absent de chat-noir, cheetah, crow, exit, hdd-defrag, jpeja, logo-process, outlast-trials
+- **aspect** : 15/21   absent de btr, cheetah, crow, jhag-banana-rush, logo-process, moon-vtc
+- **nature** : 20/21   absent de strakara
+- **case_study** : 20/21   absent de hors-champ
 
 ### Couverture des cles de premier niveau dans `_data/services/` (4 fichiers)  (1)
 
@@ -209,9 +209,9 @@ Une cle absente d'une partie du corpus fait s'appliquer une valeur par defaut sa
 
 ## 4. CSS
 
-130 jetons definis, 123 consommes, 293 noms de selecteur, 11 `!important`.
+129 jetons definis, 125 consommes, 294 noms de selecteur, 11 `!important`.
 
-`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1327`, `assets/css/_sass/pages/_project.scss:1335`
+`!important` : `assets/css/_sass/base/_bases.scss:86`, `assets/css/_sass/base/_bases.scss:87`, `assets/css/_sass/base/_bases.scss:88`, `assets/css/_sass/base/_bases.scss:89`, `assets/css/_sass/base/_bases.scss:100`, `assets/css/_sass/base/_bases.scss:105`, `assets/css/_sass/base/_bases.scss:106`, `assets/css/_sass/base/_bases.scss:107`, `assets/css/_sass/components/_cursor.scss:16`, `assets/css/_sass/pages/_project.scss:1348`, `assets/css/_sass/pages/_project.scss:1356`
 
 Points de rupture ecrits en dur : 520px (1x)
 
@@ -219,28 +219,30 @@ Points de rupture ecrits en dur : 520px (1x)
 
 Verdict de fait, pas de valeur : certains sont reserves pour une phase a venir.
 
-- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:545)
-- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:669)
-- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:452)
-- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:451)
-- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:450)
-- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:388)
+- --dur-reveal = 0.8s   (assets/css/_sass/base/_variables.scss:572)
+- --ease-expo-in-out = cubic-bezier(0.87, 0, 0.13, 1)   (assets/css/_sass/base/_variables.scss:696)
+- --rhythm-lg = 10rem   (assets/css/_sass/base/_variables.scss:479)
+- --rhythm-md = 6rem   (assets/css/_sass/base/_variables.scss:478)
+- --rhythm-sm = 4rem   (assets/css/_sass/base/_variables.scss:477)
+- --track-display = -0.015em   (assets/css/_sass/base/_variables.scss:415)
 
-### Jetons lus UNIQUEMENT depuis le JavaScript  (3)
+### Jetons lus UNIQUEMENT depuis le JavaScript  (2)
 
 Aucun `var()` ne les lit, mais ils ont un consommateur. A ne PAS ranger avec les jetons sans emploi : les supprimer casserait un comportement.
 
 - --dur-loader-hold = 800ms   lu par assets/js/script.js:150
 - --p-vert-haute = #051510   lu par assets/js/dither.js:382
-- --p-vert-mediane = #030F0C   lu par assets/js/dither.js:382
 
-### Jetons poses en ligne et consommes SANS valeur de repli  (3)
+### Jetons poses en ligne et consommes SANS valeur de repli  (6)
 
 Si la donnee qui pose le `style=` manque, la declaration entiere tombe.
 
-- assets/css/_sass/pages/_project.scss:949  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:957  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
-- assets/css/_sass/pages/_project.scss:973  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/components/_carousel.scss:183  -webkit-mask: var(--logo) center / contain no-repeat;
+- assets/css/_sass/components/_carousel.scss:184  mask: var(--logo) center / contain no-repeat;
+- assets/css/_sass/components/_carousel.scss:146  aspect-ratio: var(--ratio);
+- assets/css/_sass/pages/_project.scss:970  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:978  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
+- assets/css/_sass/pages/_project.scss:994  color: oklch(from var(--swatch-color) clamp(0, (0.5 - l) * 9999, 1) 0 0);
 
 ### DESACCORD DE SELECTEUR : le CSS cible un genre, le HTML emet l'autre  (3)
 
@@ -269,9 +271,9 @@ Vivants a l'execution, invisibles au build. A ne PAS ranger avec le CSS mort : l
 - .contact-erreur  style en assets/css/_sass/pages/_contact.scss:147, pose par assets/js/script.js:1397
 - .is-invalid  style en assets/css/_sass/pages/_contact.scss:328, pose par assets/js/script.js:391, assets/js/script.js:1438, assets/js/script.js:1442, assets/js/script.js:1466
 - .galerie-plus  style en assets/css/_sass/pages/_project.scss:355, pose par assets/js/script.js:1189
-- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1289, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
+- .voile-en-cours  style en assets/css/_sass/pages/_project.scss:1310, pose par _layouts/default.html (script en ligne 3):31, _layouts/default.html (script en ligne 3):33
 
-### Selecteurs absents des 64 pages construites  (20)
+### Selecteurs absents des 66 pages construites  (20)
 
 Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 
@@ -294,7 +296,7 @@ Fait date, pas jugement : aucune page du dernier build ne porte ce nom.
 - .social-links  assets/css/_sass/layout/_sections.scss:280 assets/css/_sass/layout/_sections.scss:288 assets/css/_sass/layout/_sections.scss:294 assets/css/_sass/layout/_sections.scss:299
 - .social-icon  assets/css/_sass/layout/_sections.scss:315 assets/css/_sass/layout/_sections.scss:322
 - .contact-select  assets/css/_sass/pages/_contact.scss:167 assets/css/_sass/pages/_contact.scss:183
-- .project-back-link  assets/css/_sass/pages/_project.scss:1184 assets/css/_sass/pages/_project.scss:1197 assets/css/_sass/pages/_project.scss:1199 assets/css/_sass/pages/_project.scss:1202
+- .project-back-link  assets/css/_sass/pages/_project.scss:1205 assets/css/_sass/pages/_project.scss:1218 assets/css/_sass/pages/_project.scss:1220 assets/css/_sass/pages/_project.scss:1223
 
 ### Valeurs ecrites en dur alors qu'un jeton DE LEUR FAMILLE porte la meme  (2)
 
@@ -314,7 +316,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 0.75rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_bases.scss:15, assets/css/_sass/base/_media-queries.scss:151, assets/css/_sass/components/_buttons.scss:310)
 - espacement 0.875rem : 7 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:34, assets/css/_sass/components/_buttons.scss:47)
 - espacement 1.25rem : 4 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/base/_media-queries.scss:269, assets/css/_sass/components/_buttons.scss:311, assets/css/_sass/components/_containers.scss:15)
-- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:941, assets/css/_sass/pages/_project.scss:1036)
+- espacement 0.25rem : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_service-cards.scss:85, assets/css/_sass/pages/_project.scss:962, assets/css/_sass/pages/_project.scss:1057)
 - espacement 0.9rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_about.scss:208, assets/css/_sass/pages/_project.scss:428)
 - espacement 2.5rem : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/cards/_experience-cards.scss:16, assets/css/_sass/pages/_contact.scss:179)
 - espacement 2px : 2 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_contact.scss:249, assets/css/_sass/pages/_contact.scss:375)
@@ -326,7 +328,7 @@ Fait, pas jugement. Nommer n'est pas aligner : une valeur listee ici merite un n
 - espacement 1.1rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:361)
 - espacement 1.4rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:212)
 - espacement 1.75rem : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:106)
-- espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:814)
+- espacement 1em : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/pages/_project.scss:835)
 - espacement 20px : 1 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_carousel.scss:21)
 - trait 2px : 15 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_containers.scss:104, assets/css/_sass/components/_containers.scss:165, assets/css/_sass/components/_cursor.scss:125)
 - trait 6px : 3 declaration(s), AUCUN jeton de cette famille ne porte cette valeur   (ex. assets/css/_sass/components/_dropdown.scss:46, assets/css/_sass/components/_dropdown.scss:47, assets/css/_sass/components/_dropdown.scss:48)
@@ -359,18 +361,18 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 
 | Attribut | HTML | CSS | JS |
 |---|---|---|---|
-| `aria-atomic` | 64 page(s) | - | - **personne ne le lit** |
-| `aria-controls` | 64 page(s) | - | assets/js/script.js:355 |
+| `aria-atomic` | 66 page(s) | - | - **personne ne le lit** |
+| `aria-controls` | 66 page(s) | - | assets/js/script.js:355 |
 | `aria-current` | 8 page(s) | - | - **personne ne le lit** |
 | `aria-describedby` | - | - | assets/js/script.js:1407 |
-| `aria-expanded` | 64 page(s) | oui | assets/js/script.js:362 |
+| `aria-expanded` | 66 page(s) | oui | assets/js/script.js:362 |
 | `aria-haspopup` | 4 page(s) | - | - **personne ne le lit** |
-| `aria-hidden` | 64 page(s) | - | assets/js/script.js:1608 |
+| `aria-hidden` | 66 page(s) | oui | assets/js/script.js:1608 |
 | `aria-invalid` | - | - | assets/js/script.js:1406 |
-| `aria-label` | 64 page(s) | - | assets/js/script.js:1491 |
-| `aria-labelledby` | 52 page(s) | - | - **personne ne le lit** |
-| `aria-live` | 64 page(s) | - | - **personne ne le lit** |
-| `aria-modal` | 40 page(s) | - | - **personne ne le lit** |
+| `aria-label` | 66 page(s) | - | assets/js/script.js:1491 |
+| `aria-labelledby` | 54 page(s) | - | - **personne ne le lit** |
+| `aria-live` | 66 page(s) | - | - **personne ne le lit** |
+| `aria-modal` | 42 page(s) | - | - **personne ne le lit** |
 | `aria-selected` | 4 page(s) | oui | assets/js/script.js:372 |
 | `data-actif` | - | oui | assets/js/script.js:1626 |
 | `data-category` | 10 page(s) | - | assets/js/script.js:488 |
@@ -387,10 +389,9 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 | `data-empty` | 2 page(s) | oui | assets/js/script.js:390 |
 | `data-en` | 1 page(s) | oui | - |
 | `data-encre` | - | oui | assets/js/script.js:1071 |
-| `data-name` | 2 page(s) | - | - **personne ne le lit** |
 | `data-placeholder` | 2 page(s) | - | - **personne ne le lit** |
 | `data-saisi` | - | oui | assets/js/script.js:1691 |
-| `data-set-lang` | 62 page(s) | - | assets/js/script.js:1315 |
+| `data-set-lang` | 64 page(s) | - | assets/js/script.js:1315 |
 | `data-seuil` | 24 page(s) | - | assets/js/script.js:1184 |
 | `data-seuil-mobile` | 24 page(s) | - | assets/js/script.js:1183 |
 | `data-src` | 4 page(s) | - | assets/js/script.js:1267 |
@@ -402,9 +403,9 @@ Pour chaque `data-*` et `aria-*` emis : **H** le HTML le pose, **J** le JS l'ecr
 
 ## 7. Assets
 
-76 fichiers, 84.7 Mo au total.
+82 fichiers, 84.9 Mo au total.
 
-### Assets qu'aucune page construite ne reference (1.2 Mo)  (5)
+### Assets qu'aucune page construite ne reference (1.2 Mo)  (4)
 
 Detection par nom de fichier : un chemin construit dynamiquement y echapperait. Verifier avant de supprimer.
 
@@ -412,32 +413,31 @@ Detection par nom de fichier : un chemin construit dynamiquement y echapperait. 
 -  273.5 Ko  /assets/images/projects/JPeJA-thumbnail2.jpg
 -  259.4 Ko  /assets/images/projects/aelio/aelio-app-mockup-alone.avif
 -  218.9 Ko  /assets/images/projects/jhag/jhag-br-p3-flambe.webp
--    1.7 Ko  /assets/images/partners/ottony-paris.svg
 
 ### Pages les plus lourdes au chargement (medias non differes)  (10)
 
 Ce que le visiteur telecharge sans l'avoir demande. Le CSS, le JS et les polices ne sont pas comptes.
 
--    9.5 Mo  en/projects/jpeja.html   JPeJA.mp4
 -    9.5 Mo  fr/projects/jpeja.html   JPeJA.mp4
+-    9.5 Mo  en/projects/jpeja.html   JPeJA.mp4
 -    1.1 Mo  fr/projects/cheetah.html   CHEETAH.mp4
 -    1.1 Mo  en/projects/cheetah.html   CHEETAH.mp4
 -  547.8 Ko  fr/projects/exit.html   exit.webp
 -  547.8 Ko  en/projects/exit.html   exit.webp
--  501.4 Ko  en/projects/zylkene.html   zylkene-mockup.webp
 -  501.4 Ko  fr/projects/zylkene.html   zylkene-mockup.webp
+-  501.4 Ko  en/projects/zylkene.html   zylkene-mockup.webp
 -  462.2 Ko  fr/projects/outlast-trials.html   outlast-trials.png
 -  462.2 Ko  en/projects/outlast-trials.html   outlast-trials.png
 
 ## 8. Ratios declares contre dimensions reelles
 
-59 medias mesures. Le ratio pilote la place reservee, le ratio par defaut des pieces de sequence, et le RYTHME de cadrage.
+60 medias mesures. Le ratio pilote la place reservee, le ratio par defaut des pieces de sequence, et le RYTHME de cadrage.
 
 Rien a signaler.
 
 ## 9. Build et CI
 
-**CSS servi** : 265954 o brut, 83710 o gzip. Sans les commentaires : 86308 o, 14050 o gzip, soit **83 % de moins** sur le fil.
+**CSS servi** : 277056 o brut, 87939 o gzip. Sans les commentaires : 87020 o, 14163 o gzip, soit **84 % de moins** sur le fil.
 
 Les plugins Ruby de `_plugins/` **s'executent** avec cette chaine de build.
 
@@ -460,7 +460,7 @@ Rien a signaler.
 - `assets/js/script.js:1393` : champ.id + '-erreur'
 - `assets/js/script.js:1412` : champ.id + '-erreur'
 
-**Noms de variable liees a plusieurs sources** (58). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
+**Noms de variable liees a plusieurs sources** (62). Liquid a des portees de bloc, la carte n'en a pas : quand un meme nom designe plusieurs choses dans un fichier, elle resout vers l'UNION des possibilites. Elle peut donc declarer vivante une cle qui ne l'est pas, jamais l'inverse.
 
 - _includes/lang-selector.html : `hote` a 2 liaisons
 - _includes/lang-selector.html : `switch_url` a 3 liaisons
@@ -473,8 +473,8 @@ Rien a signaler.
 - _includes/meta/schema-org.html : `final_page_description` a 3 liaisons
 - _includes/meta/schema-org.html : `project_locale` a 2 liaisons
 - _includes/meta/schema-org.html : `schema_image` a 2 liaisons
-- _includes/pages/about.html : `item` a 2 liaisons
-- ... et 46 autres
+- _includes/pages/about.html : `_malt` a 2 liaisons
+- ... et 50 autres
 
 ### Limites structurelles, valables meme quand la liste ci-dessus est vide
 
