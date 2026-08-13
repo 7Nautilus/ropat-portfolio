@@ -1,6 +1,6 @@
 # Carte du depot
 
-> Generee le 13/08/2026 a 00:46, d'apres l'etat de f86d344.
+> Generee le 13/08/2026 a 14:20, d'apres l'etat de 0199937.
 > (Elle decrit le commit CI-DESSUS et vit dans le SUIVANT : elle se genere forcement
 > avant celui qui l'embarque. Un decalage d'un commit n'est pas une peremption.)
 > **Ne pas editer a la main** : `bundle exec ruby scripts/carte.rb` la reecrit en entier.
@@ -17,7 +17,7 @@ ne le signale.
 | Mesure | Valeur |
 |---|---|
 | Pages construites lues comme oracle | **66** |
-| Date du build lu | 13/08/2026 00:46 |
+| Date du build lu | 13/08/2026 14:20 |
 | Repertoire lu | `.carte/site` |
 | Fichiers de donnees | 39 |
 | Includes | 33 |
@@ -113,7 +113,7 @@ Rien a signaler.
 
 ## 2. Graphe des includes
 
-33 includes, 79 appels, profondeur maximale 4 depuis `_layouts/default.html`.
+33 includes, 59 appels, profondeur maximale 4 depuis `_layouts/default.html`.
 
 **Orphelins** : projects/project-main.html, services/service-main.html.
 
@@ -142,14 +142,14 @@ Rien a signaler.
 - `services/service-card.html` <- pages/index.html, pages/services.html
 - `services/subservices-card.html` <- services/service-main.html
 - `social-media-icons.html` <- pages/contact.html
-- `ui/button.html` <- 404.html, labo/design-system.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
-- `ui/dropdown.html` <- labo/design-system.html, pages/contact.html, portfolio-filters.html
+- `ui/button.html` <- 404.html, layout/nav.html, pages/about.html, pages/contact.html, pages/index.html, pages/services.html, projects/project-main.html, services/service-card.html, services/service-main.html
+- `ui/dropdown.html` <- pages/contact.html, portfolio-filters.html
 - `ui/icon-arrow.html` <- ui/button.html
 - `ui/icon-send.html` <- ui/button.html
 - `ui/loader.html` <- pages/index.html
 - `ui/logo.html` <- layout/header.html, ui/loader.html
 - `ui/note-malt.html` <- pages/about.html, projects/project-avis.html
-- `ui/status-dot.html` <- labo/design-system.html, pages/about.html, pages/index.html
+- `ui/status-dot.html` <- pages/about.html, pages/index.html
 
 </details>
 

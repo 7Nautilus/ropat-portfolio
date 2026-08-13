@@ -1,6 +1,6 @@
 {
-  "genere_le": "2026-08-12T22:46:33Z",
-  "commit": "f86d344",
+  "genere_le": "2026-08-13T12:20:17Z",
+  "commit": "0199937",
   "pages_construites": 66,
   "perime": null,
   "indetermines": 7,
@@ -359,9 +359,6 @@
     "fr/portfolio.html -> pages/portfolio.html",
     "fr/services.html -> pages/services.html",
     "index.html -> pages/index.html",
-    "labo/design-system.html -> ui/button.html",
-    "labo/design-system.html -> ui/dropdown.html",
-    "labo/design-system.html -> ui/status-dot.html",
     "layout/footer.html -> lang-selector.html",
     "layout/header.html -> burger-menu.html",
     "layout/header.html -> layout/nav.html",

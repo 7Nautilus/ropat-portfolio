@@ -62,11 +62,9 @@ _archives/
 # fichier IGNORE y survit, il faut `-fdx` pour l'atteindre. Les lister ici est
 # donc le seul moyen de tenir les deux a la fois : non versionnes ET durables.
 #
-# ⚠️ LES CHEMINS SONT ECRITS UN PAR UN, ET CE N'EST PAS DE LA VERBOSITE. Un
-# `labo/` global contredirait la pratique du depot : 5 bancs y sont DEJA
-# versionnes (41 commits), et `_config.yml` les exclut du build pour qu'ils
-# vivent dans le depot sans etre publies. Un motif large ferait disparaitre en
-# silence tout banc futur.
+# ⚠️ LES CHEMINS SONT ECRITS UN PAR UN parce qu'ils sont DISPERSES : ils vivent
+# dans `_includes/`, `assets/css/` et `labo/`. Ce n'est pas le cas de `labo/`,
+# qui est desormais ignore en bloc plus bas.
 #
 # Le jour ou le composant trouve un hote et entre en service, retirer les deux
 # premieres lignes : un composant servi n'a rien a faire hors du depot.
@@ -76,10 +74,6 @@ _includes/ui/icon-heart.html
 _includes/ui/icon-message-circle.html
 _includes/ui/icon-bookmark.html
 _includes/ui/icon-ellipsis.html
-labo/mise-en-situation.html
-labo/cadre-dessine.html
-labo/page-projet-ouverture.html
-labo/voile-transition.html
 
 # ══════════════════════════════════════════════════════════════════════════
 #  LES DEUX FICHES SANS AUTORISATION CLIENT, 13/08/2026
@@ -134,21 +128,9 @@ _data/projects/luz-optique.yml
 # Les commiter protegerait des deux. Le choix reste ouvert banc par banc, et
 # c'est precisement pourquoi ils sont ecrits un par un plutot qu'en motif large.
 #
-# ⚠️ UN MOTIF `labo/` GLOBAL RESTE INTERDIT, et la section « mise en situation »
-# le dit deja : 5 bancs y sont DEJA versionnes, `_config.yml` les exclut du
-# build pour qu'ils vivent dans le depot sans etre publies, et un motif large
-# ferait disparaitre en silence tout banc futur.
-#
-# Le jour ou un de ces bancs merite d'entrer dans le depot : retirer SA ligne et
-# le commiter. Les cinq bancs deja versionnes montrent que c'est la pratique
-# normale, pas une exception.
-labo/carte-dossier.html
-labo/dossier-numerique.html
-labo/dossier-onglet.html
-labo/dossier.html
-labo/epreuve.html
-labo/fiches.html
-labo/grille-dossiers.html
+# ⚠️ CETTE SECTION EST CADUQUE DEPUIS LE 13/08/2026 : `labo/` est ignore en bloc
+# plus bas, ces sept lignes seraient redondantes. Le releve reste ici parce qu'il
+# chiffre ce que la regle protege.
 
 # ══════════════════════════════════════════════════════════════════════════
 #  LES TROIS CRITIQUES DU BANC `fiches.html`, 13/08/2026
@@ -164,9 +146,9 @@ labo/grille-dossiers.html
 # pas de sens, et les ignorer les aligne sur ce qu'elles commentent. Le jour ou
 # `fiches.html` entre dans le depot, ses critiques suivent.
 #
-# ⚠️ UN MOTIF `.impeccable/critique/` GLOBAL EST INTERDIT, pour la meme raison
-# que `labo/` : TROIS critiques y sont DEJA versionnees, plus `config.json`. Un
-# motif large les sortirait de l'index.
+# ⚠️ PAS DE MOTIF `.impeccable/critique/` GLOBAL POUR L'INSTANT : trois critiques
+# y sont DEJA versionnees, plus `config.json`, et un motif large les sortirait de
+# l'index sans que ce soit demande. A trancher separement.
 #
 # ⚠️ NOTE SUR `hook.cache.json` : il est ignore, mais par `.git/info/exclude`,
 # qui est LOCAL et ne se clone pas. Il n'est donc protege que sur cette machine.
@@ -175,3 +157,52 @@ labo/grille-dossiers.html
 .impeccable/critique/2026-08-04T22-49-14Z__fiches.md
 .impeccable/critique/2026-08-05T01-35-15Z__fiches.md
 .impeccable/critique/2026-08-05T03-58-14Z__fiches.md
+
+# ══════════════════════════════════════════════════════════════════════════
+#  DOCTRINE : LE CHANTIER EST IGNORE PAR DEFAUT, ON SELECTIONNE CE QU'ON PUBLIE
+# ══════════════════════════════════════════════════════════════════════════
+# Ropat, 13/08/2026 : « par defaut, tout ce qui concerne un chantier, un test
+# etc reste gitignore, et on selectionne ce qui doit etre publie, le labo reste
+# ignore entierement ».
+#
+# ⚠️ C'EST UN RENVERSEMENT, ET LES SECTIONS AU-DESSUS PORTAIENT L'INVERSE. Elles
+# refusaient un motif `labo/` global au motif que « 5 bancs y sont DEJA
+# versionnes ». La regle est maintenant : **on n'ajoute pas au fur et a mesure ce
+# qui doit sortir, on retire au cas par cas ce qui doit entrer.** Le defaut n'est
+# plus « publie sauf mention », il est « garde sauf decision ».
+#
+# ⚠️ ET UN `.gitignore` NE DELOGE PAS CE QUI EST DEJA SUIVI. Poser `labo/` ne
+# suffisait pas : les cinq bancs versionnes seraient restes dans l'index et dans
+# tout clone. Ils ont ete retires par `git rm --cached` le meme jour
+# (`anneaux-focus`, `comparer-courbes`, `design-system`, `specimen-polices`,
+# `temoin-annonces`, 181 941 o). Ils restent SUR LE DISQUE et dans l'HISTORIQUE,
+# donc recuperables ; ils ne sont simplement plus livres.
+#
+# CE QUE CA PROTEGE, ET C'EST LE VRAI POINT : un banc est un brouillon. Le
+# publier par defaut, c'est publier des essais non aboutis dans un depot PUBLIC,
+# et obliger a se souvenir de chaque exclusion. Ignorer par defaut inverse la
+# charge : rien ne sort sans un geste explicite.
+#
+# COMMENT PUBLIER UN BANC, le jour ou il le merite : `git add -f <chemin>`, ou
+# une ligne `!labo/<banc>.html` juste sous la regle. Les deux marchent ; la
+# seconde documente le choix dans ce fichier, ce qui vaut mieux.
+# ⚠️ Une exception `!` doit viser un FICHIER, jamais un sous-repertoire : git
+# n'entre pas dans un repertoire exclu, donc un `!labo/x/` ne serait jamais
+# evalue. Le meme piege est explique en tete de ce fichier pour `.vscode/`.
+#
+# ⚠️ CE QUE CETTE REGLE REND FRAGILE, ET QU'ELLE NE CASSE PAS. Quatorze fichiers
+# SUIVIS citent `labo/`. La plupart decrivent l'exclusion de BUILD (`_config.yml`,
+# `_config.dev.yml`, `scripts/carte*`) et restent exactes. Trois pointent un banc
+# comme lieu d'une mesure (`DESIGN.md:107`, `_variables.scss:353`,
+# `_project.scss:569`) : vrai sur le disque de Ropat, introuvable dans un clone.
+# ⚠️ **Et `DOCTRINE.md:14` designe `labo/design-system.html` comme « la preuve »**,
+# l'un des trois piliers du document qui fait loi. La loi du site s'appuie donc
+# desormais sur un fichier que le depot ne livre plus. Ce n'est pas une erreur
+# introduite ici, c'est une consequence a assumer ou a lever : soit ce banc
+# ressort par `!labo/design-system.html`, soit `DOCTRINE.md` cesse de s'y
+# adosser. C'est un arbitrage de Ropat, pas une correction.
+#
+# La carte a paye le retrait sans rien casser : les appels d'include passent de
+# 79 a 59, et AUCUN include ne perd son dernier consommateur (`ui/button`,
+# `ui/dropdown` et `ui/status-dot` perdent labo et gardent les autres).
+labo/
