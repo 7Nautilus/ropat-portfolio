@@ -133,7 +133,7 @@ _data/projects/luz-optique.yml
 # chiffre ce que la regle protege.
 
 # ══════════════════════════════════════════════════════════════════════════
-#  LES TROIS CRITIQUES DU BANC `fiches.html`, 13/08/2026
+#  LES CRITIQUES DU DOSSIER `.impeccable/`, 13/08/2026
 # ══════════════════════════════════════════════════════════════════════════
 # Trois instantanes de critique non suivis ET non ignores, 49 882 octets,
 # emportables par `git clean -fd`.
@@ -146,17 +146,18 @@ _data/projects/luz-optique.yml
 # pas de sens, et les ignorer les aligne sur ce qu'elles commentent. Le jour ou
 # `fiches.html` entre dans le depot, ses critiques suivent.
 #
-# ⚠️ PAS DE MOTIF `.impeccable/critique/` GLOBAL POUR L'INSTANT : trois critiques
-# y sont DEJA versionnees, plus `config.json`, et un motif large les sortirait de
-# l'index sans que ce soit demande. A trancher separement.
+# ⚠️ MOTIF DE REPERTOIRE DEPUIS LE 13/08/2026, et c'est la doctrine qui l'a
+# permis. Les trois critiques encore versionnees ont ete sorties de l'index par
+# `git rm --cached` (32 976 o) : plus rien ne s'oppose au motif, et il evite
+# d'avoir a poser une ligne a chaque nouvelle critique. Le defaut est desormais
+# « ignore », c'est exactement ce que la doctrine demande.
+# `.impeccable/config.json` reste SUIVI : c'est de la configuration d'outil, au
+# meme titre que `.vscode/tasks.json`, pas du chantier.
 #
 # ⚠️ NOTE SUR `hook.cache.json` : il est ignore, mais par `.git/info/exclude`,
 # qui est LOCAL et ne se clone pas. Il n'est donc protege que sur cette machine.
 # Ce n'est pas un oubli a corriger ici : un cache se regenere, il n'a rien a
 # proteger. Note pour qu'on ne le cherche pas dans ce fichier.
-.impeccable/critique/2026-08-04T22-49-14Z__fiches.md
-.impeccable/critique/2026-08-05T01-35-15Z__fiches.md
-.impeccable/critique/2026-08-05T03-58-14Z__fiches.md
 
 # ══════════════════════════════════════════════════════════════════════════
 #  DOCTRINE : LE CHANTIER EST IGNORE PAR DEFAUT, ON SELECTIONNE CE QU'ON PUBLIE
@@ -197,12 +198,19 @@ _data/projects/luz-optique.yml
 # `_project.scss:569`) : vrai sur le disque de Ropat, introuvable dans un clone.
 # ⚠️ **Et `DOCTRINE.md:14` designe `labo/design-system.html` comme « la preuve »**,
 # l'un des trois piliers du document qui fait loi. La loi du site s'appuie donc
-# desormais sur un fichier que le depot ne livre plus. Ce n'est pas une erreur
-# introduite ici, c'est une consequence a assumer ou a lever : soit ce banc
-# ressort par `!labo/design-system.html`, soit `DOCTRINE.md` cesse de s'y
-# adosser. C'est un arbitrage de Ropat, pas une correction.
+# desormais sur un fichier que le depot ne livre plus.
+#
+# ✅ TRANCHE PAR ROPAT LE 13/08/2026 : **ON LAISSE LES REFERENCES TELLES QUELLES.**
+# Ni `!labo/design-system.html`, ni reecriture de `DOCTRINE.md`, `DESIGN.md`,
+# `_variables.scss` ou `_project.scss`. Ces documents disent ou une mesure a ete
+# faite ; le banc existe, il n'est simplement pas livre. La reference reste vraie
+# pour qui travaille sur ce depot, c'est-a-dire son seul lecteur.
+# ⚠️ **NE PAS ROUVRIR CETTE CASE EN LA PRENANT POUR UNE REFERENCE CASSEE.** Un
+# audit qui verifie l'existence des chemins cites LES SIGNALERA, et il aura tort :
+# ce sont des chemins LOCAUX, assumes comme tels.
 #
 # La carte a paye le retrait sans rien casser : les appels d'include passent de
 # 79 a 59, et AUCUN include ne perd son dernier consommateur (`ui/button`,
 # `ui/dropdown` et `ui/status-dot` perdent labo et gardent les autres).
 labo/
+.impeccable/critique/
