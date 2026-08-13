@@ -115,3 +115,37 @@ labo/voile-transition.html
 # `pages_generees.rb:55` et casse le build en CI.
 _data/projects/cinco.yml
 _data/projects/luz-optique.yml
+
+# ══════════════════════════════════════════════════════════════════════════
+#  LES BANCS DU CHANTIER DOSSIER, 13/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# Demande de Ropat : « protege les bancs du labo un par un ». Sept bancs du
+# chantier « carte projet en dossier » etaient non suivis ET non ignores, donc
+# emportables par `git clean -fd` sans confirmation ni trace. Ensemble :
+# 217 047 octets, dont `labo/fiches.html` seul (104 462 o), le banc abouti
+# qui porte les 23 fiches et le redesign complet.
+#
+# ⚠️ MEME RAISON QUE LES DEUX SECTIONS PRECEDENTES : CECI NE CACHE RIEN, CELA
+# PROTEGE. Un fichier simplement non suivi disparait au premier `git clean -fd` ;
+# un fichier IGNORE y survit, il faut `-fdx` pour l'atteindre.
+#
+# ⚠️ ET CE N'EST PAS UNE SAUVEGARDE. Ignorer protege du nettoyage, pas de la
+# perte du disque : ces 217 047 octets n'existent alors qu'en UN exemplaire.
+# Les commiter protegerait des deux. Le choix reste ouvert banc par banc, et
+# c'est precisement pourquoi ils sont ecrits un par un plutot qu'en motif large.
+#
+# ⚠️ UN MOTIF `labo/` GLOBAL RESTE INTERDIT, et la section « mise en situation »
+# le dit deja : 5 bancs y sont DEJA versionnes, `_config.yml` les exclut du
+# build pour qu'ils vivent dans le depot sans etre publies, et un motif large
+# ferait disparaitre en silence tout banc futur.
+#
+# Le jour ou un de ces bancs merite d'entrer dans le depot : retirer SA ligne et
+# le commiter. Les cinq bancs deja versionnes montrent que c'est la pratique
+# normale, pas une exception.
+labo/carte-dossier.html
+labo/dossier-numerique.html
+labo/dossier-onglet.html
+labo/dossier.html
+labo/epreuve.html
+labo/fiches.html
+labo/grille-dossiers.html
