@@ -149,3 +149,29 @@ labo/dossier.html
 labo/epreuve.html
 labo/fiches.html
 labo/grille-dossiers.html
+
+# ══════════════════════════════════════════════════════════════════════════
+#  LES TROIS CRITIQUES DU BANC `fiches.html`, 13/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# Trois instantanes de critique non suivis ET non ignores, 49 882 octets,
+# emportables par `git clean -fd`.
+#
+# ⚠️ ET LE CHOIX N'EST PAS ARBITRAIRE : UNE CRITIQUE SUIT SON SUJET. Verifie sur
+# les six critiques du dossier, six fois sur six :
+#   3 critiques SUIVIES  -> sujet `_includes/projects/project-main.html`, SUIVI
+#   3 critiques ignorees -> sujet `labo/fiches.html`, IGNORE (section ci-dessus)
+# Ces trois-ci portent sur un banc hors du depot ; les y garder seules n'aurait
+# pas de sens, et les ignorer les aligne sur ce qu'elles commentent. Le jour ou
+# `fiches.html` entre dans le depot, ses critiques suivent.
+#
+# ⚠️ UN MOTIF `.impeccable/critique/` GLOBAL EST INTERDIT, pour la meme raison
+# que `labo/` : TROIS critiques y sont DEJA versionnees, plus `config.json`. Un
+# motif large les sortirait de l'index.
+#
+# ⚠️ NOTE SUR `hook.cache.json` : il est ignore, mais par `.git/info/exclude`,
+# qui est LOCAL et ne se clone pas. Il n'est donc protege que sur cette machine.
+# Ce n'est pas un oubli a corriger ici : un cache se regenere, il n'a rien a
+# proteger. Note pour qu'on ne le cherche pas dans ce fichier.
+.impeccable/critique/2026-08-04T22-49-14Z__fiches.md
+.impeccable/critique/2026-08-05T01-35-15Z__fiches.md
+.impeccable/critique/2026-08-05T03-58-14Z__fiches.md
