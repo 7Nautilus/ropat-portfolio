@@ -80,3 +80,38 @@ labo/mise-en-situation.html
 labo/cadre-dessine.html
 labo/page-projet-ouverture.html
 labo/voile-transition.html
+
+# ══════════════════════════════════════════════════════════════════════════
+#  LES DEUX FICHES SANS AUTORISATION CLIENT, 13/08/2026
+# ══════════════════════════════════════════════════════════════════════════
+# `cinco` et `luz-optique` ont ete retirees de `_data/projects/index.yml` le
+# 12/08/2026 sur decision de Ropat : aucune autorisation client n'a ete
+# demandee, et leurs fiches sont vides (29 et 30 valeurs nulles). Indexees,
+# elles produisaient quatre URLs a `<title>` vide et `robots: index, follow`.
+#
+# ⚠️ ELLES NE POUVAIENT DEJA PAS ATTEINDRE ropat.art, ET CE N'EST PAS LE
+# RISQUE. `index.yml` est la liste d'EXISTENCE : `_plugins/pages_generees.rb`
+# itere `index.order`, les deux en sont absentes, donc aucune page. Verifie sur
+# un build de production ou les deux fichiers etaient sur le disque : 0 fichier
+# emis les mentionne, sur 156, quand le temoin `strakara` en rend 10.
+#
+# ⚠️ LE RISQUE EST LE DEPOT LUI-MEME, ET IL EST PUBLIC (verifie en anonyme :
+# l'API GitHub rend 200 sans jeton). Un `git add -A` les ferait entrer dans un
+# historique lisible par tous, et l'historique ne s'efface pas d'un commit.
+# C'est arrive DEUX FOIS le 12/08, rattrape les deux fois en relisant le
+# contenu du commit avant de pousser.
+#
+# ⚠️ ET COMME LA SECTION PRECEDENTE : CECI NE LES CACHE PAS, CELA LES PROTEGE.
+# Un fichier simplement non suivi est emporte par `git clean -fd` sans trace ;
+# un fichier IGNORE y survit. Les deux exigences tiennent ensemble : hors de
+# tout commit ET durables sur le disque.
+#
+# Leurs propres en-tetes disent deja « CETTE FICHE N'EST PAS DANS index.yml, ET
+# C'EST VOLONTAIRE ». Ces deux lignes rendent l'affirmation opposable.
+#
+# Le jour ou l'autorisation client est obtenue ET les fiches remplies : retirer
+# ces deux lignes, remettre les identifiants dans `index.order`, et commiter le
+# tout ensemble. Une fiche indexee dont le fichier manque fait lever
+# `pages_generees.rb:55` et casse le build en CI.
+_data/projects/cinco.yml
+_data/projects/luz-optique.yml
